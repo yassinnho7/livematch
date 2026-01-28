@@ -23,10 +23,11 @@ class MonetizationManager {
         this.state = {
             ogadsShown: false,
             ogadsCompleted: false,
-            monetagTriggered: false,
             countdownFinished: false,
             streamUnlocked: false,
-            configLoaded: false
+            configLoaded: false,
+            socialBarShowCount: parseInt(sessionStorage.getItem('ad_sb_count') || '0'),
+            ggAgencyTriggered: false
         };
 
         this.init();
@@ -68,7 +69,6 @@ class MonetizationManager {
     }
 
     setupConfig(adIds) {
-        // تنظيف القيم من الفراغات الزائدة
         const clean = (val) => (val && typeof val === 'string') ? val.trim() : '';
 
         this.config = {
@@ -76,17 +76,17 @@ class MonetizationManager {
                 lockerUrl: clean(adIds.ogadsLockerUrl),
                 enabled: !!clean(adIds.ogadsLockerUrl)
             },
-            monetag: {
-                zoneId: clean(adIds.monetagZoneId),
-                enabled: !!clean(adIds.monetagZoneId)
-            },
             adsterra: {
+                banner: clean(adIds.adsterraBanner),
                 socialBarKey: clean(adIds.adsterraSocial),
-                popunderKey: clean(adIds.adsterraPop),
-                enabled: !!(clean(adIds.adsterraSocial) || clean(adIds.adsterraPop))
+                enabled: true
+            },
+            ggAgency: {
+                linkUrl: clean(adIds.ggAgencyLink),
+                enabled: !!clean(adIds.ggAgencyLink)
             }
         };
-        console.log('📊 Active Monetization Config:', this.config);
+        console.log('📊 Active Monetization Config');
     }
 
     /**
@@ -142,17 +142,8 @@ class MonetizationManager {
      * تفعيل الإعلانات الثانوية (Normal Choice)
      */
     triggerPassiveMonetization() {
-        // 1. Monetag In-Page Push
-        if (this.config.monetag.enabled) {
-            console.log('🔄 Triggering Monetag In-Page Push...');
-            this.triggerMonetag();
-        }
-
-        // 2. Adsterra Popunder
-        if (this.config.adsterra.enabled && this.config.adsterra.popunderKey) {
-            console.log('🔄 Triggering Adsterra Popunder...');
-            this.loadAdsterraPopunder();
-        }
+        console.log('🔄 Triggering Passive Monetization...');
+        this.unlockStream(); // Open stream immediately for 'normal'
     }
 
     /**
@@ -257,57 +248,17 @@ class MonetizationManager {
     }
 
     /**
-     * تفعيل Monetag OnClick (Popunder) كاحتياطي
+     * تفعيل GG.Agency Clickunder
      */
-    triggerMonetag() {
-        if (this.state.monetagTriggered || !this.config.monetag.enabled) {
-            // إذا تم تفعيل Monetag مسبقاً أو معطل، افتح البث مباشرة
-            this.unlockStream();
-            return;
-        }
+    triggerGGAgency() {
+        if (this.state.ggAgencyTriggered || !this.config.ggAgency.enabled) return;
 
-        console.log('🔄 Triggering Monetag OnClick (Popunder) fallback...');
-        this.state.monetagTriggered = true;
+        console.log('🔄 Activating GG.Agency Link...');
+        this.state.ggAgencyTriggered = true;
 
-        // الكود الكامل من المتغير البيئي
-        const fullScript = this.config.monetag.zoneId;
-
-        if (fullScript && fullScript.includes('src=')) {
-            // استخراج الرابط و data-zone
-            const srcMatch = fullScript.match(/src=["']([^"']+)["']/);
-            const zoneMatch = fullScript.match(/data-zone=["']([^"']+)["']/);
-
-            if (srcMatch && srcMatch[1]) {
-                const script = document.createElement('script');
-                script.src = srcMatch[1];
-                if (zoneMatch && zoneMatch[1]) {
-                    script.setAttribute('data-zone', zoneMatch[1]);
-                }
-                script.setAttribute('data-cfasync', 'false');
-                script.async = true;
-
-                script.onload = () => {
-                    console.log('✅ Monetag OnClick (Popunder) loaded');
-                    // بعد 2 ثواني، افتح البث
-                    setTimeout(() => {
-                        this.unlockStream();
-                    }, 2000);
-                };
-
-                script.onerror = () => {
-                    console.error('❌ Monetag failed');
-                    // افتح البث مباشرة
-                    this.unlockStream();
-                };
-
-                document.head.appendChild(script);
-            } else {
-                console.warn('⚠️ Could not extract Monetag script URL');
-                this.unlockStream();
-            }
-        } else {
-            console.warn('⚠️ Monetag zone ID is not a full script tag');
-            this.unlockStream();
+        const url = this.config.ggAgency.linkUrl;
+        if (url) {
+            window.open(url, '_blank');
         }
     }
 
@@ -349,28 +300,50 @@ class MonetizationManager {
     }
 
     /**
-     * تهيئة Adsterra (Social Bar + Popunder)
+     * تهيئة Adsterra
      */
     initAdsterra() {
-        console.log('📢 Initializing Adsterra...');
+        // Load Banner (immediately for countdown)
+        this.loadAdsterraBanner();
 
-        // Social Bar
-        if (this.config.adsterra.socialBarKey) {
+        // Social Bar (limited to 3 times per session)
+        if (this.state.socialBarShowCount < 3) {
             this.loadAdsterraSocialBar();
-        }
-
-        // Popunder
-        if (this.config.adsterra.popunderKey) {
-            this.loadAdsterraPopunder();
+            this.state.socialBarShowCount++;
+            sessionStorage.setItem('ad_sb_count', this.state.socialBarShowCount);
+        } else {
+            console.log('📢 Adsterra Social Bar: limit reached (3)');
         }
     }
 
     /**
+     * تحميل Adsterra Banner (320x50)
+     */
+    loadAdsterraBanner() {
+        const container = document.getElementById('adsterra-banner-container');
+        if (!container || !this.config.adsterra.banner) return;
+
+        console.log('📢 Injecting Adsterra Banner...');
+        const scriptContent = this.config.adsterra.banner;
+
+        // Inject script tags into container
+        const div = document.createElement('div');
+        div.innerHTML = scriptContent;
+
+        // Ensure scripts inside innerHTML actually execute
+        Array.from(div.querySelectorAll('script')).forEach(oldScript => {
+            const newScript = document.createElement('script');
+            Array.from(oldScript.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value));
+            newScript.appendChild(document.createTextNode(oldScript.innerHTML));
+            container.appendChild(newScript);
+        });
+    }
+
+    /**
      * تحميل Adsterra Social Bar
-     * يستخدم الكود الكامل من Environment Variable
      */
     loadAdsterraSocialBar() {
-        console.log('📢 Attempting to load Adsterra Social Bar...');
+        console.log('📢 Loading Adsterra Social Bar...');
         const fullScript = this.config.adsterra.socialBarKey;
 
         if (fullScript && fullScript.includes('src=')) {
@@ -379,12 +352,8 @@ class MonetizationManager {
                 const script = document.createElement('script');
                 script.src = srcMatch[1];
                 script.async = true;
-                script.onerror = (e) => console.error('❌ Adsterra Social Bar blocked or failed to load');
-                script.onload = () => console.log('✅ Adsterra Social Bar loaded successfully');
                 document.body.appendChild(script);
             }
-        } else {
-            console.warn('⚠️ Adsterra Social Bar: key is missing');
         }
     }
 

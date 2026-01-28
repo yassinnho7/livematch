@@ -176,7 +176,10 @@
     <div id="monetization-layer" class="monetization-layer">
         <div class="monetization-overlay"></div>
         <div class="monetization-content">
-            <div class="monetization-icon">⏱️</div>
+            <!-- Adsterra Banner Area -->
+            <div id="adsterra-banner-container"
+                style="min-height: 50px; margin-bottom: 20px; display: flex; justify-content: center;"></div>
+
             <h2>جاري تحضير البث...</h2>
             <div class="countdown-circle">
                 <svg width="200" height="200">
@@ -329,59 +332,59 @@
             .choice-content {
                 width: 95%;
                 padding: 10px;
+                margin-top: 20px;
             }
 
             .choice-cards {
-                flex-direction: column;
-                gap: 0.8rem;
-                max-height: 70vh;
-                overflow-y: auto;
+                flex-direction: column !important;
+                gap: 1.2rem;
+                max-height: unset;
+                overflow-y: visible;
                 padding: 10px;
-                -webkit-overflow-scrolling: touch;
             }
 
             .choice-title {
-                font-size: 1.3rem;
-                margin-bottom: 1rem;
+                font-size: 1.4rem;
+                margin-bottom: 1.5rem;
             }
 
             .choice-card {
                 min-width: unset;
-                padding: 1rem;
+                padding: 1.8rem;
                 border-radius: 15px;
             }
 
             .choice-badge {
-                font-size: 0.65rem;
-                padding: 3px 25px;
-                top: 15px;
-                left: -30px;
+                font-size: 0.75rem;
+                padding: 4px 30px;
+                top: 20px;
+                left: -35px;
             }
 
             .choice-icon {
-                font-size: 2.5rem;
-                margin-bottom: 0.5rem;
+                font-size: 3rem;
+                margin-bottom: 0.8rem;
             }
 
             .choice-card h3 {
-                font-size: 1.1rem;
-                margin-bottom: 0.5rem;
+                font-size: 1.35rem;
+                margin-bottom: 0.8rem;
             }
 
             .choice-card p {
-                font-size: 0.85rem;
-                margin-bottom: 1rem;
+                font-size: 1.05rem;
+                margin-bottom: 1.5rem;
             }
 
             .choice-btn {
-                padding: 8px 20px;
-                font-size: 0.95rem;
+                padding: 12px 24px;
+                font-size: 1.1rem;
             }
         }
 
         /* Prevent body scroll when layer is open */
         body.modal-open {
-            overflow: hidden;
+            overflow: hidden !important;
             position: fixed;
             width: 100%;
         }
@@ -401,7 +404,7 @@
     </div>
 
     <!-- Stream Container -->
-    <div id="stream-container">
+    <div id="stream-container" onclick="if(window.monetizationManager) window.monetizationManager.triggerGGAgency()">
         <iframe id="stream" sandbox="allow-same-origin allow-scripts allow-forms" allowfullscreen></iframe>
     </div>
 

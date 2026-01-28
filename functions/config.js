@@ -4,11 +4,10 @@ export async function onRequest(context) {
 
     const config = {
         adIds: {
-            // VITE_OGADS_LOCKER_ID now contains the FULL URL (e.g., https://lockedapp.space/cl/i/l776rj)
             ogadsLockerUrl: env.VITE_OGADS_LOCKER_ID || '',
-            monetagZoneId: env.VITE_MONETAG_ZONE_ID || '',
+            adsterraBanner: env.VITE_ADSTERRA_BANNER_KEY || '',
             adsterraSocial: env.VITE_ADSTERRA_SOCIAL_BAR_KEY || '',
-            adsterraPop: env.VITE_ADSTERRA_POPUNDER_KEY || ''
+            ggAgencyLink: env.VITE_GGAGENCY_LINK_ID || ''
         }
     };
 
