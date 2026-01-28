@@ -1,6 +1,11 @@
-const fs = require('fs');
-const path = require('path');
-const https = require('https');
+import fs from 'fs';
+import path from 'path';
+import https from 'https';
+import { fileURLToPath } from 'url';
+
+// ES Module equivalent of __dirname
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 // Configuration
 const WEBHOOK_URL = process.env.MAKE_WEBHOOK_URL;
@@ -95,6 +100,7 @@ function sendWebhook(payload) {
 
         const req = https.request(options, (res) => {
             if (res.statusCode >= 200 && res.statusCode < 300) {
+                console.log(`✅ Webhook accepted (${res.statusCode})`);
                 resolve();
             } else {
                 reject(new Error(`Webhook failed with status ${res.statusCode}`));
