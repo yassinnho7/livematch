@@ -4,12 +4,6 @@ on:
   schedule:
     - cron: '*/30 * * * *'
   workflow_dispatch:
-    inputs:
-      force_notify:
-        description: 'إجبار إرسال التنبيهات للتجربة (Test Mode)'
-        required: false
-        default: false
-        type: boolean
 
 permissions:
   contents: write
@@ -42,7 +36,6 @@ jobs:
       - name: Notify Webhook (Make.com)
         env:
           MAKE_WEBHOOK_URL: ${{ secrets.MAKE_WEBHOOK_URL }}
-          FORCE_NOTIFY: ${{ github.event.inputs.force_notify || 'false' }} 
         run: |
           node scrapers/notify_webhook.js
         continue-on-error: true
