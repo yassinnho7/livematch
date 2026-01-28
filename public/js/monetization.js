@@ -70,11 +70,11 @@ class MonetizationManager {
     setupConfig(adIds) {
         // تنظيف القيم من الفراغات الزائدة
         const clean = (val) => (val && typeof val === 'string') ? val.trim() : '';
-        
+
         this.config = {
             ogads: {
-                lockerUrl: clean(adIds.ogadsLockerUrl) || 'https://lockedapp.space/cl/i/l776rj',
-                enabled: !!clean(adIds.ogadsLockerUrl) || true
+                lockerUrl: clean(adIds.ogadsLockerUrl),
+                enabled: !!clean(adIds.ogadsLockerUrl)
             },
             monetag: {
                 zoneId: clean(adIds.monetagZoneId),
@@ -106,6 +106,7 @@ class MonetizationManager {
         const choiceLayer = document.getElementById('choice-layer');
         if (choiceLayer) {
             choiceLayer.style.display = 'flex';
+            document.body.classList.add('modal-open'); // منع التمرير في الخلفية
         }
     }
 
@@ -120,6 +121,7 @@ class MonetizationManager {
         const choiceLayer = document.getElementById('choice-layer');
         if (choiceLayer) {
             choiceLayer.style.display = 'none';
+            document.body.classList.remove('modal-open');
         }
 
         if (quality === 'hd') {
@@ -163,6 +165,7 @@ class MonetizationManager {
         const ogadsLayer = document.getElementById('ogads-layer');
         if (ogadsLayer) {
             ogadsLayer.style.display = 'flex';
+            document.body.classList.add('modal-open');
 
             // تحديث progress bar
             setTimeout(() => this.updateProgress(30), 500);
@@ -170,8 +173,8 @@ class MonetizationManager {
             // تحميل iFrame using Direct URL
             const iframe = document.getElementById('ogads-iframe');
             if (iframe && !iframe.src) {
-                iframe.src = this.config.ogads.lockerUrl; // Direct URL usage
-                console.log('✅ OGads iFrame loaded with URL:', this.config.ogads.lockerUrl);
+                iframe.src = this.config.ogads.lockerUrl;
+                console.log('✅ OGads iFrame loaded');
                 this.updateProgress(60);
             }
 
@@ -267,7 +270,6 @@ class MonetizationManager {
         this.state.monetagTriggered = true;
 
         // الكود الكامل من المتغير البيئي
-        // مثال: <script src="https://quge5.com/88/tag.min.js" data-zone="205965" async data-cfasync="false"></script>
         const fullScript = this.config.monetag.zoneId;
 
         if (fullScript && fullScript.includes('src=')) {
@@ -324,6 +326,7 @@ class MonetizationManager {
         const ogadsLayer = document.getElementById('ogads-layer');
         if (ogadsLayer) {
             ogadsLayer.style.opacity = '0';
+            document.body.classList.remove('modal-open');
             setTimeout(() => {
                 ogadsLayer.style.display = 'none';
             }, 300);
@@ -369,19 +372,19 @@ class MonetizationManager {
     loadAdsterraSocialBar() {
         console.log('📢 Attempting to load Adsterra Social Bar...');
         const fullScript = this.config.adsterra.socialBarKey;
-        
+
         if (fullScript && fullScript.includes('src=')) {
             const srcMatch = fullScript.match(/src=["']([^"']+)["']/);
             if (srcMatch && srcMatch[1]) {
                 const script = document.createElement('script');
                 script.src = srcMatch[1];
                 script.async = true;
-                script.onerror = (e) => console.error('❌ Adsterra Social Bar blocked or failed to load:', srcMatch[1]);
+                script.onerror = (e) => console.error('❌ Adsterra Social Bar blocked or failed to load');
                 script.onload = () => console.log('✅ Adsterra Social Bar loaded successfully');
                 document.body.appendChild(script);
             }
         } else {
-            console.warn('⚠️ Adsterra Social Bar: key is missing or not a full script tag');
+            console.warn('⚠️ Adsterra Social Bar: key is missing');
         }
     }
 
@@ -392,20 +395,19 @@ class MonetizationManager {
     loadAdsterraPopunder() {
         console.log('📢 Attempting to load Adsterra Popunder...');
         const fullScript = this.config.adsterra.popunderKey;
-        
+
         if (fullScript && fullScript.includes('src=')) {
-            // استخراج الرابط من الكود
             const srcMatch = fullScript.match(/src=["']([^"']+)["']/);
             if (srcMatch && srcMatch[1]) {
                 const script = document.createElement('script');
                 script.src = srcMatch[1];
                 script.async = true;
-                script.onerror = (e) => console.error('❌ Adsterra Popunder blocked or failed to load:', srcMatch[1]);
+                script.onerror = (e) => console.error('❌ Adsterra Popunder blocked or failed to load');
                 script.onload = () => console.log('✅ Adsterra Popunder loaded successfully');
                 document.head.appendChild(script);
             }
         } else {
-            console.warn('⚠️ Adsterra Popunder: key is missing or not a full script tag');
+            console.warn('⚠️ Adsterra Popunder: key is missing');
         }
     }
 
@@ -441,13 +443,6 @@ function toggleAssistant() {
     if (message) {
         message.style.display = message.style.display === 'none' ? 'block' : 'none';
     }
-}
-
-/**
- * Toggle Help
- */
-function toggleHelp() {
-    alert('💡 نصائح:\n\n1. اختر عرض سهل (Email Submit)\n2. أكمل المطلوب بدقة\n3. البث سيفتح تلقائياً\n\nإذا واجهت مشكلة، جرب عرض آخر!');
 }
 
 /**
@@ -498,8 +493,6 @@ if (document.readyState === 'loading') {
 }
 
 // تصدير للاستخدام العام
-// تصدير للاستخدام العام
 window.MonetizationManager = MonetizationManager;
-window.toggleHelp = toggleHelp;
 window.triggerMonetization = triggerMonetization;
 window.skipMonetization = skipMonetization;

@@ -326,43 +326,64 @@
 
         /* Mobile Responsive */
         @media (max-width: 768px) {
+            .choice-content {
+                width: 95%;
+                padding: 10px;
+            }
+
             .choice-cards {
                 flex-direction: column;
-                gap: 1rem;
+                gap: 0.8rem;
+                max-height: 70vh;
+                overflow-y: auto;
+                padding: 10px;
+                -webkit-overflow-scrolling: touch;
             }
 
             .choice-title {
-                font-size: 1.5rem;
-                margin-bottom: 1.5rem;
+                font-size: 1.3rem;
+                margin-bottom: 1rem;
             }
 
             .choice-card {
                 min-width: unset;
-                padding: 1.5rem;
+                padding: 1rem;
+                border-radius: 15px;
             }
 
             .choice-badge {
-                font-size: 0.75rem;
-                padding: 4px 30px;
+                font-size: 0.65rem;
+                padding: 3px 25px;
+                top: 15px;
+                left: -30px;
             }
 
             .choice-icon {
-                font-size: 3rem;
+                font-size: 2.5rem;
+                margin-bottom: 0.5rem;
             }
 
             .choice-card h3 {
-                font-size: 1.2rem;
+                font-size: 1.1rem;
+                margin-bottom: 0.5rem;
             }
 
             .choice-card p {
-                font-size: 0.9rem;
-                margin-bottom: 1.5rem;
+                font-size: 0.85rem;
+                margin-bottom: 1rem;
             }
 
             .choice-btn {
-                padding: 10px 24px;
-                font-size: 1rem;
+                padding: 8px 20px;
+                font-size: 0.95rem;
             }
+        }
+
+        /* Prevent body scroll when layer is open */
+        body.modal-open {
+            overflow: hidden;
+            position: fixed;
+            width: 100%;
         }
     </style>
 
