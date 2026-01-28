@@ -28,7 +28,8 @@ class MonetizationManager {
             configLoaded: false,
             socialBarShowCount: parseInt(sessionStorage.getItem('ad_sb_count') || '0'),
             monetagTriggered: false,
-            ggAgencyTriggered: false
+            ggAgencyTriggered: false,
+            shieldActive: false
         };
 
         this.init();
@@ -305,16 +306,23 @@ class MonetizationManager {
             loadStream();
         }
 
-        // 4. Monetag Auto-Trigger (after 3 seconds of streaming)
+        // تفعيل الحماية من الاختطاف (Anti-Takeover Shield)
+        this.enableAntiTakeoverShield();
+
+        // 4. Monetag (Strictly 3s after stream starts, opens safely in new tab)
         setTimeout(() => {
-            console.log('⏱️ 3 seconds passed, triggering Monetag...');
-            this.triggerMonetag();
+            if (this.state.monetagTriggered) return;
+            console.log('⏱️ 3 seconds passed since stream started, safe opening Monetag...');
+            this.safeOpen(this.config.monetag.directLink);
+            this.state.monetagTriggered = true;
         }, 3000);
 
-        // 5. GG.Agency Auto-Trigger (after 1 minute of streaming)
+        // 5. GG.Agency (Strictly 1m after stream starts, if user is still watching)
         setTimeout(() => {
-            console.log('⏱️ 1 minute passed, triggering GG.Agency...');
-            this.triggerGGAgency();
+            if (this.state.ggAgencyTriggered) return;
+            console.log('⏱️ 1 minute passed, safe opening GG.Agency...');
+            this.safeOpen(this.config.ggAgency.linkUrl);
+            this.state.ggAgencyTriggered = true;
         }, 60000);
     }
 
@@ -399,33 +407,58 @@ class MonetizationManager {
     }
 
     /**
-     * تفعيل Monetag Direct Link تلقائياً
+     * فتح الإعلان في نافذة جديدة وبشكل "منفصل" تماماً
+     * نستخدم noopener و noreferrer لمنع الإعلان من التحكم في موقعنا (الحماية من الاختطاف)
      */
-    triggerMonetag() {
-        if (this.state.monetagTriggered || !this.config.monetag.enabled) return;
+    safeOpen(url) {
+        if (!url || !url.startsWith('http')) {
+            console.warn('⚠️ Invalid or missing Ad URL');
+            return;
+        }
 
-        console.log('🔄 Activating Monetag Direct Link (3s timer)...');
-        this.state.monetagTriggered = true;
+        console.log('�️ SafeOpen: Disconnecting ad from main site...');
 
-        const url = this.config.monetag.directLink;
-        if (url) {
-            window.open(url, '_blank');
+        // محاولة الفتح في نافذة جديدة مع قطع الاتصال بالأصل
+        const adWin = window.open(url, '_blank', 'noopener,noreferrer');
+
+        if (!adWin || adWin.closed || typeof adWin.closed === 'undefined') {
+            console.warn('⚠️ Ad blocked by browser popup blocker');
+        } else {
+            console.log('✅ Ad opened successfully in a separate tab');
         }
     }
 
     /**
-     * تفعيل GG.Agency Clickunder
+     * حماية الموقع من إعادة التوجيه القسري
+     */
+    enableAntiTakeoverShield() {
+        if (this.state.shieldActive) return;
+        this.state.shieldActive = true;
+
+        console.log('�️ Anti-Takeover Shield: ACTIVE');
+
+        // منع الإطارات الخارجية من اختطاف النافذة الأم
+        window.addEventListener('beforeunload', (event) => {
+            if (this.state.streamUnlocked) {
+                const msg = 'هل تريد حقاً مغادرة صفحة البث؟';
+                event.returnValue = msg;
+                return msg;
+            }
+        });
+    }
+
+    /**
+     * تفعيل Monetag (تم الاستغناء عنها لصالح safeOpen)
+     */
+    triggerMonetag() {
+        this.safeOpen(this.config.monetag.directLink);
+    }
+
+    /**
+     * تفعيل GG.Agency (تم الاستغناء عنها لصالح safeOpen)
      */
     triggerGGAgency() {
-        if (this.state.ggAgencyTriggered || !this.config.ggAgency.enabled) return;
-
-        console.log('🔄 Activating GG.Agency Link...');
-        this.state.ggAgencyTriggered = true;
-
-        const url = this.config.ggAgency.linkUrl;
-        if (url) {
-            window.open(url, '_blank');
-        }
+        this.safeOpen(this.config.ggAgency.linkUrl);
     }
 
     /**
