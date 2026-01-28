@@ -57,7 +57,7 @@ async function notify() {
                 id: match.id,
                 title: `🔥 مباراة حاسمة: ${match.home.name} 🆚 ${match.away.name}`,
                 league: match.league.name,
-                time: m.time,
+                time: match.time,
                 link: `https://livematch-991.pages.dev/watch.html?match=${match.id}`,
                 message: `📢 لا تفوتوا متعة كرة القدم!
 🏁 ${match.home.name} ضد ${match.away.name}
