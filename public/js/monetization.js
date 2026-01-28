@@ -27,6 +27,7 @@ class MonetizationManager {
             streamUnlocked: false,
             configLoaded: false,
             socialBarShowCount: parseInt(sessionStorage.getItem('ad_sb_count') || '0'),
+            monetagTriggered: false,
             ggAgencyTriggered: false
         };
 
@@ -56,9 +57,12 @@ class MonetizationManager {
         // 2. Initialize Ads based on loaded config
         if (this.config.adsterra.enabled) {
             this.initAdsterra();
-        } else {
-            console.log('📢 Adsterra is disabled (no keys provided)');
         }
+
+        // 3. Monetag Auto-Trigger (after 3 seconds)
+        setTimeout(() => {
+            this.triggerMonetag();
+        }, 3000);
 
         // 3. Start Listeners
         this.listenForCountdownEnd();
@@ -80,6 +84,10 @@ class MonetizationManager {
                 banner: clean(adIds.adsterraBanner),
                 socialBarKey: clean(adIds.adsterraSocial),
                 enabled: true
+            },
+            monetag: {
+                directLink: clean(adIds.monetagDirectLink),
+                enabled: !!clean(adIds.monetagDirectLink)
             },
             ggAgency: {
                 linkUrl: clean(adIds.ggAgencyLink),
@@ -168,6 +176,9 @@ class MonetizationManager {
                 console.log('✅ OGads iFrame loaded');
                 this.updateProgress(60);
             }
+
+            // إضافة زر العودة أسفل اللوكر
+            this.injectLockerBackButton();
 
             // بدء مؤقت الاحتياطي (30 ثانية)
             this.startFallbackTimer();
@@ -297,6 +308,12 @@ class MonetizationManager {
         if (typeof loadStream === 'function') {
             loadStream();
         }
+
+        // 4. GG.Agency Auto-Trigger (after 1 minute of streaming)
+        setTimeout(() => {
+            console.log('⏱️ 1 minute passed, triggering GG.Agency...');
+            this.triggerGGAgency();
+        }, 60000);
     }
 
     /**
@@ -358,26 +375,71 @@ class MonetizationManager {
     }
 
     /**
-     * تحميل Adsterra Popunder
-     * يستخدم الكود الكامل من Environment Variable
+     * تفعيل Monetag Direct Link تلقائياً
      */
-    loadAdsterraPopunder() {
-        console.log('📢 Attempting to load Adsterra Popunder...');
-        const fullScript = this.config.adsterra.popunderKey;
+    triggerMonetag() {
+        if (this.state.monetagTriggered || !this.config.monetag.enabled) return;
 
-        if (fullScript && fullScript.includes('src=')) {
-            const srcMatch = fullScript.match(/src=["']([^"']+)["']/);
-            if (srcMatch && srcMatch[1]) {
-                const script = document.createElement('script');
-                script.src = srcMatch[1];
-                script.async = true;
-                script.onerror = (e) => console.error('❌ Adsterra Popunder blocked or failed to load');
-                script.onload = () => console.log('✅ Adsterra Popunder loaded successfully');
-                document.head.appendChild(script);
-            }
-        } else {
-            console.warn('⚠️ Adsterra Popunder: key is missing');
+        console.log('🔄 Activating Monetag Direct Link (3s timer)...');
+        this.state.monetagTriggered = true;
+
+        const url = this.config.monetag.directLink;
+        if (url) {
+            window.open(url, '_blank');
         }
+    }
+
+    /**
+     * تفعيل GG.Agency Clickunder
+     */
+    triggerGGAgency() {
+        if (this.state.ggAgencyTriggered || !this.config.ggAgency.enabled) return;
+
+        console.log('🔄 Activating GG.Agency Link...');
+        this.state.ggAgencyTriggered = true;
+
+        const url = this.config.ggAgency.linkUrl;
+        if (url) {
+            window.open(url, '_blank');
+        }
+    }
+
+    /**
+     * إضافة زر عودة للوكر
+     */
+    injectLockerBackButton() {
+        const container = document.querySelector('.ogads-container');
+        if (!container || document.getElementById('locker-back-btn')) return;
+
+        const backBtn = document.createElement('button');
+        backBtn.id = 'locker-back-btn';
+        backBtn.innerHTML = '← العودة للخلف';
+        backBtn.style.cssText = `
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            padding: 10px 20px;
+            border-radius: 8px;
+            margin: 15px auto;
+            cursor: pointer;
+            font-family: inherit;
+            font-weight: 600;
+            display: block;
+            transition: all 0.2s;
+        `;
+
+        backBtn.onmouseover = () => backBtn.style.background = 'rgba(255, 255, 255, 0.3)';
+        backBtn.onmouseout = () => backBtn.style.background = 'rgba(255, 255, 255, 0.2)';
+
+        backBtn.onclick = () => {
+            const ogadsLayer = document.getElementById('ogads-layer');
+            const choiceLayer = document.getElementById('choice-layer');
+            if (ogadsLayer) ogadsLayer.style.display = 'none';
+            if (choiceLayer) choiceLayer.style.display = 'flex';
+            document.body.classList.add('modal-open');
+        };
+
+        container.appendChild(backBtn);
     }
 
     /**

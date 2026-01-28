@@ -7,6 +7,7 @@ export async function onRequest(context) {
             ogadsLockerUrl: env.VITE_OGADS_LOCKER_ID || '',
             adsterraBanner: env.VITE_ADSTERRA_BANNER_KEY || '',
             adsterraSocial: env.VITE_ADSTERRA_SOCIAL_BAR_KEY || '',
+            monetagDirectLink: env.VITE_MONETAG_ZONE_ID || '',
             ggAgencyLink: env.VITE_GGAGENCY_LINK_ID || ''
         }
     };

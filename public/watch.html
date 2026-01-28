@@ -331,54 +331,54 @@
         @media (max-width: 768px) {
             .choice-content {
                 width: 95%;
-                padding: 10px;
-                margin-top: 20px;
+                padding: 5px;
+                margin-top: 15px;
             }
 
             .choice-cards {
                 flex-direction: column !important;
-                gap: 1.2rem;
+                gap: 1rem;
                 max-height: unset;
                 overflow-y: visible;
-                padding: 10px;
+                padding: 5px;
             }
 
             .choice-title {
-                font-size: 1.4rem;
-                margin-bottom: 1.5rem;
+                font-size: 1.3rem;
+                margin-bottom: 1.2rem;
             }
 
             .choice-card {
                 min-width: unset;
-                padding: 1.8rem;
-                border-radius: 15px;
+                padding: 1.2rem;
+                border-radius: 12px;
             }
 
             .choice-badge {
-                font-size: 0.75rem;
-                padding: 4px 30px;
-                top: 20px;
-                left: -35px;
+                font-size: 0.7rem;
+                padding: 3px 25px;
+                top: 15px;
+                left: -30px;
             }
 
             .choice-icon {
-                font-size: 3rem;
-                margin-bottom: 0.8rem;
+                font-size: 2.2rem;
+                margin-bottom: 0.6rem;
             }
 
             .choice-card h3 {
-                font-size: 1.35rem;
-                margin-bottom: 0.8rem;
+                font-size: 1.15rem;
+                margin-bottom: 0.5rem;
             }
 
             .choice-card p {
-                font-size: 1.05rem;
-                margin-bottom: 1.5rem;
+                font-size: 0.9rem;
+                margin-bottom: 1rem;
             }
 
             .choice-btn {
-                padding: 12px 24px;
-                font-size: 1.1rem;
+                padding: 10px 20px;
+                font-size: 1rem;
             }
         }
 
@@ -414,7 +414,7 @@
 
         const urlParams = new URLSearchParams(window.location.search);
         const matchId = urlParams.get('match');
-        let countdown = 10;
+        let countdown = 12;
         let streamUrl = '';
 
         async function loadMatch() {
@@ -455,7 +455,7 @@
                 countdownEl.textContent = countdown;
 
                 // Update progress circle
-                const offset = circumference - (countdown / 10) * circumference;
+                const offset = circumference - (countdown / 12) * circumference;
                 progressCircle.style.strokeDashoffset = offset;
 
                 if (countdown <= 0) {
