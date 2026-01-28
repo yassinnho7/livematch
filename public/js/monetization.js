@@ -55,6 +55,8 @@ class MonetizationManager {
         // 2. Initialize Ads based on loaded config
         if (this.config.adsterra.enabled) {
             this.initAdsterra();
+        } else {
+            console.log('📢 Adsterra is disabled (no keys provided)');
         }
 
         // 3. Start Listeners
@@ -62,26 +64,29 @@ class MonetizationManager {
         this.setupIframeListeners();
 
         this.state.configLoaded = true;
+        console.log('✅ Monetization System Ready - State:', this.state);
     }
 
     setupConfig(adIds) {
+        // تنظيف القيم من الفراغات الزائدة
+        const clean = (val) => (val && typeof val === 'string') ? val.trim() : '';
+        
         this.config = {
             ogads: {
-                // Now using full URL directly as requested
-                lockerUrl: adIds.ogadsLockerUrl || 'https://lockedapp.space/cl/i/l776rj',
-                enabled: true
+                lockerUrl: clean(adIds.ogadsLockerUrl) || 'https://lockedapp.space/cl/i/l776rj',
+                enabled: !!clean(adIds.ogadsLockerUrl) || true
             },
             monetag: {
-                zoneId: adIds.monetagZoneId || '10526690',
-                enabled: !!(adIds.monetagZoneId || '10526690')
+                zoneId: clean(adIds.monetagZoneId),
+                enabled: !!clean(adIds.monetagZoneId)
             },
             adsterra: {
-                socialBarKey: adIds.adsterraSocial || '',
-                popunderKey: adIds.adsterraPop || '',
-                enabled: !!(adIds.adsterraSocial && adIds.adsterraPop)
+                socialBarKey: clean(adIds.adsterraSocial),
+                popunderKey: clean(adIds.adsterraPop),
+                enabled: !!(clean(adIds.adsterraSocial) || clean(adIds.adsterraPop))
             }
         };
-        console.log('📊 Active Config:', this.config);
+        console.log('📊 Active Monetization Config:', this.config);
     }
 
     /**
@@ -362,23 +367,21 @@ class MonetizationManager {
      * يستخدم الكود الكامل من Environment Variable
      */
     loadAdsterraSocialBar() {
-        console.log('📢 Loading Adsterra Social Bar...');
-
-        // الكود الكامل من المتغير البيئي (مثال: <script src="https://pl28582110.effectivegatecpm.com/bf/db/5e/bfdb5e4549c4611a6c774636cc09cc3f.js"></script>)
+        console.log('📢 Attempting to load Adsterra Social Bar...');
         const fullScript = this.config.adsterra.socialBarKey;
-
+        
         if (fullScript && fullScript.includes('src=')) {
-            // استخراج الرابط من الكود
             const srcMatch = fullScript.match(/src=["']([^"']+)["']/);
             if (srcMatch && srcMatch[1]) {
                 const script = document.createElement('script');
                 script.src = srcMatch[1];
                 script.async = true;
+                script.onerror = (e) => console.error('❌ Adsterra Social Bar blocked or failed to load:', srcMatch[1]);
+                script.onload = () => console.log('✅ Adsterra Social Bar loaded successfully');
                 document.body.appendChild(script);
-                console.log('✅ Adsterra Social Bar loaded:', srcMatch[1]);
             }
         } else {
-            console.warn('⚠️ Adsterra Social Bar key is not a full script tag');
+            console.warn('⚠️ Adsterra Social Bar: key is missing or not a full script tag');
         }
     }
 
@@ -387,11 +390,9 @@ class MonetizationManager {
      * يستخدم الكود الكامل من Environment Variable
      */
     loadAdsterraPopunder() {
-        console.log('📢 Loading Adsterra Popunder...');
-
-        // الكود الكامل من المتغير البيئي
+        console.log('📢 Attempting to load Adsterra Popunder...');
         const fullScript = this.config.adsterra.popunderKey;
-
+        
         if (fullScript && fullScript.includes('src=')) {
             // استخراج الرابط من الكود
             const srcMatch = fullScript.match(/src=["']([^"']+)["']/);
@@ -399,11 +400,12 @@ class MonetizationManager {
                 const script = document.createElement('script');
                 script.src = srcMatch[1];
                 script.async = true;
+                script.onerror = (e) => console.error('❌ Adsterra Popunder blocked or failed to load:', srcMatch[1]);
+                script.onload = () => console.log('✅ Adsterra Popunder loaded successfully');
                 document.head.appendChild(script);
-                console.log('✅ Adsterra Popunder loaded:', srcMatch[1]);
             }
         } else {
-            console.warn('⚠️ Adsterra Popunder key is not a full script tag');
+            console.warn('⚠️ Adsterra Popunder: key is missing or not a full script tag');
         }
     }
 
