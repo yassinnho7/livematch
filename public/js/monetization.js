@@ -29,6 +29,7 @@ class MonetizationManager {
             socialBarShowCount: parseInt(sessionStorage.getItem('ad_sb_count') || '0'),
             monetagTriggered: false,
             ggAgencyTriggered: false,
+            ggAgencyReady: false, // Flag indicating the delay has passed
             shieldActive: false
         };
 
@@ -259,18 +260,16 @@ class MonetizationManager {
     }
 
     /**
-     * تفعيل GG.Agency Clickunder
+     * تفعيل GG.Agency (بناءً على تفاعل المستخدم بعد انقضاء المدة)
      */
     triggerGGAgency() {
-        if (this.state.ggAgencyTriggered || !this.config.ggAgency.enabled) return;
-
-        console.log('🔄 Activating GG.Agency Link...');
-        this.state.ggAgencyTriggered = true;
-
-        const url = this.config.ggAgency.linkUrl;
-        if (url) {
-            window.open(url, '_blank');
+        if (this.state.ggAgencyTriggered || !this.config.ggAgency.enabled || !this.state.ggAgencyReady) {
+            return;
         }
+
+        console.log('🔄 User interacted. Triggering GG.Agency Link...');
+        this.safeOpen(this.config.ggAgency.linkUrl);
+        this.state.ggAgencyTriggered = true;
     }
 
     /**
@@ -320,12 +319,10 @@ class MonetizationManager {
             this.state.monetagTriggered = true;
         }, 3000);
 
-        // 5. GG.Agency (Strictly 1m after stream starts, if user is still watching)
+        // 5. GG.Agency (Set ready flag after 1m, opens on NEXT user click to bypass blockers)
         setTimeout(() => {
-            if (this.state.ggAgencyTriggered) return;
-            console.log('⏱️ 1 minute passed, safe opening GG.Agency...');
-            this.safeOpen(this.config.ggAgency.linkUrl);
-            this.state.ggAgencyTriggered = true;
+            console.log('⏱️ 1 minute passed, GG.Agency is now READY for trigger.');
+            this.state.ggAgencyReady = true;
         }, 60000);
     }
 
@@ -444,18 +441,7 @@ class MonetizationManager {
 
         console.log('🛡️ Anti-Takeover Shield: ACTIVE - Protecting main window...');
 
-        // 1. منع الإطارات الخارجية أو الإعلانات من اختطاف النافذة الأم
-        window.addEventListener('beforeunload', (event) => {
-            // لا تظهر الرسالة في حالة الضغط على أزرار الخروج الرسمية في موقعنا
-            if (this.state.streamUnlocked || document.getElementById('monetization-layer')?.style.display !== 'none') {
-                const msg = 'استمر في المشاهدة، لا تغادر الموقع الآن!';
-                event.preventDefault();
-                event.returnValue = msg;
-                return msg;
-            }
-        });
-
-        // 2. حماية إضافية ضد الـ Location Hijacking
+        // 1. حماية ضد الـ Location Hijacking (منع الإطارات من تغيير رابط الموقع الأصلي)
         if (window.top !== window.self) {
             try {
                 window.top.location = window.self.location;
