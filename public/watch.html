@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>بث مباشر</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+
+    <!-- Monetization CSS -->
+    <link rel="stylesheet" href="/css/ogads-custom.css">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Cairo', sans-serif;
+            background: #000;
+            color: #fff;
+            overflow: hidden;
+        }
+
+        /* Small Back Button */
+        .back-btn {
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            background: rgba(102, 126, 234, 0.9);
+            padding: 8px 16px;
+            border-radius: 6px;
+            color: #fff;
+            font-weight: 600;
+            font-size: 13px;
+            border: none;
+            cursor: pointer;
+            text-decoration: none;
+            z-index: 1000;
+            transition: all 0.2s;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        .back-btn:hover {
+            background: rgba(102, 126, 234, 1);
+            transform: translateY(-1px);
+        }
+
+        /* Stream Container */
+        #stream-container {
+            width: 100vw;
+            height: 100vh;
+            background: #000;
+            display: none;
+        }
+
+        #stream {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        /* Monetization Layer - العد التنازلي المحسّن */
+        .monetization-layer {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Cairo', 'Tajawal', sans-serif;
+            direction: rtl;
+            overflow-y: auto;
+            /* السماح بالتمرير العمودي للمحتوى الطويل */
+            padding: 20px 0;
+            /* مسافة للأعلى والأسفل للجمالية */
+        }
+
+        .monetization-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.95) 0%, rgba(26, 32, 44, 0.98) 100%);
+            backdrop-filter: blur(10px);
+        }
+
+        .monetization-content {
+            position: relative;
+            text-align: center;
+            color: #fff;
+            z-index: 1;
+        }
+
+        .monetization-icon {
+            font-size: 80px;
+            margin-bottom: 20px;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+        .monetization-content h2 {
+            font-size: 32px;
+            font-weight: 700;
+            margin: 0 0 40px 0;
+        }
+
+        /* دائرة العد التنازلي */
+        .countdown-circle {
+            position: relative;
+            width: 200px;
+            height: 200px;
+            margin: 0 auto 30px;
+        }
+
+        .countdown-circle svg {
+            transform: rotate(-90deg);
+        }
+
+        .countdown-bg {
+            fill: none;
+            stroke: rgba(255, 255, 255, 0.1);
+            stroke-width: 8;
+        }
+
+        .countdown-progress {
+            fill: none;
+            stroke: #667eea;
+            stroke-width: 8;
+            stroke-linecap: round;
+            stroke-dasharray: 565;
+            stroke-dashoffset: 0;
+            transition: stroke-dashoffset 1s linear;
+        }
+
+        .countdown-number {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 72px;
+            font-weight: 800;
+            color: #667eea;
+        }
+
+        .countdown-text {
+            font-size: 18px;
+            color: rgba(255, 255, 255, 0.8);
+            margin: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Back Button -->
+    <a href="index.html" class="back-btn">← العودة</a>
+
+    <!-- طبقة العد التنازلي المحسّنة -->
+    <div id="monetization-layer" class="monetization-layer">
+        <div class="monetization-overlay"></div>
+        <div class="monetization-content">
+            <div class="monetization-icon">⏱️</div>
+            <h2>جاري تحضير البث...</h2>
+            <div class="countdown-circle">
+                <svg width="200" height="200">
+                    <circle cx="100" cy="100" r="90" class="countdown-bg"></circle>
+                    <circle cx="100" cy="100" r="90" class="countdown-progress" id="countdown-progress"></circle>
+                </svg>
+                <div class="countdown-number" id="countdown">10</div>
+            </div>
+            <p class="countdown-text">شاهد إعلاننا لدعم السيرفر...</p>
+        </div>
+    </div>
+
+    <!-- طبقة الاختيار (HD vs Normal) -->
+    <div id="choice-layer" class="monetization-layer" style="display: none;">
+        <div class="monetization-overlay"></div>
+        <div class="choice-content">
+            <h2 class="choice-title">اختر جودة البث المفضل</h2>
+            <div class="choice-cards">
+                <!-- خيار HD (يفتح Locker) -->
+                <div class="choice-card premium" onclick="window.monetizationManager.selectQuality('hd')">
+                    <div class="choice-badge">🚀 موصى به</div>
+                    <div class="choice-icon">💎</div>
+                    <h3>بث فائق الجودة (HD)</h3>
+                    <p>بدون تقطيع • سيرفر خاص • 4K</p>
+                    <button class="choice-btn">مشاهدة HD</button>
+                </div>
+
+                <!-- خيار عادي (يفتح إعلانات) -->
+                <div class="choice-card standard" onclick="window.monetizationManager.selectQuality('normal')">
+                    <div class="choice-icon">📺</div>
+                    <h3>بث قياسي (SD)</h3>
+                    <p>جودة متوسطة • سيرفر عام</p>
+                    <button class="choice-btn secondary">مشاهدة الآن</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <style>
+        /* أنماط نافذة الاختيار */
+        .choice-content {
+            position: relative;
+            z-index: 10;
+            width: 90%;
+            max-width: 800px;
+            text-align: center;
+        }
+
+        .choice-title {
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: #fff;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .choice-cards {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .choice-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            padding: 2rem;
+            flex: 1;
+            min-width: 280px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .choice-card:hover {
+            transform: translateY(-10px);
+            background: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        .choice-card.premium {
+            background: linear-gradient(145deg, rgba(102, 126, 234, 0.2), rgba(118, 75, 162, 0.2));
+            border-color: rgba(102, 126, 234, 0.4);
+        }
+
+        .choice-card.premium:hover {
+            border-color: #667eea;
+            box-shadow: 0 0 30px rgba(102, 126, 234, 0.3);
+        }
+
+        .choice-badge {
+            position: absolute;
+            top: 20px;
+            left: -35px;
+            background: #ffd700;
+            color: #000;
+            padding: 5px 40px;
+            transform: rotate(-45deg);
+            font-weight: bold;
+            font-size: 0.9rem;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .choice-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+        }
+
+        .choice-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .choice-card p {
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+        }
+
+        .choice-btn {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            width: 100%;
+            transition: all 0.3s;
+        }
+
+        .choice-card:hover .choice-btn {
+            background: #764ba2;
+            transform: scale(1.05);
+        }
+
+        .choice-btn.secondary {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .choice-card:hover .choice-btn.secondary {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .choice-cards {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .choice-title {
+                font-size: 1.5rem;
+                margin-bottom: 1.5rem;
+            }
+
+            .choice-card {
+                min-width: unset;
+                padding: 1.5rem;
+            }
+
+            .choice-badge {
+                font-size: 0.75rem;
+                padding: 4px 30px;
+            }
+
+            .choice-icon {
+                font-size: 3rem;
+            }
+
+            .choice-card h3 {
+                font-size: 1.2rem;
+            }
+
+            .choice-card p {
+                font-size: 0.9rem;
+                margin-bottom: 1.5rem;
+            }
+
+            .choice-btn {
+                padding: 10px 24px;
+                font-size: 1rem;
+            }
+        }
+    </style>
+
+    <!-- طبقة OGads Content Locker -->
+    <div id="ogads-layer" class="monetization-layer ogads-layer" style="display: none; padding: 0;">
+        <div class="ogads-overlay"></div>
+        <!-- جعل اللوكر يأخذ الشاشة بالكامل بدون إطار تقييدي للسماح بالتمرير داخل الـ iframe إذا لزم الأمر -->
+        <div class="ogads-container"
+            style="width: 100%; height: 100%; background: transparent; box-shadow: none; display: flex; flex-direction: column;">
+            <iframe id="ogads-iframe" allow="payment; camera; microphone"
+                style="width: 100%; height: 100%; border: none; flex-grow: 1;"
+                sandbox="allow-forms allow-scripts allow-same-origin allow-popups allow-top-navigation">
+            </iframe>
+        </div>
+    </div>
+
+    <!-- Stream Container -->
+    <div id="stream-container">
+        <iframe id="stream" sandbox="allow-same-origin allow-scripts allow-forms" allowfullscreen></iframe>
+    </div>
+
+    <script>
+        // Block popups
+        window.open = function () { return null; };
+
+        const urlParams = new URLSearchParams(window.location.search);
+        const matchId = urlParams.get('match');
+        let countdown = 10;
+        let streamUrl = '';
+
+        async function loadMatch() {
+            try {
+                const response = await fetch('data/matches.json');
+                const data = await response.json();
+                const match = data.matches.find(m => m.id == matchId);
+
+                if (match && match.streams && match.streams.length > 0) {
+                    streamUrl = match.streams[0].url;
+
+                    // التحقق من أن الرابط ليس livekora.vip (بث غير متوفر)
+                    if (streamUrl.includes('livekora.vip') || streamUrl.includes('www.livekora.vip')) {
+                        showError('البث غير متوفر الآن، يرجى المحاولة لاحقاً');
+                        return;
+                    }
+
+                    document.title = `${match.home.name} vs ${match.away.name} - بث مباشر`;
+                    startCountdown();
+                } else {
+                    showError('لا يوجد بث متاح');
+                }
+            } catch (error) {
+                showError('خطأ في تحميل البث');
+            }
+        }
+
+        function startCountdown() {
+            const countdownEl = document.getElementById('countdown');
+            const progressCircle = document.getElementById('countdown-progress');
+            const circumference = 2 * Math.PI * 90; // 2πr
+
+            progressCircle.style.strokeDasharray = circumference;
+            progressCircle.style.strokeDashoffset = 0;
+
+            const interval = setInterval(() => {
+                countdown--;
+                countdownEl.textContent = countdown;
+
+                // Update progress circle
+                const offset = circumference - (countdown / 10) * circumference;
+                progressCircle.style.strokeDashoffset = offset;
+
+                if (countdown <= 0) {
+                    clearInterval(interval);
+                    // Trigger monetization system
+                    document.dispatchEvent(new Event('countdownFinished'));
+                }
+            }, 1000);
+        }
+
+        function loadStream() {
+            const streamIframe = document.getElementById('stream');
+            streamIframe.src = streamUrl;
+        }
+
+        function showError(message) {
+            const layer = document.getElementById('monetization-layer');
+            layer.innerHTML = `
+                <div class="monetization-overlay"></div>
+                <div class="monetization-content">
+                    <h2>⚠️ ${message}</h2>
+                    <a href="index.html" style="color: #4facfe; margin-top: 20px; display: inline-block; font-size: 18px;">العودة للمباريات</a>
+                </div>
+            `;
+        }
+
+        // Make loadStream available globally for monetization.js
+        window.loadStream = loadStream;
+
+        document.addEventListener('contextmenu', e => e.preventDefault());
+
+        // Debug logging
+        console.log('🎬 watch.html loaded');
+        console.log('📍 Match ID:', matchId);
+
+        loadMatch();
+    </script>
+
+    <!-- Configuration -->
+    <script src="/js/config.js"></script>
+
+    <!-- Monetization System -->
+    <script type="module" src="/js/monetization.js"></script>
+</body>
+
+</html>

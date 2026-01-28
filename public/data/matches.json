@@ -1,0 +1,96 @@
+{
+  "generated_at": "2026-01-27T23:34:39.069Z",
+  "count": 3,
+  "matches": [
+    {
+      "id": 100001,
+      "date": "2026-01-27T13:00:00.000Z",
+      "timestamp": 1769518800,
+      "status": "FT",
+      "league": {
+        "name": "تونس, الرابطة التونسية المحترفة الأولى",
+        "country": "Tunisia",
+        "logo": "https://a.espncdn.com/combiner/i?img=/i/leaguelogos/soccer/500/1247.png&h=40&w=40"
+      },
+      "home": {
+        "name": "الترجي الجرجيسي",
+        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/cdn/2025/10/8236.png"
+      },
+      "away": {
+        "name": "النادي الأفريقي",
+        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/cdn/2025/10/8239.png"
+      },
+      "score": null,
+      "streams": [
+        {
+          "id": "stream_el-watania-2_100001",
+          "source": "livekora",
+          "quality": "HD",
+          "channel": "el-watania-2",
+          "url": "https://pl.kooralive.fit/albaplayer/el-watania-2",
+          "priority": 1
+        }
+      ]
+    },
+    {
+      "id": 100002,
+      "date": "2026-01-27T13:00:00.000Z",
+      "timestamp": 1769518800,
+      "status": "FT",
+      "league": {
+        "name": "تونس, الرابطة التونسية المحترفة الأولى",
+        "country": "Tunisia",
+        "logo": "https://a.espncdn.com/combiner/i?img=/i/leaguelogos/soccer/500/1247.png&h=40&w=40"
+      },
+      "home": {
+        "name": "الترجي",
+        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/cdn/2025/10/8235.png"
+      },
+      "away": {
+        "name": "شبيبة القيروان",
+        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/cdn/2025/10/8238.png"
+      },
+      "score": null,
+      "streams": [
+        {
+          "id": "stream_el-watania-1_100002",
+          "source": "livekora",
+          "quality": "HD",
+          "channel": "el-watania-1",
+          "url": "https://pl.kooralive.fit/albaplayer/el-watania-1",
+          "priority": 1
+        }
+      ]
+    },
+    {
+      "id": 100003,
+      "date": "2026-01-27T15:00:00.000Z",
+      "timestamp": 1769526000,
+      "status": "FT",
+      "league": {
+        "name": "مصر, الدوري المصري",
+        "country": "Egypt",
+        "logo": "https://a.espncdn.com/combiner/i?img=/i/leaguelogos/soccer/500/1237.png&h=40&w=40"
+      },
+      "home": {
+        "name": "الأهلي",
+        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/cdn/2025/10/7085.png"
+      },
+      "away": {
+        "name": "وادي دجلة",
+        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/cdn/2026/01/8311.png"
+      },
+      "score": null,
+      "streams": [
+        {
+          "id": "stream_thmanya1_100003",
+          "source": "livekora",
+          "quality": "HD",
+          "channel": "thmanya1",
+          "url": "https://pl.buffstreams.stream/albaplayer/thmanya1",
+          "priority": 1
+        }
+      ]
+    }
+  ]
+}

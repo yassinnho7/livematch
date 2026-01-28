@@ -1,0 +1,24 @@
+{
+  "name": "livematch",
+  "version": "1.0.0",
+  "description": "Live football matches streaming platform",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "scrape": "node scrapers/livekora_scraper.js",
+    "test": "echo \"No tests yet\""
+  },
+  "dependencies": {
+    "puppeteer": "^21.11.0",
+    "puppeteer-extra": "^3.3.6",
+    "puppeteer-extra-plugin-stealth": "^2.11.2"
+  },
+  "keywords": [
+    "football",
+    "streaming",
+    "livekora",
+    "scraping"
+  ],
+  "author": "yassinnho7",
+  "license": "MIT"
+}
