@@ -59,11 +59,6 @@ class MonetizationManager {
             this.initAdsterra();
         }
 
-        // 3. Monetag Auto-Trigger (after 3 seconds)
-        setTimeout(() => {
-            this.triggerMonetag();
-        }, 3000);
-
         // 3. Start Listeners
         this.listenForCountdownEnd();
         this.setupIframeListeners();
@@ -82,6 +77,7 @@ class MonetizationManager {
             },
             adsterra: {
                 banner: clean(adIds.adsterraBanner),
+                errorBanner: clean(adIds.adsterraErrorBanner),
                 socialBarKey: clean(adIds.adsterraSocial),
                 enabled: true
             },
@@ -309,7 +305,13 @@ class MonetizationManager {
             loadStream();
         }
 
-        // 4. GG.Agency Auto-Trigger (after 1 minute of streaming)
+        // 4. Monetag Auto-Trigger (after 3 seconds of streaming)
+        setTimeout(() => {
+            console.log('⏱️ 3 seconds passed, triggering Monetag...');
+            this.triggerMonetag();
+        }, 3000);
+
+        // 5. GG.Agency Auto-Trigger (after 1 minute of streaming)
         setTimeout(() => {
             console.log('⏱️ 1 minute passed, triggering GG.Agency...');
             this.triggerGGAgency();
@@ -331,6 +333,28 @@ class MonetizationManager {
         } else {
             console.log('📢 Adsterra Social Bar: limit reached (3)');
         }
+    }
+
+    /**
+     * تحميل Adsterra Error Banner (728x90)
+     */
+    loadAdsterraErrorBanner() {
+        const container = document.getElementById('adsterra-error-banner');
+        if (!container || !this.config.adsterra.errorBanner) return;
+
+        console.log('📢 Injecting Adsterra Error Banner (728x90)...');
+        const scriptContent = this.config.adsterra.errorBanner;
+
+        container.innerHTML = ''; // Clear previous
+        const div = document.createElement('div');
+        div.innerHTML = scriptContent;
+
+        Array.from(div.querySelectorAll('script')).forEach(oldScript => {
+            const newScript = document.createElement('script');
+            Array.from(oldScript.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value));
+            newScript.appendChild(document.createTextNode(oldScript.innerHTML));
+            container.appendChild(newScript);
+        });
     }
 
     /**

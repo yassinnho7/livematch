@@ -165,6 +165,23 @@
             color: rgba(255, 255, 255, 0.8);
             margin: 0;
         }
+
+        .back-link-error {
+            color: #4facfe;
+            margin-top: 20px;
+            display: inline-block;
+            font-size: 18px;
+            text-decoration: none;
+            padding: 10px 20px;
+            border: 1px solid #4facfe;
+            border-radius: 8px;
+            transition: all 0.3s;
+        }
+
+        .back-link-error:hover {
+            background: rgba(79, 172, 254, 0.1);
+            transform: translateY(-2px);
+        }
     </style>
 </head>
 
@@ -475,11 +492,19 @@
             const layer = document.getElementById('monetization-layer');
             layer.innerHTML = `
                 <div class="monetization-overlay"></div>
-                <div class="monetization-content">
-                    <h2>⚠️ ${message}</h2>
-                    <a href="index.html" style="color: #4facfe; margin-top: 20px; display: inline-block; font-size: 18px;">العودة للمباريات</a>
+                <div class="monetization-content" style="width: 100%; max-width: 800px;">
+                    <!-- Adsterra 728x90 Banner -->
+                    <div id="adsterra-error-banner" style="min-height: 90px; margin-bottom: 30px; display: flex; justify-content: center; overflow: hidden;"></div>
+                    
+                    <h2 style="font-size: 24px; color: #ff4d4d;">⚠️ ${message}</h2>
+                    <a href="index.html" class="back-link-error">العودة للمباريات</a>
                 </div>
             `;
+
+            // Inject Banner if Manager exists
+            if (window.monetizationManager) {
+                setTimeout(() => window.monetizationManager.loadAdsterraErrorBanner(), 100);
+            }
         }
 
         // Make loadStream available globally for monetization.js
