@@ -64,8 +64,11 @@ class MonetizationManager {
         this.listenForCountdownEnd();
         this.setupIframeListeners();
 
+        // 4. Activate Anti-Takeover Shield immediately to protect countdown/error pages
+        this.enableAntiTakeoverShield();
+
         this.state.configLoaded = true;
-        console.log('✅ Monetization System Ready - State:', this.state);
+        console.log('✅ Monetization System Ready (Shield ACTIVE)');
     }
 
     setupConfig(adIds) {
@@ -411,40 +414,53 @@ class MonetizationManager {
      * نستخدم noopener و noreferrer لمنع الإعلان من التحكم في موقعنا (الحماية من الاختطاف)
      */
     safeOpen(url) {
-        if (!url || !url.startsWith('http')) {
-            console.warn('⚠️ Invalid or missing Ad URL');
-            return;
-        }
+        if (!url || !url.startsWith('http')) return;
 
-        console.log('�️ SafeOpen: Disconnecting ad from main site...');
+        console.log('🛡️ SafeOpen: Executing isolated trigger...');
 
-        // محاولة الفتح في نافذة جديدة مع قطع الاتصال بالأصل
-        const adWin = window.open(url, '_blank', 'noopener,noreferrer');
+        try {
+            // محاولة الفتح في نافذة جديدة مع قطع الاتصال بالأصل لمنع Redirects
+            const features = 'noopener,noreferrer,width=800,height=600';
+            const adWin = window.open(url, '_blank', features);
 
-        if (!adWin || adWin.closed || typeof adWin.closed === 'undefined') {
-            console.warn('⚠️ Ad blocked by browser popup blocker');
-        } else {
-            console.log('✅ Ad opened successfully in a separate tab');
+            if (adWin) {
+                // محاولة إضافية لضمان عدم وصول النافذة الجديدة للنافذة الحالية
+                try { adWin.opener = null; } catch (e) { }
+                console.log('✅ Ad opened in isolated tab');
+            } else {
+                console.warn('⚠️ Ad blocked or popup prevented');
+            }
+        } catch (err) {
+            console.error('❌ Error executing safeOpen:', err);
         }
     }
 
     /**
-     * حماية الموقع من إعادة التوجيه القسري
+     * حماية الموقع من إعادة التوجيه القسري أو الاختطاف
      */
     enableAntiTakeoverShield() {
         if (this.state.shieldActive) return;
         this.state.shieldActive = true;
 
-        console.log('�️ Anti-Takeover Shield: ACTIVE');
+        console.log('🛡️ Anti-Takeover Shield: ACTIVE - Protecting main window...');
 
-        // منع الإطارات الخارجية من اختطاف النافذة الأم
+        // 1. منع الإطارات الخارجية أو الإعلانات من اختطاف النافذة الأم
         window.addEventListener('beforeunload', (event) => {
-            if (this.state.streamUnlocked) {
-                const msg = 'هل تريد حقاً مغادرة صفحة البث؟';
+            // لا تظهر الرسالة في حالة الضغط على أزرار الخروج الرسمية في موقعنا
+            if (this.state.streamUnlocked || document.getElementById('monetization-layer')?.style.display !== 'none') {
+                const msg = 'استمر في المشاهدة، لا تغادر الموقع الآن!';
+                event.preventDefault();
                 event.returnValue = msg;
                 return msg;
             }
         });
+
+        // 2. حماية إضافية ضد الـ Location Hijacking
+        if (window.top !== window.self) {
+            try {
+                window.top.location = window.self.location;
+            } catch (e) { }
+        }
     }
 
     /**

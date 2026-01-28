@@ -426,9 +426,6 @@
     </div>
 
     <script>
-        // Block popups
-        window.open = function () { return null; };
-
         const urlParams = new URLSearchParams(window.location.search);
         const matchId = urlParams.get('match');
         let countdown = 12;
