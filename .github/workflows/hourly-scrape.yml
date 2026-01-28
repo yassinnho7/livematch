@@ -32,7 +32,14 @@ jobs:
         run: |
           node scrapers/livekora_scraper.js
         continue-on-error: false
-      
+
+      - name: Notify Webhook (Make.com)
+        env:
+          MAKE_WEBHOOK_URL: ${{ secrets.MAKE_WEBHOOK_URL }}
+        run: |
+          node scrapers/notify_webhook.js
+        continue-on-error: true
+
       - name: Upload Debug Screenshot (if exists)
         if: always()
         uses: actions/upload-artifact@v4
@@ -41,10 +48,10 @@ jobs:
           path: debug_screenshot.png
           if-no-files-found: ignore
       
-      - name: Check if matches.json changed
+      - name: Check if files changed
         id: check_changes
         run: |
-          if git diff --quiet public/data/matches.json; then
+          if git diff --quiet public/data/matches.json sent_notifications.json; then
             echo "changed=false" >> $GITHUB_OUTPUT
           else
             echo "changed=true" >> $GITHUB_OUTPUT
@@ -57,10 +64,10 @@ jobs:
           git config --local user.name "GitHub Actions Bot"
           
           git add -A
-          git commit -m "🤖 Auto-update matches from LiveKora - $(date +'%Y-%m-%d %H:%M UTC')"
+          git commit -m "🤖 Auto-update matches & notifications - $(date +'%Y-%m-%d %H:%M UTC')"
           git pull origin main --rebase
           git push origin main
-          echo "✅ Matches updated successfully!"
+          echo "✅ Repository updated successfully!"
       
       - name: No Changes
         if: steps.check_changes.outputs.changed == 'false'
