@@ -1,481 +1,0 @@
-# 💰 دليل دمج شبكات الإعلانات
-
-## 🎯 نظرة عامة
-
-سندمج 3 شبكات إعلانية للحصول على أقصى ربح:
-
-1. **OGads** - CPA Content Locker ($0.50-2/تحويل)
-2. **Adsterra** - Display Ads (Social Bar + Popunder)
-3. **Monetag** - SmartLink (Fallback)
-
----
-
-# الشبكة 1: OGads (CPA)
-
-## ما هو OGads؟
-
-**Content Locker** = قفل المحتوى
-
-المستخدم يريد مشاهدة المباراة → يكمل عرض (استطلاع/تطبيق/تسجيل) → يفتح البث
-
-## الخطوة 1: التسجيل
-
-**اذهب إلى:**
-```
-https://ogads.com
-```
-
-**سجل حساب:**
-- Email
-- Password
-- Country
-- Payment method (PayPal/Payoneer)
-
-**تفعيل الحساب:**
-- تحقق من البريد
-- اضغط رابط التفعيل
-
-✅ **حساب OGads جاهز!**
-
----
-
-## الخطوة 2: إنشاء Content Locker
-
-**في Dashboard:**
-```
-Content Lockers → Create New Locker
-```
-
-**الإعدادات:**
-
-**1. Locker Type:**
-```
-Mobile Content Locker (أفضل للموبايل)
-```
-
-**2. Template:**
-```
-اختر تصميم جذاب (مثل: Modern Blue)
-```
-
-**3. Headline:**
-```
-شاهد المباراة الآن!
-```
-
-**4. Description:**
-```
-أكمل خطوة واحدة بسيطة لمشاهدة البث المباشر مجاناً
-```
-
-**5. Countries:**
-```
-اختر: الدول العربية (أعلى عمولة)
-- السعودية
-- الإمارات
-- الكويت
-- قطر
-- مصر
-```
-
-**6. اضغط "Create Locker"**
-
----
-
-## الخطوة 3: الحصول على الكود
-
-**بعد إنشاء Locker:**
-
-**1. انسخ Locker URL:**
-```
-https://ogads.com/locker/XXXXX
-```
-
-**2. أو احصل على JavaScript Code:**
-```javascript
-<script src="https://ogads.com/locker.js?id=XXXXX"></script>
-```
-
----
-
-## الخطوة 4: دمج في الموقع
-
-**افتح:** [livematch/public/watch.html](file:///C:/Users/sonr0353/Desktop/sitefoot/livematch/public/watch.html)
-
-**ابحث عن:**
-```html
-<!-- OGads Content Locker Placeholder -->
-<div id="ogads-locker" class="ad-container">
-```
-
-**استبدل بـ:**
-```html
-<div id="ogads-locker" class="ad-container">
-    <script src="https://ogads.com/locker.js?id=YOUR_LOCKER_ID"></script>
-</div>
-```
-
-✅ **OGads مدمج!**
-
----
-
-## التوقعات المالية - OGads
-
-```
-معدل التحويل: 5-10%
-عمولة متوسطة: $1/تحويل
-
-500 زائر/يوم:
-500 × 7% × $1 = $35/يوم = $1,050/شهر
-
-2000 زائر/يوم:
-2000 × 7% × $1 = $140/يوم = $4,200/شهر
-
-10000 زائر/يوم:
-10000 × 7% × $1.5 = $1,050/يوم = $31,500/شهر
-```
-
----
-
-# الشبكة 2: Adsterra
-
-## ما هو Adsterra؟
-
-**Display Ads** = إعلانات عرض
-
-- Social Bar (شريط أسفل الصفحة)
-- Popunder (نافذة خلفية)
-- Banner Ads (إعلانات بانر)
-
-## الخطوة 1: التسجيل
-
-**اذهب إلى:**
-```
-https://publishers.adsterra.com/signup
-```
-
-**سجل حساب:**
-- Email
-- Password
-- Website: https://livematch-991.pages.dev
-- Category: Sports
-
-**تفعيل:**
-- تحقق من البريد
-- اضغط رابط التفعيل
-
-✅ **حساب Adsterra جاهز!**
-
----
-
-## الخطوة 2: إضافة الموقع
-
-**في Dashboard:**
-```
-Websites → Add Website
-```
-
-**املأ البيانات:**
-```
-Website URL: https://livematch-991.pages.dev
-Category: Sports
-Traffic: 500-5000/day
-```
-
-**اضغط "Add"**
-
-**انتظر الموافقة** (عادة 24-48 ساعة)
-
----
-
-## الخطوة 3: إنشاء Ad Units
-
-### Ad Unit 1: Social Bar
-
-**في Dashboard:**
-```
-Ad Units → Create New → Social Bar
-```
-
-**الإعدادات:**
-```
-Name: Football Social Bar
-Website: livematch-991.pages.dev
-Position: Bottom
-```
-
-**احصل على الكود:**
-```javascript
-<script type="text/javascript">
-atOptions = {
-    'key' : 'YOUR_KEY_HERE',
-    'format' : 'iframe',
-    'height' : 60,
-    'width' : 468,
-    'params' : {}
-};
-</script>
-<script type="text/javascript" src="//www.topcreativeformat.com/YOUR_KEY/invoke.js"></script>
-```
-
----
-
-### Ad Unit 2: Popunder
-
-**في Dashboard:**
-```
-Ad Units → Create New → Popunder
-```
-
-**الإعدادات:**
-```
-Name: Football Popunder
-Website: livematch-991.pages.dev
-Frequency: 1 per 24 hours
-```
-
-**احصل على الكود:**
-```javascript
-<script type="text/javascript">
-atOptions = {
-    'key' : 'YOUR_POPUNDER_KEY',
-    'format' : 'iframe',
-    'height' : 90,
-    'width' : 728,
-    'params' : {}
-};
-</script>
-<script type="text/javascript" src="//www.topcreativeformat.com/YOUR_KEY/invoke.js"></script>
-```
-
----
-
-## الخطوة 4: دمج في الموقع
-
-**افتح:** [livematch/public/watch.html](file:///C:/Users/sonr0353/Desktop/sitefoot/livematch/public/watch.html)
-
-**أضف Social Bar قبل `</body>`:**
-```html
-<!-- Adsterra Social Bar -->
-<div id="adsterra-social">
-    <script type="text/javascript">
-    atOptions = {
-        'key' : 'YOUR_SOCIAL_BAR_KEY',
-        'format' : 'iframe',
-        'height' : 60,
-        'width' : 468,
-        'params' : {}
-    };
-    </script>
-    <script type="text/javascript" src="//www.topcreativeformat.com/YOUR_KEY/invoke.js"></script>
-</div>
-```
-
-**أضف Popunder في `<head>`:**
-```html
-<!-- Adsterra Popunder -->
-<script type="text/javascript">
-atOptions = {
-    'key' : 'YOUR_POPUNDER_KEY',
-    'format' : 'iframe',
-    'height' : 90,
-    'width' : 728,
-    'params' : {}
-};
-</script>
-<script type="text/javascript" src="//www.topcreativeformat.com/YOUR_KEY/invoke.js"></script>
-```
-
-✅ **Adsterra مدمج!**
-
----
-
-## التوقعات المالية - Adsterra
-
-```
-Social Bar CPM: $3-10
-Popunder CPM: $5-15
-
-500 زائر/يوم:
-Social Bar: 500 × $0.005 = $2.50/يوم
-Popunder: 500 × $0.01 = $5/يوم
-الإجمالي: $7.50/يوم = $225/شهر
-
-2000 زائر/يوم:
-Social Bar: 2000 × $0.005 = $10/يوم
-Popunder: 2000 × $0.01 = $20/يوم
-الإجمالي: $30/يوم = $900/شهر
-
-10000 زائر/يوم:
-Social Bar: 10000 × $0.008 = $80/يوم
-Popunder: 10000 × $0.012 = $120/يوم
-الإجمالي: $200/يوم = $6,000/شهر
-```
-
----
-
-# الشبكة 3: Monetag
-
-## ما هو Monetag؟
-
-**SmartLink** = رابط ذكي يختار أفضل إعلان تلقائياً
-
-استخدامه: **Fallback** إذا فشل OGads
-
-## الخطوة 1: التسجيل
-
-**اذهب إلى:**
-```
-https://monetag.com/signup
-```
-
-**سجل حساب:**
-- Email
-- Password
-- Website: https://livematch-991.pages.dev
-
-**تفعيل:**
-- تحقق من البريد
-
-✅ **حساب Monetag جاهز!**
-
----
-
-## الخطوة 2: إنشاء SmartLink
-
-**في Dashboard:**
-```
-SmartLink → Create New
-```
-
-**الإعدادات:**
-```
-Name: Football SmartLink
-Website: livematch-991.pages.dev
-```
-
-**احصل على الرابط:**
-```
-https://monetag.com/click/XXXXX
-```
-
----
-
-## الخطوة 3: دمج كـ Fallback
-
-**افتح:** [livematch/public/js/watch-player.js](file:///C:/Users/sonr0353/Desktop/sitefoot/livematch/public/js/watch-player.js)
-
-**أضف في نهاية الملف:**
-```javascript
-// Monetag SmartLink Fallback
-function monetagFallback() {
-    const monetagUrl = 'https://monetag.com/click/YOUR_SMARTLINK_ID';
-    window.location.href = monetagUrl;
-}
-
-// استخدم إذا فشل OGads
-setTimeout(() => {
-    if (!ogadsCompleted) {
-        monetagFallback();
-    }
-}, 30000); // 30 ثانية
-```
-
-✅ **Monetag مدمج كـ Fallback!**
-
----
-
-## التوقعات المالية - Monetag
-
-```
-CPM: $2-8
-
-500 زائر/يوم (Fallback 20%):
-100 × $0.005 = $0.50/يوم = $15/شهر
-
-2000 زائر/يوم (Fallback 20%):
-400 × $0.005 = $2/يوم = $60/شهر
-
-10000 زائر/يوم (Fallback 20%):
-2000 × $0.006 = $12/يوم = $360/شهر
-```
-
----
-
-# 📊 التوقعات الإجمالية
-
-## السيناريو المتحفظ (500 زائر/يوم)
-
-```
-OGads:    $35/يوم   = $1,050/شهر
-Adsterra: $7.50/يوم = $225/شهر
-Monetag:  $0.50/يوم = $15/شهر
-───────────────────────────────
-الإجمالي: $43/يوم   = $1,290/شهر
-```
-
-## السيناريو المتوسط (2000 زائر/يوم)
-
-```
-OGads:    $140/يوم  = $4,200/شهر
-Adsterra: $30/يوم   = $900/شهر
-Monetag:  $2/يوم    = $60/شهر
-───────────────────────────────
-الإجمالي: $172/يوم  = $5,160/شهر
-```
-
-## السيناريو المتفائل (10000 زائر/يوم)
-
-```
-OGads:    $1,050/يوم = $31,500/شهر
-Adsterra: $200/يوم   = $6,000/شهر
-Monetag:  $12/يوم    = $360/شهر
-───────────────────────────────
-الإجمالي: $1,262/يوم = $37,860/شهر
-```
-
----
-
-# ✅ Checklist التكامل
-
-## OGads:
-- [ ] حساب مفعّل
-- [ ] Content Locker تم إنشاؤه
-- [ ] الكود مدمج في watch.html
-- [ ] اختبار ناجح
-
-## Adsterra:
-- [ ] حساب مفعّل
-- [ ] الموقع تمت الموافقة عليه
-- [ ] Social Bar مدمج
-- [ ] Popunder مدمج
-- [ ] اختبار ناجح
-
-## Monetag:
-- [ ] حساب مفعّل
-- [ ] SmartLink تم إنشاؤه
-- [ ] Fallback مدمج
-- [ ] اختبار ناجح
-
----
-
-# 🎯 نصائح للتحسين
-
-## 1. A/B Testing
-- جرب templates مختلفة لـ OGads
-- جرب مواضع مختلفة للإعلانات
-- قس معدل التحويل لكل تغيير
-
-## 2. User Experience
-- لا تبالغ في الإعلانات
-- اجعل المحتوى سهل الوصول
-- سرعة التحميل مهمة
-
-## 3. المراقبة
-- راقب الأرباح يومياً
-- تحقق من معدلات التحويل
-- حسّن باستمرار
-
----
-
-**استمتع بالأرباح!** 💰🚀
