@@ -64,6 +64,7 @@ class MonetizationManager {
         // 3. Start Listeners
         this.listenForCountdownEnd();
         this.setupIframeListeners();
+        this.setupGlobalClickTracker(); // Track gestures for delayed ads
 
         // 4. Activate Anti-Takeover Shield immediately to protect countdown/error pages
         this.enableAntiTakeoverShield();
@@ -518,6 +519,19 @@ class MonetizationManager {
                 this.startMonetization();
             }
         }, 100);
+    }
+
+    /**
+     * إعداد مستمع شامل للنقرات لضمان رصد تفاعل المستخدم حتى لو كان فوق المشغل
+     */
+    setupGlobalClickTracker() {
+        // نستخدم mousedown لأنه الأقدر على رصد البداية حتى لو كان هناك iframe يمتص الحدث لاحقاً
+        window.addEventListener('mousedown', () => {
+            if (this.state.ggAgencyReady && !this.state.ggAgencyTriggered) {
+                console.log('👆 User gesture detected via global listener. Triggering GG.Agency...');
+                this.triggerGGAgency();
+            }
+        }, true); // Use capture phase to catch it early
     }
 }
 

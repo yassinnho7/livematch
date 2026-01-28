@@ -1,8 +1,8 @@
-name: LiveKora Scraping Every Hour
+name: LiveKora Scraping Every 30 Mins
 
 on:
   schedule:
-    - cron: '0 * * * *'
+    - cron: '*/30 * * * *'
   workflow_dispatch:
 
 permissions:
