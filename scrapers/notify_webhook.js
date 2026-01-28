@@ -4,6 +4,7 @@ const https = require('https');
 
 // Configuration
 const WEBHOOK_URL = process.env.MAKE_WEBHOOK_URL;
+const FORCE_NOTIFY = process.env.FORCE_NOTIFY === 'true'; // New: Force notify for testing
 const MATCHES_PATH = path.join(__dirname, '..', 'public', 'data', 'matches.json');
 const HISTORY_PATH = path.join(__dirname, '..', 'sent_notifications.json');
 
@@ -29,6 +30,8 @@ async function notify() {
 
         const now = Math.floor(Date.now() / 1000);
         const upcomingMatches = matches.filter(m => {
+            if (FORCE_NOTIFY) return true; // Send everything in test mode
+
             // Notify if match starts in next 60 minutes OR is LIVE
             // AND hasn't been notified yet
             const timeUntilStart = m.timestamp - now;
