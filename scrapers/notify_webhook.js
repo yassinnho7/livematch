@@ -28,18 +28,25 @@ async function notify() {
         }
 
         const now = Math.floor(Date.now() / 1000);
+        console.log(`🕒 Current Time (UTC): ${new Date().toISOString()}`);
+
         const upcomingMatches = matches.filter(m => {
-            // Notify if match starts in next 60 minutes OR is LIVE
-            // AND hasn't been notified yet
             const timeUntilStart = m.timestamp - now;
-            const isSoon = timeUntilStart > 0 && timeUntilStart < 3600; // 1 hour
+            // Notify if match starts in next 35 minutes (buffer for 30min target)
+            // OR if it just started (LIVE)
+            const isSoon = timeUntilStart > 0 && timeUntilStart < 2100; // 35 minutes window
             const isLive = m.status === 'LIVE';
 
-            return (isSoon || isLive) && !history.includes(m.id);
+            const shouldNotify = (isSoon || isLive) && !history.includes(m.id);
+
+            if (shouldNotify) {
+                console.log(`🎯 Match Targeted: ${m.home.name} vs ${m.away.name} (Starts in ${Math.round(timeUntilStart / 60)} mins)`);
+            }
+            return shouldNotify;
         });
 
         if (upcomingMatches.length === 0) {
-            console.log('ℹ️ No new matches to notify.');
+            console.log('ℹ️ No matches currently in the 30-minute notification window.');
             return;
         }
 
