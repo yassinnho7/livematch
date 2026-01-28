@@ -1,15 +1,22 @@
 name: LiveKora Scraping Every 30 Mins
 
 
+
+
 on:
   schedule:
-    - cron: '*/30 * * * *'→ Runs every 30 minutes
+    - cron: '*/30 * * * *'# Runs every 30 minutes
+
 
   workflow_dispatch:
 
 
+
+
 permissions:
   contents: write
+
+
 
 
 jobs:
@@ -34,8 +41,3 @@ jobs:
       
       - name: Run LiveKora Scraper
         run: |
-          node scrapers/livekora_scraper.js
-        continue-on-error: false
-
-
-      - name: Notify Webhook (Make.com)
