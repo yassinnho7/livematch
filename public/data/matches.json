@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-01-28T21:55:50.664Z",
+  "generated_at": "2026-01-28T22:22:47.446Z",
   "count": 12,
   "matches": [
     {
@@ -96,7 +96,7 @@
       "id": 100004,
       "date": "2026-01-28T20:00:00.000Z",
       "timestamp": 1769630400,
-      "status": "LIVE",
+      "status": "FT",
       "league": {
         "name": "أوروبا, دوري أبطال اوروبا",
         "country": "International",
@@ -126,7 +126,7 @@
       "id": 100005,
       "date": "2026-01-28T20:00:00.000Z",
       "timestamp": 1769630400,
-      "status": "LIVE",
+      "status": "FT",
       "league": {
         "name": "أوروبا, دوري أبطال اوروبا",
         "country": "International",
@@ -156,7 +156,7 @@
       "id": 100006,
       "date": "2026-01-28T20:00:00.000Z",
       "timestamp": 1769630400,
-      "status": "LIVE",
+      "status": "FT",
       "league": {
         "name": "أوروبا, دوري أبطال اوروبا",
         "country": "International",
@@ -186,7 +186,7 @@
       "id": 100007,
       "date": "2026-01-28T20:00:00.000Z",
       "timestamp": 1769630400,
-      "status": "LIVE",
+      "status": "FT",
       "league": {
         "name": "أوروبا, دوري أبطال اوروبا",
         "country": "International",
@@ -216,7 +216,7 @@
       "id": 100008,
       "date": "2026-01-28T20:00:00.000Z",
       "timestamp": 1769630400,
-      "status": "LIVE",
+      "status": "FT",
       "league": {
         "name": "أوروبا, دوري أبطال اوروبا",
         "country": "International",
@@ -246,7 +246,7 @@
       "id": 100009,
       "date": "2026-01-28T20:00:00.000Z",
       "timestamp": 1769630400,
-      "status": "LIVE",
+      "status": "FT",
       "league": {
         "name": "أوروبا, دوري أبطال اوروبا",
         "country": "International",
@@ -276,7 +276,7 @@
       "id": 100010,
       "date": "2026-01-28T20:00:00.000Z",
       "timestamp": 1769630400,
-      "status": "LIVE",
+      "status": "FT",
       "league": {
         "name": "أوروبا, دوري أبطال اوروبا",
         "country": "International",
@@ -306,7 +306,7 @@
       "id": 100011,
       "date": "2026-01-28T20:00:00.000Z",
       "timestamp": 1769630400,
-      "status": "LIVE",
+      "status": "FT",
       "league": {
         "name": "أوروبا, دوري أبطال اوروبا",
         "country": "International",
@@ -336,7 +336,7 @@
       "id": 100012,
       "date": "2026-01-28T20:00:00.000Z",
       "timestamp": 1769630400,
-      "status": "LIVE",
+      "status": "FT",
       "league": {
         "name": "أوروبا, دوري أبطال اوروبا",
         "country": "International",
