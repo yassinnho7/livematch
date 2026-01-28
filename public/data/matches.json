@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-01-28T13:11:04.714Z",
-  "count": 20,
+  "generated_at": "2026-01-28T14:43:01.569Z",
+  "count": 12,
   "matches": [
     {
       "id": 100001,
@@ -23,11 +23,11 @@
       "score": null,
       "streams": [
         {
-          "id": "stream_albaplayer_100001",
+          "id": "stream_el-watania-1_100001",
           "source": "livekora",
           "quality": "HD",
-          "channel": "albaplayer",
-          "url": "https://www.livekora.vip/albaplayer/",
+          "channel": "el-watania-1",
+          "url": "https://pl.kooralive.fit/albaplayer/el-watania-1",
           "priority": 1
         }
       ]
@@ -53,11 +53,11 @@
       "score": null,
       "streams": [
         {
-          "id": "stream_albaplayer_100002",
+          "id": "stream_on-time-sport-1_100002",
           "source": "livekora",
           "quality": "HD",
-          "channel": "albaplayer",
-          "url": "https://www.livekora.vip/albaplayer/",
+          "channel": "on-time-sport-1",
+          "url": "https://pl.kooralive.fit/albaplayer/on-time-sport-1",
           "priority": 1
         }
       ]
@@ -83,47 +83,17 @@
       "score": null,
       "streams": [
         {
-          "id": "stream_albaplayer_100003",
+          "id": "stream_thmanya1_100003",
           "source": "livekora",
           "quality": "HD",
-          "channel": "albaplayer",
-          "url": "https://www.livekora.vip/albaplayer/",
+          "channel": "thmanya1",
+          "url": "https://pl.kooralive.fit/albaplayer/thmanya1",
           "priority": 1
         }
       ]
     },
     {
       "id": 100004,
-      "date": "2026-01-28T18:00:00.000Z",
-      "timestamp": 1769623200,
-      "status": "NS",
-      "league": {
-        "name": "مصر, الدوري المصري",
-        "country": "Egypt",
-        "logo": "https://a.espncdn.com/combiner/i?img=/i/leaguelogos/soccer/500/1237.png&h=40&w=40"
-      },
-      "home": {
-        "name": "بيراميدز",
-        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/cdn/2025/10/22143.png"
-      },
-      "away": {
-        "name": "الجونة",
-        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/cdn/2025/12/8308.png"
-      },
-      "score": null,
-      "streams": [
-        {
-          "id": "stream_albaplayer_100004",
-          "source": "livekora",
-          "quality": "HD",
-          "channel": "albaplayer",
-          "url": "https://www.livekora.vip/albaplayer/",
-          "priority": 1
-        }
-      ]
-    },
-    {
-      "id": 100005,
       "date": "2026-01-28T20:00:00.000Z",
       "timestamp": 1769630400,
       "status": "NS",
@@ -143,77 +113,17 @@
       "score": null,
       "streams": [
         {
-          "id": "stream_bein4_100005",
+          "id": "stream_bein4_100004",
           "source": "livekora",
           "quality": "HD",
           "channel": "bein4",
-          "url": "https://pl.buffstreams.stream/albaplayer/bein4",
+          "url": "https://pl.kooralive.fit/albaplayer/bein4",
           "priority": 1
         }
       ]
     },
     {
-      "id": 100006,
-      "date": "2026-01-28T20:00:00.000Z",
-      "timestamp": 1769630400,
-      "status": "NS",
-      "league": {
-        "name": "أوروبا, دوري أبطال اوروبا",
-        "country": "International",
-        "logo": "https://cdn-icons-png.flaticon.com/512/1378/1378598.png"
-      },
-      "home": {
-        "name": "أتلتيك بلباو",
-        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/cdn/2025/10/144.png"
-      },
-      "away": {
-        "name": "سبورتنج لشبونة",
-        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/cdn/2025/10/890.png"
-      },
-      "score": null,
-      "streams": [
-        {
-          "id": "stream_albaplayer_100006",
-          "source": "livekora",
-          "quality": "HD",
-          "channel": "albaplayer",
-          "url": "https://www.livekora.vip/albaplayer/",
-          "priority": 1
-        }
-      ]
-    },
-    {
-      "id": 100007,
-      "date": "2026-01-28T20:00:00.000Z",
-      "timestamp": 1769630400,
-      "status": "NS",
-      "league": {
-        "name": "أوروبا, دوري أبطال اوروبا",
-        "country": "International",
-        "logo": "https://cdn-icons-png.flaticon.com/512/1378/1378598.png"
-      },
-      "home": {
-        "name": "باير ليفركوزن",
-        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/cdn/2025/10/333.png"
-      },
-      "away": {
-        "name": "فياريال",
-        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/cdn/2025/10/133.png"
-      },
-      "score": null,
-      "streams": [
-        {
-          "id": "stream_albaplayer_100007",
-          "source": "livekora",
-          "quality": "HD",
-          "channel": "albaplayer",
-          "url": "https://www.livekora.vip/albaplayer/",
-          "priority": 1
-        }
-      ]
-    },
-    {
-      "id": 100008,
+      "id": 100005,
       "date": "2026-01-28T20:00:00.000Z",
       "timestamp": 1769630400,
       "status": "NS",
@@ -233,77 +143,17 @@
       "score": null,
       "streams": [
         {
-          "id": "stream_bein-sport-7_100008",
+          "id": "stream_bein-sport-7_100005",
           "source": "livekora",
           "quality": "HD",
           "channel": "bein-sport-7",
-          "url": "https://pl.buffstreams.stream/albaplayer/bein-sport-7",
+          "url": "https://pl.kooralive.fit/albaplayer/bein-sport-7",
           "priority": 1
         }
       ]
     },
     {
-      "id": 100009,
-      "date": "2026-01-28T20:00:00.000Z",
-      "timestamp": 1769630400,
-      "status": "NS",
-      "league": {
-        "name": "أوروبا, دوري أبطال اوروبا",
-        "country": "International",
-        "logo": "https://cdn-icons-png.flaticon.com/512/1378/1378598.png"
-      },
-      "home": {
-        "name": "كلوب بروج",
-        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/cdn/2025/09/1169-1.png"
-      },
-      "away": {
-        "name": "أولمبيك مارسيليا",
-        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/cdn/2025/09/469-1.png"
-      },
-      "score": null,
-      "streams": [
-        {
-          "id": "stream_albaplayer_100009",
-          "source": "livekora",
-          "quality": "HD",
-          "channel": "albaplayer",
-          "url": "https://www.livekora.vip/albaplayer/",
-          "priority": 1
-        }
-      ]
-    },
-    {
-      "id": 100010,
-      "date": "2026-01-28T20:00:00.000Z",
-      "timestamp": 1769630400,
-      "status": "NS",
-      "league": {
-        "name": "أوروبا, دوري أبطال اوروبا",
-        "country": "International",
-        "logo": "https://cdn-icons-png.flaticon.com/512/1378/1378598.png"
-      },
-      "home": {
-        "name": "آينتراخت فرانكفورت",
-        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/cdn/2025/09/337-1.png"
-      },
-      "away": {
-        "name": "توتنهام هوتسبر",
-        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/cdn/2025/09/114-1.png"
-      },
-      "score": null,
-      "streams": [
-        {
-          "id": "stream_ssc-extra-1_100010",
-          "source": "livekora",
-          "quality": "HD",
-          "channel": "ssc-extra-1",
-          "url": "https://pl.buffstreams.stream/albaplayer/ssc-extra-1",
-          "priority": 1
-        }
-      ]
-    },
-    {
-      "id": 100011,
+      "id": 100006,
       "date": "2026-01-28T20:00:00.000Z",
       "timestamp": 1769630400,
       "status": "NS",
@@ -323,17 +173,17 @@
       "score": null,
       "streams": [
         {
-          "id": "stream_bein3_100011",
+          "id": "stream_bein3_100006",
           "source": "livekora",
           "quality": "HD",
           "channel": "bein3",
-          "url": "https://pl.buffstreams.stream/albaplayer/bein3",
+          "url": "https://pl.kooralive.fit/albaplayer/bein3",
           "priority": 1
         }
       ]
     },
     {
-      "id": 100012,
+      "id": 100007,
       "date": "2026-01-28T20:00:00.000Z",
       "timestamp": 1769630400,
       "status": "NS",
@@ -353,17 +203,17 @@
       "score": null,
       "streams": [
         {
-          "id": "stream_ch1_100012",
+          "id": "stream_ch1_100007",
           "source": "livekora",
           "quality": "HD",
           "channel": "ch1",
-          "url": "https://pl.buffstreams.stream/albaplayer/ch1",
+          "url": "https://pl.kooralive.fit/albaplayer/ch1",
           "priority": 1
         }
       ]
     },
     {
-      "id": 100013,
+      "id": 100008,
       "date": "2026-01-28T20:00:00.000Z",
       "timestamp": 1769630400,
       "status": "NS",
@@ -383,47 +233,17 @@
       "score": null,
       "streams": [
         {
-          "id": "stream_bein6_100013",
+          "id": "stream_bein6_100008",
           "source": "livekora",
           "quality": "HD",
           "channel": "bein6",
-          "url": "https://pl.buffstreams.stream/albaplayer/bein6",
+          "url": "https://pl.kooralive.fit/albaplayer/bein6",
           "priority": 1
         }
       ]
     },
     {
-      "id": 100014,
-      "date": "2026-01-28T20:00:00.000Z",
-      "timestamp": 1769630400,
-      "status": "NS",
-      "league": {
-        "name": "أوروبا, دوري أبطال اوروبا",
-        "country": "International",
-        "logo": "https://cdn-icons-png.flaticon.com/512/1378/1378598.png"
-      },
-      "home": {
-        "name": "أتلتيكو مدريد",
-        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/cdn/2025/09/134-1.png"
-      },
-      "away": {
-        "name": "بودو جليمت",
-        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/cdn/2025/09/1978-1.png"
-      },
-      "score": null,
-      "streams": [
-        {
-          "id": "stream_albaplayer_100014",
-          "source": "livekora",
-          "quality": "HD",
-          "channel": "albaplayer",
-          "url": "https://www.livekora.vip/albaplayer/",
-          "priority": 1
-        }
-      ]
-    },
-    {
-      "id": 100015,
+      "id": 100009,
       "date": "2026-01-28T20:00:00.000Z",
       "timestamp": 1769630400,
       "status": "NS",
@@ -443,47 +263,17 @@
       "score": null,
       "streams": [
         {
-          "id": "stream_bein5_100015",
+          "id": "stream_bein5_100009",
           "source": "livekora",
           "quality": "HD",
           "channel": "bein5",
-          "url": "https://pl.buffstreams.stream/albaplayer/bein5",
+          "url": "https://pl.kooralive.fit/albaplayer/bein5",
           "priority": 1
         }
       ]
     },
     {
-      "id": 100016,
-      "date": "2026-01-28T20:00:00.000Z",
-      "timestamp": 1769630400,
-      "status": "NS",
-      "league": {
-        "name": "أوروبا, دوري أبطال اوروبا",
-        "country": "International",
-        "logo": "https://cdn-icons-png.flaticon.com/512/1378/1378598.png"
-      },
-      "home": {
-        "name": "أياكس",
-        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/cdn/2025/09/690-1.png"
-      },
-      "away": {
-        "name": "أولمبياكوس",
-        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/cdn/2025/10/1023.png"
-      },
-      "score": null,
-      "streams": [
-        {
-          "id": "stream_albaplayer_100016",
-          "source": "livekora",
-          "quality": "HD",
-          "channel": "albaplayer",
-          "url": "https://www.livekora.vip/albaplayer/",
-          "priority": 1
-        }
-      ]
-    },
-    {
-      "id": 100017,
+      "id": 100010,
       "date": "2026-01-28T20:00:00.000Z",
       "timestamp": 1769630400,
       "status": "NS",
@@ -503,17 +293,17 @@
       "score": null,
       "streams": [
         {
-          "id": "stream_bein1_100017",
+          "id": "stream_bein1_100010",
           "source": "livekora",
           "quality": "HD",
           "channel": "bein1",
-          "url": "https://pl.buffstreams.stream/albaplayer/bein1",
+          "url": "https://pl.kooralive.fit/albaplayer/bein1",
           "priority": 1
         }
       ]
     },
     {
-      "id": 100018,
+      "id": 100011,
       "date": "2026-01-28T20:00:00.000Z",
       "timestamp": 1769630400,
       "status": "NS",
@@ -533,17 +323,17 @@
       "score": null,
       "streams": [
         {
-          "id": "stream_ch2_100018",
+          "id": "stream_ch2_100011",
           "source": "livekora",
           "quality": "HD",
           "channel": "ch2",
-          "url": "https://pl.buffstreams.stream/albaplayer/ch2",
+          "url": "https://pl.kooralive.fit/albaplayer/ch2",
           "priority": 1
         }
       ]
     },
     {
-      "id": 100019,
+      "id": 100012,
       "date": "2026-01-28T20:00:00.000Z",
       "timestamp": 1769630400,
       "status": "NS",
@@ -563,41 +353,11 @@
       "score": null,
       "streams": [
         {
-          "id": "stream_bein-sport-xtra-4_100019",
+          "id": "stream_bein-extra-1_100012",
           "source": "livekora",
           "quality": "HD",
-          "channel": "bein-sport-xtra-4",
-          "url": "https://pl.buffstreams.stream/albaplayer/bein-sport-xtra-4",
-          "priority": 1
-        }
-      ]
-    },
-    {
-      "id": 100020,
-      "date": "2026-01-28T20:00:00.000Z",
-      "timestamp": 1769630400,
-      "status": "NS",
-      "league": {
-        "name": "أوروبا, دوري أبطال اوروبا",
-        "country": "International",
-        "logo": "https://cdn-icons-png.flaticon.com/512/1378/1378598.png"
-      },
-      "home": {
-        "name": "موناكو",
-        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/cdn/2025/10/471.png"
-      },
-      "away": {
-        "name": "يوفنتوس",
-        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/cdn/2025/10/226.png"
-      },
-      "score": null,
-      "streams": [
-        {
-          "id": "stream_albaplayer_100020",
-          "source": "livekora",
-          "quality": "HD",
-          "channel": "albaplayer",
-          "url": "https://www.livekora.vip/albaplayer/",
+          "channel": "bein-extra-1",
+          "url": "https://pl.kooralive.fit/albaplayer/bein-extra-1",
           "priority": 1
         }
       ]
