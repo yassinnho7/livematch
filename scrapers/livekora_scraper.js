@@ -349,6 +349,13 @@ class LiveKoraScraper {
 // Main execution
 async function main() {
     try {
+        // التحقق من التوقيت لتوفير الموارد (إيقاف بين 4 صباحاً و 9 صباحاً بتوقيت GMT)
+        const gmtHour = new Date().getUTCHours();
+        if (gmtHour >= 4 && gmtHour < 9) {
+            console.log(`🕒 التوقيت الحالي (${gmtHour} GMT) يقع ضمن فترة الهدوء. يتم إيقاف السكرابير لتوفير الموارد.`);
+            process.exit(0);
+        }
+
         const scraper = new LiveKoraScraper();
         const matches = await scraper.scrapeMatches();
 
