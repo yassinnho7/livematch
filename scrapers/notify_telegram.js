@@ -44,8 +44,9 @@ async function notifyTelegram() {
 
         const upcomingMatches = matches.filter(m => {
             const timeUntilStart = m.timestamp - now;
-            // Notify if match starts in next 35 minutes
-            const isSoon = timeUntilStart > 0 && timeUntilStart < 2100;
+            // Notify if match starts in next 15 minutes (buffer for 10min target)
+            // OR if it just started (LIVE)
+            const isSoon = timeUntilStart > 0 && timeUntilStart < 900; // 15 minutes window
             const isLive = m.status === 'LIVE';
 
             return (isSoon || isLive) && !history.includes(m.id);
@@ -59,20 +60,18 @@ async function notifyTelegram() {
         console.log(`🚀 Sending ${upcomingMatches.length} notifications to Telegram...`);
 
         for (const match of upcomingMatches) {
-            const message = `📢 *مباراة اليوم المباشرة*
-            
-🏁 *${match.home.name}* 🆚 *${match.away.name}*
-🏆 البطولة: ${match.league.name}
-⏰ التوقيت: ${match.time} (كمت)
+            const message = `🔔 <b>مباراة اليوم المباشرة</b>\n\n` +
+                `🏟️ <b>${match.home.name}</b> 🆚 <b>${match.away.name}</b>\n\n` +
+                `🏆 <b>البطولة:</b> ${match.league.name}\n` +
+                `⏰ <b>التوقيت:</b> ${match.time} (كمت)\n` +
+                `✨ <b>الجودة:</b> Full HD 1080p\n\n` +
+                `⚡ <b>شاهد المباراة مجاناً وبدون تقطيع هنا:</b>\n` +
+                `👇👇👇\n` +
+                `🚀 <a href="https://livematch-991.pages.dev/watch.html?match=${match.id}">رابط البث المباشر الفوري</a>\n\n` +
+                `🔥 <i>نتمنى لكم مشاهدة ممتعة!</i>\n` +
+                `✅ لا تنسوا متابعة قناتنا لكل جديد!`;
 
-🔗 شاهد المباراة بدون تقطيع هنا:
-👇👇👇
-https://livematch-991.pages.dev/watch.html?match=${match.id}`;
-
-            // استخدام صورة الدوري أو شعار الفريق المضيف كصورة للمنشور
-            const photoUrl = match.home.logo || match.league.logo || 'https://livematch-991.pages.dev/og-image.jpg';
-
-            await sendTelegramPhoto(photoUrl, message);
+            await sendTelegramMessage(message);
             history.push(match.id);
         }
 
@@ -85,18 +84,18 @@ https://livematch-991.pages.dev/watch.html?match=${match.id}`;
     }
 }
 
-function sendTelegramPhoto(photoUrl, caption) {
+function sendTelegramMessage(text) {
     return new Promise((resolve, reject) => {
         const payload = JSON.stringify({
             chat_id: CHAT_ID,
-            photo: photoUrl,
-            caption: caption,
-            parse_mode: 'Markdown'
+            text: text,
+            parse_mode: 'HTML',
+            disable_web_page_preview: false
         });
 
         const options = {
             hostname: 'api.telegram.org',
-            path: `/bot${TELEGRAM_TOKEN}/sendPhoto`,
+            path: `/bot${TELEGRAM_TOKEN}/sendMessage`,
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -109,7 +108,7 @@ function sendTelegramPhoto(photoUrl, caption) {
             res.on('data', (chunk) => body += chunk);
             res.on('end', () => {
                 if (res.statusCode === 200) {
-                    console.log('✅ Telegram post sent successfully');
+                    console.log('✅ Telegram message sent successfully');
                     resolve();
                 } else {
                     console.error('❌ Telegram error:', body);

@@ -65,19 +65,23 @@ async function notify() {
         console.log(`🚀 Notifying ${upcomingMatches.length} matches...`);
 
         for (const match of upcomingMatches) {
+            const message = `🌟 <b>مباراة اليوم المباشرة</b>\n\n` +
+                `🆚 <b>${match.home.name}</b> ضد <b>${match.away.name}</b>\n\n` +
+                `🚩 <b>البطولة:</b> ${match.league.name}\n` +
+                `⏳ <b>التوقيت:</b> ${match.time}\n` +
+                `🖥️ <b>الجودة:</b> متعددة (HD, SD)\n\n` +
+                `📺 <b>شاهد المباراة الآن مجاناً عبر الرابط التالي:</b>\n` +
+                `🔗 <a href="https://livematch-991.pages.dev/watch.html?match=${match.id}">رابط البث المباشر الرسمي</a>\n\n` +
+                `⚽ <i>لا تفوت الإثارة، تابع الصفحة لمباريات الغد!</i>\n` +
+                `🛡️ تمت الترقية بنظام الحماية الجديد.`;
+
             const payload = {
                 id: match.id,
                 title: `🔥 مباراة حاسمة: ${match.home.name} 🆚 ${match.away.name}`,
                 league: match.league.name,
                 time: match.time,
                 link: `https://livematch-991.pages.dev/watch.html?match=${match.id}`,
-                message: `📢 لا تفوتوا متعة كرة القدم!
-🏁 ${match.home.name} ضد ${match.away.name}
-🏆 البطولة: ${match.league.name}
-⏰ التوقيت: ${match.time}
-🔗 شاهد الآن مجاناً وبدون تقطيع هنا:
-👇👇👇
-https://livematch-991.pages.dev/watch.html?match=${match.id}`
+                message: message
             };
 
             await sendWebhook(payload);
