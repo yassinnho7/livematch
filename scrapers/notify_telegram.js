@@ -60,10 +60,10 @@ async function notifyTelegram() {
         console.log(`🚀 Sending ${upcomingMatches.length} notifications to Telegram...`);
 
         for (const match of upcomingMatches) {
-            const message = `🔔 <b>مباراة اليوم المباشرة</b>\n\n` +
+            const message = `🌟 <b>مباراة اليوم المباشرة</b>\n\n` +
                 `🏟️ <b>${match.home.name}</b> 🆚 <b>${match.away.name}</b>\n\n` +
                 `🏆 <b>البطولة:</b> ${match.league.name}\n` +
-                `⏰ <b>التوقيت:</b> ${match.time} (كمت)\n` +
+                `⏰ <b>التوقيت:</b> ${match.time || 'قريباً'}\n` +
                 `✨ <b>الجودة:</b> Full HD 1080p\n\n` +
                 `⚡ <b>شاهد المباراة مجاناً وبدون تقطيع هنا:</b>\n` +
                 `👇👇👇\n` +

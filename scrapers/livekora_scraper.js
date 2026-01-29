@@ -244,6 +244,7 @@ class LiveKoraScraper {
                 date: new Date(timestamp * 1000).toISOString(),
                 timestamp: timestamp,
                 status: match.status,
+                time: match.time,
                 league: {
                     name: match.league,
                     country: this.getCountryFromLeague(match.league),
