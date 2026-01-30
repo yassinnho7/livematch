@@ -1,4 +1,4 @@
-name: LiveKora Scraping Every 30 Mins
+name: LiveKora Scraping Every 15 Mins
 
 on:
   schedule:
