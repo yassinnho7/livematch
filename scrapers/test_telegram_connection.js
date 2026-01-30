@@ -1,7 +1,7 @@
 import https from 'https';
 
 const TELEGRAM_TOKEN = process.env.TELEGRAM_BOT_TOKEN;
-const CHAT_ID = process.env.TELEGRAM_CHAT_ID;
+const CHAT_ID = '@live_football_macth'; // Target the channel directly
 
 if (!TELEGRAM_TOKEN || !CHAT_ID) {
     console.error('❌ Error: TELEGRAM_BOT_TOKEN or TELEGRAM_CHAT_ID not set.');
