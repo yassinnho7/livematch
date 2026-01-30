@@ -73,14 +73,21 @@ async function notifyTelegram() {
         console.log(`🚀 Sending ${upcomingMatches.length} notifications to Telegram...`);
 
         for (const match of upcomingMatches) {
+            const league = match.league ? match.league.name : 'Unknown League';
+            const home = match.home ? match.home.name : 'Home';
+            const away = match.away ? match.away.name : 'Away';
+            const time = match.time_label || (match.time ? `${match.time} GMT` : 'Soon');
+
+            const siteUrl = process.env.SITE_URL || 'https://livematch-991.pages.dev';
+
             const message = `🌟 <b>مباراة اليوم المباشرة</b>\n\n` +
-                `🏟️ <b>${match.home.name}</b> 🆚 <b>${match.away.name}</b>\n\n` +
-                `🏆 <b>البطولة:</b> ${match.league.name}\n` +
-                `⏰ <b>التوقيت:</b> ${match.time_label || match.time + ' GMT'}\n` +
+                `🏟️ <b>${home}</b> 🆚 <b>${away}</b>\n\n` +
+                `🏆 <b>البطولة:</b> ${league}\n` +
+                `⏰ <b>التوقيت:</b> ${time}\n` +
                 `✨ <b>الجودة:</b> Full HD 1080p\n\n` +
                 `⚡ <b>شاهد المباراة مجاناً وبدون تقطيع هنا:</b>\n` +
                 `👇👇👇\n` +
-                `🚀 <a href="https://livematch-991.pages.dev/watch.html?match=${match.id}">رابط البث المباشر الفوري</a>\n\n` +
+                `🚀 <a href="${siteUrl}/watch.html?match=${match.id}">رابط البث المباشر الفوري</a>\n\n` +
                 `🔥 <i>نتمنى لكم مشاهدة ممتعة!</i>\n` +
                 `✅ لا تنسوا متابعة قناتنا لكل جديد!`;
 

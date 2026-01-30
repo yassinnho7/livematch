@@ -64,14 +64,16 @@ async function notify() {
         console.log(`🚀 Notifying ${upcomingMatches.length} matches...`);
 
         for (const match of upcomingMatches) {
+            const siteUrl = process.env.SITE_URL || 'https://livematch-991.pages.dev';
+
             const message = `🌟 مباراة اليوم المباشرة\n\n` +
                 `🆚 ${match.home.name} ضد ${match.away.name}\n\n` +
                 `🚩 البطولة: ${match.league.name}\n` +
-                `⏳ التوقيت: ${match.time_label || match.time + ' GMT'}\n` +
+                `⏳ التوقيت: ${match.time_label || (match.time ? match.time + ' GMT' : 'Soon')}\n` +
                 `🖥️ الجودة: Full HD\n\n` +
                 `📺 شاهد المباراة الآن مجاناً عبر الرابط التالي:\n` +
                 `👇👇👇\n` +
-                `🔗 https://livematch-991.pages.dev/watch.html?match=${match.id}\n\n` +
+                `🔗 ${siteUrl}/watch.html?match=${match.id}\n\n` +
                 `⚽ لا تفوت الإثارة، تابع الصفحة لمباريات الغد!`;
 
             const payload = {
@@ -79,7 +81,7 @@ async function notify() {
                 title: `🔥 مباراة حاسمة: ${match.home.name} 🆚 ${match.away.name}`,
                 league: match.league.name,
                 time: match.time,
-                link: `https://livematch-991.pages.dev/watch.html?match=${match.id}`,
+                link: `${siteUrl}/watch.html?match=${match.id}`,
                 message: message
             };
 

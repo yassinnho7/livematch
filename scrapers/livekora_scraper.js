@@ -7,7 +7,7 @@ puppeteer.use(StealthPlugin());
 
 class LiveKoraScraper {
     constructor() {
-        this.baseUrl = 'https://www.livekora.vip/';
+        this.baseUrl = process.env.SOURCE_URL || 'https://www.livekora.vip/';
     }
 
     async scrapeMatches() {
