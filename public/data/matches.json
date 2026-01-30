@@ -1,71 +1,7 @@
 {
-  "generated_at": "2026-01-30T21:20:34.770Z",
+  "generated_at": "2026-01-30T21:48:21.847Z",
   "count": 5,
   "matches": [
-    {
-      "id": 1200561668,
-      "date": "2026-01-30T19:45:00.000Z",
-      "timestamp": 1769802300,
-      "status": "LIVE",
-      "time": "19:45",
-      "time_label": "19:45 GMT",
-      "league": {
-        "name": "فرنسا, الدوري الفرنسي",
-        "country": "France",
-        "logo": "https://a.espncdn.com/combiner/i?img=/i/leaguelogos/soccer/500/9.png&h=40&w=40"
-      },
-      "home": {
-        "name": "لانس",
-        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/01/481.png"
-      },
-      "away": {
-        "name": "لو آفر",
-        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/01/485.png"
-      },
-      "score": null,
-      "streams": [
-        {
-          "id": "stream_bein4_1200561668",
-          "source": "livekora",
-          "quality": "HD",
-          "channel": "bein4",
-          "url": "https://pl.kooralive.fit/albaplayer/bein4",
-          "priority": 1
-        }
-      ]
-    },
-    {
-      "id": 655707823,
-      "date": "2026-01-30T19:45:00.000Z",
-      "timestamp": 1769802300,
-      "status": "LIVE",
-      "time": "19:45",
-      "time_label": "19:45 GMT",
-      "league": {
-        "name": "إيطاليا, الدوري الإيطالي",
-        "country": "Italy",
-        "logo": "https://a.espncdn.com/combiner/i?img=/i/leaguelogos/soccer/500/12.png&h=40&w=40"
-      },
-      "home": {
-        "name": "لاتسيو",
-        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/01/236.png"
-      },
-      "away": {
-        "name": "جنوى",
-        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/01/231.png"
-      },
-      "score": null,
-      "streams": [
-        {
-          "id": "stream_ad-premium-1_655707823",
-          "source": "livekora",
-          "quality": "HD",
-          "channel": "ad-premium-1",
-          "url": "https://pl.kooralive.fit/albaplayer/ad-premium-1",
-          "priority": 1
-        }
-      ]
-    },
     {
       "id": 677597781,
       "date": "2026-01-30T20:00:00.000Z",
@@ -158,6 +94,70 @@
           "quality": "HD",
           "channel": "bein1",
           "url": "https://pl.kooralive.fit/albaplayer/bein1",
+          "priority": 1
+        }
+      ]
+    },
+    {
+      "id": 1200561668,
+      "date": "2026-01-30T19:45:00.000Z",
+      "timestamp": 1769802300,
+      "status": "FT",
+      "time": "19:45",
+      "time_label": "19:45 GMT",
+      "league": {
+        "name": "فرنسا, الدوري الفرنسي",
+        "country": "France",
+        "logo": "https://a.espncdn.com/combiner/i?img=/i/leaguelogos/soccer/500/9.png&h=40&w=40"
+      },
+      "home": {
+        "name": "لانس",
+        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/01/481.png"
+      },
+      "away": {
+        "name": "لو آفر",
+        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/01/485.png"
+      },
+      "score": null,
+      "streams": [
+        {
+          "id": "stream_bein4_1200561668",
+          "source": "livekora",
+          "quality": "HD",
+          "channel": "bein4",
+          "url": "https://pl.kooralive.fit/albaplayer/bein4",
+          "priority": 1
+        }
+      ]
+    },
+    {
+      "id": 655707823,
+      "date": "2026-01-30T19:45:00.000Z",
+      "timestamp": 1769802300,
+      "status": "FT",
+      "time": "19:45",
+      "time_label": "19:45 GMT",
+      "league": {
+        "name": "إيطاليا, الدوري الإيطالي",
+        "country": "Italy",
+        "logo": "https://a.espncdn.com/combiner/i?img=/i/leaguelogos/soccer/500/12.png&h=40&w=40"
+      },
+      "home": {
+        "name": "لاتسيو",
+        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/01/236.png"
+      },
+      "away": {
+        "name": "جنوى",
+        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/01/231.png"
+      },
+      "score": null,
+      "streams": [
+        {
+          "id": "stream_ad-premium-1_655707823",
+          "source": "livekora",
+          "quality": "HD",
+          "channel": "ad-premium-1",
+          "url": "https://pl.kooralive.fit/albaplayer/ad-premium-1",
           "priority": 1
         }
       ]
