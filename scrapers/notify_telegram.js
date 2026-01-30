@@ -45,8 +45,8 @@ async function notifyTelegram() {
         const upcomingMatches = matches.filter(m => {
             const timeUntilStart = m.timestamp - now;
 
-            // WIDE WINDOW: -30 mins to +30 mins
-            const isSoon = timeUntilStart > -1800 && timeUntilStart < 1800;
+            // TEST MODE: -5 hours to +5 hours (to verify delivery)
+            const isSoon = timeUntilStart > -18000 && timeUntilStart < 18000;
 
             const inHistory = history.includes(m.id);
             const shouldNotify = isSoon && !inHistory;
