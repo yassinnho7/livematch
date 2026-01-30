@@ -111,19 +111,32 @@ async function notifyTelegram() {
     }
 }
 
-function sendTelegramMessage(text) {
-    return new Promise((resolve, reject) => {
-        if (!text) {
-            console.error('❌ Attempted to send empty text to Telegram!');
-            return resolve(); // Skip but don't crash
-        }
+// Wrapper to try HTML first, then Plain Text
+async function sendTelegramMessage(text) {
+    // Attempt 1: HTML
+    const success = await sendRequest(text, 'HTML');
+    if (success) return;
 
-        const payload = JSON.stringify({
+    console.log('⚠️ HTML message failed. Retrying with PLAIN TEXT...');
+
+    // Attempt 2: Plain Text (Strip HTML tags)
+    const plainText = text.replace(/<[^>]*>?/gm, '') // Remove tags
+        .replace(/&nbsp;/g, ' ')
+        .replace(/&amp;/g, '&');
+
+    await sendRequest(plainText, undefined); // undefined parse_mode = proper plain text
+}
+
+function sendRequest(text, parseMode) {
+    return new Promise((resolve) => {
+        const payloadData = {
             chat_id: CHAT_ID,
             text: text,
-            parse_mode: 'HTML',
             disable_web_page_preview: false
-        });
+        };
+        if (parseMode) payloadData.parse_mode = parseMode;
+
+        const payload = JSON.stringify(payloadData);
 
         const options = {
             hostname: 'api.telegram.org',
@@ -131,30 +144,27 @@ function sendTelegramMessage(text) {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'Content-Length': payload.length
+                'Content-Length': Buffer.byteLength(payload)
             }
         };
-
-        console.log('📡 Sending request to Telegram API...');
 
         const req = https.request(options, (res) => {
             let body = '';
             res.on('data', (chunk) => body += chunk);
             res.on('end', () => {
                 if (res.statusCode === 200) {
-                    console.log('✅ Telegram message sent successfully');
-                    resolve();
+                    console.log(`✅ Telegram message sent (${parseMode || 'Plain'}).`);
+                    resolve(true);
                 } else {
-                    console.error('❌ Telegram error response:', body);
-                    // Don't fail the whole script for one message, just log it
-                    resolve();
+                    console.error(`❌ Telegram error (${parseMode || 'Plain'}):`, body);
+                    resolve(false);
                 }
             });
         });
 
         req.on('error', (e) => {
             console.error('❌ Network error:', e.message);
-            resolve();
+            resolve(false);
         });
 
         req.write(payload);

@@ -58,4 +58,12 @@ jobs:
           git add sent_telegram_notifications.json || true
           
           git diff --cached --quiet || git commit -m "🔄 Auto-update: LiveKora matches data [$(date +'%Y-%m-%d %H:%M UTC')]"
-          git push || echo "No changes to push"
+          
+          # Retry loop for push to handle race conditions
+          n=0
+          until [ "$n" -ge 5 ]
+          do
+             git pull --rebase origin main && git push origin main && break
+             n=$((n+1)) 
+             sleep 5
+          done
