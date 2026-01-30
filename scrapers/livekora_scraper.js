@@ -204,20 +204,35 @@ class LiveKoraScraper {
         }
     }
 
+    // Helper to create a simple hash from string
+    generateMatchHash(str) {
+        let hash = 0;
+        for (let i = 0; i < str.length; i++) {
+            const char = str.charCodeAt(i);
+            hash = ((hash << 5) - hash) + char;
+            hash = hash & hash; // Convert to 32bit integer
+        }
+        return Math.abs(hash);
+    }
+
     processMatches(rawMatches) {
         return rawMatches.map(match => {
             let timestamp;
-            if (match.isoTimestamp) {
-                timestamp = Math.floor(new Date(match.isoTimestamp).getTime() / 1000);
-            } else if (match.time && match.time.includes(':')) {
+            // GMT Correction: The site is likely GMT+1 (e.g. 18:30). We want GMT (17:30).
+            // So we need to parse the time and subtract 1 hour.
+
+            if (match.time && match.time.includes(':')) {
                 try {
                     const timeMatch = match.time.match(/(\d+):(\d+)/);
                     if (timeMatch) {
-                        const hours = parseInt(timeMatch[1]);
+                        let hours = parseInt(timeMatch[1]);
                         const minutes = parseInt(timeMatch[2]);
-                        const today = new Date();
-                        today.setHours(hours, minutes, 0, 0);
-                        timestamp = Math.floor(today.getTime() / 1000);
+
+                        // Create date object for TODAY with this time
+                        const date = new Date();
+                        date.setUTCHours(hours - 1, minutes, 0, 0); // Assume scraped time is GMT+1, so -1 to get GMT
+
+                        timestamp = Math.floor(date.getTime() / 1000);
                     } else {
                         timestamp = Math.floor(Date.now() / 1000);
                     }
@@ -225,8 +240,14 @@ class LiveKoraScraper {
                     timestamp = Math.floor(Date.now() / 1000);
                 }
             } else {
-                timestamp = Math.floor(Date.now() / 1000);
+                timestamp = Math.floor(Date.now() / 1000); // Fallback
             }
+
+            // Generate Stable ID based on teams and date (Day-Month-Year)
+            // This ensures the ID remains the same for the entire day, preventing duplicate notifications
+            const dateStr = new Date().toISOString().split('T')[0];
+            const uniqueString = `${dateStr}-${match.homeTeam}-${match.awayTeam}`;
+            const stableId = this.generateMatchHash(uniqueString);
 
             let channel = 'stream';
             try {
@@ -239,12 +260,17 @@ class LiveKoraScraper {
                 // Keep default
             }
 
+            // Format time for GMT display
+            const gmtDate = new Date(timestamp * 1000);
+            const gmtTimeStr = gmtDate.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit', timeZone: 'UTC' });
+
             return {
-                id: match.id,
-                date: new Date(timestamp * 1000).toISOString(),
+                id: stableId,
+                date: gmtDate.toISOString(),
                 timestamp: timestamp,
                 status: match.status,
-                time: match.time,
+                time: gmtTimeStr, // Now converted to GMT
+                time_label: `${gmtTimeStr} GMT`, // Explicit label
                 league: {
                     name: match.league,
                     country: this.getCountryFromLeague(match.league),
@@ -260,7 +286,7 @@ class LiveKoraScraper {
                 },
                 score: match.score ? this.parseScore(match.score) : null,
                 streams: [{
-                    id: `stream_${channel}_${match.id}`,
+                    id: `stream_${channel}_${stableId}`,
                     source: 'livekora',
                     quality: 'HD',
                     channel: channel,

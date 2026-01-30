@@ -44,12 +44,12 @@ async function notify() {
 
         const upcomingMatches = matches.filter(m => {
             const timeUntilStart = m.timestamp - now;
-            // Notify if match starts in next 35 minutes (buffer for 30min target)
-            // OR if it just started (LIVE)
-            const isSoon = timeUntilStart > 0 && timeUntilStart < 2100; // 35 minutes window
-            const isLive = m.status === 'LIVE';
+            // Notify strictly before match starts (up to 35 mins before)
+            // prevent notifying for matches that already started a long time ago
+            // allowing a small buffer of 5 mins after start just in case scraper was slow
+            const isSoon = timeUntilStart > -300 && timeUntilStart < 2100; // Window: -5 mins to +35 mins
 
-            const shouldNotify = (isSoon || isLive) && !history.includes(m.id);
+            const shouldNotify = isSoon && !history.includes(m.id);
 
             if (shouldNotify) {
                 console.log(`🎯 Match Targeted: ${m.home.name} vs ${m.away.name} (Starts in ${Math.round(timeUntilStart / 60)} mins)`);
@@ -68,7 +68,7 @@ async function notify() {
             const message = `🌟 مباراة اليوم المباشرة\n\n` +
                 `🆚 ${match.home.name} ضد ${match.away.name}\n\n` +
                 `🚩 البطولة: ${match.league.name}\n` +
-                `⏳ التوقيت: ${match.time || 'قريباً'}\n` +
+                `⏳ التوقيت: ${match.time_label || match.time + ' GMT'}\n` +
                 `🖥️ الجودة: Full HD\n\n` +
                 `📺 شاهد المباراة الآن مجاناً عبر الرابط التالي:\n` +
                 `👇👇👇\n` +

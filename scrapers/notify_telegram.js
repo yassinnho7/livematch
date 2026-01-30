@@ -44,9 +44,9 @@ async function notifyTelegram() {
 
         const upcomingMatches = matches.filter(m => {
             const timeUntilStart = m.timestamp - now;
-            // Notify if match starts in next 15 minutes (buffer for 10min target)
-            // OR if it just started (LIVE)
-            const isSoon = timeUntilStart > 0 && timeUntilStart < 900; // 15 minutes window
+            // Notify if match starts in next 35 minutes (buffer for 30min scraper schedule)
+            // Or if it just started (LIVE)
+            const isSoon = timeUntilStart > 0 && timeUntilStart < 2100; // 35 minutes window
             const isLive = m.status === 'LIVE';
 
             return (isSoon || isLive) && !history.includes(m.id);
@@ -63,7 +63,7 @@ async function notifyTelegram() {
             const message = `🌟 <b>مباراة اليوم المباشرة</b>\n\n` +
                 `🏟️ <b>${match.home.name}</b> 🆚 <b>${match.away.name}</b>\n\n` +
                 `🏆 <b>البطولة:</b> ${match.league.name}\n` +
-                `⏰ <b>التوقيت:</b> ${match.time || 'قريباً'}\n` +
+                `⏰ <b>التوقيت:</b> ${match.time_label || match.time + ' GMT'}\n` +
                 `✨ <b>الجودة:</b> Full HD 1080p\n\n` +
                 `⚡ <b>شاهد المباراة مجاناً وبدون تقطيع هنا:</b>\n` +
                 `👇👇👇\n` +
