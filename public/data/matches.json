@@ -1,13 +1,14 @@
 {
-  "generated_at": "2026-01-30T16:51:12.613Z",
+  "generated_at": "2026-01-30T17:25:36.461Z",
   "count": 5,
   "matches": [
     {
-      "id": 100001,
-      "date": "2026-01-30T18:30:00.000Z",
-      "timestamp": 1769797800,
+      "id": 1770564033,
+      "date": "2026-01-30T17:30:00.000Z",
+      "timestamp": 1769794200,
       "status": "NS",
-      "time": "18:30",
+      "time": "17:30",
+      "time_label": "17:30 GMT",
       "league": {
         "name": "السعودية, الدوري السعودي",
         "country": "Saudi Arabia",
@@ -24,7 +25,7 @@
       "score": null,
       "streams": [
         {
-          "id": "stream_thmanya1_100001",
+          "id": "stream_thmanya1_1770564033",
           "source": "livekora",
           "quality": "HD",
           "channel": "thmanya1",
@@ -34,11 +35,12 @@
       ]
     },
     {
-      "id": 100002,
-      "date": "2026-01-30T20:00:00.000Z",
-      "timestamp": 1769803200,
+      "id": 398390290,
+      "date": "2026-01-30T19:00:00.000Z",
+      "timestamp": 1769799600,
       "status": "NS",
-      "time": "20:00",
+      "time": "19:00",
+      "time_label": "19:00 GMT",
       "league": {
         "name": "أفريقيا, دوري أبطال أفريقيا - المجموعات",
         "country": "Africa",
@@ -55,7 +57,7 @@
       "score": null,
       "streams": [
         {
-          "id": "stream_bein1_100002",
+          "id": "stream_bein1_398390290",
           "source": "livekora",
           "quality": "HD",
           "channel": "bein1",
@@ -65,11 +67,12 @@
       ]
     },
     {
-      "id": 100003,
-      "date": "2026-01-30T20:45:00.000Z",
-      "timestamp": 1769805900,
+      "id": 1200561668,
+      "date": "2026-01-30T19:45:00.000Z",
+      "timestamp": 1769802300,
       "status": "NS",
-      "time": "20:45",
+      "time": "19:45",
+      "time_label": "19:45 GMT",
       "league": {
         "name": "فرنسا, الدوري الفرنسي",
         "country": "France",
@@ -86,7 +89,7 @@
       "score": null,
       "streams": [
         {
-          "id": "stream_bein4_100003",
+          "id": "stream_bein4_1200561668",
           "source": "livekora",
           "quality": "HD",
           "channel": "bein4",
@@ -96,11 +99,12 @@
       ]
     },
     {
-      "id": 100004,
-      "date": "2026-01-30T20:45:00.000Z",
-      "timestamp": 1769805900,
+      "id": 655707823,
+      "date": "2026-01-30T19:45:00.000Z",
+      "timestamp": 1769802300,
       "status": "NS",
-      "time": "20:45",
+      "time": "19:45",
+      "time_label": "19:45 GMT",
       "league": {
         "name": "إيطاليا, الدوري الإيطالي",
         "country": "Italy",
@@ -117,7 +121,7 @@
       "score": null,
       "streams": [
         {
-          "id": "stream_ad-premium-1_100004",
+          "id": "stream_ad-premium-1_655707823",
           "source": "livekora",
           "quality": "HD",
           "channel": "ad-premium-1",
@@ -127,11 +131,12 @@
       ]
     },
     {
-      "id": 100005,
-      "date": "2026-01-30T21:00:00.000Z",
-      "timestamp": 1769806800,
+      "id": 677597781,
+      "date": "2026-01-30T20:00:00.000Z",
+      "timestamp": 1769803200,
       "status": "NS",
-      "time": "21:00",
+      "time": "20:00",
+      "time_label": "20:00 GMT",
       "league": {
         "name": "إسبانيا, الدوري الإسباني",
         "country": "Spain",
@@ -148,7 +153,7 @@
       "score": null,
       "streams": [
         {
-          "id": "stream_bein2_100005",
+          "id": "stream_bein2_677597781",
           "source": "livekora",
           "quality": "HD",
           "channel": "bein2",
