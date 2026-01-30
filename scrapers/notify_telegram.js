@@ -44,16 +44,29 @@ async function notifyTelegram() {
 
         const upcomingMatches = matches.filter(m => {
             const timeUntilStart = m.timestamp - now;
-            // Notify if match starts in next 35 minutes (buffer for 30min scraper schedule)
-            // Or if it just started (LIVE)
-            const isSoon = timeUntilStart > 0 && timeUntilStart < 2100; // 35 minutes window
-            const isLive = m.status === 'LIVE';
 
-            return (isSoon || isLive) && !history.includes(m.id);
+            // STRICTER WINDOW: -5 mins to +20 mins
+            // Allows notifying for matches starting in next 20 mins
+            // Also allows notifying for matches that started 5 mins ago (grace period)
+            const isSoon = timeUntilStart > -300 && timeUntilStart < 1200;
+
+            // Check conditions
+            const inHistory = history.includes(m.id);
+            const shouldNotify = isSoon && !inHistory;
+
+            if (!shouldNotify) {
+                // Debug: Why was it skipped?
+                if (inHistory) console.log(`⏩ Skipped ${m.home.name} (Already in history)`);
+                else if (!isSoon) console.log(`⏳ Skipped ${m.home.name} (Outside window: starts in ${Math.round(timeUntilStart / 60)}m)`);
+            } else {
+                console.log(`🎯 Match Targeted: ${m.home.name} vs ${m.away.name} (Starts in ${Math.round(timeUntilStart / 60)} mins)`);
+            }
+
+            return shouldNotify;
         });
 
         if (upcomingMatches.length === 0) {
-            console.log('ℹ️ No new matches for Telegram notification.');
+            console.log('ℹ️ No matches currently in the notification window (-5m to +20m) and not in history.');
             return;
         }
 
