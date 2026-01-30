@@ -46,16 +46,12 @@ async function notifyTelegram() {
             const timeUntilStart = m.timestamp - now;
 
             // WIDE WINDOW: -30 mins to +30 mins
-            // Requested by user to handle GitHub Actions delays
-            // Ensures we catch matches even if they started 30 mins ago
             const isSoon = timeUntilStart > -1800 && timeUntilStart < 1800;
 
-            // Check conditions
             const inHistory = history.includes(m.id);
             const shouldNotify = isSoon && !inHistory;
 
             if (!shouldNotify) {
-                // Debug: Why was it skipped?
                 if (inHistory) console.log(`⏩ Skipped ${m.home.name} (Already in history)`);
                 else if (!isSoon) console.log(`⏳ Skipped ${m.home.name} (Outside window: starts in ${Math.round(timeUntilStart / 60)}m)`);
             } else {
@@ -66,36 +62,47 @@ async function notifyTelegram() {
         });
 
         if (upcomingMatches.length === 0) {
-            console.log('ℹ️ No matches currently in the notification window (-5m to +20m) and not in history.');
+            console.log('ℹ️ No matches currently in the notification window (-30m to +30m) and not in history.');
             return;
         }
 
         console.log(`🚀 Sending ${upcomingMatches.length} notifications to Telegram...`);
+
+        const siteUrl = process.env.SITE_URL || 'https://livematch-991.pages.dev';
+        console.log('🔗 Site URL being used:', siteUrl);
 
         for (const match of upcomingMatches) {
             const league = match.league ? match.league.name : 'Unknown League';
             const home = match.home ? match.home.name : 'Home';
             const away = match.away ? match.away.name : 'Away';
             const time = match.time_label || (match.time ? `${match.time} GMT` : 'Soon');
+            const link = `${siteUrl}/watch.html?match=${match.id}`;
 
-            const siteUrl = process.env.SITE_URL || 'https://livematch-991.pages.dev';
+            console.log(`🛠️ Constructing message for: ${home} vs ${away}`);
 
-            const message = `🌟 <b>مباراة اليوم المباشرة</b>\n\n` +
+            let message = `🌟 <b>مباراة اليوم المباشرة</b>\n\n` +
                 `🏟️ <b>${home}</b> 🆚 <b>${away}</b>\n\n` +
                 `🏆 <b>البطولة:</b> ${league}\n` +
                 `⏰ <b>التوقيت:</b> ${time}\n` +
                 `✨ <b>الجودة:</b> Full HD 1080p\n\n` +
                 `⚡ <b>شاهد المباراة مجاناً وبدون تقطيع هنا:</b>\n` +
                 `👇👇👇\n` +
-                `🚀 <a href="${siteUrl}/watch.html?match=${match.id}">رابط البث المباشر الفوري</a>\n\n` +
+                `🚀 <a href="${link}">رابط البث المباشر الفوري</a>\n\n` +
                 `🔥 <i>نتمنى لكم مشاهدة ممتعة!</i>\n` +
                 `✅ لا تنسوا متابعة قناتنا لكل جديد!`;
+
+            // Validate message
+            if (!message || message.trim().length === 0) {
+                console.error('❌ FATAL: Constructed message is empty! Using fallback.');
+                message = `🔥 Match: ${home} vs ${away}\n🔗 Watch: ${link}`;
+            }
+
+            console.log(`📝 Message preview: ${message.substring(0, 50)}...`);
 
             await sendTelegramMessage(message);
             history.push(match.id);
         }
 
-        // Save history (last 100)
         fs.writeFileSync(HISTORY_PATH, JSON.stringify(history.slice(-100), null, 2));
         console.log('✅ Telegram history updated.');
 
@@ -106,6 +113,11 @@ async function notifyTelegram() {
 
 function sendTelegramMessage(text) {
     return new Promise((resolve, reject) => {
+        if (!text) {
+            console.error('❌ Attempted to send empty text to Telegram!');
+            return resolve(); // Skip but don't crash
+        }
+
         const payload = JSON.stringify({
             chat_id: CHAT_ID,
             text: text,
@@ -123,6 +135,8 @@ function sendTelegramMessage(text) {
             }
         };
 
+        console.log('📡 Sending request to Telegram API...');
+
         const req = https.request(options, (res) => {
             let body = '';
             res.on('data', (chunk) => body += chunk);
@@ -131,13 +145,18 @@ function sendTelegramMessage(text) {
                     console.log('✅ Telegram message sent successfully');
                     resolve();
                 } else {
-                    console.error('❌ Telegram error:', body);
-                    reject(new Error(`Telegram failed with status ${res.statusCode}`));
+                    console.error('❌ Telegram error response:', body);
+                    // Don't fail the whole script for one message, just log it
+                    resolve();
                 }
             });
         });
 
-        req.on('error', reject);
+        req.on('error', (e) => {
+            console.error('❌ Network error:', e.message);
+            resolve();
+        });
+
         req.write(payload);
         req.end();
     });
