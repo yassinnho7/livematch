@@ -31,12 +31,20 @@ function createMatchCard(match) {
     card.href = `watch.html?match=${match.id}`;
 
     // Time
-    const matchDate = new Date(match.timestamp * 1000);
-    const timeString = matchDate.toLocaleTimeString('en-US', {
-        hour: '2-digit',
-        minute: '2-digit',
-        hour12: false
-    });
+    // We expect the backend to provide correct GMT time in timestamp
+    // Use the explicit label if available (e.g. "17:30 GMT") or format it
+    let timeString = match.time_label;
+
+    if (!timeString) {
+        const matchDate = new Date(match.timestamp * 1000);
+        const formattedTime = matchDate.toLocaleTimeString('en-GB', {
+            hour: '2-digit',
+            minute: '2-digit',
+            timeZone: 'UTC',
+            hour12: false
+        });
+        timeString = `${formattedTime} GMT`;
+    }
 
     // Status
     let statusText = 'لم تبدأ';
