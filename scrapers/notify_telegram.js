@@ -45,10 +45,10 @@ async function notifyTelegram() {
         const upcomingMatches = matches.filter(m => {
             const timeUntilStart = m.timestamp - now;
 
-            // STRICTER WINDOW: -5 mins to +20 mins
-            // Allows notifying for matches starting in next 20 mins
-            // Also allows notifying for matches that started 5 mins ago (grace period)
-            const isSoon = timeUntilStart > -300 && timeUntilStart < 1200;
+            // WIDE WINDOW: -30 mins to +30 mins
+            // Requested by user to handle GitHub Actions delays
+            // Ensures we catch matches even if they started 30 mins ago
+            const isSoon = timeUntilStart > -1800 && timeUntilStart < 1800;
 
             // Check conditions
             const inHistory = history.includes(m.id);

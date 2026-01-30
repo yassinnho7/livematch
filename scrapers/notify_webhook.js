@@ -44,10 +44,9 @@ async function notify() {
 
         const upcomingMatches = matches.filter(m => {
             const timeUntilStart = m.timestamp - now;
-            // Notify strictly before match starts (up to 35 mins before)
-            // prevent notifying for matches that already started a long time ago
-            // allowing a small buffer of 5 mins after start just in case scraper was slow
-            const isSoon = timeUntilStart > -300 && timeUntilStart < 2100; // Window: -5 mins to +35 mins
+            // WIDE WINDOW: -30 mins to +30 mins
+            // Requested by user to handle GitHub Actions delays
+            const isSoon = timeUntilStart > -1800 && timeUntilStart < 1800;
 
             const shouldNotify = isSoon && !history.includes(m.id);
 
