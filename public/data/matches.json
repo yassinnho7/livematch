@@ -1,103 +1,7 @@
 {
-  "generated_at": "2026-01-31T14:41:26.495Z",
+  "generated_at": "2026-01-31T15:00:54.117Z",
   "count": 19,
   "matches": [
-    {
-      "id": 1086927678,
-      "date": "2026-01-31T13:00:00.000Z",
-      "timestamp": 1769864400,
-      "status": "LIVE",
-      "time": "13:00",
-      "time_label": "13:00 GMT",
-      "league": {
-        "name": "أفريقيا, دوري أبطال أفريقيا - المجموعات",
-        "country": "Africa",
-        "logo": "https://a.espncdn.com/combiner/i?img=/i/leaguelogos/soccer/500/1257.png&h=40&w=40"
-      },
-      "home": {
-        "name": "يانج افريكانز",
-        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/01/18957.png"
-      },
-      "away": {
-        "name": "الأهلي",
-        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/01/8200.png"
-      },
-      "score": null,
-      "streams": [
-        {
-          "id": "stream_bein2_1086927678",
-          "source": "livekora",
-          "quality": "HD",
-          "channel": "bein2",
-          "url": "https://pl.kooralive.fit/albaplayer/bein2",
-          "priority": 1
-        }
-      ]
-    },
-    {
-      "id": 883411026,
-      "date": "2026-01-31T13:00:00.000Z",
-      "timestamp": 1769864400,
-      "status": "LIVE",
-      "time": "13:00",
-      "time_label": "13:00 GMT",
-      "league": {
-        "name": "تونس, الرابطة التونسية المحترفة الأولى",
-        "country": "Tunisia",
-        "logo": "https://a.espncdn.com/combiner/i?img=/i/leaguelogos/soccer/500/1247.png&h=40&w=40"
-      },
-      "home": {
-        "name": "النادي الأفريقي",
-        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/01/8239.png"
-      },
-      "away": {
-        "name": "البنزرتي",
-        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/01/8231.png"
-      },
-      "score": null,
-      "streams": [
-        {
-          "id": "stream_el-watania-2_883411026",
-          "source": "livekora",
-          "quality": "HD",
-          "channel": "el-watania-2",
-          "url": "https://pl.kooralive.fit/albaplayer/el-watania-2",
-          "priority": 1
-        }
-      ]
-    },
-    {
-      "id": 1476750250,
-      "date": "2026-01-31T13:00:00.000Z",
-      "timestamp": 1769864400,
-      "status": "LIVE",
-      "time": "13:00",
-      "time_label": "13:00 GMT",
-      "league": {
-        "name": "إسبانيا, الدوري الإسباني",
-        "country": "Spain",
-        "logo": "https://a.espncdn.com/combiner/i?img=/i/leaguelogos/soccer/500/15.png&h=40&w=40"
-      },
-      "home": {
-        "name": "ريال أوفييدو",
-        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/01/193.png"
-      },
-      "away": {
-        "name": "جيرونا",
-        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/01/175.png"
-      },
-      "score": null,
-      "streams": [
-        {
-          "id": "stream_bein3_1476750250",
-          "source": "livekora",
-          "quality": "HD",
-          "channel": "bein3",
-          "url": "https://pl.kooralive.fit/albaplayer/bein3",
-          "priority": 1
-        }
-      ]
-    },
     {
       "id": 1061416380,
       "date": "2026-01-31T14:30:00.000Z",
@@ -166,7 +70,7 @@
       "id": 1571220644,
       "date": "2026-01-31T15:00:00.000Z",
       "timestamp": 1769871600,
-      "status": "NS",
+      "status": "LIVE",
       "time": "15:00",
       "time_label": "15:00 GMT",
       "league": {
@@ -198,7 +102,7 @@
       "id": 337937196,
       "date": "2026-01-31T15:00:00.000Z",
       "timestamp": 1769871600,
-      "status": "NS",
+      "status": "LIVE",
       "time": "15:00",
       "time_label": "15:00 GMT",
       "league": {
@@ -230,7 +134,7 @@
       "id": 235597381,
       "date": "2026-01-31T15:00:00.000Z",
       "timestamp": 1769871600,
-      "status": "NS",
+      "status": "LIVE",
       "time": "15:00",
       "time_label": "15:00 GMT",
       "league": {
@@ -606,6 +510,102 @@
           "quality": "HD",
           "channel": "bein4",
           "url": "https://pl.kooralive.fit/albaplayer/bein4",
+          "priority": 1
+        }
+      ]
+    },
+    {
+      "id": 1086927678,
+      "date": "2026-01-31T13:00:00.000Z",
+      "timestamp": 1769864400,
+      "status": "LIVE",
+      "time": "13:00",
+      "time_label": "13:00 GMT",
+      "league": {
+        "name": "أفريقيا, دوري أبطال أفريقيا - المجموعات",
+        "country": "Africa",
+        "logo": "https://a.espncdn.com/combiner/i?img=/i/leaguelogos/soccer/500/1257.png&h=40&w=40"
+      },
+      "home": {
+        "name": "يانج افريكانز",
+        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/01/18957.png"
+      },
+      "away": {
+        "name": "الأهلي",
+        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/01/8200.png"
+      },
+      "score": null,
+      "streams": [
+        {
+          "id": "stream_bein2_1086927678",
+          "source": "livekora",
+          "quality": "HD",
+          "channel": "bein2",
+          "url": "https://pl.kooralive.fit/albaplayer/bein2",
+          "priority": 1
+        }
+      ]
+    },
+    {
+      "id": 883411026,
+      "date": "2026-01-31T13:00:00.000Z",
+      "timestamp": 1769864400,
+      "status": "LIVE",
+      "time": "13:00",
+      "time_label": "13:00 GMT",
+      "league": {
+        "name": "تونس, الرابطة التونسية المحترفة الأولى",
+        "country": "Tunisia",
+        "logo": "https://a.espncdn.com/combiner/i?img=/i/leaguelogos/soccer/500/1247.png&h=40&w=40"
+      },
+      "home": {
+        "name": "النادي الأفريقي",
+        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/01/8239.png"
+      },
+      "away": {
+        "name": "البنزرتي",
+        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/01/8231.png"
+      },
+      "score": null,
+      "streams": [
+        {
+          "id": "stream_el-watania-2_883411026",
+          "source": "livekora",
+          "quality": "HD",
+          "channel": "el-watania-2",
+          "url": "https://pl.kooralive.fit/albaplayer/el-watania-2",
+          "priority": 1
+        }
+      ]
+    },
+    {
+      "id": 1476750250,
+      "date": "2026-01-31T13:00:00.000Z",
+      "timestamp": 1769864400,
+      "status": "LIVE",
+      "time": "13:00",
+      "time_label": "13:00 GMT",
+      "league": {
+        "name": "إسبانيا, الدوري الإسباني",
+        "country": "Spain",
+        "logo": "https://a.espncdn.com/combiner/i?img=/i/leaguelogos/soccer/500/15.png&h=40&w=40"
+      },
+      "home": {
+        "name": "ريال أوفييدو",
+        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/01/193.png"
+      },
+      "away": {
+        "name": "جيرونا",
+        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/01/175.png"
+      },
+      "score": null,
+      "streams": [
+        {
+          "id": "stream_bein3_1476750250",
+          "source": "livekora",
+          "quality": "HD",
+          "channel": "bein3",
+          "url": "https://pl.kooralive.fit/albaplayer/bein3",
           "priority": 1
         }
       ]
