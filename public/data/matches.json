@@ -1,71 +1,7 @@
 {
-  "generated_at": "2026-01-31T16:05:45.544Z",
+  "generated_at": "2026-01-31T16:47:28.208Z",
   "count": 19,
   "matches": [
-    {
-      "id": 1061416380,
-      "date": "2026-01-31T14:30:00.000Z",
-      "timestamp": 1769869800,
-      "status": "LIVE",
-      "time": "14:30",
-      "time_label": "14:30 GMT",
-      "league": {
-        "name": "ألمانيا, الدوري الألماني",
-        "country": "Germany",
-        "logo": "https://a.espncdn.com/combiner/i?img=/i/leaguelogos/soccer/500/10.png&h=40&w=40"
-      },
-      "home": {
-        "name": "آينتراخت فرانكفورت",
-        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/01/337.png"
-      },
-      "away": {
-        "name": "باير ليفركوزن",
-        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/01/333.png"
-      },
-      "score": null,
-      "streams": [
-        {
-          "id": "stream_mbc-action_1061416380",
-          "source": "livekora",
-          "quality": "HD",
-          "channel": "mbc-action",
-          "url": "https://pl.kooralive.fit/albaplayer/mbc-action",
-          "priority": 1
-        }
-      ]
-    },
-    {
-      "id": 1764470853,
-      "date": "2026-01-31T14:30:00.000Z",
-      "timestamp": 1769869800,
-      "status": "LIVE",
-      "time": "14:30",
-      "time_label": "14:30 GMT",
-      "league": {
-        "name": "الإمارات, كأس رئيس الدولة - ربع النهائي",
-        "country": "International",
-        "logo": "https://cdn-icons-png.flaticon.com/512/1378/1378598.png"
-      },
-      "home": {
-        "name": "دبا الفجيرة",
-        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/01/10880.png"
-      },
-      "away": {
-        "name": "العين",
-        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/01/8353.png"
-      },
-      "score": null,
-      "streams": [
-        {
-          "id": "stream_ad1_1764470853",
-          "source": "livekora",
-          "quality": "HD",
-          "channel": "ad1",
-          "url": "https://pl.kooralive.fit/albaplayer/ad1",
-          "priority": 1
-        }
-      ]
-    },
     {
       "id": 1571220644,
       "date": "2026-01-31T15:00:00.000Z",
@@ -606,6 +542,70 @@
           "quality": "HD",
           "channel": "bein3",
           "url": "https://pl.kooralive.fit/albaplayer/bein3",
+          "priority": 1
+        }
+      ]
+    },
+    {
+      "id": 1061416380,
+      "date": "2026-01-31T14:30:00.000Z",
+      "timestamp": 1769869800,
+      "status": "FT",
+      "time": "14:30",
+      "time_label": "14:30 GMT",
+      "league": {
+        "name": "ألمانيا, الدوري الألماني",
+        "country": "Germany",
+        "logo": "https://a.espncdn.com/combiner/i?img=/i/leaguelogos/soccer/500/10.png&h=40&w=40"
+      },
+      "home": {
+        "name": "آينتراخت فرانكفورت",
+        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/01/337.png"
+      },
+      "away": {
+        "name": "باير ليفركوزن",
+        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/01/333.png"
+      },
+      "score": null,
+      "streams": [
+        {
+          "id": "stream_mbc-action_1061416380",
+          "source": "livekora",
+          "quality": "HD",
+          "channel": "mbc-action",
+          "url": "https://pl.kooralive.fit/albaplayer/mbc-action",
+          "priority": 1
+        }
+      ]
+    },
+    {
+      "id": 1764470853,
+      "date": "2026-01-31T14:30:00.000Z",
+      "timestamp": 1769869800,
+      "status": "FT",
+      "time": "14:30",
+      "time_label": "14:30 GMT",
+      "league": {
+        "name": "الإمارات, كأس رئيس الدولة - ربع النهائي",
+        "country": "International",
+        "logo": "https://cdn-icons-png.flaticon.com/512/1378/1378598.png"
+      },
+      "home": {
+        "name": "دبا الفجيرة",
+        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/01/10880.png"
+      },
+      "away": {
+        "name": "العين",
+        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/01/8353.png"
+      },
+      "score": null,
+      "streams": [
+        {
+          "id": "stream_ad1_1764470853",
+          "source": "livekora",
+          "quality": "HD",
+          "channel": "ad1",
+          "url": "https://pl.kooralive.fit/albaplayer/ad1",
           "priority": 1
         }
       ]
