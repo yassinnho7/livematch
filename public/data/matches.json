@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-02-01T16:00:21.174Z",
+  "generated_at": "2026-02-01T16:35:08.561Z",
   "count": 19,
   "matches": [
     {
@@ -102,7 +102,7 @@
       "id": 229529926,
       "date": "2026-02-01T16:30:00.000Z",
       "timestamp": 1769963400,
-      "status": "NS",
+      "status": "LIVE",
       "time": "16:30",
       "time_label": "16:30 GMT",
       "league": {
@@ -134,7 +134,7 @@
       "id": 420817480,
       "date": "2026-02-01T16:30:00.000Z",
       "timestamp": 1769963400,
-      "status": "NS",
+      "status": "LIVE",
       "time": "16:30",
       "time_label": "16:30 GMT",
       "league": {
@@ -486,7 +486,7 @@
       "id": 1520142201,
       "date": "2026-02-01T14:00:00.000Z",
       "timestamp": 1769954400,
-      "status": "LIVE",
+      "status": "FT",
       "time": "14:00",
       "time_label": "14:00 GMT",
       "league": {
@@ -518,7 +518,7 @@
       "id": 48967325,
       "date": "2026-02-01T14:00:00.000Z",
       "timestamp": 1769954400,
-      "status": "LIVE",
+      "status": "FT",
       "time": "14:00",
       "time_label": "14:00 GMT",
       "league": {
@@ -550,7 +550,7 @@
       "id": 1837473800,
       "date": "2026-02-01T14:00:00.000Z",
       "timestamp": 1769954400,
-      "status": "LIVE",
+      "status": "FT",
       "time": "14:00",
       "time_label": "14:00 GMT",
       "league": {
@@ -582,7 +582,7 @@
       "id": 542204678,
       "date": "2026-02-01T14:00:00.000Z",
       "timestamp": 1769954400,
-      "status": "LIVE",
+      "status": "FT",
       "time": "14:00",
       "time_label": "14:00 GMT",
       "league": {
