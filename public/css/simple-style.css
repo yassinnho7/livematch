@@ -13,7 +13,7 @@ body {
 }
 
 .container {
-    max-width: 900px;
+    max-width: 1000px;
     margin: 0 auto;
 }
 
@@ -76,6 +76,19 @@ body {
     font-size: 18px;
     background: #1e293b;
     border-radius: 12px;
+}
+
+/* Ad Banner */
+.ad-banner {
+    width: 100%;
+    min-height: 250px;
+    margin-bottom: 25px;
+    background: rgba(30, 41, 59, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 12px;
+    overflow: hidden;
 }
 
 /* Match Card - CENTERED DESIGN like yallashootgol */
