@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-02-01T21:56:46.799Z",
+  "generated_at": "2026-02-01T22:19:24.707Z",
   "count": 8,
   "matches": [
     {
@@ -230,7 +230,7 @@
       "id": 769141265,
       "date": "2026-02-01T20:00:00.000Z",
       "timestamp": 1769976000,
-      "status": "LIVE",
+      "status": "FT",
       "time": "20:00",
       "time_label": "20:00 GMT",
       "league": {
