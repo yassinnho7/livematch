@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-02-01T13:52:07.172Z",
+  "generated_at": "2026-02-01T14:18:27.165Z",
   "count": 25,
   "matches": [
     {
@@ -61,7 +61,7 @@
           "source": "livekora",
           "quality": "HD",
           "channel": "bein3",
-          "url": "https://pl.kooralive.fit/albaplayer/bein3/",
+          "url": "https://pl.kooralive.fit/albaplayer/bein3",
           "priority": 1
         }
       ]
@@ -166,7 +166,7 @@
       "id": 1381272793,
       "date": "2026-02-01T14:00:00.000Z",
       "timestamp": 1769954400,
-      "status": "NS",
+      "status": "LIVE",
       "time": "14:00",
       "time_label": "14:00 GMT",
       "league": {
@@ -198,7 +198,7 @@
       "id": 1520142201,
       "date": "2026-02-01T14:00:00.000Z",
       "timestamp": 1769954400,
-      "status": "NS",
+      "status": "LIVE",
       "time": "14:00",
       "time_label": "14:00 GMT",
       "league": {
@@ -230,7 +230,7 @@
       "id": 48967325,
       "date": "2026-02-01T14:00:00.000Z",
       "timestamp": 1769954400,
-      "status": "NS",
+      "status": "LIVE",
       "time": "14:00",
       "time_label": "14:00 GMT",
       "league": {
@@ -262,7 +262,7 @@
       "id": 1837473800,
       "date": "2026-02-01T14:00:00.000Z",
       "timestamp": 1769954400,
-      "status": "NS",
+      "status": "LIVE",
       "time": "14:00",
       "time_label": "14:00 GMT",
       "league": {
@@ -294,7 +294,7 @@
       "id": 542204678,
       "date": "2026-02-01T14:00:00.000Z",
       "timestamp": 1769954400,
-      "status": "NS",
+      "status": "LIVE",
       "time": "14:00",
       "time_label": "14:00 GMT",
       "league": {
