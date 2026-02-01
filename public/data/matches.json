@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-02-01T14:18:27.165Z",
-  "count": 25,
+  "generated_at": "2026-02-01T14:51:35.596Z",
+  "count": 24,
   "matches": [
     {
       "id": 611807854,
@@ -62,38 +62,6 @@
           "quality": "HD",
           "channel": "bein3",
           "url": "https://pl.kooralive.fit/albaplayer/bein3",
-          "priority": 1
-        }
-      ]
-    },
-    {
-      "id": 720407000,
-      "date": "2026-02-01T13:00:00.000Z",
-      "timestamp": 1769950800,
-      "status": "LIVE",
-      "time": "13:00",
-      "time_label": "13:00 GMT",
-      "league": {
-        "name": "أفريقيا, الكونفدرالية الافريقية",
-        "country": "Africa",
-        "logo": "https://cdn-icons-png.flaticon.com/512/1378/1378598.png"
-      },
-      "home": {
-        "name": "مانييما يونيون",
-        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/01/50818.png"
-      },
-      "away": {
-        "name": "الوداد الرياضي",
-        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/01/8326.png"
-      },
-      "score": null,
-      "streams": [
-        {
-          "id": "stream_bein-extra-1_720407000",
-          "source": "livekora",
-          "quality": "HD",
-          "channel": "bein-extra-1",
-          "url": "https://pl.kooralive.fit/albaplayer/bein-extra-1",
           "priority": 1
         }
       ]
