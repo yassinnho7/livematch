@@ -1,39 +1,7 @@
 {
-  "generated_at": "2026-02-01T17:02:17.713Z",
-  "count": 19,
+  "generated_at": "2026-02-01T17:34:44.737Z",
+  "count": 15,
   "matches": [
-    {
-      "id": 1787209810,
-      "date": "2026-02-01T15:15:00.000Z",
-      "timestamp": 1769958900,
-      "status": "LIVE",
-      "time": "15:15",
-      "time_label": "15:15 GMT",
-      "league": {
-        "name": "إسبانيا, الدوري الإسباني",
-        "country": "Spain",
-        "logo": "https://a.espncdn.com/combiner/i?img=/i/leaguelogos/soccer/500/15.png&h=40&w=40"
-      },
-      "home": {
-        "name": "ريال بيتيس",
-        "logo": "https://l.yacinetv.info/wp-content/uploads/2026/01/146.png"
-      },
-      "away": {
-        "name": "فالنسيا",
-        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/01/139.png"
-      },
-      "score": null,
-      "streams": [
-        {
-          "id": "stream_bein5_1787209810",
-          "source": "livekora",
-          "quality": "HD",
-          "channel": "bein5",
-          "url": "https://pl.kooralive.fit/albaplayer/bein5",
-          "priority": 1
-        }
-      ]
-    },
     {
       "id": 1240309202,
       "date": "2026-02-01T16:00:00.000Z",
@@ -230,7 +198,7 @@
       "id": 376637461,
       "date": "2026-02-01T17:30:00.000Z",
       "timestamp": 1769967000,
-      "status": "NS",
+      "status": "LIVE",
       "time": "17:30",
       "time_label": "17:30 GMT",
       "league": {
@@ -262,7 +230,7 @@
       "id": 718048314,
       "date": "2026-02-01T17:30:00.000Z",
       "timestamp": 1769967000,
-      "status": "NS",
+      "status": "LIVE",
       "time": "17:30",
       "time_label": "17:30 GMT",
       "league": {
@@ -483,129 +451,33 @@
       ]
     },
     {
-      "id": 1520142201,
-      "date": "2026-02-01T14:00:00.000Z",
-      "timestamp": 1769954400,
+      "id": 1787209810,
+      "date": "2026-02-01T15:15:00.000Z",
+      "timestamp": 1769958900,
       "status": "FT",
-      "time": "14:00",
-      "time_label": "14:00 GMT",
+      "time": "15:15",
+      "time_label": "15:15 GMT",
       "league": {
-        "name": "إنجلترا, الدوري الإنجليزي",
-        "country": "England",
-        "logo": "https://a.espncdn.com/combiner/i?img=/i/leaguelogos/soccer/500/23.png&h=40&w=40"
+        "name": "إسبانيا, الدوري الإسباني",
+        "country": "Spain",
+        "logo": "https://a.espncdn.com/combiner/i?img=/i/leaguelogos/soccer/500/15.png&h=40&w=40"
       },
       "home": {
-        "name": "مانشستر يونايتد",
-        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/01/105.png"
+        "name": "ريال بيتيس",
+        "logo": "https://l.yacinetv.info/wp-content/uploads/2026/01/146.png"
       },
       "away": {
-        "name": "فولهام",
-        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/01/120.png"
+        "name": "فالنسيا",
+        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/01/139.png"
       },
       "score": null,
       "streams": [
         {
-          "id": "stream_bein1_1520142201",
+          "id": "stream_bein5_1787209810",
           "source": "livekora",
           "quality": "HD",
-          "channel": "bein1",
-          "url": "https://pl.kooralive.fit/albaplayer/bein1",
-          "priority": 1
-        }
-      ]
-    },
-    {
-      "id": 48967325,
-      "date": "2026-02-01T14:00:00.000Z",
-      "timestamp": 1769954400,
-      "status": "FT",
-      "time": "14:00",
-      "time_label": "14:00 GMT",
-      "league": {
-        "name": "إنجلترا, الدوري الإنجليزي",
-        "country": "England",
-        "logo": "https://a.espncdn.com/combiner/i?img=/i/leaguelogos/soccer/500/23.png&h=40&w=40"
-      },
-      "home": {
-        "name": "أستون فيلا",
-        "logo": "https://l.yacinetv.info/wp-content/uploads/2026/01/109.png"
-      },
-      "away": {
-        "name": "برينتفورد",
-        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/01/63.png"
-      },
-      "score": null,
-      "streams": [
-        {
-          "id": "stream_bein4_48967325",
-          "source": "livekora",
-          "quality": "HD",
-          "channel": "bein4",
-          "url": "https://pl.kooralive.fit/albaplayer/bein4",
-          "priority": 1
-        }
-      ]
-    },
-    {
-      "id": 1837473800,
-      "date": "2026-02-01T14:00:00.000Z",
-      "timestamp": 1769954400,
-      "status": "FT",
-      "time": "14:00",
-      "time_label": "14:00 GMT",
-      "league": {
-        "name": "إنجلترا, الدوري الإنجليزي",
-        "country": "England",
-        "logo": "https://a.espncdn.com/combiner/i?img=/i/leaguelogos/soccer/500/23.png&h=40&w=40"
-      },
-      "home": {
-        "name": "نوتنجهام فورست",
-        "logo": "https://l.yacinetv.info/wp-content/uploads/2026/01/29.png"
-      },
-      "away": {
-        "name": "كريستال بالاس",
-        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/01/10.png"
-      },
-      "score": null,
-      "streams": [
-        {
-          "id": "stream_ch1_1837473800",
-          "source": "livekora",
-          "quality": "HD",
-          "channel": "ch1",
-          "url": "https://pl.kooralive.fit/albaplayer/ch1",
-          "priority": 1
-        }
-      ]
-    },
-    {
-      "id": 542204678,
-      "date": "2026-02-01T14:00:00.000Z",
-      "timestamp": 1769954400,
-      "status": "FT",
-      "time": "14:00",
-      "time_label": "14:00 GMT",
-      "league": {
-        "name": "فرنسا, الدوري الفرنسي",
-        "country": "France",
-        "logo": "https://a.espncdn.com/combiner/i?img=/i/leaguelogos/soccer/500/9.png&h=40&w=40"
-      },
-      "home": {
-        "name": "أولمبيك ليون",
-        "logo": "https://l.yacinetv.info/wp-content/uploads/2026/01/465.png"
-      },
-      "away": {
-        "name": "ليل",
-        "logo": "https://l.yacinetv.info/wp-content/uploads/2026/01/478.png"
-      },
-      "score": null,
-      "streams": [
-        {
-          "id": "stream_bein6_542204678",
-          "source": "livekora",
-          "quality": "HD",
-          "channel": "bein6",
-          "url": "https://pl.kooralive.fit/albaplayer/bein6",
+          "channel": "bein5",
+          "url": "https://pl.kooralive.fit/albaplayer/bein5",
           "priority": 1
         }
       ]
