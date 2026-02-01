@@ -8,7 +8,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/simple-style.css">
-    <script async src="https://ss.mrmnd.com/banner.js"></script>
+    <!-- <script async src="https://ss.mrmnd.com/banner.js"></script> -->
+    <script id="aclib" type="text/javascript" src="//acscdn.com/script/aclib.js"></script>
 </head>
 
 <body>
@@ -20,7 +21,16 @@
         </header>
 
         <!-- Mondiad Banner 468x60 -->
-        <div class="ad-banner" data-mndbanid="a696eb85-9862-4c71-a8c8-4e577e5ad547"></div>
+        <!-- <div class="ad-banner" data-mndbanid="a696eb85-9862-4c71-a8c8-4e577e5ad547"></div> -->
+
+        <!-- Adcash Banner 468x60 -->
+        <div class="ad-banner">
+            <script type="text/javascript">
+                aclib.runBanner({
+                    zoneId: '10911190',
+                });
+            </script>
+        </div>
 
         <!-- Matches Container -->
         <div id="matches-container" class="matches-container">
