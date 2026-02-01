@@ -1,12 +1,12 @@
 {
-  "generated_at": "2026-02-01T12:01:23.260Z",
-  "count": 26,
+  "generated_at": "2026-02-01T13:01:59.447Z",
+  "count": 25,
   "matches": [
     {
       "id": 611807854,
       "date": "2026-02-01T13:00:00.000Z",
       "timestamp": 1769950800,
-      "status": "NS",
+      "status": "LIVE",
       "time": "13:00",
       "time_label": "13:00 GMT",
       "league": {
@@ -38,7 +38,7 @@
       "id": 1182102311,
       "date": "2026-02-01T13:00:00.000Z",
       "timestamp": 1769950800,
-      "status": "NS",
+      "status": "LIVE",
       "time": "13:00",
       "time_label": "13:00 GMT",
       "league": {
@@ -70,7 +70,7 @@
       "id": 720407000,
       "date": "2026-02-01T13:00:00.000Z",
       "timestamp": 1769950800,
-      "status": "NS",
+      "status": "LIVE",
       "time": "13:00",
       "time_label": "13:00 GMT",
       "league": {
@@ -102,7 +102,7 @@
       "id": 1758581464,
       "date": "2026-02-01T13:00:00.000Z",
       "timestamp": 1769950800,
-      "status": "NS",
+      "status": "LIVE",
       "time": "13:00",
       "time_label": "13:00 GMT",
       "league": {
@@ -134,7 +134,7 @@
       "id": 568718841,
       "date": "2026-02-01T13:00:00.000Z",
       "timestamp": 1769950800,
-      "status": "NS",
+      "status": "LIVE",
       "time": "13:00",
       "time_label": "13:00 GMT",
       "league": {
@@ -153,11 +153,11 @@
       "score": null,
       "streams": [
         {
-          "id": "stream_el-watania-1_568718841",
+          "id": "stream_el-watania-2_568718841",
           "source": "livekora",
           "quality": "HD",
-          "channel": "el-watania-1",
-          "url": "https://pl.kooralive.fit/albaplayer/el-watania-1",
+          "channel": "el-watania-2",
+          "url": "https://pl.kooralive.fit/albaplayer/el-watania-2",
           "priority": 1
         }
       ]
@@ -318,38 +318,6 @@
           "quality": "HD",
           "channel": "bein6",
           "url": "https://pl.kooralive.fit/albaplayer/bein6",
-          "priority": 1
-        }
-      ]
-    },
-    {
-      "id": 1087857746,
-      "date": "2026-02-01T15:15:00.000Z",
-      "timestamp": 1769958900,
-      "status": "NS",
-      "time": "15:15",
-      "time_label": "15:15 GMT",
-      "league": {
-        "name": "السعودية, الدوري السعودي",
-        "country": "Saudi Arabia",
-        "logo": "https://a.espncdn.com/combiner/i?img=/i/leaguelogos/soccer/500/3007.png&h=40&w=40"
-      },
-      "home": {
-        "name": "الشباب",
-        "logo": "https://l.yacinetv.info/wp-content/uploads/2026/01/8945.png"
-      },
-      "away": {
-        "name": "الفيحاء",
-        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/01/20733.png"
-      },
-      "score": null,
-      "streams": [
-        {
-          "id": "stream_thmanya1_1087857746",
-          "source": "livekora",
-          "quality": "HD",
-          "channel": "thmanya1",
-          "url": "https://pl.kooralive.fit/albaplayer/thmanya1",
           "priority": 1
         }
       ]
