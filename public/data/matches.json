@@ -1,71 +1,7 @@
 {
-  "generated_at": "2026-02-01T21:05:55.886Z",
+  "generated_at": "2026-02-01T21:39:06.299Z",
   "count": 8,
   "matches": [
-    {
-      "id": 1758640932,
-      "date": "2026-02-01T19:45:00.000Z",
-      "timestamp": 1769975100,
-      "status": "LIVE",
-      "time": "19:45",
-      "time_label": "19:45 GMT",
-      "league": {
-        "name": "فرنسا, الدوري الفرنسي",
-        "country": "France",
-        "logo": "https://a.espncdn.com/combiner/i?img=/i/leaguelogos/soccer/500/9.png&h=40&w=40"
-      },
-      "home": {
-        "name": "ستراسبورج",
-        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/01/479.png"
-      },
-      "away": {
-        "name": "باريس سان جيرمان",
-        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/01/480.png"
-      },
-      "score": null,
-      "streams": [
-        {
-          "id": "stream_bein1_1758640932",
-          "source": "livekora",
-          "quality": "HD",
-          "channel": "bein1",
-          "url": "https://pl.kooralive.fit/albaplayer/bein1",
-          "priority": 1
-        }
-      ]
-    },
-    {
-      "id": 1805317229,
-      "date": "2026-02-01T19:45:00.000Z",
-      "timestamp": 1769975100,
-      "status": "LIVE",
-      "time": "19:45",
-      "time_label": "19:45 GMT",
-      "league": {
-        "name": "إيطاليا, الدوري الإيطالي",
-        "country": "Italy",
-        "logo": "https://a.espncdn.com/combiner/i?img=/i/leaguelogos/soccer/500/12.png&h=40&w=40"
-      },
-      "home": {
-        "name": "بارما",
-        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/01/241.png"
-      },
-      "away": {
-        "name": "يوفنتوس",
-        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/01/226.png"
-      },
-      "score": null,
-      "streams": [
-        {
-          "id": "stream_ad-premium-1_1805317229",
-          "source": "livekora",
-          "quality": "HD",
-          "channel": "ad-premium-1",
-          "url": "https://pl.kooralive.fit/albaplayer/ad-premium-1",
-          "priority": 1
-        }
-      ]
-    },
     {
       "id": 769141265,
       "date": "2026-02-01T20:00:00.000Z",
@@ -254,6 +190,70 @@
           "quality": "HD",
           "channel": "bein2",
           "url": "https://pl.kooralive.fit/albaplayer/bein2",
+          "priority": 1
+        }
+      ]
+    },
+    {
+      "id": 1758640932,
+      "date": "2026-02-01T19:45:00.000Z",
+      "timestamp": 1769975100,
+      "status": "LIVE",
+      "time": "19:45",
+      "time_label": "19:45 GMT",
+      "league": {
+        "name": "فرنسا, الدوري الفرنسي",
+        "country": "France",
+        "logo": "https://a.espncdn.com/combiner/i?img=/i/leaguelogos/soccer/500/9.png&h=40&w=40"
+      },
+      "home": {
+        "name": "ستراسبورج",
+        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/01/479.png"
+      },
+      "away": {
+        "name": "باريس سان جيرمان",
+        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/01/480.png"
+      },
+      "score": null,
+      "streams": [
+        {
+          "id": "stream_bein1_1758640932",
+          "source": "livekora",
+          "quality": "HD",
+          "channel": "bein1",
+          "url": "https://pl.kooralive.fit/albaplayer/bein1",
+          "priority": 1
+        }
+      ]
+    },
+    {
+      "id": 1805317229,
+      "date": "2026-02-01T19:45:00.000Z",
+      "timestamp": 1769975100,
+      "status": "LIVE",
+      "time": "19:45",
+      "time_label": "19:45 GMT",
+      "league": {
+        "name": "إيطاليا, الدوري الإيطالي",
+        "country": "Italy",
+        "logo": "https://a.espncdn.com/combiner/i?img=/i/leaguelogos/soccer/500/12.png&h=40&w=40"
+      },
+      "home": {
+        "name": "بارما",
+        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/01/241.png"
+      },
+      "away": {
+        "name": "يوفنتوس",
+        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/01/226.png"
+      },
+      "score": null,
+      "streams": [
+        {
+          "id": "stream_ad-premium-1_1805317229",
+          "source": "livekora",
+          "quality": "HD",
+          "channel": "ad-premium-1",
+          "url": "https://pl.kooralive.fit/albaplayer/ad-premium-1",
           "priority": 1
         }
       ]
