@@ -32,6 +32,10 @@ class LiveKoraScraper {
             // Set realistic viewport
             await page.setViewport({ width: 1920, height: 1080 });
 
+            // Log browser console messages
+            page.on('console', msg => console.log('🌐 BROWSER:', msg.text()));
+            page.on('error', err => console.log('❌ BROWSER ERROR:', err.message));
+
             // Set realistic user agent
             await page.setUserAgent('Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36');
 
@@ -66,8 +70,12 @@ class LiveKoraScraper {
 
                 // Check if we got blocked
                 const pageContent = await page.content();
+                console.log('📄 Page Title:', await page.title());
+                
                 if (pageContent.includes('cloudflare') || pageContent.includes('captcha') || pageContent.includes('blocked')) {
                     console.log('🚫 Bot detection detected! Page was blocked.');
+                    // Save page source for debugging
+                    await fs.writeFile('debug_source.html', pageContent);
                 }
 
                 await browser.close();

@@ -24,7 +24,12 @@ jobs:
         with:
           node-version: '20'
       
-      - name: Install Dependencies
+      - name: Install Puppeteer Dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libgbm-dev libasound2 libnss3 libatk1.0-0 libatk-bridge2.0-0 libcups2 libdrm2 libxkbcommon0 libxcomposite1 libxdamage1 libxrandr2 libpangocairo-1.0-0 libpango-1.0-0
+          
+      - name: Install Node Dependencies
         run: |
           npm install puppeteer puppeteer-extra puppeteer-extra-plugin-stealth
       
@@ -61,9 +66,11 @@ jobs:
           
           # Retry loop for push to handle race conditions
           n=0
-          until [ "$n" -ge 5 ]
+          until [ "$n" -ge 10 ]
           do
-             git pull --rebase origin main && git push origin main && break
+             echo "Push attempt $((n+1))..."
+             git pull --rebase origin main || git rebase --abort
+             git push origin main && break
              n=$((n+1)) 
-             sleep 5
+             sleep 10
           done
