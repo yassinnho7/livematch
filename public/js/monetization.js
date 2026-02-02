@@ -121,11 +121,11 @@ class MonetizationManager {
     }
 
     /**
-     * معالجة اختيار المستخدم (HD vs Normal)
-     * @param {string} quality 'hd' or 'normal'
+     * معالجة اختيار المستخدم للسيرفر
+     * @param {number} index ترتيب السيرفر في المصفوفة
      */
-    selectQuality(quality) {
-        console.log(`👤 User selected: ${quality} quality`);
+    selectServer(index) {
+        console.log(`👤 User selected server index: ${index}`);
 
         // إخفاء نافذة الاختيار
         const choiceLayer = document.getElementById('choice-layer');
@@ -134,15 +134,21 @@ class MonetizationManager {
             document.body.classList.remove('modal-open');
         }
 
-        if (quality === 'hd') {
-            // خيار HD: تفعيل OGads Locker
+        // تحديث الرابط في الصفحة الرئيسية
+        if (typeof window.selectServer === 'function') {
+            window.selectServer(index);
+        }
+
+        // استراتيجية الربح حسب السيرفر
+        if (index === 1) {
+            // السيرفر الثاني (VIP): تفعيل OGads Locker إذا كان متاحاً
             if (this.config.ogads.enabled) {
                 this.showOGadsLocker();
             } else {
                 this.unlockStream();
             }
         } else {
-            // خيار عادي: فتح البث + Monetag + Adsterra Popunder
+            // السيرفرات الأخرى: فتح البث + Monetag + Adsterra Popunder
             this.triggerPassiveMonetization();
             this.unlockStream();
         }

@@ -415,6 +415,8 @@
         const urlParams = new URLSearchParams(window.location.search);
         const matchId = urlParams.get('match');
         let currentMatch = null;
+        let countdown = 12; // Re-initialized
+        let streamUrl = '';
 
         async function loadMatch() {
             try {
@@ -501,9 +503,9 @@
 
                     // إظهار اختيار السيرفر وإخفاء العد التنازلي
                     document.getElementById('countdown-area').style.display = 'none';
-                    document.getElementById('server-selection').style.display = 'block';
 
-                    // افتراضي اختيار السيرفر الأول
+                    // Note: selectServer will be handled by monetization manager choice modal
+                    // but we set a default just in case.
                     if (currentMatch.streams.length > 0) streamUrl = currentMatch.streams[0].url;
 
                     document.dispatchEvent(new Event('countdownFinished'));
