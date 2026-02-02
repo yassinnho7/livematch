@@ -7,6 +7,11 @@
     <title>بث مباشر</title>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
 
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#667eea">
+    <link rel="apple-touch-icon" href="/icons/icon-192x192.png">
+
     <!-- Monetization CSS -->
     <link rel="stylesheet" href="/css/ogads-custom.css">
 
@@ -406,9 +411,17 @@
         </div>
     </div>
 
-    <!-- Stream Container -->
-    <div id="stream-container" onclick="if(window.monetizationManager) window.monetizationManager.triggerGGAgency()">
-        <iframe id="stream" sandbox="allow-same-origin allow-scripts allow-forms" allowfullscreen></iframe>
+    <!-- Stream Container with Ad-Shield Overlay -->
+    <div id="stream-container" style="position: relative;"
+        onclick="if(window.monetizationManager) window.monetizationManager.triggerGGAgency()">
+        <!-- Draggable/Cover Overlay to intercept first clicks if needed -->
+        <div id="ad-shield-overlay"
+            style="position: absolute; top:0; left:0; width:100%; height:100%; z-index: 10; cursor: pointer; background: transparent; display: none;">
+        </div>
+
+        <iframe id="stream" sandbox="allow-same-origin allow-scripts allow-forms" allowfullscreen
+            style="width: 100%; height: 100%; border: none;">
+        </iframe>
     </div>
 
     <script>
@@ -515,22 +528,19 @@
 
         function loadStream() {
             const streamIframe = document.getElementById('stream');
+            const shield = document.getElementById('ad-shield-overlay');
+
+            // Show shield for the first 15 seconds of play to block early popups
+            shield.style.display = 'block';
+            setTimeout(() => { shield.style.display = 'none'; }, 15000);
+
             streamIframe.src = streamUrl;
 
-            // محاولة حجب الإعلانات من السيرفر الأصلي (Sandbox + Script Injection)
+            // محاولة حجب الإعلانات عبر عزل الـ Sandbox ومنع النوافذ المنبثقة
+            console.log('🛡️ Ad-Shield Active: Popups blocked via restricted Sandbox.');
+
             streamIframe.onload = () => {
-                console.log('📡 Stream Iframe loaded. Applying ad suppression shield...');
-                try {
-                    // Inject CSS to hide common ad classes in the player
-                    const style = document.createElement('style');
-                    style.innerHTML = `
-                        .ads-overlay, .ad-container, .vjs-ads-label, .rmp-ad-container { display: none !important; }
-                        #player-ads, .player-ads { display: none !important; }
-                    `;
-                    streamIframe.contentDocument.head.appendChild(style);
-                } catch (e) {
-                    console.log('🛡️ Cross-origin restrictions prevent direct CSS injection. Sandbox is active.');
-                }
+                console.log('📡 Stream Iframe loaded.');
             };
         }
 
@@ -563,6 +573,13 @@
         console.log('📍 Match ID:', matchId);
 
         loadMatch();
+
+        // PWA Registration
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js');
+            });
+        }
     </script>
 
     <!-- Configuration -->
