@@ -1,104 +1,90 @@
-const SimpleStreamScraper = require('./simple_stream_scraper');
-const FallbackManager = require('./fallback_manager');
+import LiveKoraScraper from './livekora_scraper.js';
+import SiiirScraper from './siiir_scraper.js';
+import fs from 'fs/promises';
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 class ScraperManager {
     constructor() {
-        this.scraper = new SimpleStreamScraper();
-        this.fallback = new FallbackManager();
+        this.liveKora = new LiveKoraScraper();
+        this.siiir = new SiiirScraper();
     }
 
-    /**
-     * جلب روابط البث لجميع المباريات
-     */
-    async scrapeAllMatches(matches) {
-        const results = [];
+    async runFullUpdate() {
+        console.log('🚀 Starting Multi-Source Scrape: LiveKora + Siiir.tv');
 
-        for (const match of matches) {
-            console.log(`🔍 Scraping: ${match.home.name} vs ${match.away.name}`);
+        // 1. Get matches from LiveKora (Base data)
+        const koraMatches = await this.liveKora.scrapeMatches();
 
-            const streams = await this.scraper.scrapeMatch(match);
+        // 2. Get player links from Siiir.tv
+        const siiirStreams = await this.siiir.scrapeMatches();
 
-            // إضافة للـ fallback manager
-            this.fallback.addStreams(match.id, streams);
+        // 3. Merge Siiir streams into LiveKora matches
+        const finalMatches = this.mergeSources(koraMatches, siiirStreams);
 
-            results.push({
-                ...match,
-                streams: streams,
-                broadcast_info: this.getBroadcastInfo(match.league.name)
+        // 4. Save results
+        await this.saveMatches(finalMatches);
+
+        return finalMatches;
+    }
+
+    mergeSources(matches, extraStreams) {
+        console.log(`🔄 Merging ${extraStreams.length} Siiir streams into ${matches.length} matches...`);
+
+        return matches.map(match => {
+            // Find matching stream from Siiir
+            const matchingSiiir = extraStreams.find(s => {
+                const title = s.title.toLowerCase();
+                const home = match.home.name.toLowerCase();
+                const away = match.away.name.toLowerCase();
+
+                // Match if both team names are found in the Siiir title
+                return title.includes(home) || title.includes(away) ||
+                    home.includes(title.split('vs')[0]?.trim()) ||
+                    away.includes(title.split('vs')[1]?.trim());
             });
-        }
 
-        return results;
-    }
+            if (matchingSiiir) {
+                console.log(`🔗 Linked Siiir stream to: ${match.home.name} vs ${match.away.name}`);
 
-    /**
-     * معلومات البث حسب الدوري
-     */
-    getBroadcastInfo(leagueName) {
-        const broadcastMap = {
-            'Premier League': {
-                primary_channel: 'beIN Sports 1',
-                alternative_channels: ['beIN Sports 2', 'SSC 1']
-            },
-            'La Liga': {
-                primary_channel: 'beIN Sports 1',
-                alternative_channels: ['beIN Sports 2']
-            },
-            'Serie A': {
-                primary_channel: 'beIN Sports 3',
-                alternative_channels: ['SSC 2']
-            },
-            'Bundesliga': {
-                primary_channel: 'beIN Sports 3',
-                alternative_channels: []
-            },
-            'Ligue 1': {
-                primary_channel: 'beIN Sports 3',
-                alternative_channels: []
-            },
-            'UEFA Champions League': {
-                primary_channel: 'beIN Sports 1',
-                alternative_channels: ['beIN Sports 2', 'beIN Sports 3']
-            },
-            'UEFA Europa League': {
-                primary_channel: 'beIN Sports 4',
-                alternative_channels: ['beIN Sports 5']
+                // Add as Server 2
+                match.streams.push({
+                    id: `stream_siiir_${match.id}`,
+                    source: 'siiir',
+                    quality: 'Premium',
+                    channel: 'Server 2',
+                    url: matchingSiiir.playerUrl,
+                    priority: 2
+                });
             }
-        };
 
-        return broadcastMap[leagueName] || {
-            primary_channel: 'beIN Sports',
-            alternative_channels: []
-        };
+            return match;
+        });
     }
 
-    /**
-     * حفظ النتائج في ملف JSON
-     */
-    async saveResults(matches, outputPath) {
-        const fs = require('fs').promises;
-
+    async saveMatches(matches) {
         const data = {
             generated_at: new Date().toISOString(),
             count: matches.length,
             matches: matches
         };
 
-        await fs.writeFile(
-            outputPath,
-            JSON.stringify(data, null, 2),
-            'utf8'
-        );
-
-        console.log(`✅ Saved ${matches.length} matches to ${outputPath}`);
-    }
-
-    /**
-     * الحصول على إحصائيات
-     */
-    getStats() {
-        return this.fallback.getStats();
+        const outputPath = path.join(__dirname, '..', 'public', 'data', 'matches.json');
+        await fs.writeFile(outputPath, JSON.stringify(data, null, 2), 'utf8');
+        console.log(`✅ Multi-source update complete. Saved ${matches.length} matches.`);
     }
 }
 
-module.exports = ScraperManager;
+// If running directly
+if (process.argv[1] === fileURLToPath(import.meta.url)) {
+    const manager = new ScraperManager();
+    manager.runFullUpdate().then(() => process.exit(0)).catch(err => {
+        console.error(err);
+        process.exit(1);
+    });
+}
+
+export default ScraperManager;

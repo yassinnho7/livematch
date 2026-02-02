@@ -197,40 +197,26 @@
             <div id="adsterra-banner-container"
                 style="min-height: 50px; margin-bottom: 20px; display: flex; justify-content: center;"></div>
 
-            <h2>جاري تحضير البث...</h2>
-            <div class="countdown-circle">
-                <svg width="200" height="200">
-                    <circle cx="100" cy="100" r="90" class="countdown-bg"></circle>
-                    <circle cx="100" cy="100" r="90" class="countdown-progress" id="countdown-progress"></circle>
-                </svg>
-                <div class="countdown-number" id="countdown">10</div>
+            <div id="countdown-area">
+                <h2>جاري تحضير البث...</h2>
+                <div class="countdown-circle">
+                    <svg width="200" height="200">
+                        <circle cx="100" cy="100" r="90" class="countdown-bg"></circle>
+                        <circle cx="100" cy="100" r="90" class="countdown-progress" id="countdown-progress"></circle>
+                    </svg>
+                    <div class="countdown-number" id="countdown">12</div>
+                </div>
+                <p class="countdown-text">شاهد إعلاننا لدعم السيرفر...</p>
             </div>
-            <p class="countdown-text">شاهد إعلاننا لدعم السيرفر...</p>
         </div>
     </div>
 
-    <!-- طبقة الاختيار (HD vs Normal) -->
     <div id="choice-layer" class="monetization-layer" style="display: none;">
         <div class="monetization-overlay"></div>
         <div class="choice-content">
-            <h2 class="choice-title">اختر جودة البث المفضل</h2>
-            <div class="choice-cards">
-                <!-- خيار HD (يفتح Locker) -->
-                <div class="choice-card premium" onclick="window.monetizationManager.selectQuality('hd')">
-                    <div class="choice-badge">🚀 موصى به</div>
-                    <div class="choice-icon">💎</div>
-                    <h3>بث فائق الجودة (HD)</h3>
-                    <p>بدون تقطيع • سيرفر خاص • 4K</p>
-                    <button class="choice-btn">مشاهدة HD</button>
-                </div>
-
-                <!-- خيار عادي (يفتح إعلانات) -->
-                <div class="choice-card standard" onclick="window.monetizationManager.selectQuality('normal')">
-                    <div class="choice-icon">📺</div>
-                    <h3>بث قياسي (SD)</h3>
-                    <p>جودة متوسطة • سيرفر عام</p>
-                    <button class="choice-btn secondary">مشاهدة الآن</button>
-                </div>
+            <h2 class="choice-title">اختر سيرفر البث المفضل</h2>
+            <div class="choice-cards" id="server-cards-container">
+                <!-- Servers will be injected here dynamically -->
             </div>
         </div>
     </div>
@@ -428,25 +414,20 @@
     <script>
         const urlParams = new URLSearchParams(window.location.search);
         const matchId = urlParams.get('match');
-        let countdown = 12;
-        let streamUrl = '';
+        let currentMatch = null;
 
         async function loadMatch() {
             try {
                 const response = await fetch('data/matches.json');
                 const data = await response.json();
-                const match = data.matches.find(m => m.id == matchId);
+                currentMatch = data.matches.find(m => m.id == matchId);
 
-                if (match && match.streams && match.streams.length > 0) {
-                    streamUrl = match.streams[0].url;
+                if (currentMatch && currentMatch.streams && currentMatch.streams.length > 0) {
+                    document.title = `${currentMatch.home.name} vs ${currentMatch.away.name} - بث مباشر`;
 
-                    // التحقق من أن الرابط ليس livekora.vip (بث غير متوفر)
-                    if (streamUrl.includes('livekora.vip') || streamUrl.includes('www.livekora.vip')) {
-                        showError('البث غير متوفر الآن، يرجى المحاولة لاحقاً');
-                        return;
-                    }
+                    // تحضير قائمة السيرفرات
+                    renderServerList();
 
-                    document.title = `${match.home.name} vs ${match.away.name} - بث مباشر`;
                     startCountdown();
                 } else {
                     showError('لا يوجد بث متاح');
@@ -456,10 +437,54 @@
             }
         }
 
+        function renderServerList() {
+            const container = document.getElementById('server-cards-container');
+            container.innerHTML = '';
+
+            currentMatch.streams.forEach((stream, index) => {
+                const isPremium = index === 1; // Siiir.tv is usually our Premium/Server 2
+                const card = document.createElement('div');
+                card.className = `choice-card ${isPremium ? 'premium' : 'standard'}`;
+
+                // Add unique attributes for monetization
+                // Generic Names
+                const serverName = isPremium ? 'سيرفر البث 2 (فائق السرعة)' : `سيرفر البث ${index + 1} (جودة عالية)`;
+                const serverIcon = isPremium ? '🚀' : '📺';
+                const serverDesc = isPremium ? 'مشاهدة بدون حظر • سيرفر فرعي' : 'بث مباشر رئيسي • جودات متعددة';
+
+                card.innerHTML = `
+                    ${isPremium ? '<div class="choice-badge">🔥 موصى به</div>' : ''}
+                    <div class="choice-icon">${serverIcon}</div>
+                    <h3>${serverName}</h3>
+                    <p>${serverDesc}</p>
+                    <button class="choice-btn ${!isPremium ? 'secondary' : ''}">مشاهدة الآن</button>
+                `;
+
+                card.onclick = () => {
+                    if (window.monetizationManager) {
+                        window.monetizationManager.selectServer(index);
+                    } else {
+                        selectServer(index);
+                        document.getElementById('choice-layer').style.display = 'none';
+                        document.body.classList.remove('modal-open');
+                        loadStream();
+                    }
+                };
+
+                container.appendChild(card);
+            });
+        }
+
+        function selectServer(index) {
+            if (!currentMatch || !currentMatch.streams[index]) return;
+            streamUrl = currentMatch.streams[index].url;
+            console.log('📡 Server selected:', index, streamUrl);
+        }
+
         function startCountdown() {
             const countdownEl = document.getElementById('countdown');
             const progressCircle = document.getElementById('countdown-progress');
-            const circumference = 2 * Math.PI * 90; // 2πr
+            const circumference = 2 * Math.PI * 90;
 
             progressCircle.style.strokeDasharray = circumference;
             progressCircle.style.strokeDashoffset = 0;
@@ -468,13 +493,19 @@
                 countdown--;
                 countdownEl.textContent = countdown;
 
-                // Update progress circle
                 const offset = circumference - (countdown / 12) * circumference;
                 progressCircle.style.strokeDashoffset = offset;
 
                 if (countdown <= 0) {
                     clearInterval(interval);
-                    // Trigger monetization system
+
+                    // إظهار اختيار السيرفر وإخفاء العد التنازلي
+                    document.getElementById('countdown-area').style.display = 'none';
+                    document.getElementById('server-selection').style.display = 'block';
+
+                    // افتراضي اختيار السيرفر الأول
+                    if (currentMatch.streams.length > 0) streamUrl = currentMatch.streams[0].url;
+
                     document.dispatchEvent(new Event('countdownFinished'));
                 }
             }, 1000);
@@ -483,6 +514,22 @@
         function loadStream() {
             const streamIframe = document.getElementById('stream');
             streamIframe.src = streamUrl;
+
+            // محاولة حجب الإعلانات من السيرفر الأصلي (Sandbox + Script Injection)
+            streamIframe.onload = () => {
+                console.log('📡 Stream Iframe loaded. Applying ad suppression shield...');
+                try {
+                    // Inject CSS to hide common ad classes in the player
+                    const style = document.createElement('style');
+                    style.innerHTML = `
+                        .ads-overlay, .ad-container, .vjs-ads-label, .rmp-ad-container { display: none !important; }
+                        #player-ads, .player-ads { display: none !important; }
+                    `;
+                    streamIframe.contentDocument.head.appendChild(style);
+                } catch (e) {
+                    console.log('🛡️ Cross-origin restrictions prevent direct CSS injection. Sandbox is active.');
+                }
+            };
         }
 
         function showError(message) {
