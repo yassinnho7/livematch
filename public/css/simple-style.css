@@ -81,13 +81,10 @@ body {
 /* Ad Banner */
 .ad-banner {
     width: 100%;
-    min-height: 80px;
     margin-bottom: 25px;
-    background: rgba(30, 41, 59, 0.5);
     display: flex;
     justify-content: center;
     align-items: center;
-    border-radius: 12px;
     overflow: hidden;
 }
 
