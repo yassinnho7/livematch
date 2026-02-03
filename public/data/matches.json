@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-02-03T12:04:03.269Z",
+  "generated_at": "2026-02-03T13:25:26.390Z",
   "count": 6,
   "matches": [
     {
@@ -29,7 +29,39 @@
           "source": "livekora",
           "quality": "HD",
           "channel": "on-time-sport-1",
-          "url": "https://pl.kooralive.fit/albaplayer/on-time-sport-1",
+          "url": "https://pl.koooralive.click/albaplayer/on-time-sport-1",
+          "priority": 1
+        }
+      ]
+    },
+    {
+      "id": 1921156363,
+      "date": "2026-02-03T19:45:00.000Z",
+      "timestamp": 1770147900,
+      "status": "NS",
+      "time": "19:45",
+      "time_label": "19:45 GMT",
+      "league": {
+        "name": "ألمانيا, كأس المانيا - ربع النهائي",
+        "country": "Germany",
+        "logo": "https://a.espncdn.com/combiner/i?img=/i/leaguelogos/soccer/500/10.png&h=40&w=40"
+      },
+      "home": {
+        "name": "باير ليفركوزن",
+        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/01/333.png"
+      },
+      "away": {
+        "name": "سانت باولي",
+        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/02/359.png"
+      },
+      "score": null,
+      "streams": [
+        {
+          "id": "stream_ad2_1921156363",
+          "source": "livekora",
+          "quality": "HD",
+          "channel": "ad2",
+          "url": "https://pl.koooralive.click/albaplayer/ad2",
           "priority": 1
         }
       ]
@@ -61,39 +93,7 @@
           "source": "livekora",
           "quality": "HD",
           "channel": "ad-premium-1",
-          "url": "https://pl.kooralive.fit/albaplayer/ad-premium-1",
-          "priority": 1
-        }
-      ]
-    },
-    {
-      "id": 1921156363,
-      "date": "2026-02-03T19:45:00.000Z",
-      "timestamp": 1770147900,
-      "status": "NS",
-      "time": "19:45",
-      "time_label": "19:45 GMT",
-      "league": {
-        "name": "ألمانيا, كأس المانيا - ربع النهائي",
-        "country": "Germany",
-        "logo": "https://a.espncdn.com/combiner/i?img=/i/leaguelogos/soccer/500/10.png&h=40&w=40"
-      },
-      "home": {
-        "name": "باير ليفركوزن",
-        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/01/333.png"
-      },
-      "away": {
-        "name": "سانت باولي",
-        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/02/359.png"
-      },
-      "score": null,
-      "streams": [
-        {
-          "id": "stream_albaplayer_1921156363",
-          "source": "livekora",
-          "quality": "HD",
-          "channel": "albaplayer",
-          "url": "https://www.livekora.vip/albaplayer/",
+          "url": "https://pl.koooralive.click/albaplayer/ad-premium-1",
           "priority": 1
         }
       ]
@@ -125,7 +125,7 @@
           "source": "livekora",
           "quality": "HD",
           "channel": "bein1",
-          "url": "https://pl.kooralive.fit/albaplayer/bein1",
+          "url": "https://pl.koooralive.click/albaplayer/bein1",
           "priority": 1
         }
       ]
@@ -157,7 +157,7 @@
           "source": "livekora",
           "quality": "HD",
           "channel": "ch1",
-          "url": "https://pl.kooralive.fit/albaplayer/ch1",
+          "url": "https://pl.koooralive.click/albaplayer/ch1",
           "priority": 1
         }
       ]
@@ -189,7 +189,7 @@
           "source": "livekora",
           "quality": "HD",
           "channel": "bein4",
-          "url": "https://pl.kooralive.fit/albaplayer/bein4",
+          "url": "https://pl.koooralive.click/albaplayer/bein4",
           "priority": 1
         }
       ]
