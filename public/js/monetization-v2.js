@@ -112,24 +112,6 @@ class MonetizationManager {
             }, true);
         }
 
-        // Show Back Button ONLY now and ensure high Z-Index
-        let backBtn = document.getElementById('back-home-btn');
-        if (!backBtn) {
-            // If missing, recreate/force it
-            console.warn('⚠️ Back Button missing, re-creating it...');
-            backBtn = document.createElement('a');
-            backBtn.id = 'back-home-btn';
-            backBtn.href = '/';
-            backBtn.className = 'back-btn';
-            backBtn.textContent = 'الرئيسية';
-            document.body.appendChild(backBtn);
-        }
-
-        console.log('✅ Showing Back Button');
-        backBtn.style.display = 'flex';
-        backBtn.style.setProperty('display', 'flex', 'important'); // Force override
-        backBtn.style.zIndex = '2147483647';
-
         if (typeof loadStream === 'function') {
             loadStream();
         }
