@@ -106,12 +106,18 @@ class MonetizationManager {
         if (streamContainer) {
             streamContainer.style.display = 'block';
             streamContainer.style.opacity = '1';
+
+            // Prevent Vignette/Banners from capturing clicks on the stream
+            streamContainer.addEventListener('click', (e) => {
+                e.stopPropagation();
+            }, true);
         }
 
-        // Show Back Button ONLY now
+        // Show Back Button ONLY now and ensure high Z-Index
         const backBtn = document.getElementById('back-home-btn');
         if (backBtn) {
-            backBtn.style.display = 'flex';
+            backBtn.style.display = 'flex'; // Ensure flex is applied
+            backBtn.style.zIndex = '2147483647'; // Max Z-Index
         }
 
         if (typeof loadStream === 'function') {
