@@ -1,4 +1,4 @@
-const CACHE_NAME = 'livematch-v2';
+const CACHE_NAME = 'livematch-v3';
 const ASSETS = [
     '/',
     '/index.html',

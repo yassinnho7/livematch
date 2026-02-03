@@ -64,9 +64,21 @@
     <script>
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
-                navigator.serviceWorker.register('/sw.js')
-                    .then(reg => console.log('🚀 Service Worker Registered', reg))
-                    .catch(err => console.log('❌ SW Registration failed', err));
+                // Force update check
+                navigator.serviceWorker.register('/sw.js').then(reg => {
+                    reg.update(); // Request immediate update
+                    console.log('🚀 Service Worker Registered', reg);
+                }).catch(err => console.log('❌ SW Registration failed', err));
+
+                // Emergency: Clear old cache if users report stuck "v2" or "v1" issues
+                if (navigator.serviceWorker.controller) {
+                    navigator.serviceWorker.controller.postMessage({ type: 'CHECK_VERSION' });
+                }
+            });
+
+            // Listen for new worker taking over
+            navigator.serviceWorker.addEventListener('controllerchange', () => {
+                window.location.reload();
             });
         }
     </script>
