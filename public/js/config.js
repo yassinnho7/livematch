@@ -14,8 +14,8 @@ const MONETIZATION_CONFIG = {
     // هويات الإعلانات (أضف مفاتيحك هنا)
     adIds: {
         monetagZoneId: '10526690',
-        adsterraSocial: '<script type=\'text/javascript\' src=\'//pl18402434.highperformanceformat.com/f2/87/00/f28700947761007a82643a12a514d7c0.js\'></script>',
-        adsterraBanner: '<script type="text/javascript">atOptions = { "key": "129087cf28b991b1ac22461099f7d24c", "format": "iframe", "height": 60, "width": 468, "params": {} };</script><script type="text/javascript" src="//www.highperformanceformat.com/129087cf28b991b1ac22461099f7d24c/invoke.js"></script>',
+        adsterraSocial: '',
+        adsterraBanner: '',
         adsterraPop: '',
         server2AdNetworkKey: '',
         server3AdNetworkKey: ''

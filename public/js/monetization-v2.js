@@ -31,11 +31,7 @@ class MonetizationManager {
     }
 
     selectServer(index) {
-        // Multi-Network strategy
-        if (index === 0) {
-            window.open('https://otieu.com/4/10526676', '_blank', 'noopener,noreferrer');
-        }
-
+        // Ad-Maven popunder active
         document.getElementById('choice-layer').style.display = 'none';
         if (typeof window.selectServer === 'function') window.selectServer(index);
     }
