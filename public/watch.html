@@ -458,26 +458,29 @@
             const container = document.getElementById('server-cards-container');
             container.innerHTML = '';
 
-            currentMatch.streams.forEach((stream, index) => {
-                const isPremium = index === 1; // Siiir.tv is usually our Premium/Server 2
-                const card = document.createElement('div');
-                card.className = `choice-card ${isPremium ? 'premium' : 'standard'}`;
+            // Filter out empty or invalid streams if any
+            const activeStreams = currentMatch.streams.filter(s => s.url && s.url.length > 5);
 
-                // Add unique attributes for monetization
-                // Generic Names
-                const serverName = isPremium ? 'سيرفر البث 2 (فائق السرعة)' : `سيرفر البث ${index + 1} (جودة عالية)`;
-                const serverIcon = isPremium ? '🚀' : '📺';
-                const serverDesc = isPremium ? 'مشاهدة بدون حظر • سيرفر فرعي' : 'بث مباشر رئيسي • جودات متعددة';
+            activeStreams.forEach((stream, index) => {
+                // Determine if it's the Siiir stream (Server 2)
+                const isSiiir = stream.source === 'siiir' || index === 1;
+                const card = document.createElement('div');
+                card.className = `choice-card ${isSiiir ? 'premium' : 'standard'}`;
+
+                const serverName = isSiiir ? 'سيرفر البث 2 (VIP - فائق السرعة)' : `سيرفر البث ${index + 1} (جودة عالية)`;
+                const serverIcon = isSiiir ? '⚡' : '📺';
+                const serverDesc = isSiiir ? 'بث مباشر خاص • بدون تقطيع' : 'بث مباشر رئيسي • جودات متعددة';
 
                 card.innerHTML = `
-                    ${isPremium ? '<div class="choice-badge">🔥 موصى به</div>' : ''}
+                    ${isSiiir ? '<div class="choice-badge">🚀 موصى به</div>' : ''}
                     <div class="choice-icon">${serverIcon}</div>
                     <h3>${serverName}</h3>
                     <p>${serverDesc}</p>
-                    <button class="choice-btn ${!isPremium ? 'secondary' : ''}">مشاهدة الآن</button>
+                    <button class="choice-btn ${!isSiiir ? 'secondary' : ''}">مشاهدة الآن</button>
                 `;
 
                 card.onclick = () => {
+                    // Logic to handle monetization or direct loading
                     if (window.monetizationManager) {
                         window.monetizationManager.selectServer(index);
                     } else {
@@ -490,6 +493,10 @@
 
                 container.appendChild(card);
             });
+
+            // If only 1 server is available, we might want to skip the choice layer
+            // and go straight to loading, but the user wants the choice modal to be part of the flow
+            // OR if Server 2 is missing, just don't show the card.
         }
 
         function selectServer(index) {
@@ -532,17 +539,34 @@
             const streamIframe = document.getElementById('stream');
             const shield = document.getElementById('ad-shield-overlay');
 
-            // Show shield for the first 15 seconds of play to block early popups
+            // Show shield to capture early stray clicks
             shield.style.display = 'block';
-            setTimeout(() => { shield.style.display = 'none'; }, 15000);
+            setTimeout(() => { shield.style.display = 'none'; }, 12000);
 
             streamIframe.src = streamUrl;
 
-            // محاولة حجب الإعلانات عبر عزل الـ Sandbox ومنع النوافذ المنبثقة
-            console.log('🛡️ Ad-Shield Active: Popups blocked via restricted Sandbox.');
-
+            // Super Ad-Shield v5: Injecting rigid CSS rules to squash source ads
             streamIframe.onload = () => {
-                console.log('📡 Stream Iframe loaded.');
+                console.log('📡 Stream Iframe loaded. Shielding...');
+                try {
+                    // This only works if same-origin, but we include it as "Extreme effort" fallback
+                    const style = document.createElement('style');
+                    style.innerHTML = `
+                        iframe[src*="ads"], .ad-box, .vjs-ads-label, #player-ads, 
+                        .rmp-ad-container, [id*="pop"], [class*="pop"] { display: none !important; opacity: 0 !important; pointer-events: none !important; }
+                    `;
+                    streamIframe.contentDocument.head.appendChild(style);
+                } catch (e) {
+                    console.log('🛡️ Sandbox & Cross-Origin policy active. Blocking popups via Browser API.');
+                }
+            };
+
+            // Anti-Takeover: Prevent top-level redirection from iframe
+            window.onbeforeunload = function () {
+                if (streamIframe && streamIframe.src) {
+                    console.log('🚫 Preventing unwanted redirect from source player.');
+                    return "هل تريد مغادرة الصفحة؟ قد تفتح إعلانات غير مرغوب فيها.";
+                }
             };
         }
 

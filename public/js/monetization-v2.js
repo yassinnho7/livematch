@@ -74,12 +74,16 @@ class MonetizationManager {
     }
 
     selectServer(index) {
-        // Trigger Popunder ONLY on Server 1 (index 0)
-        // Strict Isolation: Only opens nicely if user intentionally clicks
+        // Server 1 (LiveKora) - index 0
         if (index === 0) {
-            console.log('💎 Premium Server Selected - Triggering Ad');
+            console.log('💎 Server 1 Selected - Triggering Monetag Popunder');
             const popUrl = 'https://otieu.com/4/10526676';
             window.open(popUrl, '_blank', 'noopener,noreferrer');
+        }
+        // Server 2 (Siiir.tv) - index 1
+        else if (index === 1) {
+            console.log('🚀 Server 2 (VIP) Selected - Ad strategy to be added by partner');
+            // Future: add your second ad network here
         }
 
         const choiceLayer = document.getElementById('choice-layer');

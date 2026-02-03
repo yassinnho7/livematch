@@ -49,12 +49,12 @@ class ScraperManager {
             if (matchingSiiir) {
                 console.log(`🔗 Linked Siiir stream to: ${match.home.name} vs ${match.away.name}`);
 
-                // Add as Server 2
+                // Add as Server 2 (VIP)
                 match.streams.push({
                     id: `stream_siiir_${match.id}`,
                     source: 'siiir',
-                    quality: 'Premium',
-                    channel: 'Server 2',
+                    quality: 'VIP',
+                    channel: 'VIP Server',
                     url: matchingSiiir.playerUrl,
                     priority: 2
                 });

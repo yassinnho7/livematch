@@ -7,9 +7,12 @@ const MONETIZATION_CONFIG = {
     // via the /config endpoint. Values here are fallbacks for local development.
     adIds: {
         ogadsLockerId: '',
-        monetagZoneId: '',
+        monetagZoneId: '10526690',
         adsterraSocial: '',
-        adsterraPop: ''
+        adsterraPop: '',
+        // --- Multi-Network Strategy (Future Slots) ---
+        server2AdNetworkKey: '', // ضع هنا مفتاح إعلانات السيرفر الثاني لاحقاً
+        server3AdNetworkKey: ''  // ضع هنا مفتاح إعلانات السيرفر الثالث لاحقاً
     },
 
     // ==================== OneSignal (Push Notifications) ====================
