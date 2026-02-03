@@ -13,6 +13,28 @@
     <!-- <script data-cfasync="false" src="//dcbbwymp1bhlf.cloudfront.net/?wbbcd=1240674"></script> -->
     <!-- In-Page Push (DISABLED) -->
     <!-- Version: 2.1.0-shield-activated -->
+    <!-- Pollfish Integration -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script>
+        var pollfishConfig = {
+            api_key: "665cd4af-841c-49e1-90a2-eb8b85439090",
+            debug: false,
+            indicator_position: "TOP_RIGHT",
+            ready: function () {
+                console.log("Pollfish Ready");
+            },
+            surveyAvailable: function (data) {
+                const btn = document.getElementById('pollfish-area');
+                if (btn) btn.style.display = 'block';
+            },
+            surveyNotAvailable: function () {
+                const btn = document.getElementById('pollfish-area');
+                if (btn) btn.style.display = 'none';
+            }
+        };
+    </script>
+    <script src="https://storage.googleapis.com/pollfish_production/sdk/webplugin/pollfish.min.js"></script>
+
     <script src="/js/ad-maven-internal.js"></script>
 
     <style>
@@ -232,6 +254,21 @@
             color: #ff6b6b;
             margin-top: 20px;
         }
+
+        @keyframes pulse {
+            0% {
+                opacity: 0.6;
+            }
+
+            50% {
+                opacity: 1;
+                transform: scale(1.02);
+            }
+
+            100% {
+                opacity: 0.6;
+            }
+        }
     </style>
 </head>
 
@@ -267,6 +304,18 @@
         <div class="monetization-overlay"></div>
         <div class="monetization-content">
             <h2 style="margin-bottom: 20px;">اختر سيرفر المشاهدة</h2>
+
+            <!-- Pollfish Premium Choice -->
+            <div id="pollfish-area" style="margin-bottom: 30px; display: none;">
+                <button class="choice-btn premium" onclick="Pollfish.showFullSurvey()"
+                    style="background: #ff4757; font-size: 18px; padding: 18px; border: 2px solid #fff; box-shadow: 0 0 20px rgba(255, 71, 87, 0.5);">🎮
+                    Play Now! (شاهد أسرع بدقة VIP)</button>
+                <p
+                    style="font-size: 13px; margin-top: 8px; font-weight: 600; color: #ff6b6b; animation: pulse 2s infinite;">
+                    أكمل استطلاعاً صغيراً لفتح سيرفر المشاهدة السريع فوراً</p>
+                <div style="width: 50px; height: 2px; background: rgba(255,255,255,0.2); margin: 25px auto;"></div>
+            </div>
+
             <div class="choice-cards" id="server-cards-container"></div>
         </div>
     </div>
