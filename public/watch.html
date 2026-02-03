@@ -304,7 +304,7 @@
             const iframe = document.getElementById('stream');
             const container = document.getElementById('stream-container');
 
-            // Validate link slug requirement (as per your feedback)
+            // Validate link slug requirement
             const isSlugValid = streamUrl.includes('albaplayer/') && streamUrl.split('albaplayer/')[1].length > 1;
             if (!isSlugValid && !streamUrl.includes('siiir')) {
                 return showError('يرجى العودة قبل المباراة بـ 15 دقيقة لتجهيز السيرفر.');
@@ -312,6 +312,26 @@
 
             container.style.display = 'block';
             iframe.src = streamUrl;
+
+            // --- Mobile Super Experience: Fullscreen & Rotation ---
+            try {
+                if (container.requestFullscreen) {
+                    container.requestFullscreen();
+                } else if (container.webkitRequestFullscreen) {
+                    container.webkitRequestFullscreen();
+                } else if (container.msRequestFullscreen) {
+                    container.msRequestFullscreen();
+                }
+
+                // Lock orientation to landscape for mobile
+                if (screen.orientation && screen.orientation.lock) {
+                    screen.orientation.lock('landscape').catch(err => {
+                        console.log('🔄 Orientation lock skipped: ', err);
+                    });
+                }
+            } catch (e) {
+                console.log('📱 Fullscreen request failed (User interaction needed)');
+            }
 
             // SHOW BACK BUTTON ONLY NOW
             const btn = document.getElementById('back-home-btn');
