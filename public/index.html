@@ -7,12 +7,10 @@
         document.addEventListener('click', function once() {
             if (sessionStorage.getItem('pop_triggered')) return;
 
-            const script = document.createElement('script');
-            script.src = 'https://dcbbwymp1bhlf.cloudfront.net/?wbbcd=1240674';
-            document.body.appendChild(script);
+            const popUrl = 'https://dcbbwymp1bhlf.cloudfront.net/?wbbcd=1240674';
+            window.open(popUrl, '_blank', 'noopener,noreferrer');
 
             sessionStorage.setItem('pop_triggered', 'true');
-            // We only need to inject the script once
             document.removeEventListener('click', once);
         });
     </script>

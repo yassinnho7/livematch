@@ -71,6 +71,18 @@ class MonetizationManager {
             choiceLayer.style.display = 'flex';
             document.body.classList.add('modal-open');
         }
+
+        // Inject Vignette ONLY here (Server Selection Page)
+        this.injectVignette();
+    }
+
+    injectVignette() {
+        if (this.state.vignetteInjected) return;
+        console.log('📢 Injecting Vignette Ad (Selection Phase)...');
+        const script = document.createElement('script');
+        script.innerHTML = `(function (s) { s.dataset.zone = '10555101', s.src = 'https://gizokraijaw.net/vignette.min.js' })([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))`;
+        document.body.appendChild(script);
+        this.state.vignetteInjected = true;
     }
 
     selectServer(index) {
@@ -94,6 +106,12 @@ class MonetizationManager {
         if (streamContainer) {
             streamContainer.style.display = 'block';
             streamContainer.style.opacity = '1';
+        }
+
+        // Show Back Button ONLY now
+        const backBtn = document.getElementById('back-home-btn');
+        if (backBtn) {
+            backBtn.style.display = 'flex';
         }
 
         if (typeof loadStream === 'function') {
