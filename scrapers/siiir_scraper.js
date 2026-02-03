@@ -80,7 +80,12 @@ class SiiirScraper {
             page.on('request', request => {
                 const url = request.url();
                 if (url.includes('playerv2.php') && url.includes('key=')) {
-                    playerUrl = url;
+                    // Prefer URLs with numeric match IDs over generic "match1" strings
+                    if (url.includes('match=') && /\d/.test(url.split('match=')[1])) {
+                        playerUrl = url;
+                    } else if (!playerUrl) {
+                        playerUrl = url;
+                    }
                     console.log(`🎯 Captured Player URL: ${playerUrl.substring(0, 50)}...`);
                 }
                 request.continue();
