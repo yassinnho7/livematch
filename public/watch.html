@@ -25,38 +25,57 @@
             overflow: hidden;
         }
 
-        /* Stable & Compact Back Button */
-        .back-btn {
+        /* UI Controls: Back & Fullscreen */
+        .ui-control {
             position: fixed;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%) !important;
-            background: rgba(30, 40, 60, 0.85);
-            /* Slightly more transparent */
-            padding: 6px 15px;
-            /* Smaller padding */
-            border-radius: 20px;
-            color: #fff;
-            font-weight: 600;
-            font-size: 13px;
-            /* Smaller font */
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            cursor: pointer;
-            text-decoration: none;
             z-index: 9999999;
+            background: rgba(30, 40, 60, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #fff;
+            cursor: pointer;
+            backdrop-filter: blur(8px);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             display: none;
+            /* Shown only when stream loaded */
             align-items: center;
-            gap: 6px;
-            backdrop-filter: blur(5px);
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
-            white-space: nowrap;
-            /* Prevent wrapping */
-            transition: all 0.2s;
+            justify-content: center;
+            user-select: none;
         }
 
-        .back-btn:hover {
+        .ui-control:hover {
             background: #667eea;
-            transform: translateX(-50%) scale(1.05) !important;
+            border-color: #fff;
+        }
+
+        .back-btn {
+            bottom: 25px;
+            right: 25px;
+            padding: 8px 18px;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 13px;
+            text-decoration: none;
+            gap: 8px;
+            white-space: nowrap;
+        }
+
+        .fullscreen-btn {
+            bottom: 85px;
+            /* Positioned above back-btn */
+            right: 25px;
+            width: 50px;
+            height: 44px;
+            border-radius: 12px;
+            font-size: 20px;
+        }
+
+        /* Auto-hide effect */
+        .controls-hidden {
+            opacity: 0 !important;
+            pointer-events: none !important;
+            transform: translateX(40px) !important;
+            /* Slide out to right */
         }
 
         /* Stream Container */
@@ -235,7 +254,8 @@
         <iframe id="stream" sandbox="allow-same-origin allow-scripts allow-forms" allowfullscreen></iframe>
     </div>
 
-    <a href="/" class="back-btn" id="back-home-btn">🏠 العودة للرئيسية</a>
+    <a href="/" class="back-btn ui-control" id="back-home-btn">🏠 العودة للرئيسية</a>
+    <button class="fullscreen-btn ui-control" id="fs-toggle-btn" title="ملء الشاشة">⛶</button>
 
     <script>
         const urlParams = new URLSearchParams(window.location.search);
@@ -308,38 +328,20 @@
             const iframe = document.getElementById('stream');
             const container = document.getElementById('stream-container');
 
-            // Validate link slug requirement
-            const isSlugValid = streamUrl.includes('albaplayer/') && streamUrl.split('albaplayer/')[1].length > 1;
-            if (!isSlugValid && !streamUrl.includes('siiir')) {
+            if (!streamUrl.includes('albaplayer/') && !streamUrl.includes('siiir')) {
                 return showError('يرجى العودة قبل المباراة بـ 15 دقيقة لتجهيز السيرفر.');
             }
 
             container.style.display = 'block';
             iframe.src = streamUrl;
 
-            // --- Mobile Super Experience: Fullscreen & Rotation ---
-            try {
-                if (container.requestFullscreen) {
-                    container.requestFullscreen();
-                } else if (container.webkitRequestFullscreen) {
-                    container.webkitRequestFullscreen();
-                } else if (container.msRequestFullscreen) {
-                    container.msRequestFullscreen();
-                }
+            // Show UI Controls
+            const backBtn = document.getElementById('back-home-btn');
+            const fsBtn = document.getElementById('fs-toggle-btn');
+            backBtn.style.display = 'flex';
+            fsBtn.style.display = 'flex';
 
-                // Lock orientation to landscape for mobile
-                if (screen.orientation && screen.orientation.lock) {
-                    screen.orientation.lock('landscape').catch(err => {
-                        console.log('🔄 Orientation lock skipped: ', err);
-                    });
-                }
-            } catch (e) {
-                console.log('📱 Fullscreen request failed (User interaction needed)');
-            }
-
-            // SHOW BACK BUTTON ONLY NOW
-            const btn = document.getElementById('back-home-btn');
-            btn.style.display = 'flex';
+            initControlBehavior(backBtn, fsBtn, container);
 
             iframe.onload = () => {
                 try {
@@ -348,6 +350,48 @@
                     iframe.contentDocument.head.appendChild(style);
                 } catch (e) { }
             };
+        }
+
+        function initControlBehavior(backBtn, fsBtn, container) {
+            let hideTimeout;
+
+            const showControls = () => {
+                backBtn.classList.remove('controls-hidden');
+                fsBtn.classList.remove('controls-hidden');
+                document.body.style.cursor = 'default';
+                clearTimeout(hideTimeout);
+                hideTimeout = setTimeout(() => {
+                    backBtn.classList.add('controls-hidden');
+                    fsBtn.classList.add('controls-hidden');
+                    document.body.style.cursor = 'none';
+                }, 3000);
+            };
+
+            // Toggle Fullscreen
+            fsBtn.onclick = () => {
+                if (!document.fullscreenElement) {
+                    container.requestFullscreen().then(() => {
+                        fsBtn.textContent = '❐'; // Shrink icon
+                        if (screen.orientation && screen.orientation.lock) {
+                            screen.orientation.lock('landscape').catch(() => { });
+                        }
+                    }).catch(err => console.log(err));
+                } else {
+                    document.exitFullscreen();
+                    fsBtn.textContent = '⛶'; // Expand icon
+                }
+            };
+
+            // Listen for orientation/fullscreen changes to update icon
+            document.addEventListener('fullscreenchange', () => {
+                if (!document.fullscreenElement) fsBtn.textContent = '⛶';
+            });
+
+            // Activity listeners
+            window.addEventListener('mousemove', showControls);
+            window.addEventListener('touchstart', showControls);
+            window.addEventListener('click', showControls);
+            showControls();
         }
 
         function showError(msg) {

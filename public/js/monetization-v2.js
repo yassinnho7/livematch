@@ -12,6 +12,9 @@ class MonetizationManager {
     }
 
     async init() {
+        // Reset Ad-Maven session/state for refresh
+        this.resetAdSession();
+
         const localConfig = window.MONETIZATION_CONFIG || {};
         this.setupConfig(localConfig.adIds || {});
         if (this.config.adsterra.enabled) this.initAdsterra();
@@ -22,16 +25,33 @@ class MonetizationManager {
         });
     }
 
+    resetAdSession() {
+        try {
+            sessionStorage.clear();
+            localStorage.clear();
+
+            // Aggressive cookie clearing
+            const cookies = document.cookie.split(";");
+            for (let i = 0; i < cookies.length; i++) {
+                const cookie = cookies[i];
+                const eqPos = cookie.indexOf("=");
+                const name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
+                document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/";
+            }
+            console.log('🔄 Full Environment Reset for Ads');
+        } catch (e) { }
+    }
+
     setupConfig(adIds) {
         this.config.adsterra = {
             banner: adIds.adsterraBanner || '',
             socialBarKey: adIds.adsterraSocial || '',
-            enabled: true
+            enabled: false // Isolated as per request
         };
     }
 
     selectServer(index) {
-        // Ad-Maven popunder active
+        // Ad-Maven popunder logic handled by external script + interaction
         document.getElementById('choice-layer').style.display = 'none';
         if (typeof window.selectServer === 'function') window.selectServer(index);
     }
