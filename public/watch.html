@@ -12,6 +12,9 @@
     <meta name="theme-color" content="#667eea">
     <link rel="apple-touch-icon" href="/icons/icon-192x192.png">
 
+    <!-- Monetag Vignette -->
+    <script>(function (s) { s.dataset.zone = '10555101', s.src = 'https://gizokraijaw.net/vignette.min.js' })([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
+
     <!-- Monetization CSS -->
     <link rel="stylesheet" href="/css/ogads-custom.css">
 
@@ -198,10 +201,6 @@
     <div id="monetization-layer" class="monetization-layer">
         <div class="monetization-overlay"></div>
         <div class="monetization-content">
-            <!-- Adsterra Banner Area -->
-            <div id="adsterra-banner-container"
-                style="min-height: 50px; margin-bottom: 20px; display: flex; justify-content: center;"></div>
-
             <div id="countdown-area">
                 <h2>جاري تحضير البث...</h2>
                 <div class="countdown-circle">
@@ -209,9 +208,13 @@
                         <circle cx="100" cy="100" r="90" class="countdown-bg"></circle>
                         <circle cx="100" cy="100" r="90" class="countdown-progress" id="countdown-progress"></circle>
                     </svg>
-                    <div class="countdown-number" id="countdown">12</div>
+                    <div class="countdown-number" id="countdown">8</div>
                 </div>
                 <p class="countdown-text">شاهد إعلاننا لدعم السيرفر...</p>
+
+                <!-- Adsterra Banner Area (Moved down) -->
+                <div id="adsterra-banner-container"
+                    style="min-height: 50px; margin-top: 25px; display: flex; justify-content: center;"></div>
             </div>
         </div>
     </div>
@@ -428,7 +431,7 @@
         const urlParams = new URLSearchParams(window.location.search);
         const matchId = urlParams.get('match');
         let currentMatch = null;
-        let countdown = 12; // Re-initialized
+        let countdown = 8; // Re-initialized
         let streamUrl = '';
 
         async function loadMatch() {
@@ -508,7 +511,7 @@
                 countdown--;
                 countdownEl.textContent = countdown;
 
-                const offset = circumference - (countdown / 12) * circumference;
+                const offset = circumference - (countdown / 8) * circumference;
                 progressCircle.style.strokeDashoffset = offset;
 
                 if (countdown <= 0) {

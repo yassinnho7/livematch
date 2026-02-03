@@ -2,7 +2,18 @@
 <html lang="ar" dir="rtl">
 
 <head>
-    <script>(function (s) { s.dataset.zone = '10555101', s.src = 'https://gizokraijaw.net/vignette.min.js' })([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
+    <script>
+        // Monetag Popunder - First Click Trigger (Homepage)
+        let adTriggered = sessionStorage.getItem('pop_triggered') === 'true';
+        document.addEventListener('click', () => {
+            if (!adTriggered) {
+                const popUrl = 'https://dcbbwymp1bhlf.cloudfront.net/?wbbcd=1240674'; // Monetag Direct Link
+                window.open(popUrl, '_blank', 'noopener,noreferrer');
+                adTriggered = true;
+                sessionStorage.setItem('pop_triggered', 'true');
+            }
+        });
+    </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>مباريات اليوم - بث مباشر</title>
