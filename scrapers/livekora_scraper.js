@@ -1,6 +1,7 @@
 import puppeteer from 'puppeteer-extra';
 import StealthPlugin from 'puppeteer-extra-plugin-stealth';
 import fs from 'fs/promises';
+import { fileURLToPath } from 'url';
 
 // Add stealth plugin to avoid bot detection
 puppeteer.use(StealthPlugin());
@@ -417,4 +418,8 @@ async function main() {
     }
 }
 
-main();
+if (process.argv[1] === fileURLToPath(import.meta.url)) {
+    main();
+}
+
+export default LiveKoraScraper;
