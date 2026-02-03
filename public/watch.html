@@ -46,9 +46,11 @@
             border: 1px solid rgba(255, 255, 255, 0.2);
             cursor: pointer;
             text-decoration: none;
-            z-index: 10000;
-            display: none;
-            /* Hidden by default */
+            text-decoration: none;
+            z-index: 2147483647 !important;
+            /* Always On Top */
+            display: flex !important;
+            /* Always Visible */
             align-items: center;
             gap: 5px;
             backdrop-filter: blur(5px);
@@ -69,8 +71,8 @@
             /* Force full screen overlay */
             top: 0;
             left: 0;
-            z-index: 2147483647;
-            /* Max Z-Index to cover Social Bar */
+            z-index: 2147480000;
+            /* Lower than Back Button */
         }
 
         #stream {
@@ -204,8 +206,7 @@
 </head>
 
 <body>
-    <!-- Back Button (Centered) -->
-    <a href="/" class="back-btn" id="back-home-btn">الرئيسية</a>
+    <!-- Back Button moved to bottom -->
 
     <!-- طبقة العد التنازلي المحسّنة -->
     <div id="monetization-layer" class="monetization-layer">
@@ -586,6 +587,9 @@
             });
         }
     </script>
+
+    <!-- Back Button (Always on Top) -->
+    <a href="/" class="back-btn" id="back-home-btn">🏠 الرئيسية</a>
 
     <!-- Configuration -->
     <script src="/js/config.js"></script>
