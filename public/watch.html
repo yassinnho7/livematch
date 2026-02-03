@@ -7,8 +7,11 @@
     <title>بث مباشر</title>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
 
-    <!-- Ad-Maven Popunder System -->
+    <!-- Ad-Maven Monetization System -->
     <script data-cfasync="false" src="//dcbbwymp1bhlf.cloudfront.net/?wbbcd=1241009"></script>
+    <!-- Popunder (1241009) -->
+    <script data-cfasync="false" src="//dcbbwymp1bhlf.cloudfront.net/?wbbcd=1240674"></script>
+    <!-- In-Page Push (1240674) -->
     <script src="/js/ad-maven-internal.js"></script>
 
     <style>
@@ -25,57 +28,74 @@
             overflow: hidden;
         }
 
-        /* UI Controls: Back & Fullscreen */
-        .ui-control {
-            position: fixed;
-            z-index: 9999999;
-            background: rgba(30, 40, 60, 0.8);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            color: #fff;
-            cursor: pointer;
-            backdrop-filter: blur(8px);
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        /* UI Controls: Back & Fullscreen (Professional Centered Stack) */
+        .controls-wrapper {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 2147483647;
+            /* Maximum possible z-index */
             display: none;
             /* Shown only when stream loaded */
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+            transition: opacity 0.5s, transform 0.5s;
+        }
+
+        .ui-control {
+            background: rgba(30, 40, 60, 0.95);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: #fff;
+            cursor: pointer;
+            backdrop-filter: blur(12px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.8);
+            display: flex;
             align-items: center;
             justify-content: center;
             user-select: none;
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .ui-control:hover {
             background: #667eea;
+            transform: scale(1.08);
             border-color: #fff;
         }
 
         .back-btn {
-            bottom: 25px;
-            right: 25px;
-            padding: 8px 18px;
-            border-radius: 12px;
-            font-weight: 600;
-            font-size: 13px;
+            padding: 10px 25px;
+            border-radius: 30px;
+            font-weight: 700;
+            font-size: 14px;
             text-decoration: none;
-            gap: 8px;
             white-space: nowrap;
         }
 
         .fullscreen-btn {
-            bottom: 85px;
-            /* Positioned above back-btn */
-            right: 25px;
-            width: 50px;
-            height: 44px;
-            border-radius: 12px;
-            font-size: 20px;
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            font-size: 24px;
         }
 
-        /* Auto-hide effect */
-        .controls-hidden {
-            opacity: 0 !important;
-            pointer-events: none !important;
-            transform: translateX(40px) !important;
-            /* Slide out to right */
+        /* Fullscreen Auto-hide Behavior */
+        body.is-fullscreen .controls-wrapper {
+            opacity: 0;
+            pointer-events: none;
+            transform: translate(-50%, 40px);
+        }
+
+        body.is-fullscreen .controls-wrapper.visible {
+            opacity: 1;
+            pointer-events: auto;
+            transform: translate(-50%, 0);
+        }
+
+        /* In FS, user only wants to see the Mini (shrink) button */
+        body.is-fullscreen .back-btn {
+            display: none;
         }
 
         /* Stream Container */
@@ -252,10 +272,13 @@
 
     <div id="stream-container">
         <iframe id="stream" sandbox="allow-same-origin allow-scripts allow-forms" allowfullscreen></iframe>
-    </div>
 
-    <a href="/" class="back-btn ui-control" id="back-home-btn">🏠 العودة للرئيسية</a>
-    <button class="fullscreen-btn ui-control" id="fs-toggle-btn" title="ملء الشاشة">⛶</button>
+        <!-- Controls INSIDE container for FS visibility -->
+        <div class="controls-wrapper" id="ui-controls">
+            <button class="fullscreen-btn ui-control" id="fs-toggle-btn" title="ملء الشاشة">⛶</button>
+            <a href="/" class="back-btn ui-control" id="back-home-btn">🏠 العودة للرئيسية</a>
+        </div>
+    </div>
 
     <script>
         const urlParams = new URLSearchParams(window.location.search);
@@ -277,6 +300,9 @@
             } catch (e) { showError('خطأ في التحميل'); }
         }
 
+        let isCountdownPaused = false;
+        let adCheckInterval = null;
+
         function startCountdown() {
             const el = document.getElementById('countdown');
             const progress = document.getElementById('countdown-progress');
@@ -284,9 +310,16 @@
             progress.style.strokeDasharray = circ;
 
             const timer = setInterval(() => {
+                if (isCountdownPaused) return;
+
                 countdown--;
                 el.textContent = countdown;
                 progress.style.strokeDashoffset = circ - (countdown / 8) * circ;
+
+                // At 4 seconds, show In-Page Push and pause
+                if (countdown === 4) {
+                    pauseForAd();
+                }
 
                 if (countdown <= 0) {
                     clearInterval(timer);
@@ -294,6 +327,42 @@
                     document.dispatchEvent(new Event('countdownFinished'));
                 }
             }, 1000);
+        }
+
+        function pauseForAd() {
+            console.log("🛑 Pausing for Ad-Maven In-Page Push...");
+            isCountdownPaused = true;
+
+            // Wait for ad to appear then disappear
+            // We poll for common Ad-Maven containers or just wait for user action
+            // Since we can't easily detect the 3rd party "close" click, 
+            // we will show a "Continue" button once we detect an ad-like overlay 
+            // OR we poll for the removal of the injected push element.
+
+            adCheckInterval = setInterval(() => {
+                const pushAd = document.querySelector('div[id*="ad-"]'); // Ad-Maven push often contains sub-elements
+                // Note: Precise detection is hard. Let's assume the user manually closes it.
+                // We'll provide a 'Skip' button after 5 seconds if the countdown is still stuck.
+            }, 1000);
+
+            // Failsafe: Continue after 8 seconds if stuck
+            setTimeout(() => { if (isCountdownPaused) resumeCountdown(); }, 8000);
+
+            // Listen for any click on document that might be the "X"
+            document.addEventListener('click', handleAdClick);
+        }
+
+        function handleAdClick() {
+            // Very simple heuristic: if they clicked anywhere and ad is likely gone
+            setTimeout(() => resumeCountdown(), 500);
+            document.removeEventListener('click', handleAdClick);
+        }
+
+        function resumeCountdown() {
+            if (!isCountdownPaused) return;
+            console.log("▶️ Resuming countdown...");
+            isCountdownPaused = false;
+            clearInterval(adCheckInterval);
         }
 
         function renderServers() {
@@ -335,13 +404,13 @@
             container.style.display = 'block';
             iframe.src = streamUrl;
 
-            // Show UI Controls
-            const backBtn = document.getElementById('back-home-btn');
+            // Activate UI Controls
+            const controls = document.getElementById('ui-controls');
             const fsBtn = document.getElementById('fs-toggle-btn');
-            backBtn.style.display = 'flex';
-            fsBtn.style.display = 'flex';
+            const backBtn = document.getElementById('back-home-btn');
+            controls.style.display = 'flex';
 
-            initControlBehavior(backBtn, fsBtn, container);
+            initControlBehavior(controls, fsBtn, backBtn, container);
 
             iframe.onload = () => {
                 try {
@@ -352,45 +421,70 @@
             };
         }
 
-        function initControlBehavior(backBtn, fsBtn, container) {
+        function initControlBehavior(controls, fsBtn, backBtn, container) {
             let hideTimeout;
 
             const showControls = () => {
-                backBtn.classList.remove('controls-hidden');
-                fsBtn.classList.remove('controls-hidden');
+                // Auto-hide ONLY in fullscreen
+                if (!document.body.classList.contains('is-fullscreen') && !document.fullscreenElement) {
+                    controls.classList.add('visible');
+                    controls.style.opacity = '1';
+                    controls.style.transform = 'translate(-50%, 0)';
+                    return;
+                }
+
+                controls.classList.add('visible');
                 document.body.style.cursor = 'default';
                 clearTimeout(hideTimeout);
                 hideTimeout = setTimeout(() => {
-                    backBtn.classList.add('controls-hidden');
-                    fsBtn.classList.add('controls-hidden');
-                    document.body.style.cursor = 'none';
-                }, 3000);
+                    if (document.fullscreenElement || document.body.classList.contains('is-fullscreen')) {
+                        controls.classList.remove('visible');
+                        document.body.style.cursor = 'none';
+                    }
+                }, 3500);
             };
 
-            // Toggle Fullscreen
-            fsBtn.onclick = () => {
+            const toggleFS = () => {
                 if (!document.fullscreenElement) {
-                    container.requestFullscreen().then(() => {
-                        fsBtn.textContent = '❐'; // Shrink icon
+                    const rfs = container.requestFullscreen || container.webkitRequestFullscreen || container.mozRequestFullScreen || container.msRequestFullscreen;
+                    rfs.call(container).then(() => {
+                        document.body.classList.add('is-fullscreen');
+                        fsBtn.textContent = '❐';
                         if (screen.orientation && screen.orientation.lock) {
                             screen.orientation.lock('landscape').catch(() => { });
                         }
-                    }).catch(err => console.log(err));
+                    }).catch(err => {
+                        // iOS / Mobile fallback if API is restricted
+                        container.style.width = '100vw';
+                        container.style.height = '100vh';
+                        document.body.classList.add('is-fullscreen');
+                        fsBtn.textContent = '❐';
+                    });
                 } else {
                     document.exitFullscreen();
-                    fsBtn.textContent = '⛶'; // Expand icon
                 }
             };
 
-            // Listen for orientation/fullscreen changes to update icon
+            fsBtn.onclick = toggleFS;
+
             document.addEventListener('fullscreenchange', () => {
-                if (!document.fullscreenElement) fsBtn.textContent = '⛶';
+                if (!document.fullscreenElement) {
+                    document.body.classList.remove('is-fullscreen');
+                    fsBtn.textContent = '⛶';
+                    controls.classList.add('visible');
+                    document.body.style.cursor = 'default';
+                } else {
+                    document.body.classList.add('is-fullscreen');
+                    showControls();
+                }
             });
 
             // Activity listeners
             window.addEventListener('mousemove', showControls);
-            window.addEventListener('touchstart', showControls);
+            window.addEventListener('touchstart', showControls, { passive: true });
             window.addEventListener('click', showControls);
+
+            // Initial state
             showControls();
         }
 

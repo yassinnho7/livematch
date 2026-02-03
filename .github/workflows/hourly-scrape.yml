@@ -33,9 +33,9 @@ jobs:
         run: |
           npm install puppeteer puppeteer-extra puppeteer-extra-plugin-stealth
       
-      - name: Run LiveKora Scraper
+      - name: Run Scraper Manager (LiveKora + Siiir.tv)
         run: |
-          node scrapers/livekora_scraper.js
+          node scrapers/scraper_manager.js
       
       - name: Notify Webhook (Make.com)
         env:

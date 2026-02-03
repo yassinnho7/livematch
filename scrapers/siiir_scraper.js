@@ -34,11 +34,15 @@ class SiiirScraper {
 
             // Extract match links
             const matchLinks = await page.evaluate(() => {
-                const links = Array.from(document.querySelectorAll('a.AY_Match'));
-                return links.map(a => ({
-                    url: a.href,
-                    title: a.innerText.trim()
-                })).filter(item => item.url && item.url.includes('match-'));
+                // AY_Match is on the container div
+                const containers = Array.from(document.querySelectorAll('.AY_Match'));
+                return containers.map(div => {
+                    const link = div.querySelector('a');
+                    return {
+                        url: link ? link.href : null,
+                        title: div.innerText.trim()
+                    };
+                }).filter(item => item.url && (item.url.includes('match=') || item.url.includes('match-')));
             });
 
             console.log(`✅ Found ${matchLinks.length} match links on Siiir.tv`);

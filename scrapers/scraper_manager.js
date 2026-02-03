@@ -38,12 +38,21 @@ class ScraperManager {
             // Find matching stream from Siiir
             const matchingSiiir = extraStreams.find(s => {
                 const title = s.title.toLowerCase();
-                const clean = (name) => name.toLowerCase().replace(/نادي|ال|fc|united|city|real|atletico/g, '').trim();
+                const clean = (name) => name.toLowerCase()
+                    .replace(/نادي|ال|fc|united|city|real|atletico|stade|club|f\.c/g, '')
+                    .replace(/[^\w\u0621-\u064A\s]/g, '') // Remove symbols
+                    .trim();
+
                 const home = clean(match.home.name);
                 const away = clean(match.away.name);
 
-                return (home.length > 3 && title.includes(home)) ||
-                    (away.length > 3 && title.includes(away));
+                // Multi-keyword check: if any significant word from team name is in title
+                const hasMatch = (teamStr) => {
+                    const words = teamStr.split(/\s+/).filter(w => w.length > 2);
+                    return words.some(w => title.includes(w));
+                };
+
+                return (home.length > 2 && hasMatch(home)) || (away.length > 2 && hasMatch(away));
             });
 
             if (matchingSiiir) {
