@@ -16,7 +16,7 @@
     <script>(function (s) { s.dataset.zone = '10555101', s.src = 'https://gizokraijaw.net/vignette.min.js' })([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
 
     <!-- Monetization CSS -->
-    <link rel="stylesheet" href="/css/ogads-custom.css">
+    <!-- Monetization CSS (Removed OGads) -->
 
     <style>
         * {
@@ -36,19 +36,24 @@
         .back-btn {
             position: fixed;
             bottom: 20px;
-            left: 20px;
+            left: 50%;
+            transform: translateX(-50%);
             background: rgba(102, 126, 234, 0.9);
-            padding: 8px 16px;
-            border-radius: 6px;
+            padding: 10px 24px;
+            border-radius: 50px;
             color: #fff;
-            font-weight: 600;
-            font-size: 13px;
+            font-weight: 700;
+            font-size: 15px;
             border: none;
             cursor: pointer;
             text-decoration: none;
-            z-index: 1000;
+            z-index: 10000;
+            /* Above everything */
             transition: all 0.2s;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
 
         .back-btn:hover {
@@ -194,8 +199,8 @@
 </head>
 
 <body>
-    <!-- Back Button -->
-    <a href="index.html" class="back-btn">← العودة</a>
+    <!-- Back Button (Centered) -->
+    <a href="/" class="back-btn"><span>🏠</span> العودة للرئيسية</a>
 
     <!-- طبقة العد التنازلي المحسّنة -->
     <div id="monetization-layer" class="monetization-layer">
@@ -401,22 +406,10 @@
         }
     </style>
 
-    <!-- طبقة OGads Content Locker -->
-    <div id="ogads-layer" class="monetization-layer ogads-layer" style="display: none; padding: 0;">
-        <div class="ogads-overlay"></div>
-        <!-- جعل اللوكر يأخذ الشاشة بالكامل بدون إطار تقييدي للسماح بالتمرير داخل الـ iframe إذا لزم الأمر -->
-        <div class="ogads-container"
-            style="width: 100%; height: 100%; background: transparent; box-shadow: none; display: flex; flex-direction: column;">
-            <iframe id="ogads-iframe" allow="payment; camera; microphone"
-                style="width: 100%; height: 100%; border: none; flex-grow: 1;"
-                sandbox="allow-forms allow-scripts allow-same-origin allow-popups allow-top-navigation">
-            </iframe>
-        </div>
-    </div>
+    <!-- Removed OGads Layer -->
 
     <!-- Stream Container with Ad-Shield Overlay -->
-    <div id="stream-container" style="position: relative;"
-        onclick="if(window.monetizationManager) window.monetizationManager.triggerGGAgency()">
+    <div id="stream-container" style="position: relative;">
         <!-- Draggable/Cover Overlay to intercept first clicks if needed -->
         <div id="ad-shield-overlay"
             style="position: absolute; top:0; left:0; width:100%; height:100%; z-index: 10; cursor: pointer; background: transparent; display: none;">

@@ -1,392 +1,133 @@
 /**
  * ============================================
- * LiveMatch - نظام الربح الذكي المتقدم v3.0
+ * LiveMatch - نظام الربح الذكي المتقدم v3.1
  * ============================================
  * 
- * يدير التكامل الذكي بين:
- * - OGads Content Locker (iFrame-based)
- * - Monetag SmartLink (الاحتياطي)
- * - Adsterra Social Bar & Popunder (الربح السلبي)
- * 
- * @version 3.0
- * @author LiveMatch Team
+ * المكونات النشطة:
+ * - Adsterra (Social Bar & Banners)
+ * - Monetag (Vignette via watch.html)
  */
 
 class MonetizationManager {
     constructor() {
         this.config = {
-            ogads: { enabled: false },
-            monetag: { enabled: false },
             adsterra: { enabled: false }
         };
 
         this.state = {
-            ogadsShown: false,
-            ogadsCompleted: false,
             countdownFinished: false,
             streamUnlocked: false,
             configLoaded: false,
             socialBarShowCount: parseInt(sessionStorage.getItem('ad_sb_count') || '0'),
-            monetagTriggered: false,
-            ggAgencyTriggered: false,
-            ggAgencyReady: false, // Flag indicating the delay has passed
             shieldActive: false
         };
 
         this.init();
     }
 
-    /**
-     * تهيئة نظام الربح
-     */
     async init() {
         console.log('💰 Initializing LiveMatch Monetization System...');
 
-        // 1. Fetch Configuration from Secure Cloudflare Function
         try {
             const response = await fetch('/config');
             if (!response.ok) throw new Error('Config fetch failed');
             const serverConfig = await response.json();
-
             this.setupConfig(serverConfig.adIds);
-            console.log('✅ Configuration loaded securely from Cloudflare');
         } catch (error) {
-            console.warn('⚠️ Could not load remote config, falling back to local/default config:', error);
+            console.warn('⚠️ Fallback to local config');
             const localConfig = window.MONETIZATION_CONFIG || {};
             this.setupConfig(localConfig.adIds || {});
         }
 
-        // 2. Initialize Ads based on loaded config
         if (this.config.adsterra.enabled) {
             this.initAdsterra();
         }
 
-        // 3. Start Listeners
         this.listenForCountdownEnd();
-        this.setupIframeListeners();
-        this.setupGlobalClickTracker(); // Track gestures for delayed ads
-
-        // 4. Activate Anti-Takeover Shield immediately to protect countdown/error pages
         this.enableAntiTakeoverShield();
 
         this.state.configLoaded = true;
-        console.log('✅ Monetization System Ready (Shield ACTIVE)');
     }
 
     setupConfig(adIds) {
         const clean = (val) => (val && typeof val === 'string') ? val.trim() : '';
-
         this.config = {
-            ogads: {
-                lockerUrl: clean(adIds.ogadsLockerUrl),
-                enabled: !!clean(adIds.ogadsLockerUrl)
-            },
             adsterra: {
                 banner: clean(adIds.adsterraBanner),
                 errorBanner: clean(adIds.adsterraErrorBanner),
                 socialBarKey: clean(adIds.adsterraSocial),
                 enabled: true
-            },
-            monetag: {
-                directLink: clean(adIds.monetagDirectLink),
-                enabled: !!clean(adIds.monetagDirectLink)
-            },
-            ggAgency: {
-                linkUrl: clean(adIds.ggAgencyLink),
-                enabled: !!clean(adIds.ggAgencyLink)
             }
         };
-        console.log('📊 Active Monetization Config');
     }
 
-    /**
-     * بدء عملية الربح (تعديل: إظهار نافذة الاختيار بدلاً من اللوكر مباشرة)
-     */
     startMonetization() {
-        console.log('🚀 Countdown finished. Showing choice modal...');
         this.state.countdownFinished = true;
-
-        // إخفاء العد التنازلي
         const countdownLayer = document.getElementById('monetization-layer');
-        if (countdownLayer) {
-            countdownLayer.style.display = 'none';
-        }
+        if (countdownLayer) countdownLayer.style.display = 'none';
 
-        // إظهار نافذة الاختيار
         const choiceLayer = document.getElementById('choice-layer');
         if (choiceLayer) {
             choiceLayer.style.display = 'flex';
-            document.body.classList.add('modal-open'); // منع التمرير في الخلفية
+            document.body.classList.add('modal-open');
         }
     }
 
-    /**
-     * معالجة اختيار المستخدم للسيرفر
-     * @param {number} index ترتيب السيرفر في المصفوفة
-     */
     selectServer(index) {
-        console.log(`👤 User selected server index: ${index}`);
-
-        // إخفاء نافذة الاختيار
         const choiceLayer = document.getElementById('choice-layer');
         if (choiceLayer) {
             choiceLayer.style.display = 'none';
             document.body.classList.remove('modal-open');
         }
 
-        // تحديث الرابط في الصفحة الرئيسية
         if (typeof window.selectServer === 'function') {
             window.selectServer(index);
         }
-
-        // استراتيجية الربح حسب السيرفر
-        if (index === 1) {
-            // السيرفر الثاني (VIP): تفعيل OGads Locker إذا كان متاحاً
-            if (this.config.ogads.enabled) {
-                this.showOGadsLocker();
-            } else {
-                this.unlockStream();
-            }
-        } else {
-            // السيرفرات الأخرى: فتح البث + Monetag + Adsterra Popunder
-            this.triggerPassiveMonetization();
-            this.unlockStream();
-        }
+        this.unlockStream();
     }
 
-    /**
-     * تفعيل الإعلانات الثانوية (Normal Choice)
-     */
-    triggerPassiveMonetization() {
-        console.log('🔄 Triggering Passive Monetization...');
-        this.unlockStream(); // Open stream immediately for 'normal'
-    }
-
-    /**
-     * عرض OGads Content Locker (iFrame-based)
-     */
-    showOGadsLocker() {
-        console.log('🔒 Loading OGads Content Locker...');
-        this.state.ogadsShown = true;
-
-        const ogadsLayer = document.getElementById('ogads-layer');
-        if (ogadsLayer) {
-            ogadsLayer.style.display = 'flex';
-            document.body.classList.add('modal-open');
-
-            // تحديث progress bar
-            setTimeout(() => this.updateProgress(30), 500);
-
-            // تحميل iFrame using Direct URL
-            const iframe = document.getElementById('ogads-iframe');
-            if (iframe && !iframe.src) {
-                iframe.src = this.config.ogads.lockerUrl;
-                console.log('✅ OGads iFrame loaded');
-                this.updateProgress(60);
-            }
-
-            // إضافة زر العودة أسفل اللوكر
-            this.injectLockerBackButton();
-
-            // بدء مؤقت الاحتياطي (30 ثانية)
-            this.startFallbackTimer();
-        }
-    }
-
-    /**
-     * إعداد event listeners لـ iFrame
-     */
-    setupIframeListeners() {
-        // الاستماع لرسائل من OGads iFrame
-        window.addEventListener('message', (event) => {
-            // تحقق من المصدر
-            if (event.origin.includes('applocked.store') || event.origin.includes('ogads.com')) {
-                console.log('📨 Message from OGads:', event.data);
-
-                // إذا كانت الرسالة تشير إلى إكمال العرض
-                if (event.data === 'conversion' || event.data.type === 'conversion') {
-                    this.handleOGadsSuccess();
-                }
-            }
-        });
-    }
-
-    /**
-     * معالجة نجاح OGads
-     */
-    handleOGadsSuccess() {
-        console.log('🎉 OGads conversion completed!');
-        this.state.ogadsCompleted = true;
-        this.updateProgress(100);
-        this.showSuccessMessage();
-
-        // فتح البث بعد 2 ثانية
-        setTimeout(() => {
-            this.unlockStream();
-        }, 2000);
-    }
-
-    /**
-     * تحديث شريط التقدم
-     */
-    updateProgress(percentage) {
-        const progressBar = document.querySelector('.ogads-progress-fill');
-        if (progressBar) {
-            progressBar.style.width = percentage + '%';
-        }
-    }
-
-    /**
-     * عرض رسالة النجاح
-     */
-    showSuccessMessage() {
-        const container = document.querySelector('.ogads-container');
-        if (container) {
-            container.innerHTML = `
-                <div class="ogads-success">
-                    <div class="ogads-success-icon">✓</div>
-                    <h3>تم بنجاح!</h3>
-                    <p>جاري تحميل البث المباشر...</p>
-                </div>
-            `;
-        }
-    }
-
-
-
-    /**
-     * مؤقت احتياطي - إذا لم يكمل المستخدم OGads خلال 30 ثانية
-     */
-    startFallbackTimer() {
-        setTimeout(() => {
-            if (!this.state.ogadsCompleted && !this.state.streamUnlocked) {
-                console.log('⏱️ Fallback timer triggered');
-                this.triggerMonetag();
-            }
-        }, 30000); // 30 ثانية
-    }
-
-    /**
-     * تفعيل GG.Agency (بناءً على تفاعل المستخدم بعد انقضاء المدة)
-     */
-    triggerGGAgency() {
-        if (this.state.ggAgencyTriggered || !this.config.ggAgency.enabled || !this.state.ggAgencyReady) {
-            return;
-        }
-
-        console.log('🔄 User interacted. Triggering GG.Agency Link...');
-        this.safeOpen(this.config.ggAgency.linkUrl);
-        this.state.ggAgencyTriggered = true;
-    }
-
-    /**
-     * فتح البث
-     */
     unlockStream() {
-        if (this.state.streamUnlocked) {
-            return; // تجنب الفتح المتكرر
-        }
-
-        console.log('🎬 Unlocking stream...');
+        if (this.state.streamUnlocked) return;
         this.state.streamUnlocked = true;
 
-        // إخفاء طبقة OGads
-        const ogadsLayer = document.getElementById('ogads-layer');
-        if (ogadsLayer) {
-            ogadsLayer.style.opacity = '0';
-            document.body.classList.remove('modal-open');
-            setTimeout(() => {
-                ogadsLayer.style.display = 'none';
-            }, 300);
-        }
-
-        // إظهار البث
         const streamContainer = document.getElementById('stream-container');
         if (streamContainer) {
             streamContainer.style.display = 'block';
-            streamContainer.style.opacity = '0';
-            setTimeout(() => {
-                streamContainer.style.opacity = '1';
-            }, 100);
+            streamContainer.style.opacity = '1';
         }
 
-        // تحميل البث
         if (typeof loadStream === 'function') {
             loadStream();
         }
 
-        // تفعيل الحماية من الاختطاف (Anti-Takeover Shield)
         this.enableAntiTakeoverShield();
-
-        // 4. Monetag (Strictly 3s after stream starts, opens safely in new tab)
-        setTimeout(() => {
-            if (this.state.monetagTriggered) return;
-            console.log('⏱️ 3 seconds passed since stream started, safe opening Monetag...');
-            this.safeOpen(this.config.monetag.directLink);
-            this.state.monetagTriggered = true;
-        }, 3000);
-
-        // 5. GG.Agency (Set ready flag after 1m, opens on NEXT user click to bypass blockers)
-        setTimeout(() => {
-            console.log('⏱️ 1 minute passed, GG.Agency is now READY for trigger.');
-            this.state.ggAgencyReady = true;
-        }, 60000);
     }
 
-    /**
-     * تهيئة Adsterra
-     */
     initAdsterra() {
-        // Load Banner (immediately for countdown)
         this.loadAdsterraBanner();
-
-        // Social Bar (limited to 3 times per session)
         if (this.state.socialBarShowCount < 3) {
             this.loadAdsterraSocialBar();
             this.state.socialBarShowCount++;
             sessionStorage.setItem('ad_sb_count', this.state.socialBarShowCount);
-        } else {
-            console.log('📢 Adsterra Social Bar: limit reached (3)');
         }
     }
 
-    /**
-     * تحميل Adsterra Error Banner (728x90)
-     */
     loadAdsterraErrorBanner() {
         const container = document.getElementById('adsterra-error-banner');
         if (!container || !this.config.adsterra.errorBanner) return;
-
-        console.log('📢 Injecting Adsterra Error Banner (728x90)...');
-        const scriptContent = this.config.adsterra.errorBanner;
-
-        container.innerHTML = ''; // Clear previous
-        const div = document.createElement('div');
-        div.innerHTML = scriptContent;
-
-        Array.from(div.querySelectorAll('script')).forEach(oldScript => {
-            const newScript = document.createElement('script');
-            Array.from(oldScript.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value));
-            newScript.appendChild(document.createTextNode(oldScript.innerHTML));
-            container.appendChild(newScript);
-        });
+        this.injectScript(container, this.config.adsterra.errorBanner);
     }
 
-    /**
-     * تحميل Adsterra Banner (320x50)
-     */
     loadAdsterraBanner() {
         const container = document.getElementById('adsterra-banner-container');
         if (!container || !this.config.adsterra.banner) return;
+        this.injectScript(container, this.config.adsterra.banner);
+    }
 
-        console.log('📢 Injecting Adsterra Banner...');
-        const scriptContent = this.config.adsterra.banner;
-
-        // Inject script tags into container
+    injectScript(container, scriptContent) {
+        container.innerHTML = '';
         const div = document.createElement('div');
         div.innerHTML = scriptContent;
-
-        // Ensure scripts inside innerHTML actually execute
         Array.from(div.querySelectorAll('script')).forEach(oldScript => {
             const newScript = document.createElement('script');
             Array.from(oldScript.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value));
@@ -395,13 +136,8 @@ class MonetizationManager {
         });
     }
 
-    /**
-     * تحميل Adsterra Social Bar
-     */
     loadAdsterraSocialBar() {
-        console.log('📢 Loading Adsterra Social Bar...');
         const fullScript = this.config.adsterra.socialBarKey;
-
         if (fullScript && fullScript.includes('src=')) {
             const srcMatch = fullScript.match(/src=["']([^"']+)["']/);
             if (srcMatch && srcMatch[1]) {
@@ -413,111 +149,16 @@ class MonetizationManager {
         }
     }
 
-    /**
-     * فتح الإعلان في نافذة جديدة وبشكل "منفصل" تماماً
-     * نستخدم noopener و noreferrer لمنع الإعلان من التحكم في موقعنا (الحماية من الاختطاف)
-     */
-    safeOpen(url) {
-        if (!url || !url.startsWith('http')) return;
-
-        console.log('🛡️ SafeOpen: Executing isolated trigger...');
-
-        try {
-            // محاولة الفتح في نافذة جديدة مع قطع الاتصال بالأصل لمنع Redirects
-            const features = 'noopener,noreferrer,width=800,height=600';
-            const adWin = window.open(url, '_blank', features);
-
-            if (adWin) {
-                // محاولة إضافية لضمان عدم وصول النافذة الجديدة للنافذة الحالية
-                try { adWin.opener = null; } catch (e) { }
-                console.log('✅ Ad opened in isolated tab');
-            } else {
-                console.warn('⚠️ Ad blocked or popup prevented');
-            }
-        } catch (err) {
-            console.error('❌ Error executing safeOpen:', err);
-        }
-    }
-
-    /**
-     * حماية الموقع من إعادة التوجيه القسري أو الاختطاف
-     */
     enableAntiTakeoverShield() {
         if (this.state.shieldActive) return;
         this.state.shieldActive = true;
-
-        console.log('🛡️ Anti-Takeover Shield: ACTIVE - Protecting main window...');
-
-        // 1. حماية ضد الـ Location Hijacking (منع الإطارات من تغيير رابط الموقع الأصلي)
         if (window.top !== window.self) {
-            try {
-                window.top.location = window.self.location;
-            } catch (e) { }
+            try { window.top.location = window.self.location; } catch (e) { }
         }
     }
 
-    /**
-     * تفعيل Monetag (تم الاستغناء عنها لصالح safeOpen)
-     */
-    triggerMonetag() {
-        this.safeOpen(this.config.monetag.directLink);
-    }
-
-    /**
-     * تفعيل GG.Agency (تم الاستغناء عنها لصالح safeOpen)
-     */
-    triggerGGAgency() {
-        this.safeOpen(this.config.ggAgency.linkUrl);
-    }
-
-    /**
-     * إضافة زر عودة للوكر
-     */
-    injectLockerBackButton() {
-        const container = document.querySelector('.ogads-container');
-        if (!container || document.getElementById('locker-back-btn')) return;
-
-        const backBtn = document.createElement('button');
-        backBtn.id = 'locker-back-btn';
-        backBtn.innerHTML = '← العودة للخلف';
-        backBtn.style.cssText = `
-            background: rgba(255, 255, 255, 0.2);
-            color: white;
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            padding: 10px 20px;
-            border-radius: 8px;
-            margin: 15px auto;
-            cursor: pointer;
-            font-family: inherit;
-            font-weight: 600;
-            display: block;
-            transition: all 0.2s;
-        `;
-
-        backBtn.onmouseover = () => backBtn.style.background = 'rgba(255, 255, 255, 0.3)';
-        backBtn.onmouseout = () => backBtn.style.background = 'rgba(255, 255, 255, 0.2)';
-
-        backBtn.onclick = () => {
-            const ogadsLayer = document.getElementById('ogads-layer');
-            const choiceLayer = document.getElementById('choice-layer');
-            if (ogadsLayer) ogadsLayer.style.display = 'none';
-            if (choiceLayer) choiceLayer.style.display = 'flex';
-            document.body.classList.add('modal-open');
-        };
-
-        container.appendChild(backBtn);
-    }
-
-    /**
-     * الاستماع لحدث انتهاء العد التنازلي
-     */
     listenForCountdownEnd() {
-        // يمكنك استخدام custom event أو مراقبة DOM
-        document.addEventListener('countdownFinished', () => {
-            this.startMonetization();
-        });
-
-        // أو مراقبة العد التنازلي
+        document.addEventListener('countdownFinished', () => this.startMonetization());
         const checkCountdown = setInterval(() => {
             const countdownElement = document.getElementById('countdown');
             if (countdownElement && parseInt(countdownElement.textContent) <= 0) {
@@ -526,73 +167,12 @@ class MonetizationManager {
             }
         }, 100);
     }
-
-    /**
-     * إعداد مستمع شامل للنقرات لضمان رصد تفاعل المستخدم حتى لو كان فوق المشغل
-     */
-    setupGlobalClickTracker() {
-        // نستخدم mousedown لأنه الأقدر على رصد البداية حتى لو كان هناك iframe يمتص الحدث لاحقاً
-        window.addEventListener('mousedown', () => {
-            if (this.state.ggAgencyReady && !this.state.ggAgencyTriggered) {
-                console.log('👆 User gesture detected via global listener. Triggering GG.Agency...');
-                this.triggerGGAgency();
-            }
-        }, true); // Use capture phase to catch it early
-    }
 }
-
-// ============================================
-// دوال مساعدة عامة
-// ============================================
-
-/**
- * Toggle AI Assistant Message
- */
-function toggleAssistant() {
-    const message = document.getElementById('ogads-assistant-message');
-    if (message) {
-        message.style.display = message.style.display === 'none' ? 'block' : 'none';
-    }
-}
-
-/**
- * تفعيل الربح يدوياً (للاختبار)
- */
-function triggerMonetization() {
-    if (window.monetizationManager) {
-        window.monetizationManager.startMonetization();
-    } else {
-        console.error('Monetization Manager not initialized');
-    }
-}
-
-/**
- * فتح البث مباشرة (للاختبار)
- */
-function skipMonetization() {
-    if (window.monetizationManager) {
-        window.monetizationManager.unlockStream();
-    } else {
-        console.error('Monetization Manager not initialized');
-    }
-}
-
-// ============================================
-// تهيئة تلقائية عند تحميل الصفحة
-// ============================================
-
-// ============================================
-// تهيئة تلقائية عند تحميل الصفحة
-// ============================================
 
 function initWhenReady() {
-    // تحقق من أننا في صفحة المشاهدة (يدعم watch.html و /watch)
-    const isWatchPage = window.location.pathname.includes('watch') ||
-        window.location.search.includes('match=');
-
+    const isWatchPage = window.location.pathname.includes('watch') || window.location.search.includes('match=');
     if (isWatchPage && !window.monetizationManager) {
         window.monetizationManager = new MonetizationManager();
-        console.log('💰 Monetization Manager v3.0 initialized');
     }
 }
 
@@ -602,7 +182,4 @@ if (document.readyState === 'loading') {
     initWhenReady();
 }
 
-// تصدير للاستخدام العام
 window.MonetizationManager = MonetizationManager;
-window.triggerMonetization = triggerMonetization;
-window.skipMonetization = skipMonetization;
