@@ -3,14 +3,12 @@
 
 <head>
     <script>
-        // Monetag Popunder - First Click Trigger (Homepage)
+        // Monetag Popunder - Always Persistent
         document.addEventListener('click', function once() {
-            if (sessionStorage.getItem('pop_triggered')) return;
-
+            // Removed sessionStorage check to trigger every time
             const popUrl = 'https://otieu.com/4/10526676';
             window.open(popUrl, '_blank', 'noopener,noreferrer');
 
-            sessionStorage.setItem('pop_triggered', 'true');
             document.removeEventListener('click', once);
         });
     </script>

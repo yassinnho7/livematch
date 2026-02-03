@@ -73,7 +73,7 @@ class MonetizationManager {
         }
 
         // Inject Vignette ONLY here (Server Selection Page)
-        this.injectVignette();
+        // this.injectVignette(); // Disabled by user request
     }
 
     injectVignette() {
@@ -116,8 +116,11 @@ class MonetizationManager {
         // Show Back Button ONLY now and ensure high Z-Index
         const backBtn = document.getElementById('back-home-btn');
         if (backBtn) {
+            console.log('✅ Showing Back Button');
             backBtn.style.display = 'flex'; // Ensure flex is applied
             backBtn.style.zIndex = '2147483647'; // Max Z-Index
+        } else {
+            console.warn('❌ Back Button NOT FOUND');
         }
 
         if (typeof loadStream === 'function') {
