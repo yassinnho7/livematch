@@ -569,12 +569,6 @@
                     console.log('🛡️ Sandbox active.');
                 }
             };
-
-            window.onbeforeunload = function () {
-                if (streamIframe && streamIframe.src) {
-                    return "هل تريد مغادرة الصفحة؟ قد تفتح إعلانات غير مرغوب فيها.";
-                }
-            };
         }
 
         function showError(message) {
