@@ -1,12 +1,12 @@
 {
-  "generated_at": "2026-02-03T16:07:51.706Z",
+  "generated_at": "2026-02-03T22:02:58.678Z",
   "count": 6,
   "matches": [
     {
       "id": 283588465,
       "date": "2026-02-03T18:00:00.000Z",
       "timestamp": 1770141600,
-      "status": "NS",
+      "status": "FT",
       "time": "18:00",
       "time_label": "18:00 GMT",
       "league": {
@@ -38,7 +38,7 @@
       "id": 1921156363,
       "date": "2026-02-03T19:45:00.000Z",
       "timestamp": 1770147900,
-      "status": "NS",
+      "status": "FT",
       "time": "19:45",
       "time_label": "19:45 GMT",
       "league": {
@@ -70,7 +70,7 @@
       "id": 1619022534,
       "date": "2026-02-03T19:45:00.000Z",
       "timestamp": 1770147900,
-      "status": "NS",
+      "status": "FT",
       "time": "19:45",
       "time_label": "19:45 GMT",
       "league": {
@@ -89,12 +89,20 @@
       "score": null,
       "streams": [
         {
-          "id": "stream_albaplayer_1619022534",
+          "id": "stream_ad-premium-1_1619022534",
           "source": "livekora",
           "quality": "HD",
-          "channel": "albaplayer",
-          "url": "https://www.tvkooralive.live/albaplayer/",
+          "channel": "ad-premium-1",
+          "url": "https://pl.koooralive.click/albaplayer/ad-premium-1",
           "priority": 1
+        },
+        {
+          "id": "stream_siiir_1619022534",
+          "source": "siiir",
+          "quality": "VIP",
+          "channel": "VIP Server",
+          "url": "https://eyj0exaioijkv1qilcjhbgcioijiuzi1nij99sss.yallashot.us/playerv2.php?match=match5&key=c0ae1abba6eebd7e6cc5b88b1d2B71547",
+          "priority": 2
         }
       ]
     },
@@ -102,7 +110,7 @@
       "id": 424700192,
       "date": "2026-02-03T20:00:00.000Z",
       "timestamp": 1770148800,
-      "status": "NS",
+      "status": "FT",
       "time": "20:00",
       "time_label": "20:00 GMT",
       "league": {
@@ -121,12 +129,20 @@
       "score": null,
       "streams": [
         {
-          "id": "stream_albaplayer_424700192",
+          "id": "stream_bein1_424700192",
           "source": "livekora",
           "quality": "HD",
-          "channel": "albaplayer",
-          "url": "https://www.tvkooralive.live/albaplayer/",
+          "channel": "bein1",
+          "url": "https://pl.koooralive.click/albaplayer/bein1",
           "priority": 1
+        },
+        {
+          "id": "stream_siiir_424700192",
+          "source": "siiir",
+          "quality": "VIP",
+          "channel": "VIP Server",
+          "url": "https://eyj0exaioijkv1qilcjhbgcioijiuzi1nij99sss.yallashot.us/playerv2.php?match=match2&key=c0ae1abba6eebd7e6cc5b88b1d2B71547",
+          "priority": 2
         }
       ]
     },
@@ -134,7 +150,7 @@
       "id": 962623462,
       "date": "2026-02-03T20:00:00.000Z",
       "timestamp": 1770148800,
-      "status": "NS",
+      "status": "FT",
       "time": "20:00",
       "time_label": "20:00 GMT",
       "league": {
@@ -153,12 +169,20 @@
       "score": null,
       "streams": [
         {
-          "id": "stream_albaplayer_962623462",
+          "id": "stream_ch1_962623462",
           "source": "livekora",
           "quality": "HD",
-          "channel": "albaplayer",
-          "url": "https://www.tvkooralive.live/albaplayer/",
+          "channel": "ch1",
+          "url": "https://pl.koooralive.click/albaplayer/ch1",
           "priority": 1
+        },
+        {
+          "id": "stream_siiir_962623462",
+          "source": "siiir",
+          "quality": "VIP",
+          "channel": "VIP Server",
+          "url": "https://eyj0exaioijkv1qilcjhbgcioijiuzi1nij99sss.yallashot.us/playerv2.php?match=match1&key=c0ae1abba6eebd7e6cc5b88b1d2B71547",
+          "priority": 2
         }
       ]
     },
@@ -166,7 +190,7 @@
       "id": 1059474799,
       "date": "2026-02-03T20:10:00.000Z",
       "timestamp": 1770149400,
-      "status": "NS",
+      "status": "LIVE",
       "time": "20:10",
       "time_label": "20:10 GMT",
       "league": {
@@ -185,12 +209,20 @@
       "score": null,
       "streams": [
         {
-          "id": "stream_albaplayer_1059474799",
+          "id": "stream_bein4_1059474799",
           "source": "livekora",
           "quality": "HD",
-          "channel": "albaplayer",
-          "url": "https://www.tvkooralive.live/albaplayer/",
+          "channel": "bein4",
+          "url": "https://pl.koooralive.click/albaplayer/bein4",
           "priority": 1
+        },
+        {
+          "id": "stream_siiir_1059474799",
+          "source": "siiir",
+          "quality": "VIP",
+          "channel": "VIP Server",
+          "url": "https://eyj0exaioijkv1qilcjhbgcioijiuzi1nij99sss.yallashot.us/playerv2.php?match=match4&key=c0ae1abba6eebd7e6cc5b88b1d2B71547",
+          "priority": 2
         }
       ]
     }
