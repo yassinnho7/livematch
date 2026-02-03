@@ -71,7 +71,7 @@ class LiveKoraScraper {
                 // Check if we got blocked
                 const pageContent = await page.content();
                 console.log('📄 Page Title:', await page.title());
-                
+
                 if (pageContent.includes('cloudflare') || pageContent.includes('captcha') || pageContent.includes('blocked')) {
                     console.log('🚫 Bot detection detected! Page was blocked.');
                     // Save page source for debugging
@@ -162,24 +162,28 @@ class LiveKoraScraper {
                             const channelSlug = cleanPath.split('/').pop();
 
                             // بناء الرابط الجديد بالشكل المطلوب تماماً
-                            processedStreamLink = `${urlObj.origin}/albaplayer/${channelSlug}`;
-                        } catch (e) {
-                            console.warn('⚠️ Could not transform URL, using original:', streamLink);
-                        }
+                            if (channelSlug && channelSlug.length > 1) {
+                                processedStreamLink = `${urlObj.origin}/albaplayer/${channelSlug}`;
 
-                        results.push({
-                            id: 100000 + index + 1,
-                            homeTeam,
-                            awayTeam,
-                            homeLogo,
-                            awayLogo,
-                            league: leagueName,
-                            status,
-                            time: timeText,
-                            isoTimestamp,
-                            score: scoreText,
-                            streamLink: processedStreamLink
-                        });
+                                results.push({
+                                    id: 100000 + index + 1,
+                                    homeTeam,
+                                    awayTeam,
+                                    homeLogo,
+                                    awayLogo,
+                                    league: leagueName,
+                                    status,
+                                    time: timeText,
+                                    isoTimestamp,
+                                    score: scoreText,
+                                    streamLink: processedStreamLink
+                                });
+                            } else {
+                                console.warn(`⚠️ Skipping match ${homeTeam} vs ${awayTeam}: No channel slug found.`);
+                            }
+                        } catch (e) {
+                            console.warn('⚠️ Could not transform URL:', streamLink);
+                        }
                     } catch (error) {
                         console.error('Error parsing match:', error.message);
                     }

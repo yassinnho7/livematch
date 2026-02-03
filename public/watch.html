@@ -539,17 +539,26 @@
             const streamIframe = document.getElementById('stream');
             const shield = document.getElementById('ad-shield-overlay');
 
-            // Show shield to capture early stray clicks
+            // التحقق من صحة الرابط (يجب أن يحتوي على اسم القناة بعد albaplayer/)
+            const isValidStream = streamUrl && streamUrl.includes('albaplayer/') && streamUrl.split('albaplayer/')[1].length > 1;
+
+            if (!isValidStream && !streamUrl.includes('siiir')) {
+                showError('⚠️ البث غير متوفر حالياً. نعتذر، يرجى العودة قبل موعد المباراة بـ 15 دقيقة للتأكد من ربط السيرفرات.');
+                return;
+            }
+
+            // إظهار زر الرئيسية الآن فقط (بشكل ثابت وبدون حركات)
+            const backBtn = document.getElementById('back-home-btn');
+            if (backBtn) backBtn.style.display = 'flex';
+
             shield.style.display = 'block';
-            setTimeout(() => { shield.style.display = 'none'; }, 12000);
+            setTimeout(() => { shield.style.display = 'none'; }, 10000);
 
             streamIframe.src = streamUrl;
 
-            // Super Ad-Shield v5: Injecting rigid CSS rules to squash source ads
             streamIframe.onload = () => {
                 console.log('📡 Stream Iframe loaded. Shielding...');
                 try {
-                    // This only works if same-origin, but we include it as "Extreme effort" fallback
                     const style = document.createElement('style');
                     style.innerHTML = `
                         iframe[src*="ads"], .ad-box, .vjs-ads-label, #player-ads, 
@@ -557,14 +566,12 @@
                     `;
                     streamIframe.contentDocument.head.appendChild(style);
                 } catch (e) {
-                    console.log('🛡️ Sandbox & Cross-Origin policy active. Blocking popups via Browser API.');
+                    console.log('🛡️ Sandbox active.');
                 }
             };
 
-            // Anti-Takeover: Prevent top-level redirection from iframe
             window.onbeforeunload = function () {
                 if (streamIframe && streamIframe.src) {
-                    console.log('🚫 Preventing unwanted redirect from source player.');
                     return "هل تريد مغادرة الصفحة؟ قد تفتح إعلانات غير مرغوب فيها.";
                 }
             };
