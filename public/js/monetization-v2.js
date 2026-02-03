@@ -1,195 +1,68 @@
 /**
  * ============================================
- * LiveMatch - نظام الربح الذكي المتقدم v3.2
+ * LiveMatch - Monetization Manager v5.0 (Strict Clean)
  * ============================================
- * 
- * المكونات النشطة:
- * - Adsterra (Social Bar & Banners)
- * - Monetag (Popunder - Server 1 Only)
  */
 
 class MonetizationManager {
     constructor() {
-        this.config = {
-            adsterra: { enabled: false }
-        };
-
-        this.state = {
-            countdownFinished: false,
-            streamUnlocked: false,
-            configLoaded: false,
-            shieldActive: false
-        };
-
+        this.config = { adsterra: { enabled: false } };
+        this.state = { countdownFinished: false, streamUnlocked: false };
         this.init();
     }
 
     async init() {
-        console.log('💰 Initializing LiveMatch Monetization System v3.2...');
+        const localConfig = window.MONETIZATION_CONFIG || {};
+        this.setupConfig(localConfig.adIds || {});
+        if (this.config.adsterra.enabled) this.initAdsterra();
 
-        try {
-            const response = await fetch('/config');
-            if (!response.ok) throw new Error('Config fetch failed');
-            const serverConfig = await response.json();
-            this.setupConfig(serverConfig.adIds);
-        } catch (error) {
-            console.warn('⚠️ Fallback to local config');
-            const localConfig = window.MONETIZATION_CONFIG || {};
-            this.setupConfig(localConfig.adIds || {});
-        }
-
-        if (this.config.adsterra.enabled) {
-            this.initAdsterra();
-        }
-
-        this.listenForCountdownEnd();
-        this.enableAntiTakeoverShield();
-
-        this.state.configLoaded = true;
-    }
-
-    setupConfig(adIds) {
-        const clean = (val) => (val && typeof val === 'string') ? val.trim() : '';
-        this.config = {
-            adsterra: {
-                banner: clean(adIds.adsterraBanner),
-                errorBanner: clean(adIds.adsterraErrorBanner),
-                socialBarKey: clean(adIds.adsterraSocial),
-                enabled: true
-            }
-        };
-    }
-
-    startMonetization() {
-        this.state.countdownFinished = true;
-        const countdownLayer = document.getElementById('monetization-layer');
-        if (countdownLayer) countdownLayer.style.display = 'none';
-
-        const choiceLayer = document.getElementById('choice-layer');
-        if (choiceLayer) {
-            choiceLayer.style.display = 'flex';
-            document.body.classList.add('modal-open');
-        }
-    }
-
-    selectServer(index) {
-        // Server 1 (LiveKora) - index 0
-        if (index === 0) {
-            console.log('💎 Server 1 Selected - Triggering Monetag Popunder');
-            const popUrl = 'https://otieu.com/4/10526676';
-            window.open(popUrl, '_blank', 'noopener,noreferrer');
-        }
-        // Server 2 (Siiir.tv) - index 1
-        else if (index === 1) {
-            console.log('🚀 Server 2 (VIP) Selected - Ad strategy to be added by partner');
-            // Future: add your second ad network here
-        }
-
-        const choiceLayer = document.getElementById('choice-layer');
-        if (choiceLayer) {
-            choiceLayer.style.display = 'none';
-            document.body.classList.remove('modal-open');
-        }
-
-        if (typeof window.selectServer === 'function') {
-            window.selectServer(index);
-        }
-        this.unlockStream();
-    }
-
-    unlockStream() {
-        if (this.state.streamUnlocked) return;
-        this.state.streamUnlocked = true;
-
-        const streamContainer = document.getElementById('stream-container');
-        if (streamContainer) {
-            streamContainer.style.display = 'block';
-            streamContainer.style.opacity = '1';
-
-            // Removed StopPropagation as it might interfere with player interaction
-        }
-
-        if (typeof loadStream === 'function') {
-            loadStream();
-        }
-
-        // Removed anti-takeover shield as it causes page refreshes/loops in some environments
-    }
-
-    initAdsterra() {
-        this.loadAdsterraBanner();
-        // Removed Social Bar count logic as per cleanup request
-        this.loadAdsterraSocialBar();
-    }
-
-    loadAdsterraErrorBanner() {
-        const container = document.getElementById('adsterra-error-banner');
-        if (!container || !this.config.adsterra.errorBanner) return;
-        this.injectScript(container, this.config.adsterra.errorBanner);
-    }
-
-    loadAdsterraBanner() {
-        const container = document.getElementById('adsterra-banner-container');
-        if (!container || !this.config.adsterra.banner) return;
-        this.injectScript(container, this.config.adsterra.banner);
-    }
-
-    injectScript(container, scriptContent) {
-        container.innerHTML = '';
-        const div = document.createElement('div');
-        div.innerHTML = scriptContent;
-        // Strip out any suspicious <script> behavior if possible, but Adsterra needs scripts.
-        Array.from(div.querySelectorAll('script')).forEach(oldScript => {
-            const newScript = document.createElement('script');
-            Array.from(oldScript.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value));
-            newScript.appendChild(document.createTextNode(oldScript.innerHTML));
-            container.appendChild(newScript);
+        document.addEventListener('countdownFinished', () => {
+            document.getElementById('monetization-layer').style.display = 'none';
+            document.getElementById('choice-layer').style.display = 'flex';
         });
     }
 
-    loadAdsterraSocialBar() {
-        const fullScript = this.config.adsterra.socialBarKey;
-        if (fullScript && fullScript.includes('src=')) {
-            const srcMatch = fullScript.match(/src=["']([^"']+)["']/);
-            if (srcMatch && srcMatch[1]) {
-                const script = document.createElement('script');
+    setupConfig(adIds) {
+        this.config.adsterra = {
+            banner: adIds.adsterraBanner || '',
+            socialBarKey: adIds.adsterraSocial || '',
+            enabled: true
+        };
+    }
+
+    selectServer(index) {
+        // Multi-Network strategy
+        if (index === 0) {
+            window.open('https://otieu.com/4/10526676', '_blank', 'noopener,noreferrer');
+        }
+
+        document.getElementById('choice-layer').style.display = 'none';
+        if (typeof window.selectServer === 'function') window.selectServer(index);
+    }
+
+    initAdsterra() {
+        const container = document.getElementById('adsterra-banner-container');
+        if (container && this.config.adsterra.banner) {
+            const div = document.createElement('div');
+            div.innerHTML = this.config.adsterra.banner;
+            Array.from(div.querySelectorAll('script')).forEach(s => {
+                const ns = document.createElement('script');
+                Array.from(s.attributes).forEach(a => ns.setAttribute(a.name, a.value));
+                ns.innerHTML = s.innerHTML;
+                container.appendChild(ns);
+            });
+        }
+
+        if (this.config.adsterra.socialBarKey) {
+            const script = document.createElement('script');
+            const srcMatch = this.config.adsterra.socialBarKey.match(/src=["']([^"']+)["']/);
+            if (srcMatch) {
                 script.src = srcMatch[1];
                 script.async = true;
-                // Add defer to lower priority
-                script.defer = true;
                 document.body.appendChild(script);
             }
         }
     }
-
-    enableAntiTakeoverShield() {
-        // Disabled to prevent browser exit/refresh loops
-        console.log('🛡️ Anti-Takeover Shield Disabled.');
-    }
-
-    listenForCountdownEnd() {
-        document.addEventListener('countdownFinished', () => this.startMonetization());
-        const checkCountdown = setInterval(() => {
-            const countdownElement = document.getElementById('countdown');
-            if (countdownElement && parseInt(countdownElement.textContent) <= 0) {
-                clearInterval(checkCountdown);
-                this.startMonetization();
-            }
-        }, 100);
-    }
 }
 
-function initWhenReady() {
-    const isWatchPage = window.location.pathname.includes('watch') || window.location.search.includes('match=');
-    if (isWatchPage && !window.monetizationManager) {
-        window.monetizationManager = new MonetizationManager();
-    }
-}
-
-if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initWhenReady);
-} else {
-    initWhenReady();
-}
-
-window.MonetizationManager = MonetizationManager;
+window.monetizationManager = new MonetizationManager();

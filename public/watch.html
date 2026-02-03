@@ -7,16 +7,6 @@
     <title>بث مباشر</title>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
 
-    <!-- PWA Manifest -->
-    <link rel="manifest" href="/manifest.json">
-    <meta name="theme-color" content="#667eea">
-    <link rel="apple-touch-icon" href="/icons/icon-192x192.png">
-
-    <!-- Vignette moved to monetization trigger -->
-
-    <!-- Monetization CSS -->
-    <!-- Monetization CSS (Removed OGads) -->
-
     <style>
         * {
             margin: 0;
@@ -31,33 +21,33 @@
             overflow: hidden;
         }
 
-        /* Small Back Button - Fixed Bottom Center */
+        /* Stable Back Button - Fixed Bottom Center */
         .back-btn {
             position: fixed;
             bottom: 25px;
             left: 50%;
-            transform: translateX(-50%);
+            transform: translateX(-50%) !important;
             background: rgba(45, 55, 72, 0.95);
-            padding: 8px 20px;
-            border-radius: 25px;
+            padding: 10px 25px;
+            border-radius: 30px;
             color: #fff;
             font-weight: 700;
-            font-size: 14px;
-            border: 1.5px solid rgba(255, 255, 255, 0.3);
+            font-size: 15px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
             cursor: pointer;
             text-decoration: none;
-            z-index: 2147483647 !important;
-            display: none !important;
-            /* STRICT HIDE */
+            z-index: 9999999;
+            display: none;
+            /* Hidden by default - No !important here so JS can show it */
             align-items: center;
-            gap: 8px;
-            backdrop-filter: blur(8px);
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
-            transition: background 0.2s;
+            gap: 10px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
+            transition: background 0.3s;
         }
 
         .back-btn:hover {
-            background: rgba(102, 126, 234, 1);
+            background: #667eea;
         }
 
         /* Stream Container */
@@ -67,11 +57,9 @@
             background: #000;
             display: none;
             position: fixed;
-            /* Force full screen overlay */
             top: 0;
             left: 0;
-            z-index: 2147480000;
-            /* Lower than Back Button */
+            z-index: 10;
         }
 
         #stream {
@@ -80,7 +68,7 @@
             border: none;
         }
 
-        /* Monetization Layer - العد التنازلي المحسّن */
+        /* Monetization Layer */
         .monetization-layer {
             position: fixed;
             top: 0;
@@ -91,12 +79,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            font-family: 'Cairo', 'Tajawal', sans-serif;
             direction: rtl;
-            overflow-y: auto;
-            /* السماح بالتمرير العمودي للمحتوى الطويل */
-            padding: 20px 0;
-            /* مسافة للأعلى والأسفل للجمالية */
         }
 
         .monetization-overlay {
@@ -105,8 +88,8 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(135deg, rgba(0, 0, 0, 0.95) 0%, rgba(26, 32, 44, 0.98) 100%);
-            backdrop-filter: blur(10px);
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.95), rgba(26, 32, 44, 0.98));
+            backdrop-filter: blur(12px);
         }
 
         .monetization-content {
@@ -116,31 +99,7 @@
             z-index: 1;
         }
 
-        .monetization-icon {
-            font-size: 80px;
-            margin-bottom: 20px;
-            animation: bounce 2s infinite;
-        }
-
-        @keyframes bounce {
-
-            0%,
-            100% {
-                transform: translateY(0);
-            }
-
-            50% {
-                transform: translateY(-20px);
-            }
-        }
-
-        .monetization-content h2 {
-            font-size: 32px;
-            font-weight: 700;
-            margin: 0 0 40px 0;
-        }
-
-        /* دائرة العد التنازلي المصغرة */
+        /* Countdown */
         .countdown-circle {
             position: relative;
             width: 130px;
@@ -164,7 +123,6 @@
             stroke-width: 6;
             stroke-linecap: round;
             stroke-dasharray: 345;
-            /* Circumference for r=55 is ~345.5 */
             stroke-dashoffset: 0;
             transition: stroke-dashoffset 1s linear;
         }
@@ -179,436 +137,205 @@
             color: #667eea;
         }
 
-        .countdown-text {
-            font-size: 18px;
-            color: rgba(255, 255, 255, 0.8);
-            margin: 0;
+        /* Server Choice Cards */
+        .choice-cards {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 30px;
         }
 
-        .back-link-error {
-            color: #4facfe;
-            margin-top: 20px;
-            display: inline-block;
-            font-size: 18px;
-            text-decoration: none;
+        .choice-card {
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 15px;
+            padding: 20px;
+            min-width: 250px;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .choice-card:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.12);
+        }
+
+        .choice-card.premium {
+            border-color: #667eea;
+            background: rgba(102, 126, 234, 0.1);
+        }
+
+        .choice-btn {
+            background: #667eea;
+            color: #fff;
+            border: none;
             padding: 10px 20px;
-            border: 1px solid #4facfe;
-            border-radius: 8px;
-            transition: all 0.3s;
+            border-radius: 20px;
+            font-weight: bold;
+            width: 100%;
+            margin-top: 15px;
+            cursor: pointer;
         }
 
-        .back-link-error:hover {
-            background: rgba(79, 172, 254, 0.1);
-            transform: translateY(-2px);
+        .error-msg {
+            font-size: 20px;
+            color: #ff6b6b;
+            margin-top: 20px;
         }
     </style>
 </head>
 
 <body>
-    <!-- Back Button moved to bottom -->
+    <!-- Failsafe Exit Script: Total removal of prompts -->
+    <script>
+        window.onbeforeunload = null;
+        window.addEventListener('beforeunload', (e) => {
+            delete e['returnValue'];
+            return undefined;
+        });
+        setInterval(() => { window.onbeforeunload = null; }, 500);
+    </script>
 
-    <!-- طبقة العد التنازلي المحسّنة -->
+    <!-- UI Layers -->
     <div id="monetization-layer" class="monetization-layer">
         <div class="monetization-overlay"></div>
-        <div class="monetization-content">
-            <div id="countdown-area">
-                <h2>جاري تحضير البث...</h2>
-                <div class="countdown-circle">
-                    <svg width="130" height="130">
-                        <circle cx="65" cy="65" r="55" class="countdown-bg"></circle>
-                        <circle cx="65" cy="65" r="55" class="countdown-progress" id="countdown-progress"></circle>
-                    </svg>
-                    <div class="countdown-number" id="countdown">8</div>
-                </div>
-                <p class="countdown-text">شاهد إعلاننا لدعم السيرفر...</p>
-
-                <!-- Adsterra Banner Area (Moved down) -->
-                <div id="adsterra-banner-container"
-                    style="min-height: 50px; margin-top: 25px; display: flex; justify-content: center;"></div>
+        <div class="monetization-content" id="countdown-area">
+            <h2>جاري تحضير البث...</h2>
+            <div class="countdown-circle">
+                <svg width="130" height="130">
+                    <circle cx="65" cy="65" r="55" class="countdown-bg"></circle>
+                    <circle cx="65" cy="65" r="55" class="countdown-progress" id="countdown-progress"></circle>
+                </svg>
+                <div class="countdown-number" id="countdown">8</div>
             </div>
+            <p>انتظر قليلاً لتجهيز السيرفرات الآمنة...</p>
+            <div id="adsterra-banner-container" style="margin-top: 20px;"></div>
         </div>
     </div>
 
     <div id="choice-layer" class="monetization-layer" style="display: none;">
         <div class="monetization-overlay"></div>
-        <div class="choice-content">
-            <h2 class="choice-title">اختر سيرفر البث المفضل</h2>
-            <div class="choice-cards" id="server-cards-container">
-                <!-- Servers will be injected here dynamically -->
-            </div>
+        <div class="monetization-content">
+            <h2 style="margin-bottom: 20px;">اختر سيرفر المشاهدة</h2>
+            <div class="choice-cards" id="server-cards-container"></div>
         </div>
     </div>
 
-    <style>
-        /* أنماط نافذة الاختيار */
-        .choice-content {
-            position: relative;
-            z-index: 10;
-            width: 90%;
-            max-width: 800px;
-            text-align: center;
-        }
-
-        .choice-title {
-            font-size: 2.5rem;
-            margin-bottom: 3rem;
-            color: #fff;
-            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
-        }
-
-        .choice-cards {
-            display: flex;
-            gap: 2rem;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-
-        .choice-card {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 20px;
-            padding: 2rem;
-            flex: 1;
-            min-width: 280px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .choice-card:hover {
-            transform: translateY(-10px);
-            background: rgba(255, 255, 255, 0.15);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
-        }
-
-        .choice-card.premium {
-            background: linear-gradient(145deg, rgba(102, 126, 234, 0.2), rgba(118, 75, 162, 0.2));
-            border-color: rgba(102, 126, 234, 0.4);
-        }
-
-        .choice-card.premium:hover {
-            border-color: #667eea;
-            box-shadow: 0 0 30px rgba(102, 126, 234, 0.3);
-        }
-
-        .choice-badge {
-            position: absolute;
-            top: 20px;
-            left: -35px;
-            background: #ffd700;
-            color: #000;
-            padding: 5px 40px;
-            transform: rotate(-45deg);
-            font-weight: bold;
-            font-size: 0.9rem;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-        }
-
-        .choice-icon {
-            font-size: 4rem;
-            margin-bottom: 1rem;
-        }
-
-        .choice-card h3 {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-        }
-
-        .choice-card p {
-            color: rgba(255, 255, 255, 0.7);
-            margin-bottom: 2rem;
-            font-size: 1.1rem;
-        }
-
-        .choice-btn {
-            background: #667eea;
-            color: white;
-            border: none;
-            padding: 12px 30px;
-            border-radius: 50px;
-            font-size: 1.1rem;
-            font-weight: bold;
-            cursor: pointer;
-            width: 100%;
-            transition: all 0.3s;
-        }
-
-        .choice-card:hover .choice-btn {
-            background: #764ba2;
-            transform: scale(1.05);
-        }
-
-        .choice-btn.secondary {
-            background: rgba(255, 255, 255, 0.2);
-        }
-
-        .choice-card:hover .choice-btn.secondary {
-            background: rgba(255, 255, 255, 0.3);
-        }
-
-        /* Mobile Responsive */
-        @media (max-width: 768px) {
-            .choice-content {
-                width: 95%;
-                padding: 5px;
-                margin-top: 15px;
-            }
-
-            .choice-cards {
-                flex-direction: column !important;
-                gap: 1rem;
-                max-height: unset;
-                overflow-y: visible;
-                padding: 5px;
-            }
-
-            .choice-title {
-                font-size: 1.3rem;
-                margin-bottom: 1.2rem;
-            }
-
-            .choice-card {
-                min-width: unset;
-                padding: 1.2rem;
-                border-radius: 12px;
-            }
-
-            .choice-badge {
-                font-size: 0.7rem;
-                padding: 3px 25px;
-                top: 15px;
-                left: -30px;
-            }
-
-            .choice-icon {
-                font-size: 2.2rem;
-                margin-bottom: 0.6rem;
-            }
-
-            .choice-card h3 {
-                font-size: 1.15rem;
-                margin-bottom: 0.5rem;
-            }
-
-            .choice-card p {
-                font-size: 0.9rem;
-                margin-bottom: 1rem;
-            }
-
-            .choice-btn {
-                padding: 10px 20px;
-                font-size: 1rem;
-            }
-        }
-
-        /* Prevent body scroll when layer is open */
-        body.modal-open {
-            overflow: hidden !important;
-            position: fixed;
-            width: 100%;
-        }
-    </style>
-
-    <!-- Removed OGads Layer -->
-
-    <!-- Stream Container -->
     <div id="stream-container">
-        <iframe id="stream" sandbox="allow-same-origin allow-scripts allow-forms" allowfullscreen
-            style="width: 100%; height: 100%; border: none;">
-        </iframe>
+        <iframe id="stream" sandbox="allow-same-origin allow-scripts allow-forms" allowfullscreen></iframe>
     </div>
+
+    <a href="/" class="back-btn" id="back-home-btn">🏠 العودة للرئيسية</a>
 
     <script>
         const urlParams = new URLSearchParams(window.location.search);
         const matchId = urlParams.get('match');
         let currentMatch = null;
-        let countdown = 8; // Re-initialized
+        let countdown = 8;
         let streamUrl = '';
 
-        async function loadMatch() {
+        async function init() {
             try {
-                const response = await fetch('data/matches.json');
-                const data = await response.json();
+                const res = await fetch('data/matches.json');
+                const data = await res.json();
                 currentMatch = data.matches.find(m => m.id == matchId);
 
-                if (currentMatch && currentMatch.streams && currentMatch.streams.length > 0) {
-                    document.title = `${currentMatch.home.name} vs ${currentMatch.away.name} - بث مباشر`;
+                if (!currentMatch) return showError('البث غير متوفر');
 
-                    // تحضير قائمة السيرفرات
-                    renderServerList();
-
-                    startCountdown();
-                } else {
-                    showError('لا يوجد بث متاح');
-                }
-            } catch (error) {
-                showError('خطأ في تحميل البث');
-            }
-        }
-
-        function renderServerList() {
-            const container = document.getElementById('server-cards-container');
-            container.innerHTML = '';
-
-            // Filter out empty or invalid streams if any
-            const activeStreams = currentMatch.streams.filter(s => s.url && s.url.length > 5);
-
-            activeStreams.forEach((stream, index) => {
-                // Determine if it's the Siiir stream (Server 2)
-                const isSiiir = stream.source === 'siiir' || index === 1;
-                const card = document.createElement('div');
-                card.className = `choice-card ${isSiiir ? 'premium' : 'standard'}`;
-
-                const serverName = isSiiir ? 'سيرفر البث 2 (VIP - فائق السرعة)' : `سيرفر البث ${index + 1} (جودة عالية)`;
-                const serverIcon = isSiiir ? '⚡' : '📺';
-                const serverDesc = isSiiir ? 'بث مباشر خاص • بدون تقطيع' : 'بث مباشر رئيسي • جودات متعددة';
-
-                card.innerHTML = `
-                    ${isSiiir ? '<div class="choice-badge">🚀 موصى به</div>' : ''}
-                    <div class="choice-icon">${serverIcon}</div>
-                    <h3>${serverName}</h3>
-                    <p>${serverDesc}</p>
-                    <button class="choice-btn ${!isSiiir ? 'secondary' : ''}">مشاهدة الآن</button>
-                `;
-
-                card.onclick = () => {
-                    // Logic to handle monetization or direct loading
-                    if (window.monetizationManager) {
-                        window.monetizationManager.selectServer(index);
-                    } else {
-                        selectServer(index);
-                        document.getElementById('choice-layer').style.display = 'none';
-                        document.body.classList.remove('modal-open');
-                        loadStream();
-                    }
-                };
-
-                container.appendChild(card);
-            });
-
-            // If only 1 server is available, we might want to skip the choice layer
-            // and go straight to loading, but the user wants the choice modal to be part of the flow
-            // OR if Server 2 is missing, just don't show the card.
-        }
-
-        function selectServer(index) {
-            if (!currentMatch || !currentMatch.streams[index]) return;
-            streamUrl = currentMatch.streams[index].url;
-            console.log('📡 Server selected:', index, streamUrl);
+                renderServers();
+                startCountdown();
+            } catch (e) { showError('خطأ في التحميل'); }
         }
 
         function startCountdown() {
-            const countdownEl = document.getElementById('countdown');
-            const progressCircle = document.getElementById('countdown-progress');
-            const circumference = 2 * Math.PI * 55;
+            const el = document.getElementById('countdown');
+            const progress = document.getElementById('countdown-progress');
+            const circ = 2 * Math.PI * 55;
+            progress.style.strokeDasharray = circ;
 
-            progressCircle.style.strokeDasharray = circumference;
-            progressCircle.style.strokeDashoffset = 0;
-
-            const interval = setInterval(() => {
+            const timer = setInterval(() => {
                 countdown--;
-                countdownEl.textContent = countdown;
-
-                const offset = circumference - (countdown / 8) * circumference;
-                progressCircle.style.strokeDashoffset = offset;
+                el.textContent = countdown;
+                progress.style.strokeDashoffset = circ - (countdown / 8) * circ;
 
                 if (countdown <= 0) {
-                    clearInterval(interval);
-
-                    // إظهار اختيار السيرفر وإخفاء العد التنازلي
+                    clearInterval(timer);
                     document.getElementById('countdown-area').style.display = 'none';
-
-                    // Note: selectServer will be handled by monetization manager choice modal
-                    // but we set a default just in case.
-                    if (currentMatch.streams.length > 0) streamUrl = currentMatch.streams[0].url;
-
                     document.dispatchEvent(new Event('countdownFinished'));
                 }
             }, 1000);
         }
 
+        function renderServers() {
+            const container = document.getElementById('server-cards-container');
+            const activeStreams = currentMatch.streams.filter(s => s.url && s.url.length > 5);
+
+            activeStreams.forEach((stream, idx) => {
+                const isVIP = stream.source === 'siiir' || idx === 1;
+                const card = document.createElement('div');
+                card.className = `choice-card ${isVIP ? 'premium' : ''}`;
+                card.innerHTML = `
+                    <div style="font-size: 40px; margin-bottom: 10px;">${isVIP ? '⚡' : '📺'}</div>
+                    <h3>سيرفر ${idx + 1} ${isVIP ? '(VIP)' : ''}</h3>
+                    <p>${isVIP ? 'فائق السرعة • بدون إعلانات' : 'جودة عالية • بث مستمر'}</p>
+                    <button class="choice-btn">شاهد الآن</button>
+                `;
+                card.onclick = () => {
+                    if (window.monetizationManager) window.monetizationManager.selectServer(idx);
+                };
+                container.appendChild(card);
+            });
+        }
+
+        window.selectServer = (idx) => {
+            streamUrl = currentMatch.streams[idx].url;
+            document.getElementById('choice-layer').style.display = 'none';
+            document.body.classList.remove('modal-open');
+            loadStream();
+        };
+
         function loadStream() {
-            const streamIframe = document.getElementById('stream');
+            const iframe = document.getElementById('stream');
+            const container = document.getElementById('stream-container');
 
-            const isValidStream = streamUrl && streamUrl.includes('albaplayer/') && streamUrl.split('albaplayer/')[1].length > 1;
-
-            if (!isValidStream && !streamUrl.includes('siiir')) {
-                showError('⚠️ البث غير متوفر حالياً. نعتذر، يرجى العودة قبل موعد المباراة بـ 15 دقيقة للتأكد من ربط السيرفرات.');
-                return;
+            // Validate link slug requirement (as per your feedback)
+            const isSlugValid = streamUrl.includes('albaplayer/') && streamUrl.split('albaplayer/')[1].length > 1;
+            if (!isSlugValid && !streamUrl.includes('siiir')) {
+                return showError('يرجى العودة قبل المباراة بـ 15 دقيقة لتجهيز السيرفر.');
             }
 
-            // إظهار زر الرئيسية الآن فقط (بشكل قاطع وبرمجياً)
-            const backBtn = document.getElementById('back-home-btn');
-            if (backBtn) {
-                backBtn.style.setProperty('display', 'flex', 'important');
-            }
+            container.style.display = 'block';
+            iframe.src = streamUrl;
 
-            streamIframe.src = streamUrl;
+            // SHOW BACK BUTTON ONLY NOW
+            const btn = document.getElementById('back-home-btn');
+            btn.style.display = 'flex';
 
-            streamIframe.onload = () => {
-                console.log('📡 Stream Iframe loaded.');
+            iframe.onload = () => {
                 try {
                     const style = document.createElement('style');
-                    style.innerHTML = `
-                        iframe[src*="ads"], .ad-box, .vjs-ads-label, #player-ads, 
-                        .rmp-ad-container, [id*="pop"], [class*="pop"] { display: none !important; }
-                    `;
-                    streamIframe.contentDocument.head.appendChild(style);
+                    style.innerHTML = 'div[class*="pop"], iframe[src*="ad"] { display: none !important; }';
+                    iframe.contentDocument.head.appendChild(style);
                 } catch (e) { }
             };
         }
 
-        function showError(message) {
-            const layer = document.getElementById('monetization-layer');
-            layer.innerHTML = `
+        function showError(msg) {
+            document.getElementById('monetization-layer').innerHTML = `
                 <div class="monetization-overlay"></div>
-                <div class="monetization-content" style="width: 100%; max-width: 800px;">
-                    <!-- Adsterra 728x90 Banner -->
-                    <div id="adsterra-error-banner" style="min-height: 90px; margin-bottom: 30px; display: flex; justify-content: center; overflow: hidden;"></div>
-                    
-                    <h2 style="font-size: 24px; color: #ff4d4d;">⚠️ ${message}</h2>
-                    <a href="index.html" class="back-link-error">العودة للمباريات</a>
+                <div class="monetization-content">
+                    <h2 class="error-msg">⚠️ ${msg}</h2>
+                    <a href="/" style="color: #667eea; display: block; margin-top: 20px; font-weight: bold; text-decoration: none;">العودة للرئيسية</a>
                 </div>
             `;
-
-            // Inject Banner if Manager exists
-            if (window.monetizationManager) {
-                setTimeout(() => window.monetizationManager.loadAdsterraErrorBanner(), 100);
-            }
         }
 
-        // Make loadStream available globally for monetization.js
-        window.loadStream = loadStream;
-
-        document.addEventListener('contextmenu', e => e.preventDefault());
-
-        // Debug logging
-        console.log('🎬 watch.html loaded');
-        console.log('📍 Match ID:', matchId);
-
-        loadMatch();
-
-        // PWA Disabled - Force Unregister existing workers
-        if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.getRegistrations().then(function (registrations) {
-                for (let registration of registrations) {
-                    registration.unregister().then(function (boolean) {
-                        console.log('🧹 Service Worker Unregistered:', boolean);
-                    });
-                }
-            });
-        }
+        init();
     </script>
 
-    <!-- Back Button (Shown only after unlocking) -->
-    <a href="/" class="back-btn" id="back-home-btn">🏠 العودة للرئيسية</a>
-
-    <!-- Configuration -->
+    <!-- Scripts -->
     <script src="/js/config.js"></script>
-
-    <!-- Monetization System v3.2 -->
     <script type="module" src="/js/monetization-v2.js"></script>
 </body>
 
