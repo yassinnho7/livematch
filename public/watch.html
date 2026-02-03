@@ -21,33 +21,38 @@
             overflow: hidden;
         }
 
-        /* Stable Back Button - Fixed Bottom Center */
+        /* Stable & Compact Back Button */
         .back-btn {
             position: fixed;
-            bottom: 25px;
+            bottom: 20px;
             left: 50%;
             transform: translateX(-50%) !important;
-            background: rgba(45, 55, 72, 0.95);
-            padding: 10px 25px;
-            border-radius: 30px;
+            background: rgba(30, 40, 60, 0.85);
+            /* Slightly more transparent */
+            padding: 6px 15px;
+            /* Smaller padding */
+            border-radius: 20px;
             color: #fff;
-            font-weight: 700;
-            font-size: 15px;
-            border: 2px solid rgba(255, 255, 255, 0.3);
+            font-weight: 600;
+            font-size: 13px;
+            /* Smaller font */
+            border: 1px solid rgba(255, 255, 255, 0.2);
             cursor: pointer;
             text-decoration: none;
             z-index: 9999999;
             display: none;
-            /* Hidden by default - No !important here so JS can show it */
             align-items: center;
-            gap: 10px;
-            backdrop-filter: blur(10px);
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
-            transition: background 0.3s;
+            gap: 6px;
+            backdrop-filter: blur(5px);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+            white-space: nowrap;
+            /* Prevent wrapping */
+            transition: all 0.2s;
         }
 
         .back-btn:hover {
             background: #667eea;
+            transform: translateX(-50%) scale(1.05) !important;
         }
 
         /* Stream Container */
