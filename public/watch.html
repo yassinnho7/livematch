@@ -31,34 +31,34 @@
             overflow: hidden;
         }
 
-        /* Small Back Button */
+        /* Small Back Button - Fixed Bottom Center */
         .back-btn {
             position: fixed;
-            bottom: 15px;
+            bottom: 25px;
             left: 50%;
             transform: translateX(-50%);
-            background: rgba(45, 55, 72, 0.8);
-            padding: 6px 15px;
-            border-radius: 20px;
+            background: rgba(45, 55, 72, 0.95);
+            padding: 8px 20px;
+            border-radius: 25px;
             color: #fff;
-            font-weight: 600;
-            font-size: 13px;
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            font-weight: 700;
+            font-size: 14px;
+            border: 1.5px solid rgba(255, 255, 255, 0.3);
             cursor: pointer;
             text-decoration: none;
-            text-decoration: none;
             z-index: 2147483647 !important;
-            /* Always On Top */
-            display: flex !important;
-            /* Always Visible */
+            display: none;
+            /* Hidden by default */
             align-items: center;
-            gap: 5px;
-            backdrop-filter: blur(5px);
+            gap: 8px;
+            backdrop-filter: blur(8px);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+            transition: background 0.2s;
+            /* Only color transition, no movement */
         }
 
         .back-btn:hover {
             background: rgba(102, 126, 234, 1);
-            transform: translateY(-1px);
         }
 
         /* Stream Container */
@@ -612,8 +612,8 @@
         }
     </script>
 
-    <!-- Back Button (Always on Top) -->
-    <a href="/" class="back-btn" id="back-home-btn">🏠 الرئيسية</a>
+    <!-- Back Button (Shown only after unlocking) -->
+    <a href="/" class="back-btn" id="back-home-btn">🏠 العودة للرئيسية</a>
 
     <!-- Configuration -->
     <script src="/js/config.js"></script>

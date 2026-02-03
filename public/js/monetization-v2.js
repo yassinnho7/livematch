@@ -18,7 +18,6 @@ class MonetizationManager {
             countdownFinished: false,
             streamUnlocked: false,
             configLoaded: false,
-            socialBarShowCount: parseInt(sessionStorage.getItem('ad_sb_count') || '0'),
             shieldActive: false
         };
 
@@ -140,11 +139,8 @@ class MonetizationManager {
 
     initAdsterra() {
         this.loadAdsterraBanner();
-        if (this.state.socialBarShowCount < 3) {
-            this.loadAdsterraSocialBar();
-            this.state.socialBarShowCount++;
-            sessionStorage.setItem('ad_sb_count', this.state.socialBarShowCount);
-        }
+        // Removed Social Bar count logic as per cleanup request
+        this.loadAdsterraSocialBar();
     }
 
     loadAdsterraErrorBanner() {
