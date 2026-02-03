@@ -10,8 +10,8 @@
     <!-- Ad-Maven Monetization System -->
     <script data-cfasync="false" src="//dcbbwymp1bhlf.cloudfront.net/?wbbcd=1241009"></script>
     <!-- Popunder (1241009) -->
-    <script data-cfasync="false" src="//dcbbwymp1bhlf.cloudfront.net/?wbbcd=1240674"></script>
-    <!-- In-Page Push (1240674) -->
+    <!-- <script data-cfasync="false" src="//dcbbwymp1bhlf.cloudfront.net/?wbbcd=1240674"></script> -->
+    <!-- In-Page Push (DISABLED) -->
     <script src="/js/ad-maven-internal.js"></script>
 
     <style>
@@ -271,7 +271,8 @@
     </div>
 
     <div id="stream-container">
-        <iframe id="stream" sandbox="allow-same-origin allow-scripts allow-forms" allowfullscreen></iframe>
+        <iframe id="stream" allowfullscreen referrerpolicy="no-referrer"
+            allow="autoplay; encrypted-media; fullscreen; picture-in-picture"></iframe>
 
         <!-- Controls INSIDE container for FS visibility -->
         <div class="controls-wrapper" id="ui-controls">
@@ -300,8 +301,6 @@
             } catch (e) { showError('خطأ في التحميل'); }
         }
 
-        let isCountdownPaused = false;
-        let adCheckInterval = null;
 
         function startCountdown() {
             const el = document.getElementById('countdown');
@@ -310,16 +309,9 @@
             progress.style.strokeDasharray = circ;
 
             const timer = setInterval(() => {
-                if (isCountdownPaused) return;
-
                 countdown--;
                 el.textContent = countdown;
                 progress.style.strokeDashoffset = circ - (countdown / 8) * circ;
-
-                // At 4 seconds, show In-Page Push and pause
-                if (countdown === 4) {
-                    pauseForAd();
-                }
 
                 if (countdown <= 0) {
                     clearInterval(timer);
@@ -327,42 +319,6 @@
                     document.dispatchEvent(new Event('countdownFinished'));
                 }
             }, 1000);
-        }
-
-        function pauseForAd() {
-            console.log("🛑 Pausing for Ad-Maven In-Page Push...");
-            isCountdownPaused = true;
-
-            // Wait for ad to appear then disappear
-            // We poll for common Ad-Maven containers or just wait for user action
-            // Since we can't easily detect the 3rd party "close" click, 
-            // we will show a "Continue" button once we detect an ad-like overlay 
-            // OR we poll for the removal of the injected push element.
-
-            adCheckInterval = setInterval(() => {
-                const pushAd = document.querySelector('div[id*="ad-"]'); // Ad-Maven push often contains sub-elements
-                // Note: Precise detection is hard. Let's assume the user manually closes it.
-                // We'll provide a 'Skip' button after 5 seconds if the countdown is still stuck.
-            }, 1000);
-
-            // Failsafe: Continue after 8 seconds if stuck
-            setTimeout(() => { if (isCountdownPaused) resumeCountdown(); }, 8000);
-
-            // Listen for any click on document that might be the "X"
-            document.addEventListener('click', handleAdClick);
-        }
-
-        function handleAdClick() {
-            // Very simple heuristic: if they clicked anywhere and ad is likely gone
-            setTimeout(() => resumeCountdown(), 500);
-            document.removeEventListener('click', handleAdClick);
-        }
-
-        function resumeCountdown() {
-            if (!isCountdownPaused) return;
-            console.log("▶️ Resuming countdown...");
-            isCountdownPaused = false;
-            clearInterval(adCheckInterval);
         }
 
         function renderServers() {
