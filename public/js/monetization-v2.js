@@ -106,17 +106,14 @@ class MonetizationManager {
             streamContainer.style.display = 'block';
             streamContainer.style.opacity = '1';
 
-            // Prevent Vignette/Banners from capturing clicks on the stream
-            streamContainer.addEventListener('click', (e) => {
-                e.stopPropagation();
-            }, true);
+            // Removed StopPropagation as it might interfere with player interaction
         }
 
         if (typeof loadStream === 'function') {
             loadStream();
         }
 
-        this.enableAntiTakeoverShield();
+        // Removed anti-takeover shield as it causes page refreshes/loops in some environments
     }
 
     initAdsterra() {
@@ -166,11 +163,8 @@ class MonetizationManager {
     }
 
     enableAntiTakeoverShield() {
-        if (this.state.shieldActive) return;
-        this.state.shieldActive = true;
-        if (window.top !== window.self) {
-            try { window.top.location = window.self.location; } catch (e) { }
-        }
+        // Disabled to prevent browser exit/refresh loops
+        console.log('🛡️ Anti-Takeover Shield Disabled.');
     }
 
     listenForCountdownEnd() {
