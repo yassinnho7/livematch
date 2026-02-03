@@ -62,23 +62,15 @@
 
     <script src="js/simple-matches.js"></script>
     <script>
+        // PWA Disabled - Force Unregister existing workers
         if ('serviceWorker' in navigator) {
-            window.addEventListener('load', () => {
-                // Force update check
-                navigator.serviceWorker.register('/sw.js').then(reg => {
-                    reg.update(); // Request immediate update
-                    console.log('🚀 Service Worker Registered', reg);
-                }).catch(err => console.log('❌ SW Registration failed', err));
-
-                // Emergency: Clear old cache if users report stuck "v2" or "v1" issues
-                if (navigator.serviceWorker.controller) {
-                    navigator.serviceWorker.controller.postMessage({ type: 'CHECK_VERSION' });
+            navigator.serviceWorker.getRegistrations().then(function (registrations) {
+                for (let registration of registrations) {
+                    registration.unregister().then(function (boolean) {
+                        console.log('🧹 Service Worker Unregistered:', boolean);
+                        if (boolean) window.location.reload();
+                    });
                 }
-            });
-
-            // Listen for new worker taking over
-            navigator.serviceWorker.addEventListener('controllerchange', () => {
-                window.location.reload();
             });
         }
     </script>
