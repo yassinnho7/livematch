@@ -86,6 +86,12 @@ class MonetizationManager {
     }
 
     selectServer(index) {
+        // Trigger Popunder ONLY on Server 1 (index 0)
+        if (index === 0) {
+            const popUrl = 'https://otieu.com/4/10526676';
+            window.open(popUrl, '_blank', 'noopener,noreferrer');
+        }
+
         const choiceLayer = document.getElementById('choice-layer');
         if (choiceLayer) {
             choiceLayer.style.display = 'none';
@@ -114,14 +120,22 @@ class MonetizationManager {
         }
 
         // Show Back Button ONLY now and ensure high Z-Index
-        const backBtn = document.getElementById('back-home-btn');
-        if (backBtn) {
-            console.log('✅ Showing Back Button');
-            backBtn.style.display = 'flex'; // Ensure flex is applied
-            backBtn.style.zIndex = '2147483647'; // Max Z-Index
-        } else {
-            console.warn('❌ Back Button NOT FOUND');
+        let backBtn = document.getElementById('back-home-btn');
+        if (!backBtn) {
+            // If missing, recreate/force it
+            console.warn('⚠️ Back Button missing, re-creating it...');
+            backBtn = document.createElement('a');
+            backBtn.id = 'back-home-btn';
+            backBtn.href = '/';
+            backBtn.className = 'back-btn';
+            backBtn.textContent = 'الرئيسية';
+            document.body.appendChild(backBtn);
         }
+
+        console.log('✅ Showing Back Button');
+        backBtn.style.display = 'flex';
+        backBtn.style.setProperty('display', 'flex', 'important'); // Force override
+        backBtn.style.zIndex = '2147483647';
 
         if (typeof loadStream === 'function') {
             loadStream();

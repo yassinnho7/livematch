@@ -44,9 +44,10 @@ self.addEventListener('activate', event => {
 self.addEventListener('fetch', event => {
     const url = new URL(event.request.url);
 
-    // Dynamic Content: Network First (Matches JSON, HTML pages)
+    // Dynamic Content: Network First (Matches JSON, HTML pages, JS logic)
     if (url.pathname.endsWith('.json') ||
         url.pathname.endsWith('.html') ||
+        url.pathname.endsWith('.js') ||
         url.pathname === '/') {
 
         event.respondWith(
