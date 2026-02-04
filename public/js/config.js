@@ -23,7 +23,7 @@ const MONETIZATION_CONFIG = {
 
     // إعدادات التحليلات
     analytics: {
-        gaId: 'G-XXXXXXXXXX', // استبدل هذا بالمعرف الخاص بك من Google Analytics
+        gaId: 'G-YEKSYGPND9',
         enabled: true
     },
 
