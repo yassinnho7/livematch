@@ -193,9 +193,10 @@
             }
 
             .choice-card {
-                min-width: 125px;
-                padding: 10px;
-                border-radius: 10px;
+                min-width: 145px;
+                /* Increased size */
+                padding: 12px;
+                border-radius: 12px;
             }
 
             .choice-card h3 {
@@ -278,6 +279,10 @@
             border: 1px solid rgba(255, 255, 255, 0.15);
             cursor: pointer;
             transition: transform 0.2s;
+            min-width: 180px;
+            /* Increased desktop size */
+            padding: 20px;
+            border-radius: 15px;
         }
 
         .choice-btn {
@@ -419,8 +424,14 @@
                 const isVIP = stream.source === 'siiir' || idx === 1;
                 const card = document.createElement('div');
                 card.className = `choice-card ${isVIP ? 'premium' : ''}`;
-                card.innerHTML = `<div style="font-size: 24px; margin-bottom: 5px;">${isVIP ? '⚡' : '📺'}</div><h3>سيرفر ${idx + 1}</h3><button class="choice-btn">شاهد الآن</button>`;
-                card.onclick = () => { if (window.monetizationManager) window.monetizationManager.selectServer(idx); };
+                card.innerHTML = `<div style="font-size: 28px; margin-bottom: 8px;">${isVIP ? '⚡' : '📺'}</div><h3>سيرفر ${idx + 1}</h3><button class="choice-btn">شاهد الآن</button>`;
+                card.onclick = () => {
+                    if (window.monetizationManager && typeof window.monetizationManager.selectServer === 'function') {
+                        window.monetizationManager.selectServer(idx);
+                    } else {
+                        window.selectServer(idx);
+                    }
+                };
                 container.appendChild(card);
             });
         }
