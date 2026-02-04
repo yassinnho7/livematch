@@ -1,11 +1,11 @@
 {
-  "generated_at": "2026-02-03T23:54:56.330Z",
+  "generated_at": "2026-02-04T01:06:44.589Z",
   "count": 6,
   "matches": [
     {
-      "id": 283588465,
-      "date": "2026-02-03T18:00:00.000Z",
-      "timestamp": 1770141600,
+      "id": 72237552,
+      "date": "2026-02-04T18:00:00.000Z",
+      "timestamp": 1770228000,
       "status": "FT",
       "time": "18:00",
       "time_label": "18:00 GMT",
@@ -25,7 +25,7 @@
       "score": null,
       "streams": [
         {
-          "id": "stream_on-time-sport-1_283588465",
+          "id": "stream_on-time-sport-1_72237552",
           "source": "livekora",
           "quality": "HD",
           "channel": "on-time-sport-1",
@@ -35,9 +35,9 @@
       ]
     },
     {
-      "id": 1921156363,
-      "date": "2026-02-03T19:45:00.000Z",
-      "timestamp": 1770147900,
+      "id": 1890136556,
+      "date": "2026-02-04T19:45:00.000Z",
+      "timestamp": 1770234300,
       "status": "FT",
       "time": "19:45",
       "time_label": "19:45 GMT",
@@ -57,7 +57,7 @@
       "score": null,
       "streams": [
         {
-          "id": "stream_ad2_1921156363",
+          "id": "stream_ad2_1890136556",
           "source": "livekora",
           "quality": "HD",
           "channel": "ad2",
@@ -67,9 +67,9 @@
       ]
     },
     {
-      "id": 1619022534,
-      "date": "2026-02-03T19:45:00.000Z",
-      "timestamp": 1770147900,
+      "id": 1168392953,
+      "date": "2026-02-04T19:45:00.000Z",
+      "timestamp": 1770234300,
       "status": "FT",
       "time": "19:45",
       "time_label": "19:45 GMT",
@@ -89,7 +89,7 @@
       "score": null,
       "streams": [
         {
-          "id": "stream_ad-premium-1_1619022534",
+          "id": "stream_ad-premium-1_1168392953",
           "source": "livekora",
           "quality": "HD",
           "channel": "ad-premium-1",
@@ -99,9 +99,9 @@
       ]
     },
     {
-      "id": 424700192,
-      "date": "2026-02-03T20:00:00.000Z",
-      "timestamp": 1770148800,
+      "id": 1082851617,
+      "date": "2026-02-04T20:00:00.000Z",
+      "timestamp": 1770235200,
       "status": "FT",
       "time": "20:00",
       "time_label": "20:00 GMT",
@@ -121,7 +121,7 @@
       "score": null,
       "streams": [
         {
-          "id": "stream_bein1_424700192",
+          "id": "stream_bein1_1082851617",
           "source": "livekora",
           "quality": "HD",
           "channel": "bein1",
@@ -131,9 +131,9 @@
       ]
     },
     {
-      "id": 962623462,
-      "date": "2026-02-03T20:00:00.000Z",
-      "timestamp": 1770148800,
+      "id": 34448891,
+      "date": "2026-02-04T20:00:00.000Z",
+      "timestamp": 1770235200,
       "status": "FT",
       "time": "20:00",
       "time_label": "20:00 GMT",
@@ -153,7 +153,7 @@
       "score": null,
       "streams": [
         {
-          "id": "stream_ch1_962623462",
+          "id": "stream_ch1_34448891",
           "source": "livekora",
           "quality": "HD",
           "channel": "ch1",
@@ -163,9 +163,9 @@
       ]
     },
     {
-      "id": 1059474799,
-      "date": "2026-02-03T20:10:00.000Z",
-      "timestamp": 1770149400,
+      "id": 2021088816,
+      "date": "2026-02-04T20:10:00.000Z",
+      "timestamp": 1770235800,
       "status": "FT",
       "time": "20:10",
       "time_label": "20:10 GMT",
@@ -185,7 +185,7 @@
       "score": null,
       "streams": [
         {
-          "id": "stream_bein4_1059474799",
+          "id": "stream_bein4_2021088816",
           "source": "livekora",
           "quality": "HD",
           "channel": "bein4",
