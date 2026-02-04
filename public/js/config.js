@@ -21,6 +21,12 @@ const MONETIZATION_CONFIG = {
         server3AdNetworkKey: ''
     },
 
+    // إعدادات التحليلات
+    analytics: {
+        gaId: 'G-XXXXXXXXXX', // استبدل هذا بالمعرف الخاص بك من Google Analytics
+        enabled: true
+    },
+
     // إعدادات العداد
     countdown: {
         duration: 8
