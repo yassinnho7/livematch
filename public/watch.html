@@ -44,8 +44,33 @@
             if (pollfishSurveyAvailable && typeof Pollfish !== 'undefined') {
                 Pollfish.showFullSurvey();
             } else {
-                alert('⚽ المحتوى غير متوفر حالياً، حاول لاحقاً!');
+                showToast('⚽ المحتوى غير متوفر حالياً، حاول لاحقاً!');
             }
+        }
+
+        function showToast(message) {
+            const toast = document.createElement('div');
+            toast.textContent = message;
+            toast.style.position = 'fixed';
+            toast.style.bottom = '20px';
+            toast.style.left = '50%';
+            toast.style.transform = 'translateX(-50%)';
+            toast.style.background = 'rgba(255, 71, 87, 0.9)';
+            toast.style.color = '#fff';
+            toast.style.padding = '12px 24px';
+            toast.style.borderRadius = '25px';
+            toast.style.boxShadow = '0 5px 15px rgba(0,0,0,0.3)';
+            toast.style.zIndex = '99999';
+            toast.style.fontSize = '14px';
+            toast.style.fontWeight = 'bold';
+            toast.style.transition = 'opacity 0.3s';
+
+            document.body.appendChild(toast);
+
+            setTimeout(() => {
+                toast.style.opacity = '0';
+                setTimeout(() => toast.remove(), 300);
+            }, 3000);
         }
     </script>
     <script src="https://storage.googleapis.com/pollfish_production/sdk/webplugin/pollfish.min.js"></script>
@@ -69,16 +94,7 @@
         /* UI Controls: Back & Fullscreen (Professional Centered Stack) */
         .controls-wrapper {
             position: absolute;
-            bottom: 30px;
-            bottom: calc(30px + env(safe-area-inset-bottom, 0px));
-            left: 50%;
-            transform: translateX(-50%);
-            z-index: 2147483647;
-            display: none;
-            flex-direction: column;
-            align-items: center;
-            gap: 15px;
-            transition: opacity 0.5s, transform 0.5s;
+            bottom: calc(50px + env(safe-area-inset-bottom, 20px));
             padding-bottom: env(safe-area-inset-bottom, 20px);
         }
 
@@ -331,15 +347,15 @@
     <div id="choice-layer" class="monetization-layer" style="display: none;">
         <div class="monetization-overlay"></div>
         <div class="monetization-content">
-            <h2 style="margin-bottom: 20px;">اختر سيرفر المشاهدة</h2>
+            <h2 style="margin-bottom: 15px; margin-top: -20px;">اختر سيرفر المشاهدة</h2>
 
             <!-- Pollfish Always-Visible Button -->
-            <div id="pollfish-area" style="margin-bottom: 25px;">
+            <div id="pollfish-area" style="margin-bottom: 20px;">
                 <button class="choice-btn" onclick="tryShowPollfish()"
-                    style="background: linear-gradient(135deg, #f5af19 0%, #f12711 100%); font-size: 16px; padding: 14px 30px; border: 2px solid #fff; box-shadow: 0 0 15px rgba(245, 175, 25, 0.4); border-radius: 30px; width: auto;">
+                    style="background: linear-gradient(135deg, #f5af19 0%, #f12711 100%); font-size: 16px; padding: 12px 25px; border: 2px solid #fff; box-shadow: 0 0 15px rgba(245, 175, 25, 0.4); border-radius: 30px; width: auto; margin-top: 5px;">
                     ⚽ صوّت للاعبك المفضل!</button>
-                <p style="font-size: 12px; margin-top: 8px; color: rgba(255,255,255,0.6);">شارك رأيك واربح مكافآت</p>
-                <div style="width: 50px; height: 2px; background: rgba(255,255,255,0.2); margin: 20px auto;"></div>
+                <p style="font-size: 11px; margin-top: 5px; color: rgba(255,255,255,0.6);">شارك رأيك واربح مكافآت</p>
+                <div style="width: 50px; height: 1px; background: rgba(255,255,255,0.1); margin: 15px auto 5px;"></div>
             </div>
 
             <div class="choice-cards" id="server-cards-container"></div>
