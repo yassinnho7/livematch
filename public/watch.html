@@ -52,7 +52,7 @@
             const toast = document.createElement('div');
             toast.textContent = message;
             toast.style.position = 'fixed';
-            toast.style.bottom = '20px';
+            toast.style.bottom = '100px'; /* Move higher */
             toast.style.left = '50%';
             toast.style.transform = 'translateX(-50%)';
             toast.style.background = 'rgba(255, 71, 87, 0.9)';
@@ -94,7 +94,7 @@
         /* UI Controls: Back & Fullscreen (Professional Centered Stack) */
         .controls-wrapper {
             position: absolute;
-            bottom: calc(50px + env(safe-area-inset-bottom, 20px));
+            bottom: calc(85px + env(safe-area-inset-bottom, 20px));
             padding-bottom: env(safe-area-inset-bottom, 20px);
         }
 
@@ -119,19 +119,19 @@
         }
 
         .back-btn {
-            padding: 10px 25px;
-            border-radius: 30px;
+            padding: 8px 18px;
+            border-radius: 20px;
             font-weight: 700;
-            font-size: 14px;
+            font-size: 13px;
             text-decoration: none;
             white-space: nowrap;
         }
 
         .fullscreen-btn {
-            width: 55px;
-            height: 55px;
+            width: 45px;
+            height: 45px;
             border-radius: 50%;
-            font-size: 24px;
+            font-size: 20px;
         }
 
         /* Fullscreen Auto-hide Behavior */
@@ -182,6 +182,9 @@
             align-items: center;
             justify-content: center;
             direction: rtl;
+            overflow-y: auto;
+            /* Enable scroll if content is too tall */
+            padding: 20px 0;
         }
 
         .monetization-overlay {
@@ -199,6 +202,9 @@
             text-align: center;
             color: #fff;
             z-index: 1;
+            width: 100%;
+            max-width: 500px;
+            padding: 10px;
         }
 
         /* Countdown */
@@ -251,9 +257,10 @@
         .choice-card {
             background: rgba(255, 255, 255, 0.08);
             border: 1px solid rgba(255, 255, 255, 0.15);
-            border-radius: 15px;
-            padding: 20px;
-            min-width: 250px;
+            border-radius: 12px;
+            padding: 15px;
+            min-width: 160px;
+            /* Smaller for mobile */
             cursor: pointer;
             transition: transform 0.2s;
         }
