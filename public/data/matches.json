@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-02-04T21:55:44.973Z",
+  "generated_at": "2026-02-04T22:20:14.664Z",
   "count": 5,
   "matches": [
     {
@@ -70,7 +70,7 @@
       "id": 32724590,
       "date": "2026-02-04T20:00:00.000Z",
       "timestamp": 1770235200,
-      "status": "LIVE",
+      "status": "FT",
       "time": "20:00",
       "time_label": "20:00 GMT",
       "league": {
@@ -95,14 +95,6 @@
           "channel": "bein1",
           "url": "https://pl.koooralive.click/albaplayer/bein1",
           "priority": 1
-        },
-        {
-          "id": "stream_siiir_32724590",
-          "source": "siiir",
-          "quality": "VIP",
-          "channel": "VIP Server",
-          "url": "https://eyj0exaioijkv1qilcjhbgcioijiuzi1nij99sss.yallashot.us/playerv2.php?match=match1&key=c0ae1abba6eebd7e6cc5b88b1d2B71547",
-          "priority": 2
         }
       ]
     },
@@ -110,7 +102,7 @@
       "id": 1522938057,
       "date": "2026-02-04T20:00:00.000Z",
       "timestamp": 1770235200,
-      "status": "LIVE",
+      "status": "FT",
       "time": "20:00",
       "time_label": "20:00 GMT",
       "league": {
@@ -135,14 +127,6 @@
           "channel": "ad-premium-1",
           "url": "https://pl.koooralive.click/albaplayer/ad-premium-1",
           "priority": 1
-        },
-        {
-          "id": "stream_siiir_1522938057",
-          "source": "siiir",
-          "quality": "VIP",
-          "channel": "VIP Server",
-          "url": "https://eyj0exaioijkv1qilcjhbgcioijiuzi1nij99sss.yallashot.us/playerv2.php?match=match5&key=c0ae1abba6eebd7e6cc5b88b1d2B71547",
-          "priority": 2
         }
       ]
     },
@@ -150,7 +134,7 @@
       "id": 1397981985,
       "date": "2026-02-04T20:00:00.000Z",
       "timestamp": 1770235200,
-      "status": "LIVE",
+      "status": "FT",
       "time": "20:00",
       "time_label": "20:00 GMT",
       "league": {
@@ -175,14 +159,6 @@
           "channel": "ch2",
           "url": "https://pl.koooralive.click/albaplayer/ch2",
           "priority": 1
-        },
-        {
-          "id": "stream_siiir_1397981985",
-          "source": "siiir",
-          "quality": "VIP",
-          "channel": "VIP Server",
-          "url": "https://eyj0exaioijkv1qilcjhbgcioijiuzi1nij99sss.yallashot.us/playerv2.php?match=match3&key=c0ae1abba6eebd7e6cc5b88b1d2B71547",
-          "priority": 2
         }
       ]
     }
