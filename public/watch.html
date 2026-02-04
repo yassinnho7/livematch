@@ -399,9 +399,18 @@
             const timer = setInterval(() => {
                 countdown--; el.textContent = countdown;
                 progress.style.strokeDashoffset = circ - (countdown / 8) * circ;
-                if (countdown <= 0) { clearInterval(timer); document.getElementById('countdown-area').style.display = 'none'; document.dispatchEvent(new Event('countdownFinished')); }
+                if (countdown <= 0) {
+                    clearInterval(timer);
+                    document.getElementById('countdown-area').style.display = 'none';
+                    document.dispatchEvent(new Event('countdownFinished'));
+                }
             }, 1000);
         }
+
+        // Restore missing listener to show choice layer
+        document.addEventListener('countdownFinished', () => {
+            document.getElementById('choice-layer').style.display = 'flex';
+        });
 
         function renderServers() {
             const container = document.getElementById('server-cards-container');
