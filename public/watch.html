@@ -70,7 +70,7 @@
             setTimeout(() => {
                 toast.style.opacity = '0';
                 setTimeout(() => toast.remove(), 300);
-            }, 3000);
+            }, 1500); // Faster duration (1.5s)
         }
     </script>
     <script src="https://storage.googleapis.com/pollfish_production/sdk/webplugin/pollfish.min.js"></script>
@@ -95,10 +95,24 @@
         .controls-wrapper {
             position: absolute;
             bottom: calc(85px + env(safe-area-inset-bottom, 20px));
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 2147483647;
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+            transition: opacity 0.5s, transform 0.5s;
             padding-bottom: env(safe-area-inset-bottom, 20px);
+            pointer-events: none;
+            /* Let clicks pass through unless on children */
         }
 
         .ui-control {
+            pointer-events: auto;
+            /* Buttons MUST capture clicks */
+            position: relative;
+            z-index: 2147483647;
             background: rgba(30, 40, 60, 0.95);
             border: 1px solid rgba(255, 255, 255, 0.3);
             color: #fff;
@@ -110,6 +124,8 @@
             justify-content: center;
             user-select: none;
             transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            /* Increased Touch Area */
+            margin: 5px;
         }
 
         .ui-control:hover {
@@ -513,29 +529,44 @@
             const toggleFS = () => {
                 if (!document.fullscreenElement) {
                     const rfs = container.requestFullscreen || container.webkitRequestFullscreen || container.mozRequestFullScreen || container.msRequestFullscreen;
-                    rfs.call(container).then(() => {
-                        document.body.classList.add('is-fullscreen');
-                        fsBtn.textContent = '❐';
-                        if (screen.orientation && screen.orientation.lock) {
-                            screen.orientation.lock('landscape').catch(() => { });
-                        }
-                    }).catch(err => {
-                        // iOS / Mobile fallback if API is restricted
-                        container.style.width = '100vw';
-                        container.style.height = '100vh';
-                        document.body.classList.add('is-fullscreen');
-                        fsBtn.textContent = '❐';
-                    });
+                    if (rfs) {
+                        rfs.call(container).then(() => {
+                            document.body.classList.add('is-fullscreen');
+                            fsBtn.textContent = '❐';
+                            if (screen.orientation && screen.orientation.lock) {
+                                screen.orientation.lock('landscape').catch(() => { });
+                            }
+                        }).catch(err => {
+                            // Mobile/iOS fallback
+                            container.style.width = '100vw';
+                            container.style.height = '100vh';
+                            document.body.classList.add('is-fullscreen');
+                            fsBtn.textContent = '❐';
+                        });
+                    }
                 } else {
-                    document.exitFullscreen();
+                    if (document.exitFullscreen) {
+                        document.exitFullscreen().then(() => {
+                            if (screen.orientation && screen.orientation.unlock) {
+                                screen.orientation.unlock();
+                            }
+                        }).catch(() => { });
+                    } else if (document.webkitExitFullscreen) {
+                        document.webkitExitFullscreen();
+                    }
                 }
             };
 
-            fsBtn.onclick = toggleFS;
+            fsBtn.onclick = (e) => {
+                e.stopPropagation(); // Don't trigger iframe activity
+                toggleFS();
+            };
 
-            document.addEventListener('fullscreenchange', () => {
-                if (!document.fullscreenElement) {
+            const onFSChange = () => {
+                if (!document.fullscreenElement && !document.webkitFullscreenElement) {
                     document.body.classList.remove('is-fullscreen');
+                    container.style.width = '';
+                    container.style.height = '';
                     fsBtn.textContent = '⛶';
                     controls.classList.add('visible');
                     document.body.style.cursor = 'default';
@@ -543,7 +574,10 @@
                     document.body.classList.add('is-fullscreen');
                     showControls();
                 }
-            });
+            };
+
+            document.addEventListener('fullscreenchange', onFSChange);
+            document.addEventListener('webkitfullscreenchange', onFSChange);
 
             // Activity listeners
             window.addEventListener('mousemove', showControls);
