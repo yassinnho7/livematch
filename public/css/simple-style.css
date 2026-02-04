@@ -213,3 +213,97 @@ body {
         order: -1;
     }
 }
+
+/* ======================== */
+/* Skeleton Loading States  */
+/* ======================== */
+.skeleton-card {
+    pointer-events: none;
+}
+
+.skeleton {
+    background: linear-gradient(90deg, #2d3748 25%, #3d4a5c 50%, #2d3748 75%);
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+    border-radius: 4px;
+}
+
+.skeleton-logo {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+}
+
+.skeleton-text {
+    width: 80px;
+    height: 16px;
+}
+
+.skeleton-time {
+    width: 60px;
+    height: 20px;
+}
+
+.skeleton-vs {
+    width: 30px;
+    height: 14px;
+    margin-top: 6px;
+}
+
+@keyframes shimmer {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+}
+
+/* ======================== */
+/* Error & Empty States     */
+/* ======================== */
+.error-state,
+.empty-state {
+    text-align: center;
+    padding: 60px 20px;
+    background: #1e293b;
+    border-radius: 12px;
+}
+
+.error-icon,
+.empty-icon {
+    font-size: 48px;
+    margin-bottom: 16px;
+}
+
+.error-message {
+    font-size: 18px;
+    font-weight: 600;
+    color: #ff6b6b;
+    margin-bottom: 20px;
+}
+
+.empty-message {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+.empty-hint {
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.retry-btn {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: #fff;
+    border: none;
+    padding: 12px 32px;
+    border-radius: 25px;
+    font-size: 16px;
+    font-weight: 600;
+    font-family: 'Cairo', sans-serif;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.retry-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 20px rgba(102, 126, 234, 0.4);
+}

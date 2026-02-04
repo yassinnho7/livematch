@@ -65,16 +65,15 @@
 
     <script src="js/matches-v2.js"></script>
     <script>
-        // PWA Disabled - Force Unregister existing workers
+        // PWA Smart Service Worker - Re-enabled
         if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.getRegistrations().then(function (registrations) {
-                for (let registration of registrations) {
-                    registration.unregister().then(function (boolean) {
-                        console.log('🧹 Service Worker Unregistered:', boolean);
-                        if (boolean) window.location.reload();
-                    });
-                }
-            });
+            navigator.serviceWorker.register('/sw.js')
+                .then(registration => {
+                    console.log('🎯 Smart SW registered:', registration.scope);
+                    // Check for updates every 5 minutes
+                    setInterval(() => registration.update(), 5 * 60 * 1000);
+                })
+                .catch(err => console.log('SW registration failed:', err));
         }
     </script>
 </body>
