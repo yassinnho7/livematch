@@ -51,12 +51,12 @@
             toast.style.position = 'fixed';
             toast.style.top = '0';
             toast.style.left = '0';
-            toast.style.width = '100%';
+            toast.style.width = '100vw';
             toast.style.background = 'rgba(255, 71, 87, 0.95)';
             toast.style.color = '#fff';
             toast.style.padding = '8px 10px';
             toast.style.textAlign = 'center';
-            toast.style.zIndex = '999999';
+            toast.style.zIndex = '2147483647';
             toast.style.fontSize = '12px';
             toast.style.fontWeight = 'bold';
             toast.style.transition = 'transform 0.4s ease';
@@ -89,38 +89,39 @@
         /* UI Controls Layer */
         .controls-wrapper {
             position: absolute;
-            bottom: calc(85px + env(safe-area-inset-bottom, 20px));
+            bottom: 85px;
             left: 50%;
             transform: translateX(-50%);
             z-index: 2147483647;
             display: none;
             flex-direction: column;
             align-items: center;
-            gap: 15px;
-            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            gap: 12px;
+            transition: all 0.5s ease;
             pointer-events: none;
         }
 
         .ui-control {
             pointer-events: auto;
             position: relative;
-            background: rgba(30, 40, 60, 0.95);
-            border: 1px solid rgba(255, 255, 255, 0.3);
+            background: rgba(30, 40, 60, 0.92);
+            border: 1px solid rgba(255, 255, 255, 0.2);
             color: #fff;
             cursor: pointer;
-            backdrop-filter: blur(12px);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(8px);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
             display: flex;
             align-items: center;
             justify-content: center;
             transition: all 0.2s ease;
+            user-select: none;
         }
 
         .back-btn {
-            padding: 8px 18px;
+            padding: 8px 20px;
             border-radius: 20px;
             font-weight: 700;
-            font-size: 13px;
+            font-size: 14px;
             text-decoration: none;
         }
 
@@ -131,43 +132,55 @@
             font-size: 20px;
         }
 
-        /* Fullscreen DIM & HIDE Behavior */
+        /* Fullscreen HIDE/SHOW Logic */
+        body.is-fullscreen .controls-wrapper {
+            opacity: 0;
+            pointer-events: none;
+            transform: translate(-50%, 20px);
+        }
+
         body.is-fullscreen .controls-wrapper.visible {
             opacity: 0.5;
-            bottom: calc(25px + env(safe-area-inset-bottom, 10px));
+            pointer-events: auto;
+            transform: translate(-50%, 0);
         }
 
         body.is-fullscreen .back-btn {
             display: none;
         }
 
-        /* MOBILE SPECIFIC TUNING */
+        /* MOBILE SPECIFIC TUNING (iPhone/Android) */
         @media (max-width: 768px) {
             .controls-wrapper {
                 left: auto;
                 right: 60px;
-                /* ~2.5cm from right */
-                bottom: calc(65px + env(safe-area-inset-bottom, 20px));
-                /* Lifted Home button */
+                /* Precise Right Spacing */
+                bottom: calc(75px + env(safe-area-inset-bottom, 10px));
+                /* Lifted Home Button */
                 transform: none;
-                gap: 8px;
-            }
-
-            .fullscreen-btn {
-                width: 35px;
-                height: 35px;
-                font-size: 16px;
+                gap: 10px;
             }
 
             .back-btn {
-                padding: 5px 12px;
-                font-size: 10px;
-                border-radius: 12px;
+                padding: 6px 15px;
+                font-size: 12px;
             }
 
+            /* Slightly Larger per request */
+            .fullscreen-btn {
+                width: 32px;
+                height: 32px;
+                font-size: 14px;
+            }
+
+            /* Smaller FS Button */
+
+            /* Fullscreen Mobile View (Landscape) */
             body.is-fullscreen .controls-wrapper {
-                transform: translateX(120px);
-                bottom: calc(25px + env(safe-area-inset-bottom, 10px));
+                transform: translateX(100px);
+                right: 60px;
+                bottom: calc(15px + env(safe-area-inset-bottom, 5px));
+                /* Lowered 1.5cm+ */
             }
 
             body.is-fullscreen .controls-wrapper.visible {
@@ -193,18 +206,13 @@
                 display: none;
             }
 
-            .choice-btn {
-                padding: 8px 15px;
-                font-size: 12px;
-            }
-
             .monetization-content h2 {
                 margin-top: -40px !important;
                 font-size: 18px;
             }
         }
 
-        /* Functional Styles */
+        /* Functional Layers */
         #stream-container {
             width: 100vw;
             height: 100vh;
@@ -257,6 +265,34 @@
             padding: 10px;
         }
 
+        .choice-cards {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 25px;
+        }
+
+        .choice-card {
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .choice-btn {
+            background: #667eea;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-weight: bold;
+            width: 100%;
+            margin-top: 15px;
+            cursor: pointer;
+        }
+
+        /* Countdown Animation */
         .countdown-circle {
             position: relative;
             width: 130px;
@@ -292,53 +328,11 @@
             font-weight: 800;
             color: #667eea;
         }
-
-        .choice-cards {
-            display: flex;
-            gap: 15px;
-            justify-content: center;
-            flex-wrap: wrap;
-            margin-top: 25px;
-        }
-
-        .choice-card {
-            background: rgba(255, 255, 255, 0.08);
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            cursor: pointer;
-            transition: transform 0.2s;
-        }
-
-        .choice-card:hover {
-            transform: translateY(-5px);
-            background: rgba(255, 255, 255, 0.12);
-        }
-
-        .choice-card.premium {
-            border-color: #667eea;
-            background: rgba(102, 126, 234, 0.1);
-        }
-
-        .choice-btn {
-            background: #667eea;
-            color: #fff;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 20px;
-            font-weight: bold;
-            width: 100%;
-            margin-top: 15px;
-            cursor: pointer;
-        }
-
-        .error-msg {
-            font-size: 20px;
-            color: #ff6b6b;
-            margin-top: 20px;
-        }
     </style>
 </head>
 
 <body>
+    <!-- UI Layers -->
     <div id="monetization-layer" class="monetization-layer">
         <div class="monetization-overlay"></div>
         <div class="monetization-content" id="countdown-area">
@@ -386,9 +380,7 @@
     <script>
         const urlParams = new URLSearchParams(window.location.search);
         const matchId = urlParams.get('match');
-        let currentMatch = null;
-        let countdown = 8;
-        let streamUrl = '';
+        let currentMatch = null, countdown = 8, streamUrl = '';
 
         async function init() {
             try {
@@ -402,19 +394,12 @@
         }
 
         function startCountdown() {
-            const el = document.getElementById('countdown');
-            const progress = document.getElementById('countdown-progress');
-            const circ = 2 * Math.PI * 55;
-            progress.style.strokeDasharray = circ;
+            const el = document.getElementById('countdown'), progress = document.getElementById('countdown-progress');
+            const circ = 2 * Math.PI * 55; progress.style.strokeDasharray = circ;
             const timer = setInterval(() => {
-                countdown--;
-                el.textContent = countdown;
+                countdown--; el.textContent = countdown;
                 progress.style.strokeDashoffset = circ - (countdown / 8) * circ;
-                if (countdown <= 0) {
-                    clearInterval(timer);
-                    document.getElementById('countdown-area').style.display = 'none';
-                    document.dispatchEvent(new Event('countdownFinished'));
-                }
+                if (countdown <= 0) { clearInterval(timer); document.getElementById('countdown-area').style.display = 'none'; document.dispatchEvent(new Event('countdownFinished')); }
             }, 1000);
         }
 
@@ -425,7 +410,7 @@
                 const isVIP = stream.source === 'siiir' || idx === 1;
                 const card = document.createElement('div');
                 card.className = `choice-card ${isVIP ? 'premium' : ''}`;
-                card.innerHTML = `<div style="font-size: 28px; margin-bottom: 5px;">${isVIP ? '⚡' : '📺'}</div><h3>سيرفر ${idx + 1} ${isVIP ? '(VIP)' : ''}</h3><button class="choice-btn">شاهد الآن</button>`;
+                card.innerHTML = `<div style="font-size: 24px; margin-bottom: 5px;">${isVIP ? '⚡' : '📺'}</div><h3>سيرفر ${idx + 1}</h3><button class="choice-btn">شاهد الآن</button>`;
                 card.onclick = () => { if (window.monetizationManager) window.monetizationManager.selectServer(idx); };
                 container.appendChild(card);
             });
@@ -434,19 +419,15 @@
         window.selectServer = (idx) => {
             streamUrl = currentMatch.streams[idx].url;
             document.getElementById('choice-layer').style.display = 'none';
-            loadStream();
+            container.style.display = 'block'; iframe.src = streamUrl;
+            document.getElementById('ui-controls').style.display = 'flex';
+            initControlBehavior(document.getElementById('ui-controls'), document.getElementById('fs-toggle-btn'), document.getElementById('back-home-btn'), document.getElementById('stream-container'));
         };
 
-        function loadStream() {
-            const iframe = document.getElementById('stream');
-            const container = document.getElementById('stream-container');
-            if (!streamUrl.includes('albaplayer/') && !streamUrl.includes('siiir') && !streamUrl.includes('yallashot.us') && !streamUrl.includes('playerv2.php')) {
-                return showError('يرجى العودة قبل المباراة بـ 15 دقيقة.');
-            }
-            container.style.display = 'block'; iframe.src = streamUrl;
-            const controls = document.getElementById('ui-controls');
-            controls.style.display = 'flex';
-            initControlBehavior(controls, document.getElementById('fs-toggle-btn'), document.getElementById('back-home-btn'), container);
+        const iframe = document.getElementById('stream'), container = document.getElementById('stream-container');
+
+        function showError(msg) {
+            document.getElementById('monetization-layer').innerHTML = `<div class="monetization-overlay"></div><div class="monetization-content"><h2>⚠️ ${msg}</h2><a href="/" style="color:#667eea;display:block;margin-top:20px;font-weight:bold;text-decoration:none;">العودة للرئيسية</a></div>`;
         }
 
         function initControlBehavior(controls, fsBtn, backBtn, container) {
@@ -494,20 +475,8 @@
             window.addEventListener('mousemove', showControls);
             showControls();
         }
-
-        function showError(msg) {
-            document.getElementById('monetization-layer').innerHTML = `
-                <div class="monetization-overlay"></div>
-                <div class="monetization-content">
-                    <h2 class="error-msg">⚠️ ${msg}</h2>
-                    <a href="/" style="color: #667eea; display: block; margin-top: 20px; font-weight: bold; text-decoration: none;">العودة للرئيسية</a>
-                </div>
-            `;
-        }
         init();
     </script>
-    <script src="/js/config.js"></script>
-    <script type="module" src="/js/monetization-v2.js"></script>
 </body>
 
 </html>
