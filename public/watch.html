@@ -118,7 +118,7 @@
         }
 
         .back-btn {
-            padding: 8px 20px;
+            padding: 10px 22px;
             border-radius: 20px;
             font-weight: 700;
             font-size: 14px;
@@ -132,7 +132,7 @@
             font-size: 20px;
         }
 
-        /* Fullscreen HIDE/SHOW Logic */
+        /* Fullscreen Behavior */
         body.is-fullscreen .controls-wrapper {
             opacity: 0;
             pointer-events: none;
@@ -149,38 +149,31 @@
             display: none;
         }
 
-        /* MOBILE SPECIFIC TUNING (iPhone/Android) */
+        /* MOBILE SPECIFIC TUNING */
         @media (max-width: 768px) {
             .controls-wrapper {
                 left: auto;
                 right: 60px;
-                /* Precise Right Spacing */
-                bottom: calc(75px + env(safe-area-inset-bottom, 10px));
-                /* Lifted Home Button */
+                bottom: calc(85px + env(safe-area-inset-bottom, 10px));
                 transform: none;
                 gap: 10px;
             }
 
             .back-btn {
-                padding: 6px 15px;
-                font-size: 12px;
+                padding: 8px 18px;
+                font-size: 13px;
             }
 
-            /* Slightly Larger per request */
             .fullscreen-btn {
-                width: 32px;
-                height: 32px;
-                font-size: 14px;
+                width: 34px;
+                height: 34px;
+                font-size: 16px;
             }
 
-            /* Smaller FS Button */
-
-            /* Fullscreen Mobile View (Landscape) */
             body.is-fullscreen .controls-wrapper {
                 transform: translateX(100px);
                 right: 60px;
                 bottom: calc(15px + env(safe-area-inset-bottom, 5px));
-                /* Lowered 1.5cm+ */
             }
 
             body.is-fullscreen .controls-wrapper.visible {
@@ -193,14 +186,13 @@
             }
 
             .choice-card {
-                min-width: 145px;
-                /* Increased size */
-                padding: 12px;
+                min-width: 155px;
+                padding: 15px;
                 border-radius: 12px;
             }
 
             .choice-card h3 {
-                font-size: 13px;
+                font-size: 14px;
             }
 
             .choice-card p {
@@ -209,11 +201,11 @@
 
             .monetization-content h2 {
                 margin-top: -40px !important;
-                font-size: 18px;
+                font-size: 19px;
             }
         }
 
-        /* Functional Layers */
+        /* Essential Layers */
         #stream-container {
             width: 100vw;
             height: 100vh;
@@ -232,7 +224,7 @@
         }
 
         .monetization-layer {
-            position: fixed;
+            position: absolute;
             top: 0;
             left: 0;
             width: 100%;
@@ -280,7 +272,6 @@
             cursor: pointer;
             transition: transform 0.2s;
             min-width: 180px;
-            /* Increased desktop size */
             padding: 20px;
             border-radius: 15px;
         }
@@ -297,7 +288,6 @@
             cursor: pointer;
         }
 
-        /* Countdown Animation */
         .countdown-circle {
             position: relative;
             width: 130px;
@@ -337,11 +327,10 @@
 </head>
 
 <body>
-    <!-- UI Layers -->
     <div id="monetization-layer" class="monetization-layer">
         <div class="monetization-overlay"></div>
         <div class="monetization-content" id="countdown-area">
-            <h2 style="margin-bottom: 10px;">جاري تحضير البث...</h2>
+            <h2 style="margin-bottom: 15px;">جاري تحضير البث المباشر...</h2>
             <div class="countdown-circle">
                 <svg width="130" height="130">
                     <circle cx="65" cy="65" r="55" class="countdown-bg"></circle>
@@ -349,24 +338,20 @@
                 </svg>
                 <div class="countdown-number" id="countdown">8</div>
             </div>
-            <p style="margin-bottom: 20px;">انتظر قليلاً لتجهيز السيرفرات الآمنة...</p>
-            <div id="countdown-ad-banner" style="display: flex; justify-content: center;">
-                <script>atOptions = { 'key': '2895cfc4a233371917690acdf46458f6', 'format': 'iframe', 'height': 250, 'width': 300, 'params': {} };</script>
-                <script src="https://www.highperformanceformat.com/2895cfc4a233371917690acdf46458f6/invoke.js"></script>
-            </div>
+            <p>انتظر ثواني لتجهيز السيرفرات الأكثر استقراراً...</p>
         </div>
     </div>
 
     <div id="choice-layer" class="monetization-layer" style="display: none;">
         <div class="monetization-overlay"></div>
         <div class="monetization-content">
-            <h2 style="margin-bottom: 15px; margin-top: -40px;">اختر سيرفر المشاهدة</h2>
-            <div id="pollfish-area" style="margin-bottom: 20px;">
+            <h2 style="margin-bottom: 20px; margin-top: -40px;">اختر سيرفر المشاهدة</h2>
+            <div id="pollfish-area" style="margin-bottom: 25px;">
                 <button class="choice-btn" onclick="tryShowPollfish()"
                     style="background: linear-gradient(135deg, #f5af19 0%, #f12711 100%); font-size: 16px; padding: 12px 25px; border: 2px solid #fff; box-shadow: 0 0 15px rgba(245, 175, 25, 0.4); border-radius: 30px; width: auto; margin-top: 5px;">⚽
                     صوّت للاعبك المفضل!</button>
-                <p style="font-size: 11px; margin-top: 5px; color: rgba(255,255,255,0.6);">شارك رأيك واربح مكافآت</p>
-                <div style="width: 50px; height: 1px; background: rgba(255,255,255,0.1); margin: 15px auto 5px;"></div>
+                <p style="font-size: 11px; margin-top: 5px; color: rgba(255,255,255,0.6);">شارك رأيك واربح مكافآت بدون
+                    إعلانات</p>
             </div>
             <div class="choice-cards" id="server-cards-container"></div>
         </div>
@@ -387,15 +372,19 @@
         const matchId = urlParams.get('match');
         let currentMatch = null, countdown = 8, streamUrl = '';
 
+        // Pre-fetch DOM elements to avoid scope issues
+        const getStreamFrame = () => document.getElementById('stream');
+        const getStreamContainer = () => document.getElementById('stream-container');
+
         async function init() {
             try {
                 const res = await fetch(`data/matches.json?t=${Date.now()}`, { cache: 'no-store' });
                 const data = await res.json();
                 currentMatch = data.matches.find(m => m.id == matchId);
-                if (!currentMatch) return showError('البث غير متوفر');
+                if (!currentMatch) return showError('البث غير متوفر حالياً');
                 renderServers();
                 startCountdown();
-            } catch (e) { showError('خطأ في التحميل'); }
+            } catch (e) { showError('خطأ في تحميل البيانات'); }
         }
 
         function startCountdown() {
@@ -406,16 +395,11 @@
                 progress.style.strokeDashoffset = circ - (countdown / 8) * circ;
                 if (countdown <= 0) {
                     clearInterval(timer);
-                    document.getElementById('countdown-area').style.display = 'none';
-                    document.dispatchEvent(new Event('countdownFinished'));
+                    document.getElementById('monetization-layer').style.display = 'none';
+                    document.getElementById('choice-layer').style.display = 'flex';
                 }
             }, 1000);
         }
-
-        // Restore missing listener to show choice layer
-        document.addEventListener('countdownFinished', () => {
-            document.getElementById('choice-layer').style.display = 'flex';
-        });
 
         function renderServers() {
             const container = document.getElementById('server-cards-container');
@@ -424,27 +408,29 @@
                 const isVIP = stream.source === 'siiir' || idx === 1;
                 const card = document.createElement('div');
                 card.className = `choice-card ${isVIP ? 'premium' : ''}`;
-                card.innerHTML = `<div style="font-size: 28px; margin-bottom: 8px;">${isVIP ? '⚡' : '📺'}</div><h3>سيرفر ${idx + 1}</h3><button class="choice-btn">شاهد الآن</button>`;
-                card.onclick = () => {
-                    if (window.monetizationManager && typeof window.monetizationManager.selectServer === 'function') {
-                        window.monetizationManager.selectServer(idx);
-                    } else {
-                        window.selectServer(idx);
-                    }
-                };
+                card.innerHTML = `<div style="font-size: 32px; margin-bottom: 10px;">${isVIP ? '⚡' : '📺'}</div><h3>سيرفر ${idx + 1}</h3><button class="choice-btn">شاهد الآن</button>`;
+                card.onclick = () => window.selectServer(idx);
                 container.appendChild(card);
             });
         }
 
         window.selectServer = (idx) => {
-            streamUrl = currentMatch.streams[idx].url;
-            document.getElementById('choice-layer').style.display = 'none';
-            container.style.display = 'block'; iframe.src = streamUrl;
-            document.getElementById('ui-controls').style.display = 'flex';
-            initControlBehavior(document.getElementById('ui-controls'), document.getElementById('fs-toggle-btn'), document.getElementById('back-home-btn'), document.getElementById('stream-container'));
-        };
+            const selected = currentMatch.streams[idx];
+            if (!selected || !selected.url) return showToast('السيرفر غير متاح');
 
-        const iframe = document.getElementById('stream'), container = document.getElementById('stream-container');
+            streamUrl = selected.url;
+            document.getElementById('choice-layer').style.display = 'none';
+
+            const frame = getStreamFrame();
+            const cont = getStreamContainer();
+
+            cont.style.display = 'block';
+            frame.src = streamUrl;
+
+            const controls = document.getElementById('ui-controls');
+            controls.style.display = 'flex';
+            initControlBehavior(controls, document.getElementById('fs-toggle-btn'), document.getElementById('back-home-btn'), cont);
+        };
 
         function showError(msg) {
             document.getElementById('monetization-layer').innerHTML = `<div class="monetization-overlay"></div><div class="monetization-content"><h2>⚠️ ${msg}</h2><a href="/" style="color:#667eea;display:block;margin-top:20px;font-weight:bold;text-decoration:none;">العودة للرئيسية</a></div>`;
@@ -466,7 +452,6 @@
                     if (rfs) {
                         rfs.call(container).then(() => {
                             document.body.classList.add('is-fullscreen'); fsBtn.textContent = '❐';
-                            if (screen.orientation && screen.orientation.lock) screen.orientation.lock('landscape').catch(() => { });
                         }).catch(() => {
                             container.style.width = '100vw'; container.style.height = '100vh';
                             document.body.classList.add('is-fullscreen'); fsBtn.textContent = '❐';
