@@ -28,11 +28,35 @@
     function gtag() { dataLayer.push(arguments); }
     window.gtag = gtag; // Make global
 
-    gtag('js', new Date());
-    gtag('config', gaId, {
-        'page_title': document.title,
-        'page_path': window.location.pathname + window.location.search
+    // 4. Helper: Track Custom Event
+    window.trackEvent = function (eventName, params = {}) {
+        if (!window.gtag) return;
+        gtag('event', eventName, params);
+        console.log(`📊 Event Sent: ${eventName}`, params);
+    };
+
+    // 5. "Super Event": Detect Rage Clicks (User Frustration)
+    let clickConfig = { count: 0, lastTime: 0, element: null };
+    document.addEventListener('click', (e) => {
+        const now = Date.now();
+        const el = e.target;
+
+        if (now - clickConfig.lastTime < 300 && clickConfig.element === el) {
+            clickConfig.count++;
+            if (clickConfig.count === 3) { // 3 Rapid clicks on same element
+                trackEvent('user_frustration', {
+                    type: 'rage_click',
+                    element_tag: el.tagName,
+                    element_text: el.innerText.substring(0, 20),
+                    element_class: el.className
+                });
+            }
+        } else {
+            clickConfig.count = 1;
+            clickConfig.element = el;
+        }
+        clickConfig.lastTime = now;
     });
 
-    console.log('✅ Analytics Loaded Successfully.');
+    console.log('✅ Analytics Loaded Successfully (Advanced Mode).');
 })();

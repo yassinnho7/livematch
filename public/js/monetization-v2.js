@@ -51,6 +51,15 @@ class MonetizationManager {
     }
 
     selectServer(index) {
+        // Track Selection
+        if (window.trackEvent) {
+            trackEvent('select_server', {
+                server_index: index,
+                is_vip: index === 0 ? false : true, // Just an example logic
+                server_type: index === 0 ? 'standard' : 'vip'
+            });
+        }
+
         // Ad-Maven popunder logic handled by external script + interaction
         document.getElementById('choice-layer').style.display = 'none';
         if (typeof window.selectServer === 'function') window.selectServer(index);

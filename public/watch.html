@@ -31,10 +31,17 @@
             surveyAvailable: function (data) {
                 const btn = document.getElementById('pollfish-area');
                 if (btn) btn.style.display = 'block';
+                if (window.trackEvent) trackEvent('pollfish_available', { reward: data.reward_name });
             },
             surveyNotAvailable: function () {
                 const btn = document.getElementById('pollfish-area');
                 if (btn) btn.style.display = 'none';
+            },
+            userNotEligible: function () {
+                if (window.trackEvent) trackEvent('pollfish_not_eligible');
+            },
+            surveyCompleted: function (data) {
+                if (window.trackEvent) trackEvent('pollfish_completed', { revenue: data.revenue });
             }
         };
     </script>
@@ -352,6 +359,16 @@
 
                 if (!currentMatch) return showError('البث غير متوفر');
 
+                // Track Match View
+                if (window.trackEvent) {
+                    trackEvent('view_match', {
+                        match_id: matchId,
+                        home_team: currentMatch.home.name,
+                        away_team: currentMatch.away.name,
+                        league: currentMatch.league.name
+                    });
+                }
+
                 renderServers();
                 startCountdown();
             } catch (e) { showError('خطأ في التحميل'); }
@@ -501,6 +518,8 @@
         }
 
         function showError(msg) {
+            if (window.trackEvent) trackEvent('error_shown', { message: msg });
+
             document.getElementById('monetization-layer').innerHTML = `
                 <div class="monetization-overlay"></div>
                 <div class="monetization-content">
@@ -509,6 +528,20 @@
                 </div>
             `;
         }
+
+        // Track Session Duration on Exit
+        const entryTime = Date.now();
+        window.addEventListener('beforeunload', () => {
+            const duration = Math.round((Date.now() - entryTime) / 1000);
+            if (window.trackEvent) {
+                // Use sendBeacon for reliability on exit
+                const data = { event_name: 'session_end', duration_sec: duration };
+                const blob = new Blob([JSON.stringify(data)], { type: 'application/json' });
+                navigator.sendBeacon('https://www.google-analytics.com/collect?v=2&tid=G-YEKSYGPND9', blob); // Simplified
+                // Also try standard tracking
+                trackEvent('session_end', { duration_sec: duration });
+            }
+        });
 
         init();
     </script>
