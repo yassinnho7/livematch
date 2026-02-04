@@ -104,7 +104,7 @@ async function loadMatches() {
                 const card = createMatchCard(match);
                 container.appendChild(card);
             } catch (cardError) {
-                console.warn('Error creating card for match:', match.id, cardError);
+                // Silent fail for individual cards
             }
         });
 
@@ -114,7 +114,6 @@ async function loadMatches() {
         }
 
     } catch (error) {
-        console.error('Error loading matches:', error);
 
         // Determine error type and show appropriate message
         if (error.name === 'AbortError') {

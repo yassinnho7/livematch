@@ -65,15 +65,13 @@
 
     <script src="js/matches-v2.js"></script>
     <script>
-        // PWA Smart Service Worker - Re-enabled
+        // PWA Service Worker
         if ('serviceWorker' in navigator) {
             navigator.serviceWorker.register('/sw.js')
                 .then(registration => {
-                    console.log('🎯 Smart SW registered:', registration.scope);
-                    // Check for updates every 5 minutes
                     setInterval(() => registration.update(), 5 * 60 * 1000);
                 })
-                .catch(err => console.log('SW registration failed:', err));
+                .catch(() => { });
         }
     </script>
 </body>

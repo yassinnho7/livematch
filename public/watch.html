@@ -19,21 +19,18 @@
     <!-- Pollfish Integration -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <script>
+        var pollfishSurveyAvailable = false;
         var pollfishConfig = {
             api_key: "665cd4af-841c-49e1-90a2-eb8b85439090",
             debug: false,
             indicator_position: "TOP_RIGHT",
-            ready: function () {
-                console.log("Pollfish Ready");
-            },
+            ready: function () { },
             surveyAvailable: function (data) {
-                const btn = document.getElementById('pollfish-area');
-                if (btn) btn.style.display = 'block';
+                pollfishSurveyAvailable = true;
                 if (window.trackEvent) trackEvent('pollfish_available', { reward: data.reward_name });
             },
             surveyNotAvailable: function () {
-                const btn = document.getElementById('pollfish-area');
-                if (btn) btn.style.display = 'none';
+                pollfishSurveyAvailable = false;
             },
             userNotEligible: function () {
                 if (window.trackEvent) trackEvent('pollfish_not_eligible');
@@ -42,6 +39,14 @@
                 if (window.trackEvent) trackEvent('pollfish_completed', { revenue: data.revenue });
             }
         };
+
+        function tryShowPollfish() {
+            if (pollfishSurveyAvailable && typeof Pollfish !== 'undefined') {
+                Pollfish.showFullSurvey();
+            } else {
+                alert('⚽ المحتوى غير متوفر حالياً، حاول لاحقاً!');
+            }
+        }
     </script>
     <script src="https://storage.googleapis.com/pollfish_production/sdk/webplugin/pollfish.min.js"></script>
 
@@ -65,16 +70,16 @@
         .controls-wrapper {
             position: absolute;
             bottom: 30px;
+            bottom: calc(30px + env(safe-area-inset-bottom, 0px));
             left: 50%;
             transform: translateX(-50%);
             z-index: 2147483647;
-            /* Maximum possible z-index */
             display: none;
-            /* Shown only when stream loaded */
             flex-direction: column;
             align-items: center;
             gap: 15px;
             transition: opacity 0.5s, transform 0.5s;
+            padding-bottom: env(safe-area-inset-bottom, 20px);
         }
 
         .ui-control {
@@ -297,7 +302,7 @@
     <div id="monetization-layer" class="monetization-layer">
         <div class="monetization-overlay"></div>
         <div class="monetization-content" id="countdown-area">
-            <h2>جاري تحضير البث...</h2>
+            <h2 style="margin-bottom: 10px;">جاري تحضير البث...</h2>
             <div class="countdown-circle">
                 <svg width="130" height="130">
                     <circle cx="65" cy="65" r="55" class="countdown-bg"></circle>
@@ -305,8 +310,21 @@
                 </svg>
                 <div class="countdown-number" id="countdown">8</div>
             </div>
-            <p>انتظر قليلاً لتجهيز السيرفرات الآمنة...</p>
-            <div id="adsterra-banner-container" style="margin-top: 20px;"></div>
+            <p style="margin-bottom: 20px;">انتظر قليلاً لتجهيز السيرفرات الآمنة...</p>
+
+            <!-- Adsterra Banner 300x250 -->
+            <div id="countdown-ad-banner" style="display: flex; justify-content: center;">
+                <script>
+                    atOptions = {
+                        'key': '2895cfc4a233371917690acdf46458f6',
+                        'format': 'iframe',
+                        'height': 250,
+                        'width': 300,
+                        'params': {}
+                    };
+                </script>
+                <script src="https://www.highperformanceformat.com/2895cfc4a233371917690acdf46458f6/invoke.js"></script>
+            </div>
         </div>
     </div>
 
@@ -315,15 +333,13 @@
         <div class="monetization-content">
             <h2 style="margin-bottom: 20px;">اختر سيرفر المشاهدة</h2>
 
-            <!-- Pollfish Premium Choice -->
-            <div id="pollfish-area" style="margin-bottom: 30px; display: none;">
-                <button class="choice-btn premium" onclick="Pollfish.showFullSurvey()"
-                    style="background: #ff4757; font-size: 18px; padding: 18px; border: 2px solid #fff; box-shadow: 0 0 20px rgba(255, 71, 87, 0.5);">🎮
-                    Play Now! (شاهد أسرع بدقة VIP)</button>
-                <p
-                    style="font-size: 13px; margin-top: 8px; font-weight: 600; color: #ff6b6b; animation: pulse 2s infinite;">
-                    أكمل استطلاعاً صغيراً لفتح سيرفر المشاهدة السريع فوراً</p>
-                <div style="width: 50px; height: 2px; background: rgba(255,255,255,0.2); margin: 25px auto;"></div>
+            <!-- Pollfish Always-Visible Button -->
+            <div id="pollfish-area" style="margin-bottom: 25px;">
+                <button class="choice-btn" onclick="tryShowPollfish()"
+                    style="background: linear-gradient(135deg, #f5af19 0%, #f12711 100%); font-size: 16px; padding: 14px 30px; border: 2px solid #fff; box-shadow: 0 0 15px rgba(245, 175, 25, 0.4); border-radius: 30px; width: auto;">
+                    ⚽ صوّت للاعبك المفضل!</button>
+                <p style="font-size: 12px; margin-top: 8px; color: rgba(255,255,255,0.6);">شارك رأيك واربح مكافآت</p>
+                <div style="width: 50px; height: 2px; background: rgba(255,255,255,0.2); margin: 20px auto;"></div>
             </div>
 
             <div class="choice-cards" id="server-cards-container"></div>
