@@ -383,7 +383,7 @@
 
         async function init() {
             try {
-                const res = await fetch('data/matches.json');
+                const res = await fetch(`data/matches.json?t=${Date.now()}`, { cache: 'no-store' });
                 const data = await res.json();
                 currentMatch = data.matches.find(m => m.id == matchId);
 

@@ -65,13 +65,20 @@
 
     <script src="js/matches-v2.js"></script>
     <script>
-        // PWA Service Worker
+        // PWA Service Worker - FORCE REFRESH MODE
         if ('serviceWorker' in navigator) {
             navigator.serviceWorker.register('/sw.js')
                 .then(registration => {
-                    setInterval(() => registration.update(), 5 * 60 * 1000);
+                    registration.update(); // Force immediate update check
                 })
                 .catch(() => { });
+        }
+
+        // REINFORCEMENT: Clear lingering caches manually
+        if ('caches' in window) {
+            caches.keys().then(names => {
+                for (let name of names) caches.delete(name);
+            });
         }
     </script>
 </body>

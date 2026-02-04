@@ -58,9 +58,10 @@ async function loadMatches() {
         const controller = new AbortController();
         const timeoutId = setTimeout(() => controller.abort(), 10000);
 
-        const response = await fetch('data/matches.json', {
+        // Cache-busting with timestamp to bypass ANY browser/ISP cache
+        const response = await fetch(`data/matches.json?t=${Date.now()}`, {
             signal: controller.signal,
-            cache: 'no-store' // Always get fresh data
+            cache: 'no-store'
         });
         clearTimeout(timeoutId);
 

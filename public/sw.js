@@ -1,26 +1,34 @@
 /**
- * LiveMatch - Service Worker v3.0 (Disabled)
- * ==========================================
- * الكاشينغ معطل تماماً لتجنب مشاكل الإعلانات والتحديثات
+ * LIVE MATCH - THE CACHE KILLER v4.0 (NUCLEAR OPTION)
+ * ==================================================
+ * هذا السكربت يقتل أي كاش متبقي في متصفح الزائر نهائياً.
  */
 
-const CACHE_NAME = 'livematch-disabled-v3';
-
-// التثبيت: تخطي فوري
 self.addEventListener('install', (event) => {
-    self.skipWaiting();
+    console.log('💀 SW Killer: Installing and clearing...');
+    self.skipWaiting(); // تجاوي الانتظار
 });
 
-// التنشيط: حذف جميع الكاش
 self.addEventListener('activate', (event) => {
+    console.log('💀 SW Killer: Activating and destroying all caches...');
     event.waitUntil(
-        caches.keys().then(keyList => {
-            return Promise.all(keyList.map(key => caches.delete(key)));
-        }).then(() => self.clients.claim())
+        caches.keys().then((keys) => {
+            return Promise.all(
+                keys.map((key) => {
+                    console.log('💥 Destroying cache:', key);
+                    return caches.delete(key);
+                })
+            );
+        }).then(() => {
+            return self.clients.claim(); // السيطرة الفورية
+        })
     );
 });
 
-// الجلب: دائماً من الشبكة (بدون كاش)
+// تعميم قاعدة: لا كاش أبداً، دائماً من الشبكة
 self.addEventListener('fetch', (event) => {
-    event.respondWith(fetch(event.request));
+    event.respondWith(
+        fetch(event.request, { cache: 'no-store' })
+            .catch(() => fetch(event.request))
+    );
 });
