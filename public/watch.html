@@ -12,7 +12,6 @@
 
     <!-- Ad-Maven Monetization System -->
     <script data-cfasync="false" src="//dcbbwymp1bhlf.cloudfront.net/?wbbcd=1241009"></script>
-    <!-- Popunder (1241009) -->
 
     <!-- Pollfish Integration -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
@@ -67,11 +66,10 @@
             setTimeout(() => {
                 toast.style.transform = 'translateY(-100%)';
                 setTimeout(() => toast.remove(), 400);
-            }, 1800);
+            }, 2000);
         }
     </script>
     <script src="https://storage.googleapis.com/pollfish_production/sdk/webplugin/pollfish.min.js"></script>
-
     <script src="/js/ad-maven-internal.js"></script>
 
     <style>
@@ -88,7 +86,7 @@
             overflow: hidden;
         }
 
-        /* UI Controls: Back & Fullscreen */
+        /* UI Controls Layer */
         .controls-wrapper {
             position: absolute;
             bottom: calc(85px + env(safe-area-inset-bottom, 20px));
@@ -99,15 +97,13 @@
             flex-direction: column;
             align-items: center;
             gap: 15px;
-            transition: opacity 0.5s, transform 0.5s;
-            padding-bottom: env(safe-area-inset-bottom, 20px);
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
             pointer-events: none;
         }
 
         .ui-control {
             pointer-events: auto;
             position: relative;
-            z-index: 2147483647;
             background: rgba(30, 40, 60, 0.95);
             border: 1px solid rgba(255, 255, 255, 0.3);
             color: #fff;
@@ -117,61 +113,65 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            user-select: none;
-            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-            margin: 5px;
-        }
-
-        .ui-control:hover {
-            background: #667eea;
-            transform: scale(1.08);
-            border-color: #fff;
+            transition: all 0.2s ease;
         }
 
         .back-btn {
-            padding: 6px 15px;
-            border-radius: 15px;
+            padding: 8px 18px;
+            border-radius: 20px;
             font-weight: 700;
-            font-size: 11px;
+            font-size: 13px;
             text-decoration: none;
-            white-space: nowrap;
         }
 
         .fullscreen-btn {
-            width: 40px;
-            height: 40px;
+            width: 45px;
+            height: 45px;
             border-radius: 50%;
-            font-size: 18px;
+            font-size: 20px;
         }
 
+        /* Fullscreen DIM & HIDE Behavior */
         body.is-fullscreen .controls-wrapper.visible {
-            transform: none;
             opacity: 0.5;
-            /* Dimmed in FS as requested */
+            bottom: calc(25px + env(safe-area-inset-bottom, 10px));
         }
 
         body.is-fullscreen .back-btn {
             display: none;
         }
 
+        /* MOBILE SPECIFIC TUNING */
         @media (max-width: 768px) {
             .controls-wrapper {
                 left: auto;
-                right: 25px;
-                /* ~2.5cm is roughly here */
+                right: 60px;
+                /* ~2.5cm from right */
+                bottom: calc(65px + env(safe-area-inset-bottom, 20px));
+                /* Lifted Home button */
                 transform: none;
-                bottom: calc(50px + env(safe-area-inset-bottom, 20px));
-                align-items: flex-end;
+                gap: 8px;
+            }
+
+            .fullscreen-btn {
+                width: 35px;
+                height: 35px;
+                font-size: 16px;
+            }
+
+            .back-btn {
+                padding: 5px 12px;
+                font-size: 10px;
+                border-radius: 12px;
+            }
+
+            body.is-fullscreen .controls-wrapper {
+                transform: translateX(120px);
+                bottom: calc(25px + env(safe-area-inset-bottom, 10px));
             }
 
             body.is-fullscreen .controls-wrapper.visible {
                 transform: none;
-                opacity: 0.5;
-            }
-
-            body.is-fullscreen .controls-wrapper {
-                transform: translateX(100px);
-                /* Hide to the right */
             }
 
             .monetization-layer {
@@ -180,8 +180,9 @@
             }
 
             .choice-card {
-                min-width: 130px;
+                min-width: 125px;
                 padding: 10px;
+                border-radius: 10px;
             }
 
             .choice-card h3 {
@@ -192,18 +193,18 @@
                 display: none;
             }
 
-            .monetization-content h2 {
-                margin-top: -30px !important;
-                font-size: 18px;
-            }
-
             .choice-btn {
                 padding: 8px 15px;
                 font-size: 12px;
             }
+
+            .monetization-content h2 {
+                margin-top: -40px !important;
+                font-size: 18px;
+            }
         }
 
-        /* Stream Container */
+        /* Functional Styles */
         #stream-container {
             width: 100vw;
             height: 100vh;
@@ -221,7 +222,6 @@
             border: none;
         }
 
-        /* Monetization Layer */
         .monetization-layer {
             position: fixed;
             top: 0;
@@ -257,7 +257,6 @@
             padding: 10px;
         }
 
-        /* Countdown */
         .countdown-circle {
             position: relative;
             width: 130px;
@@ -294,7 +293,6 @@
             color: #667eea;
         }
 
-        /* Server Choice Cards */
         .choice-cards {
             display: flex;
             gap: 15px;
@@ -306,9 +304,6 @@
         .choice-card {
             background: rgba(255, 255, 255, 0.08);
             border: 1px solid rgba(255, 255, 255, 0.15);
-            border-radius: 12px;
-            padding: 15px;
-            min-width: 160px;
             cursor: pointer;
             transition: transform 0.2s;
         }
@@ -344,15 +339,6 @@
 </head>
 
 <body>
-    <script>
-        window.onbeforeunload = null;
-        window.addEventListener('beforeunload', (e) => {
-            delete e['returnValue'];
-            return undefined;
-        });
-        setInterval(() => { window.onbeforeunload = null; }, 500);
-    </script>
-
     <div id="monetization-layer" class="monetization-layer">
         <div class="monetization-overlay"></div>
         <div class="monetization-content" id="countdown-area">
@@ -365,17 +351,8 @@
                 <div class="countdown-number" id="countdown">8</div>
             </div>
             <p style="margin-bottom: 20px;">انتظر قليلاً لتجهيز السيرفرات الآمنة...</p>
-
             <div id="countdown-ad-banner" style="display: flex; justify-content: center;">
-                <script>
-                    atOptions = {
-                        'key': '2895cfc4a233371917690acdf46458f6',
-                        'format': 'iframe',
-                        'height': 250,
-                        'width': 300,
-                        'params': {}
-                    };
-                </script>
+                <script>atOptions = { 'key': '2895cfc4a233371917690acdf46458f6', 'format': 'iframe', 'height': 250, 'width': 300, 'params': {} };</script>
                 <script src="https://www.highperformanceformat.com/2895cfc4a233371917690acdf46458f6/invoke.js"></script>
             </div>
         </div>
@@ -385,15 +362,13 @@
         <div class="monetization-overlay"></div>
         <div class="monetization-content">
             <h2 style="margin-bottom: 15px; margin-top: -40px;">اختر سيرفر المشاهدة</h2>
-
             <div id="pollfish-area" style="margin-bottom: 20px;">
                 <button class="choice-btn" onclick="tryShowPollfish()"
-                    style="background: linear-gradient(135deg, #f5af19 0%, #f12711 100%); font-size: 16px; padding: 12px 25px; border: 2px solid #fff; box-shadow: 0 0 15px rgba(245, 175, 25, 0.4); border-radius: 30px; width: auto; margin-top: 5px;">
-                    ⚽ صوّت للاعبك المفضل!</button>
+                    style="background: linear-gradient(135deg, #f5af19 0%, #f12711 100%); font-size: 16px; padding: 12px 25px; border: 2px solid #fff; box-shadow: 0 0 15px rgba(245, 175, 25, 0.4); border-radius: 30px; width: auto; margin-top: 5px;">⚽
+                    صوّت للاعبك المفضل!</button>
                 <p style="font-size: 11px; margin-top: 5px; color: rgba(255,255,255,0.6);">شارك رأيك واربح مكافآت</p>
                 <div style="width: 50px; height: 1px; background: rgba(255,255,255,0.1); margin: 15px auto 5px;"></div>
             </div>
-
             <div class="choice-cards" id="server-cards-container"></div>
         </div>
     </div>
@@ -402,10 +377,9 @@
         <iframe id="stream" allowfullscreen referrerpolicy="no-referrer"
             allow="autoplay; encrypted-media; fullscreen; picture-in-picture"
             sandbox="allow-scripts allow-same-origin allow-forms allow-presentation"></iframe>
-
         <div class="controls-wrapper" id="ui-controls">
+            <a href="/" class="back-btn ui-control" id="back-home-btn">🏠 الرئيسية</a>
             <button class="fullscreen-btn ui-control" id="fs-toggle-btn" title="ملء الشاشة">⛶</button>
-            <a href="/" class="back-btn ui-control" id="back-home-btn">🏠 العودة للرئيسية</a>
         </div>
     </div>
 
@@ -421,16 +395,7 @@
                 const res = await fetch(`data/matches.json?t=${Date.now()}`, { cache: 'no-store' });
                 const data = await res.json();
                 currentMatch = data.matches.find(m => m.id == matchId);
-
                 if (!currentMatch) return showError('البث غير متوفر');
-
-                if (window.trackEvent) {
-                    trackEvent('view_match', {
-                        match_id: matchId, home_team: currentMatch.home.name,
-                        away_team: currentMatch.away.name, league: currentMatch.league.name
-                    });
-                }
-
                 renderServers();
                 startCountdown();
             } catch (e) { showError('خطأ في التحميل'); }
@@ -441,12 +406,10 @@
             const progress = document.getElementById('countdown-progress');
             const circ = 2 * Math.PI * 55;
             progress.style.strokeDasharray = circ;
-
             const timer = setInterval(() => {
                 countdown--;
                 el.textContent = countdown;
                 progress.style.strokeDashoffset = circ - (countdown / 8) * circ;
-
                 if (countdown <= 0) {
                     clearInterval(timer);
                     document.getElementById('countdown-area').style.display = 'none';
@@ -458,20 +421,12 @@
         function renderServers() {
             const container = document.getElementById('server-cards-container');
             const activeStreams = currentMatch.streams.filter(s => s.url && s.url.length > 5);
-
             activeStreams.forEach((stream, idx) => {
                 const isVIP = stream.source === 'siiir' || idx === 1;
                 const card = document.createElement('div');
                 card.className = `choice-card ${isVIP ? 'premium' : ''}`;
-                card.innerHTML = `
-                    <div style="font-size: 30px; margin-bottom: 8px;">${isVIP ? '⚡' : '📺'}</div>
-                    <h3>سيرفر ${idx + 1} ${isVIP ? '(VIP)' : ''}</h3>
-                    <p>${isVIP ? 'فائق السرعة • بدون إعلانات' : 'جودة عالية'}</p>
-                    <button class="choice-btn">شاهد الآن</button>
-                `;
-                card.onclick = () => {
-                    if (window.monetizationManager) window.monetizationManager.selectServer(idx);
-                };
+                card.innerHTML = `<div style="font-size: 28px; margin-bottom: 5px;">${isVIP ? '⚡' : '📺'}</div><h3>سيرفر ${idx + 1} ${isVIP ? '(VIP)' : ''}</h3><button class="choice-btn">شاهد الآن</button>`;
+                card.onclick = () => { if (window.monetizationManager) window.monetizationManager.selectServer(idx); };
                 container.appendChild(card);
             });
         }
@@ -479,43 +434,28 @@
         window.selectServer = (idx) => {
             streamUrl = currentMatch.streams[idx].url;
             document.getElementById('choice-layer').style.display = 'none';
-            document.body.classList.remove('modal-open');
             loadStream();
         };
 
         function loadStream() {
             const iframe = document.getElementById('stream');
             const container = document.getElementById('stream-container');
-
             if (!streamUrl.includes('albaplayer/') && !streamUrl.includes('siiir') && !streamUrl.includes('yallashot.us') && !streamUrl.includes('playerv2.php')) {
-                return showError('يرجى العودة قبل المباراة بـ 15 دقيقة لتجهيز السيرفر.');
+                return showError('يرجى العودة قبل المباراة بـ 15 دقيقة.');
             }
-
-            container.style.display = 'block';
-            iframe.src = streamUrl;
-
+            container.style.display = 'block'; iframe.src = streamUrl;
             const controls = document.getElementById('ui-controls');
-            const fsBtn = document.getElementById('fs-toggle-btn');
-            const backBtn = document.getElementById('back-home-btn');
             controls.style.display = 'flex';
-
-            initControlBehavior(controls, fsBtn, backBtn, container);
+            initControlBehavior(controls, document.getElementById('fs-toggle-btn'), document.getElementById('back-home-btn'), container);
         }
 
         function initControlBehavior(controls, fsBtn, backBtn, container) {
             let hideTimeout;
-
             const showControls = () => {
                 controls.classList.add('visible');
-                controls.style.opacity = (document.fullscreenElement || document.body.classList.contains('is-fullscreen')) ? '0.5' : '1';
-                document.body.style.cursor = 'default';
                 clearTimeout(hideTimeout);
-
                 hideTimeout = setTimeout(() => {
-                    if (document.fullscreenElement || document.body.classList.contains('is-fullscreen')) {
-                        controls.classList.remove('visible');
-                        document.body.style.cursor = 'none';
-                    }
+                    if (document.fullscreenElement || document.body.classList.contains('is-fullscreen')) controls.classList.remove('visible');
                 }, 2000);
             };
 
@@ -524,51 +464,34 @@
                     const rfs = container.requestFullscreen || container.webkitRequestFullscreen || container.mozRequestFullScreen || container.msRequestFullscreen;
                     if (rfs) {
                         rfs.call(container).then(() => {
-                            document.body.classList.add('is-fullscreen');
-                            fsBtn.textContent = '❐';
-                            if (screen.orientation && screen.orientation.lock) {
-                                screen.orientation.lock('landscape').catch(() => { });
-                            }
+                            document.body.classList.add('is-fullscreen'); fsBtn.textContent = '❐';
+                            if (screen.orientation && screen.orientation.lock) screen.orientation.lock('landscape').catch(() => { });
                         }).catch(() => {
                             container.style.width = '100vw'; container.style.height = '100vh';
-                            document.body.classList.add('is-fullscreen');
-                            fsBtn.textContent = '❐';
+                            document.body.classList.add('is-fullscreen'); fsBtn.textContent = '❐';
                         });
                     }
                 } else {
-                    if (document.exitFullscreen) {
-                        document.exitFullscreen().then(() => {
-                            if (screen.orientation && screen.orientation.unlock) {
-                                screen.orientation.unlock();
-                            }
-                        }).catch(() => { });
-                    } else if (document.webkitExitFullscreen) {
-                        document.webkitExitFullscreen();
-                    }
+                    if (document.exitFullscreen) document.exitFullscreen().catch(() => { });
+                    else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
                 }
             };
 
             fsBtn.onclick = (e) => { e.stopPropagation(); toggleFS(); };
-
             const onFSChange = () => {
-                if (!document.fullscreenElement && !document.webkitFullscreenElement) {
+                const isFS = document.fullscreenElement || document.webkitFullscreenElement;
+                if (!isFS) {
                     document.body.classList.remove('is-fullscreen');
                     container.style.width = ''; container.style.height = '';
-                    fsBtn.textContent = '⛶';
-                    controls.classList.add('visible');
-                    controls.style.opacity = '1';
+                    fsBtn.textContent = '⛶'; controls.classList.add('visible');
                 } else {
-                    document.body.classList.add('is-fullscreen');
-                    showControls();
+                    document.body.classList.add('is-fullscreen'); showControls();
                 }
             };
-
             document.addEventListener('fullscreenchange', onFSChange);
             document.addEventListener('webkitfullscreenchange', onFSChange);
-
-            window.addEventListener('mousemove', showControls);
             window.addEventListener('touchstart', showControls, { passive: true });
-            window.addEventListener('click', showControls);
+            window.addEventListener('mousemove', showControls);
             showControls();
         }
 
@@ -581,10 +504,8 @@
                 </div>
             `;
         }
-
         init();
     </script>
-
     <script src="/js/config.js"></script>
     <script type="module" src="/js/monetization-v2.js"></script>
 </body>
