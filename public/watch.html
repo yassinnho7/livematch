@@ -13,9 +13,7 @@
     <!-- Ad-Maven Monetization System -->
     <script data-cfasync="false" src="//dcbbwymp1bhlf.cloudfront.net/?wbbcd=1241009"></script>
     <!-- Popunder (1241009) -->
-    <!-- <script data-cfasync="false" src="//dcbbwymp1bhlf.cloudfront.net/?wbbcd=1240674"></script> -->
-    <!-- In-Page Push (DISABLED) -->
-    <!-- Version: 2.1.0-shield-activated -->
+
     <!-- Pollfish Integration -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <script>
@@ -55,23 +53,21 @@
             toast.style.top = '0';
             toast.style.left = '0';
             toast.style.width = '100%';
-            toast.style.transform = 'translateY(-100%)';
-            toast.style.background = 'rgba(255, 71, 87, 0.9)';
+            toast.style.background = 'rgba(255, 71, 87, 0.95)';
             toast.style.color = '#fff';
-            toast.style.padding = '12px 24px';
-            toast.style.borderRadius = '25px';
-            toast.style.boxShadow = '0 5px 15px rgba(0,0,0,0.3)';
-            toast.style.zIndex = '99999';
-            toast.style.fontSize = '14px';
+            toast.style.padding = '8px 10px';
+            toast.style.textAlign = 'center';
+            toast.style.zIndex = '999999';
+            toast.style.fontSize = '12px';
             toast.style.fontWeight = 'bold';
-            toast.style.transition = 'opacity 0.3s';
-
+            toast.style.transition = 'transform 0.4s ease';
+            toast.style.transform = 'translateY(-100%)';
             document.body.appendChild(toast);
-
+            setTimeout(() => toast.style.transform = 'translateY(0)', 10);
             setTimeout(() => {
-                toast.style.opacity = '0';
-                setTimeout(() => toast.remove(), 300);
-            }, 1500); // Faster duration (1.5s)
+                toast.style.transform = 'translateY(-100%)';
+                setTimeout(() => toast.remove(), 400);
+            }, 1800);
         }
     </script>
     <script src="https://storage.googleapis.com/pollfish_production/sdk/webplugin/pollfish.min.js"></script>
@@ -92,7 +88,7 @@
             overflow: hidden;
         }
 
-        /* UI Controls: Back & Fullscreen (Professional Centered Stack) */
+        /* UI Controls: Back & Fullscreen */
         .controls-wrapper {
             position: absolute;
             bottom: calc(85px + env(safe-area-inset-bottom, 20px));
@@ -106,12 +102,10 @@
             transition: opacity 0.5s, transform 0.5s;
             padding-bottom: env(safe-area-inset-bottom, 20px);
             pointer-events: none;
-            /* Let clicks pass through unless on children */
         }
 
         .ui-control {
             pointer-events: auto;
-            /* Buttons MUST capture clicks */
             position: relative;
             z-index: 2147483647;
             background: rgba(30, 40, 60, 0.95);
@@ -125,7 +119,6 @@
             justify-content: center;
             user-select: none;
             transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-            /* Increased Touch Area */
             margin: 5px;
         }
 
@@ -151,20 +144,12 @@
             font-size: 18px;
         }
 
-        /* Fullscreen Auto-hide Behavior */
-        body.is-fullscreen .controls-wrapper {
-            opacity: 0;
-            pointer-events: none;
-            transform: translate(-50%, 40px);
-        }
-
         body.is-fullscreen .controls-wrapper.visible {
-            opacity: 1;
-            pointer-events: auto;
-            transform: translate(-50%, 0);
+            transform: none;
+            opacity: 0.5;
+            /* Dimmed in FS as requested */
         }
 
-        /* In FS, user only wants to see the Mini (shrink) button */
         body.is-fullscreen .back-btn {
             display: none;
         }
@@ -173,37 +158,48 @@
             .controls-wrapper {
                 left: auto;
                 right: 25px;
+                /* ~2.5cm is roughly here */
                 transform: none;
-                bottom: calc(40px + env(safe-area-inset-bottom, 20px));
-            }
-
-            body.is-fullscreen .controls-wrapper {
-                transform: translateX(100px);
-                opacity: 0;
+                bottom: calc(50px + env(safe-area-inset-bottom, 20px));
+                align-items: flex-end;
             }
 
             body.is-fullscreen .controls-wrapper.visible {
                 transform: none;
-                opacity: 0.7;
-                /* Semi-transparent in FS to not distract */
+                opacity: 0.5;
+            }
+
+            body.is-fullscreen .controls-wrapper {
+                transform: translateX(100px);
+                /* Hide to the right */
             }
 
             .monetization-layer {
                 align-items: flex-start;
-                padding-top: 40px;
+                padding-top: 30px;
             }
 
             .choice-card {
-                min-width: 140px;
+                min-width: 130px;
                 padding: 10px;
             }
 
             .choice-card h3 {
-                font-size: 14px;
+                font-size: 13px;
             }
 
             .choice-card p {
-                font-size: 11px;
+                display: none;
+            }
+
+            .monetization-content h2 {
+                margin-top: -30px !important;
+                font-size: 18px;
+            }
+
+            .choice-btn {
+                padding: 8px 15px;
+                font-size: 12px;
             }
         }
 
@@ -238,7 +234,6 @@
             justify-content: center;
             direction: rtl;
             overflow-y: auto;
-            /* Enable scroll if content is too tall */
             padding: 20px 0;
         }
 
@@ -286,7 +281,6 @@
             stroke-width: 6;
             stroke-linecap: round;
             stroke-dasharray: 345;
-            stroke-dashoffset: 0;
             transition: stroke-dashoffset 1s linear;
         }
 
@@ -303,10 +297,10 @@
         /* Server Choice Cards */
         .choice-cards {
             display: flex;
-            gap: 20px;
+            gap: 15px;
             justify-content: center;
             flex-wrap: wrap;
-            margin-top: 30px;
+            margin-top: 25px;
         }
 
         .choice-card {
@@ -315,7 +309,6 @@
             border-radius: 12px;
             padding: 15px;
             min-width: 160px;
-            /* Smaller for mobile */
             cursor: pointer;
             transition: transform 0.2s;
         }
@@ -347,26 +340,10 @@
             color: #ff6b6b;
             margin-top: 20px;
         }
-
-        @keyframes pulse {
-            0% {
-                opacity: 0.6;
-            }
-
-            50% {
-                opacity: 1;
-                transform: scale(1.02);
-            }
-
-            100% {
-                opacity: 0.6;
-            }
-        }
     </style>
 </head>
 
 <body>
-    <!-- Failsafe Exit Script: Total removal of prompts -->
     <script>
         window.onbeforeunload = null;
         window.addEventListener('beforeunload', (e) => {
@@ -376,7 +353,6 @@
         setInterval(() => { window.onbeforeunload = null; }, 500);
     </script>
 
-    <!-- UI Layers -->
     <div id="monetization-layer" class="monetization-layer">
         <div class="monetization-overlay"></div>
         <div class="monetization-content" id="countdown-area">
@@ -390,7 +366,6 @@
             </div>
             <p style="margin-bottom: 20px;">انتظر قليلاً لتجهيز السيرفرات الآمنة...</p>
 
-            <!-- Adsterra Banner 300x250 -->
             <div id="countdown-ad-banner" style="display: flex; justify-content: center;">
                 <script>
                     atOptions = {
@@ -409,9 +384,8 @@
     <div id="choice-layer" class="monetization-layer" style="display: none;">
         <div class="monetization-overlay"></div>
         <div class="monetization-content">
-            <h2 style="margin-bottom: 15px; margin-top: -20px;">اختر سيرفر المشاهدة</h2>
+            <h2 style="margin-bottom: 15px; margin-top: -40px;">اختر سيرفر المشاهدة</h2>
 
-            <!-- Pollfish Always-Visible Button -->
             <div id="pollfish-area" style="margin-bottom: 20px;">
                 <button class="choice-btn" onclick="tryShowPollfish()"
                     style="background: linear-gradient(135deg, #f5af19 0%, #f12711 100%); font-size: 16px; padding: 12px 25px; border: 2px solid #fff; box-shadow: 0 0 15px rgba(245, 175, 25, 0.4); border-radius: 30px; width: auto; margin-top: 5px;">
@@ -429,7 +403,6 @@
             allow="autoplay; encrypted-media; fullscreen; picture-in-picture"
             sandbox="allow-scripts allow-same-origin allow-forms allow-presentation"></iframe>
 
-        <!-- Controls INSIDE container for FS visibility -->
         <div class="controls-wrapper" id="ui-controls">
             <button class="fullscreen-btn ui-control" id="fs-toggle-btn" title="ملء الشاشة">⛶</button>
             <a href="/" class="back-btn ui-control" id="back-home-btn">🏠 العودة للرئيسية</a>
@@ -451,13 +424,10 @@
 
                 if (!currentMatch) return showError('البث غير متوفر');
 
-                // Track Match View
                 if (window.trackEvent) {
                     trackEvent('view_match', {
-                        match_id: matchId,
-                        home_team: currentMatch.home.name,
-                        away_team: currentMatch.away.name,
-                        league: currentMatch.league.name
+                        match_id: matchId, home_team: currentMatch.home.name,
+                        away_team: currentMatch.away.name, league: currentMatch.league.name
                     });
                 }
 
@@ -465,7 +435,6 @@
                 startCountdown();
             } catch (e) { showError('خطأ في التحميل'); }
         }
-
 
         function startCountdown() {
             const el = document.getElementById('countdown');
@@ -495,9 +464,9 @@
                 const card = document.createElement('div');
                 card.className = `choice-card ${isVIP ? 'premium' : ''}`;
                 card.innerHTML = `
-                    <div style="font-size: 40px; margin-bottom: 10px;">${isVIP ? '⚡' : '📺'}</div>
+                    <div style="font-size: 30px; margin-bottom: 8px;">${isVIP ? '⚡' : '📺'}</div>
                     <h3>سيرفر ${idx + 1} ${isVIP ? '(VIP)' : ''}</h3>
-                    <p>${isVIP ? 'فائق السرعة • بدون إعلانات' : 'جودة عالية • بث مستمر'}</p>
+                    <p>${isVIP ? 'فائق السرعة • بدون إعلانات' : 'جودة عالية'}</p>
                     <button class="choice-btn">شاهد الآن</button>
                 `;
                 card.onclick = () => {
@@ -525,44 +494,29 @@
             container.style.display = 'block';
             iframe.src = streamUrl;
 
-            // Activate UI Controls
             const controls = document.getElementById('ui-controls');
             const fsBtn = document.getElementById('fs-toggle-btn');
             const backBtn = document.getElementById('back-home-btn');
             controls.style.display = 'flex';
 
             initControlBehavior(controls, fsBtn, backBtn, container);
-
-            iframe.onload = () => {
-                try {
-                    const style = document.createElement('style');
-                    style.innerHTML = 'div[class*="pop"], iframe[src*="ad"] { display: none !important; }';
-                    iframe.contentDocument.head.appendChild(style);
-                } catch (e) { }
-            };
         }
 
         function initControlBehavior(controls, fsBtn, backBtn, container) {
             let hideTimeout;
 
             const showControls = () => {
-                // Auto-hide ONLY in fullscreen
-                if (!document.body.classList.contains('is-fullscreen') && !document.fullscreenElement) {
-                    controls.classList.add('visible');
-                    controls.style.opacity = '1';
-                    controls.style.transform = 'translate(-50%, 0)';
-                    return;
-                }
-
                 controls.classList.add('visible');
+                controls.style.opacity = (document.fullscreenElement || document.body.classList.contains('is-fullscreen')) ? '0.5' : '1';
                 document.body.style.cursor = 'default';
                 clearTimeout(hideTimeout);
+
                 hideTimeout = setTimeout(() => {
                     if (document.fullscreenElement || document.body.classList.contains('is-fullscreen')) {
                         controls.classList.remove('visible');
                         document.body.style.cursor = 'none';
                     }
-                }, 2000); // Faster hide (2s)
+                }, 2000);
             };
 
             const toggleFS = () => {
@@ -575,10 +529,8 @@
                             if (screen.orientation && screen.orientation.lock) {
                                 screen.orientation.lock('landscape').catch(() => { });
                             }
-                        }).catch(err => {
-                            // Mobile/iOS fallback
-                            container.style.width = '100vw';
-                            container.style.height = '100vh';
+                        }).catch(() => {
+                            container.style.width = '100vw'; container.style.height = '100vh';
                             document.body.classList.add('is-fullscreen');
                             fsBtn.textContent = '❐';
                         });
@@ -596,19 +548,15 @@
                 }
             };
 
-            fsBtn.onclick = (e) => {
-                e.stopPropagation(); // Don't trigger iframe activity
-                toggleFS();
-            };
+            fsBtn.onclick = (e) => { e.stopPropagation(); toggleFS(); };
 
             const onFSChange = () => {
                 if (!document.fullscreenElement && !document.webkitFullscreenElement) {
                     document.body.classList.remove('is-fullscreen');
-                    container.style.width = '';
-                    container.style.height = '';
+                    container.style.width = ''; container.style.height = '';
                     fsBtn.textContent = '⛶';
                     controls.classList.add('visible');
-                    document.body.style.cursor = 'default';
+                    controls.style.opacity = '1';
                 } else {
                     document.body.classList.add('is-fullscreen');
                     showControls();
@@ -618,18 +566,13 @@
             document.addEventListener('fullscreenchange', onFSChange);
             document.addEventListener('webkitfullscreenchange', onFSChange);
 
-            // Activity listeners
             window.addEventListener('mousemove', showControls);
             window.addEventListener('touchstart', showControls, { passive: true });
             window.addEventListener('click', showControls);
-
-            // Initial state
             showControls();
         }
 
         function showError(msg) {
-            if (window.trackEvent) trackEvent('error_shown', { message: msg });
-
             document.getElementById('monetization-layer').innerHTML = `
                 <div class="monetization-overlay"></div>
                 <div class="monetization-content">
@@ -639,24 +582,9 @@
             `;
         }
 
-        // Track Session Duration on Exit
-        const entryTime = Date.now();
-        window.addEventListener('beforeunload', () => {
-            const duration = Math.round((Date.now() - entryTime) / 1000);
-            if (window.trackEvent) {
-                // Use sendBeacon for reliability on exit
-                const data = { event_name: 'session_end', duration_sec: duration };
-                const blob = new Blob([JSON.stringify(data)], { type: 'application/json' });
-                navigator.sendBeacon('https://www.google-analytics.com/collect?v=2&tid=G-YEKSYGPND9', blob); // Simplified
-                // Also try standard tracking
-                trackEvent('session_end', { duration_sec: duration });
-            }
-        });
-
         init();
     </script>
 
-    <!-- Scripts -->
     <script src="/js/config.js"></script>
     <script type="module" src="/js/monetization-v2.js"></script>
 </body>
