@@ -71,6 +71,9 @@ jobs:
           # Add critical files first (must succeed)
           git add public/data/matches.json
           
+          # Add generated posters (ignore if directory doesn't exist)
+          git add public/posters/*.jpg || true
+          
           # Add optional log files (ignore if missing)
           git add sent_notifications.json || true
           git add sent_telegram_notifications.json || true

@@ -31,6 +31,9 @@ try {
 }
 
 async function generatePosters() {
+    // Clean old posters first
+    await cleanOldPosters();
+
     console.log('🎨 Starting poster generation...');
 
     // Load Data
@@ -175,11 +178,9 @@ async function cleanOldPosters() {
     });
 }
 
-async function generatePosters() {
-    await cleanOldPosters();
-    console.log('🎨 Starting poster generation...');
 
-    // ... rest of the existing function logic (using specific Arabic fix) ...
-    // Note: To handle Arabic RTL correctly in node-canvas, we just need to use the Cairo font 
-    // and ensure text alignment is 'center' or 'right' as needed.
-}
+// Execute the poster generation
+generatePosters().catch(err => {
+    console.error('❌ Fatal error:', err);
+    process.exit(1);
+});

@@ -71,9 +71,7 @@ async function notify() {
                 `🚩 البطولة: ${match.league.name}\n` +
                 `⏳ التوقيت: ${match.time_label || (match.time ? match.time + ' GMT' : 'Soon')}\n` +
                 `🖥️ الجودة: Full HD\n\n` +
-                `📺 شاهد المباراة الآن مجاناً عبر الرابط التالي:\n` +
-                `👇👇👇\n` +
-                `🔗 ${siteUrl}/watch.html?match=${match.id}\n\n` +
+                `🔗 رابط البث: ${siteUrl}/watch.html?match=${match.id}\n\n` +
                 `⚽ لا تفوت الإثارة، تابع الصفحة لمباريات الغد!`;
 
             const payload = {
