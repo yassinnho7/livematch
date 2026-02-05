@@ -1,12 +1,12 @@
 {
-  "generated_at": "2026-02-05T18:46:06.355Z",
-  "count": 2,
+  "generated_at": "2026-02-05T23:36:55.122Z",
+  "count": 5,
   "matches": [
     {
       "id": 1214109701,
       "date": "2026-02-05T17:30:00.000Z",
       "timestamp": 1770312600,
-      "status": "LIVE",
+      "status": "FT",
       "time": "17:30",
       "time_label": "17:30 GMT",
       "league": {
@@ -31,22 +31,15 @@
           "channel": "thmanya2",
           "url": "https://pl.koooralive.click/albaplayer/thmanya2",
           "priority": 1
-        },
-        {
-          "id": "stream_siiir_1214109701",
-          "source": "siiir",
-          "quality": "VIP",
-          "channel": "VIP Server",
-          "url": "https://eyj0exaioijkv1qilcjhbgcioijiuzi1nij99sss.yallashot.us/playerv2.php?match=match7&key=c0ae1abba6eebd7e6cc5b88b1d2B71547",
-          "priority": 2
         }
-      ]
+      ],
+      "poster_url": "/posters/1214109701.jpg"
     },
     {
       "id": 1442406082,
       "date": "2026-02-05T17:30:00.000Z",
       "timestamp": 1770312600,
-      "status": "LIVE",
+      "status": "FT",
       "time": "17:30",
       "time_label": "17:30 GMT",
       "league": {
@@ -71,16 +64,108 @@
           "channel": "thmanya1",
           "url": "https://pl.koooralive.click/albaplayer/thmanya1",
           "priority": 1
-        },
-        {
-          "id": "stream_siiir_1442406082",
-          "source": "siiir",
-          "quality": "VIP",
-          "channel": "VIP Server",
-          "url": "https://eyj0exaioijkv1qilcjhbgcioijiuzi1nij99sss.yallashot.us/playerv2.php?match=match6&key=c0ae1abba6eebd7e6cc5b88b1d2B71547",
-          "priority": 2
         }
-      ]
+      ],
+      "poster_url": "/posters/1442406082.jpg"
+    },
+    {
+      "id": 1526130640,
+      "date": "2026-02-05T20:00:00.000Z",
+      "timestamp": 1770321600,
+      "status": "FT",
+      "time": "20:00",
+      "time_label": "20:00 GMT",
+      "league": {
+        "name": "إسبانيا, كأس ملك إسبانيا - ربع النهائي",
+        "country": "Spain",
+        "logo": "https://a.espncdn.com/combiner/i?img=/i/leaguelogos/soccer/500/15.png&h=40&w=40"
+      },
+      "home": {
+        "name": "ريال بيتيس",
+        "logo": "https://l.yacinetv.info/wp-content/uploads/2026/01/146.png"
+      },
+      "away": {
+        "name": "أتلتيكو مدريد",
+        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/01/134.png"
+      },
+      "score": null,
+      "streams": [
+        {
+          "id": "stream_ch2_1526130640",
+          "source": "livekora",
+          "quality": "HD",
+          "channel": "ch2",
+          "url": "https://pl.koooralive.click/albaplayer/ch2",
+          "priority": 1
+        }
+      ],
+      "poster_url": "/posters/1526130640.jpg"
+    },
+    {
+      "id": 1321930371,
+      "date": "2026-02-05T20:00:00.000Z",
+      "timestamp": 1770321600,
+      "status": "FT",
+      "time": "20:00",
+      "time_label": "20:00 GMT",
+      "league": {
+        "name": "فرنسا, كأس فرنسا - دور الـ 16",
+        "country": "France",
+        "logo": "https://cdn-icons-png.flaticon.com/512/1378/1378598.png"
+      },
+      "home": {
+        "name": "ستراسبورج",
+        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/01/479.png"
+      },
+      "away": {
+        "name": "موناكو",
+        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/01/471.png"
+      },
+      "score": null,
+      "streams": [
+        {
+          "id": "stream_bein4_1321930371",
+          "source": "livekora",
+          "quality": "HD",
+          "channel": "bein4",
+          "url": "https://pl.koooralive.click/albaplayer/bein4",
+          "priority": 1
+        }
+      ],
+      "poster_url": "/posters/1321930371.jpg"
+    },
+    {
+      "id": 25253171,
+      "date": "2026-02-05T20:00:00.000Z",
+      "timestamp": 1770321600,
+      "status": "FT",
+      "time": "20:00",
+      "time_label": "20:00 GMT",
+      "league": {
+        "name": "إيطاليا, كأس إيطاليا - ربع النهائي",
+        "country": "Italy",
+        "logo": "https://a.espncdn.com/combiner/i?img=/i/leaguelogos/soccer/500/12.png&h=40&w=40"
+      },
+      "home": {
+        "name": "أتالانتا",
+        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/02/232.png"
+      },
+      "away": {
+        "name": "يوفنتوس",
+        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/01/226.png"
+      },
+      "score": null,
+      "streams": [
+        {
+          "id": "stream_ch1_25253171",
+          "source": "livekora",
+          "quality": "HD",
+          "channel": "ch1",
+          "url": "https://pl.koooralive.click/albaplayer/ch1",
+          "priority": 1
+        }
+      ],
+      "poster_url": "/posters/25253171.jpg"
     }
   ]
 }
