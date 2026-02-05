@@ -1,12 +1,12 @@
 {
-  "generated_at": "2026-02-05T17:03:09.383Z",
+  "generated_at": "2026-02-05T17:58:34.372Z",
   "count": 2,
   "matches": [
     {
       "id": 1214109701,
       "date": "2026-02-05T17:30:00.000Z",
       "timestamp": 1770312600,
-      "status": "NS",
+      "status": "LIVE",
       "time": "17:30",
       "time_label": "17:30 GMT",
       "league": {
@@ -46,7 +46,7 @@
       "id": 1442406082,
       "date": "2026-02-05T17:30:00.000Z",
       "timestamp": 1770312600,
-      "status": "NS",
+      "status": "LIVE",
       "time": "17:30",
       "time_label": "17:30 GMT",
       "league": {
