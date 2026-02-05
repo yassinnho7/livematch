@@ -1,34 +1,28 @@
 /**
- * LIVE MATCH - THE CACHE KILLER v4.0 (NUCLEAR OPTION)
- * ==================================================
- * هذا السكربت يقتل أي كاش متبقي في متصفح الزائر نهائياً.
+ * LIVE MATCH - SERVICE WORKER SELF-DESTRUCT
+ * =========================================
+ * This script exists solely to KILL any existing service worker.
+ * If this file is loaded, it immediately unregisters itself.
  */
 
 self.addEventListener('install', (event) => {
-    console.log('💀 SW Killer: Installing and clearing...');
-    self.skipWaiting(); // تجاوي الانتظار
+    console.log('💀 SW Self-Destruct: Installing...');
+    self.skipWaiting();
 });
 
 self.addEventListener('activate', (event) => {
-    console.log('💀 SW Killer: Activating and destroying all caches...');
+    console.log('💀 SW Self-Destruct: Activating and Unregistering...');
     event.waitUntil(
-        caches.keys().then((keys) => {
-            return Promise.all(
-                keys.map((key) => {
-                    console.log('💥 Destroying cache:', key);
-                    return caches.delete(key);
-                })
-            );
-        }).then(() => {
-            return self.clients.claim(); // السيطرة الفورية
+        self.registration.unregister().then(() => {
+            console.log('💥 SW Self-Destruct: Unregistered successfully.');
+            return self.clients.matchAll();
+        }).then(clients => {
+            clients.forEach(client => client.navigate(client.url)); // Force reload to clear SW control
         })
     );
 });
 
-// تعميم قاعدة: لا كاش أبداً، دائماً من الشبكة
 self.addEventListener('fetch', (event) => {
-    event.respondWith(
-        fetch(event.request, { cache: 'no-store' })
-            .catch(() => fetch(event.request))
-    );
+    // Pass through everything, don't cache
+    return;
 });

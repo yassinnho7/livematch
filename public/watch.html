@@ -9,6 +9,9 @@
 
     <!-- Analytics -->
     <script src="/js/analytics.js"></script>
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
 
     <!-- Ad-Maven Monetization System -->
     <script data-cfasync="false" src="//dcbbwymp1bhlf.cloudfront.net/?wbbcd=1241009"></script>
@@ -539,6 +542,23 @@
             showControls();
         }
         init();
+
+        // 🛑 NUCLEAR CACHE KILLER 🛑
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.getRegistrations().then(function (registrations) {
+                for (let registration of registrations) {
+                    console.log('💀 Unregistering SW:', registration);
+                    registration.unregister();
+                }
+            });
+        }
+        if ('caches' in window) {
+            caches.keys().then(names => {
+                for (let name of names) caches.delete(name);
+            });
+        }
+        localStorage.clear();
+        sessionStorage.clear();
     </script>
 </body>
 

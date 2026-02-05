@@ -8,7 +8,10 @@
     <title>مباريات اليوم - بث مباشر</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/simple-style.css">
+    <link rel="stylesheet" href="css/simple-style.css?v=9999">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
 
     <!-- PWA Manifest -->
     <link rel="manifest" href="/manifest.json">
@@ -63,23 +66,32 @@
         </div>
     </div>
 
-    <script src="js/matches-v2.js"></script>
+    <script src="js/matches-v2.js?v=9999"></script>
     <script>
-        // PWA Service Worker - FORCE REFRESH MODE
+        // 🛑 NUCLEAR CACHE KILLER 🛑
+        // 1. Unregister all Service Workers immediately
         if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('/sw.js')
-                .then(registration => {
-                    registration.update(); // Force immediate update check
-                })
-                .catch(() => { });
-        }
-
-        // REINFORCEMENT: Clear lingering caches manually
-        if ('caches' in window) {
-            caches.keys().then(names => {
-                for (let name of names) caches.delete(name);
+            navigator.serviceWorker.getRegistrations().then(function (registrations) {
+                for (let registration of registrations) {
+                    console.log('💀 Unregistering SW:', registration);
+                    registration.unregister();
+                }
             });
         }
+
+        // 2. Clear all browser caches
+        if ('caches' in window) {
+            caches.keys().then(names => {
+                for (let name of names) {
+                    console.log('💥 Deleting cache:', name);
+                    caches.delete(name);
+                }
+            });
+        }
+
+        // 3. Clear Storage
+        localStorage.clear();
+        sessionStorage.clear();
     </script>
 </body>
 
