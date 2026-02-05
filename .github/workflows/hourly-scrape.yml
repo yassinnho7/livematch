@@ -85,7 +85,8 @@ jobs:
           until [ "$n" -ge 10 ]
           do
              echo "Push attempt $((n+1))..."
-             git pull --rebase origin main || git rebase --abort
+             # Handle unstaged changes (like temporary logs or lock files)
+             git pull --rebase --autostash origin main || { git rebase --abort; git checkout . ; git pull --rebase origin main; }
              git push origin main && break
              n=$((n+1)) 
              sleep 10

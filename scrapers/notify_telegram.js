@@ -99,7 +99,7 @@ async function notifyTelegram() {
 
             console.log(`📝 Message preview: ${message.substring(0, 50)}...`);
 
-            await sendTelegramMessage(message);
+            await sendTelegramPhoto(link, message, match.poster_url);
             history.push(match.id);
         }
 
@@ -111,36 +111,46 @@ async function notifyTelegram() {
     }
 }
 
-// Wrapper to try HTML first, then Plain Text
-async function sendTelegramMessage(text) {
-    // Attempt 1: HTML
-    const success = await sendRequest(text, 'HTML');
+// Wrapper to send Photo if URL exists, otherwise fallback to Message
+async function sendTelegramPhoto(link, text, photoUrl) {
+    const posterUrl = photoUrl || "https://raw.githubusercontent.com/yassinnho7/livematch/main/public/assets/backgrounds/stadium_night.png";
+
+    // Attempt 1: sendPhoto with HTML Caption
+    const success = await sendRequest(text, 'HTML', posterUrl);
     if (success) return;
 
-    console.log('⚠️ HTML message failed. Retrying with PLAIN TEXT...');
+    console.log('⚠️ sendPhoto failed. Retrying with sendMessage as fallback...');
 
-    // Attempt 2: Plain Text (Strip HTML tags)
-    const plainText = text.replace(/<[^>]*>?/gm, '') // Remove tags
+    // Attempt 2: Fallback to regular text message
+    const plainText = text.replace(/<[^>]*>?/gm, '')
         .replace(/&nbsp;/g, ' ')
         .replace(/&amp;/g, '&');
 
-    await sendRequest(plainText, undefined); // undefined parse_mode = proper plain text
+    await sendRequest(plainText, undefined, null);
 }
 
-function sendRequest(text, parseMode) {
+function sendRequest(text, parseMode, photoUrl) {
     return new Promise((resolve) => {
+        const method = photoUrl ? 'sendPhoto' : 'sendMessage';
         const payloadData = {
             chat_id: CHAT_ID,
-            text: text,
             disable_web_page_preview: false
         };
+
+        if (photoUrl) {
+            payloadData.photo = photoUrl;
+            payloadData.caption = text;
+        } else {
+            payloadData.text = text;
+        }
+
         if (parseMode) payloadData.parse_mode = parseMode;
 
         const payload = JSON.stringify(payloadData);
 
         const options = {
             hostname: 'api.telegram.org',
-            path: `/bot${TELEGRAM_TOKEN}/sendMessage`,
+            path: `/bot${TELEGRAM_TOKEN}/${method}`,
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
