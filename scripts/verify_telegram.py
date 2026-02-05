@@ -2,8 +2,8 @@ import urllib.request
 import json
 import ssl
 
-token = "8229405185:AAFEWmcf17u8InO68a9B4Q2an5yWUhcfdDg"
-chat_id = "@live_football_macth"
+token = "YOUR_TELEGRAM_BOT_TOKEN_HERE"
+chat_id = "YOUR_CHAT_ID_HERE"
 message = "🚀 <b>تجربة بث مباشر ناجحة!</b>\n\nنظام الإشعارات الآلي يعمل الآن.\nرابط الموقع: https://livematch-991.pages.dev"
 
 url = f"https://api.telegram.org/bot{token}/sendPhoto"

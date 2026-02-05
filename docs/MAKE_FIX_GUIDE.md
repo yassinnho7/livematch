@@ -9,7 +9,7 @@ The Make.com scenario investigation revealed that the **Facebook Pages module ha
 ![Make.com Diagnosis Recording](file:///C:/Users/uers/.gemini/antigravity/brain/63bf6dec-04cf-4a57-9676-6f4365ff06b1/make_webhook_diagnosis_1770324682259.webp)
 
 **Key Findings:**
-- ✅ **Webhook is active**: `https://hook.eu1.make.com/idlpye8lhrearyi2yk7r4k9ygncv09y`
+- ✅ **Webhook is active**: `YOUR_MAKE_WEBHOOK_URL_HERE`
 - ❌ **Facebook module is missing**: Only the webhook module is visible in the editor
 - 📊 **History shows it worked**: Logs show successful Facebook posts as recently as 6:03 PM today
 - ⚠️ **Recent edits**: Changes were made between 8:19 PM - 8:57 PM that may have removed the module
@@ -44,7 +44,7 @@ Once added, configure it with these mappings:
 
 ```powershell
 # Test locally (replace with your actual webhook URL)
-$env:MAKE_WEBHOOK_URL="https://hook.eu1.make.com/idlpye8lhrearyi2yk7r4k9ygncv09y"
+$env:MAKE_WEBHOOK_URL="YOUR_MAKE_WEBHOOK_URL_HERE"
 node scrapers/notify_webhook.js
 ```
 

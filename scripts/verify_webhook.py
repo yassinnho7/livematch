@@ -2,7 +2,7 @@ import urllib.request
 import json
 import ssl
 
-webhook_url = "https://hook.eu1.make.com/idlpye8lhrearyi2yk7r4k9ygncv09yw"
+webhook_url = "YOUR_MAKE_WEBHOOK_URL_HERE"
 
 payload = {
     "id": "verify_test_001",
@@ -11,7 +11,7 @@ payload = {
     "time": "NOW",
     "link": "https://github.com/yassinnho7/livematch",
     "message": "🔥 هذا منشور تجريبي للتأكد من نظام النشر التلقائي!\n\nصورة الملعب الليلي: stadium_night.png 🏟️\nتم الارسال بنجاح عبر البرمجية.",
-    "photo": "https://raw.githubusercontent.com/yassinnho7/livematch/main/public/assets/backgrounds/stadium_night.png"
+    "photo": "IMAGE_URL_HERE"
 }
 
 data = json.dumps(payload).encode('utf-8')
