@@ -40,7 +40,7 @@ jobs:
       - name: Download Arabic Font (Cairo)
         run: |
           mkdir -p public/assets/fonts
-          wget -O public/assets/fonts/Cairo-Bold.ttf https://github.com/Gue3bara/Cairo/blob/master/fonts/ttf/Cairo-Bold.ttf?raw=true
+          wget -O public/assets/fonts/Cairo-Bold.ttf https://github.com/Gue3bara/Cairo/raw/v3.116/fonts/ttf/Cairo-Bold.ttf
 
       - name: Run Scraper Manager (LiveKora + Siiir.tv)
         run: |
