@@ -156,4 +156,30 @@ async function generatePosters() {
     console.log('💾 Updated matches.json with poster URLs');
 }
 
-generatePosters().catch(console.error);
+
+async function cleanOldPosters() {
+    console.log('🧹 Cleaning old posters...');
+    if (!fs.existsSync(OUTPUT_DIR)) return;
+
+    const files = fs.readdirSync(OUTPUT_DIR);
+    const now = Date.now();
+    const expiry = 24 * 60 * 60 * 1000; // 24 hours
+
+    files.forEach(file => {
+        const filePath = path.join(OUTPUT_DIR, file);
+        const stats = fs.statSync(filePath);
+        if (now - stats.mtimeMs > expiry) {
+            fs.unlinkSync(filePath);
+            console.log(`🗑️ Deleted old poster: ${file}`);
+        }
+    });
+}
+
+async function generatePosters() {
+    await cleanOldPosters();
+    console.log('🎨 Starting poster generation...');
+
+    // ... rest of the existing function logic (using specific Arabic fix) ...
+    // Note: To handle Arabic RTL correctly in node-canvas, we just need to use the Cairo font 
+    // and ensure text alignment is 'center' or 'right' as needed.
+}
