@@ -31,12 +31,25 @@ jobs:
           
       - name: Install Node Dependencies
         run: |
-          npm install puppeteer puppeteer-extra puppeteer-extra-plugin-stealth
-      
+          npm install puppeteer puppeteer-extra puppeteer-extra-plugin-stealth canvas
+
+      - name: Install System Dependencies for Canvas
+        run: |
+          sudo apt-get install -y build-essential libcairo2-dev libpango1.0-dev libjpeg-dev libgif-dev librsvg2-dev
+
+      - name: Download Arabic Font (Cairo)
+        run: |
+          mkdir -p public/assets/fonts
+          wget -O public/assets/fonts/Cairo-Bold.ttf https://github.com/Gue3bara/Cairo/blob/master/fonts/ttf/Cairo-Bold.ttf?raw=true
+
       - name: Run Scraper Manager (LiveKora + Siiir.tv)
         run: |
           node scrapers/scraper_manager.js
-      
+
+      - name: Generate Match Posters (AI-Hybrid)
+        run: |
+          node scripts/generate_posters.js
+
       - name: Notify Webhook (Make.com)
         env:
           MAKE_WEBHOOK_URL: ${{ secrets.MAKE_WEBHOOK_URL }}

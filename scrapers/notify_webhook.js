@@ -82,7 +82,8 @@ async function notify() {
                 league: match.league.name,
                 time: match.time,
                 link: `${siteUrl}/watch.html?match=${match.id}`,
-                message: message
+                message: message,
+                photo: match.poster_url ? `${siteUrl}${match.poster_url}` : null
             };
 
             await sendWebhook(payload);
