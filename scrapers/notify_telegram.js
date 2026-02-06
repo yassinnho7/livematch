@@ -99,7 +99,15 @@ async function notifyTelegram() {
 
             console.log(`📝 Message preview: ${message.substring(0, 50)}...`);
 
-            await sendTelegramPhoto(link, message, match.poster_url);
+            // Convert relative poster URL to absolute GitHub URL
+            const githubBaseUrl = 'https://raw.githubusercontent.com/yassinnho7/livematch/main/public';
+            const absolutePosterUrl = match.poster_url
+                ? `${githubBaseUrl}${match.poster_url}`
+                : null;
+
+            console.log(`🖼️ Poster URL: ${absolutePosterUrl || 'Using fallback'}`);
+
+            await sendTelegramPhoto(link, message, absolutePosterUrl);
             history.push(match.id);
         }
 
