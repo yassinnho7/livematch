@@ -65,14 +65,19 @@ async function notify() {
 
         for (const match of upcomingMatches) {
             const siteUrl = process.env.SITE_URL || 'https://livematch-991.pages.dev';
+            const githubBaseUrl = 'https://raw.githubusercontent.com/yassinnho7/livematch/main/public';
+            const posterUrl = match.poster_url ? `${githubBaseUrl}${match.poster_url}` : null;
 
             const message = `🌟 مباراة اليوم المباشرة\n\n` +
-                `🆚 ${match.home.name} ضد ${match.away.name}\n\n` +
-                `🚩 البطولة: ${match.league.name}\n` +
-                `⏳ التوقيت: ${match.time_label || (match.time ? match.time + ' GMT' : 'Soon')}\n` +
-                `🖥️ الجودة: Full HD\n\n` +
-                `🔗 رابط البث: ${siteUrl}/watch.html?match=${match.id}\n\n` +
-                `⚽ لا تفوت الإثارة، تابع الصفحة لمباريات الغد!`;
+                `🏟️ ${match.home.name} 🆚 ${match.away.name}\n\n` +
+                `🏆 البطولة: ${match.league.name}\n` +
+                `⏰ التوقيت: ${match.time_label || (match.time ? match.time + ' GMT' : 'Soon')}\n` +
+                `✨ الجودة: Full HD 1080p\n\n` +
+                `⚡ شاهد المباراة مجاناً وبدون تقطيع هنا:\n` +
+                `👇👇👇\n` +
+                `🚀 ${siteUrl}/watch.html?match=${match.id}\n\n` +
+                `🔥 نتمنى لكم مشاهدة ممتعة!\n` +
+                `✅ لا تنسوا متابعة قناتنا لكل جديد!`;
 
             const payload = {
                 id: match.id,
@@ -81,7 +86,7 @@ async function notify() {
                 time: match.time,
                 link: `${siteUrl}/watch.html?match=${match.id}`,
                 message: message,
-                photo: match.poster_url ? `${siteUrl}${match.poster_url}` : null
+                photo: posterUrl
             };
 
             await sendWebhook(payload);

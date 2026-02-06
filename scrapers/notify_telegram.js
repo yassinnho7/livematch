@@ -129,12 +129,8 @@ async function sendTelegramPhoto(link, text, photoUrl) {
 
     console.log('⚠️ sendPhoto failed. Retrying with sendMessage as fallback...');
 
-    // Attempt 2: Fallback to regular text message
-    const plainText = text.replace(/<[^>]*>?/gm, '')
-        .replace(/&nbsp;/g, ' ')
-        .replace(/&amp;/g, '&');
-
-    await sendRequest(plainText, undefined, null);
+    // Attempt 2: Fallback to regular text message, but KEEP HTML formatting
+    await sendRequest(text, 'HTML', null);
 }
 
 function sendRequest(text, parseMode, photoUrl) {
