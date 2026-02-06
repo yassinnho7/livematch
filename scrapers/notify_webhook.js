@@ -65,11 +65,11 @@ async function notify() {
 
         for (const match of upcomingMatches) {
             const siteUrl = process.env.SITE_URL || 'https://livematch-991.pages.dev';
-            const githubBaseUrl = 'https://raw.githubusercontent.com/yassinnho7/livematch/main/main/public';
-            const fallbackPoster = 'https://raw.githubusercontent.com/yassinnho7/livematch/main/public/assets/backgrounds/stadium_night.png';
+            const githubBaseUrl = 'https://raw.githubusercontent.com/yassinnho7/livematch/main/public';
+            const fallbackPoster = `${githubBaseUrl}/assets/backgrounds/stadium_night.png`;
 
             const posterUrl = match.poster_url
-                ? `https://raw.githubusercontent.com/yassinnho7/livematch/main/public${match.poster_url}`
+                ? `${githubBaseUrl}${match.poster_url}`
                 : fallbackPoster;
 
             const link = `${siteUrl}/watch.html?match=${match.id}`;
