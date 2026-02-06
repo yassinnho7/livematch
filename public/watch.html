@@ -440,11 +440,12 @@
 
         // Dynamic Ad Loader
         function loadInterstitialAd() {
+            console.log('⚡ Triggering Interstitial Ad');
             const script = document.createElement('script');
             script.async = true;
             script.src = "https://ss.mrmnd.com/interstitial.js";
             script.dataset.mndintid = "b7c94897-13e7-4dd3-8de5-68a7017fe59a";
-            document.head.appendChild(script);
+            document.body.appendChild(script); // Changed to body
         }
 
         window.selectServer = (idx) => {
