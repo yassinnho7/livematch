@@ -45,8 +45,8 @@ async function notifyTelegram() {
         const upcomingMatches = matches.filter(m => {
             const timeUntilStart = m.timestamp - now;
 
-            // WIDE WINDOW: -30 mins to +30 mins
-            const isSoon = timeUntilStart > -1800 && timeUntilStart < 1800;
+            // WIDE WINDOW: -90 mins to +90 mins
+            const isSoon = timeUntilStart > -5400 && timeUntilStart < 5400;
 
             const inHistory = history.includes(m.id);
             const shouldNotify = isSoon && !inHistory;
@@ -62,7 +62,7 @@ async function notifyTelegram() {
         });
 
         if (upcomingMatches.length === 0) {
-            console.log('ℹ️ No matches currently in the notification window (-30m to +30m) and not in history.');
+            console.log('ℹ️ No matches currently in the notification window (-90m to +90m) and not in history.');
             return;
         }
 

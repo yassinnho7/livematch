@@ -44,9 +44,9 @@ async function notify() {
 
         const upcomingMatches = matches.filter(m => {
             const timeUntilStart = m.timestamp - now;
-            // WIDE WINDOW: -30 mins to +30 mins
+            // WIDE WINDOW: -90 mins to +90 mins
             // Requested by user to handle GitHub Actions delays
-            const isSoon = timeUntilStart > -1800 && timeUntilStart < 1800;
+            const isSoon = timeUntilStart > -5400 && timeUntilStart < 5400;
 
             const shouldNotify = isSoon && !history.includes(m.id);
 
@@ -57,7 +57,7 @@ async function notify() {
         });
 
         if (upcomingMatches.length === 0) {
-            console.log('ℹ️ No matches currently in the 30-minute notification window.');
+            console.log('ℹ️ No matches currently in the 90-minute notification window.');
             return;
         }
 
