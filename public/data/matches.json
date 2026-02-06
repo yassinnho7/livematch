@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-02-06T17:00:40.401Z",
+  "generated_at": "2026-02-06T17:46:27.082Z",
   "count": 6,
   "matches": [
     {
@@ -25,11 +25,11 @@
       "score": null,
       "streams": [
         {
-          "id": "stream_ad1_20949795",
+          "id": "stream_ad2_20949795",
           "source": "livekora",
           "quality": "HD",
-          "channel": "ad1",
-          "url": "https://pl.koooralive.click/albaplayer/ad1",
+          "channel": "ad2",
+          "url": "https://pl.koooralive.click/albaplayer/ad2",
           "priority": 1
         }
       ],
@@ -39,7 +39,7 @@
       "id": 1768941498,
       "date": "2026-02-06T17:30:00.000Z",
       "timestamp": 1770399000,
-      "status": "NS",
+      "status": "LIVE",
       "time": "17:30",
       "time_label": "17:30 GMT",
       "league": {
@@ -64,6 +64,14 @@
           "channel": "thmanya1",
           "url": "https://pl.koooralive.click/albaplayer/thmanya1",
           "priority": 1
+        },
+        {
+          "id": "stream_siiir_1768941498",
+          "source": "siiir",
+          "quality": "VIP",
+          "channel": "VIP Server",
+          "url": "https://eyj0exaioijkv1qilcjhbgcioijiuzi1nij99sss.yallashot.us/playerv2.php?match=match6&key=c0ae1abba6eebd7e6cc5b88b1d2B71547",
+          "priority": 2
         }
       ],
       "poster_url": "/posters/1768941498.jpg"
