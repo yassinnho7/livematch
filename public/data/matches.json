@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-02-06T18:30:29.999Z",
+  "generated_at": "2026-02-06T19:08:05.394Z",
   "count": 6,
   "matches": [
     {
@@ -31,14 +31,6 @@
           "channel": "thmanya1",
           "url": "https://pl.koooralive.click/albaplayer/thmanya1",
           "priority": 1
-        },
-        {
-          "id": "stream_siiir_1768941498",
-          "source": "siiir",
-          "quality": "VIP",
-          "channel": "VIP Server",
-          "url": "https://eyj0exaioijkv1qilcjhbgcioijiuzi1nij99sss.yallashot.us/playerv2.php?match=match6&key=c0ae1abba6eebd7e6cc5b88b1d2B71547",
-          "priority": 2
         }
       ],
       "poster_url": "/posters/1768941498.jpg"
@@ -47,7 +39,7 @@
       "id": 1541362183,
       "date": "2026-02-06T19:00:00.000Z",
       "timestamp": 1770404400,
-      "status": "NS",
+      "status": "LIVE",
       "time": "19:00",
       "time_label": "19:00 GMT",
       "league": {
