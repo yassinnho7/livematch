@@ -44,9 +44,9 @@ async function notify() {
 
         const upcomingMatches = matches.filter(m => {
             const timeUntilStart = m.timestamp - now;
-            // WIDE WINDOW: -90 mins to +90 mins
+            // WIDE WINDOW: -40 mins to +40 mins
             // Requested by user to handle GitHub Actions delays
-            const isSoon = timeUntilStart > -5400 && timeUntilStart < 5400;
+            const isSoon = timeUntilStart > -2400 && timeUntilStart < 2400;
 
             const shouldNotify = isSoon && !history.includes(m.id);
 
@@ -57,7 +57,7 @@ async function notify() {
         });
 
         if (upcomingMatches.length === 0) {
-            console.log('ℹ️ No matches currently in the 90-minute notification window.');
+            console.log('ℹ️ No matches currently in the 40-minute notification window.');
             return;
         }
 
@@ -74,16 +74,16 @@ async function notify() {
 
             const link = `${siteUrl}/watch.html?match=${match.id}`;
 
-            const message = `🌟 <b>مباراة اليوم المباشرة</b>\n\n` +
-                `🏟️ <b>${match.home.name}</b> 🆚 <b>${match.away.name}</b>\n\n` +
-                `🏆 <b>البطولة:</b> ${match.league.name}\n` +
-                `⏰ <b>التوقيت:</b> ${match.time_label || (match.time ? match.time + ' GMT' : 'Soon')}\n` +
-                `✨ <b>الجودة:</b> Full HD 1080p\n\n` +
-                `⚡ <b>شاهد المباراة مجاناً وبدون تقطيع هنا:</b>\n` +
+            const message = `🌟 مباراة اليوم المباشرة\n\n` +
+                `🏟️ ${match.home.name} 🆚 ${match.away.name}\n\n` +
+                `🏆 البطولة: ${match.league.name}\n` +
+                `⏰ التوقيت: ${match.time_label || (match.time ? match.time + ' GMT' : 'Soon')}\n` +
+                `✨ الجودة: Full HD 1080p\n\n` +
+                `⚡ شاهد المباراة مجاناً وبدون تقطيع هنا:\n` +
                 `👇👇👇\n` +
-                `🚀 <a href="${link}">رابط البث المباشر الفوري</a>\n\n` +
-                `🔥 <i>نتمنى لكم مشاهدة ممتعة!</i>\n` +
-                `✅ لا تنسوا متابعة قناتنا لكل جديد!`;
+                `🚀 ${link}\n\n` +
+                `🔥 نتمنى لكم مشاهدة ممتعة!\n` +
+                `✅ لا تنسوا متابعة صفحتنا لكل جديد!`;
 
             const payload = {
                 id: match.id,
