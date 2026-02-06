@@ -443,9 +443,10 @@
             console.log('⚡ Triggering Interstitial Ad');
             const script = document.createElement('script');
             script.async = true;
+            script.setAttribute('data-cfasync', 'false'); // Bypass Cloudflare
             script.src = "https://ss.mrmnd.com/interstitial.js";
             script.dataset.mndintid = "b7c94897-13e7-4dd3-8de5-68a7017fe59a";
-            document.body.appendChild(script); // Changed to body
+            document.head.appendChild(script); // Reverted to head as it worked before
         }
 
         window.selectServer = (idx) => {
