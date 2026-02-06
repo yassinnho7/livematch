@@ -17,9 +17,8 @@
     <!-- Ad-Maven Monetization System (Disabled) -->
     <!-- <script data-cfasync="false" src="//dcbbwymp1bhlf.cloudfront.net/?wbbcd=1241009"></script> -->
 
-    <!-- Mondiad Interstitial Ad -->
-    <script async src="https://ss.mrmnd.com/interstitial.js"
-        data-mndintid="b7c94897-13e7-4dd3-8de5-68a7017fe59a"></script>
+    <!-- Mondiad Interstitial Ad (Loaded Dynamically) -->
+    <!-- Script removed to prevent early loading -->
 
     <!-- Pollfish Integration -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
@@ -420,6 +419,8 @@
                     clearInterval(timer);
                     document.getElementById('monetization-layer').style.display = 'none';
                     document.getElementById('choice-layer').style.display = 'flex';
+                    // Trigger Interstitial Ad exactly here
+                    loadInterstitialAd();
                 }
             }, 1000);
         }
@@ -435,6 +436,15 @@
                 card.onclick = () => window.selectServer(idx);
                 container.appendChild(card);
             });
+        }
+
+        // Dynamic Ad Loader
+        function loadInterstitialAd() {
+            const script = document.createElement('script');
+            script.async = true;
+            script.src = "https://ss.mrmnd.com/interstitial.js";
+            script.dataset.mndintid = "b7c94897-13e7-4dd3-8de5-68a7017fe59a";
+            document.head.appendChild(script);
         }
 
         window.selectServer = (idx) => {
