@@ -65,18 +65,24 @@ async function notify() {
 
         for (const match of upcomingMatches) {
             const siteUrl = process.env.SITE_URL || 'https://livematch-991.pages.dev';
-            const githubBaseUrl = 'https://raw.githubusercontent.com/yassinnho7/livematch/main/public';
-            const posterUrl = match.poster_url ? `${githubBaseUrl}${match.poster_url}` : null;
+            const githubBaseUrl = 'https://raw.githubusercontent.com/yassinnho7/livematch/main/main/public';
+            const fallbackPoster = 'https://raw.githubusercontent.com/yassinnho7/livematch/main/public/assets/backgrounds/stadium_night.png';
 
-            const message = `🌟 مباراة اليوم المباشرة\n\n` +
-                `🏟️ ${match.home.name} 🆚 ${match.away.name}\n\n` +
-                `🏆 البطولة: ${match.league.name}\n` +
-                `⏰ التوقيت: ${match.time_label || (match.time ? match.time + ' GMT' : 'Soon')}\n` +
-                `✨ الجودة: Full HD 1080p\n\n` +
-                `⚡ شاهد المباراة مجاناً وبدون تقطيع هنا:\n` +
+            const posterUrl = match.poster_url
+                ? `https://raw.githubusercontent.com/yassinnho7/livematch/main/public${match.poster_url}`
+                : fallbackPoster;
+
+            const link = `${siteUrl}/watch.html?match=${match.id}`;
+
+            const message = `🌟 <b>مباراة اليوم المباشرة</b>\n\n` +
+                `🏟️ <b>${match.home.name}</b> 🆚 <b>${match.away.name}</b>\n\n` +
+                `🏆 <b>البطولة:</b> ${match.league.name}\n` +
+                `⏰ <b>التوقيت:</b> ${match.time_label || (match.time ? match.time + ' GMT' : 'Soon')}\n` +
+                `✨ <b>الجودة:</b> Full HD 1080p\n\n` +
+                `⚡ <b>شاهد المباراة مجاناً وبدون تقطيع هنا:</b>\n` +
                 `👇👇👇\n` +
-                `🚀 ${siteUrl}/watch.html?match=${match.id}\n\n` +
-                `🔥 نتمنى لكم مشاهدة ممتعة!\n` +
+                `🚀 <a href="${link}">رابط البث المباشر الفوري</a>\n\n` +
+                `🔥 <i>نتمنى لكم مشاهدة ممتعة!</i>\n` +
                 `✅ لا تنسوا متابعة قناتنا لكل جديد!`;
 
             const payload = {
@@ -84,10 +90,13 @@ async function notify() {
                 title: `🔥 مباراة حاسمة: ${match.home.name} 🆚 ${match.away.name}`,
                 league: match.league.name,
                 time: match.time,
-                link: `${siteUrl}/watch.html?match=${match.id}`,
+                link: link,
                 message: message,
                 photo: posterUrl
             };
+
+            console.log(`📤 Sending Webhook for: ${match.home.name} vs ${match.away.name}`);
+            console.log(`🖼️ Photo URL: ${posterUrl}`);
 
             await sendWebhook(payload);
             history.push(match.id);
@@ -102,29 +111,40 @@ async function notify() {
     }
 }
 
-function sendWebhook(payload) {
+function sendWebhook(payloadData) {
     return new Promise((resolve, reject) => {
+        const payload = JSON.stringify(payloadData);
         const url = new URL(WEBHOOK_URL);
         const options = {
             hostname: url.hostname,
             path: url.pathname + url.search,
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Content-Length': Buffer.byteLength(payload)
             }
         };
 
         const req = https.request(options, (res) => {
-            if (res.statusCode >= 200 && res.statusCode < 300) {
-                console.log(`✅ Webhook accepted (${res.statusCode})`);
-                resolve();
-            } else {
-                reject(new Error(`Webhook failed with status ${res.statusCode}`));
-            }
+            let responseBody = '';
+            res.on('data', (chunk) => responseBody += chunk);
+            res.on('end', () => {
+                if (res.statusCode >= 200 && res.statusCode < 300) {
+                    console.log(`✅ Webhook accepted (${res.statusCode})`);
+                    resolve();
+                } else {
+                    console.error(`❌ Webhook failed (${res.statusCode}):`, responseBody);
+                    reject(new Error(`Webhook failed with status ${res.statusCode}`));
+                }
+            });
         });
 
-        req.on('error', reject);
-        req.write(JSON.stringify(payload));
+        req.on('error', (e) => {
+            console.error('❌ Webhook Network error:', e.message);
+            reject(e);
+        });
+
+        req.write(payload);
         req.end();
     });
 }
