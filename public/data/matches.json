@@ -1,73 +1,7 @@
 {
-  "generated_at": "2026-02-06T21:06:41.781Z",
+  "generated_at": "2026-02-06T21:46:50.773Z",
   "count": 6,
   "matches": [
-    {
-      "id": 439654271,
-      "date": "2026-02-06T19:30:00.000Z",
-      "timestamp": 1770406200,
-      "status": "LIVE",
-      "time": "19:30",
-      "time_label": "19:30 GMT",
-      "league": {
-        "name": "ألمانيا, الدوري الألماني",
-        "country": "Germany",
-        "logo": "https://a.espncdn.com/combiner/i?img=/i/leaguelogos/soccer/500/10.png&h=40&w=40"
-      },
-      "home": {
-        "name": "يونيون برلين",
-        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/02/392.png"
-      },
-      "away": {
-        "name": "آينتراخت فرانكفورت",
-        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/01/337.png"
-      },
-      "score": null,
-      "streams": [
-        {
-          "id": "stream_ch1_439654271",
-          "source": "livekora",
-          "quality": "HD",
-          "channel": "ch1",
-          "url": "https://pl.koooralive.click/albaplayer/ch1",
-          "priority": 1
-        }
-      ],
-      "poster_url": "/posters/439654271.jpg"
-    },
-    {
-      "id": 958662107,
-      "date": "2026-02-06T19:45:00.000Z",
-      "timestamp": 1770407100,
-      "status": "LIVE",
-      "time": "19:45",
-      "time_label": "19:45 GMT",
-      "league": {
-        "name": "فرنسا, الدوري الفرنسي",
-        "country": "France",
-        "logo": "https://a.espncdn.com/combiner/i?img=/i/leaguelogos/soccer/500/9.png&h=40&w=40"
-      },
-      "home": {
-        "name": "ميتز",
-        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/02/484.png"
-      },
-      "away": {
-        "name": "ليل",
-        "logo": "https://l.yacinetv.info/wp-content/uploads/2026/01/478.png"
-      },
-      "score": null,
-      "streams": [
-        {
-          "id": "stream_bein2_958662107",
-          "source": "livekora",
-          "quality": "HD",
-          "channel": "bein2",
-          "url": "https://pl.koooralive.click/albaplayer/bein2",
-          "priority": 1
-        }
-      ],
-      "poster_url": "/posters/958662107.jpg"
-    },
     {
       "id": 934027290,
       "date": "2026-02-06T20:00:00.000Z",
@@ -223,6 +157,72 @@
         }
       ],
       "poster_url": "/posters/1541362183.jpg"
+    },
+    {
+      "id": 439654271,
+      "date": "2026-02-06T19:30:00.000Z",
+      "timestamp": 1770406200,
+      "status": "FT",
+      "time": "19:30",
+      "time_label": "19:30 GMT",
+      "league": {
+        "name": "ألمانيا, الدوري الألماني",
+        "country": "Germany",
+        "logo": "https://a.espncdn.com/combiner/i?img=/i/leaguelogos/soccer/500/10.png&h=40&w=40"
+      },
+      "home": {
+        "name": "يونيون برلين",
+        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/02/392.png"
+      },
+      "away": {
+        "name": "آينتراخت فرانكفورت",
+        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/01/337.png"
+      },
+      "score": null,
+      "streams": [
+        {
+          "id": "stream_ch1_439654271",
+          "source": "livekora",
+          "quality": "HD",
+          "channel": "ch1",
+          "url": "https://pl.koooralive.click/albaplayer/ch1",
+          "priority": 1
+        }
+      ],
+      "poster_url": "/posters/439654271.jpg"
+    },
+    {
+      "id": 958662107,
+      "date": "2026-02-06T19:45:00.000Z",
+      "timestamp": 1770407100,
+      "status": "LIVE",
+      "time": "19:45",
+      "time_label": "19:45 GMT",
+      "league": {
+        "name": "فرنسا, الدوري الفرنسي",
+        "country": "France",
+        "logo": "https://a.espncdn.com/combiner/i?img=/i/leaguelogos/soccer/500/9.png&h=40&w=40"
+      },
+      "home": {
+        "name": "ميتز",
+        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/02/484.png"
+      },
+      "away": {
+        "name": "ليل",
+        "logo": "https://l.yacinetv.info/wp-content/uploads/2026/01/478.png"
+      },
+      "score": null,
+      "streams": [
+        {
+          "id": "stream_bein2_958662107",
+          "source": "livekora",
+          "quality": "HD",
+          "channel": "bein2",
+          "url": "https://pl.koooralive.click/albaplayer/bein2",
+          "priority": 1
+        }
+      ],
+      "poster_url": "/posters/958662107.jpg"
     }
   ]
 }
