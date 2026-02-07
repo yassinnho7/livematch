@@ -1,48 +1,7 @@
 {
-  "generated_at": "2026-02-07T17:51:59.086Z",
+  "generated_at": "2026-02-07T18:06:27.442Z",
   "count": 8,
   "matches": [
-    {
-      "id": 1663129539,
-      "date": "2026-02-07T16:00:00.000Z",
-      "timestamp": 1770480000,
-      "status": "LIVE",
-      "time": "16:00",
-      "time_label": "16:00 GMT",
-      "league": {
-        "name": "فرنسا, الدوري الفرنسي",
-        "country": "France",
-        "logo": "https://a.espncdn.com/combiner/i?img=/i/leaguelogos/soccer/500/9.png&h=40&w=40"
-      },
-      "home": {
-        "name": "لانس",
-        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/01/481.png"
-      },
-      "away": {
-        "name": "ستاد رين",
-        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/01/477.png"
-      },
-      "score": null,
-      "streams": [
-        {
-          "id": "stream_ch2_1663129539",
-          "source": "livekora",
-          "quality": "HD",
-          "channel": "ch2",
-          "url": "https://pl.koooralive.click/albaplayer/ch2",
-          "priority": 1
-        },
-        {
-          "id": "stream_siiir_1663129539",
-          "source": "siiir",
-          "quality": "VIP",
-          "channel": "VIP Server",
-          "url": "https://eyj0exaioijkv1qilcjhbgcioijiuzi1nij99sss.yallashot.us/playerv2.php?match=match1&key=c0ae1abba6eebd7e6cc5b88b1d2B71547",
-          "priority": 2
-        }
-      ],
-      "poster_url": "/posters/1663129539.jpg"
-    },
     {
       "id": 1026913261,
       "date": "2026-02-07T17:00:00.000Z",
@@ -297,6 +256,47 @@
         }
       ],
       "poster_url": "/posters/582278603.jpg"
+    },
+    {
+      "id": 1663129539,
+      "date": "2026-02-07T16:00:00.000Z",
+      "timestamp": 1770480000,
+      "status": "FT",
+      "time": "16:00",
+      "time_label": "16:00 GMT",
+      "league": {
+        "name": "فرنسا, الدوري الفرنسي",
+        "country": "France",
+        "logo": "https://a.espncdn.com/combiner/i?img=/i/leaguelogos/soccer/500/9.png&h=40&w=40"
+      },
+      "home": {
+        "name": "لانس",
+        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/01/481.png"
+      },
+      "away": {
+        "name": "ستاد رين",
+        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/01/477.png"
+      },
+      "score": null,
+      "streams": [
+        {
+          "id": "stream_ch2_1663129539",
+          "source": "livekora",
+          "quality": "HD",
+          "channel": "ch2",
+          "url": "https://pl.koooralive.click/albaplayer/ch2",
+          "priority": 1
+        },
+        {
+          "id": "stream_siiir_1663129539",
+          "source": "siiir",
+          "quality": "VIP",
+          "channel": "VIP Server",
+          "url": "https://eyj0exaioijkv1qilcjhbgcioijiuzi1nij99sss.yallashot.us/playerv2.php?match=match1&key=c0ae1abba6eebd7e6cc5b88b1d2B71547",
+          "priority": 2
+        }
+      ],
+      "poster_url": "/posters/1663129539.jpg"
     }
   ]
 }
