@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-02-07T18:57:35.430Z",
+  "generated_at": "2026-02-07T19:22:47.007Z",
   "count": 8,
   "matches": [
     {
@@ -88,7 +88,7 @@
       "id": 202823805,
       "date": "2026-02-07T19:00:00.000Z",
       "timestamp": 1770490800,
-      "status": "NS",
+      "status": "LIVE",
       "time": "19:00",
       "time_label": "19:00 GMT",
       "league": {
@@ -129,7 +129,7 @@
       "id": 1745121151,
       "date": "2026-02-07T19:00:00.000Z",
       "timestamp": 1770490800,
-      "status": "NS",
+      "status": "LIVE",
       "time": "19:00",
       "time_label": "19:00 GMT",
       "league": {
@@ -195,6 +195,14 @@
           "channel": "bein3",
           "url": "https://pl.koooralive.click/albaplayer/bein3",
           "priority": 1
+        },
+        {
+          "id": "stream_siiir_159669691",
+          "source": "siiir",
+          "quality": "VIP",
+          "channel": "VIP Server",
+          "url": "https://eyj0exaioijkv1qilcjhbgcioijiuzi1nij99sss.yallashot.us/playerv2.php?match=match10&key=c0ae1abba6eebd7e6cc5b88b1d2B71547",
+          "priority": 2
         }
       ],
       "poster_url": "/posters/159669691.jpg"
@@ -285,7 +293,7 @@
       "id": 1026913261,
       "date": "2026-02-07T17:00:00.000Z",
       "timestamp": 1770483600,
-      "status": "LIVE",
+      "status": "FT",
       "time": "17:00",
       "time_label": "17:00 GMT",
       "league": {
@@ -310,14 +318,6 @@
           "channel": "ad-premium-1",
           "url": "https://pl.koooralive.click/albaplayer/ad-premium-1",
           "priority": 1
-        },
-        {
-          "id": "stream_siiir_1026913261",
-          "source": "siiir",
-          "quality": "VIP",
-          "channel": "VIP Server",
-          "url": "https://eyj0exaioijkv1qilcjhbgcioijiuzi1nij99sss.yallashot.us/playerv2.php?match=match6&key=c0ae1abba6eebd7e6cc5b88b1d2B71547",
-          "priority": 2
         }
       ],
       "poster_url": "/posters/1026913261.jpg"
