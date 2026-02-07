@@ -134,7 +134,12 @@ async function generatePosters() {
         ctx.font = 'bold 90px "Cairo", sans-serif';
         ctx.shadowColor = 'rgba(0,0,0,0.8)';
         ctx.shadowBlur = 10;
-        ctx.fillText(match.time || 'TBD', 540, 850);
+        ctx.fillText(match.time || 'TBD', 540, 830); // Moved up slightly
+
+        // GMT Label
+        ctx.font = 'bold 40px "Cairo", sans-serif';
+        ctx.fillStyle = '#dfe6e9';
+        ctx.fillText('GMT', 540, 880);
 
         // League
         ctx.fillStyle = '#dfe6e9';

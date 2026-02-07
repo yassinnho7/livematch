@@ -90,7 +90,7 @@ async function notify() {
                 title: `🔥 مباراة حاسمة: ${match.home.name} 🆚 ${match.away.name}`,
                 league: match.league.name,
                 time: match.time,
-                link: link,
+                link: "", // Empty to prevent duplicate link (Link is already in message)
                 message: message,
                 photo: posterUrl
             };
