@@ -1,12 +1,12 @@
 {
-  "generated_at": "2026-02-07T12:04:54.782Z",
+  "generated_at": "2026-02-07T13:14:08.219Z",
   "count": 17,
   "matches": [
     {
       "id": 316961407,
       "date": "2026-02-07T12:30:00.000Z",
       "timestamp": 1770467400,
-      "status": "NS",
+      "status": "LIVE",
       "time": "12:30",
       "time_label": "12:30 GMT",
       "league": {
@@ -47,7 +47,7 @@
       "id": 1808353095,
       "date": "2026-02-07T13:00:00.000Z",
       "timestamp": 1770469200,
-      "status": "NS",
+      "status": "LIVE",
       "time": "13:00",
       "time_label": "13:00 GMT",
       "league": {
@@ -72,6 +72,14 @@
           "channel": "ch2",
           "url": "https://pl.koooralive.click/albaplayer/ch2",
           "priority": 1
+        },
+        {
+          "id": "stream_siiir_1808353095",
+          "source": "siiir",
+          "quality": "VIP",
+          "channel": "VIP Server",
+          "url": "https://eyj0exaioijkv1qilcjhbgcioijiuzi1nij99sss.yallashot.us/playerv2.php?match=match9&key=c0ae1abba6eebd7e6cc5b88b1d2B71547",
+          "priority": 2
         }
       ],
       "poster_url": "/posters/1808353095.jpg"
@@ -80,7 +88,7 @@
       "id": 460800308,
       "date": "2026-02-07T13:00:00.000Z",
       "timestamp": 1770469200,
-      "status": "NS",
+      "status": "LIVE",
       "time": "13:00",
       "time_label": "13:00 GMT",
       "league": {
