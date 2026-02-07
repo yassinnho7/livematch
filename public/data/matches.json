@@ -1,89 +1,7 @@
 {
-  "generated_at": "2026-02-07T20:30:56.395Z",
+  "generated_at": "2026-02-07T20:57:50.244Z",
   "count": 8,
   "matches": [
-    {
-      "id": 202823805,
-      "date": "2026-02-07T19:00:00.000Z",
-      "timestamp": 1770490800,
-      "status": "LIVE",
-      "time": "19:00",
-      "time_label": "19:00 GMT",
-      "league": {
-        "name": "أفريقيا, دوري أبطال أفريقيا - المجموعات",
-        "country": "Africa",
-        "logo": "https://a.espncdn.com/combiner/i?img=/i/leaguelogos/soccer/500/1257.png&h=40&w=40"
-      },
-      "home": {
-        "name": "الجيش الملكي",
-        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/01/5455.png"
-      },
-      "away": {
-        "name": "يانج افريكانز",
-        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/01/18957.png"
-      },
-      "score": null,
-      "streams": [
-        {
-          "id": "stream_bein5_202823805",
-          "source": "livekora",
-          "quality": "HD",
-          "channel": "bein5",
-          "url": "https://pl.koooralive.click/albaplayer/bein5",
-          "priority": 1
-        },
-        {
-          "id": "stream_siiir_202823805",
-          "source": "siiir",
-          "quality": "VIP",
-          "channel": "VIP Server",
-          "url": "https://eyj0exaioijkv1qilcjhbgcioijiuzi1nij99sss.yallashot.us/playerv2.php?match=match5&key=c0ae1abba6eebd7e6cc5b88b1d2B71547",
-          "priority": 2
-        }
-      ],
-      "poster_url": "/posters/202823805.jpg"
-    },
-    {
-      "id": 1745121151,
-      "date": "2026-02-07T19:00:00.000Z",
-      "timestamp": 1770490800,
-      "status": "LIVE",
-      "time": "19:00",
-      "time_label": "19:00 GMT",
-      "league": {
-        "name": "أفريقيا, دوري أبطال أفريقيا - المجموعات",
-        "country": "Africa",
-        "logo": "https://a.espncdn.com/combiner/i?img=/i/leaguelogos/soccer/500/1257.png&h=40&w=40"
-      },
-      "home": {
-        "name": "شبيبة القبائل",
-        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/01/8223.png"
-      },
-      "away": {
-        "name": "الأهلي",
-        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/01/8200.png"
-      },
-      "score": null,
-      "streams": [
-        {
-          "id": "stream_bein2_1745121151",
-          "source": "livekora",
-          "quality": "HD",
-          "channel": "bein2",
-          "url": "https://pl.koooralive.click/albaplayer/bein2",
-          "priority": 1
-        },
-        {
-          "id": "stream_siiir_1745121151",
-          "source": "siiir",
-          "quality": "VIP",
-          "channel": "VIP Server",
-          "url": "https://eyj0exaioijkv1qilcjhbgcioijiuzi1nij99sss.yallashot.us/playerv2.php?match=match2&key=c0ae1abba6eebd7e6cc5b88b1d2B71547",
-          "priority": 2
-        }
-      ],
-      "poster_url": "/posters/1745121151.jpg"
-    },
     {
       "id": 159669691,
       "date": "2026-02-07T20:00:00.000Z",
@@ -313,6 +231,88 @@
         }
       ],
       "poster_url": "/posters/358742592.jpg"
+    },
+    {
+      "id": 202823805,
+      "date": "2026-02-07T19:00:00.000Z",
+      "timestamp": 1770490800,
+      "status": "LIVE",
+      "time": "19:00",
+      "time_label": "19:00 GMT",
+      "league": {
+        "name": "أفريقيا, دوري أبطال أفريقيا - المجموعات",
+        "country": "Africa",
+        "logo": "https://a.espncdn.com/combiner/i?img=/i/leaguelogos/soccer/500/1257.png&h=40&w=40"
+      },
+      "home": {
+        "name": "الجيش الملكي",
+        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/01/5455.png"
+      },
+      "away": {
+        "name": "يانج افريكانز",
+        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/01/18957.png"
+      },
+      "score": null,
+      "streams": [
+        {
+          "id": "stream_bein5_202823805",
+          "source": "livekora",
+          "quality": "HD",
+          "channel": "bein5",
+          "url": "https://pl.koooralive.click/albaplayer/bein5",
+          "priority": 1
+        },
+        {
+          "id": "stream_siiir_202823805",
+          "source": "siiir",
+          "quality": "VIP",
+          "channel": "VIP Server",
+          "url": "https://eyj0exaioijkv1qilcjhbgcioijiuzi1nij99sss.yallashot.us/playerv2.php?match=match5&key=c0ae1abba6eebd7e6cc5b88b1d2B71547",
+          "priority": 2
+        }
+      ],
+      "poster_url": "/posters/202823805.jpg"
+    },
+    {
+      "id": 1745121151,
+      "date": "2026-02-07T19:00:00.000Z",
+      "timestamp": 1770490800,
+      "status": "LIVE",
+      "time": "19:00",
+      "time_label": "19:00 GMT",
+      "league": {
+        "name": "أفريقيا, دوري أبطال أفريقيا - المجموعات",
+        "country": "Africa",
+        "logo": "https://a.espncdn.com/combiner/i?img=/i/leaguelogos/soccer/500/1257.png&h=40&w=40"
+      },
+      "home": {
+        "name": "شبيبة القبائل",
+        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/01/8223.png"
+      },
+      "away": {
+        "name": "الأهلي",
+        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/01/8200.png"
+      },
+      "score": null,
+      "streams": [
+        {
+          "id": "stream_bein2_1745121151",
+          "source": "livekora",
+          "quality": "HD",
+          "channel": "bein2",
+          "url": "https://pl.koooralive.click/albaplayer/bein2",
+          "priority": 1
+        },
+        {
+          "id": "stream_siiir_1745121151",
+          "source": "siiir",
+          "quality": "VIP",
+          "channel": "VIP Server",
+          "url": "https://eyj0exaioijkv1qilcjhbgcioijiuzi1nij99sss.yallashot.us/playerv2.php?match=match2&key=c0ae1abba6eebd7e6cc5b88b1d2B71547",
+          "priority": 2
+        }
+      ],
+      "poster_url": "/posters/1745121151.jpg"
     }
   ]
 }
