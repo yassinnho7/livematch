@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-02-07T22:43:23.753Z",
+  "generated_at": "2026-02-07T23:06:03.525Z",
   "count": 8,
   "matches": [
     {
@@ -64,14 +64,6 @@
           "channel": "ad-premium-1",
           "url": "https://pl.koooralive.click/albaplayer/ad-premium-1",
           "priority": 1
-        },
-        {
-          "id": "stream_siiir_1026913261",
-          "source": "siiir",
-          "quality": "VIP",
-          "channel": "VIP Server",
-          "url": "https://eyj0exaioijkv1qilcjhbgcioijiuzi1nij99sss.yallashot.us/playerv2.php?match=match6&key=c0ae1abba6eebd7e6cc5b88b1d2B71547",
-          "priority": 2
         }
       ],
       "poster_url": "/posters/1026913261.jpg"
@@ -105,14 +97,6 @@
           "channel": "mbc-action",
           "url": "https://pl.koooralive.click/albaplayer/mbc-action",
           "priority": 1
-        },
-        {
-          "id": "stream_siiir_854061987",
-          "source": "siiir",
-          "quality": "VIP",
-          "channel": "VIP Server",
-          "url": "https://eyj0exaioijkv1qilcjhbgcioijiuzi1nij99sss.yallashot.us/playerv2.php?match=match10&key=c0ae1abba6eebd7e6cc5b88b1d2B71547",
-          "priority": 2
         }
       ],
       "poster_url": "/posters/854061987.jpg"
@@ -146,14 +130,6 @@
           "channel": "bein1",
           "url": "https://pl.koooralive.click/albaplayer/bein1",
           "priority": 1
-        },
-        {
-          "id": "stream_siiir_358742592",
-          "source": "siiir",
-          "quality": "VIP",
-          "channel": "VIP Server",
-          "url": "https://eyj0exaioijkv1qilcjhbgcioijiuzi1nij99sss.yallashot.us/playerv2.php?match=match1&key=c0ae1abba6eebd7e6cc5b88b1d2B71547",
-          "priority": 2
         }
       ],
       "poster_url": "/posters/358742592.jpg"
