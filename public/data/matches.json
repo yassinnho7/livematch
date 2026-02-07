@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-02-07T14:54:52.744Z",
-  "count": 19,
+  "generated_at": "2026-02-07T15:18:19.215Z",
+  "count": 15,
   "matches": [
     {
       "id": 775650802,
@@ -47,7 +47,7 @@
       "id": 1094546740,
       "date": "2026-02-07T15:00:00.000Z",
       "timestamp": 1770476400,
-      "status": "NS",
+      "status": "LIVE",
       "time": "15:00",
       "time_label": "15:00 GMT",
       "league": {
@@ -88,7 +88,7 @@
       "id": 1808858506,
       "date": "2026-02-07T15:00:00.000Z",
       "timestamp": 1770476400,
-      "status": "NS",
+      "status": "LIVE",
       "time": "15:00",
       "time_label": "15:00 GMT",
       "league": {
@@ -129,7 +129,7 @@
       "id": 1046193642,
       "date": "2026-02-07T15:00:00.000Z",
       "timestamp": 1770476400,
-      "status": "NS",
+      "status": "LIVE",
       "time": "15:00",
       "time_label": "15:00 GMT",
       "league": {
@@ -170,7 +170,7 @@
       "id": 296483697,
       "date": "2026-02-07T15:00:00.000Z",
       "timestamp": 1770476400,
-      "status": "NS",
+      "status": "LIVE",
       "time": "15:00",
       "time_label": "15:00 GMT",
       "league": {
@@ -211,7 +211,7 @@
       "id": 600240884,
       "date": "2026-02-07T15:00:00.000Z",
       "timestamp": 1770476400,
-      "status": "NS",
+      "status": "LIVE",
       "time": "15:00",
       "time_label": "15:00 GMT",
       "league": {
@@ -252,7 +252,7 @@
       "id": 288704940,
       "date": "2026-02-07T15:15:00.000Z",
       "timestamp": 1770477300,
-      "status": "NS",
+      "status": "LIVE",
       "time": "15:15",
       "time_label": "15:15 GMT",
       "league": {
@@ -353,11 +353,11 @@
       "score": null,
       "streams": [
         {
-          "id": "stream_ad1_1026913261",
+          "id": "stream_ad-premium-1_1026913261",
           "source": "livekora",
           "quality": "HD",
-          "channel": "ad1",
-          "url": "https://pl.koooralive.click/albaplayer/ad1",
+          "channel": "ad-premium-1",
+          "url": "https://pl.koooralive.click/albaplayer/ad-premium-1",
           "priority": 1
         }
       ],
@@ -403,39 +403,6 @@
         }
       ],
       "poster_url": "/posters/854061987.jpg"
-    },
-    {
-      "id": 53142377,
-      "date": "2026-02-07T17:30:00.000Z",
-      "timestamp": 1770485400,
-      "status": "NS",
-      "time": "17:30",
-      "time_label": "17:30 GMT",
-      "league": {
-        "name": "إسبانيا, الدوري الإسباني",
-        "country": "Spain",
-        "logo": "https://a.espncdn.com/combiner/i?img=/i/leaguelogos/soccer/500/15.png&h=40&w=40"
-      },
-      "home": {
-        "name": "إشبيلية",
-        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/02/135.png"
-      },
-      "away": {
-        "name": "جيرونا",
-        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/01/175.png"
-      },
-      "score": null,
-      "streams": [
-        {
-          "id": "stream_bein3_53142377",
-          "source": "livekora",
-          "quality": "HD",
-          "channel": "bein3",
-          "url": "https://pl.koooralive.click/albaplayer/bein3",
-          "priority": 1
-        }
-      ],
-      "poster_url": "/posters/53142377.jpg"
     },
     {
       "id": 358742592,
@@ -609,121 +576,6 @@
         }
       ],
       "poster_url": "/posters/582278603.jpg"
-    },
-    {
-      "id": 316961407,
-      "date": "2026-02-07T12:30:00.000Z",
-      "timestamp": 1770467400,
-      "status": "FT",
-      "time": "12:30",
-      "time_label": "12:30 GMT",
-      "league": {
-        "name": "إنجلترا, الدوري الإنجليزي",
-        "country": "England",
-        "logo": "https://a.espncdn.com/combiner/i?img=/i/leaguelogos/soccer/500/23.png&h=40&w=40"
-      },
-      "home": {
-        "name": "مانشستر يونايتد",
-        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/01/105.png"
-      },
-      "away": {
-        "name": "توتنهام هوتسبر",
-        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/01/114.png"
-      },
-      "score": null,
-      "streams": [
-        {
-          "id": "stream_bein1_316961407",
-          "source": "livekora",
-          "quality": "HD",
-          "channel": "bein1",
-          "url": "https://pl.koooralive.click/albaplayer/bein1",
-          "priority": 1
-        },
-        {
-          "id": "stream_siiir_316961407",
-          "source": "siiir",
-          "quality": "VIP",
-          "channel": "VIP Server",
-          "url": "https://eyj0exaioijkv1qilcjhbgcioijiuzi1nij99sss.yallashot.us/playerv2.php?match=match6&key=c0ae1abba6eebd7e6cc5b88b1d2B71547",
-          "priority": 2
-        }
-      ],
-      "poster_url": "/posters/316961407.jpg"
-    },
-    {
-      "id": 1808353095,
-      "date": "2026-02-07T13:00:00.000Z",
-      "timestamp": 1770469200,
-      "status": "LIVE",
-      "time": "13:00",
-      "time_label": "13:00 GMT",
-      "league": {
-        "name": "أفريقيا, دوري أبطال أفريقيا - المجموعات",
-        "country": "Africa",
-        "logo": "https://a.espncdn.com/combiner/i?img=/i/leaguelogos/soccer/500/1257.png&h=40&w=40"
-      },
-      "home": {
-        "name": "باور ديناموز",
-        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/02/76692.png"
-      },
-      "away": {
-        "name": "نهضة بركان",
-        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/01/9974.png"
-      },
-      "score": null,
-      "streams": [
-        {
-          "id": "stream_ch2_1808353095",
-          "source": "livekora",
-          "quality": "HD",
-          "channel": "ch2",
-          "url": "https://pl.koooralive.click/albaplayer/ch2",
-          "priority": 1
-        },
-        {
-          "id": "stream_siiir_1808353095",
-          "source": "siiir",
-          "quality": "VIP",
-          "channel": "VIP Server",
-          "url": "https://eyj0exaioijkv1qilcjhbgcioijiuzi1nij99sss.yallashot.us/playerv2.php?match=match9&key=c0ae1abba6eebd7e6cc5b88b1d2B71547",
-          "priority": 2
-        }
-      ],
-      "poster_url": "/posters/1808353095.jpg"
-    },
-    {
-      "id": 460800308,
-      "date": "2026-02-07T13:00:00.000Z",
-      "timestamp": 1770469200,
-      "status": "LIVE",
-      "time": "13:00",
-      "time_label": "13:00 GMT",
-      "league": {
-        "name": "تونس, الرابطة التونسية المحترفة الأولى",
-        "country": "Tunisia",
-        "logo": "https://a.espncdn.com/combiner/i?img=/i/leaguelogos/soccer/500/1247.png&h=40&w=40"
-      },
-      "home": {
-        "name": "النجم الساحلي",
-        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/01/8241.png"
-      },
-      "away": {
-        "name": "الاتحاد المنستيري",
-        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/02/8769.png"
-      },
-      "score": null,
-      "streams": [
-        {
-          "id": "stream_el-watania-1_460800308",
-          "source": "livekora",
-          "quality": "HD",
-          "channel": "el-watania-1",
-          "url": "https://pl.koooralive.click/albaplayer/el-watania-1",
-          "priority": 1
-        }
-      ],
-      "poster_url": "/posters/460800308.jpg"
     }
   ]
 }
