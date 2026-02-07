@@ -1,86 +1,12 @@
 {
-  "generated_at": "2026-02-07T14:24:48.744Z",
-  "count": 17,
+  "generated_at": "2026-02-07T14:54:52.744Z",
+  "count": 19,
   "matches": [
-    {
-      "id": 1808353095,
-      "date": "2026-02-07T13:00:00.000Z",
-      "timestamp": 1770469200,
-      "status": "LIVE",
-      "time": "13:00",
-      "time_label": "13:00 GMT",
-      "league": {
-        "name": "أفريقيا, دوري أبطال أفريقيا - المجموعات",
-        "country": "Africa",
-        "logo": "https://a.espncdn.com/combiner/i?img=/i/leaguelogos/soccer/500/1257.png&h=40&w=40"
-      },
-      "home": {
-        "name": "باور ديناموز",
-        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/02/76692.png"
-      },
-      "away": {
-        "name": "نهضة بركان",
-        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/01/9974.png"
-      },
-      "score": null,
-      "streams": [
-        {
-          "id": "stream_ch2_1808353095",
-          "source": "livekora",
-          "quality": "HD",
-          "channel": "ch2",
-          "url": "https://pl.koooralive.click/albaplayer/ch2",
-          "priority": 1
-        },
-        {
-          "id": "stream_siiir_1808353095",
-          "source": "siiir",
-          "quality": "VIP",
-          "channel": "VIP Server",
-          "url": "https://eyj0exaioijkv1qilcjhbgcioijiuzi1nij99sss.yallashot.us/playerv2.php?match=match9&key=c0ae1abba6eebd7e6cc5b88b1d2B71547",
-          "priority": 2
-        }
-      ],
-      "poster_url": "/posters/1808353095.jpg"
-    },
-    {
-      "id": 460800308,
-      "date": "2026-02-07T13:00:00.000Z",
-      "timestamp": 1770469200,
-      "status": "LIVE",
-      "time": "13:00",
-      "time_label": "13:00 GMT",
-      "league": {
-        "name": "تونس, الرابطة التونسية المحترفة الأولى",
-        "country": "Tunisia",
-        "logo": "https://a.espncdn.com/combiner/i?img=/i/leaguelogos/soccer/500/1247.png&h=40&w=40"
-      },
-      "home": {
-        "name": "النجم الساحلي",
-        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/01/8241.png"
-      },
-      "away": {
-        "name": "الاتحاد المنستيري",
-        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/02/8769.png"
-      },
-      "score": null,
-      "streams": [
-        {
-          "id": "stream_el-watania-1_460800308",
-          "source": "livekora",
-          "quality": "HD",
-          "channel": "el-watania-1",
-          "url": "https://pl.koooralive.click/albaplayer/el-watania-1",
-          "priority": 1
-        }
-      ],
-      "poster_url": "/posters/460800308.jpg"
-    },
     {
       "id": 775650802,
       "date": "2026-02-07T14:30:00.000Z",
       "timestamp": 1770474600,
-      "status": "NS",
+      "status": "LIVE",
       "time": "14:30",
       "time_label": "14:30 GMT",
       "league": {
@@ -146,6 +72,14 @@
           "channel": "bein4",
           "url": "https://pl.koooralive.click/albaplayer/bein4",
           "priority": 1
+        },
+        {
+          "id": "stream_siiir_1094546740",
+          "source": "siiir",
+          "quality": "VIP",
+          "channel": "VIP Server",
+          "url": "https://eyj0exaioijkv1qilcjhbgcioijiuzi1nij99sss.yallashot.us/playerv2.php?match=match4&key=c0ae1abba6eebd7e6cc5b88b1d2B71547",
+          "priority": 2
         }
       ],
       "poster_url": "/posters/1094546740.jpg"
@@ -226,7 +160,7 @@
           "source": "siiir",
           "quality": "VIP",
           "channel": "VIP Server",
-          "url": "https://eyj0exaioijkv1qilcjhbgcioijiuzi1nij99sss.yallashot.us/playerv2.php?match=match1&key=c0ae1abba6eebd7e6cc5b88b1d2B71547",
+          "url": "https://eyj0exaioijkv1qilcjhbgcioijiuzi1nij99sss.yallashot.us/playerv2.php?match=match6&key=c0ae1abba6eebd7e6cc5b88b1d2B71547",
           "priority": 2
         }
       ],
@@ -261,6 +195,14 @@
           "channel": "bein3",
           "url": "https://pl.koooralive.click/albaplayer/bein3",
           "priority": 1
+        },
+        {
+          "id": "stream_siiir_296483697",
+          "source": "siiir",
+          "quality": "VIP",
+          "channel": "VIP Server",
+          "url": "https://eyj0exaioijkv1qilcjhbgcioijiuzi1nij99sss.yallashot.us/playerv2.php?match=match3&key=c0ae1abba6eebd7e6cc5b88b1d2B71547",
+          "priority": 2
         }
       ],
       "poster_url": "/posters/296483697.jpg"
@@ -294,6 +236,14 @@
           "channel": "bein5",
           "url": "https://pl.koooralive.click/albaplayer/bein5",
           "priority": 1
+        },
+        {
+          "id": "stream_siiir_600240884",
+          "source": "siiir",
+          "quality": "VIP",
+          "channel": "VIP Server",
+          "url": "https://eyj0exaioijkv1qilcjhbgcioijiuzi1nij99sss.yallashot.us/playerv2.php?match=match5&key=c0ae1abba6eebd7e6cc5b88b1d2B71547",
+          "priority": 2
         }
       ],
       "poster_url": "/posters/600240884.jpg"
@@ -327,9 +277,58 @@
           "channel": "bein2",
           "url": "https://pl.koooralive.click/albaplayer/bein2",
           "priority": 1
+        },
+        {
+          "id": "stream_siiir_288704940",
+          "source": "siiir",
+          "quality": "VIP",
+          "channel": "VIP Server",
+          "url": "https://eyj0exaioijkv1qilcjhbgcioijiuzi1nij99sss.yallashot.us/playerv2.php?match=match2&key=c0ae1abba6eebd7e6cc5b88b1d2B71547",
+          "priority": 2
         }
       ],
       "poster_url": "/posters/288704940.jpg"
+    },
+    {
+      "id": 1663129539,
+      "date": "2026-02-07T16:00:00.000Z",
+      "timestamp": 1770480000,
+      "status": "NS",
+      "time": "16:00",
+      "time_label": "16:00 GMT",
+      "league": {
+        "name": "فرنسا, الدوري الفرنسي",
+        "country": "France",
+        "logo": "https://a.espncdn.com/combiner/i?img=/i/leaguelogos/soccer/500/9.png&h=40&w=40"
+      },
+      "home": {
+        "name": "لانس",
+        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/01/481.png"
+      },
+      "away": {
+        "name": "ستاد رين",
+        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/01/477.png"
+      },
+      "score": null,
+      "streams": [
+        {
+          "id": "stream_ch2_1663129539",
+          "source": "livekora",
+          "quality": "HD",
+          "channel": "ch2",
+          "url": "https://pl.koooralive.click/albaplayer/ch2",
+          "priority": 1
+        },
+        {
+          "id": "stream_siiir_1663129539",
+          "source": "siiir",
+          "quality": "VIP",
+          "channel": "VIP Server",
+          "url": "https://eyj0exaioijkv1qilcjhbgcioijiuzi1nij99sss.yallashot.us/playerv2.php?match=match1&key=c0ae1abba6eebd7e6cc5b88b1d2B71547",
+          "priority": 2
+        }
+      ],
+      "poster_url": "/posters/1663129539.jpg"
     },
     {
       "id": 1026913261,
@@ -473,7 +472,7 @@
           "source": "siiir",
           "quality": "VIP",
           "channel": "VIP Server",
-          "url": "https://eyj0exaioijkv1qilcjhbgcioijiuzi1nij99sss.yallashot.us/playerv2.php?match=match1&key=c0ae1abba6eebd7e6cc5b88b1d2B71547",
+          "url": "https://eyj0exaioijkv1qilcjhbgcioijiuzi1nij99sss.yallashot.us/playerv2.php?match=match6&key=c0ae1abba6eebd7e6cc5b88b1d2B71547",
           "priority": 2
         }
       ],
@@ -511,6 +510,39 @@
         }
       ],
       "poster_url": "/posters/202823805.jpg"
+    },
+    {
+      "id": 1745121151,
+      "date": "2026-02-07T19:00:00.000Z",
+      "timestamp": 1770490800,
+      "status": "NS",
+      "time": "19:00",
+      "time_label": "19:00 GMT",
+      "league": {
+        "name": "أفريقيا, دوري أبطال أفريقيا - المجموعات",
+        "country": "Africa",
+        "logo": "https://a.espncdn.com/combiner/i?img=/i/leaguelogos/soccer/500/1257.png&h=40&w=40"
+      },
+      "home": {
+        "name": "شبيبة القبائل",
+        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/01/8223.png"
+      },
+      "away": {
+        "name": "الأهلي",
+        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/01/8200.png"
+      },
+      "score": null,
+      "streams": [
+        {
+          "id": "stream_bein2_1745121151",
+          "source": "livekora",
+          "quality": "HD",
+          "channel": "bein2",
+          "url": "https://pl.koooralive.click/albaplayer/bein2",
+          "priority": 1
+        }
+      ],
+      "poster_url": "/posters/1745121151.jpg"
     },
     {
       "id": 159669691,
@@ -582,7 +614,7 @@
       "id": 316961407,
       "date": "2026-02-07T12:30:00.000Z",
       "timestamp": 1770467400,
-      "status": "LIVE",
+      "status": "FT",
       "time": "12:30",
       "time_label": "12:30 GMT",
       "league": {
@@ -613,11 +645,85 @@
           "source": "siiir",
           "quality": "VIP",
           "channel": "VIP Server",
-          "url": "https://eyj0exaioijkv1qilcjhbgcioijiuzi1nij99sss.yallashot.us/playerv2.php?match=match1&key=c0ae1abba6eebd7e6cc5b88b1d2B71547",
+          "url": "https://eyj0exaioijkv1qilcjhbgcioijiuzi1nij99sss.yallashot.us/playerv2.php?match=match6&key=c0ae1abba6eebd7e6cc5b88b1d2B71547",
           "priority": 2
         }
       ],
       "poster_url": "/posters/316961407.jpg"
+    },
+    {
+      "id": 1808353095,
+      "date": "2026-02-07T13:00:00.000Z",
+      "timestamp": 1770469200,
+      "status": "LIVE",
+      "time": "13:00",
+      "time_label": "13:00 GMT",
+      "league": {
+        "name": "أفريقيا, دوري أبطال أفريقيا - المجموعات",
+        "country": "Africa",
+        "logo": "https://a.espncdn.com/combiner/i?img=/i/leaguelogos/soccer/500/1257.png&h=40&w=40"
+      },
+      "home": {
+        "name": "باور ديناموز",
+        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/02/76692.png"
+      },
+      "away": {
+        "name": "نهضة بركان",
+        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/01/9974.png"
+      },
+      "score": null,
+      "streams": [
+        {
+          "id": "stream_ch2_1808353095",
+          "source": "livekora",
+          "quality": "HD",
+          "channel": "ch2",
+          "url": "https://pl.koooralive.click/albaplayer/ch2",
+          "priority": 1
+        },
+        {
+          "id": "stream_siiir_1808353095",
+          "source": "siiir",
+          "quality": "VIP",
+          "channel": "VIP Server",
+          "url": "https://eyj0exaioijkv1qilcjhbgcioijiuzi1nij99sss.yallashot.us/playerv2.php?match=match9&key=c0ae1abba6eebd7e6cc5b88b1d2B71547",
+          "priority": 2
+        }
+      ],
+      "poster_url": "/posters/1808353095.jpg"
+    },
+    {
+      "id": 460800308,
+      "date": "2026-02-07T13:00:00.000Z",
+      "timestamp": 1770469200,
+      "status": "LIVE",
+      "time": "13:00",
+      "time_label": "13:00 GMT",
+      "league": {
+        "name": "تونس, الرابطة التونسية المحترفة الأولى",
+        "country": "Tunisia",
+        "logo": "https://a.espncdn.com/combiner/i?img=/i/leaguelogos/soccer/500/1247.png&h=40&w=40"
+      },
+      "home": {
+        "name": "النجم الساحلي",
+        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/01/8241.png"
+      },
+      "away": {
+        "name": "الاتحاد المنستيري",
+        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/02/8769.png"
+      },
+      "score": null,
+      "streams": [
+        {
+          "id": "stream_el-watania-1_460800308",
+          "source": "livekora",
+          "quality": "HD",
+          "channel": "el-watania-1",
+          "url": "https://pl.koooralive.click/albaplayer/el-watania-1",
+          "priority": 1
+        }
+      ],
+      "poster_url": "/posters/460800308.jpg"
     }
   ]
 }
