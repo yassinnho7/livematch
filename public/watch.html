@@ -442,6 +442,7 @@
     <script>
         const urlParams = new URLSearchParams(window.location.search);
         const matchId = urlParams.get('match');
+        const selectedServerIdx = urlParams.get('server');
         let currentMatch = null, countdown = 8, streamUrl = '';
 
         // Pre-fetch DOM elements to avoid scope issues
@@ -454,7 +455,15 @@
                 const data = await res.json();
                 currentMatch = data.matches.find(m => m.id == matchId);
                 if (!currentMatch) return showError('البث غير متوفر حالياً');
+
                 renderServers();
+
+                // If a server was pre-selected from the article page
+                if (selectedServerIdx !== null && currentMatch.streams[selectedServerIdx]) {
+                    document.querySelector('#countdown-area h2').textContent = 'جاري تجهيز السيرفر المختار...';
+                    streamUrl = currentMatch.streams[selectedServerIdx].url;
+                }
+
                 startCountdown();
             } catch (e) { showError('خطأ في تحميل البيانات'); }
         }
@@ -467,11 +476,19 @@
                 progress.style.strokeDashoffset = circ - (countdown / 8) * circ;
                 if (countdown <= 0) {
                     clearInterval(timer);
-                    document.getElementById('monetization-layer').style.display = 'none';
-                    document.getElementById('choice-layer').style.display = 'flex';
-                    // Monetag Interstitial/Pop will be added here later
-                    // Mondiad Interstitial Ad (Disabled)
-                    // loadInterstitialAd();
+
+                    // If server was pre-selected, go straight to stream after countdown
+                    if (streamUrl) {
+                        document.getElementById('monetization-layer').style.display = 'none';
+                        const frame = getStreamFrame();
+                        const cont = getStreamContainer();
+                        cont.style.display = 'block';
+                        frame.src = streamUrl;
+                        initControlBehavior(document.getElementById('ui-controls'), document.getElementById('fs-toggle-btn'), document.getElementById('back-home-btn'), cont);
+                    } else {
+                        document.getElementById('monetization-layer').style.display = 'none';
+                        document.getElementById('choice-layer').style.display = 'flex';
+                    }
                 }
             }, 1000);
         }

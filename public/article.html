@@ -142,6 +142,96 @@
                 font-size: 16px;
             }
         }
+
+        /* Floating Pulsing Button */
+        .floating-watch-btn {
+            position: fixed;
+            bottom: 25px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1000;
+            background: linear-gradient(135deg, #ff4757 0%, #ff6b81 100%);
+            color: #fff;
+            text-decoration: none;
+            padding: 12px 25px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 16px;
+            box-shadow: 0 5px 20px rgba(255, 71, 87, 0.4);
+            animation: pulse-animation 2s infinite;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        @keyframes pulse-animation {
+            0% {
+                transform: translateX(-50%) scale(1);
+                box-shadow: 0 0 0 0 rgba(255, 71, 87, 0.7);
+            }
+
+            70% {
+                transform: translateX(-50%) scale(1.05);
+                box-shadow: 0 0 0 15px rgba(255, 71, 87, 0);
+            }
+
+            100% {
+                transform: translateX(-50%) scale(1);
+                box-shadow: 0 0 0 0 rgba(255, 71, 87, 0);
+            }
+        }
+
+        .floating-watch-btn:hover {
+            background: #ff6b81;
+            transform: translateX(-50%) translateY(-3px);
+        }
+
+        /* Embedded Server Selection */
+        .server-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .server-card {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 15px;
+            border-radius: 12px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .server-card:hover {
+            background: rgba(102, 126, 234, 0.2);
+            border-color: #667eea;
+            transform: translateY(-2px);
+        }
+
+        .server-card i {
+            display: block;
+            font-size: 24px;
+            margin-bottom: 8px;
+        }
+
+        .server-card h4 {
+            margin: 0;
+            font-size: 14px;
+            color: #fff;
+        }
+
+        .server-tag {
+            font-size: 10px;
+            background: #667eea;
+            padding: 2px 6px;
+            border-radius: 4px;
+            margin-top: 5px;
+            display: inline-block;
+        }
     </style>
 </head>
 
@@ -187,8 +277,14 @@
             </div>
 
             <div class="watch-button-container">
-                <!-- Adsterra 300x250 before button -->
-                <div style="margin-bottom: 20px; display: flex; justify-content: center;">
+                <h3 style="margin-bottom: 20px; color: #fff;">⚡ اختر سيرفر المشاهدة لبدء البث المباشر</h3>
+
+                <div id="server-selection-area" class="server-grid">
+                    <!-- Servers injected here -->
+                </div>
+
+                <!-- Adsterra 300x250 below servers -->
+                <div style="margin-top: 30px; display: flex; justify-content: center;">
                     <script type="text/javascript">
                         atOptions = {
                             'key': '2895cfc4a233371917690acdf46458f6',
@@ -201,9 +297,13 @@
                     <script type="text/javascript"
                         src="//www.highperformanceformat.com/2895cfc4a233371917690acdf46458f6/invoke.js"></script>
                 </div>
-
-                <a id="watch-link" href="#" class="watch-btn">⚡ شاهد البث المباشر للمباراة من هنا</a>
             </div>
+
+            <!-- Floating Button Targets bottom area -->
+            <a href="#server-selection-area" class="floating-watch-btn" id="floating-btn">
+                <span>🔴 شاهد المباراة الآن</span>
+                <span style="font-size: 12px; opacity: 0.8;">(بث مباشر)</span>
+            </a>
         </div>
     </div>
 
@@ -288,7 +388,36 @@
                 document.getElementById('away-logo').src = match.away.logo;
                 document.getElementById('hero-bg').style.backgroundImage = `url('https://raw.githubusercontent.com/yassinnho7/livematch/main/public/assets/backgrounds/stadium_night.png')`;
 
-                document.getElementById('watch-link').href = `/watch.html?match=${matchId}`;
+                // 4. Inject Servers
+                const serverArea = document.getElementById('server-selection-area');
+                const activeStreams = match.streams.filter(s => s.url && s.url.length > 5);
+                activeStreams.forEach((stream, idx) => {
+                    const isVIP = stream.source === 'siiir' || idx === 1;
+                    const card = document.createElement('div');
+                    card.className = 'server-card';
+                    card.innerHTML = `
+                        <i>${isVIP ? '⚡' : '📺'}</i>
+                        <h4>سيرفر ${idx + 1}</h4>
+                        <span class="server-tag">${isVIP ? 'VIP High Quality' : 'Standard Quality'}</span>
+                    `;
+                    card.onclick = () => {
+                        window.location.href = `/watch.html?match=${matchId}&server=${idx}`;
+                    };
+                    serverArea.appendChild(card);
+                });
+
+                // Hide floating button when near the real buttons
+                window.addEventListener('scroll', () => {
+                    const rect = serverArea.getBoundingClientRect();
+                    const floatBtn = document.getElementById('floating-btn');
+                    if (rect.top < window.innerHeight && rect.bottom > 0) {
+                        floatBtn.style.opacity = '0';
+                        floatBtn.style.pointerEvents = 'none';
+                    } else {
+                        floatBtn.style.opacity = '1';
+                        floatBtn.style.pointerEvents = 'auto';
+                    }
+                });
 
             } catch (err) {
                 console.error(err);
