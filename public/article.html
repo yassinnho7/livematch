@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="page-title">مباراة اليوم - بث مباشر</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/simple-style.css?v=9999">
+
+    <!-- Meta Tags for SEO (Updated dynamically) -->
+    <meta name="description" id="meta-description" content="البث المباشر للمباراة وتحليل شامل بالذكاء الصناعي.">
+    <meta name="keywords" id="meta-keywords" content="بث مباشر, كورة, مباريات اليوم, بث مباشر للمباريات">
+
+    <style>
+        .article-container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background: rgba(26, 32, 44, 0.8);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(10px);
+        }
+
+        .match-hero {
+            position: relative;
+            width: 100%;
+            height: 300px;
+            border-radius: 15px;
+            overflow: hidden;
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 30px;
+        }
+
+        .match-hero::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(0deg, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.4) 100%);
+        }
+
+        .hero-info {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            text-align: center;
+        }
+
+        .hero-team img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: white;
+            padding: 5px;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+        }
+
+        .hero-vs {
+            font-size: 32px;
+            font-weight: 900;
+            color: #667eea;
+        }
+
+        .article-body {
+            line-height: 1.8;
+            font-size: 18px;
+            color: #e2e8f0;
+        }
+
+        .article-body h2 {
+            margin: 30px 0 15px;
+            color: #fff;
+            border-right: 4px solid #667eea;
+            padding-right: 15px;
+        }
+
+        .article-body p {
+            margin-bottom: 20px;
+        }
+
+        .ad-native-container {
+            margin: 30px 0;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .watch-button-container {
+            text-align: center;
+            margin: 40px 0;
+        }
+
+        .watch-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #fff;
+            text-decoration: none;
+            padding: 15px 40px;
+            font-size: 20px;
+            font-weight: 700;
+            border-radius: 50px;
+            display: inline-block;
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.4);
+            transition: all 0.3s ease;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .watch-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(102, 126, 234, 0.6);
+            border-color: #fff;
+        }
+
+        @media (max-width: 768px) {
+            .match-hero {
+                height: 200px;
+            }
+
+            .hero-team img {
+                width: 60px;
+                height: 60px;
+            }
+
+            .hero-vs {
+                font-size: 24px;
+            }
+
+            .article-body {
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <a href="/" style="text-decoration: none; color: inherit;">
+                <h1>⚽ مباريات اليوم - بث مباشر</h1>
+            </a>
+        </header>
+
+        <div class="article-container" id="loading-view">
+            <p style="text-align: center;">جاري تحضير المقال والتحليل الذكي للمباراة...</p>
+        </div>
+
+        <div class="article-container" id="article-view" style="display: none;">
+            <div class="match-hero" id="hero-bg">
+                <div class="hero-info">
+                    <div class="hero-team">
+                        <img id="home-logo" src="" alt="">
+                        <p id="home-name" style="margin-top: 10px; font-weight: 700;"></p>
+                    </div>
+                    <div class="hero-vs">VS</div>
+                    <div class="hero-team">
+                        <img id="away-logo" src="" alt="">
+                        <p id="away-name" style="margin-top: 10px; font-weight: 700;"></p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Adsterra Native Ad -->
+            <div class="ad-native-container">
+                <script async="async" data-cfasync="false"
+                    src="//pl25804368.highperformanceformat.com/f25a5262c64b638fa45d625c5678cd29/invoke.js"></script>
+                <div id="container-f25a5262c64b638fa45d625c5678cd29"></div>
+            </div>
+
+            <h1 id="article-title" style="font-size: 28px; line-height: 1.4; margin-bottom: 25px; color: #fff;"></h1>
+
+            <div class="article-body" id="article-content">
+                <!-- Content injected here -->
+            </div>
+
+            <div class="watch-button-container">
+                <!-- Adsterra 300x250 before button -->
+                <div style="margin-bottom: 20px; display: flex; justify-content: center;">
+                    <script type="text/javascript">
+                        atOptions = {
+                            'key': '2895cfc4a233371917690acdf46458f6',
+                            'format': 'iframe',
+                            'height': 250,
+                            'width': 300,
+                            'params': {}
+                        };
+                    </script>
+                    <script type="text/javascript"
+                        src="//www.highperformanceformat.com/2895cfc4a233371917690acdf46458f6/invoke.js"></script>
+                </div>
+
+                <a id="watch-link" href="#" class="watch-btn">⚡ شاهد البث المباشر للمباراة من هنا</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const matchId = urlParams.get('match');
+
+        async function loadArticle() {
+            if (!matchId) {
+                window.location.href = '/';
+                return;
+            }
+
+            try {
+                // 1. Fetch match info
+                const matchRes = await fetch('/data/matches.json');
+                const matchData = await matchRes.json();
+                const match = matchData.matches.find(m => m.id == matchId);
+
+                if (!match) {
+                    showError('المباراة غير موجودة');
+                    return;
+                }
+
+                // 2. Try to fetch AI Article
+                let article;
+                try {
+                    const articleRes = await fetch(`/data/articles/${matchId}.json`);
+                    if (articleRes.ok) {
+                        article = await articleRes.json();
+                    }
+                } catch (e) { console.warn('No AI article found'); }
+
+                // Fallback article if AI fails
+                if (!article) {
+                    article = {
+                        title: `مشاهدة مباراة ${match.home.name} و ${match.away.name} بث مباشر`,
+                        content: `<p>تابعوا البث المباشر لأقوى مباريات اليوم في ${match.league.name} حيث يلتقي فريقي ${match.home.name} و ${match.away.name} في مواجهة نارية كبرى.</p><p>نوفر لكم جودة عالية وسيرفرات متعددة للمشاهدة بدون تقطيع.</p>`,
+                        meta_description: `بث مباشر مباراة ${match.home.name} ضد ${match.away.name} اليوم.`
+                    };
+                }
+
+                // 3. Render Content
+                document.getElementById('loading-view').style.display = 'none';
+                document.getElementById('article-view').style.display = 'block';
+
+                document.getElementById('page-title').textContent = article.title;
+                document.getElementById('article-title').textContent = article.title;
+                document.getElementById('article-content').innerHTML = article.content;
+                document.getElementById('meta-description').content = article.meta_description;
+
+                document.getElementById('home-name').textContent = match.home.name;
+                document.getElementById('away-name').textContent = match.away.name;
+                document.getElementById('home-logo').src = match.home.logo;
+                document.getElementById('away-logo').src = match.away.logo;
+                document.getElementById('hero-bg').style.backgroundImage = `url('https://raw.githubusercontent.com/yassinnho7/livematch/main/public/assets/backgrounds/stadium_night.png')`;
+
+                document.getElementById('watch-link').href = `/watch.html?match=${matchId}`;
+
+            } catch (err) {
+                console.error(err);
+                showError('حدث خطأ أثناء تحميل البيانات');
+            }
+        }
+
+        function showError(msg) {
+            document.getElementById('loading-view').innerHTML = `<h2 style="color:#ff4757; text-align:center;">⚠️ ${msg}</h2><a href="/" style="display:block; text-align:center; margin-top:10px; color:#667eea;">العودة للرئيسية</a>`;
+        }
+
+        loadArticle();
+    </script>
+</body>
+
+</html>

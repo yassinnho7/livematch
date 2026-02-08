@@ -139,7 +139,7 @@ function createMatchCard(match) {
 
     const card = document.createElement('a');
     card.className = 'match-row';
-    card.href = `watch.html?match=${match.id}`;
+    card.href = `article.html?match=${match.id}`;
 
     // Time with fallback
     let timeString = match.time_label || '';

@@ -3,6 +3,7 @@ import SiiirScraper from './siiir_scraper.js';
 import fs from 'fs/promises';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import { generateMatchArticle, saveArticle } from './ai_content.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -25,10 +26,25 @@ class ScraperManager {
         // 3. Merge Siiir streams into LiveKora matches
         const finalMatches = this.mergeSources(koraMatches, siiirStreams);
 
-        // 4. Save results
+        // 4. Generate AI Articles for matches
+        await this.processArticles(finalMatches);
+
+        // 5. Save results
         await this.saveMatches(finalMatches);
 
         return finalMatches;
+    }
+
+    async processArticles(matches) {
+        console.log(`🤖 Generating AI Articles for ${matches.length} matches...`);
+        for (const match of matches) {
+            // Only generate for future matches or matches without articles
+            const article = await generateMatchArticle(match);
+            if (article) {
+                await saveArticle(match.id, article);
+                console.log(`📝 Generated article for: ${match.home.name} vs ${match.away.name}`);
+            }
+        }
     }
 
     mergeSources(matches, extraStreams) {
