@@ -1,48 +1,7 @@
 {
-  "generated_at": "2026-02-08T19:22:57.842Z",
+  "generated_at": "2026-02-08T19:47:43.580Z",
   "count": 5,
   "matches": [
-    {
-      "id": 1077913163,
-      "date": "2026-02-08T17:30:00.000Z",
-      "timestamp": 1770571800,
-      "status": "LIVE",
-      "time": "17:30",
-      "time_label": "17:30 GMT",
-      "league": {
-        "name": "إسبانيا, الدوري الإسباني",
-        "country": "Spain",
-        "logo": "https://a.espncdn.com/combiner/i?img=/i/leaguelogos/soccer/500/15.png&h=40&w=40"
-      },
-      "home": {
-        "name": "أتلتيكو مدريد",
-        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/01/134.png"
-      },
-      "away": {
-        "name": "ريال بيتيس",
-        "logo": "https://l.yacinetv.info/wp-content/uploads/2026/01/146.png"
-      },
-      "score": null,
-      "streams": [
-        {
-          "id": "stream_bein5_1077913163",
-          "source": "livekora",
-          "quality": "HD",
-          "channel": "bein5",
-          "url": "https://pl.koooralive.click/albaplayer/bein5",
-          "priority": 1
-        },
-        {
-          "id": "stream_siiir_1077913163",
-          "source": "siiir",
-          "quality": "VIP",
-          "channel": "VIP Server",
-          "url": "https://eyj0exaioijkv1qilcjhbgcioijiuzi1nij99sss.yallashot.us/playerv2.php?match=match5&key=c0ae1abba6eebd7e6cc5b88b1d2B71547",
-          "priority": 2
-        }
-      ],
-      "poster_url": "/posters/1077913163.jpg"
-    },
     {
       "id": 946275938,
       "date": "2026-02-08T19:00:00.000Z",
@@ -88,7 +47,7 @@
       "id": 1282043940,
       "date": "2026-02-08T19:45:00.000Z",
       "timestamp": 1770579900,
-      "status": "NS",
+      "status": "LIVE",
       "time": "19:45",
       "time_label": "19:45 GMT",
       "league": {
@@ -129,7 +88,7 @@
       "id": 800523062,
       "date": "2026-02-08T19:45:00.000Z",
       "timestamp": 1770579900,
-      "status": "NS",
+      "status": "LIVE",
       "time": "19:45",
       "time_label": "19:45 GMT",
       "league": {
@@ -201,11 +160,52 @@
           "source": "siiir",
           "quality": "VIP",
           "channel": "VIP Server",
-          "url": "https://eyj0exaioijkv1qilcjhbgcioijiuzi1nij99sss.yallashot.us/playerv2.php?match=match5&key=c0ae1abba6eebd7e6cc5b88b1d2B71547",
+          "url": "https://eyj0exaioijkv1qilcjhbgcioijiuzi1nij99sss.yallashot.us/playerv2.php?match=match2&key=c0ae1abba6eebd7e6cc5b88b1d2B71547",
           "priority": 2
         }
       ],
       "poster_url": "/posters/188954572.jpg"
+    },
+    {
+      "id": 1077913163,
+      "date": "2026-02-08T17:30:00.000Z",
+      "timestamp": 1770571800,
+      "status": "FT",
+      "time": "17:30",
+      "time_label": "17:30 GMT",
+      "league": {
+        "name": "إسبانيا, الدوري الإسباني",
+        "country": "Spain",
+        "logo": "https://a.espncdn.com/combiner/i?img=/i/leaguelogos/soccer/500/15.png&h=40&w=40"
+      },
+      "home": {
+        "name": "أتلتيكو مدريد",
+        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/01/134.png"
+      },
+      "away": {
+        "name": "ريال بيتيس",
+        "logo": "https://l.yacinetv.info/wp-content/uploads/2026/01/146.png"
+      },
+      "score": null,
+      "streams": [
+        {
+          "id": "stream_bein5_1077913163",
+          "source": "livekora",
+          "quality": "HD",
+          "channel": "bein5",
+          "url": "https://pl.koooralive.click/albaplayer/bein5",
+          "priority": 1
+        },
+        {
+          "id": "stream_siiir_1077913163",
+          "source": "siiir",
+          "quality": "VIP",
+          "channel": "VIP Server",
+          "url": "https://eyj0exaioijkv1qilcjhbgcioijiuzi1nij99sss.yallashot.us/playerv2.php?match=match2&key=c0ae1abba6eebd7e6cc5b88b1d2B71547",
+          "priority": 2
+        }
+      ],
+      "poster_url": "/posters/1077913163.jpg"
     }
   ]
 }
