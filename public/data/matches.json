@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-02-08T14:10:32.376Z",
+  "generated_at": "2026-02-08T14:49:52.105Z",
   "count": 21,
   "matches": [
     {
@@ -206,11 +206,11 @@
       "score": null,
       "streams": [
         {
-          "id": "stream_bein-extra-1_567086485",
+          "id": "stream_bein4_567086485",
           "source": "livekora",
           "quality": "HD",
-          "channel": "bein-extra-1",
-          "url": "https://pl.koooralive.click/albaplayer/bein-extra-1",
+          "channel": "bein4",
+          "url": "https://pl.koooralive.click/albaplayer/bein4",
           "priority": 1
         },
         {
@@ -247,11 +247,11 @@
       "score": null,
       "streams": [
         {
-          "id": "stream_bein4_582588236",
+          "id": "stream_bein-extra-1_582588236",
           "source": "livekora",
           "quality": "HD",
-          "channel": "bein4",
-          "url": "https://pl.koooralive.click/albaplayer/bein4",
+          "channel": "bein-extra-1",
+          "url": "https://pl.koooralive.click/albaplayer/bein-extra-1",
           "priority": 1
         }
       ],
