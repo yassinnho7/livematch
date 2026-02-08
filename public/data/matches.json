@@ -1,12 +1,12 @@
 {
-  "generated_at": "2026-02-08T12:56:16.261Z",
+  "generated_at": "2026-02-08T13:43:11.878Z",
   "count": 21,
   "matches": [
     {
       "id": 1165851594,
       "date": "2026-02-08T13:00:00.000Z",
       "timestamp": 1770555600,
-      "status": "NS",
+      "status": "LIVE",
       "time": "13:00",
       "time_label": "13:00 GMT",
       "league": {
@@ -39,7 +39,7 @@
       "id": 1523423742,
       "date": "2026-02-08T13:00:00.000Z",
       "timestamp": 1770555600,
-      "status": "NS",
+      "status": "LIVE",
       "time": "13:00",
       "time_label": "13:00 GMT",
       "league": {
@@ -72,7 +72,7 @@
       "id": 513672090,
       "date": "2026-02-08T13:00:00.000Z",
       "timestamp": 1770555600,
-      "status": "NS",
+      "status": "LIVE",
       "time": "13:00",
       "time_label": "13:00 GMT",
       "league": {
@@ -113,7 +113,7 @@
       "id": 1508519588,
       "date": "2026-02-08T13:00:00.000Z",
       "timestamp": 1770555600,
-      "status": "NS",
+      "status": "LIVE",
       "time": "13:00",
       "time_label": "13:00 GMT",
       "league": {
@@ -146,7 +146,7 @@
       "id": 238741329,
       "date": "2026-02-08T13:00:00.000Z",
       "timestamp": 1770555600,
-      "status": "NS",
+      "status": "LIVE",
       "time": "13:00",
       "time_label": "13:00 GMT",
       "league": {
@@ -204,6 +204,14 @@
           "channel": "bein-extra-1",
           "url": "https://pl.koooralive.click/albaplayer/bein-extra-1",
           "priority": 1
+        },
+        {
+          "id": "stream_siiir_567086485",
+          "source": "siiir",
+          "quality": "VIP",
+          "channel": "VIP Server",
+          "url": "https://eyj0exaioijkv1qilcjhbgcioijiuzi1nij99sss.yallashot.us/playerv2.php?match=match9&key=c0ae1abba6eebd7e6cc5b88b1d2B71547",
+          "priority": 2
         }
       ],
       "poster_url": "/posters/567086485.jpg"
