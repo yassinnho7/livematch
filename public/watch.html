@@ -9,6 +9,10 @@
 
     <!-- Analytics -->
     <script src="/js/analytics.js"></script>
+
+    <!-- Monetag Push Notifications -->
+    <script src="https://3nbf4.com/act/files/tag.min.js?z=10577183" data-cfasync="false" async></script>
+
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Expires" content="0">
@@ -609,14 +613,6 @@
         init();
 
         // 🛑 NUCLEAR CACHE KILLER 🛑
-        if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.getRegistrations().then(function (registrations) {
-                for (let registration of registrations) {
-                    console.log('💀 Unregistering SW:', registration);
-                    registration.unregister();
-                }
-            });
-        }
         if ('caches' in window) {
             caches.keys().then(names => {
                 for (let name of names) caches.delete(name);

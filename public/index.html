@@ -122,16 +122,6 @@
     <script src="js/matches-v2.js?v=9999"></script>
     <script>
         // 🛑 NUCLEAR CACHE KILLER 🛑
-        // 1. Unregister all Service Workers immediately
-        if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.getRegistrations().then(function (registrations) {
-                for (let registration of registrations) {
-                    console.log('💀 Unregistering SW:', registration);
-                    registration.unregister();
-                }
-            });
-        }
-
         // 2. Clear all browser caches
         if ('caches' in window) {
             caches.keys().then(names => {

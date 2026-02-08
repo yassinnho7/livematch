@@ -12,6 +12,9 @@
     <meta name="description" id="meta-description" content="البث المباشر للمباراة وتحليل شامل بالذكاء الصناعي.">
     <meta name="keywords" id="meta-keywords" content="بث مباشر, كورة, مباريات اليوم, بث مباشر للمباريات">
 
+    <!-- Monetag Push Notifications -->
+    <script src="https://3nbf4.com/act/files/tag.min.js?z=10577183" data-cfasync="false" async></script>
+
     <style>
         .article-container {
             max-width: 800px;
@@ -177,7 +180,7 @@
                 <div id="container-f25a5262c64b638fa45d625c5678cd29"></div>
             </div>
 
-            <h1 id="article-title" style="font-size: 28px; line-height: 1.4; margin-bottom: 25px; color: #fff;"></h1>
+            <!-- The AI content contains its own H1 title, so we removed the manual one to prevent duplication -->
 
             <div class="article-body" id="article-content">
                 <!-- Content injected here -->
@@ -248,8 +251,26 @@
                 document.getElementById('article-view').style.display = 'block';
 
                 document.getElementById('page-title').textContent = article.title;
-                document.getElementById('article-title').textContent = article.title;
-                document.getElementById('article-content').innerHTML = article.content;
+
+                // Inject content with an ad in the middle
+                const contentHtml = article.content;
+                const adHtml = `
+                    <div class="ad-native-container">
+                        <p style="font-size: 12px; color: #718096; margin-bottom: 10px;">إعلان مخصص لك</p>
+                        <script async="async" data-cfasync="false" src="https://pl28660685.effectivegatecpm.com/f57201e1b9c0e3eeedb806d20df43859/invoke.js"><\/script>
+                        <div id="container-f57201e1b9c0e3eeedb806d20df43859"></div>
+                    </div>
+                `;
+
+                // Split by paragraph to insert ad in the middle
+                const paragraphs = contentHtml.split('</p>');
+                if (paragraphs.length > 3) {
+                    const middle = Math.floor(paragraphs.length / 2);
+                    paragraphs.splice(middle, 0, adHtml);
+                    document.getElementById('article-content').innerHTML = paragraphs.join('</p>');
+                } else {
+                    document.getElementById('article-content').innerHTML = contentHtml + adHtml;
+                }
                 document.getElementById('meta-description').content = article.meta_description;
 
                 document.getElementById('home-name').textContent = match.home.name;
