@@ -262,15 +262,24 @@
                     </div>
                 `;
 
+                const articleContentEl = document.getElementById('article-content');
+
                 // Split by paragraph to insert ad in the middle
                 const paragraphs = contentHtml.split('</p>');
+                let finalHtml = '';
                 if (paragraphs.length > 3) {
                     const middle = Math.floor(paragraphs.length / 2);
                     paragraphs.splice(middle, 0, adHtml);
-                    document.getElementById('article-content').innerHTML = paragraphs.join('</p>');
+                    finalHtml = paragraphs.join('</p>');
                 } else {
-                    document.getElementById('article-content').innerHTML = contentHtml + adHtml;
+                    finalHtml = contentHtml + adHtml;
                 }
+
+                // Use createContextualFragment to ensure scripts are executed
+                const range = document.createRange();
+                const fragment = range.createContextualFragment(finalHtml);
+                articleContentEl.innerHTML = '';
+                articleContentEl.appendChild(fragment);
                 document.getElementById('meta-description').content = article.meta_description;
 
                 document.getElementById('home-name').textContent = match.home.name;
