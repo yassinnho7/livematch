@@ -1,12 +1,45 @@
 {
-  "generated_at": "2026-02-08T21:36:16.060Z",
+  "generated_at": "2026-02-08T21:59:56.742Z",
   "count": 4,
   "matches": [
+    {
+      "id": 946275938,
+      "date": "2026-02-08T19:00:00.000Z",
+      "timestamp": 1770577200,
+      "status": "FT",
+      "time": "19:00",
+      "time_label": "19:00 GMT",
+      "league": {
+        "name": "أفريقيا, الكونفدرالية الافريقية",
+        "country": "Africa",
+        "logo": "https://cdn-icons-png.flaticon.com/512/1378/1378598.png"
+      },
+      "home": {
+        "name": "أولمبيك آسفي",
+        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/01/8210.png"
+      },
+      "away": {
+        "name": "دجوليبا المالي",
+        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/01/19392.png"
+      },
+      "score": null,
+      "streams": [
+        {
+          "id": "stream_bein6_946275938",
+          "source": "livekora",
+          "quality": "HD",
+          "channel": "bein6",
+          "url": "https://pl.koooralive.click/albaplayer/bein6",
+          "priority": 1
+        }
+      ],
+      "poster_url": "/posters/946275938.jpg"
+    },
     {
       "id": 1282043940,
       "date": "2026-02-08T19:45:00.000Z",
       "timestamp": 1770579900,
-      "status": "LIVE",
+      "status": "FT",
       "time": "19:45",
       "time_label": "19:45 GMT",
       "league": {
@@ -37,7 +70,7 @@
           "source": "siiir",
           "quality": "VIP",
           "channel": "VIP Server",
-          "url": "https://eyj0exaioijkv1qilcjhbgcioijiuzi1nij99sss.yallashot.us/playerv2.php?match=match1&key=c0ae1abba6eebd7e6cc5b88b1d2B71547",
+          "url": "https://eyj0exaioijkv1qilcjhbgcioijiuzi1nij99sss.yallashot.us/playerv2.php?match=match2&key=c0ae1abba6eebd7e6cc5b88b1d2B71547",
           "priority": 2
         }
       ],
@@ -47,7 +80,7 @@
       "id": 800523062,
       "date": "2026-02-08T19:45:00.000Z",
       "timestamp": 1770579900,
-      "status": "LIVE",
+      "status": "FT",
       "time": "19:45",
       "time_label": "19:45 GMT",
       "league": {
@@ -72,14 +105,6 @@
           "channel": "ad-premium-1",
           "url": "https://pl.koooralive.click/albaplayer/ad-premium-1",
           "priority": 1
-        },
-        {
-          "id": "stream_siiir_800523062",
-          "source": "siiir",
-          "quality": "VIP",
-          "channel": "VIP Server",
-          "url": "https://eyj0exaioijkv1qilcjhbgcioijiuzi1nij99sss.yallashot.us/playerv2.php?match=match12&key=c0ae1abba6eebd7e6cc5b88b1d2B71547",
-          "priority": 2
         }
       ],
       "poster_url": "/posters/800523062.jpg"
@@ -124,47 +149,6 @@
         }
       ],
       "poster_url": "/posters/188954572.jpg"
-    },
-    {
-      "id": 946275938,
-      "date": "2026-02-08T19:00:00.000Z",
-      "timestamp": 1770577200,
-      "status": "FT",
-      "time": "19:00",
-      "time_label": "19:00 GMT",
-      "league": {
-        "name": "أفريقيا, الكونفدرالية الافريقية",
-        "country": "Africa",
-        "logo": "https://cdn-icons-png.flaticon.com/512/1378/1378598.png"
-      },
-      "home": {
-        "name": "أولمبيك آسفي",
-        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/01/8210.png"
-      },
-      "away": {
-        "name": "دجوليبا المالي",
-        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/01/19392.png"
-      },
-      "score": null,
-      "streams": [
-        {
-          "id": "stream_bein6_946275938",
-          "source": "livekora",
-          "quality": "HD",
-          "channel": "bein6",
-          "url": "https://pl.koooralive.click/albaplayer/bein6",
-          "priority": 1
-        },
-        {
-          "id": "stream_siiir_946275938",
-          "source": "siiir",
-          "quality": "VIP",
-          "channel": "VIP Server",
-          "url": "https://eyj0exaioijkv1qilcjhbgcioijiuzi1nij99sss.yallashot.us/playerv2.php?match=match1&key=c0ae1abba6eebd7e6cc5b88b1d2B71547",
-          "priority": 2
-        }
-      ],
-      "poster_url": "/posters/946275938.jpg"
     }
   ]
 }
