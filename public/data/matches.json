@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-02-08T16:02:46.065Z",
+  "generated_at": "2026-02-08T16:41:36.043Z",
   "count": 16,
   "matches": [
     {
@@ -72,14 +72,6 @@
           "channel": "bein-extra-1",
           "url": "https://pl.koooralive.click/albaplayer/bein-extra-1",
           "priority": 1
-        },
-        {
-          "id": "stream_siiir_2061879015",
-          "source": "siiir",
-          "quality": "VIP",
-          "channel": "VIP Server",
-          "url": "https://eyj0exaioijkv1qilcjhbgcioijiuzi1nij99sss.yallashot.us/playerv2.php?match=match3&key=c0ae1abba6eebd7e6cc5b88b1d2B71547",
-          "priority": 2
         }
       ],
       "poster_url": "/posters/2061879015.jpg"
@@ -211,7 +203,7 @@
       "id": 132572200,
       "date": "2026-02-08T16:30:00.000Z",
       "timestamp": 1770568200,
-      "status": "NS",
+      "status": "LIVE",
       "time": "16:30",
       "time_label": "16:30 GMT",
       "league": {
@@ -252,7 +244,7 @@
       "id": 127815953,
       "date": "2026-02-08T16:30:00.000Z",
       "timestamp": 1770568200,
-      "status": "NS",
+      "status": "LIVE",
       "time": "16:30",
       "time_label": "16:30 GMT",
       "league": {
@@ -351,6 +343,14 @@
           "channel": "ad-premium-1",
           "url": "https://pl.koooralive.click/albaplayer/ad-premium-1",
           "priority": 1
+        },
+        {
+          "id": "stream_siiir_818633343",
+          "source": "siiir",
+          "quality": "VIP",
+          "channel": "VIP Server",
+          "url": "https://eyj0exaioijkv1qilcjhbgcioijiuzi1nij99sss.yallashot.us/playerv2.php?match=match12&key=c0ae1abba6eebd7e6cc5b88b1d2B71547",
+          "priority": 2
         }
       ],
       "poster_url": "/posters/818633343.jpg"
@@ -507,6 +507,14 @@
           "channel": "ad-premium-1",
           "url": "https://pl.koooralive.click/albaplayer/ad-premium-1",
           "priority": 1
+        },
+        {
+          "id": "stream_siiir_800523062",
+          "source": "siiir",
+          "quality": "VIP",
+          "channel": "VIP Server",
+          "url": "https://eyj0exaioijkv1qilcjhbgcioijiuzi1nij99sss.yallashot.us/playerv2.php?match=match12&key=c0ae1abba6eebd7e6cc5b88b1d2B71547",
+          "priority": 2
         }
       ],
       "poster_url": "/posters/800523062.jpg"
@@ -556,7 +564,7 @@
       "id": 567086485,
       "date": "2026-02-08T14:00:00.000Z",
       "timestamp": 1770559200,
-      "status": "LIVE",
+      "status": "FT",
       "time": "14:00",
       "time_label": "14:00 GMT",
       "league": {
@@ -589,7 +597,7 @@
       "id": 582588236,
       "date": "2026-02-08T14:00:00.000Z",
       "timestamp": 1770559200,
-      "status": "LIVE",
+      "status": "FT",
       "time": "14:00",
       "time_label": "14:00 GMT",
       "league": {
