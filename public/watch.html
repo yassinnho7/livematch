@@ -295,32 +295,9 @@
         </div>
     </div>
 
-    <!-- Video.js for Premium HLS Player -->
-    <link href="https://vjs.zencdn.net/8.10.0/video-js.css" rel="stylesheet" />
-    <script src="https://vjs.zencdn.net/8.10.0/video.min.js"></script>
-
     <div id="stream-container">
-        <!-- Custom Video Player (Direct Links) -->
-        <div id="custom-player-wrapper" style="display: none; width: 100%; height: 100%;">
-            <video id="vjs-player" class="video-js vjs-big-play-centered vjs-theme-city" controls preload="auto"
-                width="100%" height="100%" data-setup="{}">
-                <p class="vjs-no-js">
-                    To view this video please enable JavaScript, and consider upgrading to a
-                    web browser that <a href="https://videojs.com/html5-video-support/" target="_blank">supports HTML5
-                        video</a>
-                </p>
-            </video>
-        </div>
-
-        <!-- Iframe Fallback (External Providers) -->
         <iframe id="stream" allowfullscreen referrerpolicy="no-referrer"
-            allow="autoplay; encrypted-media; fullscreen; picture-in-picture"
-            sandbox="allow-scripts allow-same-origin allow-forms allow-presentation" style="display: none;"></iframe>
-
-        <div class="controls-wrapper" id="ui-controls">
-            <a href="/" class="back-btn ui-control" id="back-home-btn">🏠 الرئيسية</a>
-            <button class="fullscreen-btn ui-control" id="fs-toggle-btn" title="ملء الشاشة">⛶</button>
-        </div>
+            allow="autoplay; encrypted-media; fullscreen; picture-in-picture"></iframe>
     </div>
 
     <script>
@@ -328,22 +305,12 @@
         const matchId = urlParams.get('match');
         const selectedServerIdx = urlParams.get('server');
         let currentMatch = null, countdown = 8, streamUrl = '';
-        let vjsPlayer = null;
 
         const getStreamFrame = () => document.getElementById('stream');
         const getStreamContainer = () => document.getElementById('stream-container');
-        const getVjsWrapper = () => document.getElementById('custom-player-wrapper');
 
         async function init() {
             try {
-                // Initialize Video.js
-                vjsPlayer = videojs('vjs-player', {
-                    fluid: false,
-                    autoplay: true,
-                    controls: true,
-                    responsive: true
-                });
-
                 const res = await fetch(`data/matches.json?t=${Date.now()}`, { cache: 'no-store' });
                 const data = await res.json();
                 currentMatch = data.matches.find(m => m.id == matchId);
@@ -358,12 +325,6 @@
 
                 startCountdown();
             } catch (e) { showError('خطأ في تحميل البيانات'); }
-        }
-
-        function isDirectStream(url) {
-            if (!url) return false;
-            const cleanUrl = url.split('?')[0].toLowerCase();
-            return cleanUrl.endsWith('.m3u8') || cleanUrl.endsWith('.mp4') || url.includes('/hls/') || url.includes('.m3u8?');
         }
 
         function startCountdown() {
@@ -389,24 +350,12 @@
             document.getElementById('choice-layer').style.display = 'none';
             const cont = getStreamContainer();
             const frame = getStreamFrame();
-            const vjsWrap = getVjsWrapper();
-            
-            cont.style.display = 'block';
 
-            if (isDirectStream(url)) {
-                // Use Custom Player
-                frame.style.display = 'none';
-                vjsWrap.style.display = 'block';
-                vjsPlayer.src({ type: 'application/x-mpegURL', src: url });
-                vjsPlayer.play().catch(e => console.warn('Autoplay prevented'));
-            } else {
-                // Use Iframe Fallback
-                vjsWrap.style.display = 'none';
-                frame.style.display = 'block';
-                frame.src = url;
-            }
-            
-            initControlBehavior(document.getElementById('ui-controls'), document.getElementById('fs-toggle-btn'), document.getElementById('back-home-btn'), cont);
+            cont.style.display = 'block';
+            frame.src = url;
+
+            // Auto-scroll to top to ensure video is visible
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
         function renderServers() {
@@ -426,63 +375,6 @@
             document.getElementById('monetization-layer').innerHTML = `<div class="monetization-overlay"></div><div class="monetization-content"><h2>⚠️ ${msg}</h2><a href="/" style="color:#667eea;display:block;margin-top:20px;font-weight:bold;text-decoration:none;">العودة للرئيسية</a></div>`;
         }
 
-        function initControlBehavior(controls, fsBtn, backBtn, container) {
-            let hideTimeout;
-            const showControls = () => {
-                controls.classList.add('visible');
-                clearTimeout(hideTimeout);
-                hideTimeout = setTimeout(() => {
-                    const isFullscreen = document.fullscreenElement || document.webkitFullscreenElement || document.body.classList.contains('is-fullscreen');
-                    if (isFullscreen) controls.classList.remove('visible');
-                }, 2000);
-            };
-
-            const toggleFS = () => {
-                const isFullscreen = document.fullscreenElement || document.webkitFullscreenElement || document.body.classList.contains('is-fullscreen');
-
-                if (!isFullscreen) {
-                    const rfs = container.requestFullscreen || container.webkitRequestFullscreen || container.mozRequestFullScreen || container.msRequestFullscreen;
-                    if (rfs) {
-                        rfs.call(container).then(() => {
-                            document.body.classList.add('is-fullscreen');
-                            fsBtn.textContent = '❐';
-                        }).catch(err => {
-                            container.style.width = '100vw'; container.style.height = '100vh';
-                            document.body.classList.add('is-fullscreen');
-                            fsBtn.textContent = '❐';
-                        });
-                    }
-                } else {
-                    document.body.classList.remove('is-fullscreen');
-                    container.style.width = ''; container.style.height = '';
-                    fsBtn.textContent = '⛶';
-                    if (document.exitFullscreen) document.exitFullscreen().catch(e => { });
-                    showControls();
-                }
-            };
-
-            fsBtn.addEventListener('click', (e) => { e.preventDefault(); e.stopPropagation(); toggleFS(); });
-            fsBtn.addEventListener('touchend', (e) => { e.preventDefault(); e.stopPropagation(); toggleFS(); });
-
-            const onFSChange = () => {
-                const isFS = document.fullscreenElement || document.webkitFullscreenElement;
-                if (!isFS) {
-                    document.body.classList.remove('is-fullscreen');
-                    container.style.width = ''; container.style.height = '';
-                    fsBtn.textContent = '⛶';
-                    controls.classList.add('visible');
-                } else {
-                    document.body.classList.add('is-fullscreen');
-                    showControls();
-                }
-            };
-
-            document.addEventListener('fullscreenchange', onFSChange);
-            document.addEventListener('webkitfullscreenchange', onFSChange);
-            window.addEventListener('touchstart', showControls, { passive: true });
-            window.addEventListener('mousemove', showControls);
-            showControls();
-        }
         init();
     </script>
 </body>
