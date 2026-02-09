@@ -247,22 +247,25 @@ body {
 
 /* Responsive Header Ad (468x60) */
 .ad-slot-header {
-    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
     margin-bottom: 20px;
     overflow: hidden;
-    /* Ensure no scrollbars if slightly off */
 }
 
 @media (max-width: 500px) {
     .ad-slot-header {
-        transform: scale(0.75);
-        /* Scale down to fit ~360px screens */
+        transform: scale(0.65);
+        /* Scale down by 35% */
         transform-origin: top center;
-        margin-bottom: -15px;
-        /* Compensate for whitespace after scaling */
-        width: 133%;
-        /* Compensate width relative to scale (1/0.75) */
-        margin-left: -16.5%;
-        /* Center after width compensation */
+        /* Layout Compensation for Scale */
+        width: 154%;
+        /* 1 / 0.65 = 1.538 */
+        margin-left: -27%;
+        /* (1 - 1.54) / 2 */
+        margin-bottom: -20px;
+        /* Reduce gap caused by scaling */
     }
 }
