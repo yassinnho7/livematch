@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-02-09T21:59:41.324Z",
+  "generated_at": "2026-02-09T22:37:48.972Z",
   "count": 6,
   "matches": [
     {
@@ -64,14 +64,6 @@
           "channel": "bein1",
           "url": "https://pl.koooralive.click/albaplayer/bein1",
           "priority": 1
-        },
-        {
-          "id": "stream_siiir_1387990996",
-          "source": "siiir",
-          "quality": "VIP",
-          "channel": "VIP Server",
-          "url": "https://eyj0exaioijkv1qilcjhbgcioijiuzi1nij99sss.yallashot.us/playerv2.php?match=match6&key=c0ae1abba6eebd7e6cc5b88b1d2B71547",
-          "priority": 2
         }
       ],
       "poster_url": "/posters/1387990996.jpg"
@@ -138,14 +130,6 @@
           "channel": "bein2",
           "url": "https://pl.koooralive.click/albaplayer/bein2",
           "priority": 1
-        },
-        {
-          "id": "stream_siiir_976386746",
-          "source": "siiir",
-          "quality": "VIP",
-          "channel": "VIP Server",
-          "url": "https://eyj0exaioijkv1qilcjhbgcioijiuzi1nij99sss.yallashot.us/playerv2.php?match=match6&key=c0ae1abba6eebd7e6cc5b88b1d2B71547",
-          "priority": 2
         }
       ],
       "poster_url": "/posters/976386746.jpg"
@@ -179,14 +163,6 @@
           "channel": "ad-premium-1",
           "url": "https://pl.koooralive.click/albaplayer/ad-premium-1",
           "priority": 1
-        },
-        {
-          "id": "stream_siiir_2137618406",
-          "source": "siiir",
-          "quality": "VIP",
-          "channel": "VIP Server",
-          "url": "https://eyj0exaioijkv1qilcjhbgcioijiuzi1nij99sss.yallashot.us/playerv2.php?match=match6&key=c0ae1abba6eebd7e6cc5b88b1d2B71547",
-          "priority": 2
         }
       ],
       "poster_url": "/posters/2137618406.jpg"
@@ -195,7 +171,7 @@
       "id": 890533590,
       "date": "2026-02-09T20:00:00.000Z",
       "timestamp": 1770667200,
-      "status": "LIVE",
+      "status": "FT",
       "time": "20:00",
       "time_label": "20:00 GMT",
       "league": {
@@ -220,14 +196,6 @@
           "channel": "bein3",
           "url": "https://pl.koooralive.click/albaplayer/bein3",
           "priority": 1
-        },
-        {
-          "id": "stream_siiir_890533590",
-          "source": "siiir",
-          "quality": "VIP",
-          "channel": "VIP Server",
-          "url": "https://eyj0exaioijkv1qilcjhbgcioijiuzi1nij99sss.yallashot.us/playerv2.php?match=match3&key=c0ae1abba6eebd7e6cc5b88b1d2B71547",
-          "priority": 2
         }
       ],
       "poster_url": "/posters/890533590.jpg"
