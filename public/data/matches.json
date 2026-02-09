@@ -1,12 +1,12 @@
 {
-  "generated_at": "2026-02-09T18:38:07.482Z",
+  "generated_at": "2026-02-09T19:54:53.189Z",
   "count": 6,
   "matches": [
     {
       "id": 2137618406,
       "date": "2026-02-09T19:45:00.000Z",
       "timestamp": 1770666300,
-      "status": "NS",
+      "status": "LIVE",
       "time": "19:45",
       "time_label": "19:45 GMT",
       "league": {
@@ -72,6 +72,14 @@
           "channel": "bein3",
           "url": "https://pl.koooralive.click/albaplayer/bein3",
           "priority": 1
+        },
+        {
+          "id": "stream_siiir_890533590",
+          "source": "siiir",
+          "quality": "VIP",
+          "channel": "VIP Server",
+          "url": "https://eyj0exaioijkv1qilcjhbgcioijiuzi1nij99sss.yallashot.us/playerv2.php?match=match3&key=c0ae1abba6eebd7e6cc5b88b1d2B71547",
+          "priority": 2
         }
       ],
       "poster_url": "/posters/890533590.jpg"
