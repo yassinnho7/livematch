@@ -12,9 +12,6 @@
     <meta name="description" id="meta-description" content="البث المباشر للمباراة وتحليل شامل بالذكاء الصناعي.">
     <meta name="keywords" id="meta-keywords" content="بث مباشر, كورة, مباريات اليوم, بث مباشر للمباريات">
 
-    <!-- Monetag Push Notifications (Disabled for safety) -->
-    <!-- <script src="https://3nbf4.com/act/files/tag.min.js?z=10577183" data-cfasync="false" async></script> -->
-
     <style>
         .article-container {
             max-width: 800px;
@@ -91,37 +88,9 @@
             margin-bottom: 20px;
         }
 
-        .ad-native-container {
-            margin: 30px 0;
-            padding: 15px;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 10px;
-            text-align: center;
-        }
-
         .watch-button-container {
             text-align: center;
             margin: 40px 0;
-        }
-
-        .watch-btn {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: #fff;
-            text-decoration: none;
-            padding: 15px 40px;
-            font-size: 20px;
-            font-weight: 700;
-            border-radius: 50px;
-            display: inline-block;
-            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.4);
-            transition: all 0.3s ease;
-            border: 2px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .watch-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 30px rgba(102, 126, 234, 0.6);
-            border-color: #fff;
         }
 
         @media (max-width: 768px) {
@@ -263,15 +232,6 @@
                 </div>
             </div>
 
-            <!-- Adsterra Native Ad (Disabled for safety) -->
-            <!-- <div class="ad-native-container">
-                <script async="async" data-cfasync="false"
-                    src="//pl25804368.highperformanceformat.com/f25a5262c64b638fa45d625c5678cd29/invoke.js"></script>
-                <div id="container-f25a5262c64b638fa45d625c5678cd29"></div>
-            </div> -->
-
-            <!-- The AI content contains its own H1 title, so we removed the manual one to prevent duplication -->
-
             <div class="article-body" id="article-content">
                 <!-- Content injected here -->
             </div>
@@ -282,21 +242,6 @@
                 <div id="server-selection-area" class="server-grid">
                     <!-- Servers injected here -->
                 </div>
-
-                <!-- Adsterra 300x250 below servers (Disabled for safety) -->
-                <!-- <div style="margin-top: 30px; display: flex; justify-content: center;">
-                    <script type="text/javascript">
-                        atOptions = {
-                            'key': '2895cfc4a233371917690acdf46458f6',
-                            'format': 'iframe',
-                            'height': 250,
-                            'width': 300,
-                            'params': {}
-                        };
-                    </script>
-                    <script type="text/javascript"
-                        src="//www.highperformanceformat.com/2895cfc4a233371917690acdf46458f6/invoke.js"></script>
-                </div> -->
             </div>
 
             <!-- Floating Button Targets bottom area -->
@@ -352,26 +297,8 @@
 
                 document.getElementById('page-title').textContent = article.title;
 
-                // Inject content (Ad disabled for safety)
-                const contentHtml = article.content;
-                /* const adHtml = `
-                    <div class="ad-native-container">
-                        <p style="font-size: 12px; color: #718096; margin-bottom: 10px;">إعلان مخصص لك</p>
-                        <script async="async" data-cfasync="false" src="https://pl28660685.effectivegatecpm.com/f57201e1b9c0e3eeedb806d20df43859/invoke.js"><\/script>
-                        <div id="container-f57201e1b9c0e3eeedb806d20df43859"></div>
-                    </div>
-                `; */
-
                 const articleContentEl = document.getElementById('article-content');
-
-                // Render content without dynamic ad
-                let finalHtml = contentHtml;
-
-                // Use createContextualFragment to ensure scripts are executed
-                const range = document.createRange();
-                const fragment = range.createContextualFragment(finalHtml);
-                articleContentEl.innerHTML = '';
-                articleContentEl.appendChild(fragment);
+                articleContentEl.innerHTML = article.content;
                 document.getElementById('meta-description').content = article.meta_description;
 
                 document.getElementById('home-name').textContent = match.home.name;

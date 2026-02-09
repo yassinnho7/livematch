@@ -11,14 +11,9 @@ const MONETIZATION_CONFIG = {
         updateInterval: 60000
     },
 
-    // هويات الإعلانات (أضف مفاتيحك هنا)
+    // هويات الإعلانات (Jubna فقط)
     adIds: {
-        monetagZoneId: '10526690',
-        adsterraSocial: '',
-        adsterraBanner: '',
-        adsterraPop: '',
-        server2AdNetworkKey: '',
-        server3AdNetworkKey: ''
+        jubnaWidgetId: '56519092199ee075f04726d7379da522'
     },
 
     // إعدادات التحليلات
