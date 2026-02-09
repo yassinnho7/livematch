@@ -245,27 +245,32 @@ body {
     background: rgba(255, 255, 255, 0.02);
 }
 
-/* Responsive Header Ad (468x60) */
-.ad-slot-header {
+/* Responsive Header Ad container */
+.ad-container-frame {
     display: flex;
     justify-content: center;
     align-items: center;
     width: 100%;
-    margin-bottom: 20px;
     overflow: hidden;
+    margin-bottom: 20px;
+    background: transparent;
+}
+
+.ad-slot-header {
+    width: 470px;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-shrink: 0;
 }
 
 @media (max-width: 500px) {
     .ad-slot-header {
         transform: scale(0.65);
-        /* Scale down by 35% */
-        transform-origin: top center;
-        /* Layout Compensation for Scale */
-        width: 154%;
-        /* 1 / 0.65 = 1.538 */
-        margin-left: -27%;
-        /* (1 - 1.54) / 2 */
-        margin-bottom: -20px;
-        /* Reduce gap caused by scaling */
+        transform-origin: center center;
+        /* Negative margins to reduce the whitespace left by scaling */
+        margin-top: -10px;
+        margin-bottom: -10px;
     }
 }
