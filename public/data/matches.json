@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-02-09T17:40:24.312Z",
+  "generated_at": "2026-02-09T17:43:09.418Z",
   "count": 6,
   "matches": [
     {
@@ -32,8 +32,7 @@
           "url": "https://pl.koooralive.click/albaplayer/bein1",
           "priority": 1
         }
-      ],
-      "poster_url": "/posters/1406850732.jpg"
+      ]
     },
     {
       "id": 976386746,
@@ -73,8 +72,7 @@
           "url": "https://eyj0exaioijkv1qilcjhbgcioijiuzi1nij99sss.yallashot.us/playerv2.php?match=match6&key=c0ae1abba6eebd7e6cc5b88b1d2B71547",
           "priority": 2
         }
-      ],
-      "poster_url": "/posters/976386746.jpg"
+      ]
     },
     {
       "id": 2137618406,
@@ -106,8 +104,7 @@
           "url": "https://pl.koooralive.click/albaplayer/ad-premium-1",
           "priority": 1
         }
-      ],
-      "poster_url": "/posters/2137618406.jpg"
+      ]
     },
     {
       "id": 890533590,
@@ -139,8 +136,7 @@
           "url": "https://pl.koooralive.click/albaplayer/bein3",
           "priority": 1
         }
-      ],
-      "poster_url": "/posters/890533590.jpg"
+      ]
     },
     {
       "id": 1661521006,
@@ -172,8 +168,7 @@
           "url": "https://pl.koooralive.click/albaplayer/bein2",
           "priority": 1
         }
-      ],
-      "poster_url": "/posters/1661521006.jpg"
+      ]
     },
     {
       "id": 1387990996,
@@ -213,8 +208,7 @@
           "url": "https://eyj0exaioijkv1qilcjhbgcioijiuzi1nij99sss.yallashot.us/playerv2.php?match=match6&key=c0ae1abba6eebd7e6cc5b88b1d2B71547",
           "priority": 2
         }
-      ],
-      "poster_url": "/posters/1387990996.jpg"
+      ]
     }
   ]
 }
