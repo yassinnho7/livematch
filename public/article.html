@@ -12,8 +12,8 @@
     <meta name="description" id="meta-description" content="البث المباشر للمباراة وتحليل شامل بالذكاء الصناعي.">
     <meta name="keywords" id="meta-keywords" content="بث مباشر, كورة, مباريات اليوم, بث مباشر للمباريات">
 
-    <!-- Monetag Push Notifications -->
-    <script src="https://3nbf4.com/act/files/tag.min.js?z=10577183" data-cfasync="false" async></script>
+    <!-- Monetag Push Notifications (Disabled for safety) -->
+    <!-- <script src="https://3nbf4.com/act/files/tag.min.js?z=10577183" data-cfasync="false" async></script> -->
 
     <style>
         .article-container {
@@ -263,12 +263,12 @@
                 </div>
             </div>
 
-            <!-- Adsterra Native Ad -->
-            <div class="ad-native-container">
+            <!-- Adsterra Native Ad (Disabled for safety) -->
+            <!-- <div class="ad-native-container">
                 <script async="async" data-cfasync="false"
                     src="//pl25804368.highperformanceformat.com/f25a5262c64b638fa45d625c5678cd29/invoke.js"></script>
                 <div id="container-f25a5262c64b638fa45d625c5678cd29"></div>
-            </div>
+            </div> -->
 
             <!-- The AI content contains its own H1 title, so we removed the manual one to prevent duplication -->
 
@@ -283,8 +283,8 @@
                     <!-- Servers injected here -->
                 </div>
 
-                <!-- Adsterra 300x250 below servers -->
-                <div style="margin-top: 30px; display: flex; justify-content: center;">
+                <!-- Adsterra 300x250 below servers (Disabled for safety) -->
+                <!-- <div style="margin-top: 30px; display: flex; justify-content: center;">
                     <script type="text/javascript">
                         atOptions = {
                             'key': '2895cfc4a233371917690acdf46458f6',
@@ -296,7 +296,7 @@
                     </script>
                     <script type="text/javascript"
                         src="//www.highperformanceformat.com/2895cfc4a233371917690acdf46458f6/invoke.js"></script>
-                </div>
+                </div> -->
             </div>
 
             <!-- Floating Button Targets bottom area -->
@@ -352,28 +352,20 @@
 
                 document.getElementById('page-title').textContent = article.title;
 
-                // Inject content with an ad in the middle
+                // Inject content (Ad disabled for safety)
                 const contentHtml = article.content;
-                const adHtml = `
+                /* const adHtml = `
                     <div class="ad-native-container">
                         <p style="font-size: 12px; color: #718096; margin-bottom: 10px;">إعلان مخصص لك</p>
                         <script async="async" data-cfasync="false" src="https://pl28660685.effectivegatecpm.com/f57201e1b9c0e3eeedb806d20df43859/invoke.js"><\/script>
                         <div id="container-f57201e1b9c0e3eeedb806d20df43859"></div>
                     </div>
-                `;
+                `; */
 
                 const articleContentEl = document.getElementById('article-content');
 
-                // Split by paragraph to insert ad in the middle
-                const paragraphs = contentHtml.split('</p>');
-                let finalHtml = '';
-                if (paragraphs.length > 3) {
-                    const middle = Math.floor(paragraphs.length / 2);
-                    paragraphs.splice(middle, 0, adHtml);
-                    finalHtml = paragraphs.join('</p>');
-                } else {
-                    finalHtml = contentHtml + adHtml;
-                }
+                // Render content without dynamic ad
+                let finalHtml = contentHtml;
 
                 // Use createContextualFragment to ensure scripts are executed
                 const range = document.createRange();
