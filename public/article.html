@@ -203,11 +203,66 @@
             margin-top: 5px;
             display: inline-block;
         }
+
+        /* Premium Table Styling */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 25px 0;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        th,
+        td {
+            padding: 15px;
+            text-align: right;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        th {
+            background: rgba(102, 126, 234, 0.2);
+            color: #667eea;
+            font-weight: 700;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        tr:hover {
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        @media (max-width: 600px) {
+
+            th,
+            td {
+                padding: 10px;
+                font-size: 14px;
+            }
+        }
     </style>
 </head>
 
 <body>
     <div class="container">
+        <!-- Header Ad 468x60 -->
+        <div class="ad-slot-header" style="text-align: center; margin-bottom: 20px;">
+            <script>
+                atOptions = {
+                    'key': '15d1ca482efd28581d78b70b9bb40556',
+                    'format': 'iframe',
+                    'height': 60,
+                    'width': 468,
+                    'params': {}
+                };
+            </script>
+            <script src="https://www.highperformanceformat.com/15d1ca482efd28581d78b70b9bb40556/invoke.js"></script>
+        </div>
+
         <!-- Header -->
         <header class="header">
             <a href="/" style="text-decoration: none; color: inherit;">
@@ -236,6 +291,20 @@
 
             <div class="article-body" id="article-content">
                 <!-- Content injected here -->
+            </div>
+
+            <!-- Content Ad 300x250 -->
+            <div class="ad-slot-body" style="text-align: center; margin-top: 30px;">
+                <script>
+                    atOptions = {
+                        'key': '2895cfc4a233371917690acdf46458f6',
+                        'format': 'iframe',
+                        'height': 250,
+                        'width': 300,
+                        'params': {}
+                    };
+                </script>
+                <script src="https://www.highperformanceformat.com/2895cfc4a233371917690acdf46458f6/invoke.js"></script>
             </div>
 
             <div class="watch-button-container">

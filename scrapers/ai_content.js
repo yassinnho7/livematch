@@ -89,31 +89,28 @@ export async function generateMatchArticle(match, maxAttempts = 12) {
             const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-lite:generateContent?key=${apiKey}`;
 
             const prompt = `
-You are a professional sports journalist and SEO expert. 
-Write a compelling, human-like match preview for the following football match:
-Match: ${match.home.name} vs ${match.away.name}
-League: ${match.league.name}
-Time: ${match.time} GMT
+أنت خبير في الصحافة الرياضية ومحرك بحث جوجل (SEO).
+اكتب مقالاً مفصلاً لمباراة: ${match.home.name} ضد ${match.away.name} في ${match.league.name}.
 
-Requirements:
-1. Language: Arabic (Modern Standard Arabic with a sports-enthusiast tone).
-2. Title: Create a catchy, click-worthy title (H1).
-3. Introduction: An exciting intro about the importance of the match.
-4. Team Form: Discuss the recent performance of both teams (winning streaks, losses, etc.).
-5. Key Factors: Mention potential key player absences or returns, and the coach's situation if applicable.
-6. History/H2H: Mention typical head-to-head dynamics or historical significance.
-7. League Standing: How this match affects their position in the ${match.league.name}.
-8. Conclusion: A call to action for fans to watch the match live.
-9. SEO: Use keywords naturally, use subheadings (H2, H3).
-10. Style: Natural, human-like, NOT robotic. Avoid repetitive phrases.
+متطلبات إجبارية للمقال:
+1. عنوان احترافي (H1) يحتوي على اسم البطولة والفريقين.
+2. مقدمة تحليلية (2-3 فقرات).
+3. **إجباري**: جدول HTML للتشكيلة المتوقعة للفريقين (Probable Lineups).
+4. **إجباري**: جدول HTML لتاريخ المواجهات المباشرة (Head to Head) آخر 5 مباريات.
+5. **إجباري**: جدول HTML لنتائج آخر 5 مباريات لكل فريق (Form).
+6. استخدم تنسيق جداول HTML نظيف (<table>, <thead>, <tbody>, <tr>, <th>, <td>).
+7. تحليل تقني لنقاط القوة والضعف (استخدم <ul>).
+8. خاتمة تحفز القارئ على متابعة البث في موقع "sitefoot".
 
-Format the output ONLY as a valid JSON object with the following fields:
+أجبني بتنسيق JSON حصراً:
 {
-    "title": "H1 Title",
-    "meta_description": "Short SEO description",
-    "content": "HTML formatted content with <h2> and <p> tags",
-    "keywords": ["keyword1", "keyword2"]
+  "title": "عنوان المقال",
+  "content": "محتوى المقال الكامل بتنسيق HTML"،
+  "meta_description": "وصف السيو",
+  "keywords": ["الكلمات", "الدلالية"]
 }
+
+ملاحظة: إذا لم تتوفر لديك بيانات دقيقة، قم بإنشاء إحصائيات وتشكيلات منطقية بناءً على معرفتك الرياضية العامة، المهم هو وجود الجداول وتنسيقها الاحترافي.
             `;
 
             const requestBody = {

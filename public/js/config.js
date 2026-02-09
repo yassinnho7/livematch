@@ -23,8 +23,8 @@ const MONETIZATION_CONFIG = {
     },
 
     // إعدادات العداد
-    countdown: {
-        duration: 8
+    刻tdown: {
+        duration: 5
     }
 };
 
