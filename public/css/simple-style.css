@@ -9,58 +9,54 @@ body {
     background: #0f172a;
     color: #fff;
     min-height: 100vh;
-    padding: 20px 10px;
+    padding: 10px; /* Reduced padding for mobile */
+    overflow-x: hidden; /* Prevent horizontal scroll */
 }
 
 .container {
+    width: 100%;
     max-width: 900px;
     margin: 0 auto;
+    padding: 0 10px; /* Internal padding */
 }
 
 /* Header */
 .header {
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    padding: 20px;
+    padding: 15px;
     border-radius: 12px;
-    margin-bottom: 25px;
+    margin-bottom: 20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     box-shadow: 0 4px 20px rgba(102, 126, 234, 0.3);
+    flex-wrap: wrap; /* Allow wrapping on small screens */
+    gap: 15px;
 }
 
 .header h1 {
-    font-size: 24px;
+    font-size: 1.25rem; /* ~20px */
     font-weight: 900;
+    line-height: 1.4;
 }
 
 .live-badge {
     background: #ff0844;
-    padding: 8px 16px;
-    border-radius: 25px;
-    font-size: 14px;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 0.8rem;
     font-weight: 700;
     animation: pulse 2s infinite;
-    box-shadow: 0 0 20px rgba(255, 8, 68, 0.5);
+    box-shadow: 0 0 15px rgba(255, 8, 68, 0.5);
     white-space: nowrap;
-    /* منع الكسر على سطرين */
     display: inline-flex;
     align-items: center;
     gap: 4px;
 }
 
 @keyframes pulse {
-
-    0%,
-    100% {
-        opacity: 1;
-        transform: scale(1);
-    }
-
-    50% {
-        opacity: 0.8;
-        transform: scale(1.05);
-    }
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.8; transform: scale(1.05); }
 }
 
 /* Matches Container */
@@ -72,8 +68,8 @@ body {
 
 .loading {
     text-align: center;
-    padding: 60px 20px;
-    font-size: 18px;
+    padding: 40px 20px;
+    font-size: 1rem;
     background: #1e293b;
     border-radius: 12px;
 }
@@ -81,22 +77,22 @@ body {
 /* Ad Banner */
 .ad-banner {
     width: 100%;
-    margin-bottom: 25px;
+    margin-bottom: 20px;
     display: flex;
     justify-content: center;
     align-items: center;
     overflow: hidden;
 }
 
-/* Match Card - CENTERED DESIGN like yallashootgol */
+/* Match Card - Responsive Grid */
 .match-row {
     background: #1e293b;
     border-radius: 12px;
-    padding: 16px 20px;
+    padding: 15px;
     display: grid;
-    grid-template-columns: 1fr auto 1fr;
+    grid-template-columns: 1fr auto 1fr; /* Default for Desktop */
     align-items: center;
-    gap: 20px;
+    gap: 15px;
     transition: all 0.3s;
     cursor: pointer;
     text-decoration: none;
@@ -110,11 +106,12 @@ body {
     box-shadow: 0 4px 16px rgba(102, 126, 234, 0.2);
 }
 
-/* Team - RIGHT ALIGNED */
+/* Team Styling */
 .team {
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 10px;
+    min-width: 0; /* Prevent flexitem duplicate overflow */
 }
 
 .team:first-child {
@@ -128,214 +125,91 @@ body {
 }
 
 .team-logo {
-    width: 32px;
-    height: 32px;
+    width: 35px; /* Slightly larger for easier tap/vis */
+    height: 35px;
     object-fit: contain;
+    flex-shrink: 0;
 }
 
 .team-name {
-    font-size: 15px;
+    font-size: 0.9rem;
     font-weight: 700;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
-/* Center Section - VS + Time */
+/* Center Section */
 .match-center {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 8px;
-    min-width: 100px;
+    gap: 5px;
+    min-width: 90px;
 }
 
 .match-time {
-    font-size: 16px;
+    font-size: 1rem;
     font-weight: 700;
     color: #4facfe;
 }
 
 .match-status {
-    font-size: 11px;
-    padding: 4px 12px;
-    border-radius: 12px;
+    font-size: 0.75rem;
+    padding: 4px 10px;
+    border-radius: 8px;
     font-weight: 600;
 }
 
-.status-live {
-    background: #ff0844;
-    color: #fff;
-    animation: pulse 2s infinite;
-}
-
-.status-finished {
-    background: rgba(16, 185, 129, 0.2);
-    color: #10b981;
-}
-
-.status-upcoming {
-    background: rgba(255, 255, 255, 0.1);
-    color: rgba(255, 255, 255, 0.6);
-}
+.status-live { background: #ff0844; color: #fff; animation: pulse 2s infinite; }
+.status-finished { background: rgba(16, 185, 129, 0.2); color: #10b981; }
+.status-upcoming { background: rgba(255, 255, 255, 0.1); color: rgba(255, 255, 255, 0.6); }
 
 .vs {
-    font-size: 13px;
+    font-size: 0.8rem;
     color: rgba(255, 255, 255, 0.4);
     font-weight: 700;
 }
 
-/* Responsive */
-@media (max-width: 768px) {
+/* ======================== */
+/* Responsive Tweaks        */
+/* ======================== */
+@media (max-width: 600px) {
     .header {
         flex-direction: column;
-        gap: 10px;
         text-align: center;
-        padding: 12px 15px;
-        margin-bottom: 15px;
+        gap: 10px;
     }
 
-    .header h1 {
-        font-size: 18px;
-    }
-
-    .live-badge {
-        font-size: 12px;
-        padding: 6px 12px;
-    }
-
+    /* Stack match info for very small screens if needed, 
+       but 3-col grid usually works best for football scores.
+       We'll tighten the gap instead. */
     .match-row {
-        grid-template-columns: 1fr auto 1fr;
+        padding: 12px 10px;
         gap: 8px;
-        padding: 10px 12px;
-    }
-
-    .team {
-        flex-direction: column;
-        gap: 6px;
+        grid-template-columns: 1fr 80px 1fr; /* Fixed width center to prevent squish */
     }
 
     .team-logo {
-        width: 26px;
-        height: 26px;
+        width: 30px;
+        height: 30px;
     }
 
     .team-name {
-        font-size: 13px;
-        text-align: center;
-    }
-
-    .match-center {
-        gap: 6px;
-        min-width: 80px;
+        font-size: 0.85rem; /* Adjustable for small screens */
     }
 
     .match-time {
-        font-size: 14px;
-    }
-
-    .vs {
-        font-size: 11px;
-    }
-
-    .match-status {
-        font-size: 10px;
-        padding: 3px 8px;
+        font-size: 0.9rem;
     }
 }
 
-/* ======================== */
-/* Skeleton Loading States  */
-/* ======================== */
-.skeleton-card {
-    pointer-events: none;
-}
-
-.skeleton {
-    background: linear-gradient(90deg, #2d3748 25%, #3d4a5c 50%, #2d3748 75%);
-    background-size: 200% 100%;
-    animation: shimmer 1.5s infinite;
-    border-radius: 4px;
-}
-
-.skeleton-logo {
-    width: 32px;
-    height: 32px;
-    border-radius: 50%;
-}
-
-.skeleton-text {
-    width: 80px;
-    height: 16px;
-}
-
-.skeleton-time {
-    width: 60px;
-    height: 20px;
-}
-
-.skeleton-vs {
-    width: 30px;
-    height: 14px;
-    margin-top: 6px;
-}
-
-@keyframes shimmer {
-    0% {
-        background-position: 200% 0;
-    }
-
-    100% {
-        background-position: -200% 0;
-    }
-}
-
-/* ======================== */
-/* Error & Empty States     */
-/* ======================== */
-.error-state,
-.empty-state {
-    text-align: center;
-    padding: 60px 20px;
-    background: #1e293b;
-    border-radius: 12px;
-}
-
-.error-icon,
-.empty-icon {
-    font-size: 48px;
-    margin-bottom: 16px;
-}
-
-.error-message {
-    font-size: 18px;
-    font-weight: 600;
-    color: #ff6b6b;
+/* Table Wrapper for Articles */
+.table-wrapper {
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
     margin-bottom: 20px;
-}
-
-.empty-message {
-    font-size: 18px;
-    font-weight: 600;
-    margin-bottom: 8px;
-}
-
-.empty-hint {
-    font-size: 14px;
-    color: rgba(255, 255, 255, 0.5);
-}
-
-.retry-btn {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    color: #fff;
-    border: none;
-    padding: 12px 32px;
-    border-radius: 25px;
-    font-size: 16px;
-    font-weight: 600;
-    font-family: 'Cairo', sans-serif;
-    cursor: pointer;
-    transition: all 0.3s;
-}
-
-.retry-btn:hover {
-    transform: scale(1.05);
-    box-shadow: 0 4px 20px rgba(102, 126, 234, 0.4);
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.02);
 }

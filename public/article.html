@@ -211,7 +211,7 @@
         }
 
         /* Premium Table Styling */
-        table {
+        .article-body table {
             width: 100%;
             border-collapse: collapse;
             margin: 25px 0;
@@ -219,6 +219,10 @@
             border-radius: 12px;
             overflow: hidden;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            /* Ensure table doesn't overflow its container */
+            display: block;
+            overflow-x: auto;
+            white-space: nowrap;
         }
 
         th,
@@ -248,6 +252,30 @@
             td {
                 padding: 10px;
                 font-size: 14px;
+            }
+            
+            .article-container {
+                padding: 15px;
+                margin: 10px auto;
+                width: 95%;
+            }
+            
+            .match-hero {
+                height: 180px;
+            }
+            
+            .hero-team img {
+                width: 50px;
+                height: 50px;
+            }
+            
+            .hero-vs {
+                font-size: 20px;
+            }
+            
+            .article-body {
+                font-size: 16px;
+                line-height: 1.6;
             }
         }
     </style>

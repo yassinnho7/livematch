@@ -29,6 +29,8 @@
             background: #000;
             color: #fff;
             height: 100vh;
+            height: 100dvh;
+            /* Dynamic Viewport Height for Mobile */
             width: 100vw;
             overflow: hidden;
             /* Prevent scrolling */
@@ -76,6 +78,8 @@
             /* Don't shrink */
             gap: 15px;
             z-index: 100;
+            padding-bottom: env(safe-area-inset-bottom, 10px);
+            /* iPhone Home Bar */
         }
 
         .control-card {
@@ -94,12 +98,14 @@
             cursor: pointer;
             font-family: inherit;
             font-weight: 600;
-            font-size: 12px;
+            font-size: 13px;
+            /* Slightly larger text */
             display: flex;
             align-items: center;
-            gap: 6px;
-            padding: 6px 10px;
-            border-radius: 6px;
+            gap: 8px;
+            padding: 8px 12px;
+            /* Comfortable touch area */
+            border-radius: 8px;
             transition: background 0.2s;
         }
 
@@ -109,7 +115,8 @@
         }
 
         .control-btn .icon {
-            font-size: 16px;
+            font-size: 18px;
+            /* Distinct icon */
         }
 
         /* Monetization Layers (Overlay) */
@@ -124,7 +131,6 @@
             align-items: center;
             justify-content: center;
             background: #000;
-            /* Solid background for loading */
         }
 
         .monetization-content {
@@ -155,7 +161,6 @@
             stroke: #667eea;
             stroke-width: 5;
             stroke-dasharray: 283;
-            /* 2 * PI * 45 */
             transition: stroke-dashoffset 1s linear;
         }
 
@@ -170,7 +175,8 @@
 
         .choice-cards {
             display: grid;
-            grid-template-columns: 1fr 1fr;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            /* Responsive Grid */
             gap: 10px;
             margin-top: 20px;
         }
@@ -178,7 +184,8 @@
         .choice-card {
             background: rgba(255, 255, 255, 0.08);
             border: 1px solid rgba(255, 255, 255, 0.1);
-            padding: 10px;
+            padding: 15px;
+            /* Larger tap area */
             border-radius: 10px;
             cursor: pointer;
         }
@@ -191,6 +198,18 @@
         .ad-box {
             margin: 15px auto;
             text-align: center;
+        }
+
+        @media (max-width: 480px) {
+            .control-btn {
+                padding: 10px 15px;
+                /* Even larger touch targert for mobile */
+                font-size: 14px;
+            }
+
+            .monetization-content {
+                width: 95%;
+            }
         }
     </style>
 </head>
