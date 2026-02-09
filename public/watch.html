@@ -295,10 +295,28 @@
         </div>
     </div>
 
+    <!-- Video.js for Premium HLS Player -->
+    <link href="https://vjs.zencdn.net/8.10.0/video-js.css" rel="stylesheet" />
+    <script src="https://vjs.zencdn.net/8.10.0/video.min.js"></script>
+
     <div id="stream-container">
+        <!-- Custom Video Player (Direct Links) -->
+        <div id="custom-player-wrapper" style="display: none; width: 100%; height: 100%;">
+            <video id="vjs-player" class="video-js vjs-big-play-centered vjs-theme-city" controls preload="auto"
+                width="100%" height="100%" data-setup="{}">
+                <p class="vjs-no-js">
+                    To view this video please enable JavaScript, and consider upgrading to a
+                    web browser that <a href="https://videojs.com/html5-video-support/" target="_blank">supports HTML5
+                        video</a>
+                </p>
+            </video>
+        </div>
+
+        <!-- Iframe Fallback (External Providers) -->
         <iframe id="stream" allowfullscreen referrerpolicy="no-referrer"
             allow="autoplay; encrypted-media; fullscreen; picture-in-picture"
-            sandbox="allow-scripts allow-same-origin allow-forms allow-presentation"></iframe>
+            sandbox="allow-scripts allow-same-origin allow-forms allow-presentation" style="display: none;"></iframe>
+
         <div class="controls-wrapper" id="ui-controls">
             <a href="/" class="back-btn ui-control" id="back-home-btn">🏠 الرئيسية</a>
             <button class="fullscreen-btn ui-control" id="fs-toggle-btn" title="ملء الشاشة">⛶</button>
@@ -310,12 +328,22 @@
         const matchId = urlParams.get('match');
         const selectedServerIdx = urlParams.get('server');
         let currentMatch = null, countdown = 8, streamUrl = '';
+        let vjsPlayer = null;
 
         const getStreamFrame = () => document.getElementById('stream');
         const getStreamContainer = () => document.getElementById('stream-container');
+        const getVjsWrapper = () => document.getElementById('custom-player-wrapper');
 
         async function init() {
             try {
+                // Initialize Video.js
+                vjsPlayer = videojs('vjs-player', {
+                    fluid: false,
+                    autoplay: true,
+                    controls: true,
+                    responsive: true
+                });
+
                 const res = await fetch(`data/matches.json?t=${Date.now()}`, { cache: 'no-store' });
                 const data = await res.json();
                 currentMatch = data.matches.find(m => m.id == matchId);
@@ -332,6 +360,12 @@
             } catch (e) { showError('خطأ في تحميل البيانات'); }
         }
 
+        function isDirectStream(url) {
+            if (!url) return false;
+            const cleanUrl = url.split('?')[0].toLowerCase();
+            return cleanUrl.endsWith('.m3u8') || cleanUrl.endsWith('.mp4') || url.includes('/hls/') || url.includes('.m3u8?');
+        }
+
         function startCountdown() {
             const el = document.getElementById('countdown'), progress = document.getElementById('countdown-progress');
             const circ = 2 * Math.PI * 55; progress.style.strokeDasharray = circ;
@@ -341,18 +375,38 @@
                 if (countdown <= 0) {
                     clearInterval(timer);
                     if (streamUrl) {
-                        document.getElementById('monetization-layer').style.display = 'none';
-                        const frame = getStreamFrame();
-                        const cont = getStreamContainer();
-                        cont.style.display = 'block';
-                        frame.src = streamUrl;
-                        initControlBehavior(document.getElementById('ui-controls'), document.getElementById('fs-toggle-btn'), document.getElementById('back-home-btn'), cont);
+                        launchStream(streamUrl);
                     } else {
                         document.getElementById('monetization-layer').style.display = 'none';
                         document.getElementById('choice-layer').style.display = 'flex';
                     }
                 }
             }, 1000);
+        }
+
+        function launchStream(url) {
+            document.getElementById('monetization-layer').style.display = 'none';
+            document.getElementById('choice-layer').style.display = 'none';
+            const cont = getStreamContainer();
+            const frame = getStreamFrame();
+            const vjsWrap = getVjsWrapper();
+            
+            cont.style.display = 'block';
+
+            if (isDirectStream(url)) {
+                // Use Custom Player
+                frame.style.display = 'none';
+                vjsWrap.style.display = 'block';
+                vjsPlayer.src({ type: 'application/x-mpegURL', src: url });
+                vjsPlayer.play().catch(e => console.warn('Autoplay prevented'));
+            } else {
+                // Use Iframe Fallback
+                vjsWrap.style.display = 'none';
+                frame.style.display = 'block';
+                frame.src = url;
+            }
+            
+            initControlBehavior(document.getElementById('ui-controls'), document.getElementById('fs-toggle-btn'), document.getElementById('back-home-btn'), cont);
         }
 
         function renderServers() {
@@ -363,28 +417,10 @@
                 const card = document.createElement('div');
                 card.className = `choice-card ${isVIP ? 'premium' : ''}`;
                 card.innerHTML = `<div style="font-size: 32px; margin-bottom: 10px;">${isVIP ? '⚡' : '📺'}</div><h3>سيرفر ${idx + 1}</h3><button class="choice-btn">شاهد الآن</button>`;
-                card.onclick = () => window.selectServer(idx);
+                card.onclick = () => launchStream(currentMatch.streams[idx].url);
                 container.appendChild(card);
             });
         }
-
-        window.selectServer = (idx) => {
-            const selected = currentMatch.streams[idx];
-            if (!selected || !selected.url) return;
-
-            streamUrl = selected.url;
-            document.getElementById('choice-layer').style.display = 'none';
-
-            const frame = getStreamFrame();
-            const cont = getStreamContainer();
-
-            cont.style.display = 'block';
-            frame.src = streamUrl;
-
-            const controls = document.getElementById('ui-controls');
-            controls.style.display = 'flex';
-            initControlBehavior(controls, document.getElementById('fs-toggle-btn'), document.getElementById('back-home-btn'), cont);
-        };
 
         function showError(msg) {
             document.getElementById('monetization-layer').innerHTML = `<div class="monetization-overlay"></div><div class="monetization-content"><h2>⚠️ ${msg}</h2><a href="/" style="color:#667eea;display:block;margin-top:20px;font-weight:bold;text-decoration:none;">العودة للرئيسية</a></div>`;
