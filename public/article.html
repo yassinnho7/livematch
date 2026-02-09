@@ -161,13 +161,19 @@
 
         /* Embedded Server Selection */
         .server-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            /* Centers items if there's only one */
             gap: 15px;
             margin-top: 20px;
         }
 
         .server-card {
+            flex: 1 1 300px;
+            /* Take up space but don't grow too huge */
+            max-width: 400px;
+            /* Cap width for single item */
             background: rgba(255, 255, 255, 0.1);
             border: 1px solid rgba(255, 255, 255, 0.1);
             padding: 15px;
@@ -268,6 +274,11 @@
             <a href="/" style="text-decoration: none; color: inherit;">
                 <h1>⚽ مباريات اليوم - بث مباشر</h1>
             </a>
+            <!-- Skip to Watch Button -->
+            <button onclick="document.getElementById('server-selection-area').scrollIntoView({behavior: 'smooth'});"
+                style="background: #e53e3e; color: white; border: none; padding: 8px 15px; border-radius: 20px; font-weight: bold; cursor: pointer; margin-top: 10px; font-size: 14px;">
+                📺 انتقل للمشاهدة فوراً
+            </button>
         </header>
 
         <div class="article-container" id="loading-view">
