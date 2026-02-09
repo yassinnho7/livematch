@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-02-09T19:54:53.189Z",
+  "generated_at": "2026-02-09T20:32:43.625Z",
   "count": 6,
   "matches": [
     {
@@ -47,7 +47,7 @@
       "id": 890533590,
       "date": "2026-02-09T20:00:00.000Z",
       "timestamp": 1770667200,
-      "status": "NS",
+      "status": "LIVE",
       "time": "20:00",
       "time_label": "20:00 GMT",
       "league": {
@@ -180,12 +180,6 @@
       },
       "score": null,
       "streams": [
-        {
-          "name": "سيرفر خاص (Test HLS)",
-          "url": "https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8",
-          "source": "custom_hls",
-          "quality": "HD"
-        },
         {
           "id": "stream_bein1_1406850732",
           "source": "livekora",
