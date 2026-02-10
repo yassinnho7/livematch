@@ -346,201 +346,182 @@
                     };
                 </script>
                 <script src="https://www.highperformanceformat.com/2895cfc4a233371917690acdf46458f6/invoke.js"></script>
-            </div>
+                <div class="watch-button-container">
+                    <h3 style="margin-bottom: 20px; color: #fff;">⚡ اختر سيرفر المشاهدة لبدء البث المباشر</h3>
 
-            <div class="watch-button-container">
-                <h3 style="margin-bottom: 20px; color: #fff;">⚡ اختر سيرفر المشاهدة لبدء البث المباشر</h3>
-
-                <div id="server-selection-area" class="server-grid">
-                    <!-- Servers injected here -->
+                    <div id="server-selection-area" class="server-grid">
+                        <!-- Servers injected here -->
+                    </div>
                 </div>
+
+                <div class="ad-banner" style="margin-top: 30px;">
+                    <div class="JC-WIDGET-DMROOT" data-widget-id="56519092199ee075f04726d7379da522"></div>
+                </div>
+
+                <section class="related-section">
+                    <h2 class="section-title">🗞️ مقالات قد تهمك</h2>
+                    <div id="related-news" class="news-grid">
+                        <!-- Related News injected by news-loader.js -->
+                    </div>
+                </section>
             </div>
-
-            <!-- Floating Button Targets bottom area -->
-            <a href="#server-selection-area" class="floating-watch-btn" id="floating-btn">
-                <span>🔴 شاهد المباراة الآن</span>
-                <span style="font-size: 12px; opacity: 0.8;">(بث مباشر)</span>
-            </a>
         </div>
-    </div>
 
-    <script>
-        const urlParams = new URLSearchParams(window.location.search);
-        const matchId = urlParams.get('match');
+        <!-- Watch Button Floating -->
+        <a id="floating-btn" href="#server-selection-area" class="watch-float-btn">
+            <span>⚡ شاهد الان</span>
+        </a>
 
-        async function loadArticle() {
-            if (!matchId) {
-                window.location.href = '/';
-                return;
-            }
+        <script src="js/news-loader.js" defer></script>
+        <script>
+            const urlParams = new URLSearchParams(window.location.search);
+            const matchId = urlParams.get('match');
+            const newsId = urlParams.get('news');
 
-            try {
-                // 1. Fetch match info
-                const matchRes = await fetch('/data/matches.json');
-                const matchData = await matchRes.json();
-                const match = matchData.matches.find(m => m.id == matchId);
-
-                if (!match) {
-                    showError('المباراة غير موجودة');
+            async function loadArticle() {
+                if (!matchId && !newsId) {
+                    window.location.href = '/';
                     return;
                 }
 
-                // 2. Try to fetch AI Article
-                let article;
                 try {
-                    const articleRes = await fetch(`/data/articles/${matchId}.json`);
-                    if (articleRes.ok) {
-                        article = await articleRes.json();
-                    }
-                } catch (e) { console.warn('No AI article found'); }
+                    const loadingView = document.getElementById('loading-view');
+                    const articleView = document.getElementById('article-view');
+                    const articleTitle = document.getElementById('article-title'); // Wait, ID is different in HTML
+                    const articleContentEl = document.getElementById('article-content');
 
-                // Fallback article if AI fails
-                if (!article) {
-                    article = {
-                        title: `مشاهدة مباراة ${match.home.name} و ${match.away.name} بث مباشر`,
-                        content: `<p>تابعوا البث المباشر لأقوى مباريات اليوم في ${match.league.name} حيث يلتقي فريقي ${match.home.name} و ${match.away.name} في مواجهة نارية كبرى.</p><p>نوفر لكم جودة عالية وسيرفرات متعددة للمشاهدة بدون تقطيع.</p>`,
-                        meta_description: `بث مباشر مباراة ${match.home.name} ضد ${match.away.name} اليوم.`
-                    };
-                }
+                    // 1. Fetch JSON Content
+                    let dataUrl = matchId ? `/data/articles/${matchId}.json` : `/data/news/${newsId}.json`;
+                    const response = await fetch(dataUrl);
+                    if (!response.ok) throw new Error('المحتوى غير متوفر حالياً');
+                    const data = await response.json();
 
-                // 3. Render Content
-                document.getElementById('loading-view').style.display = 'none';
-                document.getElementById('article-view').style.display = 'block';
+                    // 2. Hide loading, show article
+                    loadingView.style.display = 'none';
+                    articleView.style.display = 'block';
 
-                document.getElementById('page-title').textContent = article.title;
+                    // 3. Inject Content
+                    // In simple-style, we might not have 'article-title' but let's check hero or body
+                    // Looking at the viewed file, it seems we use document.getElementById('article-content') for body
+                    articleContentEl.innerHTML = `<h1>${data.title}</h1>` + data.content;
 
-                const articleContentEl = document.getElementById('article-content');
-                articleContentEl.innerHTML = article.content;
-                document.getElementById('meta-description').content = article.meta_description;
+                    // 4. Handle Hero UI
+                    const heroBg = document.getElementById('hero-bg');
+                    if (matchId) {
+                        const mResp = await fetch('/data/matches.json');
+                        const mData = await mResp.json();
+                        const match = mData.matches.find(m => m.id == matchId);
+                        if (match) {
+                            document.getElementById('home-logo').src = match.home.logo;
+                            document.getElementById('home-name').textContent = match.home.name;
+                            document.getElementById('away-logo').src = match.away.logo;
+                            document.getElementById('away-name').textContent = match.away.name;
+                            heroBg.style.backgroundImage = `url('https://raw.githubusercontent.com/yassinnho7/livematch/main/public/assets/backgrounds/stadium_night.png')`;
 
-                document.getElementById('home-name').textContent = match.home.name;
-                document.getElementById('away-name').textContent = match.away.name;
-                document.getElementById('home-logo').src = match.home.logo;
-                document.getElementById('away-logo').src = match.away.logo;
-                document.getElementById('hero-bg').style.backgroundImage = `url('https://raw.githubusercontent.com/yassinnho7/livematch/main/public/assets/backgrounds/stadium_night.png')`;
-
-                // 4. Inject Dynamic SEO & Social Meta Tags
-                const pageTitle = `شاهد مباراه ${match.home.name} ضد ${match.away.name} بث مباشر - ${match.league.name}`;
-                const pageDesc = `بث مباشر مباراة ${match.home.name} و ${match.away.name} في ${match.league.name}. شاهد المباراة بجودة عالية بدون تقطيع مع تحليل شامل وتشكيلة الفريقين.`;
-                const pageImage = `https://raw.githubusercontent.com/yassinnho7/livematch/main/public${match.poster_url || '/assets/backgrounds/stadium_night.png'}`;
-                const pageUrl = window.location.href;
-
-                // Standard Meta
-                document.title = pageTitle;
-                document.getElementById('meta-description').content = pageDesc;
-                document.getElementById('meta-keywords').content = `بث مباشر, ${match.home.name}, ${match.away.name}, ${match.league.name}, مشاهدة مباراة, كورة لايف`;
-
-                // Open Graph / Facebook
-                setMetaTag('property', 'og:title', pageTitle);
-                setMetaTag('property', 'og:description', pageDesc);
-                setMetaTag('property', 'og:image', pageImage);
-                setMetaTag('property', 'og:url', pageUrl);
-                setMetaTag('property', 'og:type', 'website');
-
-                // Twitter Cards
-                setMetaTag('name', 'twitter:card', 'summary_large_image');
-                setMetaTag('name', 'twitter:title', pageTitle);
-                setMetaTag('name', 'twitter:description', pageDesc);
-                setMetaTag('name', 'twitter:image', pageImage);
-
-                // Canonical Tag
-                let canonical = document.querySelector('link[rel="canonical"]');
-                if (!canonical) {
-                    canonical = document.createElement('link');
-                    canonical.rel = 'canonical';
-                    document.head.appendChild(canonical);
-                }
-                canonical.href = pageUrl;
-
-                // 5. Inject JSON-LD Schema (Rich Snippets)
-                const schemaData = {
-                    "@context": "https://schema.org",
-                    "@type": "SportsEvent",
-                    "name": `${match.home.name} vs ${match.away.name}`,
-                    "description": pageDesc,
-                    "startDate": new Date(match.timestamp * 1000).toISOString(),
-                    "competitor": [
-                        { "@type": "SportsTeam", "name": match.home.name, "image": match.home.logo },
-                        { "@type": "SportsTeam", "name": match.away.name, "image": match.away.logo }
-                    ],
-                    "image": pageImage,
-                    "location": {
-                        "@type": "Place",
-                        "name": "Stadium"
-                    },
-                    "offers": {
-                        "@type": "Offer",
-                        "url": pageUrl,
-                        "price": "0",
-                        "priceCurrency": "USD",
-                        "availability": "https://schema.org/InStock"
-                    }
-                };
-
-                let script = document.getElementById('json-ld-schema');
-                if (!script) {
-                    script = document.createElement('script');
-                    script.id = 'json-ld-schema';
-                    script.type = 'application/ld+json';
-                    document.head.appendChild(script);
-                }
-                script.textContent = JSON.stringify(schemaData);
-
-                // 6. Inject Servers
-                const serverArea = document.getElementById('server-selection-area');
-                const activeStreams = match.streams.filter(s => s.url && s.url.length > 5);
-                activeStreams.forEach((stream, idx) => {
-                    const isVIP = stream.source === 'siiir' || idx === 1;
-                    const card = document.createElement('div');
-                    card.className = 'server-card';
-                    card.innerHTML = `
-                        <i>${isVIP ? '⚡' : '📺'}</i>
-                        <h4>سيرفر ${idx + 1}</h4>
-                        <span class="server-tag">${isVIP ? 'VIP High Quality' : 'Standard Quality'}</span>
-                    `;
-                    card.onclick = () => {
-                        window.location.href = `/watch.html?match=${matchId}&server=${idx}`;
-                    };
-                    serverArea.appendChild(card);
-                });
-
-                // Hide floating button when near the real buttons
-                window.addEventListener('scroll', () => {
-                    const rect = serverArea.getBoundingClientRect();
-                    const floatBtn = document.getElementById('floating-btn');
-                    if (rect.top < window.innerHeight && rect.bottom > 0) {
-                        floatBtn.style.opacity = '0';
-                        floatBtn.style.pointerEvents = 'none';
+                            // Inject Servers
+                            const serverArea = document.getElementById('server-selection-area');
+                            const activeStreams = match.streams.filter(s => s.url && s.url.length > 5);
+                            activeStreams.forEach((stream, idx) => {
+                                const isVIP = stream.source === 'siiir' || idx === 1;
+                                const card = document.createElement('div');
+                                card.className = 'server-card';
+                                card.innerHTML = `
+                                <i>${isVIP ? '⚡' : '📺'}</i>
+                                <h4>سيرفر ${idx + 1}</h4>
+                                <span class="server-tag">${isVIP ? 'VIP High Quality' : 'Standard Quality'}</span>
+                            `;
+                                card.onclick = () => {
+                                    window.location.href = `/watch.html?match=${matchId}&server=${idx}`;
+                                };
+                                serverArea.appendChild(card);
+                            });
+                        }
                     } else {
-                        floatBtn.style.opacity = '1';
-                        floatBtn.style.pointerEvents = 'auto';
+                        // News Hero
+                        document.querySelector('.hero-info').style.display = 'none';
+                        heroBg.style.height = '180px';
+                        heroBg.style.backgroundImage = `url('${data.poster_url || '/assets/backgrounds/stadium_night.png'}')`;
+                        document.querySelector('.watch-button-container').style.display = 'none';
+                        document.getElementById('floating-btn').style.display = 'none';
                     }
-                });
 
-            } catch (err) {
-                console.error(err);
-                showError('حدث خطأ أثناء تحميل البيانات');
+                    // 5. SEO & Social
+                    const pageTitle = data.title + " | LiveMatch";
+                    const pageDesc = data.meta_description;
+                    const pageImage = matchId ? `https://raw.githubusercontent.com/yassinnho7/livematch/main/public/assets/backgrounds/stadium_night.png` : data.poster_url;
+                    const pageUrl = window.location.href;
+
+                    document.title = pageTitle;
+                    setMetaTag('name', 'description', pageDesc);
+                    setMetaTag('name', 'keywords', data.keywords.join(', '));
+
+                    // Open Graph / Twitter
+                    setMetaTag('property', 'og:title', pageTitle);
+                    setMetaTag('property', 'og:description', pageDesc);
+                    setMetaTag('property', 'og:image', pageImage);
+                    setMetaTag('property', 'og:url', pageUrl);
+                    setMetaTag('name', 'twitter:title', pageTitle);
+                    setMetaTag('name', 'twitter:image', pageImage);
+
+                    // 6. Schema.org
+                    const schemaData = {
+                        "@context": "https://schema.org",
+                        "@type": matchId ? "SportsEvent" : "NewsArticle",
+                        "headline": data.title,
+                        "description": pageDesc,
+                        "image": pageImage,
+                        "url": pageUrl
+                    };
+
+                    let script = document.getElementById('json-ld-schema');
+                    if (!script) {
+                        script = document.createElement('script');
+                        script.id = 'json-ld-schema';
+                        script.type = 'application/ld+json';
+                        document.head.appendChild(script);
+                    }
+                    script.textContent = JSON.stringify(schemaData);
+
+                } catch (err) {
+                    console.error(err);
+                    showError('حدث خطأ أثناء تحميل المحتوى');
+                }
             }
-        }
 
-        // Helper to set meta tags dynamically
-        function setMetaTag(attr, key, val) {
-            let meta = document.querySelector(`meta[${attr}="${key}"]`);
-            if (!meta) {
-                meta = document.createElement('meta');
-                meta.setAttribute(attr, key);
-                document.head.appendChild(meta);
+            function setMetaTag(attr, key, val) {
+                let meta = document.querySelector(`meta[${attr}="${key}"]`);
+                if (!meta) {
+                    meta = document.createElement('meta');
+                    meta.setAttribute(attr, key);
+                    document.head.appendChild(meta);
+                }
+                meta.content = val;
             }
-            meta.content = val;
-        }
 
-        function showError(msg) {
-            document.getElementById('loading-view').innerHTML = `<h2 style="color:#ff4757; text-align:center;">⚠️ ${msg}</h2><a href="/" style="display:block; text-align:center; margin-top:10px; color:#667eea;">العودة للرئيسية</a>`;
-        }
+            function showError(msg) {
+                document.getElementById('loading-view').innerHTML = `<h2 style="color:#ff4757; text-align:center;">⚠️ ${msg}</h2><a href="/" style="display:block; text-align:center; margin-top:10px; color:#667eea;">العودة للرئيسية</a>`;
+            }
 
-        loadArticle();
-    </script>
-    <script src="js/pwa-install.js" defer></script>
+            loadArticle();
+
+            // Helper to set meta tags dynamically
+            function setMetaTag(attr, key, val) {
+                let meta = document.querySelector(`meta[${attr}="${key}"]`);
+                if (!meta) {
+                    meta = document.createElement('meta');
+                    meta.setAttribute(attr, key);
+                    document.head.appendChild(meta);
+                }
+                meta.content = val;
+            }
+
+            function showError(msg) {
+                document.getElementById('loading-view').innerHTML = `<h2 style="color:#ff4757; text-align:center;">⚠️ ${msg}</h2><a href="/" style="display:block; text-align:center; margin-top:10px; color:#667eea;">العودة للرئيسية</a>`;
+            }
+
+            loadArticle();
+        </script>
+        <script src="js/pwa-install.js" defer></script>
 </body>
 
 </html>
