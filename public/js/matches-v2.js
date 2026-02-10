@@ -179,7 +179,7 @@ function createMatchCard(match) {
     card.innerHTML = `
         <div class="team">
             <span class="team-name">${homeName}</span>
-            <img src="${homeLogo}" alt="${homeName}" class="team-logo" onerror="this.src='${fallbackLogo}'">
+            <img src="${homeLogo}" alt="${homeName}" class="team-logo" loading="lazy" onerror="this.src='${fallbackLogo}'">
         </div>
         
         <div class="match-center">
@@ -189,7 +189,7 @@ function createMatchCard(match) {
         </div>
         
         <div class="team">
-            <img src="${awayLogo}" alt="${awayName}" class="team-logo" onerror="this.src='${fallbackLogo}'">
+            <img src="${awayLogo}" alt="${awayName}" class="team-logo" loading="lazy" onerror="this.src='${fallbackLogo}'">
             <span class="team-name">${awayName}</span>
         </div>
     `;
