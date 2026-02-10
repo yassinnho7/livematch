@@ -50,10 +50,10 @@ function rotateToNextKey() {
 
 const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 
-async function generateNewsBatch() {
-    console.log('📰 Starting News Generation Batch...');
+async function generateNewsBatch(count = 6) {
+    console.log(`📰 Starting News Generation Batch (${count} articles)...`);
 
-    const topics = [
+    const allTopics = [
         "أحدث أخبار سوق الانتقالات العالمية (حصري وتوقعات)",
         "تصريحات مثيرة لمدربين أو لاعبين بعد مباريات الأمس",
         "قصة تاريخية 'من الذاكرة' عن نهائي أو مواجهة كلاسيكية",
@@ -61,6 +61,9 @@ async function generateNewsBatch() {
         "تحليل تكتيكي أو 'ميمز' رياضي ساخر عن حالة نادٍ يعاني",
         "أرقام قياسية ومواهب صاعدة ستنفجر في سماء الكرة العالمية"
     ];
+
+    // Select 'count' random or sequential topics
+    const topics = allTopics.slice(0, count);
 
     const newsDir = path.join(__dirname, '..', 'public', 'data', 'news');
     const indexPath = path.join(__dirname, '..', 'public', 'data', 'news_index.json');
@@ -180,4 +183,5 @@ async function callGemini(topic, maxAttempts = 10) {
     return null;
 }
 
-generateNewsBatch();
+const countParam = parseInt(process.argv[2]) || 6;
+generateNewsBatch(countParam);
