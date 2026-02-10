@@ -89,6 +89,18 @@ export async function generateMatchArticle(match, maxAttempts = 12) {
         return null;
     }
 
+    // Check if article already exists to save API quota and prevent duplicates
+    const articlesDir = path.join(__dirname, '..', 'public', 'data', 'articles');
+    const filePath = path.join(articlesDir, `${match.id}.json`);
+
+    try {
+        await fs.access(filePath);
+        console.log(`ℹ️ Article for match ${match.id} already exists. Skipping generation.`);
+        return JSON.parse(await fs.readFile(filePath, 'utf8')); // Return existing data (optional, but good practice)
+    } catch (e) {
+        // File doesn't exist, proceed with generation
+    }
+
     console.log(`🤖 Generating article for: ${match.home.name} vs ${match.away.name}`);
 
     for (let attempt = 1; attempt <= maxAttempts; attempt++) {
