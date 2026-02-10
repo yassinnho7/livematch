@@ -1,40 +1,7 @@
 {
-  "generated_at": "2026-02-10T14:55:45.493Z",
+  "generated_at": "2026-02-10T15:59:18.834Z",
   "count": 9,
   "matches": [
-    {
-      "id": 2106668864,
-      "date": "2026-02-10T13:45:00.000Z",
-      "timestamp": 1770731100,
-      "status": "LIVE",
-      "time": "13:45",
-      "time_label": "13:45 GMT",
-      "league": {
-        "name": "غير معروف",
-        "country": "International",
-        "logo": "https://cdn-icons-png.flaticon.com/512/1378/1378598.png"
-      },
-      "home": {
-        "name": "الحسين",
-        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/02/ef1r1g3j2rbnim6wy08qu12hh.png"
-      },
-      "away": {
-        "name": "الاستقلال",
-        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/02/3exsDgdkiuqsszbRe85vQ.png"
-      },
-      "score": null,
-      "streams": [
-        {
-          "id": "stream_bein1_2106668864",
-          "source": "livekora",
-          "quality": "HD",
-          "channel": "bein1",
-          "url": "https://pl.koooralive.click/albaplayer/bein1",
-          "priority": 1
-        }
-      ],
-      "poster_url": "/posters/2106668864.jpg"
-    },
     {
       "id": 2004627497,
       "date": "2026-02-10T16:00:00.000Z",
@@ -298,6 +265,39 @@
         }
       ],
       "poster_url": "/posters/2064251245.jpg"
+    },
+    {
+      "id": 2106668864,
+      "date": "2026-02-10T13:45:00.000Z",
+      "timestamp": 1770731100,
+      "status": "FT",
+      "time": "13:45",
+      "time_label": "13:45 GMT",
+      "league": {
+        "name": "غير معروف",
+        "country": "International",
+        "logo": "https://cdn-icons-png.flaticon.com/512/1378/1378598.png"
+      },
+      "home": {
+        "name": "الحسين",
+        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/02/ef1r1g3j2rbnim6wy08qu12hh.png"
+      },
+      "away": {
+        "name": "الاستقلال",
+        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/02/3exsDgdkiuqsszbRe85vQ.png"
+      },
+      "score": null,
+      "streams": [
+        {
+          "id": "stream_bein1_2106668864",
+          "source": "livekora",
+          "quality": "HD",
+          "channel": "bein1",
+          "url": "https://pl.koooralive.click/albaplayer/bein1",
+          "priority": 1
+        }
+      ],
+      "poster_url": "/posters/2106668864.jpg"
     }
   ]
 }
