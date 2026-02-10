@@ -1,0 +1,11 @@
+User-agent: *
+Allow: /
+Allow: /article.html
+Allow: /watch.html
+Allow: /index.html
+Disallow: /css/
+Disallow: /js/
+Disallow: /data/
+Disallow: /assets/
+
+Sitemap: https://livematch-991.pages.dev/sitemap.xml

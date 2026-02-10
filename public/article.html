@@ -419,7 +419,74 @@
                 document.getElementById('away-logo').src = match.away.logo;
                 document.getElementById('hero-bg').style.backgroundImage = `url('https://raw.githubusercontent.com/yassinnho7/livematch/main/public/assets/backgrounds/stadium_night.png')`;
 
-                // 4. Inject Servers
+                // 4. Inject Dynamic SEO & Social Meta Tags
+                const pageTitle = `شاهد مباراه ${match.home.name} ضد ${match.away.name} بث مباشر - ${match.league.name}`;
+                const pageDesc = `بث مباشر مباراة ${match.home.name} و ${match.away.name} في ${match.league.name}. شاهد المباراة بجودة عالية بدون تقطيع مع تحليل شامل وتشكيلة الفريقين.`;
+                const pageImage = `https://raw.githubusercontent.com/yassinnho7/livematch/main/public${match.poster_url || '/assets/backgrounds/stadium_night.png'}`;
+                const pageUrl = window.location.href;
+
+                // Standard Meta
+                document.title = pageTitle;
+                document.getElementById('meta-description').content = pageDesc;
+                document.getElementById('meta-keywords').content = `بث مباشر, ${match.home.name}, ${match.away.name}, ${match.league.name}, مشاهدة مباراة, كورة لايف`;
+
+                // Open Graph / Facebook
+                setMetaTag('property', 'og:title', pageTitle);
+                setMetaTag('property', 'og:description', pageDesc);
+                setMetaTag('property', 'og:image', pageImage);
+                setMetaTag('property', 'og:url', pageUrl);
+                setMetaTag('property', 'og:type', 'website');
+
+                // Twitter Cards
+                setMetaTag('name', 'twitter:card', 'summary_large_image');
+                setMetaTag('name', 'twitter:title', pageTitle);
+                setMetaTag('name', 'twitter:description', pageDesc);
+                setMetaTag('name', 'twitter:image', pageImage);
+
+                // Canonical Tag
+                let canonical = document.querySelector('link[rel="canonical"]');
+                if (!canonical) {
+                    canonical = document.createElement('link');
+                    canonical.rel = 'canonical';
+                    document.head.appendChild(canonical);
+                }
+                canonical.href = pageUrl;
+
+                // 5. Inject JSON-LD Schema (Rich Snippets)
+                const schemaData = {
+                    "@context": "https://schema.org",
+                    "@type": "SportsEvent",
+                    "name": `${match.home.name} vs ${match.away.name}`,
+                    "description": pageDesc,
+                    "startDate": new Date(match.timestamp * 1000).toISOString(),
+                    "competitor": [
+                        { "@type": "SportsTeam", "name": match.home.name, "image": match.home.logo },
+                        { "@type": "SportsTeam", "name": match.away.name, "image": match.away.logo }
+                    ],
+                    "image": pageImage,
+                    "location": {
+                        "@type": "Place",
+                        "name": "Stadium"
+                    },
+                    "offers": {
+                        "@type": "Offer",
+                        "url": pageUrl,
+                        "price": "0",
+                        "priceCurrency": "USD",
+                        "availability": "https://schema.org/InStock"
+                    }
+                };
+
+                let script = document.getElementById('json-ld-schema');
+                if (!script) {
+                    script = document.createElement('script');
+                    script.id = 'json-ld-schema';
+                    script.type = 'application/ld+json';
+                    document.head.appendChild(script);
+                }
+                script.textContent = JSON.stringify(schemaData);
+
+                // 6. Inject Servers
                 const serverArea = document.getElementById('server-selection-area');
                 const activeStreams = match.streams.filter(s => s.url && s.url.length > 5);
                 activeStreams.forEach((stream, idx) => {
@@ -454,6 +521,17 @@
                 console.error(err);
                 showError('حدث خطأ أثناء تحميل البيانات');
             }
+        }
+
+        // Helper to set meta tags dynamically
+        function setMetaTag(attr, key, val) {
+            let meta = document.querySelector(`meta[${attr}="${key}"]`);
+            if (!meta) {
+                meta = document.createElement('meta');
+                meta.setAttribute(attr, key);
+                document.head.appendChild(meta);
+            }
+            meta.content = val;
         }
 
         function showError(msg) {
