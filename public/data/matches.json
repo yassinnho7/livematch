@@ -1,11 +1,11 @@
 {
-  "generated_at": "2026-02-09T23:58:03.514Z",
+  "generated_at": "2026-02-10T01:58:08.999Z",
   "count": 6,
   "matches": [
     {
-      "id": 1661521006,
-      "date": "2026-02-09T13:45:00.000Z",
-      "timestamp": 1770644700,
+      "id": 1257322648,
+      "date": "2026-02-10T13:45:00.000Z",
+      "timestamp": 1770731100,
       "status": "FT",
       "time": "13:45",
       "time_label": "13:45 GMT",
@@ -25,7 +25,7 @@
       "score": null,
       "streams": [
         {
-          "id": "stream_bein2_1661521006",
+          "id": "stream_bein2_1257322648",
           "source": "livekora",
           "quality": "HD",
           "channel": "bein2",
@@ -33,12 +33,12 @@
           "priority": 1
         }
       ],
-      "poster_url": "/posters/1661521006.jpg"
+      "poster_url": "/posters/1257322648.jpg"
     },
     {
-      "id": 1387990996,
-      "date": "2026-02-09T13:45:00.000Z",
-      "timestamp": 1770644700,
+      "id": 194392426,
+      "date": "2026-02-10T13:45:00.000Z",
+      "timestamp": 1770731100,
       "status": "FT",
       "time": "13:45",
       "time_label": "13:45 GMT",
@@ -58,7 +58,7 @@
       "score": null,
       "streams": [
         {
-          "id": "stream_bein1_1387990996",
+          "id": "stream_bein1_194392426",
           "source": "livekora",
           "quality": "HD",
           "channel": "bein1",
@@ -66,12 +66,12 @@
           "priority": 1
         }
       ],
-      "poster_url": "/posters/1387990996.jpg"
+      "poster_url": "/posters/194392426.jpg"
     },
     {
-      "id": 1406850732,
-      "date": "2026-02-09T16:00:00.000Z",
-      "timestamp": 1770652800,
+      "id": 246299262,
+      "date": "2026-02-10T16:00:00.000Z",
+      "timestamp": 1770739200,
       "status": "FT",
       "time": "16:00",
       "time_label": "16:00 GMT",
@@ -91,7 +91,7 @@
       "score": null,
       "streams": [
         {
-          "id": "stream_bein1_1406850732",
+          "id": "stream_bein1_246299262",
           "source": "livekora",
           "quality": "HD",
           "channel": "bein1",
@@ -99,12 +99,12 @@
           "priority": 1
         }
       ],
-      "poster_url": "/posters/1406850732.jpg"
+      "poster_url": "/posters/246299262.jpg"
     },
     {
-      "id": 976386746,
-      "date": "2026-02-09T16:00:00.000Z",
-      "timestamp": 1770652800,
+      "id": 572188388,
+      "date": "2026-02-10T16:00:00.000Z",
+      "timestamp": 1770739200,
       "status": "FT",
       "time": "16:00",
       "time_label": "16:00 GMT",
@@ -124,7 +124,7 @@
       "score": null,
       "streams": [
         {
-          "id": "stream_bein2_976386746",
+          "id": "stream_bein2_572188388",
           "source": "livekora",
           "quality": "HD",
           "channel": "bein2",
@@ -132,12 +132,12 @@
           "priority": 1
         }
       ],
-      "poster_url": "/posters/976386746.jpg"
+      "poster_url": "/posters/572188388.jpg"
     },
     {
-      "id": 2137618406,
-      "date": "2026-02-09T19:45:00.000Z",
-      "timestamp": 1770666300,
+      "id": 394736752,
+      "date": "2026-02-10T19:45:00.000Z",
+      "timestamp": 1770752700,
       "status": "FT",
       "time": "19:45",
       "time_label": "19:45 GMT",
@@ -157,7 +157,7 @@
       "score": null,
       "streams": [
         {
-          "id": "stream_ad-premium-1_2137618406",
+          "id": "stream_ad-premium-1_394736752",
           "source": "livekora",
           "quality": "HD",
           "channel": "ad-premium-1",
@@ -165,12 +165,12 @@
           "priority": 1
         }
       ],
-      "poster_url": "/posters/2137618406.jpg"
+      "poster_url": "/posters/394736752.jpg"
     },
     {
-      "id": 890533590,
-      "date": "2026-02-09T20:00:00.000Z",
-      "timestamp": 1770667200,
+      "id": 1351288876,
+      "date": "2026-02-10T20:00:00.000Z",
+      "timestamp": 1770753600,
       "status": "FT",
       "time": "20:00",
       "time_label": "20:00 GMT",
@@ -190,7 +190,7 @@
       "score": null,
       "streams": [
         {
-          "id": "stream_bein3_890533590",
+          "id": "stream_bein3_1351288876",
           "source": "livekora",
           "quality": "HD",
           "channel": "bein3",
@@ -198,7 +198,7 @@
           "priority": 1
         }
       ],
-      "poster_url": "/posters/890533590.jpg"
+      "poster_url": "/posters/1351288876.jpg"
     }
   ]
 }
