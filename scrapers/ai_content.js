@@ -113,7 +113,7 @@ export async function generateMatchArticle(match, maxAttempts = 12) {
 5. **إجباري**: جدول HTML لنتائج آخر 5 مباريات لكل فريق (Form).
 6. استخدم تنسيق جداول HTML نظيف (<table>, <thead>, <tbody>, <tr>, <th>, <td>).
 7. تحليل تقني لنقاط القوة والضعف (استخدم <ul>).
-8. خاتمة تحفز القارئ على متابعة البث في موقع "LiveMatch".
+8. خاتمة تحفز القارئ على متابعة البث في موقعي "https://livematch-991.pages.dev/". بشكل جذاب ولا يفسد شكل المقالة.
 
 أجبني بتنسيق JSON حصراً:
 {
