@@ -76,8 +76,8 @@ function preparePost(data) {
 
     alert('✅ تم نسخ النص الإبداعي للمنشور!\n\nسيتم الآن فتح فيسبوك. الرابط محفوظ لدينا وسأذكرك بوضعه في التعليق الأول بعد قليل.');
 
-    // 4. Open FB (User's preferred group or main)
-    window.open('https://www.facebook.com/groups/feed/', '_blank');
+    // 4. Open FB (User's specific group)
+    window.open('https://www.facebook.com/groups/2464364173789354', '_blank');
 }
 
 function copyToClipboard(text) {
