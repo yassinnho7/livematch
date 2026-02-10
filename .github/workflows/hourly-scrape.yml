@@ -32,21 +32,22 @@ jobs:
           
       - name: Install Node Dependencies
         run: npm install puppeteer puppeteer-extra puppeteer-extra-plugin-stealth canvas
-
-
+      
       - name: Download Arabic Font (Cairo)
         run: |
           mkdir -p public/assets/fonts
           wget -O public/assets/fonts/Cairo-Bold.ttf https://github.com/Gue3bara/Cairo/raw/v3.116/fonts/ttf/Cairo-Bold.ttf
-
+      
       - name: Run Scraper Manager (LiveKora + Siiir.tv)
+        env:
+          GEMINI_API_KEYS: ${{ secrets.GEMINI_API_KEYS }}
         run: |
           node scrapers/scraper_manager.js
-
+      
       - name: Generate Match Posters (AI-Hybrid)
         run: |
           node scripts/generate_posters.js
-
+      
       - name: Notify Webhook (Make.com)
         env:
           MAKE_WEBHOOK_URL: ${{ secrets.MAKE_WEBHOOK_URL }}
@@ -70,6 +71,9 @@ jobs:
           
           # Add generated posters (ignore if directory doesn't exist)
           git add public/posters/*.jpg || true
+          
+          # Add AI-generated articles (if any)
+          git add public/data/articles/*.json || true
           
           # Add optional log files (ignore if missing)
           git add sent_notifications.json || true
