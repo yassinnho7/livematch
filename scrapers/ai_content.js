@@ -5,7 +5,7 @@ import { fileURLToPath } from 'url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// Helper to manually load .env
+// Helper to manually load .env (optional - for local development only)
 async function loadEnv() {
     try {
         const envPath = path.join(__dirname, '..', '.env');
@@ -19,21 +19,33 @@ async function loadEnv() {
             const [key, ...valueParts] = trimmed.split('=');
             if (key && valueParts.length > 0) {
                 const value = valueParts.join('=').trim();
-                process.env[key.trim()] = value;
+                // Only set if not already in environment (GitHub Actions takes priority)
+                if (!process.env[key.trim()]) {
+                    process.env[key.trim()] = value;
+                }
             }
         }
+        console.log('📄 Loaded .env file for local development');
     } catch (e) {
-        console.warn('⚠️ Could not load .env file manually:', e.message);
+        // Silent fail - this is expected in GitHub Actions
+        // console.log('ℹ️ No .env file found (using environment variables)');
     }
 }
 
-// Load env before using API keys
+// Try to load .env if it exists (for local dev), but don't fail if it doesn't
 await loadEnv();
 
-// Multiple API keys for rotation
+// Get API keys from environment (works with both .env and GitHub Actions secrets)
 const API_KEYS = process.env.GEMINI_API_KEYS?.split(',').filter(k => k.trim()) || [];
 let currentKeyIndex = 0;
 const failedKeys = new Set(); // Track temporarily failed keys
+
+// Log API keys status (without exposing the actual keys)
+if (API_KEYS.length > 0) {
+    console.log(`🔑 Loaded ${API_KEYS.length} API key(s) from environment`);
+} else {
+    console.log('⚠️ No GEMINI_API_KEYS found in environment variables');
+}
 
 // Get next available API key (rotation)
 function getNextApiKey() {
@@ -72,7 +84,8 @@ const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
  */
 export async function generateMatchArticle(match, maxAttempts = 12) {
     if (API_KEYS.length === 0) {
-        console.warn('⚠️ GEMINI_API_KEYS missing in .env. Skipping AI article generation.');
+        console.warn('⚠️ GEMINI_API_KEYS not found in environment variables. Skipping AI article generation.');
+        console.warn('💡 Hint: Make sure GEMINI_API_KEYS is set in GitHub Actions secrets or .env file');
         return null;
     }
 
