@@ -23,8 +23,13 @@ const MONETIZATION_CONFIG = {
     },
 
     // إعدادات العداد
-    刻tdown: {
+    countdown: {
         duration: 5
+    },
+
+    // الروابط الخارجية (Redirects & Ads)
+    externalUrls: {
+        homeBackAd: 'https://otieu.com/4/10557734'
     }
 };
 

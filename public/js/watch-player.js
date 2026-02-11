@@ -295,7 +295,7 @@ function initAdBlocking() {
 // Load match info
 async function loadMatchInfo() {
     try {
-        const response = await fetch('/data/matches.json');
+        const response = await fetch(`/data/matches.json?t=${Date.now()}`, { cache: 'no-store' });
         const data = await response.json();
 
         if (data.matches && matchId) {

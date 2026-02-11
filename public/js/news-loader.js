@@ -19,7 +19,7 @@ async function initNews(containerId, limit = 10) {
     if (!container) return;
 
     try {
-        const response = await fetch('/data/news_index.json');
+        const response = await fetch(`/data/news_index.json?t=${Date.now()}`, { cache: 'no-store' });
         if (!response.ok) throw new Error('Could not load news');
 
         const news = await response.json();

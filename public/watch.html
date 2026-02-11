@@ -18,202 +18,7 @@
     <meta http-equiv="Expires" content="0">
     <link rel="canonical" href="https://livematch-991.pages.dev/watch.html">
 
-    <!-- PWA Manifest -->
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Cairo', sans-serif;
-            background: #000;
-            color: #fff;
-            height: 100vh;
-            height: 100dvh;
-            /* Dynamic Viewport Height for Mobile */
-            width: 100vw;
-            overflow: hidden;
-            /* Prevent scrolling */
-            display: flex;
-            flex-direction: column;
-        }
-
-        /* Essential Layers */
-        #stream-container {
-            width: 100%;
-            height: 100%;
-            display: none;
-            /* Initially hidden */
-            flex-direction: column;
-        }
-
-        /* Video Area: Takes all available space */
-        .video-player-frame {
-            width: 100%;
-            flex-grow: 1;
-            /* Fills remaining space */
-            background: #000;
-            position: relative;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        #stream {
-            width: 100%;
-            height: 100%;
-            border: none;
-        }
-
-        /* Controls Area: Fixed at bottom */
-        .watch-controls-center {
-            width: 100%;
-            padding: 10px;
-            background: #1a202c;
-            border-top: 1px solid #2d3748;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-shrink: 0;
-            /* Don't shrink */
-            gap: 15px;
-            z-index: 100;
-            padding-bottom: env(safe-area-inset-bottom, 10px);
-            /* iPhone Home Bar */
-        }
-
-        .control-card {
-            background: rgba(255, 255, 255, 0.08);
-            border-radius: 12px;
-            padding: 8px 15px;
-            display: flex;
-            align-items: center;
-            gap: 20px;
-        }
-
-        .control-btn {
-            background: none;
-            border: none;
-            color: #fff;
-            cursor: pointer;
-            font-family: inherit;
-            font-weight: 600;
-            font-size: 13px;
-            /* Slightly larger text */
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            padding: 8px 12px;
-            /* Comfortable touch area */
-            border-radius: 8px;
-            transition: background 0.2s;
-        }
-
-        .control-btn:hover {
-            background: rgba(255, 255, 255, 0.1);
-            color: #667eea;
-        }
-
-        .control-btn .icon {
-            font-size: 18px;
-            /* Distinct icon */
-        }
-
-        /* Monetization Layers (Overlay) */
-        .monetization-layer {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 9999;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: #000;
-        }
-
-        .monetization-content {
-            text-align: center;
-            width: 90%;
-            max-width: 400px;
-        }
-
-        .countdown-circle {
-            position: relative;
-            width: 100px;
-            height: 100px;
-            margin: 0 auto 20px;
-        }
-
-        .countdown-circle svg {
-            transform: rotate(-90deg);
-        }
-
-        .countdown-bg {
-            fill: none;
-            stroke: rgba(255, 255, 255, 0.1);
-            stroke-width: 5;
-        }
-
-        .countdown-progress {
-            fill: none;
-            stroke: #667eea;
-            stroke-width: 5;
-            stroke-dasharray: 283;
-            transition: stroke-dashoffset 1s linear;
-        }
-
-        .countdown-number {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            font-size: 30px;
-            font-weight: 800;
-        }
-
-        .choice-cards {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-            /* Responsive Grid */
-            gap: 10px;
-            margin-top: 20px;
-        }
-
-        .choice-card {
-            background: rgba(255, 255, 255, 0.08);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            padding: 15px;
-            /* Larger tap area */
-            border-radius: 10px;
-            cursor: pointer;
-        }
-
-        .choice-card:hover {
-            border-color: #667eea;
-            background: rgba(102, 126, 234, 0.1);
-        }
-
-        .ad-box {
-            margin: 15px auto;
-            text-align: center;
-        }
-
-        @media (max-width: 480px) {
-            .control-btn {
-                padding: 10px 15px;
-                /* Even larger touch targert for mobile */
-                font-size: 14px;
-            }
-
-            .monetization-content {
-                width: 95%;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="/css/watch.css">
 </head>
 
 <body>
@@ -295,10 +100,11 @@
         const urlParams = new URLSearchParams(window.location.search);
         const matchId = urlParams.get('match');
         const selectedServerIdx = urlParams.get('server');
-        let currentMatch = null, countdown = 5, streamUrl = '';
+        let currentMatch = null, countdown = MONETIZATION_CONFIG.countdown?.duration || 5, streamUrl = '';
 
         function goBackWithAd() {
-            window.open('https://otieu.com/4/10557734', '_blank');
+            const adUrl = MONETIZATION_CONFIG.externalUrls?.homeBackAd || 'https://otieu.com/4/10557734';
+            window.open(adUrl, '_blank');
             window.location.href = '/';
         }
 
@@ -380,6 +186,7 @@
 
         init();
     </script>
+    <script src="/js/ad-block-check.js" defer></script>
 </body>
 
 </html>

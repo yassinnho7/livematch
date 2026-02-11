@@ -32,7 +32,32 @@ class ScraperManager {
         // 5. Save results
         await this.saveMatches(finalMatches);
 
+        // 6. Clean old data (Articles & News)
+        await this.cleanOldArticles();
+
         return finalMatches;
+    }
+
+    async cleanOldArticles() {
+        console.log('🧹 Cleaning old match articles...');
+        const articlesDir = path.join(__dirname, '..', 'public', 'data', 'articles');
+        try {
+            const files = await fs.readdir(articlesDir);
+            const now = Date.now();
+            const expiry = 24 * 60 * 60 * 1000; // 24 hours
+
+            for (const file of files) {
+                if (!file.endsWith('.json')) continue;
+                const filePath = path.join(articlesDir, file);
+                const stats = await fs.stat(filePath);
+                if (now - stats.mtimeMs > expiry) {
+                    await fs.unlink(filePath);
+                    console.log(`🗑️ Deleted old article: ${file}`);
+                }
+            }
+        } catch (e) {
+            console.warn('⚠️ No articles directory to clean yet.');
+        }
     }
 
     async processArticles(matches) {

@@ -54,9 +54,17 @@ async function generatePosters() {
 
     // Process each match
     for (const match of data.matches) {
-        // Skip if poster already exists (optional, but good for perf)
-        // For now, regen everything to ensure freshness
+        const fileName = `${match.id}.jpg`;
+        const filePath = path.join(OUTPUT_DIR, fileName);
 
+        // Skip if poster already exists
+        if (fs.existsSync(filePath)) {
+            console.log(`ℹ️ Poster for match ${match.id} already exists. Skipping.`);
+            match.poster_url = `/posters/${fileName}`;
+            continue;
+        }
+
+        console.log(`🎨 Generating poster for: ${match.home.name} vs ${match.away.name}`);
         const canvas = createCanvas(1080, 1080);
         const ctx = canvas.getContext('2d');
 
@@ -148,8 +156,6 @@ async function generatePosters() {
 
         // 5. Save Image
         const buffer = canvas.toBuffer('image/jpeg', { quality: 0.9 });
-        const fileName = `${match.id}.jpg`;
-        const filePath = path.join(OUTPUT_DIR, fileName);
         fs.writeFileSync(filePath, buffer);
         console.log(`✅ Generated: ${fileName}`);
 

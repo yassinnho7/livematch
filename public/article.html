@@ -9,6 +9,9 @@
     <link rel="stylesheet" href="css/simple-style.css?v=9999">
     <meta name="profiton-domain-verification"
         content="55e62f09d2ade93c563113203fe7c5f4889c6cd2a4683d78977cf174b1f97fc1" />
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
 
     <!-- Meta Tags for SEO (Updated dynamically) -->
     <meta name="description" id="meta-description" content="البث المباشر للمباراة وتحليل شامل بالذكاء الصناعي.">
@@ -392,8 +395,8 @@
                     const articleContentEl = document.getElementById('article-content');
 
                     // 1. Fetch JSON Content
-                    let dataUrl = matchId ? `/data/articles/${matchId}.json` : `/data/news/${newsId}.json`;
-                    const response = await fetch(dataUrl);
+                    let dataUrl = matchId ? `/data/articles/${matchId}.json?t=${Date.now()}` : `/data/news/${newsId}.json?t=${Date.now()}`;
+                    const response = await fetch(dataUrl, { cache: 'no-store' });
                     if (!response.ok) throw new Error('المحتوى غير متوفر حالياً');
                     const data = await response.json();
 
@@ -409,7 +412,7 @@
                     // 4. Handle Hero UI
                     const heroBg = document.getElementById('hero-bg');
                     if (matchId) {
-                        const mResp = await fetch('/data/matches.json');
+                        const mResp = await fetch(`/data/matches.json?t=${Date.now()}`, { cache: 'no-store' });
                         const mData = await mResp.json();
                         const match = mData.matches.find(m => m.id == matchId);
                         if (match) {

@@ -53,17 +53,21 @@ const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 async function generateNewsBatch(count = 6) {
     console.log(`📰 Starting News Generation Batch (${count} articles)...`);
 
+    // 1. Clean up old news files first
+    await cleanOldNews();
+
     const allTopics = [
         "أحدث أخبار سوق الانتقالات العالمية (حصري وتوقعات)",
         "تصريحات مثيرة لمدربين أو لاعبين بعد مباريات الأمس",
         "قصة تاريخية 'من الذاكرة' عن نهائي أو مواجهة كلاسيكية",
         "معلومات سريعة وحقائق لا تعرفها عن نجم عالمي حالي",
         "تحليل تكتيكي أو 'ميمز' رياضي ساخر عن حالة نادٍ يعاني",
-        "أرقام قياسية ومواهب صاعدة ستنفجر في سماء الكرة العالمية"
+        "أرقام قياسية ومواهب صاعدة ستنفجر في سماء الكرة العالمية",
+        "تحليل لأداء ميسي ورونالدو في الدوريات الحالية",
+        "مفاجآت دوري أبطال أوروبا وتوقعات الأدوار القادمة",
+        "متابعة دقيقة لإصابات النجوم ومدة غيابهم المتوقعة",
+        "سر نجاح المدربين الصاعدين في الدوريات الكبرى"
     ];
-
-    // Select 'count' random or sequential topics
-    const topics = allTopics.slice(0, count);
 
     const newsDir = path.join(__dirname, '..', 'public', 'data', 'news');
     const indexPath = path.join(__dirname, '..', 'public', 'data', 'news_index.json');
@@ -80,14 +84,37 @@ async function generateNewsBatch(count = 6) {
         existingIndex = JSON.parse(indexData);
     } catch (e) { }
 
+    // --- Smart Quota Logic (24h) ---
+    const nowSecs = Math.floor(Date.now() / 1000);
+    const articlesLast24h = existingIndex.filter(a => (nowSecs - a.timestamp) < 24 * 60 * 60).length;
+
+    // User wants max 6 per day.
+    const quota = 6;
+    const needed = Math.max(0, quota - articlesLast24h);
+    const finalCount = Math.min(count, needed);
+
+    if (finalCount <= 0) {
+        console.log(`✅ Quota Reached: Already have ${articlesLast24h} articles in last 24h. Skipping generation.`);
+        return;
+    }
+
+    console.log(`📊 Quota Status: ${articlesLast24h}/${quota} articles found. Generating ${finalCount} more...`);
+
     const newArticles = [];
+    const existingTitles = new Set(existingIndex.map(a => a.title.trim()));
+
+    // Shuffle and pick
+    const shuffledTopics = allTopics.sort(() => Math.random() - 0.5);
+    const topics = shuffledTopics.slice(0, finalCount);
 
     for (let i = 0; i < topics.length; i++) {
         const topic = topics[i];
         console.log(`🤖 Generating news item for topic: ${topic}`);
 
         const article = await callGemini(topic);
-        if (article) {
+
+        // Check for duplicates by title
+        if (article && !existingTitles.has(article.title.trim())) {
             const id = `news_${Date.now()}_${i}`;
             const articleData = {
                 id,
@@ -104,6 +131,9 @@ async function generateNewsBatch(count = 6) {
                 timestamp: articleData.timestamp,
                 poster: article.poster_url || '/assets/backgrounds/stadium_night.png'
             });
+            existingTitles.add(article.title.trim());
+        } else if (article) {
+            console.log(`⏭️ Skipping duplicate title: ${article.title}`);
         }
     }
 
@@ -122,6 +152,28 @@ async function generateNewsBatch(count = 6) {
     await fs.writeFile(queuePath, JSON.stringify(updatedQueue, null, 2), 'utf8');
 
     console.log(`✅ Batch complete! Generated ${newArticles.length} new articles.`);
+}
+
+async function cleanOldNews() {
+    console.log('🧹 Cleaning old news files...');
+    const newsDir = path.join(__dirname, '..', 'public', 'data', 'news');
+    try {
+        const files = await fs.readdir(newsDir);
+        const now = Date.now();
+        const expiry = 48 * 60 * 60 * 1000; // 48 hours
+
+        for (const file of files) {
+            if (!file.endsWith('.json')) continue;
+            const filePath = path.join(newsDir, file);
+            const stats = await fs.stat(filePath);
+            if (now - stats.mtimeMs > expiry) {
+                await fs.unlink(filePath);
+                console.log(`🗑️ Deleted old news: ${file}`);
+            }
+        }
+    } catch (e) {
+        console.warn('⚠️ No news directory to clean yet.');
+    }
 }
 
 async function callGemini(topic, maxAttempts = 10) {

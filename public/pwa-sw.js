@@ -1,28 +1,37 @@
 /**
- * LIVE MATCH - SERVICE WORKER SELF-DESTRUCT
- * =========================================
- * This script exists solely to KILL any existing service worker.
- * If this file is loaded, it immediately unregisters itself.
+ * LIVE MATCH - SERVICE WORKER SELF-DESTRUCT (URGENT)
+ * ==================================================
+ * This script is designed to KILL any existing service worker 
+ * and CLEAR all caches immediately.
  */
 
 self.addEventListener('install', (event) => {
-    console.log('💀 SW Self-Destruct: Installing...');
     self.skipWaiting();
 });
 
 self.addEventListener('activate', (event) => {
-    console.log('💀 SW Self-Destruct: Activating and Unregistering...');
     event.waitUntil(
-        self.registration.unregister().then(() => {
-            console.log('💥 SW Self-Destruct: Unregistered successfully.');
+        caches.keys().then((cacheNames) => {
+            return Promise.all(
+                cacheNames.map((cacheName) => {
+                    return caches.delete(cacheName);
+                })
+            );
+        }).then(() => {
+            return self.registration.unregister();
+        }).then(() => {
             return self.clients.matchAll();
-        }).then(clients => {
-            clients.forEach(client => client.navigate(client.url)); // Force reload to clear SW control
+        }).then((clients) => {
+            clients.forEach((client) => {
+                if (client.url && 'navigate' in client) {
+                    client.navigate(client.url);
+                }
+            });
         })
     );
 });
 
 self.addEventListener('fetch', (event) => {
-    // Pass through everything, don't cache
+    // Do nothing, bypass everything to network
     return;
 });
