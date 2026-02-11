@@ -49,13 +49,14 @@ body {
 .watch-controls-center {
     width: 100%;
     height: 18dvh;
-    padding: 0 10px;
-    /* Removed vertical padding to ensure centering by flex */
+    padding: 3px 10px 0;
+    /* 3px top padding as requested */
     background: #1a202c;
     border-top: 1px solid #2d3748;
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
+    /* Move to top */
     flex-shrink: 0;
     z-index: 100;
     box-sizing: border-box;
