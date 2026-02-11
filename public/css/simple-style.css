@@ -4,15 +4,20 @@
     box-sizing: border-box;
 }
 
+@font-face {
+    font-family: 'Cairo';
+    src: url('../assets/fonts/Cairo-Bold.ttf') format('truetype');
+    font-weight: 700;
+    font-display: swap;
+}
+
 body {
-    font-family: 'Cairo', sans-serif;
+    font-family: 'Cairo', system-ui, -apple-system, sans-serif;
     background: #0f172a;
     color: #fff;
     min-height: 100vh;
     padding: 10px;
-    /* Reduced padding for mobile */
     overflow-x: hidden;
-    /* Prevent horizontal scroll */
 }
 
 .container {
@@ -46,13 +51,13 @@ body {
 }
 
 .live-badge {
-    background: #ff0844;
+    background: #c50030;
     padding: 6px 12px;
     border-radius: 20px;
     font-size: 0.8rem;
     font-weight: 700;
     animation: pulse 2s infinite;
-    box-shadow: 0 0 15px rgba(255, 8, 68, 0.5);
+    box-shadow: 0 0 15px rgba(197, 0, 48, 0.5);
     white-space: nowrap;
     display: inline-flex;
     align-items: center;
@@ -179,8 +184,9 @@ body {
 }
 
 .status-live {
-    background: #ff0844;
+    background: #c50030;
     color: #fff;
+    font-weight: 700;
     animation: pulse 2s infinite;
 }
 
@@ -427,4 +433,59 @@ body {
     margin-top: 40px;
     padding-top: 30px;
     border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Skeleton Loading (CLS Fix) */
+.skeleton {
+    background: linear-gradient(90deg, #1e293b 25%, #2d3748 50%, #1e293b 75%);
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+    border-radius: 4px;
+}
+
+@keyframes shimmer {
+    0% {
+        background-position: 200% 0;
+    }
+
+    100% {
+        background-position: -200% 0;
+    }
+}
+
+.skeleton-card {
+    height: 100px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.skeleton-logo {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+}
+
+.skeleton-text {
+    height: 12px;
+    width: 60%;
+    margin-bottom: 8px;
+}
+
+.skeleton-time {
+    height: 16px;
+    width: 40px;
+}
+
+.news-skeleton {
+    height: 280px;
+    width: 100%;
+}
+
+.news-skeleton-img {
+    height: 160px;
+    width: 100%;
+    border-radius: 12px 12px 0 0;
+}
+
+.news-skeleton-content {
+    padding: 15px;
 }

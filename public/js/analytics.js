@@ -16,6 +16,9 @@
 
     // Use requestIdleCallback to load analytics when browser is idle
     const loadGA = function () {
+        // Guard: prevent double-loading
+        if (document.querySelector('script[src*="googletagmanager.com/gtag"]')) return;
+
         const script = document.createElement('script');
         script.async = true;
         script.src = `https://www.googletagmanager.com/gtag/js?id=${gaId}`;

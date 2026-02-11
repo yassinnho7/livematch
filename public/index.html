@@ -6,9 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>مباريات اليوم - بث مباشر</title>
 
-    <!-- Preconnect to critical origins -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- Preload critical assets -->
+    <link rel="preload" href="assets/fonts/Cairo-Bold.ttf" as="font" type="font/ttf" crossorigin>
+
+    <!-- DNS Prefetch for third-party scripts -->
     <link rel="dns-prefetch" href="https://www.googletagmanager.com">
     <link rel="dns-prefetch" href="https://static.jubnaadserve.com">
 
@@ -20,8 +21,15 @@
             box-sizing: border-box
         }
 
+        @font-face {
+            font-family: 'Cairo';
+            src: url('assets/fonts/Cairo-Bold.ttf') format('truetype');
+            font-weight: 700;
+            font-display: swap;
+        }
+
         body {
-            font-family: 'Cairo', sans-serif;
+            font-family: 'Cairo', system-ui, -apple-system, sans-serif;
             background: #0f172a;
             color: #fff;
             min-height: 100vh;
@@ -87,7 +95,27 @@
             display: flex;
             flex-direction: column;
             gap: 12px;
-            min-height: 200px
+            min-height: 400px
+        }
+
+        .news-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+            min-height: 400px
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 900;
+            margin: 40px 0 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #fff;
+            border-right: 4px solid #667eea;
+            padding-right: 15px
         }
 
         .loading {
@@ -173,8 +201,9 @@
         }
 
         .status-live {
-            background: #ff0844;
+            background: #c50030;
             color: #fff;
+            font-weight: 700;
             animation: pulse 2s infinite
         }
 
@@ -240,9 +269,7 @@
         <link rel="stylesheet" href="css/simple-style.css?v=9999">
     </noscript>
 
-    <!-- Google Fonts loaded non-blocking -->
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet"
-        media="print" onload="this.media='all'">
+    <!-- Google Fonts removed for local performance -->
 
     <meta name="google-site-verification" content="wVmFPnoAmqaUN-06zAW4XDW04Q98_vnGCVuB-NIiB-c" />
     <meta name="profiton-domain-verification"
@@ -306,8 +333,10 @@
         <div class="ad-slot-body" id="ad-footer-slot" style="text-align: center; margin-top: 25px;"></div>
     </div>
 
-    <!-- Config must load first (small, sync) -->
-    <script src="js/config.js"></script>
+    <!-- Config inlined to eliminate last render-blocking request -->
+    <script>
+        var MONETIZATION_CONFIG = { api: { matchesJsonUrl: 'data/matches.json', updateInterval: 60000 }, adIds: { jubnaWidgetId: '56519092199ee075f04726d7379da522' }, analytics: { gaId: 'G-YEKSYGPND9', enabled: true }, countdown: { duration: 5 }, externalUrls: { homeBackAd: 'https://otieu.com/4/10557734' } }; if (typeof window !== 'undefined') { window.MONETIZATION_CONFIG = MONETIZATION_CONFIG; }
+    </script>
 
     <!-- Core app scripts (defer for non-blocking) -->
     <script src="js/matches-v2.js?v=9999" defer></script>
@@ -318,7 +347,10 @@
     <!-- Analytics & Ads: Load AFTER page is interactive (2s delay) -->
     <script>
         // Delay non-critical 3rd party scripts to improve FCP/LCP
+        var _deferLoaded = false;
         function loadDeferredScripts() {
+            if (_deferLoaded) return;
+            _deferLoaded = true;
             // Analytics
             var a = document.createElement('script');
             a.src = 'js/analytics.js';
