@@ -42,7 +42,7 @@ async function initNews(containerId, limit = 10) {
             });
 
             card.innerHTML = `
-                <img src="${item.poster}" alt="${item.title}" class="news-poster" onerror="this.src='/assets/backgrounds/stadium_night.png'">
+                <img src="${item.poster}" alt="${item.title}" class="news-poster" loading="lazy" onerror="this.src='/assets/backgrounds/stadium_night.png'">
                 <div class="news-info">
                     <h3 class="news-title">${item.title}</h3>
                     <div class="news-meta">

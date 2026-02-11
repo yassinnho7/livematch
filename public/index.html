@@ -5,10 +5,245 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>مباريات اليوم - بث مباشر</title>
+
+    <!-- Preconnect to critical origins -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="dns-prefetch" href="https://www.googletagmanager.com">
+    <link rel="dns-prefetch" href="https://static.jubnaadserve.com">
+
+    <!-- Critical CSS inlined for fast FCP -->
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box
+        }
+
+        body {
+            font-family: 'Cairo', sans-serif;
+            background: #0f172a;
+            color: #fff;
+            min-height: 100vh;
+            padding: 10px;
+            overflow-x: hidden
+        }
+
+        .container {
+            width: 100%;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 10px
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 15px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 20px rgba(102, 126, 234, .3);
+            flex-wrap: wrap;
+            gap: 15px
+        }
+
+        .header h1 {
+            font-size: 1.25rem;
+            font-weight: 900;
+            line-height: 1.4
+        }
+
+        .live-badge {
+            background: #ff0844;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: .8rem;
+            font-weight: 700;
+            animation: pulse 2s infinite;
+            box-shadow: 0 0 15px rgba(255, 8, 68, .5);
+            white-space: nowrap;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                opacity: 1;
+                transform: scale(1)
+            }
+
+            50% {
+                opacity: .8;
+                transform: scale(1.05)
+            }
+        }
+
+        .matches-container {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            min-height: 200px
+        }
+
+        .loading {
+            text-align: center;
+            padding: 40px 20px;
+            font-size: 1rem;
+            background: #1e293b;
+            border-radius: 12px
+        }
+
+        .match-row {
+            background: #1e293b;
+            border-radius: 12px;
+            padding: 15px;
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            align-items: center;
+            gap: 15px;
+            transition: all .3s;
+            cursor: pointer;
+            text-decoration: none;
+            color: inherit;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, .2)
+        }
+
+        .team {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            min-width: 0
+        }
+
+        .team:first-child {
+            justify-content: flex-end;
+            text-align: right
+        }
+
+        .team:last-child {
+            justify-content: flex-start;
+            text-align: left
+        }
+
+        .team-logo {
+            width: 35px;
+            height: 35px;
+            object-fit: contain;
+            flex-shrink: 0
+        }
+
+        .team-name {
+            font-size: .9rem;
+            font-weight: 700;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis
+        }
+
+        .match-center {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 5px;
+            min-width: 90px
+        }
+
+        .match-time {
+            font-size: 1rem;
+            font-weight: 700;
+            color: #4facfe
+        }
+
+        .vs {
+            font-size: .8rem;
+            color: rgba(255, 255, 255, .78);
+            font-weight: 700
+        }
+
+        .match-status {
+            font-size: .75rem;
+            padding: 4px 10px;
+            border-radius: 8px;
+            font-weight: 600
+        }
+
+        .status-live {
+            background: #ff0844;
+            color: #fff;
+            animation: pulse 2s infinite
+        }
+
+        .ad-container-frame {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            overflow: hidden;
+            margin-bottom: 20px;
+            background: transparent
+        }
+
+        .ad-slot-header {
+            width: 470px;
+            height: 60px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-shrink: 0
+        }
+
+        @media(max-width:600px) {
+            .header {
+                flex-direction: column;
+                text-align: center;
+                gap: 10px
+            }
+
+            .match-row {
+                padding: 12px 10px;
+                gap: 8px;
+                grid-template-columns: 1fr 80px 1fr
+            }
+
+            .team-logo {
+                width: 30px;
+                height: 30px
+            }
+
+            .team-name {
+                font-size: .85rem
+            }
+
+            .match-time {
+                font-size: .9rem
+            }
+        }
+
+        @media(max-width:500px) {
+            .ad-slot-header {
+                transform: scale(.65);
+                transform-origin: center center;
+                margin-top: -10px;
+                margin-bottom: -10px
+            }
+        }
+    </style>
+
+    <!-- Full CSS loaded non-blocking -->
+    <link rel="stylesheet" href="css/simple-style.css?v=9999" media="print" onload="this.media='all'">
+    <noscript>
+        <link rel="stylesheet" href="css/simple-style.css?v=9999">
+    </noscript>
+
+    <!-- Google Fonts loaded non-blocking -->
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet"
         media="print" onload="this.media='all'">
-    <link rel="stylesheet" href="css/simple-style.css?v=9999">
+
     <meta name="google-site-verification" content="wVmFPnoAmqaUN-06zAW4XDW04Q98_vnGCVuB-NIiB-c" />
     <meta name="profiton-domain-verification"
         content="55e62f09d2ade93c563113203fe7c5f4889c6cd2a4683d78977cf174b1f97fc1" />
@@ -28,37 +263,18 @@
     <meta property="og:image" content="https://livematch-991.pages.dev/icons/icon-512x512.png">
     <meta name="twitter:card" content="summary_large_image">
 
-    <!-- Bidvertiser2103692 -->
     <!-- PWA Manifest -->
     <link rel="manifest" href="/manifest.json">
     <meta name="theme-color" content="#667eea">
     <link rel="apple-touch-icon" href="/icons/icon-192x192.png">
     <link rel="canonical" href="https://livematch-991.pages.dev/">
-
-    <!-- Analytics & Config -->
-    <script src="js/config.js"></script>
-    <script src="js/analytics.js"></script>
-
-    <!-- Adsterra SocialBar -->
-    <script src="https://pl28582110.effectivegatecpm.com/bf/db/5e/bfdb5e4549c4611a6c774636cc09cc3f.js"></script>
 </head>
 
 <body>
     <div class="container">
-        <!-- Header Ad 468x60 -->
+        <!-- Header Ad 468x60 (deferred) -->
         <div class="ad-container-frame">
-            <div class="ad-slot-header">
-                <script>
-                    atOptions = {
-                        'key': '15d1ca482efd28581d78b70b9bb40556',
-                        'format': 'iframe',
-                        'height': 60,
-                        'width': 468,
-                        'params': {}
-                    };
-                </script>
-                <script src="https://www.highperformanceformat.com/15d1ca482efd28581d78b70b9bb40556/invoke.js"></script>
-            </div>
+            <div class="ad-slot-header" id="ad-header-slot"></div>
         </div>
 
         <!-- Header -->
@@ -67,44 +283,103 @@
             <span class="live-badge">🔴 LIVE</span>
         </header>
 
-        <!-- Jubna Banner (Active) -->
-        <div class="ad-banner" style="margin-bottom: 20px;">
-            <div class="JC-WIDGET-DMROOT" data-widget-id="56519092199ee075f04726d7379da522"></div>
-            <script type="text/javascript" async="async" src="https://static.jubnaadserve.com/api/widget.js"></script>
-        </div>
+        <!-- Main Content Landmark for Accessibility -->
+        <main>
+            <!-- Jubna Banner (deferred) -->
+            <div class="ad-banner" style="margin-bottom: 20px;">
+                <div class="JC-WIDGET-DMROOT" data-widget-id="56519092199ee075f04726d7379da522"></div>
+            </div>
 
-        <!-- Matches Container -->
-        <div id="matches-container" class="matches-container">
-            <div class="loading">جاري التحميل...</div>
-        </div>
+            <!-- Matches Container -->
+            <div id="matches-container" class="matches-container">
+                <div class="loading">جاري التحميل...</div>
+            </div>
 
-        <!-- News Section -->
-        <h2 class="section-title">📰 أحدث الأخبار العالمية</h2>
-        <div id="news-container" class="news-grid">
-            <div class="loading">جاري تحميل الأخبار...</div>
-        </div>
+            <!-- News Section -->
+            <h2 class="section-title">📰 أحدث الأخبار العالمية</h2>
+            <div id="news-container" class="news-grid">
+                <div class="loading">جاري تحميل الأخبار...</div>
+            </div>
+        </main>
 
-        <!-- Sidebar/Footer Ad 300x250 -->
-        <div class="ad-slot-body" style="text-align: center; margin-top: 25px;">
-            <script>
-                (function (jfq) {
-                    var d = document,
-                        s = d.createElement('script'),
-                        l = d.scripts[d.scripts.length - 1];
-                    s.settings = jfq || {};
-                    s.src = "\/\/funny-blind.com\/b.XIVms\/drGplR0MYMWkcg\/We_mg9RuPZDURlSkwPaTLYE3bOETrIy1ZO\/TycLtGN\/jqcW5dMRjdYPwEMxQT";
-                    s.async = true;
-                    s.referrerPolicy = 'no-referrer-when-downgrade';
-                    l.parentNode.insertBefore(s, l);
-                })({})
-            </script>
-        </div>
+        <!-- Sidebar/Footer Ad 300x250 (deferred) -->
+        <div class="ad-slot-body" id="ad-footer-slot" style="text-align: center; margin-top: 25px;"></div>
     </div>
 
-    <script src="js/matches-v2.js?v=9999"></script>
+    <!-- Config must load first (small, sync) -->
+    <script src="js/config.js"></script>
+
+    <!-- Core app scripts (defer for non-blocking) -->
+    <script src="js/matches-v2.js?v=9999" defer></script>
     <script src="js/news-loader.js" defer></script>
     <script src="js/pwa-install.js" defer></script>
     <script src="js/ad-block-check.js" defer></script>
+
+    <!-- Analytics & Ads: Load AFTER page is interactive (2s delay) -->
+    <script>
+        // Delay non-critical 3rd party scripts to improve FCP/LCP
+        function loadDeferredScripts() {
+            // Analytics
+            var a = document.createElement('script');
+            a.src = 'js/analytics.js';
+            a.defer = true;
+            document.body.appendChild(a);
+
+            // Adsterra SocialBar
+            var s1 = document.createElement('script');
+            s1.src = 'https://pl28582110.effectivegatecpm.com/bf/db/5e/bfdb5e4549c4611a6c774636cc09cc3f.js';
+            s1.async = true;
+            s1.onerror = function () { /* Suppress 3rd party errors */ };
+            document.body.appendChild(s1);
+
+            // Header Ad (Highperformance)
+            var slot = document.getElementById('ad-header-slot');
+            if (slot) {
+                window.atOptions = {
+                    'key': '15d1ca482efd28581d78b70b9bb40556',
+                    'format': 'iframe',
+                    'height': 60,
+                    'width': 468,
+                    'params': {}
+                };
+                var s2 = document.createElement('script');
+                s2.src = 'https://www.highperformanceformat.com/15d1ca482efd28581d78b70b9bb40556/invoke.js';
+                s2.async = true;
+                s2.onerror = function () { /* Suppress 3rd party errors */ };
+                slot.appendChild(s2);
+            }
+
+            // Jubna Widget
+            var s3 = document.createElement('script');
+            s3.src = 'https://static.jubnaadserve.com/api/widget.js';
+            s3.async = true;
+            s3.onerror = function () { /* Suppress 3rd party errors */ };
+            document.body.appendChild(s3);
+
+            // Footer Ad (funny-blind)
+            var adFooter = document.getElementById('ad-footer-slot');
+            if (adFooter) {
+                var s4 = document.createElement('script');
+                s4.src = '//funny-blind.com/b.XIVms/drGplR0MYMWkcg/We_mg9RuPZDURlSkwPaTLYE3bOETrIy1ZO/TycLtGN/jqcW5dMRjdYPwEMxQT';
+                s4.async = true;
+                s4.referrerPolicy = 'no-referrer-when-downgrade';
+                s4.onerror = function () { /* Suppress 3rd party errors */ };
+                adFooter.appendChild(s4);
+            }
+        }
+
+        // Load after 2 seconds or user interaction (whichever comes first)
+        var _deferTimer = setTimeout(loadDeferredScripts, 2000);
+        ['scroll', 'mousemove', 'touchstart', 'keydown'].forEach(function (evt) {
+            window.addEventListener(evt, function _handler() {
+                clearTimeout(_deferTimer);
+                loadDeferredScripts();
+                ['scroll', 'mousemove', 'touchstart', 'keydown'].forEach(function (e) {
+                    window.removeEventListener(e, _handler);
+                });
+            }, { once: true, passive: true });
+        });
+    </script>
 </body>
 
 </html>
