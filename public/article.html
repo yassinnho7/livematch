@@ -372,7 +372,7 @@
         </div>
 
         <!-- Watch Button Floating -->
-        <a id="floating-btn" href="#server-selection-area" class="watch-float-btn">
+        <a id="floating-btn" href="#server-selection-area" class="floating-watch-btn">
             <span>⚡ شاهد الان</span>
         </a>
 
@@ -424,6 +424,7 @@
 
                             // Inject Servers
                             const serverArea = document.getElementById('server-selection-area');
+                            serverArea.innerHTML = ''; // Clear existing to prevent duplication
                             const activeStreams = match.streams.filter(s => s.url && s.url.length > 5);
                             activeStreams.forEach((stream, idx) => {
                                 const isVIP = stream.source === 'siiir' || idx === 1;
@@ -492,23 +493,6 @@
                 }
             }
 
-            function setMetaTag(attr, key, val) {
-                let meta = document.querySelector(`meta[${attr}="${key}"]`);
-                if (!meta) {
-                    meta = document.createElement('meta');
-                    meta.setAttribute(attr, key);
-                    document.head.appendChild(meta);
-                }
-                meta.content = val;
-            }
-
-            function showError(msg) {
-                document.getElementById('loading-view').innerHTML = `<h2 style="color:#ff4757; text-align:center;">⚠️ ${msg}</h2><a href="/" style="display:block; text-align:center; margin-top:10px; color:#667eea;">العودة للرئيسية</a>`;
-            }
-
-            loadArticle();
-
-            // Helper to set meta tags dynamically
             function setMetaTag(attr, key, val) {
                 let meta = document.querySelector(`meta[${attr}="${key}"]`);
                 if (!meta) {

@@ -59,11 +59,9 @@ body {
     justify-content: center;
     align-items: center;
     flex-shrink: 0;
-    /* Don't shrink */
-    gap: 15px;
     z-index: 100;
-    padding-bottom: env(safe-area-inset-bottom, 10px);
-    /* iPhone Home Bar */
+    /* Use padding-bottom with a safe fallback for PWA/Mobile */
+    padding-bottom: calc(10px + env(safe-area-inset-bottom, 0px));
 }
 
 .control-card {
