@@ -81,38 +81,21 @@
                 sandbox="allow-scripts allow-same-origin allow-forms allow-presentation"></iframe>
         </div>
 
-        <!-- Match Info Card -->
-        <div id="match-info-card" class="match-info-card" style="display: none;">
-            <div class="match-info-header">
-                <span id="info-league" class="league-tag"></span>
-                <span id="info-time" class="time-tag"></span>
-            </div>
-            <div class="match-info-teams">
-                <div class="info-team">
-                    <img id="info-home-logo" src="" alt="">
-                    <span id="info-home-name"></span>
-                </div>
-                <div class="info-vs">VS</div>
-                <div class="info-team">
-                    <img id="info-away-logo" src="" alt="">
-                    <span id="info-away-name"></span>
-                </div>
-            </div>
-        </div>
+    </div>
 
-        <!-- Compact Bottom Controls -->
-        <div class="watch-controls-center">
-            <div class="control-card">
-                <button onclick="goBackWithAd()" class="control-btn">
-                    <span class="icon">🏠</span>
-                    <span>الرئيسية</span>
-                </button>
-                <button onclick="toggleFullscreen()" class="control-btn">
-                    <span class="icon">⛶</span>
-                    <span>ملء الشاشة</span>
-                </button>
-            </div>
+    <!-- Compact Bottom Controls -->
+    <div class="watch-controls-center">
+        <div class="control-card">
+            <button onclick="goBackWithAd()" class="control-btn">
+                <span class="icon">🏠</span>
+                <span>الرئيسية</span>
+            </button>
+            <button onclick="toggleFullscreen()" class="control-btn">
+                <span class="icon">⛶</span>
+                <span>ملء الشاشة</span>
+            </button>
         </div>
+    </div>
     </div>
 
     <script>
@@ -181,20 +164,9 @@
             document.getElementById('choice-layer').style.display = 'none';
             const cont = document.getElementById('stream-container');
             const frame = document.getElementById('stream');
-            const infoCard = document.getElementById('match-info-card');
 
             cont.style.display = 'flex';
             frame.src = url;
-
-            if (currentMatch) {
-                infoCard.style.display = 'block';
-                document.getElementById('info-home-logo').src = currentMatch.home.logo;
-                document.getElementById('info-home-name').textContent = currentMatch.home.name;
-                document.getElementById('info-away-logo').src = currentMatch.away.logo;
-                document.getElementById('info-away-name').textContent = currentMatch.away.name;
-                document.getElementById('info-league').textContent = currentMatch.league.name;
-                document.getElementById('info-time').textContent = currentMatch.time || 'LIVE';
-            }
         }
 
         function renderServers() {

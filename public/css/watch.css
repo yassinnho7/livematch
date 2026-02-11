@@ -10,13 +10,12 @@
 
 body {
     font-family: 'Cairo', sans-serif;
-    background: #0d1117;
+    background: #000;
     color: #fff;
-    min-height: 100vh;
+    height: 100vh;
+    height: 100dvh;
     width: 100vw;
-    overflow-x: hidden;
-    overflow-y: auto;
-    /* Allow scrolling for info card */
+    overflow: hidden;
     display: flex;
     flex-direction: column;
 }
@@ -24,27 +23,20 @@ body {
 /* Essential Layers */
 #stream-container {
     width: 100%;
-    min-height: 100vh;
+    height: 100%;
     display: none;
     flex-direction: column;
 }
 
-/* Video Area */
+/* Video Area: Fills remaining space */
 .video-player-frame {
     width: 100%;
-    aspect-ratio: 16 / 9;
-    /* Professional aspect ratio */
-    max-height: 70vh;
-    /* Don't take too much space on desktop */
+    flex-grow: 1;
     background: #000;
     position: relative;
-}
-
-@media (max-width: 768px) {
-    .video-player-frame {
-        max-height: none;
-        height: auto;
-    }
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 #stream {
@@ -53,100 +45,18 @@ body {
     border: none;
 }
 
-/* Match Info Card */
-.match-info-card {
-    background: #161b22;
-    margin: 15px;
-    padding: 20px;
-    border-radius: 16px;
-    border: 1px solid #30363d;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
-}
-
-.match-info-header {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 20px;
-}
-
-.league-tag {
-    background: #238636;
-    padding: 4px 12px;
-    border-radius: 20px;
-    font-size: 12px;
-    font-weight: 700;
-}
-
-.time-tag {
-    color: #58a6ff;
-    font-weight: 700;
-}
-
-.match-info-teams {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 30px;
-}
-
-.info-team {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;
-    width: 120px;
-}
-
-.info-team img {
-    width: 60px;
-    height: 60px;
-    object-fit: contain;
-    background: #fff;
-    padding: 5px;
-    border-radius: 50%;
-}
-
-.info-team span {
-    font-weight: 700;
-    font-size: 14px;
-    text-align: center;
-}
-
-.info-vs {
-    font-size: 24px;
-    font-weight: 900;
-    color: #f85149;
-}
-
-/* Controls Area */
+/* Controls Area: Fixed at bottom with safe area support */
 .watch-controls-center {
     width: 100%;
-    padding: 20px 10px;
-    margin-top: auto;
-    /* Push to bottom */
+    padding: 10px;
+    background: #1a202c;
+    border-top: 1px solid #2d3748;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-shrink: 0;
     z-index: 100;
-    background: #0d1117;
-    margin-bottom: env(safe-area-inset-bottom, 15px);
-}
-
-@media (max-width: 480px) {
-    .info-team {
-        width: 90px;
-    }
-
-    .info-team img {
-        width: 45px;
-        height: 45px;
-    }
-
-    .match-info-card {
-        padding: 15px;
-        margin: 10px;
-    }
+    padding-bottom: calc(10px + env(safe-area-inset-bottom, 5px));
 }
 
 .control-card {
