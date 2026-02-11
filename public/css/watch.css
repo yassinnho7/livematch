@@ -61,16 +61,6 @@ body {
     box-sizing: border-box;
 }
 
-background: #1a202c;
-border-top: 1px solid #2d3748;
-display: flex;
-justify-content: center;
-align-items: center;
-flex-shrink: 0;
-z-index: 100;
-box-sizing: border-box;
-}
-
 .control-card {
     background: rgba(255, 255, 255, 0.08);
     border-radius: 12px;
