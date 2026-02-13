@@ -263,36 +263,36 @@ body {
 .matches-container {
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 10px;
     min-height: 200px;
+    padding: 0 8px;
 }
 
 .match-card {
     background: var(--bg-card);
-    border-radius: 12px;
-    padding: 14px 12px;
+    border-radius: 16px;
+    padding: 16px 14px;
     display: grid;
-    grid-template-columns: 1fr 90px 1fr;
-    /* Fixed center width for stability */
+    grid-template-columns: 1fr auto 1fr;
     align-items: center;
-    gap: 8px;
-    transition: all 0.25s ease;
+    gap: 0;
+    transition: all 0.3s ease;
     cursor: pointer;
     text-decoration: none;
     color: inherit;
     border: 1px solid var(--border-color);
     position: relative;
     overflow: hidden;
-    max-width: 460px;
-    /* Optimal reading width */
+    max-width: 520px;
     margin: 0 auto;
     width: 100%;
+    box-sizing: border-box;
 }
 
 .match-card:hover {
     border-color: var(--border-hover);
-    transform: translateY(-1px);
-    box-shadow: 0 4px 16px var(--shadow);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px var(--shadow);
     background: var(--bg-card-hover);
 }
 
@@ -358,27 +358,28 @@ body {
     border-radius: 0 10px 10px 0;
 }
 
-/* Team */
+/* ======= TEAM ELEMENTS =======
+   CRITICAL BUG FIX: .play-overlay is :first-child, .match-meta is :last-child.
+   Teams are NOT first/last children! Use :first-of-type / :last-of-type.
+   =============================== */
 .team {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 8px;
     min-width: 0;
-    width: 100%;
-    /* Take full cell width */
     position: relative;
     z-index: 2;
 }
 
-.team:first-child {
+/* Home team (RIGHT in RTL): flex-end pushes towards LEFT edge = center */
+.team:first-of-type {
     justify-content: flex-end;
-    /* In RTL (dir="rtl"), End is the LEFT edge. Pushes content to the left/center */
     text-align: right;
 }
 
-.team:last-child {
+/* Away team (LEFT in RTL): flex-start pushes towards RIGHT edge = center */
+.team:last-of-type {
     justify-content: flex-start;
-    /* In RTL (dir="rtl"), Start is the RIGHT edge. Pushes content to the right/center */
     text-align: left;
 }
 
@@ -390,13 +391,13 @@ body {
 }
 
 .team-name {
-    font-size: 0.9rem;
-    font-weight: 800;
+    font-size: 0.88rem;
+    font-weight: 700;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
     color: var(--text-primary);
-    max-width: 120px;
+    max-width: 110px;
 }
 
 /* Center Section */
@@ -404,8 +405,9 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 6px;
-    min-width: 100px;
+    gap: 4px;
+    min-width: 80px;
+    padding: 0 8px;
     position: relative;
     z-index: 2;
 }
@@ -811,8 +813,8 @@ body {
 
     .match-card {
         padding: 12px 10px;
-        gap: 8px;
-        grid-template-columns: 1fr 85px 1fr;
+        gap: 0;
+        grid-template-columns: 1fr auto 1fr;
         max-width: 100%;
     }
 
@@ -827,16 +829,17 @@ body {
 
     .team-name {
         font-size: 0.78rem;
-        max-width: 100px;
+        max-width: 85px;
     }
 
     .match-center {
-        min-width: 80px;
-        gap: 4px;
+        min-width: 70px;
+        gap: 3px;
+        padding: 0 4px;
     }
 
     .match-time {
-        font-size: 0.75rem;
+        font-size: 0.72rem;
     }
 
     .match-score {
@@ -844,8 +847,8 @@ body {
     }
 
     .match-status-badge {
-        font-size: 0.6rem;
-        padding: 3px 7px;
+        font-size: 0.58rem;
+        padding: 2px 6px;
     }
 
     .match-meta {
@@ -855,7 +858,7 @@ body {
     }
 
     .match-meta span {
-        font-size: 0.62rem;
+        font-size: 0.6rem;
     }
 
     .match-date {
