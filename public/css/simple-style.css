@@ -371,15 +371,15 @@ body {
 }
 
 .team:first-child {
-    justify-content: flex-start;
-    /* Towards center in RTL */
-    text-align: left;
+    justify-content: flex-end;
+    /* In RTL (dir="rtl"), End is the LEFT edge. Pushes content to the left/center */
+    text-align: right;
 }
 
 .team:last-child {
-    justify-content: flex-end;
-    /* Towards center in RTL */
-    text-align: right;
+    justify-content: flex-start;
+    /* In RTL (dir="rtl"), Start is the RIGHT edge. Pushes content to the right/center */
+    text-align: left;
 }
 
 .team-logo {
