@@ -245,15 +245,16 @@ body {
 }
 
 .match-date {
-    font-size: 0.95rem;
+    font-size: 1rem;
     font-weight: 900;
-    color: var(--accent);
-    background: var(--accent-soft);
-    padding: 8px 18px;
-    border-radius: 30px;
-    border: 2px solid var(--accent);
-    margin-bottom: 5px;
-    box-shadow: 0 2px 8px var(--shadow);
+    color: #fff;
+    background: var(--accent);
+    padding: 10px 22px;
+    border-radius: 50px;
+    border: none;
+    margin-bottom: 8px;
+    box-shadow: 0 4px 15px rgba(29, 155, 240, 0.4);
+    letter-spacing: 0.5px;
 }
 
 /* ========================
@@ -269,11 +270,12 @@ body {
 .match-card {
     background: var(--bg-card);
     border-radius: 12px;
-    padding: 14px 16px;
+    padding: 14px 12px;
     display: grid;
     grid-template-columns: 1fr 90px 1fr;
     align-items: center;
-    gap: 15px;
+    gap: 0;
+    /* Minimized gap */
     transition: all 0.25s ease;
     cursor: pointer;
     text-decoration: none;
@@ -281,7 +283,8 @@ body {
     border: 1px solid var(--border-color);
     position: relative;
     overflow: hidden;
-    max-width: 600px;
+    max-width: 480px;
+    /* Tight container */
     margin: 0 auto;
     width: 100%;
 }
@@ -366,13 +369,17 @@ body {
 }
 
 .team:first-child {
-    justify-content: flex-end;
-    text-align: right;
+    justify-content: flex-start;
+    /* Towards center in RTL */
+    text-align: left;
+    padding-left: 5px;
 }
 
 .team:last-child {
-    justify-content: flex-start;
-    text-align: left;
+    justify-content: flex-end;
+    /* Towards center in RTL */
+    text-align: right;
+    padding-right: 5px;
 }
 
 .team-logo {
