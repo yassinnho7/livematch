@@ -1,130 +1,7 @@
 {
-  "generated_at": "2026-02-13T21:12:26.896Z",
+  "generated_at": "2026-02-13T21:56:21.100Z",
   "count": 10,
   "matches": [
-    {
-      "id": 891342034,
-      "date": "2026-02-13T19:30:00.000Z",
-      "timestamp": 1771011000,
-      "status": "LIVE",
-      "time": "19:30",
-      "time_label": "19:30 GMT",
-      "league": {
-        "name": "ألمانيا, الدوري الألماني",
-        "country": "Germany",
-        "logo": "https://a.espncdn.com/combiner/i?img=/i/leaguelogos/soccer/500/10.png&h=40&w=40"
-      },
-      "home": {
-        "name": "بوروسيا دورتموند",
-        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/01/341.png"
-      },
-      "away": {
-        "name": "ماينز 05",
-        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/02/352.png"
-      },
-      "score": null,
-      "streams": [
-        {
-          "id": "stream_ch1_891342034",
-          "source": "livekora",
-          "quality": "HD",
-          "channel": "ch1",
-          "url": "https://pl.koooralive.click/albaplayer/ch1",
-          "priority": 1
-        },
-        {
-          "id": "stream_siiir_891342034",
-          "source": "siiir",
-          "quality": "VIP",
-          "channel": "VIP Server",
-          "url": "https://eyj0exaioijkv1qilcjhbgcioijiuzi1nij99sss.yallashot.us/playerv2.php?match=match5&key=c0ae1abba6eebd7e6cc5b88b1d2B71547",
-          "priority": 2
-        }
-      ],
-      "poster_url": "/posters/891342034.jpg"
-    },
-    {
-      "id": 200748882,
-      "date": "2026-02-13T19:45:00.000Z",
-      "timestamp": 1771011900,
-      "status": "LIVE",
-      "time": "19:45",
-      "time_label": "19:45 GMT",
-      "league": {
-        "name": "إيطاليا, الدوري الإيطالي",
-        "country": "Italy",
-        "logo": "https://a.espncdn.com/combiner/i?img=/i/leaguelogos/soccer/500/12.png&h=40&w=40"
-      },
-      "home": {
-        "name": "بيسا",
-        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/02/248.png"
-      },
-      "away": {
-        "name": "ميلان",
-        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/02/227.png"
-      },
-      "score": null,
-      "streams": [
-        {
-          "id": "stream_ad-premium-1_200748882",
-          "source": "livekora",
-          "quality": "HD",
-          "channel": "ad-premium-1",
-          "url": "https://pl.koooralive.click/albaplayer/ad-premium-1",
-          "priority": 1
-        },
-        {
-          "id": "stream_siiir_200748882",
-          "source": "siiir",
-          "quality": "VIP",
-          "channel": "VIP Server",
-          "url": "https://eyj0exaioijkv1qilcjhbgcioijiuzi1nij99sss.yallashot.us/playerv2.php?match=match8&key=c0ae1abba6eebd7e6cc5b88b1d2B71547",
-          "priority": 2
-        }
-      ],
-      "poster_url": "/posters/200748882.jpg"
-    },
-    {
-      "id": 1784689974,
-      "date": "2026-02-13T19:45:00.000Z",
-      "timestamp": 1771011900,
-      "status": "LIVE",
-      "time": "19:45",
-      "time_label": "19:45 GMT",
-      "league": {
-        "name": "إنجلترا, كاس الاتحاد الإنجليزي - الدور 4",
-        "country": "England",
-        "logo": "https://a.espncdn.com/combiner/i?img=/i/leaguelogos/soccer/500/23.png&h=40&w=40"
-      },
-      "home": {
-        "name": "هال سيتي",
-        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/02/11.png"
-      },
-      "away": {
-        "name": "تشيلسي",
-        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/01/106.png"
-      },
-      "score": null,
-      "streams": [
-        {
-          "id": "stream_bein3_1784689974",
-          "source": "livekora",
-          "quality": "HD",
-          "channel": "bein3",
-          "url": "https://pl.koooralive.click/albaplayer/bein3",
-          "priority": 1
-        },
-        {
-          "id": "stream_siiir_1784689974",
-          "source": "siiir",
-          "quality": "VIP",
-          "channel": "VIP Server",
-          "url": "https://eyj0exaioijkv1qilcjhbgcioijiuzi1nij99sss.yallashot.us/playerv2.php?match=match2&key=c0ae1abba6eebd7e6cc5b88b1d2B71547",
-          "priority": 2
-        }
-      ],
-      "poster_url": "/posters/1784689974.jpg"
-    },
     {
       "id": 159300702,
       "date": "2026-02-13T20:05:00.000Z",
@@ -308,7 +185,7 @@
           "source": "siiir",
           "quality": "VIP",
           "channel": "VIP Server",
-          "url": "https://eyj0exaioijkv1qilcjhbgcioijiuzi1nij99sss.yallashot.us/playerv2.php?match=match2&key=c0ae1abba6eebd7e6cc5b88b1d2B71547",
+          "url": "https://eyj0exaioijkv1qilcjhbgcioijiuzi1nij99sss.yallashot.us/playerv2.php?match=match7&key=c0ae1abba6eebd7e6cc5b88b1d2B71547",
           "priority": 2
         }
       ],
@@ -390,11 +267,134 @@
           "source": "siiir",
           "quality": "VIP",
           "channel": "VIP Server",
-          "url": "https://eyj0exaioijkv1qilcjhbgcioijiuzi1nij99sss.yallashot.us/playerv2.php?match=match2&key=c0ae1abba6eebd7e6cc5b88b1d2B71547",
+          "url": "https://eyj0exaioijkv1qilcjhbgcioijiuzi1nij99sss.yallashot.us/playerv2.php?match=match7&key=c0ae1abba6eebd7e6cc5b88b1d2B71547",
           "priority": 2
         }
       ],
       "poster_url": "/posters/564762445.jpg"
+    },
+    {
+      "id": 891342034,
+      "date": "2026-02-13T19:30:00.000Z",
+      "timestamp": 1771011000,
+      "status": "FT",
+      "time": "19:30",
+      "time_label": "19:30 GMT",
+      "league": {
+        "name": "ألمانيا, الدوري الألماني",
+        "country": "Germany",
+        "logo": "https://a.espncdn.com/combiner/i?img=/i/leaguelogos/soccer/500/10.png&h=40&w=40"
+      },
+      "home": {
+        "name": "بوروسيا دورتموند",
+        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/01/341.png"
+      },
+      "away": {
+        "name": "ماينز 05",
+        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/02/352.png"
+      },
+      "score": null,
+      "streams": [
+        {
+          "id": "stream_ch1_891342034",
+          "source": "livekora",
+          "quality": "HD",
+          "channel": "ch1",
+          "url": "https://pl.koooralive.click/albaplayer/ch1",
+          "priority": 1
+        },
+        {
+          "id": "stream_siiir_891342034",
+          "source": "siiir",
+          "quality": "VIP",
+          "channel": "VIP Server",
+          "url": "https://eyj0exaioijkv1qilcjhbgcioijiuzi1nij99sss.yallashot.us/playerv2.php?match=match5&key=c0ae1abba6eebd7e6cc5b88b1d2B71547",
+          "priority": 2
+        }
+      ],
+      "poster_url": "/posters/891342034.jpg"
+    },
+    {
+      "id": 200748882,
+      "date": "2026-02-13T19:45:00.000Z",
+      "timestamp": 1771011900,
+      "status": "FT",
+      "time": "19:45",
+      "time_label": "19:45 GMT",
+      "league": {
+        "name": "إيطاليا, الدوري الإيطالي",
+        "country": "Italy",
+        "logo": "https://a.espncdn.com/combiner/i?img=/i/leaguelogos/soccer/500/12.png&h=40&w=40"
+      },
+      "home": {
+        "name": "بيسا",
+        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/02/248.png"
+      },
+      "away": {
+        "name": "ميلان",
+        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/02/227.png"
+      },
+      "score": null,
+      "streams": [
+        {
+          "id": "stream_ad-premium-1_200748882",
+          "source": "livekora",
+          "quality": "HD",
+          "channel": "ad-premium-1",
+          "url": "https://pl.koooralive.click/albaplayer/ad-premium-1",
+          "priority": 1
+        },
+        {
+          "id": "stream_siiir_200748882",
+          "source": "siiir",
+          "quality": "VIP",
+          "channel": "VIP Server",
+          "url": "https://eyj0exaioijkv1qilcjhbgcioijiuzi1nij99sss.yallashot.us/playerv2.php?match=match8&key=c0ae1abba6eebd7e6cc5b88b1d2B71547",
+          "priority": 2
+        }
+      ],
+      "poster_url": "/posters/200748882.jpg"
+    },
+    {
+      "id": 1784689974,
+      "date": "2026-02-13T19:45:00.000Z",
+      "timestamp": 1771011900,
+      "status": "FT",
+      "time": "19:45",
+      "time_label": "19:45 GMT",
+      "league": {
+        "name": "إنجلترا, كاس الاتحاد الإنجليزي - الدور 4",
+        "country": "England",
+        "logo": "https://a.espncdn.com/combiner/i?img=/i/leaguelogos/soccer/500/23.png&h=40&w=40"
+      },
+      "home": {
+        "name": "هال سيتي",
+        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/02/11.png"
+      },
+      "away": {
+        "name": "تشيلسي",
+        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/01/106.png"
+      },
+      "score": null,
+      "streams": [
+        {
+          "id": "stream_bein3_1784689974",
+          "source": "livekora",
+          "quality": "HD",
+          "channel": "bein3",
+          "url": "https://pl.koooralive.click/albaplayer/bein3",
+          "priority": 1
+        },
+        {
+          "id": "stream_siiir_1784689974",
+          "source": "siiir",
+          "quality": "VIP",
+          "channel": "VIP Server",
+          "url": "https://eyj0exaioijkv1qilcjhbgcioijiuzi1nij99sss.yallashot.us/playerv2.php?match=match2&key=c0ae1abba6eebd7e6cc5b88b1d2B71547",
+          "priority": 2
+        }
+      ],
+      "poster_url": "/posters/1784689974.jpg"
     }
   ]
 }
