@@ -372,18 +372,14 @@ body {
 
 .team:first-child {
     justify-content: flex-start;
-    /* In RTL, this is the RIGHT side (pushes to center-left) */
+    /* Towards center in RTL */
     text-align: left;
-    flex-direction: row;
-    /* Ensure logo-text order is correct */
 }
 
 .team:last-child {
     justify-content: flex-end;
-    /* In RTL, this is the LEFT side (pushes to center-right) */
+    /* Towards center in RTL */
     text-align: right;
-    flex-direction: row-reverse;
-    /* Flip logo-text order for the other team */
 }
 
 .team-logo {
@@ -400,8 +396,7 @@ body {
     overflow: hidden;
     text-overflow: ellipsis;
     color: var(--text-primary);
-    max-width: 110px;
-    /* Balanced width */
+    max-width: 120px;
 }
 
 /* Center Section */
