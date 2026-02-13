@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="ar" dir="rtl" data-theme="dark">
 
 <head>
     <meta charset="UTF-8">
@@ -29,10 +29,21 @@
 
         body {
             font-family: 'Cairo', system-ui, -apple-system, sans-serif;
-            background: #0a0e1a;
-            color: #fff;
             min-height: 100vh;
             overflow-x: hidden;
+            transition: background 0.3s, color 0.3s;
+        }
+
+        /* Dark theme (default) */
+        [data-theme="dark"] body {
+            background: #0f1923;
+            color: #e2e8f0;
+        }
+
+        /* Light theme */
+        [data-theme="light"] body {
+            background: #f0f2f5;
+            color: #1a1a2e;
         }
 
         .container {
@@ -44,7 +55,7 @@
     </style>
 
     <!-- Full CSS -->
-    <link rel="stylesheet" href="css/simple-style.css?v=2000">
+    <link rel="stylesheet" href="css/simple-style.css?v=3000">
 
     <!-- Meta Tags -->
     <meta name="google-site-verification" content="wVmFPnoAmqaUN-06zAW4XDW04Q98_vnGCVuB-NIiB-c" />
@@ -90,9 +101,14 @@
                 <h1>⚽ مباريات اليوم</h1>
                 <span class="live-badge" id="live-badge">🔴 LIVE</span>
             </div>
-            <div class="viewer-counter" id="viewer-counter">
-                <span class="viewer-dot"></span>
-                <span id="viewer-count">0</span> يشاهدون الآن
+            <div class="header-actions">
+                <div class="viewer-counter" id="viewer-counter">
+                    <span class="viewer-dot"></span>
+                    <span id="viewer-count">0</span> يشاهدون الآن
+                </div>
+                <button class="theme-toggle" id="theme-toggle" onclick="toggleTheme()" title="تبديل الوضع">
+                    <span class="theme-icon" id="theme-icon">☀️</span>
+                </button>
             </div>
         </div>
     </header>
@@ -157,11 +173,31 @@
         </div>
     </footer>
 
+    <!-- Theme Toggle Script (inline for instant load) -->
+    <script>
+        function toggleTheme() {
+            const html = document.documentElement;
+            const current = html.getAttribute('data-theme');
+            const next = current === 'dark' ? 'light' : 'dark';
+            html.setAttribute('data-theme', next);
+            localStorage.setItem('theme', next);
+            document.getElementById('theme-icon').textContent = next === 'dark' ? '☀️' : '🌙';
+        }
+        // Restore saved theme
+        (function () {
+            const saved = localStorage.getItem('theme');
+            if (saved) {
+                document.documentElement.setAttribute('data-theme', saved);
+                const icon = document.getElementById('theme-icon');
+                if (icon) icon.textContent = saved === 'dark' ? '☀️' : '🌙';
+            }
+        })();
+    </script>
+
     <!-- Core Scripts -->
     <script src="js/config.js"></script>
-    <script src="js/matches-v2.js?v=2000" defer></script>
+    <script src="js/matches-v2.js?v=3000" defer></script>
     <script src="js/news-loader.js" defer></script>
-    <script src="js/pwa-install.js" defer></script>
 </body>
 
 </html>

@@ -8,15 +8,13 @@ function initViewerCounter() {
     const counterEl = document.getElementById('viewer-count');
     if (!counterEl) return;
 
-    // Start with a realistic base number
     let baseCount = 1200 + Math.floor(Math.random() * 800);
-    counterEl.textContent = baseCount.toLocaleString();
+    counterEl.textContent = baseCount.toLocaleString('en-US');
 
-    // Fluctuate every 3-5 seconds
     setInterval(() => {
-        const change = Math.floor(Math.random() * 40) - 15; // -15 to +25
+        const change = Math.floor(Math.random() * 40) - 15;
         baseCount = Math.max(800, baseCount + change);
-        counterEl.textContent = baseCount.toLocaleString();
+        counterEl.textContent = baseCount.toLocaleString('en-US');
     }, 3000 + Math.random() * 2000);
 }
 
@@ -25,19 +23,24 @@ function setCurrentDate() {
     const dateEl = document.getElementById('current-date');
     if (!dateEl) return;
     const now = new Date();
-    dateEl.textContent = now.toLocaleDateString('ar-EG', {
-        weekday: 'long',
-        year: 'numeric',
-        month: 'long',
-        day: 'numeric'
-    });
+
+    // Arabic day/month names but with regular (Western) digits
+    const days = ['الأحد', 'الإثنين', 'الثلاثاء', 'الأربعاء', 'الخميس', 'الجمعة', 'السبت'];
+    const months = ['يناير', 'فبراير', 'مارس', 'أبريل', 'مايو', 'يونيو',
+        'يوليو', 'أغسطس', 'سبتمبر', 'أكتوبر', 'نوفمبر', 'ديسمبر'];
+
+    const dayName = days[now.getDay()];
+    const day = now.getDate();
+    const month = months[now.getMonth()];
+    const year = now.getFullYear();
+
+    dateEl.textContent = `${dayName}، ${day} ${month} ${year}`;
 }
 
 // ============ COUNTDOWN TIMERS ============
 const countdownIntervals = [];
 
 function startCountdowns() {
-    // Clear previous intervals
     countdownIntervals.forEach(id => clearInterval(id));
     countdownIntervals.length = 0;
 
@@ -50,7 +53,7 @@ function startCountdowns() {
 
             if (diff <= 0) {
                 el.textContent = '🔴 بدأت';
-                el.style.color = '#f87171';
+                el.style.color = '#f4212e';
                 return;
             }
 
@@ -200,14 +203,13 @@ function createMatchCard(match) {
     const card = document.createElement('a');
     card.className = 'match-card';
 
-    // Direct link to watch page (first available stream)
+    // Direct link to watch page (with 5s countdown)
     if (match.streams && match.streams.length > 0) {
         card.href = `watch.html?match=${match.id}&server=0`;
     } else {
         card.href = `article.html?match=${match.id}`;
     }
 
-    // Check if live
     if (match.status === 'LIVE') {
         card.classList.add('is-live');
     }
@@ -250,22 +252,16 @@ function createMatchCard(match) {
     // Team info
     const homeName = match.home.name || 'فريق 1';
     const awayName = match.away.name || 'فريق 2';
-    const fallbackLogo = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='36' height='36'%3E%3Ccircle cx='18' cy='18' r='18' fill='%231e293b'/%3E%3C/svg%3E";
+    const fallbackLogo = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32'%3E%3Ccircle cx='16' cy='16' r='16' fill='%231e293b'/%3E%3C/svg%3E";
     const homeLogo = match.home.logo || fallbackLogo;
     const awayLogo = match.away.logo || fallbackLogo;
 
-    // Channel & commentator meta
+    // Meta
     let metaHTML = '';
     const metaParts = [];
-    if (match.channel) {
-        metaParts.push(`<span>📺 ${match.channel}</span>`);
-    }
-    if (match.commentator) {
-        metaParts.push(`<span>🎙️ ${match.commentator}</span>`);
-    }
-    if (match.league && match.league.name) {
-        metaParts.push(`<span>🏆 ${match.league.name}</span>`);
-    }
+    if (match.channel) metaParts.push(`<span>📺 ${match.channel}</span>`);
+    if (match.commentator) metaParts.push(`<span>🎙️ ${match.commentator}</span>`);
+    if (match.league && match.league.name) metaParts.push(`<span>🏆 ${match.league.name}</span>`);
     if (metaParts.length > 0) {
         metaHTML = `<div class="match-meta">${metaParts.join('')}</div>`;
     }
@@ -279,7 +275,7 @@ function createMatchCard(match) {
 
         <div class="team">
             <span class="team-name">${homeName}</span>
-            <img src="${homeLogo}" alt="${homeName}" width="36" height="36" class="team-logo" loading="lazy" onerror="this.src='${fallbackLogo}'">
+            <img src="${homeLogo}" alt="${homeName}" width="32" height="32" class="team-logo" loading="lazy" onerror="this.src='${fallbackLogo}'">
         </div>
         
         <div class="match-center">
@@ -290,7 +286,7 @@ function createMatchCard(match) {
         </div>
         
         <div class="team">
-            <img src="${awayLogo}" alt="${awayName}" width="36" height="36" class="team-logo" loading="lazy" onerror="this.src='${fallbackLogo}'">
+            <img src="${awayLogo}" alt="${awayName}" width="32" height="32" class="team-logo" loading="lazy" onerror="this.src='${fallbackLogo}'">
             <span class="team-name">${awayName}</span>
         </div>
 

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="ar" dir="rtl" data-theme="dark">
 
 <head>
     <meta charset="UTF-8">
@@ -38,16 +38,162 @@
             overflow: hidden;
         }
 
-        /* Match Info Bar */
+        /* ========================
+           COUNTDOWN SCREEN (5 seconds)
+           ======================== */
+        .countdown-screen {
+            position: fixed;
+            inset: 0;
+            background: radial-gradient(ellipse at center, #0f2027 0%, #0a0a15 100%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 999;
+            transition: opacity 0.5s;
+        }
+
+        .countdown-screen.hide {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .countdown-logo {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            animation: bounce 1s infinite;
+        }
+
+        @keyframes bounce {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-8px);
+            }
+        }
+
+        .countdown-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #e2e8f0;
+            margin-bottom: 5px;
+        }
+
+        .countdown-subtitle {
+            font-size: 0.8rem;
+            color: #64748b;
+            margin-bottom: 25px;
+        }
+
+        /* Circular countdown */
+        .countdown-circle-wrap {
+            position: relative;
+            width: 100px;
+            height: 100px;
+            margin-bottom: 25px;
+        }
+
+        .countdown-circle-wrap svg {
+            width: 100px;
+            height: 100px;
+            transform: rotate(-90deg);
+        }
+
+        .countdown-bg {
+            fill: none;
+            stroke: rgba(255, 255, 255, 0.08);
+            stroke-width: 4;
+        }
+
+        .countdown-progress {
+            fill: none;
+            stroke: #1d9bf0;
+            stroke-width: 4;
+            stroke-linecap: round;
+            stroke-dasharray: 283;
+            stroke-dashoffset: 0;
+            transition: stroke-dashoffset 1s linear;
+        }
+
+        .countdown-number {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            font-weight: 900;
+            color: #fff;
+        }
+
+        .countdown-message {
+            font-size: 0.85rem;
+            color: #1d9bf0;
+            font-weight: 600;
+            animation: fadeInOut 2s infinite;
+        }
+
+        @keyframes fadeInOut {
+
+            0%,
+            100% {
+                opacity: 0.5;
+            }
+
+            50% {
+                opacity: 1;
+            }
+        }
+
+        /* Ad slot inside countdown */
+        .countdown-ad-slot {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 60px;
+        }
+
+        /* Animated dots for "preparing" text */
+        .dots::after {
+            content: '';
+            animation: dots 1.5s steps(4, end) infinite;
+        }
+
+        @keyframes dots {
+            0% {
+                content: '';
+            }
+
+            25% {
+                content: '.';
+            }
+
+            50% {
+                content: '..';
+            }
+
+            75% {
+                content: '...';
+            }
+        }
+
+        /* ========================
+           MATCH INFO BAR
+           ======================== */
         .match-info-bar {
-            background: linear-gradient(135deg, #0f172a, #1a1f3a);
+            background: #0f1923;
             padding: 8px 15px;
             display: flex;
             justify-content: center;
             align-items: center;
-            gap: 15px;
-            font-size: 0.85rem;
-            border-bottom: 1px solid rgba(102, 126, 234, 0.2);
+            gap: 12px;
+            font-size: 0.82rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
             flex-shrink: 0;
         }
 
@@ -56,17 +202,17 @@
         }
 
         .match-info-bar .live-dot {
-            width: 8px;
-            height: 8px;
-            background: #ef4444;
+            width: 7px;
+            height: 7px;
+            background: #f4212e;
             border-radius: 50%;
             animation: dotPulse 2s infinite;
         }
 
         .match-info-bar .score {
             font-weight: 900;
-            color: #667eea;
-            font-size: 1rem;
+            color: #1d9bf0;
+            font-size: 0.95rem;
         }
 
         @keyframes dotPulse {
@@ -81,7 +227,9 @@
             }
         }
 
-        /* Video Player */
+        /* ========================
+           VIDEO PLAYER
+           ======================== */
         #stream-container {
             flex: 1;
             display: flex;
@@ -103,18 +251,20 @@
             border: none;
         }
 
-        /* Server Selection */
+        /* ========================
+           SERVER SELECTION
+           ======================== */
         .server-section {
-            background: linear-gradient(180deg, #0a0e1a, #0f1628);
+            background: #0f1923;
             padding: 10px 15px;
             flex-shrink: 0;
-            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
         }
 
         .server-label {
-            font-size: 0.75rem;
-            color: #64748b;
-            margin-bottom: 8px;
+            font-size: 0.72rem;
+            color: #5b7083;
+            margin-bottom: 6px;
             text-align: center;
         }
 
@@ -126,15 +276,15 @@
         }
 
         .server-btn {
-            background: rgba(102, 126, 234, 0.1);
-            border: 1px solid rgba(102, 126, 234, 0.2);
-            color: #94a3b8;
-            padding: 8px 16px;
+            background: rgba(29, 155, 240, 0.08);
+            border: 1px solid rgba(29, 155, 240, 0.15);
+            color: #8899a6;
+            padding: 7px 14px;
             border-radius: 8px;
-            font-size: 0.8rem;
+            font-size: 0.78rem;
             font-weight: 700;
             cursor: pointer;
-            transition: all 0.3s;
+            transition: all 0.2s;
             font-family: inherit;
             display: flex;
             align-items: center;
@@ -142,32 +292,33 @@
         }
 
         .server-btn:hover {
-            background: rgba(102, 126, 234, 0.2);
+            background: rgba(29, 155, 240, 0.15);
             color: #e2e8f0;
         }
 
         .server-btn.active {
-            background: linear-gradient(135deg, #667eea, #764ba2);
+            background: #1d9bf0;
             color: #fff;
             border-color: transparent;
-            box-shadow: 0 2px 10px rgba(102, 126, 234, 0.3);
         }
 
         .server-quality {
-            font-size: 0.6rem;
-            background: rgba(255, 255, 255, 0.15);
+            font-size: 0.58rem;
+            background: rgba(255, 255, 255, 0.12);
             padding: 1px 5px;
             border-radius: 3px;
         }
 
         .server-btn.active .server-quality {
-            background: rgba(255, 255, 255, 0.25);
+            background: rgba(255, 255, 255, 0.2);
         }
 
-        /* Bottom Controls */
+        /* ========================
+           BOTTOM CONTROLS
+           ======================== */
         .watch-controls {
-            background: #0a0e1a;
-            padding: 8px 15px;
+            background: #0a0e15;
+            padding: 7px 12px;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -176,33 +327,33 @@
         }
 
         .ctrl-btn {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            color: #94a3b8;
-            padding: 6px 14px;
-            border-radius: 8px;
-            font-size: 0.75rem;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            color: #8899a6;
+            padding: 5px 12px;
+            border-radius: 6px;
+            font-size: 0.72rem;
             cursor: pointer;
             transition: all 0.2s;
             font-family: inherit;
             display: inline-flex;
             align-items: center;
-            gap: 5px;
+            gap: 4px;
         }
 
         .ctrl-btn:hover {
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.08);
             color: #fff;
         }
 
         .watch-social {
             display: flex;
-            gap: 6px;
+            gap: 8px;
         }
 
         .watch-social a {
-            color: #64748b;
-            font-size: 0.7rem;
+            color: #5b7083;
+            font-size: 0.68rem;
             text-decoration: none;
             display: flex;
             align-items: center;
@@ -211,7 +362,7 @@
         }
 
         .watch-social a:hover {
-            color: #94a3b8;
+            color: #8899a6;
         }
 
         /* Ad Banner */
@@ -219,7 +370,7 @@
             background: transparent;
             display: flex;
             justify-content: center;
-            padding: 5px;
+            padding: 4px;
             flex-shrink: 0;
         }
 
@@ -238,14 +389,14 @@
         .error-screen h2 {
             color: #fff;
             margin-bottom: 15px;
-            font-size: 1.1rem;
+            font-size: 1rem;
         }
 
         .error-screen a {
-            color: #667eea;
+            color: #1d9bf0;
             font-weight: bold;
             text-decoration: none;
-            font-size: 1rem;
+            font-size: 0.95rem;
         }
     </style>
 
@@ -261,6 +412,31 @@
 </head>
 
 <body>
+
+    <!-- 5-Second Countdown Screen -->
+    <div class="countdown-screen" id="countdown-screen">
+        <div class="countdown-logo">⚽</div>
+        <div class="countdown-title" id="cd-title">جاري تحضير البث المباشر</div>
+        <div class="countdown-subtitle" id="cd-teams">...</div>
+
+        <div class="countdown-circle-wrap">
+            <svg viewBox="0 0 100 100">
+                <circle class="countdown-bg" cx="50" cy="50" r="45" />
+                <circle class="countdown-progress" id="cd-progress" cx="50" cy="50" r="45" />
+            </svg>
+            <div class="countdown-number" id="cd-number">5</div>
+        </div>
+
+        <div class="countdown-message">
+            <span class="dots">جاري تحضير سيرفرات البث</span>
+        </div>
+
+        <!-- Ad slot during countdown -->
+        <div class="countdown-ad-slot" id="countdown-ad">
+            <!-- Ad will be placed here -->
+        </div>
+    </div>
+
     <!-- Match Info Bar -->
     <div class="match-info-bar" id="match-info-bar">
         <span class="live-dot" id="live-indicator" style="display:none"></span>
@@ -280,9 +456,7 @@
     <!-- Server Selection -->
     <div class="server-section" id="server-section">
         <div class="server-label">اختر السيرفر:</div>
-        <div class="server-grid" id="server-grid">
-            <!-- Populated by JS -->
-        </div>
+        <div class="server-grid" id="server-grid"></div>
     </div>
 
     <!-- Ad Banner Slot (Adsterra) -->
@@ -319,6 +493,40 @@
             }
         }
 
+        // ============ COUNTDOWN ============
+        function startCountdown(onDone) {
+            const screen = document.getElementById('countdown-screen');
+            const numberEl = document.getElementById('cd-number');
+            const progressEl = document.getElementById('cd-progress');
+
+            // Circle circumference = 2 * PI * r = 2 * 3.14159 * 45 ≈ 283
+            const circumference = 283;
+            let remaining = 5;
+
+            function tick() {
+                if (remaining <= 0) {
+                    // Fade out the countdown screen
+                    screen.classList.add('hide');
+                    setTimeout(() => {
+                        screen.style.display = 'none';
+                        if (onDone) onDone();
+                    }, 500);
+                    return;
+                }
+
+                numberEl.textContent = remaining;
+                // Progress: how much of the circle to fill
+                const progress = ((5 - remaining) / 5) * circumference;
+                progressEl.style.strokeDashoffset = circumference - progress;
+
+                remaining--;
+                setTimeout(tick, 1000);
+            }
+
+            tick();
+        }
+
+        // ============ SERVERS ============
         function buildServerButtons(streams) {
             const grid = document.getElementById('server-grid');
             grid.innerHTML = '';
@@ -330,7 +538,6 @@
                 btn.onclick = () => {
                     currentServerIdx = idx;
                     launchStream(stream.url);
-                    // Update active state
                     grid.querySelectorAll('.server-btn').forEach(b => b.classList.remove('active'));
                     btn.classList.add('active');
                 };
@@ -338,6 +545,7 @@
             });
         }
 
+        // ============ INIT ============
         async function init() {
             try {
                 const res = await fetch(`data/matches.json?t=${Date.now()}`, { cache: 'no-store' });
@@ -346,9 +554,12 @@
 
                 if (!currentMatch) return showError('البث المباشر انتهى أو غير متوفر');
 
+                // Update countdown teams
+                const cdTeams = document.getElementById('cd-teams');
+                cdTeams.textContent = `${currentMatch.home.name} vs ${currentMatch.away.name}`;
+
                 // Update match info bar
-                const teamsEl = document.getElementById('match-teams');
-                teamsEl.textContent = `${currentMatch.home.name} vs ${currentMatch.away.name}`;
+                document.getElementById('match-teams').textContent = `${currentMatch.home.name} vs ${currentMatch.away.name}`;
 
                 if (currentMatch.status === 'LIVE') {
                     document.getElementById('live-indicator').style.display = 'block';
@@ -361,9 +572,12 @@
                 if (currentMatch.streams && currentMatch.streams.length > 0) {
                     buildServerButtons(currentMatch.streams);
 
-                    // Launch selected or first stream
                     const idx = Math.min(currentServerIdx, currentMatch.streams.length - 1);
-                    launchStream(currentMatch.streams[idx].url);
+
+                    // Start 5-second countdown, then launch stream
+                    startCountdown(() => {
+                        launchStream(currentMatch.streams[idx].url);
+                    });
                 } else {
                     showError('لا توجد سيرفرات متاحة حالياً');
                 }
@@ -374,11 +588,14 @@
         }
 
         function launchStream(url) {
-            const frame = document.getElementById('stream');
-            frame.src = url;
+            document.getElementById('stream').src = url;
         }
 
         function showError(msg) {
+            // Remove countdown screen
+            const cd = document.getElementById('countdown-screen');
+            if (cd) cd.style.display = 'none';
+
             document.body.innerHTML = `
                 <div class="error-screen">
                     <h2>⚠️ ${msg}</h2>
