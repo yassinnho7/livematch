@@ -293,6 +293,12 @@
         /* ========================
            SERVER SELECTION
            ======================== */
+        /* Safety: hide legacy server section if it somehow reappears */
+        .server-section,
+        .server-label {
+            display: none !important;
+        }
+
         .server-section {
             background: #0f1923;
             padding: 10px 15px;
