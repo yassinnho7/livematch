@@ -1,48 +1,7 @@
 {
-  "generated_at": "2026-02-13T20:36:36.755Z",
+  "generated_at": "2026-02-13T21:12:26.896Z",
   "count": 10,
   "matches": [
-    {
-      "id": 564762445,
-      "date": "2026-02-13T19:00:00.000Z",
-      "timestamp": 1771009200,
-      "status": "LIVE",
-      "time": "19:00",
-      "time_label": "19:00 GMT",
-      "league": {
-        "name": "المغرب, الدوري المغربي",
-        "country": "Morocco",
-        "logo": "https://cdn-icons-png.flaticon.com/512/1378/1378598.png"
-      },
-      "home": {
-        "name": "الرجاء البيضاوي",
-        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/01/8204.png"
-      },
-      "away": {
-        "name": "اتحاد يعقوب المنصور",
-        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/02/82477.png"
-      },
-      "score": null,
-      "streams": [
-        {
-          "id": "stream_arryadia_564762445",
-          "source": "livekora",
-          "quality": "HD",
-          "channel": "arryadia",
-          "url": "https://pl.koooralive.click/albaplayer/arryadia",
-          "priority": 1
-        },
-        {
-          "id": "stream_siiir_564762445",
-          "source": "siiir",
-          "quality": "VIP",
-          "channel": "VIP Server",
-          "url": "https://eyj0exaioijkv1qilcjhbgcioijiuzi1nij99sss.yallashot.us/playerv2.php?match=match2&key=c0ae1abba6eebd7e6cc5b88b1d2B71547",
-          "priority": 2
-        }
-      ],
-      "poster_url": "/posters/564762445.jpg"
-    },
     {
       "id": 891342034,
       "date": "2026-02-13T19:30:00.000Z",
@@ -395,6 +354,47 @@
         }
       ],
       "poster_url": "/posters/925169562.jpg"
+    },
+    {
+      "id": 564762445,
+      "date": "2026-02-13T19:00:00.000Z",
+      "timestamp": 1771009200,
+      "status": "FT",
+      "time": "19:00",
+      "time_label": "19:00 GMT",
+      "league": {
+        "name": "المغرب, الدوري المغربي",
+        "country": "Morocco",
+        "logo": "https://cdn-icons-png.flaticon.com/512/1378/1378598.png"
+      },
+      "home": {
+        "name": "الرجاء البيضاوي",
+        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/01/8204.png"
+      },
+      "away": {
+        "name": "اتحاد يعقوب المنصور",
+        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/02/82477.png"
+      },
+      "score": null,
+      "streams": [
+        {
+          "id": "stream_arryadia_564762445",
+          "source": "livekora",
+          "quality": "HD",
+          "channel": "arryadia",
+          "url": "https://pl.koooralive.click/albaplayer/arryadia",
+          "priority": 1
+        },
+        {
+          "id": "stream_siiir_564762445",
+          "source": "siiir",
+          "quality": "VIP",
+          "channel": "VIP Server",
+          "url": "https://eyj0exaioijkv1qilcjhbgcioijiuzi1nij99sss.yallashot.us/playerv2.php?match=match2&key=c0ae1abba6eebd7e6cc5b88b1d2B71547",
+          "priority": 2
+        }
+      ],
+      "poster_url": "/posters/564762445.jpg"
     }
   ]
 }
