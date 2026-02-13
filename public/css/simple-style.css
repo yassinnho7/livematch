@@ -365,19 +365,21 @@ body {
     align-items: center;
     gap: 10px;
     min-width: 0;
+    width: 100%;
+    /* Take full cell width */
     position: relative;
     z-index: 2;
 }
 
 .team:first-child {
     justify-content: flex-end;
-    /* In RTL, End = Left (Towards center) */
+    /* Push to center (left) in RTL */
     text-align: right;
 }
 
 .team:last-child {
     justify-content: flex-start;
-    /* In RTL, Start = Right (Towards center) */
+    /* Push to center (right) in RTL */
     text-align: left;
 }
 
@@ -395,7 +397,8 @@ body {
     overflow: hidden;
     text-overflow: ellipsis;
     color: var(--text-primary);
-    max-width: 140px;
+    max-width: 150px;
+    /* More space for names */
 }
 
 /* Center Section */
