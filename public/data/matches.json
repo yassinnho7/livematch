@@ -1,89 +1,7 @@
 {
-  "generated_at": "2026-02-13T19:15:07.019Z",
+  "generated_at": "2026-02-13T19:59:12.698Z",
   "count": 10,
   "matches": [
-    {
-      "id": 1380025090,
-      "date": "2026-02-13T17:30:00.000Z",
-      "timestamp": 1771003800,
-      "status": "LIVE",
-      "time": "17:30",
-      "time_label": "17:30 GMT",
-      "league": {
-        "name": "السعودية, الدوري السعودي",
-        "country": "Saudi Arabia",
-        "logo": "https://a.espncdn.com/combiner/i?img=/i/leaguelogos/soccer/500/3007.png&h=40&w=40"
-      },
-      "home": {
-        "name": "الاتحاد",
-        "logo": "https://l.yacinetv.info/wp-content/uploads/2026/01/8593.png"
-      },
-      "away": {
-        "name": "الفيحاء",
-        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/01/20733.png"
-      },
-      "score": null,
-      "streams": [
-        {
-          "id": "stream_thmanya1_1380025090",
-          "source": "livekora",
-          "quality": "HD",
-          "channel": "thmanya1",
-          "url": "https://pl.koooralive.click/albaplayer/thmanya1",
-          "priority": 1
-        },
-        {
-          "id": "stream_siiir_1380025090",
-          "source": "siiir",
-          "quality": "VIP",
-          "channel": "VIP Server",
-          "url": "https://eyj0exaioijkv1qilcjhbgcioijiuzi1nij99sss.yallashot.us/playerv2.php?match=match7&key=c0ae1abba6eebd7e6cc5b88b1d2B71547",
-          "priority": 2
-        }
-      ],
-      "poster_url": "/posters/1380025090.jpg"
-    },
-    {
-      "id": 925169562,
-      "date": "2026-02-13T18:00:00.000Z",
-      "timestamp": 1771005600,
-      "status": "LIVE",
-      "time": "18:00",
-      "time_label": "18:00 GMT",
-      "league": {
-        "name": "فرنسا, الدوري الفرنسي",
-        "country": "France",
-        "logo": "https://a.espncdn.com/combiner/i?img=/i/leaguelogos/soccer/500/9.png&h=40&w=40"
-      },
-      "home": {
-        "name": "ستاد رين",
-        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/01/477.png"
-      },
-      "away": {
-        "name": "باريس سان جيرمان",
-        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/01/480.png"
-      },
-      "score": null,
-      "streams": [
-        {
-          "id": "stream_bein1_925169562",
-          "source": "livekora",
-          "quality": "HD",
-          "channel": "bein1",
-          "url": "https://pl.koooralive.click/albaplayer/bein1",
-          "priority": 1
-        },
-        {
-          "id": "stream_siiir_925169562",
-          "source": "siiir",
-          "quality": "VIP",
-          "channel": "VIP Server",
-          "url": "https://eyj0exaioijkv1qilcjhbgcioijiuzi1nij99sss.yallashot.us/playerv2.php?match=match1&key=c0ae1abba6eebd7e6cc5b88b1d2B71547",
-          "priority": 2
-        }
-      ],
-      "poster_url": "/posters/925169562.jpg"
-    },
     {
       "id": 564762445,
       "date": "2026-02-13T19:00:00.000Z",
@@ -119,7 +37,7 @@
           "source": "siiir",
           "quality": "VIP",
           "channel": "VIP Server",
-          "url": "https://eyj0exaioijkv1qilcjhbgcioijiuzi1nij99sss.yallashot.us/playerv2.php?match=match7&key=c0ae1abba6eebd7e6cc5b88b1d2B71547",
+          "url": "https://eyj0exaioijkv1qilcjhbgcioijiuzi1nij99sss.yallashot.us/playerv2.php?match=match2&key=c0ae1abba6eebd7e6cc5b88b1d2B71547",
           "priority": 2
         }
       ],
@@ -129,7 +47,7 @@
       "id": 891342034,
       "date": "2026-02-13T19:30:00.000Z",
       "timestamp": 1771011000,
-      "status": "NS",
+      "status": "LIVE",
       "time": "19:30",
       "time_label": "19:30 GMT",
       "league": {
@@ -170,7 +88,7 @@
       "id": 200748882,
       "date": "2026-02-13T19:45:00.000Z",
       "timestamp": 1771011900,
-      "status": "NS",
+      "status": "LIVE",
       "time": "19:45",
       "time_label": "19:45 GMT",
       "league": {
@@ -201,7 +119,7 @@
           "source": "siiir",
           "quality": "VIP",
           "channel": "VIP Server",
-          "url": "https://eyj0exaioijkv1qilcjhbgcioijiuzi1nij99sss.yallashot.us/playerv2.php?match=match81&key=c0ae1abba6eebd7e6cc5b88b1d2B71547",
+          "url": "https://eyj0exaioijkv1qilcjhbgcioijiuzi1nij99sss.yallashot.us/playerv2.php?match=match8&key=c0ae1abba6eebd7e6cc5b88b1d2B71547",
           "priority": 2
         }
       ],
@@ -211,7 +129,7 @@
       "id": 1784689974,
       "date": "2026-02-13T19:45:00.000Z",
       "timestamp": 1771011900,
-      "status": "NS",
+      "status": "LIVE",
       "time": "19:45",
       "time_label": "19:45 GMT",
       "league": {
@@ -395,6 +313,88 @@
         }
       ],
       "poster_url": "/posters/1708609937.jpg"
+    },
+    {
+      "id": 1380025090,
+      "date": "2026-02-13T17:30:00.000Z",
+      "timestamp": 1771003800,
+      "status": "FT",
+      "time": "17:30",
+      "time_label": "17:30 GMT",
+      "league": {
+        "name": "السعودية, الدوري السعودي",
+        "country": "Saudi Arabia",
+        "logo": "https://a.espncdn.com/combiner/i?img=/i/leaguelogos/soccer/500/3007.png&h=40&w=40"
+      },
+      "home": {
+        "name": "الاتحاد",
+        "logo": "https://l.yacinetv.info/wp-content/uploads/2026/01/8593.png"
+      },
+      "away": {
+        "name": "الفيحاء",
+        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/01/20733.png"
+      },
+      "score": null,
+      "streams": [
+        {
+          "id": "stream_thmanya1_1380025090",
+          "source": "livekora",
+          "quality": "HD",
+          "channel": "thmanya1",
+          "url": "https://pl.koooralive.click/albaplayer/thmanya1",
+          "priority": 1
+        },
+        {
+          "id": "stream_siiir_1380025090",
+          "source": "siiir",
+          "quality": "VIP",
+          "channel": "VIP Server",
+          "url": "https://eyj0exaioijkv1qilcjhbgcioijiuzi1nij99sss.yallashot.us/playerv2.php?match=match2&key=c0ae1abba6eebd7e6cc5b88b1d2B71547",
+          "priority": 2
+        }
+      ],
+      "poster_url": "/posters/1380025090.jpg"
+    },
+    {
+      "id": 925169562,
+      "date": "2026-02-13T18:00:00.000Z",
+      "timestamp": 1771005600,
+      "status": "LIVE",
+      "time": "18:00",
+      "time_label": "18:00 GMT",
+      "league": {
+        "name": "فرنسا, الدوري الفرنسي",
+        "country": "France",
+        "logo": "https://a.espncdn.com/combiner/i?img=/i/leaguelogos/soccer/500/9.png&h=40&w=40"
+      },
+      "home": {
+        "name": "ستاد رين",
+        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/01/477.png"
+      },
+      "away": {
+        "name": "باريس سان جيرمان",
+        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/01/480.png"
+      },
+      "score": null,
+      "streams": [
+        {
+          "id": "stream_bein1_925169562",
+          "source": "livekora",
+          "quality": "HD",
+          "channel": "bein1",
+          "url": "https://pl.koooralive.click/albaplayer/bein1",
+          "priority": 1
+        },
+        {
+          "id": "stream_siiir_925169562",
+          "source": "siiir",
+          "quality": "VIP",
+          "channel": "VIP Server",
+          "url": "https://eyj0exaioijkv1qilcjhbgcioijiuzi1nij99sss.yallashot.us/playerv2.php?match=match1&key=c0ae1abba6eebd7e6cc5b88b1d2B71547",
+          "priority": 2
+        }
+      ],
+      "poster_url": "/posters/925169562.jpg"
     }
   ]
 }
