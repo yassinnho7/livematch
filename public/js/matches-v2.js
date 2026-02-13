@@ -1,35 +1,89 @@
 /**
- * LiveMatch - Matches Loader v2.1 (With Error Boundaries & Skeleton Loading)
+ * LiveMatch - Matches Loader v3.0
+ * Features: Viewer counter, countdown timers, hover overlay, live scores
  */
 
-// Show skeleton loading state
+// ============ VIEWER COUNTER ============
+function initViewerCounter() {
+    const counterEl = document.getElementById('viewer-count');
+    if (!counterEl) return;
+
+    // Start with a realistic base number
+    let baseCount = 1200 + Math.floor(Math.random() * 800);
+    counterEl.textContent = baseCount.toLocaleString();
+
+    // Fluctuate every 3-5 seconds
+    setInterval(() => {
+        const change = Math.floor(Math.random() * 40) - 15; // -15 to +25
+        baseCount = Math.max(800, baseCount + change);
+        counterEl.textContent = baseCount.toLocaleString();
+    }, 3000 + Math.random() * 2000);
+}
+
+// ============ DATE DISPLAY ============
+function setCurrentDate() {
+    const dateEl = document.getElementById('current-date');
+    if (!dateEl) return;
+    const now = new Date();
+    dateEl.textContent = now.toLocaleDateString('ar-EG', {
+        weekday: 'long',
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric'
+    });
+}
+
+// ============ COUNTDOWN TIMERS ============
+const countdownIntervals = [];
+
+function startCountdowns() {
+    // Clear previous intervals
+    countdownIntervals.forEach(id => clearInterval(id));
+    countdownIntervals.length = 0;
+
+    document.querySelectorAll('.match-countdown[data-timestamp]').forEach(el => {
+        const timestamp = parseInt(el.dataset.timestamp) * 1000;
+
+        function updateCountdown() {
+            const now = Date.now();
+            const diff = timestamp - now;
+
+            if (diff <= 0) {
+                el.textContent = '🔴 بدأت';
+                el.style.color = '#f87171';
+                return;
+            }
+
+            const hours = Math.floor(diff / 3600000);
+            const minutes = Math.floor((diff % 3600000) / 60000);
+            const seconds = Math.floor((diff % 60000) / 1000);
+
+            if (hours > 0) {
+                el.textContent = `⏱ ${hours}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+            } else {
+                el.textContent = `⏱ ${minutes}:${String(seconds).padStart(2, '0')}`;
+            }
+        }
+
+        updateCountdown();
+        const id = setInterval(updateCountdown, 1000);
+        countdownIntervals.push(id);
+    });
+}
+
+// ============ SKELETON LOADING ============
 function showSkeletonLoaders() {
     const container = document.getElementById('matches-container');
     container.innerHTML = '';
 
-    // Create 4 skeleton cards
-    for (let i = 0; i < 4; i++) {
+    for (let i = 0; i < 5; i++) {
         const skeleton = document.createElement('div');
-        skeleton.className = 'match-row skeleton-card';
-        skeleton.innerHTML = `
-            <div class="team">
-                <div class="skeleton skeleton-text"></div>
-                <div class="skeleton skeleton-logo"></div>
-            </div>
-            <div class="match-center">
-                <div class="skeleton skeleton-time"></div>
-                <div class="skeleton skeleton-vs"></div>
-            </div>
-            <div class="team">
-                <div class="skeleton skeleton-logo"></div>
-                <div class="skeleton skeleton-text"></div>
-            </div>
-        `;
+        skeleton.className = 'match-card skeleton-card skeleton';
         container.appendChild(skeleton);
     }
 }
 
-// Show user-friendly error message
+// ============ ERROR DISPLAY ============
 function showError(message, isRetryable = true) {
     const container = document.getElementById('matches-container');
     container.innerHTML = `
@@ -39,38 +93,41 @@ function showError(message, isRetryable = true) {
             ${isRetryable ? '<button class="retry-btn" onclick="loadMatches()">🔄 إعادة المحاولة</button>' : ''}
         </div>
     `;
+}
 
-    // Track error event
-    if (window.trackEvent) {
-        trackEvent('matches_load_error', { message: message });
+// ============ LIVE BADGE ============
+function updateLiveBadge(matches) {
+    const badge = document.getElementById('live-badge');
+    if (!badge) return;
+
+    const hasLive = matches.some(m => m.status === 'LIVE');
+    if (hasLive) {
+        badge.classList.add('active');
+    } else {
+        badge.classList.remove('active');
     }
 }
 
-// Load and display matches with comprehensive error handling
+// ============ LOAD MATCHES ============
 async function loadMatches() {
     const container = document.getElementById('matches-container');
 
     try {
-        // Show skeleton while loading
         showSkeletonLoaders();
 
-        // Fetch with timeout (10 seconds max)
         const controller = new AbortController();
         const timeoutId = setTimeout(() => controller.abort(), 10000);
 
-        // Cache-busting with timestamp to bypass ANY browser/ISP cache
         const response = await fetch(`data/matches.json?t=${Date.now()}`, {
             signal: controller.signal,
             cache: 'no-store'
         });
         clearTimeout(timeoutId);
 
-        // Check HTTP status
         if (!response.ok) {
             throw new Error(`HTTP ${response.status}: ${response.statusText}`);
         }
 
-        // Parse JSON safely
         let data;
         try {
             data = await response.json();
@@ -78,12 +135,7 @@ async function loadMatches() {
             throw new Error('البيانات غير صالحة');
         }
 
-        // Validate data structure
-        if (!data || typeof data !== 'object') {
-            throw new Error('تنسيق البيانات غير صحيح');
-        }
-
-        if (!data.matches || !Array.isArray(data.matches)) {
+        if (!data || !data.matches || !Array.isArray(data.matches)) {
             throw new Error('لا توجد قائمة مباريات');
         }
 
@@ -98,25 +150,33 @@ async function loadMatches() {
             return;
         }
 
-        // Render matches
+        // Sort: LIVE first, then NS by time, then FT
+        const sorted = [...data.matches].sort((a, b) => {
+            const order = { 'LIVE': 0, 'NS': 1, 'FT': 2 };
+            const oa = order[a.status] ?? 1;
+            const ob = order[b.status] ?? 1;
+            if (oa !== ob) return oa - ob;
+            return (a.timestamp || 0) - (b.timestamp || 0);
+        });
+
+        // Update live badge
+        updateLiveBadge(sorted);
+
+        // Render
         container.innerHTML = '';
-        data.matches.forEach(match => {
+        sorted.forEach(match => {
             try {
                 const card = createMatchCard(match);
                 container.appendChild(card);
-            } catch (cardError) {
+            } catch (e) {
                 // Silent fail for individual cards
             }
         });
 
-        // Track successful load
-        if (window.trackEvent) {
-            trackEvent('matches_loaded', { count: data.matches.length });
-        }
+        // Start countdowns
+        startCountdowns();
 
     } catch (error) {
-
-        // Determine error type and show appropriate message
         if (error.name === 'AbortError') {
             showError('انتهت مهلة الاتصال - تحقق من الإنترنت');
         } else if (error.message.includes('Failed to fetch') || error.message.includes('NetworkError')) {
@@ -131,74 +191,119 @@ async function loadMatches() {
     }
 }
 
+// ============ CREATE MATCH CARD ============
 function createMatchCard(match) {
-    // Validate required fields
     if (!match || !match.id || !match.home || !match.away) {
         throw new Error('Missing required match data');
     }
 
     const card = document.createElement('a');
-    card.className = 'match-row';
-    card.href = `article.html?match=${match.id}`;
+    card.className = 'match-card';
 
-    // Time with fallback
+    // Direct link to watch page (first available stream)
+    if (match.streams && match.streams.length > 0) {
+        card.href = `watch.html?match=${match.id}&server=0`;
+    } else {
+        card.href = `article.html?match=${match.id}`;
+    }
+
+    // Check if live
+    if (match.status === 'LIVE') {
+        card.classList.add('is-live');
+    }
+
+    // Time
     let timeString = match.time_label || '';
     if (!timeString && match.timestamp) {
         try {
             const matchDate = new Date(match.timestamp * 1000);
-            const formattedTime = matchDate.toLocaleTimeString('en-GB', {
-                hour: '2-digit',
-                minute: '2-digit',
-                timeZone: 'UTC',
-                hour12: false
-            });
-            timeString = `${formattedTime} GMT`;
+            timeString = matchDate.toLocaleTimeString('en-GB', {
+                hour: '2-digit', minute: '2-digit', timeZone: 'UTC', hour12: false
+            }) + ' GMT';
         } catch (e) {
             timeString = '--:--';
         }
     }
 
-    // Status with safe defaults
-    let statusText = 'لم تبدأ';
-    let statusClass = 'status-upcoming';
+    // Status
+    let statusHTML = '';
+    let scoreHTML = '';
+    let countdownHTML = '';
+
     if (match.status === 'LIVE') {
-        statusText = '🔴 مباشر';
-        statusClass = 'status-live';
+        statusHTML = '<span class="match-status-badge status-live">🔴 مباشر</span>';
+        if (match.score) {
+            scoreHTML = `<div class="match-score">${match.score}</div>`;
+        }
     } else if (match.status === 'FT') {
-        statusText = 'انتهت';
-        statusClass = 'status-finished';
+        statusHTML = '<span class="match-status-badge status-finished">انتهت</span>';
+        if (match.score) {
+            scoreHTML = `<div class="match-score">${match.score}</div>`;
+        }
+    } else {
+        statusHTML = '<span class="match-status-badge status-upcoming">لم تبدأ</span>';
+        if (match.timestamp) {
+            countdownHTML = `<div class="match-countdown" data-timestamp="${match.timestamp}">⏱ --:--</div>`;
+        }
     }
 
-    // Safe team names and logos
+    // Team info
     const homeName = match.home.name || 'فريق 1';
     const awayName = match.away.name || 'فريق 2';
-    const fallbackLogo = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32'%3E%3Crect fill='%23333' width='32' height='32'/%3E%3C/svg%3E";
+    const fallbackLogo = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='36' height='36'%3E%3Ccircle cx='18' cy='18' r='18' fill='%231e293b'/%3E%3C/svg%3E";
     const homeLogo = match.home.logo || fallbackLogo;
     const awayLogo = match.away.logo || fallbackLogo;
 
+    // Channel & commentator meta
+    let metaHTML = '';
+    const metaParts = [];
+    if (match.channel) {
+        metaParts.push(`<span>📺 ${match.channel}</span>`);
+    }
+    if (match.commentator) {
+        metaParts.push(`<span>🎙️ ${match.commentator}</span>`);
+    }
+    if (match.league && match.league.name) {
+        metaParts.push(`<span>🏆 ${match.league.name}</span>`);
+    }
+    if (metaParts.length > 0) {
+        metaHTML = `<div class="match-meta">${metaParts.join('')}</div>`;
+    }
+
     card.innerHTML = `
+        <div class="play-overlay">
+            <div class="play-icon">
+                <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+            </div>
+        </div>
+
         <div class="team">
             <span class="team-name">${homeName}</span>
-            <img src="${homeLogo}" alt="${homeName}" width="35" height="35" class="team-logo" loading="lazy" onerror="this.src='${fallbackLogo}'">
+            <img src="${homeLogo}" alt="${homeName}" width="36" height="36" class="team-logo" loading="lazy" onerror="this.src='${fallbackLogo}'">
         </div>
         
         <div class="match-center">
             <div class="match-time">${timeString}</div>
-            <div class="vs">VS</div>
-            <div class="match-status ${statusClass}">${statusText}</div>
+            ${scoreHTML}
+            ${statusHTML}
+            ${countdownHTML}
         </div>
         
         <div class="team">
-            <img src="${awayLogo}" alt="${awayName}" width="35" height="35" class="team-logo" loading="lazy" onerror="this.src='${fallbackLogo}'">
+            <img src="${awayLogo}" alt="${awayName}" width="36" height="36" class="team-logo" loading="lazy" onerror="this.src='${fallbackLogo}'">
             <span class="team-name">${awayName}</span>
         </div>
+
+        ${metaHTML}
     `;
 
     return card;
 }
 
-// Load matches on page load
+// ============ INIT ============
+initViewerCounter();
+setCurrentDate();
 loadMatches();
 
-// Refresh every minute
+// Refresh every 60 seconds
 setInterval(loadMatches, 60000);
