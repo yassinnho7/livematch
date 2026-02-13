@@ -437,11 +437,11 @@
         </div>
     </div>
 
-    <!-- Match Info Bar -->
+    <!-- Match Info Bar (Now Header with Servers) -->
     <div class="match-info-bar" id="match-info-bar">
-        <span class="live-dot" id="live-indicator" style="display:none"></span>
-        <span class="teams" id="match-teams">جاري التحميل...</span>
-        <span class="score" id="match-score"></span>
+        <div class="server-grid" id="server-grid">
+            <!-- Server buttons will be here -->
+        </div>
     </div>
 
     <!-- Video Player -->
@@ -453,12 +453,6 @@
         </div>
     </div>
 
-    <!-- Server Selection -->
-    <div class="server-section" id="server-section">
-        <div class="server-label">اختر السيرفر:</div>
-        <div class="server-grid" id="server-grid"></div>
-    </div>
-
     <!-- Ad Banner Slot (Adsterra) -->
     <div class="watch-ad-banner" id="watch-ad">
         <!-- Adsterra banner will be placed here -->
@@ -468,7 +462,7 @@
     <div class="watch-controls">
         <div>
             <button onclick="window.location.href='/'" class="ctrl-btn">🏠 الرئيسية</button>
-            <button onclick="toggleFullscreen()" class="ctrl-btn">⛶ ملء الشاشة</button>
+            <button id="fullscreen-btn" onclick="toggleFullscreen()" class="ctrl-btn">⛶ ملء الشاشة</button>
         </div>
         <div class="watch-social">
             <a href="https://t.me/YOUR_CHANNEL" target="_blank">📱 تيليجرام</a>
@@ -483,13 +477,32 @@
         let currentMatch = null;
         let currentServerIdx = selectedServerIdx;
 
-        function toggleFullscreen() {
+        async function toggleFullscreen() {
             const el = document.querySelector('.video-player-frame');
             if (!document.fullscreenElement) {
-                if (el.requestFullscreen) el.requestFullscreen();
-                else if (el.webkitRequestFullscreen) el.webkitRequestFullscreen();
+                try {
+                    if (el.requestFullscreen) {
+                        await el.requestFullscreen();
+                    } else if (el.webkitRequestFullscreen) {
+                        await el.webkitRequestFullscreen();
+                    }
+
+                    // Attempt to lock landscape on mobile
+                    if (screen.orientation && screen.orientation.lock) {
+                        await screen.orientation.lock('landscape').catch(() => { });
+                    }
+                } catch (err) {
+                    console.error('Fullscreen error:', err);
+                }
             } else {
-                if (document.exitFullscreen) document.exitFullscreen();
+                if (document.exitFullscreen) {
+                    document.exitFullscreen();
+                }
+
+                // Unlock orientation
+                if (screen.orientation && screen.orientation.unlock) {
+                    screen.orientation.unlock();
+                }
             }
         }
 
@@ -499,13 +512,11 @@
             const numberEl = document.getElementById('cd-number');
             const progressEl = document.getElementById('cd-progress');
 
-            // Circle circumference = 2 * PI * r = 2 * 3.14159 * 45 ≈ 283
             const circumference = 283;
             let remaining = 5;
 
             function tick() {
                 if (remaining <= 0) {
-                    // Fade out the countdown screen
                     screen.classList.add('hide');
                     setTimeout(() => {
                         screen.style.display = 'none';
@@ -515,7 +526,6 @@
                 }
 
                 numberEl.textContent = remaining;
-                // Progress: how much of the circle to fill
                 const progress = ((5 - remaining) / 5) * circumference;
                 progressEl.style.strokeDashoffset = circumference - progress;
 
@@ -534,7 +544,8 @@
             streams.forEach((stream, idx) => {
                 const btn = document.createElement('button');
                 btn.className = 'server-btn' + (idx === currentServerIdx ? ' active' : '');
-                btn.innerHTML = `سيرفر ${idx + 1} <span class="server-quality">${stream.quality || 'SD'}</span>`;
+                // Simplified labels: just Server 1, Server 2...
+                btn.innerHTML = `سيرفر ${idx + 1}`;
                 btn.onclick = () => {
                     currentServerIdx = idx;
                     launchStream(stream.url);
@@ -554,27 +565,14 @@
 
                 if (!currentMatch) return showError('البث المباشر انتهى أو غير متوفر');
 
-                // Update countdown teams
                 const cdTeams = document.getElementById('cd-teams');
                 cdTeams.textContent = `${currentMatch.home.name} vs ${currentMatch.away.name}`;
 
-                // Update match info bar
-                document.getElementById('match-teams').textContent = `${currentMatch.home.name} vs ${currentMatch.away.name}`;
-
-                if (currentMatch.status === 'LIVE') {
-                    document.getElementById('live-indicator').style.display = 'block';
-                    if (currentMatch.score) {
-                        document.getElementById('match-score').textContent = currentMatch.score;
-                    }
-                }
-
-                // Build server buttons
                 if (currentMatch.streams && currentMatch.streams.length > 0) {
                     buildServerButtons(currentMatch.streams);
 
                     const idx = Math.min(currentServerIdx, currentMatch.streams.length - 1);
 
-                    // Start 5-second countdown, then launch stream
                     startCountdown(() => {
                         launchStream(currentMatch.streams[idx].url);
                     });
@@ -592,7 +590,6 @@
         }
 
         function showError(msg) {
-            // Remove countdown screen
             const cd = document.getElementById('countdown-screen');
             if (cd) cd.style.display = 'none';
 

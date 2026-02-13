@@ -103,8 +103,7 @@
             </div>
             <div class="header-actions">
                 <div class="viewer-counter" id="viewer-counter">
-                    <span class="viewer-dot"></span>
-                    <span id="viewer-count">0</span> يشاهدون الآن
+                    <span id="viewer-count">0</span>
                 </div>
                 <button class="theme-toggle" id="theme-toggle" onclick="toggleTheme()" title="تبديل الوضع">
                     <span class="theme-icon" id="theme-icon">☀️</span>
@@ -135,15 +134,15 @@
                 </div>
             </section>
 
-            <!-- News Section -->
-            <section class="news-section">
-                <div class="section-header">
-                    <h2 class="section-title">📰 أحدث الأخبار الرياضية</h2>
-                </div>
-                <div id="news-container" class="news-grid">
-                    <div class="loading">جاري تحميل الأخبار...</div>
-                </div>
-            </section>
+            <!-- Link to News Page -->
+            <div style="text-align: center; margin: 20px 0 40px;">
+                <a href="news.html" class="news-link-btn">
+                    📰 تصفح أخر الأخبار الرياضية
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" style="vertical-align: middle;">
+                        <path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z" />
+                    </svg>
+                </a>
+            </div>
         </main>
 
     </div>
@@ -197,7 +196,6 @@
     <!-- Core Scripts -->
     <script src="js/config.js"></script>
     <script src="js/matches-v2.js?v=3000" defer></script>
-    <script src="js/news-loader.js" defer></script>
 </body>
 
 </html>

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" data-theme="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>أحدث الأخبار الرياضية - مباريات اليوم</title>
+
+    <!-- Preload critical assets -->
+    <link rel="preload" href="assets/fonts/Cairo-Bold.ttf" as="font" type="font/ttf" crossorigin>
+
+    <!-- Full CSS -->
+    <link rel="stylesheet" href="css/simple-style.css?v=3001">
+
+    <style>
+        body {
+            font-family: 'Cairo', system-ui, sans-serif;
+            transition: background 0.3s, color 0.3s;
+        }
+
+        .news-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .back-btn {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            padding: 8px 15px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: all 0.2s;
+        }
+
+        .back-btn:hover {
+            background: var(--bg-card-hover);
+            border-color: var(--accent);
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header class="site-header">
+        <div class="container header-inner">
+            <div class="header-brand">
+                <a href="/" style="text-decoration: none; color: inherit;">
+                    <h1>⚽ مباريات اليوم</h1>
+                </a>
+            </div>
+            <div class="header-actions">
+                <button class="theme-toggle" id="theme-toggle" onclick="toggleTheme()" title="تبديل الوضع">
+                    <span class="theme-icon" id="theme-icon">☀️</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <div class="container" style="margin-top: 25px;">
+
+        <div class="news-header">
+            <a href="/" class="back-btn">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M15.41 16.59L10.83 12l4.58-4.59L14 6l-6 6 6 6 1.41-1.41z" />
+                </svg>
+                الرئيسية
+            </a>
+            <h2 class="section-title">📰 أحدث الأخبار الرياضية</h2>
+        </div>
+
+        <main>
+            <div id="news-container" class="news-grid">
+                <div class="loading">جاري تحميل الأخبار...</div>
+            </div>
+        </main>
+
+    </div>
+
+    <!-- Smart Footer -->
+    <footer class="site-footer">
+        <div class="container footer-inner">
+            <div class="footer-social">
+                <a href="https://t.me/YOUR_CHANNEL" target="_blank" rel="noopener"
+                    class="social-btn telegram-btn">تابعنا على تيليجرام</a>
+                <a href="https://facebook.com/YOUR_PAGE" target="_blank" rel="noopener"
+                    class="social-btn facebook-btn">تابعنا على فيسبوك</a>
+            </div>
+            <div class="footer-copy">© 2026 مباريات اليوم - بث مباشر</div>
+        </div>
+    </footer>
+
+    <!-- Theme Toggle Script -->
+    <script>
+        function toggleTheme() {
+            const html = document.documentElement;
+            const current = html.getAttribute('data-theme');
+            const next = current === 'dark' ? 'light' : 'dark';
+            html.setAttribute('data-theme', next);
+            localStorage.setItem('theme', next);
+            document.getElementById('theme-icon').textContent = next === 'dark' ? '☀️' : '🌙';
+        }
+        (function () {
+            const saved = localStorage.getItem('theme');
+            if (saved) {
+                document.documentElement.setAttribute('data-theme', saved);
+                const icon = document.getElementById('theme-icon');
+                if (icon) icon.textContent = saved === 'dark' ? '☀️' : '🌙';
+            }
+        })();
+    </script>
+
+    <script src="js/news-loader.js" defer></script>
+</body>
+
+</html>

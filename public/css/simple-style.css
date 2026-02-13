@@ -783,28 +783,41 @@ body {
     }
 
     .header-brand h1 {
-        font-size: 0.95rem;
+        font-size: 0.9rem;
+    }
+
+    .header-actions {
+        gap: 6px;
     }
 
     .viewer-counter {
-        font-size: 0.68rem;
-        padding: 4px 9px;
+        font-size: 0.75rem;
+        padding: 4px 8px;
     }
 
     .match-card {
-        padding: 10px 8px;
-        gap: 5px;
-        grid-template-columns: 1fr 80px 1fr;
+        padding: 12px 8px;
+        gap: 4px;
+        grid-template-columns: 1fr 90px 1fr;
+    }
+
+    .team {
+        gap: 4px;
     }
 
     .team-logo {
-        width: 26px;
-        height: 26px;
+        width: 28px;
+        height: 28px;
     }
 
     .team-name {
-        font-size: 0.72rem;
-        max-width: 85px;
+        font-size: 0.75rem;
+        max-width: 90px;
+    }
+
+    .match-center {
+        min-width: 85px;
+        gap: 3px;
     }
 
     .match-time {
@@ -812,61 +825,60 @@ body {
     }
 
     .match-score {
-        font-size: 0.95rem;
+        font-size: 1rem;
     }
 
-    .match-countdown {
+    .match-status-badge {
         font-size: 0.58rem;
+        padding: 2px 5px;
+        margin-top: 4px;
+        /* Space between time/score and badge */
     }
 
     .match-meta {
-        gap: 6px;
+        gap: 5px;
         flex-wrap: wrap;
-        justify-content: center;
+        padding-top: 8px;
     }
 
     .match-meta span {
-        font-size: 0.58rem;
+        font-size: 0.6rem;
     }
 
     .play-overlay .play-icon {
-        width: 36px;
-        height: 36px;
-    }
-
-    .play-icon svg {
-        width: 14px;
-        height: 14px;
-    }
-
-    .section-title {
-        font-size: 0.95rem;
+        width: 38px;
+        height: 38px;
     }
 
     .news-grid {
-        grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-        gap: 8px;
-    }
-
-    .social-btn {
-        padding: 7px 12px;
-        font-size: 0.72rem;
-    }
-
-    .footer-social {
-        gap: 8px;
-    }
-
-    .ad-slot-header {
-        transform: scale(0.65);
-        transform-origin: center center;
-        margin-top: -10px;
-        margin-bottom: -10px;
+        grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+        gap: 10px;
     }
 
     .theme-toggle {
         width: 32px;
         height: 32px;
-        font-size: 0.85rem;
     }
+}
+
+/* News Link Button (Homepage) */
+.news-link-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
+    padding: 12px 24px;
+    border-radius: 12px;
+    text-decoration: none;
+    font-weight: 700;
+    transition: all 0.3s;
+}
+
+.news-link-btn:hover {
+    background: var(--bg-card-hover);
+    border-color: var(--accent);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px var(--shadow);
 }
