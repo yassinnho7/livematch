@@ -270,13 +270,12 @@ body {
 .match-card {
     background: var(--bg-card);
     border-radius: 12px;
-    padding: 14px 10px;
+    padding: 14px 12px;
     display: grid;
-    grid-template-columns: 1fr 80px 1fr;
-    /* Smaller center */
+    grid-template-columns: 1fr 90px 1fr;
+    /* Fixed center width for stability */
     align-items: center;
-    gap: 0;
-    /* Minimized gap */
+    gap: 8px;
     transition: all 0.25s ease;
     cursor: pointer;
     text-decoration: none;
@@ -284,8 +283,8 @@ body {
     border: 1px solid var(--border-color);
     position: relative;
     overflow: hidden;
-    max-width: 440px;
-    /* Even tighter */
+    max-width: 460px;
+    /* Optimal reading width */
     margin: 0 auto;
     width: 100%;
 }
@@ -372,15 +371,19 @@ body {
 }
 
 .team:first-child {
-    justify-content: flex-end;
-    /* Push to center (left) in RTL */
-    text-align: right;
+    justify-content: flex-start;
+    /* In RTL, this is the RIGHT side (pushes to center-left) */
+    text-align: left;
+    flex-direction: row;
+    /* Ensure logo-text order is correct */
 }
 
 .team:last-child {
-    justify-content: flex-start;
-    /* Push to center (right) in RTL */
-    text-align: left;
+    justify-content: flex-end;
+    /* In RTL, this is the LEFT side (pushes to center-right) */
+    text-align: right;
+    flex-direction: row-reverse;
+    /* Flip logo-text order for the other team */
 }
 
 .team-logo {
@@ -397,8 +400,8 @@ body {
     overflow: hidden;
     text-overflow: ellipsis;
     color: var(--text-primary);
-    max-width: 150px;
-    /* More space for names */
+    max-width: 110px;
+    /* Balanced width */
 }
 
 /* Center Section */

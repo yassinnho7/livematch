@@ -605,12 +605,13 @@
         // ============ SERVERS ============
         function buildServerButtons(streams) {
             const grid = document.getElementById('server-grid');
-            grid.innerHTML = '';
+            if (!grid) return;
+            grid.innerHTML = ''; // Essential clear
 
             streams.forEach((stream, idx) => {
                 const btn = document.createElement('button');
                 btn.className = 'server-btn' + (idx === currentServerIdx ? ' active' : '');
-                // Simplified labels: just Server 1, Server 2...
+                // USER ONLY WANTS NUMBERS: Server 1, Server 2...
                 btn.innerHTML = `سيرفر ${idx + 1}`;
                 btn.onclick = () => {
                     currentServerIdx = idx;
