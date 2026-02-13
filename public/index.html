@@ -206,7 +206,6 @@
             font-weight: 700;
             animation: pulse 2s infinite
         }
-
     </style>
 
     <!-- Full CSS loaded non-blocking -->
@@ -241,6 +240,15 @@
     <meta name="theme-color" content="#667eea">
     <link rel="apple-touch-icon" href="/icons/icon-192x192.png">
     <link rel="canonical" href="https://livematch-991.pages.dev/">
+
+    <!-- Adexium In-page Script -->
+    <script type="text/javascript" src="https://cdn.atechp.space/assets/js/inp.min.js"></script>
+    <script type="text/javascript">
+        document.addEventListener('DOMContentLoaded', () => {
+            const adexiumInpage = new AdexiumInpageWidget({ wid: 'ee8ca344-81f7-468e-aec8-4b35fca66433' });
+            adexiumInpage.autoMode();
+        });
+    </script>
 </head>
 
 <body>
