@@ -1,40 +1,7 @@
 {
-  "generated_at": "2026-02-13T21:56:21.100Z",
+  "generated_at": "2026-02-13T22:26:42.837Z",
   "count": 10,
   "matches": [
-    {
-      "id": 159300702,
-      "date": "2026-02-13T20:05:00.000Z",
-      "timestamp": 1771013100,
-      "status": "LIVE",
-      "time": "20:05",
-      "time_label": "20:05 GMT",
-      "league": {
-        "name": "فرنسا, الدوري الفرنسي",
-        "country": "France",
-        "logo": "https://a.espncdn.com/combiner/i?img=/i/leaguelogos/soccer/500/9.png&h=40&w=40"
-      },
-      "home": {
-        "name": "موناكو",
-        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/01/471.png"
-      },
-      "away": {
-        "name": "نانت",
-        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/02/486.png"
-      },
-      "score": null,
-      "streams": [
-        {
-          "id": "stream_bein4_159300702",
-          "source": "livekora",
-          "quality": "HD",
-          "channel": "bein4",
-          "url": "https://pl.koooralive.click/albaplayer/bein4",
-          "priority": 1
-        }
-      ],
-      "poster_url": "/posters/159300702.jpg"
-    },
     {
       "id": 221719642,
       "date": "2026-02-13T13:00:00.000Z",
@@ -97,14 +64,6 @@
           "channel": "thmanya1",
           "url": "https://pl.koooralive.click/albaplayer/thmanya1",
           "priority": 1
-        },
-        {
-          "id": "stream_siiir_1479106921",
-          "source": "siiir",
-          "quality": "VIP",
-          "channel": "VIP Server",
-          "url": "https://eyj0exaioijkv1qilcjhbgcioijiuzi1nij99sss.yallashot.us/playerv2.php?match=match7&key=c0ae1abba6eebd7e6cc5b88b1d2B71547",
-          "priority": 2
         }
       ],
       "poster_url": "/posters/1479106921.jpg"
@@ -138,14 +97,6 @@
           "channel": "thmanya2",
           "url": "https://pl.koooralive.click/albaplayer/thmanya2",
           "priority": 1
-        },
-        {
-          "id": "stream_siiir_1708609937",
-          "source": "siiir",
-          "quality": "VIP",
-          "channel": "VIP Server",
-          "url": "https://eyj0exaioijkv1qilcjhbgcioijiuzi1nij99sss.yallashot.us/playerv2.php?match=match8&key=c0ae1abba6eebd7e6cc5b88b1d2B71547",
-          "priority": 2
         }
       ],
       "poster_url": "/posters/1708609937.jpg"
@@ -179,14 +130,6 @@
           "channel": "thmanya1",
           "url": "https://pl.koooralive.click/albaplayer/thmanya1",
           "priority": 1
-        },
-        {
-          "id": "stream_siiir_1380025090",
-          "source": "siiir",
-          "quality": "VIP",
-          "channel": "VIP Server",
-          "url": "https://eyj0exaioijkv1qilcjhbgcioijiuzi1nij99sss.yallashot.us/playerv2.php?match=match7&key=c0ae1abba6eebd7e6cc5b88b1d2B71547",
-          "priority": 2
         }
       ],
       "poster_url": "/posters/1380025090.jpg"
@@ -220,14 +163,6 @@
           "channel": "bein1",
           "url": "https://pl.koooralive.click/albaplayer/bein1",
           "priority": 1
-        },
-        {
-          "id": "stream_siiir_925169562",
-          "source": "siiir",
-          "quality": "VIP",
-          "channel": "VIP Server",
-          "url": "https://eyj0exaioijkv1qilcjhbgcioijiuzi1nij99sss.yallashot.us/playerv2.php?match=match1&key=c0ae1abba6eebd7e6cc5b88b1d2B71547",
-          "priority": 2
         }
       ],
       "poster_url": "/posters/925169562.jpg"
@@ -261,14 +196,6 @@
           "channel": "arryadia",
           "url": "https://pl.koooralive.click/albaplayer/arryadia",
           "priority": 1
-        },
-        {
-          "id": "stream_siiir_564762445",
-          "source": "siiir",
-          "quality": "VIP",
-          "channel": "VIP Server",
-          "url": "https://eyj0exaioijkv1qilcjhbgcioijiuzi1nij99sss.yallashot.us/playerv2.php?match=match7&key=c0ae1abba6eebd7e6cc5b88b1d2B71547",
-          "priority": 2
         }
       ],
       "poster_url": "/posters/564762445.jpg"
@@ -302,14 +229,6 @@
           "channel": "ch1",
           "url": "https://pl.koooralive.click/albaplayer/ch1",
           "priority": 1
-        },
-        {
-          "id": "stream_siiir_891342034",
-          "source": "siiir",
-          "quality": "VIP",
-          "channel": "VIP Server",
-          "url": "https://eyj0exaioijkv1qilcjhbgcioijiuzi1nij99sss.yallashot.us/playerv2.php?match=match5&key=c0ae1abba6eebd7e6cc5b88b1d2B71547",
-          "priority": 2
         }
       ],
       "poster_url": "/posters/891342034.jpg"
@@ -343,14 +262,6 @@
           "channel": "ad-premium-1",
           "url": "https://pl.koooralive.click/albaplayer/ad-premium-1",
           "priority": 1
-        },
-        {
-          "id": "stream_siiir_200748882",
-          "source": "siiir",
-          "quality": "VIP",
-          "channel": "VIP Server",
-          "url": "https://eyj0exaioijkv1qilcjhbgcioijiuzi1nij99sss.yallashot.us/playerv2.php?match=match8&key=c0ae1abba6eebd7e6cc5b88b1d2B71547",
-          "priority": 2
         }
       ],
       "poster_url": "/posters/200748882.jpg"
@@ -384,17 +295,42 @@
           "channel": "bein3",
           "url": "https://pl.koooralive.click/albaplayer/bein3",
           "priority": 1
-        },
-        {
-          "id": "stream_siiir_1784689974",
-          "source": "siiir",
-          "quality": "VIP",
-          "channel": "VIP Server",
-          "url": "https://eyj0exaioijkv1qilcjhbgcioijiuzi1nij99sss.yallashot.us/playerv2.php?match=match2&key=c0ae1abba6eebd7e6cc5b88b1d2B71547",
-          "priority": 2
         }
       ],
       "poster_url": "/posters/1784689974.jpg"
+    },
+    {
+      "id": 159300702,
+      "date": "2026-02-13T20:05:00.000Z",
+      "timestamp": 1771013100,
+      "status": "FT",
+      "time": "20:05",
+      "time_label": "20:05 GMT",
+      "league": {
+        "name": "فرنسا, الدوري الفرنسي",
+        "country": "France",
+        "logo": "https://a.espncdn.com/combiner/i?img=/i/leaguelogos/soccer/500/9.png&h=40&w=40"
+      },
+      "home": {
+        "name": "موناكو",
+        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/01/471.png"
+      },
+      "away": {
+        "name": "نانت",
+        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/02/486.png"
+      },
+      "score": null,
+      "streams": [
+        {
+          "id": "stream_bein4_159300702",
+          "source": "livekora",
+          "quality": "HD",
+          "channel": "bein4",
+          "url": "https://pl.koooralive.click/albaplayer/bein4",
+          "priority": 1
+        }
+      ],
+      "poster_url": "/posters/159300702.jpg"
     }
   ]
 }
