@@ -1,12 +1,12 @@
 {
-  "generated_at": "2026-02-13T12:02:47.652Z",
+  "generated_at": "2026-02-13T13:20:46.758Z",
   "count": 10,
   "matches": [
     {
       "id": 221719642,
       "date": "2026-02-13T13:00:00.000Z",
       "timestamp": 1770987600,
-      "status": "NS",
+      "status": "LIVE",
       "time": "13:00",
       "time_label": "13:00 GMT",
       "league": {
