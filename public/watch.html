@@ -6,12 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>بث مباشر</title>
     <link rel="preload" href="assets/fonts/Cairo-Bold.ttf" as="font" type="font/ttf" crossorigin>
-    <meta name="profiton-domain-verification"
-        content="55e62f09d2ade93c563113203fe7c5f4889c6cd2a4683d78977cf174b1f97fc1" />
 
-    <!-- Analytics & Config -->
     <script src="/js/config.js"></script>
-    <script src="/js/analytics.js"></script>
 
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
     <meta http-equiv="Pragma" content="no-cache">
@@ -22,56 +18,6 @@
 </head>
 
 <body>
-    <!-- Waiting Layer -->
-    <div id="monetization-layer" class="monetization-layer">
-        <div class="monetization-content">
-            <h2 style="margin-bottom: 20px; font-size: 1.2rem;">جاري تجهيز البث المباشر...</h2>
-            <div class="countdown-circle">
-                <svg width="100" height="100">
-                    <circle cx="50" cy="50" r="45" class="countdown-bg"></circle>
-                    <circle cx="50" cy="50" r="45" class="countdown-progress" id="countdown-progress"></circle>
-                </svg>
-                <div class="countdown-number" id="countdown">5</div>
-            </div>
-
-            <!-- Ad 320x50 -->
-            <div class="ad-box">
-                <script>
-                    atOptions = {
-                        'key': '167755cfce2e606f5c26037ed81a359a',
-                        'format': 'iframe',
-                        'height': 50,
-                        'width': 320,
-                        'params': {}
-                    };
-                </script>
-                <script src="https://www.highperformanceformat.com/167755cfce2e606f5c26037ed81a359a/invoke.js"></script>
-            </div>
-        </div>
-    </div>
-
-    <!-- Choice Layer -->
-    <div id="choice-layer" class="monetization-layer" style="display: none;">
-        <div class="monetization-content">
-            <h2>اختر سيرفر المشاهدة</h2>
-            <div class="choice-cards" id="server-cards-container"></div>
-
-            <!-- Ad 300x250 -->
-            <div class="ad-box">
-                <script>
-                    atOptions = {
-                        'key': '2895cfc4a233371917690acdf46458f6',
-                        'format': 'iframe',
-                        'height': 250,
-                        'width': 300,
-                        'params': {}
-                    };
-                </script>
-                <script src="https://www.highperformanceformat.com/2895cfc4a233371917690acdf46458f6/invoke.js"></script>
-            </div>
-        </div>
-    </div>
-
     <!-- Main Player Layout -->
     <div id="stream-container">
         <!-- Video takes mostly all space -->
@@ -80,13 +26,12 @@
                 allow="autoplay; encrypted-media; fullscreen; picture-in-picture"
                 sandbox="allow-scripts allow-same-origin allow-forms allow-presentation"></iframe>
         </div>
-
     </div>
 
     <!-- Compact Bottom Controls -->
     <div class="watch-controls-center">
         <div class="control-card">
-            <button onclick="goBackWithAd()" class="control-btn">
+            <button onclick="window.location.href='/'" class="control-btn">
                 <span class="icon">🏠</span>
                 <span>الرئيسية</span>
             </button>
@@ -101,13 +46,7 @@
         const urlParams = new URLSearchParams(window.location.search);
         const matchId = urlParams.get('match');
         const selectedServerIdx = urlParams.get('server');
-        let currentMatch = null, countdown = MONETIZATION_CONFIG.countdown?.duration || 5, streamUrl = '';
-
-        function goBackWithAd() {
-            const adUrl = MONETIZATION_CONFIG.externalUrls?.homeBackAd || 'https://otieu.com/4/10557734';
-            window.open(adUrl, '_blank');
-            window.location.href = '/';
-        }
+        let currentMatch = null;
 
         // Toggle Fullscreen for the Wrapper
         function toggleFullscreen() {
@@ -125,69 +64,33 @@
                 const res = await fetch(`data/matches.json?t=${Date.now()}`, { cache: 'no-store' });
                 const data = await res.json();
                 currentMatch = data.matches.find(m => m.id == matchId);
+
                 if (!currentMatch) return showError('البث المباشر انتهى أو غير متوفر');
 
-                renderServers();
-
                 if (selectedServerIdx !== null && currentMatch.streams[selectedServerIdx]) {
-                    document.querySelector('#monetization-layer h2').textContent = 'تحميل السيرفر المختار...';
-                    streamUrl = currentMatch.streams[selectedServerIdx].url;
+                    launchStream(currentMatch.streams[selectedServerIdx].url);
+                } else {
+                    showError('لم يتم اختيار سيرفر صالح');
                 }
-                startCountdown();
             } catch (e) { showError('خطأ في الاتصال بالخادم'); }
         }
 
-        function startCountdown() {
-            const el = document.getElementById('countdown'), progress = document.getElementById('countdown-progress');
-            const circ = 2 * Math.PI * 45; // r=45
-            if (progress) progress.style.strokeDashoffset = 0;
-
-            const timer = setInterval(() => {
-                countdown--;
-                if (el) el.textContent = countdown;
-                if (progress) progress.style.strokeDashoffset = circ - (countdown / 5) * circ;
-
-                if (countdown <= 0) {
-                    clearInterval(timer);
-                    if (streamUrl) launchStream(streamUrl);
-                    else {
-                        document.getElementById('monetization-layer').style.display = 'none';
-                        document.getElementById('choice-layer').style.display = 'flex';
-                    }
-                }
-            }, 1000);
-        }
-
         function launchStream(url) {
-            document.getElementById('monetization-layer').style.display = 'none';
-            document.getElementById('choice-layer').style.display = 'none';
             const cont = document.getElementById('stream-container');
             const frame = document.getElementById('stream');
-
             cont.style.display = 'flex';
             frame.src = url;
         }
 
-        function renderServers() {
-            const container = document.getElementById('server-cards-container');
-            container.innerHTML = '';
-            const activeStreams = currentMatch.streams.filter(s => s.url && s.url.length > 5);
-            activeStreams.forEach((stream, idx) => {
-                const card = document.createElement('div');
-                card.className = 'choice-card';
-                card.innerHTML = `<div style="font-size: 20px;">${stream.source === 'siiir' ? '⚡' : '📺'}</div><h4 style="font-size:14px; margin:5px 0;">سيرفر ${idx + 1}</h4>`;
-                card.onclick = () => launchStream(stream.url);
-                container.appendChild(card);
-            });
-        }
-
         function showError(msg) {
-            document.getElementById('monetization-layer').innerHTML = `<div class="monetization-content"><h2>⚠️ ${msg}</h2><a href="/" style="color:#667eea;display:block;margin-top:20px;font-weight:bold;text-decoration:none;">العودة للرئيسية</a></div>`;
+            document.body.innerHTML = `<div style="display:flex; flex-direction:column; align-items:center; justify-content:center; height:100dvh; background:#000; text-align:center;">
+                <h2 style="color:#fff; margin-bottom:20px;">⚠️ ${msg}</h2>
+                <a href="/" style="color:#667eea; font-weight:bold; text-decoration:none; font-size:1.2rem;">العودة للرئيسية</a>
+            </div>`;
         }
 
         init();
     </script>
-    <script src="/js/ad-block-check.js" defer></script>
 </body>
 
 </html>

@@ -9,27 +9,6 @@ const MONETIZATION_CONFIG = {
     api: {
         matchesJsonUrl: 'data/matches.json',
         updateInterval: 60000
-    },
-
-    // هويات الإعلانات (Jubna فقط)
-    adIds: {
-        jubnaWidgetId: '56519092199ee075f04726d7379da522'
-    },
-
-    // إعدادات التحليلات
-    analytics: {
-        gaId: 'G-YEKSYGPND9',
-        enabled: true
-    },
-
-    // إعدادات العداد
-    countdown: {
-        duration: 5
-    },
-
-    // الروابط الخارجية (Redirects & Ads)
-    externalUrls: {
-        homeBackAd: 'https://otieu.com/4/10557734'
     }
 };
 

@@ -207,60 +207,6 @@
             animation: pulse 2s infinite
         }
 
-        .ad-container-frame {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            width: 100%;
-            overflow: hidden;
-            margin-bottom: 20px;
-            background: transparent
-        }
-
-        .ad-slot-header {
-            width: 470px;
-            height: 60px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-shrink: 0
-        }
-
-        @media(max-width:600px) {
-            .header {
-                flex-direction: column;
-                text-align: center;
-                gap: 10px
-            }
-
-            .match-row {
-                padding: 12px 10px;
-                gap: 8px;
-                grid-template-columns: 1fr 80px 1fr
-            }
-
-            .team-logo {
-                width: 30px;
-                height: 30px
-            }
-
-            .team-name {
-                font-size: .85rem
-            }
-
-            .match-time {
-                font-size: .9rem
-            }
-        }
-
-        @media(max-width:500px) {
-            .ad-slot-header {
-                transform: scale(.65);
-                transform-origin: center center;
-                margin-top: -10px;
-                margin-bottom: -10px
-            }
-        }
     </style>
 
     <!-- Full CSS loaded non-blocking -->
@@ -299,10 +245,6 @@
 
 <body>
     <div class="container">
-        <!-- Header Ad 468x60 (deferred) -->
-        <div class="ad-container-frame">
-            <div class="ad-slot-header" id="ad-header-slot"></div>
-        </div>
 
         <!-- Header -->
         <header class="header">
@@ -312,10 +254,6 @@
 
         <!-- Main Content Landmark for Accessibility -->
         <main>
-            <!-- Jubna Banner (deferred) -->
-            <div class="ad-banner" style="margin-bottom: 20px;">
-                <div class="JC-WIDGET-DMROOT" data-widget-id="56519092199ee075f04726d7379da522"></div>
-            </div>
 
             <!-- Matches Container -->
             <div id="matches-container" class="matches-container">
@@ -329,89 +267,12 @@
             </div>
         </main>
 
-        <!-- Sidebar/Footer Ad 300x250 (deferred) -->
-        <div class="ad-slot-body" id="ad-footer-slot" style="text-align: center; margin-top: 25px;"></div>
     </div>
 
-    <!-- Config inlined to eliminate last render-blocking request -->
-    <script>
-        var MONETIZATION_CONFIG = { api: { matchesJsonUrl: 'data/matches.json', updateInterval: 60000 }, adIds: { jubnaWidgetId: '56519092199ee075f04726d7379da522' }, analytics: { gaId: 'G-YEKSYGPND9', enabled: true }, countdown: { duration: 5 }, externalUrls: { homeBackAd: 'https://otieu.com/4/10557734' } }; if (typeof window !== 'undefined') { window.MONETIZATION_CONFIG = MONETIZATION_CONFIG; }
-    </script>
-
-    <!-- Core app scripts (defer for non-blocking) -->
+    <!-- Core app scripts -->
     <script src="js/matches-v2.js?v=9999" defer></script>
     <script src="js/news-loader.js" defer></script>
     <script src="js/pwa-install.js" defer></script>
-    <script src="js/ad-block-check.js" defer></script>
-
-    <!-- Analytics & Ads: Load AFTER page is interactive (2s delay) -->
-    <script>
-        // Delay non-critical 3rd party scripts to improve FCP/LCP
-        var _deferLoaded = false;
-        function loadDeferredScripts() {
-            if (_deferLoaded) return;
-            _deferLoaded = true;
-            // Analytics
-            var a = document.createElement('script');
-            a.src = 'js/analytics.js';
-            a.defer = true;
-            document.body.appendChild(a);
-
-            // Adsterra SocialBar
-            var s1 = document.createElement('script');
-            s1.src = 'https://pl28582110.effectivegatecpm.com/bf/db/5e/bfdb5e4549c4611a6c774636cc09cc3f.js';
-            s1.async = true;
-            s1.onerror = function () { /* Suppress 3rd party errors */ };
-            document.body.appendChild(s1);
-
-            // Header Ad (Highperformance)
-            var slot = document.getElementById('ad-header-slot');
-            if (slot) {
-                window.atOptions = {
-                    'key': '15d1ca482efd28581d78b70b9bb40556',
-                    'format': 'iframe',
-                    'height': 60,
-                    'width': 468,
-                    'params': {}
-                };
-                var s2 = document.createElement('script');
-                s2.src = 'https://www.highperformanceformat.com/15d1ca482efd28581d78b70b9bb40556/invoke.js';
-                s2.async = true;
-                s2.onerror = function () { /* Suppress 3rd party errors */ };
-                slot.appendChild(s2);
-            }
-
-            // Jubna Widget
-            var s3 = document.createElement('script');
-            s3.src = 'https://static.jubnaadserve.com/api/widget.js';
-            s3.async = true;
-            s3.onerror = function () { /* Suppress 3rd party errors */ };
-            document.body.appendChild(s3);
-
-            // Footer Ad (funny-blind)
-            var adFooter = document.getElementById('ad-footer-slot');
-            if (adFooter) {
-                var s4 = document.createElement('script');
-                s4.src = '//funny-blind.com/b.XIVms/drGplR0MYMWkcg/We_mg9RuPZDURlSkwPaTLYE3bOETrIy1ZO/TycLtGN/jqcW5dMRjdYPwEMxQT';
-                s4.async = true;
-                s4.referrerPolicy = 'no-referrer-when-downgrade';
-                s4.onerror = function () { /* Suppress 3rd party errors */ };
-                adFooter.appendChild(s4);
-            }
-        }
-
-        // Load after 2 seconds or user interaction (whichever comes first)
-        var _deferTimer = setTimeout(loadDeferredScripts, 2000);
-        ['scroll', 'mousemove', 'touchstart', 'keydown'].forEach(function (evt) {
-            window.addEventListener(evt, function _handler() {
-                clearTimeout(_deferTimer);
-                loadDeferredScripts();
-                ['scroll', 'mousemove', 'touchstart', 'keydown'].forEach(function (e) {
-                    window.removeEventListener(e, _handler);
-                });
-            }, { once: true, passive: true });
-        });
-    </script>
 </body>
 
 </html>

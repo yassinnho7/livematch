@@ -7,8 +7,6 @@
     <title id="page-title">مباراة اليوم - بث مباشر</title>
     <link rel="preload" href="assets/fonts/Cairo-Bold.ttf" as="font" type="font/ttf" crossorigin>
     <link rel="stylesheet" href="css/simple-style.css?v=9999">
-    <meta name="profiton-domain-verification"
-        content="55e62f09d2ade93c563113203fe7c5f4889c6cd2a4683d78977cf174b1f97fc1" />
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Expires" content="0">
@@ -286,21 +284,6 @@
 
 <body>
     <div class="container">
-        <!-- Header Ad 468x60 -->
-        <div class="ad-container-frame">
-            <div class="ad-slot-header">
-                <script>
-                    atOptions = {
-                        'key': '15d1ca482efd28581d78b70b9bb40556',
-                        'format': 'iframe',
-                        'height': 60,
-                        'width': 468,
-                        'params': {}
-                    };
-                </script>
-                <script src="https://www.highperformanceformat.com/15d1ca482efd28581d78b70b9bb40556/invoke.js"></script>
-            </div>
-        </div>
 
         <!-- Header -->
         <header class="header">
@@ -338,183 +321,163 @@
                 <!-- Content injected here -->
             </div>
 
-            <!-- Content Ad 300x250 -->
-            <div class="ad-slot-body" style="text-align: center; margin-top: 30px;">
-                <!-- New Onclicka Ad Banner -->
-                <script async src="https://js.onclckmn.com/static/onclicka.js" data-admpid="424939"></script>
+            <div class="watch-button-container">
+                <h3 style="margin-bottom: 20px; color: #fff;">⚡ اختر سيرفر المشاهدة لبدء البث المباشر</h3>
 
-                <!-- Old Adterra Ad (Disabled)
-                <script>
-                    atOptions = {
-                        'key': '2895cfc4a233371917690acdf46458f6',
-                        'format': 'iframe',
-                        'height': 250,
-                        'width': 300,
-                        'params': {}
-                    };
-                </script>
-                <script src="https://www.highperformanceformat.com/2895cfc4a233371917690acdf46458f6/invoke.js"></script>
-                -->
-                <div class="watch-button-container">
-                    <h3 style="margin-bottom: 20px; color: #fff;">⚡ اختر سيرفر المشاهدة لبدء البث المباشر</h3>
-
-                    <div id="server-selection-area" class="server-grid">
-                        <!-- Servers injected here -->
-                    </div>
+                <div id="server-selection-area" class="server-grid">
+                    <!-- Servers injected here -->
                 </div>
-
-                <div class="ad-banner" style="margin-top: 30px;">
-                    <div class="JC-WIDGET-DMROOT" data-widget-id="56519092199ee075f04726d7379da522"></div>
-                </div>
-
-                <section class="related-section">
-                    <h2 class="section-title">🗞️ مقالات قد تهمك</h2>
-                    <div id="related-news" class="news-grid">
-                        <!-- Related News injected by news-loader.js -->
-                    </div>
-                </section>
             </div>
+
+
+            <section class="related-section">
+                <h2 class="section-title">🗞️ مقالات قد تهمك</h2>
+                <div id="related-news" class="news-grid">
+                    <!-- Related News injected by news-loader.js -->
+                </div>
+            </section>
         </div>
+    </div>
 
-        <!-- Watch Button Floating -->
-        <a id="floating-btn" href="#server-selection-area" class="floating-watch-btn">
-            <span>⚡ شاهد الان</span>
-        </a>
+    <!-- Watch Button Floating -->
+    <a id="floating-btn" href="#server-selection-area" class="floating-watch-btn">
+        <span>⚡ شاهد الان</span>
+    </a>
 
-        <script src="js/news-loader.js" defer></script>
-        <script>
-            const urlParams = new URLSearchParams(window.location.search);
-            const matchId = urlParams.get('match');
-            const newsId = urlParams.get('news');
+    <script src="js/news-loader.js" defer></script>
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const matchId = urlParams.get('match');
+        const newsId = urlParams.get('news');
 
-            async function loadArticle() {
-                if (!matchId && !newsId) {
-                    window.location.href = '/';
-                    return;
-                }
+        async function loadArticle() {
+            if (!matchId && !newsId) {
+                window.location.href = '/';
+                return;
+            }
 
-                try {
-                    const loadingView = document.getElementById('loading-view');
-                    const articleView = document.getElementById('article-view');
-                    const articleTitle = document.getElementById('article-title'); // Wait, ID is different in HTML
-                    const articleContentEl = document.getElementById('article-content');
+            try {
+                const loadingView = document.getElementById('loading-view');
+                const articleView = document.getElementById('article-view');
+                const articleTitle = document.getElementById('article-title'); // Wait, ID is different in HTML
+                const articleContentEl = document.getElementById('article-content');
 
-                    // 1. Fetch JSON Content
-                    let dataUrl = matchId ? `/data/articles/${matchId}.json?t=${Date.now()}` : `/data/news/${newsId}.json?t=${Date.now()}`;
-                    const response = await fetch(dataUrl, { cache: 'no-store' });
-                    if (!response.ok) throw new Error('المحتوى غير متوفر حالياً');
-                    const data = await response.json();
+                // 1. Fetch JSON Content
+                let dataUrl = matchId ? `/data/articles/${matchId}.json?t=${Date.now()}` : `/data/news/${newsId}.json?t=${Date.now()}`;
+                const response = await fetch(dataUrl, { cache: 'no-store' });
+                if (!response.ok) throw new Error('المحتوى غير متوفر حالياً');
+                const data = await response.json();
 
-                    // 2. Hide loading, show article
-                    loadingView.style.display = 'none';
-                    articleView.style.display = 'block';
+                // 2. Hide loading, show article
+                loadingView.style.display = 'none';
+                articleView.style.display = 'block';
 
-                    // 3. Inject Content
-                    // In simple-style, we might not have 'article-title' but let's check hero or body
-                    // Looking at the viewed file, it seems we use document.getElementById('article-content') for body
-                    articleContentEl.innerHTML = `<h1>${data.title}</h1>` + data.content;
+                // 3. Inject Content
+                // In simple-style, we might not have 'article-title' but let's check hero or body
+                // Looking at the viewed file, it seems we use document.getElementById('article-content') for body
+                articleContentEl.innerHTML = `<h1>${data.title}</h1>` + data.content;
 
-                    // 4. Handle Hero UI
-                    const heroBg = document.getElementById('hero-bg');
-                    if (matchId) {
-                        const mResp = await fetch(`/data/matches.json?t=${Date.now()}`, { cache: 'no-store' });
-                        const mData = await mResp.json();
-                        const match = mData.matches.find(m => m.id == matchId);
-                        if (match) {
-                            document.getElementById('home-logo').src = match.home.logo;
-                            document.getElementById('home-name').textContent = match.home.name;
-                            document.getElementById('away-logo').src = match.away.logo;
-                            document.getElementById('away-name').textContent = match.away.name;
-                            heroBg.style.backgroundImage = `url('https://raw.githubusercontent.com/yassinnho7/livematch/main/public/assets/backgrounds/stadium_night.png')`;
+                // 4. Handle Hero UI
+                const heroBg = document.getElementById('hero-bg');
+                if (matchId) {
+                    const mResp = await fetch(`/data/matches.json?t=${Date.now()}`, { cache: 'no-store' });
+                    const mData = await mResp.json();
+                    const match = mData.matches.find(m => m.id == matchId);
+                    if (match) {
+                        document.getElementById('home-logo').src = match.home.logo;
+                        document.getElementById('home-name').textContent = match.home.name;
+                        document.getElementById('away-logo').src = match.away.logo;
+                        document.getElementById('away-name').textContent = match.away.name;
+                        heroBg.style.backgroundImage = `url('https://raw.githubusercontent.com/yassinnho7/livematch/main/public/assets/backgrounds/stadium_night.png')`;
 
-                            // Inject Servers
-                            const serverArea = document.getElementById('server-selection-area');
-                            serverArea.innerHTML = ''; // Clear existing to prevent duplication
-                            const activeStreams = match.streams.filter(s => s.url && s.url.length > 5);
-                            activeStreams.forEach((stream, idx) => {
-                                const isVIP = stream.source === 'siiir' || idx === 1;
-                                const card = document.createElement('div');
-                                card.className = 'server-card';
-                                card.innerHTML = `
+                        // Inject Servers
+                        const serverArea = document.getElementById('server-selection-area');
+                        serverArea.innerHTML = ''; // Clear existing to prevent duplication
+                        const activeStreams = match.streams.filter(s => s.url && s.url.length > 5);
+                        activeStreams.forEach((stream, idx) => {
+                            const isVIP = stream.source === 'siiir' || idx === 1;
+                            const card = document.createElement('div');
+                            card.className = 'server-card';
+                            card.innerHTML = `
                                 <i>${isVIP ? '⚡' : '📺'}</i>
                                 <h4>سيرفر ${idx + 1}</h4>
                                 <span class="server-tag">${isVIP ? 'VIP High Quality' : 'Standard Quality'}</span>
                             `;
-                                card.onclick = () => {
-                                    window.location.href = `/watch.html?match=${matchId}&server=${idx}`;
-                                };
-                                serverArea.appendChild(card);
-                            });
-                        }
-                    } else {
-                        // News Hero
-                        document.querySelector('.hero-info').style.display = 'none';
-                        heroBg.style.height = '180px';
-                        heroBg.style.backgroundImage = `url('${data.poster_url || '/assets/backgrounds/stadium_night.png'}')`;
-                        document.querySelector('.watch-button-container').style.display = 'none';
-                        document.getElementById('floating-btn').style.display = 'none';
+                            card.onclick = () => {
+                                window.location.href = `/watch.html?match=${matchId}&server=${idx}`;
+                            };
+                            serverArea.appendChild(card);
+                        });
                     }
-
-                    // 5. SEO & Social
-                    const pageTitle = data.title + " | LiveMatch";
-                    const pageDesc = data.meta_description;
-                    const pageImage = matchId ? `https://raw.githubusercontent.com/yassinnho7/livematch/main/public/assets/backgrounds/stadium_night.png` : data.poster_url;
-                    const pageUrl = window.location.href;
-
-                    document.title = pageTitle;
-                    setMetaTag('name', 'description', pageDesc);
-                    setMetaTag('name', 'keywords', data.keywords.join(', '));
-
-                    // Open Graph / Twitter
-                    setMetaTag('property', 'og:title', pageTitle);
-                    setMetaTag('property', 'og:description', pageDesc);
-                    setMetaTag('property', 'og:image', pageImage);
-                    setMetaTag('property', 'og:url', pageUrl);
-                    setMetaTag('name', 'twitter:title', pageTitle);
-                    setMetaTag('name', 'twitter:image', pageImage);
-
-                    // 6. Schema.org
-                    const schemaData = {
-                        "@context": "https://schema.org",
-                        "@type": matchId ? "SportsEvent" : "NewsArticle",
-                        "headline": data.title,
-                        "description": pageDesc,
-                        "image": pageImage,
-                        "url": pageUrl
-                    };
-
-                    let script = document.getElementById('json-ld-schema');
-                    if (!script) {
-                        script = document.createElement('script');
-                        script.id = 'json-ld-schema';
-                        script.type = 'application/ld+json';
-                        document.head.appendChild(script);
-                    }
-                    script.textContent = JSON.stringify(schemaData);
-
-                } catch (err) {
-                    console.error(err);
-                    showError('حدث خطأ أثناء تحميل المحتوى');
+                } else {
+                    // News Hero
+                    document.querySelector('.hero-info').style.display = 'none';
+                    heroBg.style.height = '180px';
+                    heroBg.style.backgroundImage = `url('${data.poster_url || '/assets/backgrounds/stadium_night.png'}')`;
+                    document.querySelector('.watch-button-container').style.display = 'none';
+                    document.getElementById('floating-btn').style.display = 'none';
                 }
-            }
 
-            function setMetaTag(attr, key, val) {
-                let meta = document.querySelector(`meta[${attr}="${key}"]`);
-                if (!meta) {
-                    meta = document.createElement('meta');
-                    meta.setAttribute(attr, key);
-                    document.head.appendChild(meta);
+                // 5. SEO & Social
+                const pageTitle = data.title + " | LiveMatch";
+                const pageDesc = data.meta_description;
+                const pageImage = matchId ? `https://raw.githubusercontent.com/yassinnho7/livematch/main/public/assets/backgrounds/stadium_night.png` : data.poster_url;
+                const pageUrl = window.location.href;
+
+                document.title = pageTitle;
+                setMetaTag('name', 'description', pageDesc);
+                setMetaTag('name', 'keywords', data.keywords.join(', '));
+
+                // Open Graph / Twitter
+                setMetaTag('property', 'og:title', pageTitle);
+                setMetaTag('property', 'og:description', pageDesc);
+                setMetaTag('property', 'og:image', pageImage);
+                setMetaTag('property', 'og:url', pageUrl);
+                setMetaTag('name', 'twitter:title', pageTitle);
+                setMetaTag('name', 'twitter:image', pageImage);
+
+                // 6. Schema.org
+                const schemaData = {
+                    "@context": "https://schema.org",
+                    "@type": matchId ? "SportsEvent" : "NewsArticle",
+                    "headline": data.title,
+                    "description": pageDesc,
+                    "image": pageImage,
+                    "url": pageUrl
+                };
+
+                let script = document.getElementById('json-ld-schema');
+                if (!script) {
+                    script = document.createElement('script');
+                    script.id = 'json-ld-schema';
+                    script.type = 'application/ld+json';
+                    document.head.appendChild(script);
                 }
-                meta.content = val;
-            }
+                script.textContent = JSON.stringify(schemaData);
 
-            function showError(msg) {
-                document.getElementById('loading-view').innerHTML = `<h2 style="color:#ff4757; text-align:center;">⚠️ ${msg}</h2><a href="/" style="display:block; text-align:center; margin-top:10px; color:#667eea;">العودة للرئيسية</a>`;
+            } catch (err) {
+                console.error(err);
+                showError('حدث خطأ أثناء تحميل المحتوى');
             }
+        }
 
-            loadArticle();
-        </script>
-        <script src="js/pwa-install.js" defer></script>
+        function setMetaTag(attr, key, val) {
+            let meta = document.querySelector(`meta[${attr}="${key}"]`);
+            if (!meta) {
+                meta = document.createElement('meta');
+                meta.setAttribute(attr, key);
+                document.head.appendChild(meta);
+            }
+            meta.content = val;
+        }
+
+        function showError(msg) {
+            document.getElementById('loading-view').innerHTML = `<h2 style="color:#ff4757; text-align:center;">⚠️ ${msg}</h2><a href="/" style="display:block; text-align:center; margin-top:10px; color:#667eea;">العودة للرئيسية</a>`;
+        }
+
+        loadArticle();
+    </script>
+    <script src="js/pwa-install.js" defer></script>
 </body>
 
 </html>
