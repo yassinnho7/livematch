@@ -392,22 +392,17 @@
 
         // Go to watch page
         function goToWatch() {
-            // Get unique key for this match
-            const storageKey = 'watched_match_' + matchId;
+            // Always open omg10.com in new window first
+            window.open('https://omg10.com/4/10557734', '_blank', 'width=800,height=600,scrollbars=yes');
 
-            // Check if user already clicked once for this match
-            if (localStorage.getItem(storageKey)) {
-                // Second click: go to actual stream
+            // Then redirect to actual stream after a short delay
+            setTimeout(() => {
                 if (matchId) {
                     window.location.href = `/watch.html?match=${matchId}&server=${server}`;
                 } else {
                     window.location.href = '/watch.html';
                 }
-            } else {
-                // First click: open omg10.com in new window and store flag
-                localStorage.setItem(storageKey, 'true');
-                window.open('https://omg10.com/4/10557734', '_blank', 'width=800,height=600,scrollbars=yes');
-            }
+            }, 500);
         }
 
         // Auto-redirect after countdown if no user interaction
