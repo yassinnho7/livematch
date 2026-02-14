@@ -409,7 +409,7 @@
                                 <span class="server-tag">${isVIP ? 'VIP High Quality' : 'Standard Quality'}</span>
                             `;
                             card.onclick = () => {
-                                window.location.href = `/watch.html?match=${matchId}&server=${idx}`;
+                                window.location.href = `/server.html?match=${matchId}&server=${idx}`;
                             };
                             serverArea.appendChild(card);
                         });

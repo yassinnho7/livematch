@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" data-theme="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>جاري تحضير السيرفر</title>
+    <link rel="preload" href="assets/fonts/Cairo-Bold.ttf" as="font" type="font/ttf" crossorigin>
+
+    <script src="/js/config.js"></script>
+
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <link rel="canonical" href="https://livematch-991.pages.dev/server.html">
+
+    <style>
+        @font-face {
+            font-family: 'Cairo';
+            src: url('assets/fonts/Cairo-Bold.ttf') format('truetype');
+            font-weight: 700;
+            font-display: swap;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Cairo', system-ui, sans-serif;
+            background: #000;
+            color: #fff;
+            height: 100dvh;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        /* Countdown Screen */
+        .countdown-screen {
+            position: fixed;
+            inset: 0;
+            background: radial-gradient(ellipse at center, #0f2027 0%, #0a0a15 100%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 999;
+            transition: opacity 0.5s;
+        }
+
+        .countdown-screen.hide {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .countdown-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #e2e8f0;
+            margin-bottom: 5px;
+            margin-top: 20px;
+        }
+
+        .countdown-subtitle {
+            font-size: 0.8rem;
+            color: #64748b;
+            margin-bottom: 25px;
+            display: none;
+        }
+
+        .countdown-circle-wrap {
+            position: relative;
+            width: 120px;
+            height: 120px;
+            margin-bottom: 30px;
+        }
+
+        .countdown-circle-wrap svg {
+            width: 120px;
+            height: 120px;
+            transform: rotate(-90deg);
+        }
+
+        .countdown-bg {
+            fill: none;
+            stroke: rgba(255, 255, 255, 0.08);
+            stroke-width: 5;
+        }
+
+        .countdown-progress {
+            fill: none;
+            stroke: #1d9bf0;
+            stroke-width: 5;
+            stroke-linecap: round;
+            stroke-dasharray: 339;
+            stroke-dashoffset: 0;
+            transition: stroke-dashoffset 1s linear;
+        }
+
+        .countdown-number {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: #fff;
+        }
+
+        .countdown-message {
+            font-size: 0.95rem;
+            color: #1d9bf0;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .watch-now-btn {
+            background: #1d9bf0;
+            color: white;
+            border: none;
+            padding: 14px 40px;
+            border-radius: 30px;
+            font-size: 1.1rem;
+            font-weight: 900;
+            cursor: pointer;
+            display: none;
+            align-items: center;
+            gap: 10px;
+            animation: pulseBtn 2s infinite;
+            box-shadow: 0 4px 20px rgba(29, 155, 240, 0.5);
+            font-family: inherit;
+        }
+
+        @keyframes pulseBtn {
+            0% {
+                transform: scale(1);
+                box-shadow: 0 4px 15px rgba(29, 155, 240, 0.4);
+            }
+
+            50% {
+                transform: scale(1.05);
+                box-shadow: 0 6px 25px rgba(29, 155, 240, 0.6);
+            }
+
+            100% {
+                transform: scale(1);
+                box-shadow: 0 4px 15px rgba(29, 155, 240, 0.4);
+            }
+        }
+
+        .dots::after {
+            content: '';
+            animation: dots 1.5s steps(4, end) infinite;
+        }
+
+        @keyframes dots {
+            0% {
+                content: '';
+            }
+
+            25% {
+                content: '.';
+            }
+
+            50% {
+                content: '..';
+            }
+
+            75% {
+                content: '...';
+            }
+        }
+
+        .countdown-ad-slot {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 60px;
+        }
+
+        /* Video Player */
+        #stream-container {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #000;
+            position: relative;
+        }
+
+        .video-player-frame {
+            width: 100%;
+            height: 100%;
+            position: relative;
+        }
+
+        .video-player-frame iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        /* Server Selection */
+        .server-section {
+            background: #0f1923;
+            padding: 10px 15px;
+            flex-shrink: 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
+        }
+
+        .server-grid {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .server-btn {
+            background: rgba(29, 155, 240, 0.08);
+            border: 1px solid rgba(29, 155, 240, 0.15);
+            color: #8899a6;
+            padding: 7px 14px;
+            border-radius: 8px;
+            font-size: 0.78rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-family: inherit;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .server-btn:hover {
+            background: rgba(29, 155, 240, 0.15);
+            color: #e2e8f0;
+        }
+
+        .server-btn.active {
+            background: #1d9bf0;
+            color: #fff;
+            border-color: transparent;
+        }
+
+        /* Bottom Controls */
+        .watch-controls {
+            background: #0a0e15;
+            padding: 7px 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-shrink: 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .ctrl-btn {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            color: #8899a6;
+            padding: 5px 12px;
+            border-radius: 6px;
+            font-size: 0.72rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-family: inherit;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .ctrl-btn:hover {
+            background: rgba(255, 255, 255, 0.08);
+            color: #fff;
+        }
+
+        .watch-social {
+            display: flex;
+            gap: 8px;
+        }
+
+        .watch-social a {
+            color: #5b7083;
+            font-size: 0.68rem;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 3px;
+            transition: color 0.2s;
+        }
+
+        .watch-social a:hover {
+            color: #8899a6;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- 5-Second Countdown Screen -->
+    <div class="countdown-screen" id="countdown-screen">
+        <div class="countdown-title" id="cd-title" style="margin-top: 20px;">جاري تحضير البث المباشر</div>
+        <div class="countdown-subtitle" id="cd-teams"></div>
+
+        <div class="countdown-circle-wrap" id="cd-circle-wrap">
+            <svg viewBox="0 0 120 120">
+                <circle class="countdown-bg" cx="60" cy="60" r="54" />
+                <circle class="countdown-progress" id="cd-progress" cx="60" cy="60" r="54" />
+            </svg>
+            <div class="countdown-number" id="cd-number">5</div>
+        </div>
+
+        <div class="countdown-message" id="cd-message">
+            <span class="dots" id="cd-msg-text">جاري تحضير سيرفرات البث</span>
+        </div>
+
+        <button id="watch-now-btn" class="watch-now-btn" onclick="goToWatch()">
+            ▶️ شاهد الآن
+        </button>
+
+        <!-- 300x250 Ad Banner -->
+        <div class="countdown-ad-slot" id="countdown-ad" style="margin-top: 15px;">
+            <script>
+                atOptions = {
+                    'key': '2895cfc4a233371917690acdf46458f6',
+                    'format': 'iframe',
+                    'height': 250,
+                    'width': 300,
+                    'params': {}
+                };
+            </script>
+            <script src="https://www.highperformanceformat.com/2895cfc4a233371917690acdf46458f6/invoke.js"></script>
+        </div>
+    </div>
+
+    <!-- Video Player (hidden initially) -->
+    <div id="stream-container" style="display: none;">
+        <div class="video-player-frame">
+            <iframe id="stream" allowfullscreen referrerpolicy="no-referrer"
+                allow="autoplay; encrypted-media; fullscreen; picture-in-picture"></iframe>
+        </div>
+    </div>
+
+    <!-- Server Selection -->
+    <div class="server-section" id="server-section" style="display: none;">
+        <div class="server-grid" id="server-grid"></div>
+    </div>
+
+    <!-- Bottom Controls -->
+    <div class="watch-controls" id="watch-controls" style="display: none;">
+        <button class="ctrl-btn" onclick="location.href='/'">🏠 الرئيسية</button>
+        <div class="watch-social">
+            <a href="https://t.me/live_football_macth" target="_blank">📱 تيليجرام</a>
+            <a href="https://www.facebook.com/profile.php?id=61587365663321" target="_blank">📘 فيسبوك</a>
+        </div>
+    </div>
+
+    <!-- Popunder Ad Script -->
+    <script>
+        // Show popunder only once per session
+        if (!sessionStorage.getItem('popunderShown')) {
+            function triggerPopunder() {
+                sessionStorage.setItem('popunderShown', 'true');
+                (function (s) { s.dataset.zone = '10608055', s.src = 'https://al5sm.com/tag.min.js' })([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')));
+            }
+        }
+
+        // Get match ID from URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const matchId = urlParams.get('match');
+        const server = urlParams.get('server') || 0;
+
+        // Countdown logic
+        let countdown = 5;
+        const countdownEl = document.getElementById('cd-number');
+        const progressEl = document.getElementById('cd-progress');
+        const watchBtn = document.getElementById('watch-now-btn');
+        const cdMessage = document.getElementById('cd-message');
+
+        // Start countdown
+        const countdownInterval = setInterval(() => {
+            countdown--;
+            countdownEl.textContent = countdown;
+
+            // Update progress circle
+            const offset = 339 - (countdown * 67.8);
+            progressEl.style.strokeDashoffset = offset;
+
+            if (countdown <= 0) {
+                clearInterval(countdownInterval);
+                watchBtn.style.display = 'flex';
+                cdMessage.innerHTML = '✅ جاهز للمشاهدة!';
+                cdMessage.style.color = '#00ba7c';
+            }
+        }, 1000);
+
+        // Go to watch page
+        function goToWatch() {
+            // Trigger popunder before going
+            if (!sessionStorage.getItem('popunderShown')) {
+                triggerPopunder();
+            }
+
+            // Redirect to watch page
+            if (matchId) {
+                window.location.href = `/watch.html?match=${matchId}&server=${server}`;
+            } else {
+                window.location.href = '/watch.html';
+            }
+        }
+
+        // Auto-redirect after countdown if no user interaction
+        setTimeout(() => {
+            if (watchBtn.style.display !== 'flex' && matchId) {
+                goToWatch();
+            }
+        }, 6000);
+    </script>
+</body>
+
+</html>
