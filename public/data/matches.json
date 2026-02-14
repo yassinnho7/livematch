@@ -1,11 +1,11 @@
 {
-  "generated_at": "2026-02-13T23:44:12.376Z",
+  "generated_at": "2026-02-14T00:06:24.669Z",
   "count": 10,
   "matches": [
     {
-      "id": 221719642,
-      "date": "2026-02-13T13:00:00.000Z",
-      "timestamp": 1770987600,
+      "id": 210403515,
+      "date": "2026-02-14T13:00:00.000Z",
+      "timestamp": 1771074000,
       "status": "FT",
       "time": "13:00",
       "time_label": "13:00 GMT",
@@ -25,7 +25,7 @@
       "score": null,
       "streams": [
         {
-          "id": "stream_el-watania-2_221719642",
+          "id": "stream_el-watania-2_210403515",
           "source": "livekora",
           "quality": "HD",
           "channel": "el-watania-2",
@@ -33,12 +33,12 @@
           "priority": 1
         }
       ],
-      "poster_url": "/posters/221719642.jpg"
+      "poster_url": "/posters/210403515.jpg"
     },
     {
-      "id": 1479106921,
-      "date": "2026-02-13T13:55:00.000Z",
-      "timestamp": 1770990900,
+      "id": 28444888,
+      "date": "2026-02-14T13:55:00.000Z",
+      "timestamp": 1771077300,
       "status": "FT",
       "time": "13:55",
       "time_label": "13:55 GMT",
@@ -58,7 +58,7 @@
       "score": null,
       "streams": [
         {
-          "id": "stream_thmanya1_1479106921",
+          "id": "stream_thmanya1_28444888",
           "source": "livekora",
           "quality": "HD",
           "channel": "thmanya1",
@@ -66,12 +66,12 @@
           "priority": 1
         }
       ],
-      "poster_url": "/posters/1479106921.jpg"
+      "poster_url": "/posters/28444888.jpg"
     },
     {
-      "id": 1708609937,
-      "date": "2026-02-13T15:25:00.000Z",
-      "timestamp": 1770996300,
+      "id": 1198075760,
+      "date": "2026-02-14T15:25:00.000Z",
+      "timestamp": 1771082700,
       "status": "FT",
       "time": "15:25",
       "time_label": "15:25 GMT",
@@ -91,7 +91,7 @@
       "score": null,
       "streams": [
         {
-          "id": "stream_thmanya2_1708609937",
+          "id": "stream_thmanya2_1198075760",
           "source": "livekora",
           "quality": "HD",
           "channel": "thmanya2",
@@ -99,12 +99,12 @@
           "priority": 1
         }
       ],
-      "poster_url": "/posters/1708609937.jpg"
+      "poster_url": "/posters/1198075760.jpg"
     },
     {
-      "id": 1380025090,
-      "date": "2026-02-13T17:30:00.000Z",
-      "timestamp": 1771003800,
+      "id": 26715393,
+      "date": "2026-02-14T17:30:00.000Z",
+      "timestamp": 1771090200,
       "status": "FT",
       "time": "17:30",
       "time_label": "17:30 GMT",
@@ -124,7 +124,7 @@
       "score": null,
       "streams": [
         {
-          "id": "stream_thmanya1_1380025090",
+          "id": "stream_thmanya1_26715393",
           "source": "livekora",
           "quality": "HD",
           "channel": "thmanya1",
@@ -132,12 +132,12 @@
           "priority": 1
         }
       ],
-      "poster_url": "/posters/1380025090.jpg"
+      "poster_url": "/posters/26715393.jpg"
     },
     {
-      "id": 925169562,
-      "date": "2026-02-13T18:00:00.000Z",
-      "timestamp": 1771005600,
+      "id": 1886783579,
+      "date": "2026-02-14T18:00:00.000Z",
+      "timestamp": 1771092000,
       "status": "FT",
       "time": "18:00",
       "time_label": "18:00 GMT",
@@ -157,7 +157,7 @@
       "score": null,
       "streams": [
         {
-          "id": "stream_bein1_925169562",
+          "id": "stream_bein1_1886783579",
           "source": "livekora",
           "quality": "HD",
           "channel": "bein1",
@@ -165,12 +165,12 @@
           "priority": 1
         }
       ],
-      "poster_url": "/posters/925169562.jpg"
+      "poster_url": "/posters/1886783579.jpg"
     },
     {
-      "id": 564762445,
-      "date": "2026-02-13T19:00:00.000Z",
-      "timestamp": 1771009200,
+      "id": 894528206,
+      "date": "2026-02-14T19:00:00.000Z",
+      "timestamp": 1771095600,
       "status": "FT",
       "time": "19:00",
       "time_label": "19:00 GMT",
@@ -190,7 +190,7 @@
       "score": null,
       "streams": [
         {
-          "id": "stream_arryadia_564762445",
+          "id": "stream_arryadia_894528206",
           "source": "livekora",
           "quality": "HD",
           "channel": "arryadia",
@@ -198,12 +198,12 @@
           "priority": 1
         }
       ],
-      "poster_url": "/posters/564762445.jpg"
+      "poster_url": "/posters/894528206.jpg"
     },
     {
-      "id": 891342034,
-      "date": "2026-02-13T19:30:00.000Z",
-      "timestamp": 1771011000,
+      "id": 70271983,
+      "date": "2026-02-14T19:30:00.000Z",
+      "timestamp": 1771097400,
       "status": "FT",
       "time": "19:30",
       "time_label": "19:30 GMT",
@@ -223,7 +223,7 @@
       "score": null,
       "streams": [
         {
-          "id": "stream_ch1_891342034",
+          "id": "stream_ch1_70271983",
           "source": "livekora",
           "quality": "HD",
           "channel": "ch1",
@@ -231,12 +231,12 @@
           "priority": 1
         }
       ],
-      "poster_url": "/posters/891342034.jpg"
+      "poster_url": "/posters/70271983.jpg"
     },
     {
-      "id": 200748882,
-      "date": "2026-02-13T19:45:00.000Z",
-      "timestamp": 1771011900,
+      "id": 329831601,
+      "date": "2026-02-14T19:45:00.000Z",
+      "timestamp": 1771098300,
       "status": "FT",
       "time": "19:45",
       "time_label": "19:45 GMT",
@@ -256,7 +256,7 @@
       "score": null,
       "streams": [
         {
-          "id": "stream_ad-premium-1_200748882",
+          "id": "stream_ad-premium-1_329831601",
           "source": "livekora",
           "quality": "HD",
           "channel": "ad-premium-1",
@@ -264,12 +264,12 @@
           "priority": 1
         }
       ],
-      "poster_url": "/posters/200748882.jpg"
+      "poster_url": "/posters/329831601.jpg"
     },
     {
-      "id": 1784689974,
-      "date": "2026-02-13T19:45:00.000Z",
-      "timestamp": 1771011900,
+      "id": 431380277,
+      "date": "2026-02-14T19:45:00.000Z",
+      "timestamp": 1771098300,
       "status": "FT",
       "time": "19:45",
       "time_label": "19:45 GMT",
@@ -289,7 +289,7 @@
       "score": null,
       "streams": [
         {
-          "id": "stream_bein3_1784689974",
+          "id": "stream_bein3_431380277",
           "source": "livekora",
           "quality": "HD",
           "channel": "bein3",
@@ -297,12 +297,12 @@
           "priority": 1
         }
       ],
-      "poster_url": "/posters/1784689974.jpg"
+      "poster_url": "/posters/431380277.jpg"
     },
     {
-      "id": 159300702,
-      "date": "2026-02-13T20:05:00.000Z",
-      "timestamp": 1771013100,
+      "id": 134102305,
+      "date": "2026-02-14T20:05:00.000Z",
+      "timestamp": 1771099500,
       "status": "FT",
       "time": "20:05",
       "time_label": "20:05 GMT",
@@ -322,7 +322,7 @@
       "score": null,
       "streams": [
         {
-          "id": "stream_bein4_159300702",
+          "id": "stream_bein4_134102305",
           "source": "livekora",
           "quality": "HD",
           "channel": "bein4",
@@ -330,7 +330,7 @@
           "priority": 1
         }
       ],
-      "poster_url": "/posters/159300702.jpg"
+      "poster_url": "/posters/134102305.jpg"
     }
   ]
 }
