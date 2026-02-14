@@ -458,53 +458,6 @@
 
 <body>
 
-    <!-- 5-Second Countdown Screen -->
-    <div class="countdown-screen" id="countdown-screen">
-        <div class="countdown-title" id="cd-title" style="margin-top: 20px;">جاري تحضير البث المباشر</div>
-        <div class="countdown-subtitle" id="cd-teams"></div>
-
-        <div class="countdown-circle-wrap" id="cd-circle-wrap">
-            <svg viewBox="0 0 120 120">
-                <circle class="countdown-bg" cx="60" cy="60" r="54" />
-                <circle class="countdown-progress" id="cd-progress" cx="60" cy="60" r="54" />
-            </svg>
-            <div class="countdown-number" id="cd-number">5</div>
-        </div>
-
-        <div class="countdown-message" id="cd-message">
-            <span class="dots" id="cd-msg-text">جاري تحضير سيرفرات البث</span>
-        </div>
-
-        <button id="watch-now-btn" class="watch-now-btn" onclick="hideCountdown(); triggerPopunder();">
-            ▶️ شاهد الآن
-        </button>
-
-        <!-- 300x250 Ad Banner -->
-        <div class="countdown-ad-slot" id="countdown-ad" style="margin-top: 15px;">
-            <script>
-                atOptions = {
-                    'key': '2895cfc4a233371917690acdf46458f6',
-                    'format': 'iframe',
-                    'height': 250,
-                    'width': 300,
-                    'params': {}
-                };
-            </script>
-            <script src="https://www.highperformanceformat.com/2895cfc4a233371917690acdf46458f6/invoke.js"></script>
-        </div>
-    </div>
-
-    <!-- Popunder Ad Script -->
-    <script>
-        // Show popunder only once per session
-        if (!sessionStorage.getItem('popunderShown')) {
-            function triggerPopunder() {
-                sessionStorage.setItem('popunderShown', 'true');
-                (function (s) { s.dataset.zone = '10608055', s.src = 'https://al5sm.com/tag.min.js' })([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')));
-            }
-        }
-    </script>
-
     <!-- Match Info Bar (Now Header with Servers) -->
     <div class="match-info-bar" id="match-info-bar">
         <div class="server-grid" id="server-grid">
