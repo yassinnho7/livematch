@@ -1,130 +1,7 @@
 {
-  "generated_at": "2026-02-14T21:31:08.221Z",
+  "generated_at": "2026-02-14T21:53:13.448Z",
   "count": 7,
   "matches": [
-    {
-      "id": 1405110027,
-      "date": "2026-02-14T19:45:00.000Z",
-      "timestamp": 1771098300,
-      "status": "LIVE",
-      "time": "19:45",
-      "time_label": "19:45 GMT",
-      "league": {
-        "name": "إيطاليا, الدوري الإيطالي",
-        "country": "Italy",
-        "logo": "https://a.espncdn.com/combiner/i?img=/i/leaguelogos/soccer/500/12.png&h=40&w=40"
-      },
-      "home": {
-        "name": "إنتر ميلان",
-        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/01/224.png"
-      },
-      "away": {
-        "name": "يوفنتوس",
-        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/01/226.png"
-      },
-      "score": null,
-      "streams": [
-        {
-          "id": "stream_ad-premium-1_1405110027",
-          "source": "livekora",
-          "quality": "HD",
-          "channel": "ad-premium-1",
-          "url": "https://pl.koooralive.click/albaplayer/ad-premium-1",
-          "priority": 1
-        },
-        {
-          "id": "stream_siiir_1405110027",
-          "source": "siiir",
-          "quality": "VIP",
-          "channel": "VIP Server",
-          "url": "https://eyj0exaioijkv1qilcjhbgcioijiuzi1nij99sss.yallashot.us/playerv2.php?match=match11&key=c0ae1abba6eebd7e6cc5b88b1d2B71547",
-          "priority": 2
-        }
-      ],
-      "poster_url": "/posters/1405110027.jpg"
-    },
-    {
-      "id": 1203159981,
-      "date": "2026-02-14T20:00:00.000Z",
-      "timestamp": 1771099200,
-      "status": "LIVE",
-      "time": "20:00",
-      "time_label": "20:00 GMT",
-      "league": {
-        "name": "إنجلترا, كاس الاتحاد الإنجليزي - الدور 4",
-        "country": "England",
-        "logo": "https://a.espncdn.com/combiner/i?img=/i/leaguelogos/soccer/500/23.png&h=40&w=40"
-      },
-      "home": {
-        "name": "ليفربول",
-        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/01/108.png"
-      },
-      "away": {
-        "name": "برايتون",
-        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/01/38.png"
-      },
-      "score": null,
-      "streams": [
-        {
-          "id": "stream_bein1_1203159981",
-          "source": "livekora",
-          "quality": "HD",
-          "channel": "bein1",
-          "url": "https://pl.koooralive.click/albaplayer/bein1",
-          "priority": 1
-        },
-        {
-          "id": "stream_siiir_1203159981",
-          "source": "siiir",
-          "quality": "VIP",
-          "channel": "VIP Server",
-          "url": "https://eyj0exaioijkv1qilcjhbgcioijiuzi1nij99sss.yallashot.us/playerv2.php?match=match1&key=c0ae1abba6eebd7e6cc5b88b1d2B71547",
-          "priority": 2
-        }
-      ],
-      "poster_url": "/posters/1203159981.jpg"
-    },
-    {
-      "id": 1639489986,
-      "date": "2026-02-14T20:00:00.000Z",
-      "timestamp": 1771099200,
-      "status": "LIVE",
-      "time": "20:00",
-      "time_label": "20:00 GMT",
-      "league": {
-        "name": "إسبانيا, الدوري الإسباني",
-        "country": "Spain",
-        "logo": "https://a.espncdn.com/combiner/i?img=/i/leaguelogos/soccer/500/15.png&h=40&w=40"
-      },
-      "home": {
-        "name": "ريال مدريد",
-        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/01/131.png"
-      },
-      "away": {
-        "name": "ريال سوسيداد",
-        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/01/154.png"
-      },
-      "score": null,
-      "streams": [
-        {
-          "id": "stream_bein2_1639489986",
-          "source": "livekora",
-          "quality": "HD",
-          "channel": "bein2",
-          "url": "https://pl.koooralive.click/albaplayer/bein2",
-          "priority": 1
-        },
-        {
-          "id": "stream_siiir_1639489986",
-          "source": "siiir",
-          "quality": "VIP",
-          "channel": "VIP Server",
-          "url": "https://eyj0exaioijkv1qilcjhbgcioijiuzi1nij99sss.yallashot.us/playerv2.php?match=match4&key=c0ae1abba6eebd7e6cc5b88b1d2B71547",
-          "priority": 2
-        }
-      ],
-      "poster_url": "/posters/1639489986.jpg"
-    },
     {
       "id": 977075783,
       "date": "2026-02-14T20:05:00.000Z",
@@ -272,6 +149,121 @@
         }
       ],
       "poster_url": "/posters/1050570302.jpg"
+    },
+    {
+      "id": 1405110027,
+      "date": "2026-02-14T19:45:00.000Z",
+      "timestamp": 1771098300,
+      "status": "FT",
+      "time": "19:45",
+      "time_label": "19:45 GMT",
+      "league": {
+        "name": "إيطاليا, الدوري الإيطالي",
+        "country": "Italy",
+        "logo": "https://a.espncdn.com/combiner/i?img=/i/leaguelogos/soccer/500/12.png&h=40&w=40"
+      },
+      "home": {
+        "name": "إنتر ميلان",
+        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/01/224.png"
+      },
+      "away": {
+        "name": "يوفنتوس",
+        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/01/226.png"
+      },
+      "score": null,
+      "streams": [
+        {
+          "id": "stream_ad-premium-1_1405110027",
+          "source": "livekora",
+          "quality": "HD",
+          "channel": "ad-premium-1",
+          "url": "https://pl.koooralive.click/albaplayer/ad-premium-1",
+          "priority": 1
+        }
+      ],
+      "poster_url": "/posters/1405110027.jpg"
+    },
+    {
+      "id": 1203159981,
+      "date": "2026-02-14T20:00:00.000Z",
+      "timestamp": 1771099200,
+      "status": "LIVE",
+      "time": "20:00",
+      "time_label": "20:00 GMT",
+      "league": {
+        "name": "إنجلترا, كاس الاتحاد الإنجليزي - الدور 4",
+        "country": "England",
+        "logo": "https://a.espncdn.com/combiner/i?img=/i/leaguelogos/soccer/500/23.png&h=40&w=40"
+      },
+      "home": {
+        "name": "ليفربول",
+        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/01/108.png"
+      },
+      "away": {
+        "name": "برايتون",
+        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/01/38.png"
+      },
+      "score": null,
+      "streams": [
+        {
+          "id": "stream_bein1_1203159981",
+          "source": "livekora",
+          "quality": "HD",
+          "channel": "bein1",
+          "url": "https://pl.koooralive.click/albaplayer/bein1",
+          "priority": 1
+        },
+        {
+          "id": "stream_siiir_1203159981",
+          "source": "siiir",
+          "quality": "VIP",
+          "channel": "VIP Server",
+          "url": "https://eyj0exaioijkv1qilcjhbgcioijiuzi1nij99sss.yallashot.us/playerv2.php?match=match1&key=c0ae1abba6eebd7e6cc5b88b1d2B71547",
+          "priority": 2
+        }
+      ],
+      "poster_url": "/posters/1203159981.jpg"
+    },
+    {
+      "id": 1639489986,
+      "date": "2026-02-14T20:00:00.000Z",
+      "timestamp": 1771099200,
+      "status": "LIVE",
+      "time": "20:00",
+      "time_label": "20:00 GMT",
+      "league": {
+        "name": "إسبانيا, الدوري الإسباني",
+        "country": "Spain",
+        "logo": "https://a.espncdn.com/combiner/i?img=/i/leaguelogos/soccer/500/15.png&h=40&w=40"
+      },
+      "home": {
+        "name": "ريال مدريد",
+        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/01/131.png"
+      },
+      "away": {
+        "name": "ريال سوسيداد",
+        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/01/154.png"
+      },
+      "score": null,
+      "streams": [
+        {
+          "id": "stream_bein2_1639489986",
+          "source": "livekora",
+          "quality": "HD",
+          "channel": "bein2",
+          "url": "https://pl.koooralive.click/albaplayer/bein2",
+          "priority": 1
+        },
+        {
+          "id": "stream_siiir_1639489986",
+          "source": "siiir",
+          "quality": "VIP",
+          "channel": "VIP Server",
+          "url": "https://eyj0exaioijkv1qilcjhbgcioijiuzi1nij99sss.yallashot.us/playerv2.php?match=match4&key=c0ae1abba6eebd7e6cc5b88b1d2B71547",
+          "priority": 2
+        }
+      ],
+      "poster_url": "/posters/1639489986.jpg"
     }
   ]
 }
