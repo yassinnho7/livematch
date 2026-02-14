@@ -220,7 +220,7 @@ function createMatchCard(match) {
 
     // Direct link to watch page (with 5s countdown)
     if (match.streams && match.streams.length > 0) {
-        card.href = `server.html?match=${match.id}&server=0`;
+        card.href = `https://omg10.com/4/10557734`;
     } else {
         card.href = `article.html?match=${match.id}`;
     }
