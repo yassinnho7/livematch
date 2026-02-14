@@ -392,11 +392,21 @@
 
         // Go to watch page
         function goToWatch() {
-            // Redirect to watch page
-            if (matchId) {
-                window.location.href = `/watch.html?match=${matchId}&server=${server}`;
+            // Get unique key for this match
+            const storageKey = 'watched_match_' + matchId;
+
+            // Check if user already clicked once for this match
+            if (localStorage.getItem(storageKey)) {
+                // Second click: go to actual stream
+                if (matchId) {
+                    window.location.href = `/watch.html?match=${matchId}&server=${server}`;
+                } else {
+                    window.location.href = '/watch.html';
+                }
             } else {
-                window.location.href = '/watch.html';
+                // First click: open omg10.com in new window and store flag
+                localStorage.setItem(storageKey, 'true');
+                window.open('https://omg10.com/4/10557734', '_blank', 'width=800,height=600,scrollbars=yes');
             }
         }
 
