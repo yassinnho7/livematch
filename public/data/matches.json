@@ -1,122 +1,7 @@
 {
-  "generated_at": "2026-02-14T20:40:40.059Z",
+  "generated_at": "2026-02-14T21:01:38.704Z",
   "count": 7,
   "matches": [
-    {
-      "id": 1032796694,
-      "date": "2026-02-14T19:00:00.000Z",
-      "timestamp": 1771095600,
-      "status": "LIVE",
-      "time": "19:00",
-      "time_label": "19:00 GMT",
-      "league": {
-        "name": "أفريقيا, الكونفدرالية الافريقية",
-        "country": "Africa",
-        "logo": "https://cdn-icons-png.flaticon.com/512/1378/1378598.png"
-      },
-      "home": {
-        "name": "اتحاد العاصمة",
-        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/01/8220.png"
-      },
-      "away": {
-        "name": "أولمبيك آسفي",
-        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/01/8210.png"
-      },
-      "score": null,
-      "streams": [
-        {
-          "id": "stream_bein3_1032796694",
-          "source": "livekora",
-          "quality": "HD",
-          "channel": "bein3",
-          "url": "https://pl.koooralive.click/albaplayer/bein3",
-          "priority": 1
-        },
-        {
-          "id": "stream_siiir_1032796694",
-          "source": "siiir",
-          "quality": "VIP",
-          "channel": "VIP Server",
-          "url": "https://eyj0exaioijkv1qilcjhbgcioijiuzi1nij99sss.yallashot.us/playerv2.php?match=match3&key=c0ae1abba6eebd7e6cc5b88b1d2B71547",
-          "priority": 2
-        }
-      ],
-      "poster_url": "/posters/1032796694.jpg"
-    },
-    {
-      "id": 352527133,
-      "date": "2026-02-14T19:00:00.000Z",
-      "timestamp": 1771095600,
-      "status": "LIVE",
-      "time": "19:00",
-      "time_label": "19:00 GMT",
-      "league": {
-        "name": "أفريقيا, دوري أبطال أفريقيا - المجموعات",
-        "country": "Africa",
-        "logo": "https://a.espncdn.com/combiner/i?img=/i/leaguelogos/soccer/500/1257.png&h=40&w=40"
-      },
-      "home": {
-        "name": "نهضة بركان",
-        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/01/9974.png"
-      },
-      "away": {
-        "name": "ريفرز يونايتد",
-        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/02/6994.png"
-      },
-      "score": null,
-      "streams": [
-        {
-          "id": "stream_bein5_352527133",
-          "source": "livekora",
-          "quality": "HD",
-          "channel": "bein5",
-          "url": "https://pl.koooralive.click/albaplayer/bein5",
-          "priority": 1
-        },
-        {
-          "id": "stream_siiir_352527133",
-          "source": "siiir",
-          "quality": "VIP",
-          "channel": "VIP Server",
-          "url": "https://eyj0exaioijkv1qilcjhbgcioijiuzi1nij99sss.yallashot.us/playerv2.php?match=match2&key=c0ae1abba6eebd7e6cc5b88b1d2B71547",
-          "priority": 2
-        }
-      ],
-      "poster_url": "/posters/352527133.jpg"
-    },
-    {
-      "id": 1050570302,
-      "date": "2026-02-14T19:00:00.000Z",
-      "timestamp": 1771095600,
-      "status": "LIVE",
-      "time": "19:00",
-      "time_label": "19:00 GMT",
-      "league": {
-        "name": "أفريقيا, دوري أبطال أفريقيا - المجموعات",
-        "country": "Africa",
-        "logo": "https://a.espncdn.com/combiner/i?img=/i/leaguelogos/soccer/500/1257.png&h=40&w=40"
-      },
-      "home": {
-        "name": "بيراميدز",
-        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/01/22143.png"
-      },
-      "away": {
-        "name": "باور ديناموز",
-        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/02/76692.png"
-      },
-      "score": null,
-      "streams": [
-        {
-          "id": "stream_ch1_1050570302",
-          "source": "livekora",
-          "quality": "HD",
-          "channel": "ch1",
-          "url": "https://pl.koooralive.click/albaplayer/ch1",
-          "priority": 1
-        }
-      ],
-      "poster_url": "/posters/1050570302.jpg"
-    },
     {
       "id": 1405110027,
       "date": "2026-02-14T19:45:00.000Z",
@@ -280,6 +165,113 @@
         }
       ],
       "poster_url": "/posters/977075783.jpg"
+    },
+    {
+      "id": 1032796694,
+      "date": "2026-02-14T19:00:00.000Z",
+      "timestamp": 1771095600,
+      "status": "LIVE",
+      "time": "19:00",
+      "time_label": "19:00 GMT",
+      "league": {
+        "name": "أفريقيا, الكونفدرالية الافريقية",
+        "country": "Africa",
+        "logo": "https://cdn-icons-png.flaticon.com/512/1378/1378598.png"
+      },
+      "home": {
+        "name": "اتحاد العاصمة",
+        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/01/8220.png"
+      },
+      "away": {
+        "name": "أولمبيك آسفي",
+        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/01/8210.png"
+      },
+      "score": null,
+      "streams": [
+        {
+          "id": "stream_bein3_1032796694",
+          "source": "livekora",
+          "quality": "HD",
+          "channel": "bein3",
+          "url": "https://pl.koooralive.click/albaplayer/bein3",
+          "priority": 1
+        },
+        {
+          "id": "stream_siiir_1032796694",
+          "source": "siiir",
+          "quality": "VIP",
+          "channel": "VIP Server",
+          "url": "https://eyj0exaioijkv1qilcjhbgcioijiuzi1nij99sss.yallashot.us/playerv2.php?match=match1&key=c0ae1abba6eebd7e6cc5b88b1d2B71547",
+          "priority": 2
+        }
+      ],
+      "poster_url": "/posters/1032796694.jpg"
+    },
+    {
+      "id": 352527133,
+      "date": "2026-02-14T19:00:00.000Z",
+      "timestamp": 1771095600,
+      "status": "LIVE",
+      "time": "19:00",
+      "time_label": "19:00 GMT",
+      "league": {
+        "name": "أفريقيا, دوري أبطال أفريقيا - المجموعات",
+        "country": "Africa",
+        "logo": "https://a.espncdn.com/combiner/i?img=/i/leaguelogos/soccer/500/1257.png&h=40&w=40"
+      },
+      "home": {
+        "name": "نهضة بركان",
+        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/01/9974.png"
+      },
+      "away": {
+        "name": "ريفرز يونايتد",
+        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/02/6994.png"
+      },
+      "score": null,
+      "streams": [
+        {
+          "id": "stream_bein5_352527133",
+          "source": "livekora",
+          "quality": "HD",
+          "channel": "bein5",
+          "url": "https://pl.koooralive.click/albaplayer/bein5",
+          "priority": 1
+        }
+      ],
+      "poster_url": "/posters/352527133.jpg"
+    },
+    {
+      "id": 1050570302,
+      "date": "2026-02-14T19:00:00.000Z",
+      "timestamp": 1771095600,
+      "status": "LIVE",
+      "time": "19:00",
+      "time_label": "19:00 GMT",
+      "league": {
+        "name": "أفريقيا, دوري أبطال أفريقيا - المجموعات",
+        "country": "Africa",
+        "logo": "https://a.espncdn.com/combiner/i?img=/i/leaguelogos/soccer/500/1257.png&h=40&w=40"
+      },
+      "home": {
+        "name": "بيراميدز",
+        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/01/22143.png"
+      },
+      "away": {
+        "name": "باور ديناموز",
+        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/02/76692.png"
+      },
+      "score": null,
+      "streams": [
+        {
+          "id": "stream_ch1_1050570302",
+          "source": "livekora",
+          "quality": "HD",
+          "channel": "ch1",
+          "url": "https://pl.koooralive.click/albaplayer/ch1",
+          "priority": 1
+        }
+      ],
+      "poster_url": "/posters/1050570302.jpg"
     }
   ]
 }
