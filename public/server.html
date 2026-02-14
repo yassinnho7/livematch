@@ -359,16 +359,8 @@
         </div>
     </div>
 
-    <!-- Popunder Ad Script -->
+    <!-- Video Player (hidden initially) -->
     <script>
-        // Show popunder only once per session
-        if (!sessionStorage.getItem('popunderShown')) {
-            function triggerPopunder() {
-                sessionStorage.setItem('popunderShown', 'true');
-                (function (s) { s.dataset.zone = '10608055', s.src = 'https://al5sm.com/tag.min.js' })([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')));
-            }
-        }
-
         // Get match ID from URL
         const urlParams = new URLSearchParams(window.location.search);
         const matchId = urlParams.get('match');
@@ -400,11 +392,6 @@
 
         // Go to watch page
         function goToWatch() {
-            // Trigger popunder before going
-            if (!sessionStorage.getItem('popunderShown')) {
-                triggerPopunder();
-            }
-
             // Redirect to watch page
             if (matchId) {
                 window.location.href = `/watch.html?match=${matchId}&server=${server}`;

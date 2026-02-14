@@ -384,15 +384,16 @@ body {
 }
 
 .team-name {
-    font-size: 1.1rem;
+    font-size: 1rem;
     font-weight: 800;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    white-space: normal;
+    overflow: visible;
+    text-overflow: unset;
     color: var(--text-primary);
-    max-width: 180px;
+    max-width: 150px;
     z-index: 2;
     text-align: center;
+    line-height: 1.2;
 }
 
 /* Center Section */
@@ -430,6 +431,7 @@ body {
     font-weight: 700;
     direction: ltr;
     line-height: 1;
+    margin-top: 8px;
 }
 
 .match-status-badge {
@@ -469,7 +471,7 @@ body {
 }
 
 .match-meta span {
-    font-size: 0.68rem;
+    font-size: 0.75rem;
     color: var(--text-muted);
     display: flex;
     align-items: center;
