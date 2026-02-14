@@ -29,7 +29,7 @@ function initViewerCounter() {
     setInterval(() => {
         const change = Math.floor(Math.random() * 50) - 20;
         baseCount = Math.max(100, baseCount + change);
-        counterEl.textContent = baseCount.toLocaleString('ar-SA');
+        counterEl.textContent = baseCount.toLocaleString('en-US');
     }, 4000 + Math.random() * 3000);
 }
 
