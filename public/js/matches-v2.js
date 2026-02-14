@@ -8,14 +8,29 @@ function initViewerCounter() {
     const counterEl = document.getElementById('viewer-count');
     if (!counterEl) return;
 
-    let baseCount = 1200 + Math.floor(Math.random() * 800);
-    counterEl.textContent = baseCount.toLocaleString('en-US');
+    // Realistic visitor count based on time of day
+    const hour = new Date().getHours();
+    let baseCount;
 
+    // Peak hours (evening in Algeria: 6pm-11pm)
+    if (hour >= 18 && hour <= 23) {
+        baseCount = 2500 + Math.floor(Math.random() * 1500);
+    } else if (hour >= 12 && hour <= 17) {
+        baseCount = 1800 + Math.floor(Math.random() * 1000);
+    } else if (hour >= 6 && hour <= 11) {
+        baseCount = 800 + Math.floor(Math.random() * 600);
+    } else {
+        baseCount = 200 + Math.floor(Math.random() * 300);
+    }
+
+    counterEl.textContent = baseCount.toLocaleString('ar-SA');
+
+    // Update every few seconds with realistic fluctuations
     setInterval(() => {
-        const change = Math.floor(Math.random() * 40) - 15;
-        baseCount = Math.max(800, baseCount + change);
-        counterEl.textContent = baseCount.toLocaleString('en-US');
-    }, 3000 + Math.random() * 2000);
+        const change = Math.floor(Math.random() * 50) - 20;
+        baseCount = Math.max(100, baseCount + change);
+        counterEl.textContent = baseCount.toLocaleString('ar-SA');
+    }, 4000 + Math.random() * 3000);
 }
 
 // ============ DATE DISPLAY ============
