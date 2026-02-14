@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-02-14T22:40:18.041Z",
+  "generated_at": "2026-02-14T23:01:31.286Z",
   "count": 7,
   "matches": [
     {
@@ -31,14 +31,6 @@
           "channel": "bein3",
           "url": "https://pl.koooralive.click/albaplayer/bein3",
           "priority": 1
-        },
-        {
-          "id": "stream_siiir_1032796694",
-          "source": "siiir",
-          "quality": "VIP",
-          "channel": "VIP Server",
-          "url": "https://eyj0exaioijkv1qilcjhbgcioijiuzi1nij99sss.yallashot.us/playerv2.php?match=match3&key=c0ae1abba6eebd7e6cc5b88b1d2B71547",
-          "priority": 2
         }
       ],
       "poster_url": "/posters/1032796694.jpg"
