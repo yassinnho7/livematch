@@ -229,10 +229,10 @@ body {
 
 .section-header {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
-    margin: 18px 0 12px;
-    padding: 0 4px;
+    margin: 16px 0 14px;
+    padding: 0;
 }
 
 .section-title {
@@ -245,16 +245,14 @@ body {
 }
 
 .match-date {
-    font-size: 1rem;
-    font-weight: 900;
-    color: #fff;
-    background: var(--accent);
-    padding: 10px 22px;
-    border-radius: 50px;
-    border: none;
-    margin-bottom: 8px;
-    box-shadow: 0 4px 15px rgba(29, 155, 240, 0.4);
-    letter-spacing: 0.5px;
+    font-size: 0.88rem;
+    font-weight: 700;
+    color: var(--text-secondary);
+    background: var(--bg-card);
+    padding: 8px 20px;
+    border-radius: 10px;
+    border: 1px solid var(--border-color);
+    letter-spacing: 0.3px;
 }
 
 /* ========================
@@ -265,13 +263,13 @@ body {
     flex-direction: column;
     gap: 10px;
     min-height: 200px;
-    padding: 0 8px;
+    padding: 0;
 }
 
 .match-card {
     background: var(--bg-card);
-    border-radius: 16px;
-    padding: 16px 14px;
+    border-radius: 14px;
+    padding: 14px 16px;
     display: grid;
     grid-template-columns: 1fr auto 1fr;
     align-items: center;
@@ -283,8 +281,6 @@ body {
     border: 1px solid var(--border-color);
     position: relative;
     overflow: hidden;
-    max-width: 520px;
-    margin: 0 auto;
     width: 100%;
     box-sizing: border-box;
 }
@@ -794,8 +790,7 @@ body {
    ======================== */
 @media (max-width: 600px) {
     .header-inner {
-        justify-content: center;
-        text-align: center;
+        justify-content: space-between;
     }
 
     .header-brand h1 {
@@ -813,9 +808,7 @@ body {
 
     .match-card {
         padding: 12px 10px;
-        gap: 0;
-        grid-template-columns: 1fr auto 1fr;
-        max-width: 100%;
+        border-radius: 10px;
     }
 
     .team {
@@ -862,9 +855,8 @@ body {
     }
 
     .match-date {
-        font-size: 0.88rem;
+        font-size: 0.78rem;
         padding: 6px 14px;
-        font-weight: 800;
     }
 
     .play-overlay .play-icon {
