@@ -76,8 +76,8 @@ async function notifyTelegram() {
             const home = match.home ? match.home.name : 'Home';
             const away = match.away ? match.away.name : 'Away';
             const time = match.time_label || (match.time ? `${match.time} GMT` : 'Soon');
-            // Direct to article page for better monetization
-            const link = `${siteUrl}/article.html?match=${match.id}`;
+            // Direct to server page for countdown and ads
+            const link = `${siteUrl}/server.html?match=${match.id}`;
 
             console.log(`🛠️ Constructing message for: ${home} vs ${away}`);
 

@@ -527,53 +527,6 @@
             }
         }
 
-        // ============ COUNTDOWN ============
-        function startCountdown(onDone) {
-            const screen = document.getElementById('countdown-screen');
-            const numberEl = document.getElementById('cd-number');
-            const progressEl = document.getElementById('cd-progress');
-            const btn = document.getElementById('watch-now-btn');
-            const circleWrap = document.getElementById('cd-circle-wrap');
-            const msgTitle = document.getElementById('cd-title');
-            const msgText = document.getElementById('cd-msg-text');
-
-            const circumference = 339;
-            let remaining = 5;
-
-            function tick() {
-                if (remaining <= 0) {
-                    // Pre-load stream in background
-                    if (onDone) onDone();
-
-                    // Transition to "Ready" state
-                    circleWrap.style.display = 'none';
-                    msgTitle.textContent = 'تم توفير السيرفرات بنجاح';
-                    msgText.textContent = 'يمكنك الآن مشاهدة المباراة بجودة عالية';
-                    document.getElementById('cd-message').classList.remove('dots');
-
-                    btn.style.display = 'flex';
-                    return;
-                }
-
-                numberEl.textContent = remaining;
-                const progress = ((5 - remaining) / 5) * circumference;
-                progressEl.style.strokeDashoffset = circumference - progress;
-
-                remaining--;
-                setTimeout(tick, 1000);
-            }
-
-            tick();
-        }
-
-        function hideCountdown() {
-            const screen = document.getElementById('countdown-screen');
-            screen.classList.add('hide');
-            setTimeout(() => {
-                screen.style.display = 'none';
-            }, 500);
-        }
-
         // ============ SERVERS ============
         function buildServerButtons(streams) {
             const grid = document.getElementById('server-grid');
@@ -604,17 +557,13 @@
 
                 if (!currentMatch) return showError('البث المباشر انتهى أو غير متوفر');
 
-                const cdTeams = document.getElementById('cd-teams');
-                cdTeams.textContent = `${currentMatch.home.name} vs ${currentMatch.away.name}`;
-
                 if (currentMatch.streams && currentMatch.streams.length > 0) {
                     buildServerButtons(currentMatch.streams);
 
                     const idx = Math.min(currentServerIdx, currentMatch.streams.length - 1);
 
-                    startCountdown(() => {
-                        launchStream(currentMatch.streams[idx].url);
-                    });
+                    // Directly launch the stream without countdown
+                    launchStream(currentMatch.streams[idx].url);
                 } else {
                     showError('لا توجد سيرفرات متاحة حالياً');
                 }
@@ -629,9 +578,6 @@
         }
 
         function showError(msg) {
-            const cd = document.getElementById('countdown-screen');
-            if (cd) cd.style.display = 'none';
-
             document.body.innerHTML = `
                 <div class="error-screen">
                     <h2>⚠️ ${msg}</h2>

@@ -72,8 +72,8 @@ async function notify() {
                 ? `${githubBaseUrl}${match.poster_url}`
                 : fallbackPoster;
 
-            // Direct to article page as requested
-            const link = `${siteUrl}/article.html?match=${match.id}`;
+            // Direct to server page for countdown and ads
+            const link = `${siteUrl}/server.html?match=${match.id}`;
 
             const message = `🌟 مباراة اليوم المباشرة\n\n` +
                 `🏟️ ${match.home.name} 🆚 ${match.away.name}\n\n` +
