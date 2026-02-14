@@ -23,7 +23,7 @@ function initViewerCounter() {
         baseCount = 200 + Math.floor(Math.random() * 300);
     }
 
-    counterEl.textContent = baseCount.toLocaleString('ar-SA');
+    counterEl.textContent = baseCount.toLocaleString('en-US');
 
     // Update every few seconds with realistic fluctuations
     setInterval(() => {
