@@ -274,6 +274,7 @@ function createMatchCard(match) {
         </div>
 
         <div class="team">
+            <div class="team-bg-watermark" style="background-image: url('${homeLogo}')"></div>
             <span class="team-name">${homeName}</span>
             <img src="${homeLogo}" alt="${homeName}" width="32" height="32" class="team-logo" loading="lazy" onerror="this.src='${fallbackLogo}'">
         </div>
@@ -286,6 +287,7 @@ function createMatchCard(match) {
         </div>
         
         <div class="team">
+            <div class="team-bg-watermark" style="background-image: url('${awayLogo}')"></div>
             <img src="${awayLogo}" alt="${awayName}" width="32" height="32" class="team-logo" loading="lazy" onerror="this.src='${fallbackLogo}'">
             <span class="team-name">${awayName}</span>
         </div>
