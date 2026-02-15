@@ -1,14 +1,14 @@
 {
-  "generated_at": "2026-02-15T11:48:45.613Z",
+  "generated_at": "2026-02-15T12:03:06.073Z",
   "count": 13,
   "matches": [
     {
       "id": 507389352,
-      "date": "2026-02-15T13:00:00.000Z",
-      "timestamp": 1771160400,
-      "status": "NS",
-      "time": "13:00",
-      "time_label": "13:00 GMT",
+      "date": "2026-02-15T12:00:00.000Z",
+      "timestamp": 1771156800,
+      "status": "LIVE",
+      "time": "12:00",
+      "time_label": "12:00 GMT",
       "league": {
         "name": "إنجلترا, كاس الاتحاد الإنجليزي - الدور 4",
         "country": "England",
@@ -36,45 +36,12 @@
       "poster_url": "/posters/507389352.jpg"
     },
     {
-      "id": 1194027060,
-      "date": "2026-02-15T14:00:00.000Z",
-      "timestamp": 1771164000,
-      "status": "NS",
-      "time": "14:00",
-      "time_label": "14:00 GMT",
-      "league": {
-        "name": "إسبانيا, الدوري الإسباني",
-        "country": "Spain",
-        "logo": "https://a.espncdn.com/combiner/i?img=/i/leaguelogos/soccer/500/15.png&h=40&w=40"
-      },
-      "home": {
-        "name": "ريال أوفييدو",
-        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/01/193.png"
-      },
-      "away": {
-        "name": "أتلتيك بلباو",
-        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/01/144.png"
-      },
-      "score": null,
-      "streams": [
-        {
-          "id": "stream_bein3_1194027060",
-          "source": "livekora",
-          "quality": "HD",
-          "channel": "bein3",
-          "url": "https://pl.koooralive.click/albaplayer/bein3",
-          "priority": 1
-        }
-      ],
-      "poster_url": "/posters/1194027060.jpg"
-    },
-    {
       "id": 942507458,
-      "date": "2026-02-15T14:00:00.000Z",
-      "timestamp": 1771164000,
+      "date": "2026-02-15T13:00:00.000Z",
+      "timestamp": 1771160400,
       "status": "NS",
-      "time": "14:00",
-      "time_label": "14:00 GMT",
+      "time": "13:00",
+      "time_label": "13:00 GMT",
       "league": {
         "name": "تونس, الرابطة التونسية المحترفة الأولى",
         "country": "Tunisia",
@@ -102,12 +69,45 @@
       "poster_url": "/posters/942507458.jpg"
     },
     {
-      "id": 1414850138,
-      "date": "2026-02-15T15:00:00.000Z",
-      "timestamp": 1771167600,
+      "id": 1194027060,
+      "date": "2026-02-15T13:00:00.000Z",
+      "timestamp": 1771160400,
       "status": "NS",
-      "time": "15:00",
-      "time_label": "15:00 GMT",
+      "time": "13:00",
+      "time_label": "13:00 GMT",
+      "league": {
+        "name": "إسبانيا, الدوري الإسباني",
+        "country": "Spain",
+        "logo": "https://a.espncdn.com/combiner/i?img=/i/leaguelogos/soccer/500/15.png&h=40&w=40"
+      },
+      "home": {
+        "name": "ريال أوفييدو",
+        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/01/193.png"
+      },
+      "away": {
+        "name": "أتلتيك بلباو",
+        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/01/144.png"
+      },
+      "score": null,
+      "streams": [
+        {
+          "id": "stream_bein3_1194027060",
+          "source": "livekora",
+          "quality": "HD",
+          "channel": "bein3",
+          "url": "https://pl.koooralive.click/albaplayer/bein3",
+          "priority": 1
+        }
+      ],
+      "poster_url": "/posters/1194027060.jpg"
+    },
+    {
+      "id": 1414850138,
+      "date": "2026-02-15T14:00:00.000Z",
+      "timestamp": 1771164000,
+      "status": "NS",
+      "time": "14:00",
+      "time_label": "14:00 GMT",
       "league": {
         "name": "أفريقيا, الكونفدرالية الافريقية",
         "country": "Africa",
@@ -136,11 +136,11 @@
     },
     {
       "id": 1807903280,
-      "date": "2026-02-15T16:15:00.000Z",
-      "timestamp": 1771172100,
+      "date": "2026-02-15T15:15:00.000Z",
+      "timestamp": 1771168500,
       "status": "NS",
-      "time": "16:15",
-      "time_label": "16:15 GMT",
+      "time": "15:15",
+      "time_label": "15:15 GMT",
       "league": {
         "name": "إسبانيا, الدوري الإسباني",
         "country": "Spain",
@@ -169,11 +169,11 @@
     },
     {
       "id": 2000055582,
-      "date": "2026-02-15T17:00:00.000Z",
-      "timestamp": 1771174800,
+      "date": "2026-02-15T16:00:00.000Z",
+      "timestamp": 1771171200,
       "status": "NS",
-      "time": "17:00",
-      "time_label": "17:00 GMT",
+      "time": "16:00",
+      "time_label": "16:00 GMT",
       "league": {
         "name": "أفريقيا, الكونفدرالية الافريقية",
         "country": "Africa",
@@ -202,11 +202,11 @@
     },
     {
       "id": 345836295,
-      "date": "2026-02-15T17:00:00.000Z",
-      "timestamp": 1771174800,
+      "date": "2026-02-15T16:00:00.000Z",
+      "timestamp": 1771171200,
       "status": "NS",
-      "time": "17:00",
-      "time_label": "17:00 GMT",
+      "time": "16:00",
+      "time_label": "16:00 GMT",
       "league": {
         "name": "أفريقيا, دوري أبطال أفريقيا - المجموعات",
         "country": "Africa",
@@ -235,11 +235,11 @@
     },
     {
       "id": 388159299,
-      "date": "2026-02-15T17:00:00.000Z",
-      "timestamp": 1771174800,
+      "date": "2026-02-15T16:00:00.000Z",
+      "timestamp": 1771171200,
       "status": "NS",
-      "time": "17:00",
-      "time_label": "17:00 GMT",
+      "time": "16:00",
+      "time_label": "16:00 GMT",
       "league": {
         "name": "أفريقيا, دوري أبطال أفريقيا - المجموعات",
         "country": "Africa",
@@ -268,11 +268,11 @@
     },
     {
       "id": 1922554979,
-      "date": "2026-02-15T17:30:00.000Z",
-      "timestamp": 1771176600,
+      "date": "2026-02-15T16:30:00.000Z",
+      "timestamp": 1771173000,
       "status": "NS",
-      "time": "17:30",
-      "time_label": "17:30 GMT",
+      "time": "16:30",
+      "time_label": "16:30 GMT",
       "league": {
         "name": "إنجلترا, كاس الاتحاد الإنجليزي - الدور 4",
         "country": "England",
@@ -301,11 +301,11 @@
     },
     {
       "id": 584137932,
-      "date": "2026-02-15T18:30:00.000Z",
-      "timestamp": 1771180200,
+      "date": "2026-02-15T17:30:00.000Z",
+      "timestamp": 1771176600,
       "status": "NS",
-      "time": "18:30",
-      "time_label": "18:30 GMT",
+      "time": "17:30",
+      "time_label": "17:30 GMT",
       "league": {
         "name": "إسبانيا, الدوري الإسباني",
         "country": "Spain",
@@ -334,11 +334,11 @@
     },
     {
       "id": 976914998,
-      "date": "2026-02-15T20:45:00.000Z",
-      "timestamp": 1771188300,
+      "date": "2026-02-15T19:45:00.000Z",
+      "timestamp": 1771184700,
       "status": "NS",
-      "time": "20:45",
-      "time_label": "20:45 GMT",
+      "time": "19:45",
+      "time_label": "19:45 GMT",
       "league": {
         "name": "إيطاليا, الدوري الإيطالي",
         "country": "Italy",
@@ -367,11 +367,11 @@
     },
     {
       "id": 4412596,
-      "date": "2026-02-15T20:45:00.000Z",
-      "timestamp": 1771188300,
+      "date": "2026-02-15T19:45:00.000Z",
+      "timestamp": 1771184700,
       "status": "NS",
-      "time": "20:45",
-      "time_label": "20:45 GMT",
+      "time": "19:45",
+      "time_label": "19:45 GMT",
       "league": {
         "name": "فرنسا, الدوري الفرنسي",
         "country": "France",
@@ -400,11 +400,11 @@
     },
     {
       "id": 1505393024,
-      "date": "2026-02-15T21:00:00.000Z",
-      "timestamp": 1771189200,
+      "date": "2026-02-15T20:00:00.000Z",
+      "timestamp": 1771185600,
       "status": "NS",
-      "time": "21:00",
-      "time_label": "21:00 GMT",
+      "time": "20:00",
+      "time_label": "20:00 GMT",
       "league": {
         "name": "إسبانيا, الدوري الإسباني",
         "country": "Spain",
