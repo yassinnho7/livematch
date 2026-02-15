@@ -1,81 +1,7 @@
 {
-  "generated_at": "2026-02-15T21:27:53.985Z",
+  "generated_at": "2026-02-15T21:51:36.646Z",
   "count": 13,
   "matches": [
-    {
-      "id": 976914998,
-      "date": "2026-02-15T19:45:00.000Z",
-      "timestamp": 1771184700,
-      "status": "LIVE",
-      "time": "19:45",
-      "time_label": "19:45 GMT",
-      "league": {
-        "name": "إيطاليا, الدوري الإيطالي",
-        "country": "Italy",
-        "logo": "https://a.espncdn.com/combiner/i?img=/i/leaguelogos/soccer/500/12.png&h=40&w=40"
-      },
-      "home": {
-        "name": "نابولي",
-        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/01/234.png"
-      },
-      "away": {
-        "name": "روما",
-        "logo": "https://l.yacinetv.info/wp-content/uploads/2026/01/225.png"
-      },
-      "score": null,
-      "streams": [
-        {
-          "id": "stream_ad-premium-1_976914998",
-          "source": "livekora",
-          "quality": "HD",
-          "channel": "ad-premium-1",
-          "url": "https://pl.gomatch-live.com/albaplayer/ad-premium-1",
-          "priority": 1
-        },
-        {
-          "id": "stream_siiir_976914998",
-          "source": "siiir",
-          "quality": "VIP",
-          "channel": "VIP Server",
-          "url": "https://eyj0exaioijkv1qilcjhbgcioijiuzi1nij99sss.yallashot.us/playerv2.php?match=match2&key=c0ae1abba6eebd7e6cc5b88b1d2B71547",
-          "priority": 2
-        }
-      ],
-      "poster_url": "/posters/976914998.jpg"
-    },
-    {
-      "id": 4412596,
-      "date": "2026-02-15T19:45:00.000Z",
-      "timestamp": 1771184700,
-      "status": "LIVE",
-      "time": "19:45",
-      "time_label": "19:45 GMT",
-      "league": {
-        "name": "فرنسا, الدوري الفرنسي",
-        "country": "France",
-        "logo": "https://a.espncdn.com/combiner/i?img=/i/leaguelogos/soccer/500/9.png&h=40&w=40"
-      },
-      "home": {
-        "name": "أولمبيك ليون",
-        "logo": "https://l.yacinetv.info/wp-content/uploads/2026/01/465.png"
-      },
-      "away": {
-        "name": "نيس",
-        "logo": "https://l.yacinetv.info/wp-content/uploads/2026/01/470.png"
-      },
-      "score": null,
-      "streams": [
-        {
-          "id": "stream_bein4_4412596",
-          "source": "livekora",
-          "quality": "HD",
-          "channel": "bein4",
-          "url": "https://pl.gomatch-live.com/albaplayer/bein4",
-          "priority": 1
-        }
-      ],
-      "poster_url": "/posters/4412596.jpg"
-    },
     {
       "id": 1505393024,
       "date": "2026-02-15T20:00:00.000Z",
@@ -526,6 +452,80 @@
         }
       ],
       "poster_url": "/posters/584137932.jpg"
+    },
+    {
+      "id": 976914998,
+      "date": "2026-02-15T19:45:00.000Z",
+      "timestamp": 1771184700,
+      "status": "FT",
+      "time": "19:45",
+      "time_label": "19:45 GMT",
+      "league": {
+        "name": "إيطاليا, الدوري الإيطالي",
+        "country": "Italy",
+        "logo": "https://a.espncdn.com/combiner/i?img=/i/leaguelogos/soccer/500/12.png&h=40&w=40"
+      },
+      "home": {
+        "name": "نابولي",
+        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/01/234.png"
+      },
+      "away": {
+        "name": "روما",
+        "logo": "https://l.yacinetv.info/wp-content/uploads/2026/01/225.png"
+      },
+      "score": null,
+      "streams": [
+        {
+          "id": "stream_ad-premium-1_976914998",
+          "source": "livekora",
+          "quality": "HD",
+          "channel": "ad-premium-1",
+          "url": "https://pl.gomatch-live.com/albaplayer/ad-premium-1",
+          "priority": 1
+        },
+        {
+          "id": "stream_siiir_976914998",
+          "source": "siiir",
+          "quality": "VIP",
+          "channel": "VIP Server",
+          "url": "https://eyj0exaioijkv1qilcjhbgcioijiuzi1nij99sss.yallashot.us/playerv2.php?match=match2&key=c0ae1abba6eebd7e6cc5b88b1d2B71547",
+          "priority": 2
+        }
+      ],
+      "poster_url": "/posters/976914998.jpg"
+    },
+    {
+      "id": 4412596,
+      "date": "2026-02-15T19:45:00.000Z",
+      "timestamp": 1771184700,
+      "status": "FT",
+      "time": "19:45",
+      "time_label": "19:45 GMT",
+      "league": {
+        "name": "فرنسا, الدوري الفرنسي",
+        "country": "France",
+        "logo": "https://a.espncdn.com/combiner/i?img=/i/leaguelogos/soccer/500/9.png&h=40&w=40"
+      },
+      "home": {
+        "name": "أولمبيك ليون",
+        "logo": "https://l.yacinetv.info/wp-content/uploads/2026/01/465.png"
+      },
+      "away": {
+        "name": "نيس",
+        "logo": "https://l.yacinetv.info/wp-content/uploads/2026/01/470.png"
+      },
+      "score": null,
+      "streams": [
+        {
+          "id": "stream_bein4_4412596",
+          "source": "livekora",
+          "quality": "HD",
+          "channel": "bein4",
+          "url": "https://pl.gomatch-live.com/albaplayer/bein4",
+          "priority": 1
+        }
+      ],
+      "poster_url": "/posters/4412596.jpg"
     }
   ]
 }
