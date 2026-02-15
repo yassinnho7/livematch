@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-02-15T13:58:07.397Z",
+  "generated_at": "2026-02-15T14:26:15.119Z",
   "count": 13,
   "matches": [
     {
@@ -29,7 +29,7 @@
           "source": "livekora",
           "quality": "HD",
           "channel": "el-watania-1",
-          "url": "https://pl.koooralive.click/albaplayer/el-watania-1",
+          "url": "https://pl.gomatch-live.com/albaplayer/el-watania-1",
           "priority": 1
         }
       ],
@@ -62,8 +62,16 @@
           "source": "livekora",
           "quality": "HD",
           "channel": "bein3",
-          "url": "https://pl.koooralive.click/albaplayer/bein3",
+          "url": "https://pl.gomatch-live.com/albaplayer/bein3",
           "priority": 1
+        },
+        {
+          "id": "stream_siiir_1194027060",
+          "source": "siiir",
+          "quality": "VIP",
+          "channel": "VIP Server",
+          "url": "https://eyj0exaioijkv1qilcjhbgcioijiuzi1nij99sss.yallashot.us/playerv2.php?match=match3&key=c0ae1abba6eebd7e6cc5b88b1d2B71547",
+          "priority": 2
         }
       ],
       "poster_url": "/posters/1194027060.jpg"
@@ -72,7 +80,7 @@
       "id": 1414850138,
       "date": "2026-02-15T14:00:00.000Z",
       "timestamp": 1771164000,
-      "status": "NS",
+      "status": "LIVE",
       "time": "14:00",
       "time_label": "14:00 GMT",
       "league": {
@@ -95,8 +103,16 @@
           "source": "livekora",
           "quality": "HD",
           "channel": "ch1",
-          "url": "https://pl.koooralive.click/albaplayer/ch1",
+          "url": "https://pl.gomatch-live.com/albaplayer/ch1",
           "priority": 1
+        },
+        {
+          "id": "stream_siiir_1414850138",
+          "source": "siiir",
+          "quality": "VIP",
+          "channel": "VIP Server",
+          "url": "https://eyj0exaioijkv1qilcjhbgcioijiuzi1nij99sss.yallashot.us/playerv2.php?match=match8&key=c0ae1abba6eebd7e6cc5b88b1d2B71547",
+          "priority": 2
         }
       ],
       "poster_url": "/posters/1414850138.jpg"
@@ -128,7 +144,7 @@
           "source": "livekora",
           "quality": "HD",
           "channel": "bein3",
-          "url": "https://pl.koooralive.click/albaplayer/bein3",
+          "url": "https://pl.gomatch-live.com/albaplayer/bein3",
           "priority": 1
         }
       ],
@@ -161,8 +177,16 @@
           "source": "livekora",
           "quality": "HD",
           "channel": "bein5",
-          "url": "https://pl.koooralive.click/albaplayer/bein5",
+          "url": "https://pl.gomatch-live.com/albaplayer/bein5",
           "priority": 1
+        },
+        {
+          "id": "stream_siiir_2000055582",
+          "source": "siiir",
+          "quality": "VIP",
+          "channel": "VIP Server",
+          "url": "https://eyj0exaioijkv1qilcjhbgcioijiuzi1nij99sss.yallashot.us/playerv2.php?match=match8&key=c0ae1abba6eebd7e6cc5b88b1d2B71547",
+          "priority": 2
         }
       ],
       "poster_url": "/posters/2000055582.jpg"
@@ -194,7 +218,7 @@
           "source": "livekora",
           "quality": "HD",
           "channel": "bein2",
-          "url": "https://pl.koooralive.click/albaplayer/bein2",
+          "url": "https://pl.gomatch-live.com/albaplayer/bein2",
           "priority": 1
         }
       ],
@@ -227,7 +251,7 @@
           "source": "livekora",
           "quality": "HD",
           "channel": "bein-sport-7",
-          "url": "https://pl.koooralive.click/albaplayer/bein-sport-7",
+          "url": "https://pl.gomatch-live.com/albaplayer/bein-sport-7",
           "priority": 1
         }
       ],
@@ -260,8 +284,16 @@
           "source": "livekora",
           "quality": "HD",
           "channel": "bein1",
-          "url": "https://pl.koooralive.click/albaplayer/bein1",
+          "url": "https://pl.gomatch-live.com/albaplayer/bein1",
           "priority": 1
+        },
+        {
+          "id": "stream_siiir_1922554979",
+          "source": "siiir",
+          "quality": "VIP",
+          "channel": "VIP Server",
+          "url": "https://eyj0exaioijkv1qilcjhbgcioijiuzi1nij99sss.yallashot.us/playerv2.php?match=match3&key=c0ae1abba6eebd7e6cc5b88b1d2B71547",
+          "priority": 2
         }
       ],
       "poster_url": "/posters/1922554979.jpg"
@@ -293,7 +325,7 @@
           "source": "livekora",
           "quality": "HD",
           "channel": "bein3",
-          "url": "https://pl.koooralive.click/albaplayer/bein3",
+          "url": "https://pl.gomatch-live.com/albaplayer/bein3",
           "priority": 1
         }
       ],
@@ -326,7 +358,7 @@
           "source": "livekora",
           "quality": "HD",
           "channel": "ad-premium-1",
-          "url": "https://pl.koooralive.click/albaplayer/ad-premium-1",
+          "url": "https://pl.gomatch-live.com/albaplayer/ad-premium-1",
           "priority": 1
         }
       ],
@@ -359,7 +391,7 @@
           "source": "livekora",
           "quality": "HD",
           "channel": "bein4",
-          "url": "https://pl.koooralive.click/albaplayer/bein4",
+          "url": "https://pl.gomatch-live.com/albaplayer/bein4",
           "priority": 1
         }
       ],
@@ -392,7 +424,7 @@
           "source": "livekora",
           "quality": "HD",
           "channel": "bein3",
-          "url": "https://pl.koooralive.click/albaplayer/bein3",
+          "url": "https://pl.gomatch-live.com/albaplayer/bein3",
           "priority": 1
         }
       ],
@@ -402,7 +434,7 @@
       "id": 507389352,
       "date": "2026-02-15T12:00:00.000Z",
       "timestamp": 1771156800,
-      "status": "LIVE",
+      "status": "FT",
       "time": "12:00",
       "time_label": "12:00 GMT",
       "league": {
@@ -425,8 +457,16 @@
           "source": "livekora",
           "quality": "HD",
           "channel": "bein1",
-          "url": "https://pl.koooralive.click/albaplayer/bein1",
+          "url": "https://pl.gomatch-live.com/albaplayer/bein1",
           "priority": 1
+        },
+        {
+          "id": "stream_siiir_507389352",
+          "source": "siiir",
+          "quality": "VIP",
+          "channel": "VIP Server",
+          "url": "https://eyj0exaioijkv1qilcjhbgcioijiuzi1nij99sss.yallashot.us/playerv2.php?match=match8&key=c0ae1abba6eebd7e6cc5b88b1d2B71547",
+          "priority": 2
         }
       ],
       "poster_url": "/posters/507389352.jpg"
