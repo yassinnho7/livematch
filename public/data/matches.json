@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-02-15T11:00:03.645Z",
+  "generated_at": "2026-02-15T11:26:55.147Z",
   "count": 13,
   "matches": [
     {
@@ -124,11 +124,11 @@
       "score": null,
       "streams": [
         {
-          "id": "stream_ch2_1414850138",
+          "id": "stream_ch1_1414850138",
           "source": "livekora",
           "quality": "HD",
-          "channel": "ch2",
-          "url": "https://pl.koooralive.click/albaplayer/ch2",
+          "channel": "ch1",
+          "url": "https://pl.koooralive.click/albaplayer/ch1",
           "priority": 1
         }
       ],
@@ -256,11 +256,11 @@
       "score": null,
       "streams": [
         {
-          "id": "stream_ch1_388159299",
+          "id": "stream_bein-sport-7_388159299",
           "source": "livekora",
           "quality": "HD",
-          "channel": "ch1",
-          "url": "https://pl.koooralive.click/albaplayer/ch1",
+          "channel": "bein-sport-7",
+          "url": "https://pl.koooralive.click/albaplayer/bein-sport-7",
           "priority": 1
         }
       ],
