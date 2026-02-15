@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-02-15T15:20:16.631Z",
+  "generated_at": "2026-02-15T15:50:06.360Z",
   "count": 13,
   "matches": [
     {
@@ -154,6 +154,14 @@
           "channel": "bein2",
           "url": "https://pl.gomatch-live.com/albaplayer/bein2",
           "priority": 1
+        },
+        {
+          "id": "stream_siiir_345836295",
+          "source": "siiir",
+          "quality": "VIP",
+          "channel": "VIP Server",
+          "url": "https://eyj0exaioijkv1qilcjhbgcioijiuzi1nij99sss.yallashot.us/playerv2.php?match=match2&key=c0ae1abba6eebd7e6cc5b88b1d2B71547",
+          "priority": 2
         }
       ],
       "poster_url": "/posters/345836295.jpg"
@@ -187,6 +195,14 @@
           "channel": "bein-sport-7",
           "url": "https://pl.gomatch-live.com/albaplayer/bein-sport-7",
           "priority": 1
+        },
+        {
+          "id": "stream_siiir_388159299",
+          "source": "siiir",
+          "quality": "VIP",
+          "channel": "VIP Server",
+          "url": "https://eyj0exaioijkv1qilcjhbgcioijiuzi1nij99sss.yallashot.us/playerv2.php?match=match7&key=c0ae1abba6eebd7e6cc5b88b1d2B71547",
+          "priority": 2
         }
       ],
       "poster_url": "/posters/388159299.jpg"
@@ -434,6 +450,14 @@
           "channel": "el-watania-1",
           "url": "https://pl.gomatch-live.com/albaplayer/el-watania-1",
           "priority": 1
+        },
+        {
+          "id": "stream_siiir_942507458",
+          "source": "siiir",
+          "quality": "VIP",
+          "channel": "VIP Server",
+          "url": "https://eyj0exaioijkv1qilcjhbgcioijiuzi1nij99sss.yallashot.us/playerv2.php?match=match2&key=c0ae1abba6eebd7e6cc5b88b1d2B71547",
+          "priority": 2
         }
       ],
       "poster_url": "/posters/942507458.jpg"
