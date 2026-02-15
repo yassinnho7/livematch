@@ -1,48 +1,7 @@
 {
-  "generated_at": "2026-02-15T15:50:06.360Z",
+  "generated_at": "2026-02-15T16:05:41.466Z",
   "count": 13,
   "matches": [
-    {
-      "id": 1414850138,
-      "date": "2026-02-15T14:00:00.000Z",
-      "timestamp": 1771164000,
-      "status": "LIVE",
-      "time": "14:00",
-      "time_label": "14:00 GMT",
-      "league": {
-        "name": "أفريقيا, الكونفدرالية الافريقية",
-        "country": "Africa",
-        "logo": "https://cdn-icons-png.flaticon.com/512/1378/1378598.png"
-      },
-      "home": {
-        "name": "الوداد الرياضي",
-        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/01/8326.png"
-      },
-      "away": {
-        "name": "عزام يونايتد",
-        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/02/10537.png"
-      },
-      "score": null,
-      "streams": [
-        {
-          "id": "stream_ch1_1414850138",
-          "source": "livekora",
-          "quality": "HD",
-          "channel": "ch1",
-          "url": "https://pl.gomatch-live.com/albaplayer/ch1",
-          "priority": 1
-        },
-        {
-          "id": "stream_siiir_1414850138",
-          "source": "siiir",
-          "quality": "VIP",
-          "channel": "VIP Server",
-          "url": "https://eyj0exaioijkv1qilcjhbgcioijiuzi1nij99sss.yallashot.us/playerv2.php?match=match8&key=c0ae1abba6eebd7e6cc5b88b1d2B71547",
-          "priority": 2
-        }
-      ],
-      "poster_url": "/posters/1414850138.jpg"
-    },
     {
       "id": 1807903280,
       "date": "2026-02-15T15:15:00.000Z",
@@ -88,7 +47,7 @@
       "id": 2000055582,
       "date": "2026-02-15T16:00:00.000Z",
       "timestamp": 1771171200,
-      "status": "NS",
+      "status": "LIVE",
       "time": "16:00",
       "time_label": "16:00 GMT",
       "league": {
@@ -129,7 +88,7 @@
       "id": 345836295,
       "date": "2026-02-15T16:00:00.000Z",
       "timestamp": 1771171200,
-      "status": "NS",
+      "status": "LIVE",
       "time": "16:00",
       "time_label": "16:00 GMT",
       "league": {
@@ -170,7 +129,7 @@
       "id": 388159299,
       "date": "2026-02-15T16:00:00.000Z",
       "timestamp": 1771171200,
-      "status": "NS",
+      "status": "LIVE",
       "time": "16:00",
       "time_label": "16:00 GMT",
       "league": {
@@ -502,6 +461,47 @@
         }
       ],
       "poster_url": "/posters/1194027060.jpg"
+    },
+    {
+      "id": 1414850138,
+      "date": "2026-02-15T14:00:00.000Z",
+      "timestamp": 1771164000,
+      "status": "FT",
+      "time": "14:00",
+      "time_label": "14:00 GMT",
+      "league": {
+        "name": "أفريقيا, الكونفدرالية الافريقية",
+        "country": "Africa",
+        "logo": "https://cdn-icons-png.flaticon.com/512/1378/1378598.png"
+      },
+      "home": {
+        "name": "الوداد الرياضي",
+        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/01/8326.png"
+      },
+      "away": {
+        "name": "عزام يونايتد",
+        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/02/10537.png"
+      },
+      "score": null,
+      "streams": [
+        {
+          "id": "stream_ch1_1414850138",
+          "source": "livekora",
+          "quality": "HD",
+          "channel": "ch1",
+          "url": "https://pl.gomatch-live.com/albaplayer/ch1",
+          "priority": 1
+        },
+        {
+          "id": "stream_siiir_1414850138",
+          "source": "siiir",
+          "quality": "VIP",
+          "channel": "VIP Server",
+          "url": "https://eyj0exaioijkv1qilcjhbgcioijiuzi1nij99sss.yallashot.us/playerv2.php?match=match8&key=c0ae1abba6eebd7e6cc5b88b1d2B71547",
+          "priority": 2
+        }
+      ],
+      "poster_url": "/posters/1414850138.jpg"
     }
   ]
 }
