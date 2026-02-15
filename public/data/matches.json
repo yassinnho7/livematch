@@ -1,48 +1,7 @@
 {
-  "generated_at": "2026-02-15T21:51:36.646Z",
+  "generated_at": "2026-02-15T22:05:09.537Z",
   "count": 13,
   "matches": [
-    {
-      "id": 1505393024,
-      "date": "2026-02-15T20:00:00.000Z",
-      "timestamp": 1771185600,
-      "status": "LIVE",
-      "time": "20:00",
-      "time_label": "20:00 GMT",
-      "league": {
-        "name": "إسبانيا, الدوري الإسباني",
-        "country": "Spain",
-        "logo": "https://a.espncdn.com/combiner/i?img=/i/leaguelogos/soccer/500/15.png&h=40&w=40"
-      },
-      "home": {
-        "name": "ريال مايوركا",
-        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/02/142.png"
-      },
-      "away": {
-        "name": "ريال بيتيس",
-        "logo": "https://l.yacinetv.info/wp-content/uploads/2026/01/146.png"
-      },
-      "score": null,
-      "streams": [
-        {
-          "id": "stream_bein3_1505393024",
-          "source": "livekora",
-          "quality": "HD",
-          "channel": "bein3",
-          "url": "https://pl.gomatch-live.com/albaplayer/bein3",
-          "priority": 1
-        },
-        {
-          "id": "stream_siiir_1505393024",
-          "source": "siiir",
-          "quality": "VIP",
-          "channel": "VIP Server",
-          "url": "https://eyj0exaioijkv1qilcjhbgcioijiuzi1nij99sss.yallashot.us/playerv2.php?match=match3&key=c0ae1abba6eebd7e6cc5b88b1d2B71547",
-          "priority": 2
-        }
-      ],
-      "poster_url": "/posters/1505393024.jpg"
-    },
     {
       "id": 507389352,
       "date": "2026-02-15T12:00:00.000Z",
@@ -72,14 +31,6 @@
           "channel": "bein1",
           "url": "https://pl.gomatch-live.com/albaplayer/bein1",
           "priority": 1
-        },
-        {
-          "id": "stream_siiir_507389352",
-          "source": "siiir",
-          "quality": "VIP",
-          "channel": "VIP Server",
-          "url": "https://eyj0exaioijkv1qilcjhbgcioijiuzi1nij99sss.yallashot.us/playerv2.php?match=match8&key=c0ae1abba6eebd7e6cc5b88b1d2B71547",
-          "priority": 2
         }
       ],
       "poster_url": "/posters/507389352.jpg"
@@ -113,14 +64,6 @@
           "channel": "el-watania-1",
           "url": "https://pl.gomatch-live.com/albaplayer/el-watania-1",
           "priority": 1
-        },
-        {
-          "id": "stream_siiir_942507458",
-          "source": "siiir",
-          "quality": "VIP",
-          "channel": "VIP Server",
-          "url": "https://eyj0exaioijkv1qilcjhbgcioijiuzi1nij99sss.yallashot.us/playerv2.php?match=match2&key=c0ae1abba6eebd7e6cc5b88b1d2B71547",
-          "priority": 2
         }
       ],
       "poster_url": "/posters/942507458.jpg"
@@ -160,7 +103,7 @@
           "source": "siiir",
           "quality": "VIP",
           "channel": "VIP Server",
-          "url": "https://eyj0exaioijkv1qilcjhbgcioijiuzi1nij99sss.yallashot.us/playerv2.php?match=match3&key=c0ae1abba6eebd7e6cc5b88b1d2B71547",
+          "url": "https://eyj0exaioijkv1qilcjhbgcioijiuzi1nij99sss.yallashot.us/playerv2.php?match=match1&key=c0ae1abba6eebd7e6cc5b88b1d2B71547",
           "priority": 2
         }
       ],
@@ -195,14 +138,6 @@
           "channel": "ch1",
           "url": "https://pl.gomatch-live.com/albaplayer/ch1",
           "priority": 1
-        },
-        {
-          "id": "stream_siiir_1414850138",
-          "source": "siiir",
-          "quality": "VIP",
-          "channel": "VIP Server",
-          "url": "https://eyj0exaioijkv1qilcjhbgcioijiuzi1nij99sss.yallashot.us/playerv2.php?match=match8&key=c0ae1abba6eebd7e6cc5b88b1d2B71547",
-          "priority": 2
         }
       ],
       "poster_url": "/posters/1414850138.jpg"
@@ -236,14 +171,6 @@
           "channel": "bein3",
           "url": "https://pl.gomatch-live.com/albaplayer/bein3",
           "priority": 1
-        },
-        {
-          "id": "stream_siiir_1807903280",
-          "source": "siiir",
-          "quality": "VIP",
-          "channel": "VIP Server",
-          "url": "https://eyj0exaioijkv1qilcjhbgcioijiuzi1nij99sss.yallashot.us/playerv2.php?match=match3&key=c0ae1abba6eebd7e6cc5b88b1d2B71547",
-          "priority": 2
         }
       ],
       "poster_url": "/posters/1807903280.jpg"
@@ -277,14 +204,6 @@
           "channel": "bein5",
           "url": "https://pl.gomatch-live.com/albaplayer/bein5",
           "priority": 1
-        },
-        {
-          "id": "stream_siiir_2000055582",
-          "source": "siiir",
-          "quality": "VIP",
-          "channel": "VIP Server",
-          "url": "https://eyj0exaioijkv1qilcjhbgcioijiuzi1nij99sss.yallashot.us/playerv2.php?match=match8&key=c0ae1abba6eebd7e6cc5b88b1d2B71547",
-          "priority": 2
         }
       ],
       "poster_url": "/posters/2000055582.jpg"
@@ -318,14 +237,6 @@
           "channel": "bein2",
           "url": "https://pl.gomatch-live.com/albaplayer/bein2",
           "priority": 1
-        },
-        {
-          "id": "stream_siiir_345836295",
-          "source": "siiir",
-          "quality": "VIP",
-          "channel": "VIP Server",
-          "url": "https://eyj0exaioijkv1qilcjhbgcioijiuzi1nij99sss.yallashot.us/playerv2.php?match=match2&key=c0ae1abba6eebd7e6cc5b88b1d2B71547",
-          "priority": 2
         }
       ],
       "poster_url": "/posters/345836295.jpg"
@@ -359,14 +270,6 @@
           "channel": "bein-sport-7",
           "url": "https://pl.gomatch-live.com/albaplayer/bein-sport-7",
           "priority": 1
-        },
-        {
-          "id": "stream_siiir_388159299",
-          "source": "siiir",
-          "quality": "VIP",
-          "channel": "VIP Server",
-          "url": "https://eyj0exaioijkv1qilcjhbgcioijiuzi1nij99sss.yallashot.us/playerv2.php?match=match7&key=c0ae1abba6eebd7e6cc5b88b1d2B71547",
-          "priority": 2
         }
       ],
       "poster_url": "/posters/388159299.jpg"
@@ -406,7 +309,7 @@
           "source": "siiir",
           "quality": "VIP",
           "channel": "VIP Server",
-          "url": "https://eyj0exaioijkv1qilcjhbgcioijiuzi1nij99sss.yallashot.us/playerv2.php?match=match3&key=c0ae1abba6eebd7e6cc5b88b1d2B71547",
+          "url": "https://eyj0exaioijkv1qilcjhbgcioijiuzi1nij99sss.yallashot.us/playerv2.php?match=match1&key=c0ae1abba6eebd7e6cc5b88b1d2B71547",
           "priority": 2
         }
       ],
@@ -441,14 +344,6 @@
           "channel": "bein3",
           "url": "https://pl.gomatch-live.com/albaplayer/bein3",
           "priority": 1
-        },
-        {
-          "id": "stream_siiir_584137932",
-          "source": "siiir",
-          "quality": "VIP",
-          "channel": "VIP Server",
-          "url": "https://eyj0exaioijkv1qilcjhbgcioijiuzi1nij99sss.yallashot.us/playerv2.php?match=match3&key=c0ae1abba6eebd7e6cc5b88b1d2B71547",
-          "priority": 2
         }
       ],
       "poster_url": "/posters/584137932.jpg"
@@ -482,14 +377,6 @@
           "channel": "ad-premium-1",
           "url": "https://pl.gomatch-live.com/albaplayer/ad-premium-1",
           "priority": 1
-        },
-        {
-          "id": "stream_siiir_976914998",
-          "source": "siiir",
-          "quality": "VIP",
-          "channel": "VIP Server",
-          "url": "https://eyj0exaioijkv1qilcjhbgcioijiuzi1nij99sss.yallashot.us/playerv2.php?match=match2&key=c0ae1abba6eebd7e6cc5b88b1d2B71547",
-          "priority": 2
         }
       ],
       "poster_url": "/posters/976914998.jpg"
@@ -526,6 +413,39 @@
         }
       ],
       "poster_url": "/posters/4412596.jpg"
+    },
+    {
+      "id": 1505393024,
+      "date": "2026-02-15T20:00:00.000Z",
+      "timestamp": 1771185600,
+      "status": "FT",
+      "time": "20:00",
+      "time_label": "20:00 GMT",
+      "league": {
+        "name": "إسبانيا, الدوري الإسباني",
+        "country": "Spain",
+        "logo": "https://a.espncdn.com/combiner/i?img=/i/leaguelogos/soccer/500/15.png&h=40&w=40"
+      },
+      "home": {
+        "name": "ريال مايوركا",
+        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/02/142.png"
+      },
+      "away": {
+        "name": "ريال بيتيس",
+        "logo": "https://l.yacinetv.info/wp-content/uploads/2026/01/146.png"
+      },
+      "score": null,
+      "streams": [
+        {
+          "id": "stream_bein3_1505393024",
+          "source": "livekora",
+          "quality": "HD",
+          "channel": "bein3",
+          "url": "https://pl.gomatch-live.com/albaplayer/bein3",
+          "priority": 1
+        }
+      ],
+      "poster_url": "/posters/1505393024.jpg"
     }
   ]
 }
