@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-02-15T18:51:55.262Z",
+  "generated_at": "2026-02-15T19:20:46.485Z",
   "count": 13,
   "matches": [
     {
@@ -72,6 +72,14 @@
           "channel": "ad-premium-1",
           "url": "https://pl.gomatch-live.com/albaplayer/ad-premium-1",
           "priority": 1
+        },
+        {
+          "id": "stream_siiir_976914998",
+          "source": "siiir",
+          "quality": "VIP",
+          "channel": "VIP Server",
+          "url": "https://eyj0exaioijkv1qilcjhbgcioijiuzi1nij99sss.yallashot.us/playerv2.php?match=match2&key=c0ae1abba6eebd7e6cc5b88b1d2B71547",
+          "priority": 2
         }
       ],
       "poster_url": "/posters/976914998.jpg"
@@ -138,6 +146,14 @@
           "channel": "bein3",
           "url": "https://pl.gomatch-live.com/albaplayer/bein3",
           "priority": 1
+        },
+        {
+          "id": "stream_siiir_1505393024",
+          "source": "siiir",
+          "quality": "VIP",
+          "channel": "VIP Server",
+          "url": "https://eyj0exaioijkv1qilcjhbgcioijiuzi1nij99sss.yallashot.us/playerv2.php?match=match3&key=c0ae1abba6eebd7e6cc5b88b1d2B71547",
+          "priority": 2
         }
       ],
       "poster_url": "/posters/1505393024.jpg"
