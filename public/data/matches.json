@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-02-16T18:29:42.306Z",
+  "generated_at": "2026-02-16T19:14:31.305Z",
   "count": 6,
   "matches": [
     {
@@ -138,6 +138,14 @@
           "channel": "bein1",
           "url": "https://pl.gomatch-live.com/albaplayer/bein1",
           "priority": 1
+        },
+        {
+          "id": "stream_siiir_1817968797",
+          "source": "siiir",
+          "quality": "VIP",
+          "channel": "VIP Server",
+          "url": "https://eyj0exaioijkv1qilcjhbgcioijiuzi1nij99sss.yallashot.us/playerv2.php?match=match1&key=c0ae1abba6eebd7e6cc5b88b1d2B71547",
+          "priority": 2
         }
       ],
       "poster_url": "/posters/1817968797.jpg"
