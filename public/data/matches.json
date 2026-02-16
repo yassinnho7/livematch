@@ -1,229 +1,31 @@
 {
-  "generated_at": "2026-02-16T10:11:47.894Z",
-  "count": 13,
+  "generated_at": "2026-02-16T11:11:28.049Z",
+  "count": 6,
   "matches": [
     {
-      "id": 1752153833,
-      "date": "2026-02-16T12:00:00.000Z",
-      "timestamp": 1771243200,
-      "status": "FT",
-      "time": "12:00",
-      "time_label": "12:00 GMT",
-      "league": {
-        "name": "إنجلترا, كاس الاتحاد الإنجليزي - الدور 4",
-        "country": "England",
-        "logo": "https://a.espncdn.com/combiner/i?img=/i/leaguelogos/soccer/500/23.png&h=40&w=40"
-      },
-      "home": {
-        "name": "برمنغهام",
-        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/02/1.png"
-      },
-      "away": {
-        "name": "ليدز يونايتد",
-        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/01/36.png"
-      },
-      "score": null,
-      "streams": [
-        {
-          "id": "stream_bein1_1752153833",
-          "source": "livekora",
-          "quality": "HD",
-          "channel": "bein1",
-          "url": "https://pl.gomatch-live.com/albaplayer/bein1",
-          "priority": 1
-        }
-      ],
-      "poster_url": "/posters/1752153833.jpg"
-    },
-    {
-      "id": 493810819,
-      "date": "2026-02-16T13:00:00.000Z",
-      "timestamp": 1771246800,
-      "status": "FT",
-      "time": "13:00",
-      "time_label": "13:00 GMT",
-      "league": {
-        "name": "تونس, الرابطة التونسية المحترفة الأولى",
-        "country": "Tunisia",
-        "logo": "https://a.espncdn.com/combiner/i?img=/i/leaguelogos/soccer/500/1247.png&h=40&w=40"
-      },
-      "home": {
-        "name": "النادي الأفريقي",
-        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/01/8239.png"
-      },
-      "away": {
-        "name": "الشبيبة الرياضية بالعمران",
-        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/02/72896.png"
-      },
-      "score": null,
-      "streams": [
-        {
-          "id": "stream_el-watania-1_493810819",
-          "source": "livekora",
-          "quality": "HD",
-          "channel": "el-watania-1",
-          "url": "https://pl.gomatch-live.com/albaplayer/el-watania-1",
-          "priority": 1
-        }
-      ],
-      "poster_url": "/posters/493810819.jpg"
-    },
-    {
-      "id": 232413043,
-      "date": "2026-02-16T13:00:00.000Z",
-      "timestamp": 1771246800,
-      "status": "FT",
-      "time": "13:00",
-      "time_label": "13:00 GMT",
-      "league": {
-        "name": "إسبانيا, الدوري الإسباني",
-        "country": "Spain",
-        "logo": "https://a.espncdn.com/combiner/i?img=/i/leaguelogos/soccer/500/15.png&h=40&w=40"
-      },
-      "home": {
-        "name": "ريال أوفييدو",
-        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/01/193.png"
-      },
-      "away": {
-        "name": "أتلتيك بلباو",
-        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/01/144.png"
-      },
-      "score": null,
-      "streams": [
-        {
-          "id": "stream_bein3_232413043",
-          "source": "livekora",
-          "quality": "HD",
-          "channel": "bein3",
-          "url": "https://pl.gomatch-live.com/albaplayer/bein3",
-          "priority": 1
-        }
-      ],
-      "poster_url": "/posters/232413043.jpg"
-    },
-    {
-      "id": 2107951835,
-      "date": "2026-02-16T14:00:00.000Z",
-      "timestamp": 1771250400,
-      "status": "FT",
-      "time": "14:00",
-      "time_label": "14:00 GMT",
-      "league": {
-        "name": "أفريقيا, الكونفدرالية الافريقية",
-        "country": "Africa",
-        "logo": "https://cdn-icons-png.flaticon.com/512/1378/1378598.png"
-      },
-      "home": {
-        "name": "الوداد الرياضي",
-        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/01/8326.png"
-      },
-      "away": {
-        "name": "عزام يونايتد",
-        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/02/10537.png"
-      },
-      "score": null,
-      "streams": [
-        {
-          "id": "stream_ch1_2107951835",
-          "source": "livekora",
-          "quality": "HD",
-          "channel": "ch1",
-          "url": "https://pl.gomatch-live.com/albaplayer/ch1",
-          "priority": 1
-        }
-      ],
-      "poster_url": "/posters/2107951835.jpg"
-    },
-    {
-      "id": 1793962319,
-      "date": "2026-02-16T15:15:00.000Z",
-      "timestamp": 1771254900,
-      "status": "FT",
-      "time": "15:15",
-      "time_label": "15:15 GMT",
-      "league": {
-        "name": "إسبانيا, الدوري الإسباني",
-        "country": "Spain",
-        "logo": "https://a.espncdn.com/combiner/i?img=/i/leaguelogos/soccer/500/15.png&h=40&w=40"
-      },
-      "home": {
-        "name": "رايو فاييكانو",
-        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/01/174.png"
-      },
-      "away": {
-        "name": "أتلتيكو مدريد",
-        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/01/134.png"
-      },
-      "score": null,
-      "streams": [
-        {
-          "id": "stream_bein3_1793962319",
-          "source": "livekora",
-          "quality": "HD",
-          "channel": "bein3",
-          "url": "https://pl.gomatch-live.com/albaplayer/bein3",
-          "priority": 1
-        }
-      ],
-      "poster_url": "/posters/1793962319.jpg"
-    },
-    {
-      "id": 2083560801,
+      "id": 749362032,
       "date": "2026-02-16T16:00:00.000Z",
       "timestamp": 1771257600,
-      "status": "FT",
+      "status": "NS",
       "time": "16:00",
       "time_label": "16:00 GMT",
       "league": {
-        "name": "أفريقيا, الكونفدرالية الافريقية",
-        "country": "Africa",
-        "logo": "https://cdn-icons-png.flaticon.com/512/1378/1378598.png"
-      },
-      "home": {
-        "name": "شباب بلوزداد",
-        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/01/8225.png"
-      },
-      "away": {
-        "name": "اوتوهو",
-        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/02/50852.png"
-      },
-      "score": null,
-      "streams": [
-        {
-          "id": "stream_bein5_2083560801",
-          "source": "livekora",
-          "quality": "HD",
-          "channel": "bein5",
-          "url": "https://pl.gomatch-live.com/albaplayer/bein5",
-          "priority": 1
-        }
-      ],
-      "poster_url": "/posters/2083560801.jpg"
-    },
-    {
-      "id": 557187208,
-      "date": "2026-02-16T16:00:00.000Z",
-      "timestamp": 1771257600,
-      "status": "FT",
-      "time": "16:00",
-      "time_label": "16:00 GMT",
-      "league": {
-        "name": "أفريقيا, دوري أبطال أفريقيا - المجموعات",
-        "country": "Africa",
-        "logo": "https://a.espncdn.com/combiner/i?img=/i/leaguelogos/soccer/500/1257.png&h=40&w=40"
+        "name": "آسيا, دوري أبطال آسيا للنخبة",
+        "country": "Asia",
+        "logo": "https://a.espncdn.com/combiner/i?img=/i/leaguelogos/soccer/500/209.png&h=40&w=40"
       },
       "home": {
         "name": "الأهلي",
         "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/01/8200.png"
       },
       "away": {
-        "name": "الجيش الملكي",
-        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/01/5455.png"
+        "name": "شباب الاهلي",
+        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/02/8347.png"
       },
       "score": null,
       "streams": [
         {
-          "id": "stream_bein2_557187208",
+          "id": "stream_bein2_749362032",
           "source": "livekora",
           "quality": "HD",
           "channel": "bein2",
@@ -231,98 +33,32 @@
           "priority": 1
         }
       ],
-      "poster_url": "/posters/557187208.jpg"
+      "poster_url": "/posters/749362032.jpg"
     },
     {
-      "id": 1081260996,
+      "id": 1507601438,
       "date": "2026-02-16T16:00:00.000Z",
       "timestamp": 1771257600,
-      "status": "FT",
+      "status": "NS",
       "time": "16:00",
       "time_label": "16:00 GMT",
       "league": {
-        "name": "أفريقيا, دوري أبطال أفريقيا - المجموعات",
-        "country": "Africa",
-        "logo": "https://a.espncdn.com/combiner/i?img=/i/leaguelogos/soccer/500/1257.png&h=40&w=40"
+        "name": "آسيا, دوري أبطال آسيا للنخبة",
+        "country": "Asia",
+        "logo": "https://a.espncdn.com/combiner/i?img=/i/leaguelogos/soccer/500/209.png&h=40&w=40"
       },
       "home": {
-        "name": "يانج افريكانز",
-        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/01/18957.png"
+        "name": "الشارقة",
+        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/02/8351.png"
       },
       "away": {
-        "name": "شبيبة القبائل",
-        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/01/8223.png"
+        "name": "ناساف كارشي",
+        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/02/8596.png"
       },
       "score": null,
       "streams": [
         {
-          "id": "stream_bein-sport-7_1081260996",
-          "source": "livekora",
-          "quality": "HD",
-          "channel": "bein-sport-7",
-          "url": "https://pl.gomatch-live.com/albaplayer/bein-sport-7",
-          "priority": 1
-        }
-      ],
-      "poster_url": "/posters/1081260996.jpg"
-    },
-    {
-      "id": 2133905892,
-      "date": "2026-02-16T16:30:00.000Z",
-      "timestamp": 1771259400,
-      "status": "FT",
-      "time": "16:30",
-      "time_label": "16:30 GMT",
-      "league": {
-        "name": "إنجلترا, كاس الاتحاد الإنجليزي - الدور 4",
-        "country": "England",
-        "logo": "https://a.espncdn.com/combiner/i?img=/i/leaguelogos/soccer/500/23.png&h=40&w=40"
-      },
-      "home": {
-        "name": "أرسنال",
-        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/01/104.png"
-      },
-      "away": {
-        "name": "ويجان أتلتيك",
-        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/02/119.png"
-      },
-      "score": null,
-      "streams": [
-        {
-          "id": "stream_bein1_2133905892",
-          "source": "livekora",
-          "quality": "HD",
-          "channel": "bein1",
-          "url": "https://pl.gomatch-live.com/albaplayer/bein1",
-          "priority": 1
-        }
-      ],
-      "poster_url": "/posters/2133905892.jpg"
-    },
-    {
-      "id": 1937447629,
-      "date": "2026-02-16T17:30:00.000Z",
-      "timestamp": 1771263000,
-      "status": "FT",
-      "time": "17:30",
-      "time_label": "17:30 GMT",
-      "league": {
-        "name": "إسبانيا, الدوري الإسباني",
-        "country": "Spain",
-        "logo": "https://a.espncdn.com/combiner/i?img=/i/leaguelogos/soccer/500/15.png&h=40&w=40"
-      },
-      "home": {
-        "name": "ليفانتي",
-        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/01/150.png"
-      },
-      "away": {
-        "name": "فالنسيا",
-        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/01/139.png"
-      },
-      "score": null,
-      "streams": [
-        {
-          "id": "stream_bein3_1937447629",
+          "id": "stream_bein3_1507601438",
           "source": "livekora",
           "quality": "HD",
           "channel": "bein3",
@@ -330,79 +66,112 @@
           "priority": 1
         }
       ],
-      "poster_url": "/posters/1937447629.jpg"
+      "poster_url": "/posters/1507601438.jpg"
     },
     {
-      "id": 683511991,
-      "date": "2026-02-16T19:45:00.000Z",
-      "timestamp": 1771271100,
-      "status": "FT",
-      "time": "19:45",
-      "time_label": "19:45 GMT",
+      "id": 686041366,
+      "date": "2026-02-16T18:15:00.000Z",
+      "timestamp": 1771265700,
+      "status": "NS",
+      "time": "18:15",
+      "time_label": "18:15 GMT",
       "league": {
-        "name": "إيطاليا, الدوري الإيطالي",
-        "country": "Italy",
-        "logo": "https://a.espncdn.com/combiner/i?img=/i/leaguelogos/soccer/500/12.png&h=40&w=40"
+        "name": "آسيا, دوري أبطال آسيا للنخبة",
+        "country": "Asia",
+        "logo": "https://a.espncdn.com/combiner/i?img=/i/leaguelogos/soccer/500/209.png&h=40&w=40"
       },
       "home": {
-        "name": "نابولي",
-        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/01/234.png"
+        "name": "الهلال",
+        "logo": "https://l.yacinetv.info/wp-content/uploads/2026/01/5457.png"
       },
       "away": {
-        "name": "روما",
-        "logo": "https://l.yacinetv.info/wp-content/uploads/2026/01/225.png"
+        "name": "الوحدة",
+        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/02/8350.png"
       },
       "score": null,
       "streams": [
         {
-          "id": "stream_ad-premium-1_683511991",
+          "id": "stream_bein3_686041366",
           "source": "livekora",
           "quality": "HD",
-          "channel": "ad-premium-1",
-          "url": "https://pl.gomatch-live.com/albaplayer/ad-premium-1",
+          "channel": "bein3",
+          "url": "https://pl.gomatch-live.com/albaplayer/bein3",
           "priority": 1
         }
       ],
-      "poster_url": "/posters/683511991.jpg"
+      "poster_url": "/posters/686041366.jpg"
     },
     {
-      "id": 992659757,
-      "date": "2026-02-16T19:45:00.000Z",
-      "timestamp": 1771271100,
-      "status": "FT",
-      "time": "19:45",
-      "time_label": "19:45 GMT",
+      "id": 131397650,
+      "date": "2026-02-16T18:15:00.000Z",
+      "timestamp": 1771265700,
+      "status": "NS",
+      "time": "18:15",
+      "time_label": "18:15 GMT",
       "league": {
-        "name": "فرنسا, الدوري الفرنسي",
-        "country": "France",
-        "logo": "https://a.espncdn.com/combiner/i?img=/i/leaguelogos/soccer/500/9.png&h=40&w=40"
+        "name": "آسيا, دوري أبطال آسيا للنخبة",
+        "country": "Asia",
+        "logo": "https://a.espncdn.com/combiner/i?img=/i/leaguelogos/soccer/500/209.png&h=40&w=40"
       },
       "home": {
-        "name": "أولمبيك ليون",
-        "logo": "https://l.yacinetv.info/wp-content/uploads/2026/01/465.png"
+        "name": "الشرطة",
+        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/02/8246.png"
       },
       "away": {
-        "name": "نيس",
-        "logo": "https://l.yacinetv.info/wp-content/uploads/2026/01/470.png"
+        "name": "الدحيل",
+        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/02/8329.png"
       },
       "score": null,
       "streams": [
         {
-          "id": "stream_bein4_992659757",
+          "id": "stream_bein2_131397650",
           "source": "livekora",
           "quality": "HD",
-          "channel": "bein4",
-          "url": "https://pl.gomatch-live.com/albaplayer/bein4",
+          "channel": "bein2",
+          "url": "https://pl.gomatch-live.com/albaplayer/bein2",
           "priority": 1
         }
       ],
-      "poster_url": "/posters/992659757.jpg"
+      "poster_url": "/posters/131397650.jpg"
     },
     {
-      "id": 712364929,
+      "id": 100244507,
+      "date": "2026-02-16T19:30:00.000Z",
+      "timestamp": 1771270200,
+      "status": "NS",
+      "time": "19:30",
+      "time_label": "19:30 GMT",
+      "league": {
+        "name": "إنجلترا, كاس الاتحاد الإنجليزي - الدور 4",
+        "country": "England",
+        "logo": "https://a.espncdn.com/combiner/i?img=/i/leaguelogos/soccer/500/23.png&h=40&w=40"
+      },
+      "home": {
+        "name": "ماكليسفيلد",
+        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/02/73.png"
+      },
+      "away": {
+        "name": "برينتفورد",
+        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/01/63.png"
+      },
+      "score": null,
+      "streams": [
+        {
+          "id": "stream_bein6_100244507",
+          "source": "livekora",
+          "quality": "HD",
+          "channel": "bein6",
+          "url": "https://pl.gomatch-live.com/albaplayer/bein6",
+          "priority": 1
+        }
+      ],
+      "poster_url": "/posters/100244507.jpg"
+    },
+    {
+      "id": 1817968797,
       "date": "2026-02-16T20:00:00.000Z",
       "timestamp": 1771272000,
-      "status": "FT",
+      "status": "NS",
       "time": "20:00",
       "time_label": "20:00 GMT",
       "league": {
@@ -411,25 +180,25 @@
         "logo": "https://a.espncdn.com/combiner/i?img=/i/leaguelogos/soccer/500/15.png&h=40&w=40"
       },
       "home": {
-        "name": "ريال مايوركا",
-        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/02/142.png"
+        "name": "جيرونا",
+        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/01/175.png"
       },
       "away": {
-        "name": "ريال بيتيس",
-        "logo": "https://l.yacinetv.info/wp-content/uploads/2026/01/146.png"
+        "name": "برشلونة",
+        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/01/132.png"
       },
       "score": null,
       "streams": [
         {
-          "id": "stream_bein3_712364929",
+          "id": "stream_bein1_1817968797",
           "source": "livekora",
           "quality": "HD",
-          "channel": "bein3",
-          "url": "https://pl.gomatch-live.com/albaplayer/bein3",
+          "channel": "bein1",
+          "url": "https://pl.gomatch-live.com/albaplayer/bein1",
           "priority": 1
         }
       ],
-      "poster_url": "/posters/712364929.jpg"
+      "poster_url": "/posters/1817968797.jpg"
     }
   ]
 }
