@@ -1,140 +1,115 @@
-/**
- * LiveMatch TMA v3.0
- * Safer rendering, stronger UI flow, and smoother Telegram integration.
- */
-
 const tg = window.Telegram && window.Telegram.WebApp ? window.Telegram.WebApp : null;
 
 const CONFIG = {
     apiPath: "data/matches.json",
     syncIntervalMs: 60000,
-    adZoneId: "10621765",
-    adCooldownMs: 30000,
-    adTimeoutMs: 2800,
-    themeKey: "livematch_tma_theme_v3",
+    monetagZoneId: "10621765",
+    interstitialTimeoutMs: 5000,
+    themeKey: "tma_theme_v4",
     fallbackLogo:
-        "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='56'%3E%3Crect width='56' height='56' rx='28' fill='%2312202e'/%3E%3Ccircle cx='28' cy='28' r='14' fill='%232a3d50'/%3E%3C/svg%3E"
+        "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='56'%3E%3Crect width='56' height='56' rx='28' fill='%23111f2b'/%3E%3Ccircle cx='28' cy='28' r='14' fill='%232a3a49'/%3E%3C/svg%3E"
 };
 
 const state = {
     matches: [],
-    filtered: [],
     selectedMatch: null,
-    selectedFilter: "ALL",
-    searchQuery: "",
     currentView: "home",
     isFullscreen: false,
-    adLastShownAt: 0,
-    loadedOnce: false
+    bottomBannerMounted: false,
+    serverBannerMounted: false
 };
 
 const els = {
     loader: document.getElementById("main-loader"),
-    notification: document.getElementById("notification"),
-    matchesContainer: document.getElementById("matches-container"),
-    searchInput: document.getElementById("search-input"),
-    filterRow: document.getElementById("filter-row"),
-    countAll: document.getElementById("count-all"),
-    countLive: document.getElementById("count-live"),
-    countNext: document.getElementById("count-next"),
+    note: document.getElementById("note"),
     themeBtn: document.getElementById("theme-btn"),
     refreshBtn: document.getElementById("refresh-btn"),
+    matches: document.getElementById("matches"),
+    topBanner: document.getElementById("top-banner"),
+    bottomBanner: document.getElementById("bottom-banner"),
     serversView: document.getElementById("servers-view"),
-    serverList: document.getElementById("server-list"),
-    serverTitle: document.getElementById("server-title"),
-    serversBackBtn: document.getElementById("servers-back-btn"),
+    serversBack: document.getElementById("servers-back"),
+    serversTitle: document.getElementById("servers-title"),
+    serversList: document.getElementById("servers-list"),
+    serversBanner: document.getElementById("servers-banner"),
     playerView: document.getElementById("player-view"),
-    playerBackBtn: document.getElementById("player-back-btn"),
-    closePlayerBtn: document.getElementById("close-player-btn"),
-    fullscreenBtn: document.getElementById("fullscreen-btn"),
-    playerMatchName: document.getElementById("player-match-name"),
-    mainIframe: document.getElementById("main-iframe"),
-    playerStage: document.getElementById("player-stage")
+    playerStage: document.getElementById("player-stage"),
+    playerControls: document.getElementById("player-controls"),
+    iframe: document.getElementById("main-iframe"),
+    fullscreenBtn: document.getElementById("fullscreen-btn")
 };
 
 document.addEventListener("DOMContentLoaded", bootstrap);
 
 async function bootstrap() {
-    initTelegramBridge();
+    initTelegram();
     bindEvents();
-    applyInitialTheme();
-    showSkeletons(4);
+    applyTheme();
+    mountTopBanner();
+    showLoading();
 
     await fetchMatches();
+    hideLoading();
     setInterval(fetchMatches, CONFIG.syncIntervalMs);
 }
 
-function initTelegramBridge() {
+function initTelegram() {
     if (!tg) return;
 
     tg.ready();
     tg.expand();
+    tg.BackButton.onClick(handleBack);
 
-    if (tg.colorScheme === "light" || tg.colorScheme === "dark") {
+    if (tg.colorScheme === "dark" || tg.colorScheme === "light") {
         document.documentElement.setAttribute("data-theme", tg.colorScheme);
     }
-
-    tg.BackButton.onClick(() => {
-        if (state.currentView === "player") {
-            navigateTo("servers");
-            return;
-        }
-        if (state.currentView === "servers") {
-            navigateTo("home");
-        }
-    });
 }
 
 function bindEvents() {
-    els.searchInput.addEventListener("input", (event) => {
-        state.searchQuery = (event.target.value || "").trim().toLowerCase();
-        applyFiltersAndRender();
-    });
-
-    els.filterRow.addEventListener("click", (event) => {
-        const btn = event.target.closest("[data-filter]");
-        if (!btn) return;
-
-        state.selectedFilter = btn.getAttribute("data-filter");
-        setActiveFilterButton();
-        haptic("light");
-        applyFiltersAndRender();
-    });
-
-    els.refreshBtn.addEventListener("click", async () => {
-        haptic("light");
-        await fetchMatches(true);
-    });
-
     els.themeBtn.addEventListener("click", () => {
         toggleTheme();
         haptic("light");
     });
 
-    els.matchesContainer.addEventListener("click", (event) => {
+    els.refreshBtn.addEventListener("click", async () => {
+        haptic("light");
+        showLoading();
+        await fetchMatches();
+        hideLoading();
+    });
+
+    els.matches.addEventListener("click", async (event) => {
         const card = event.target.closest("[data-match-id]");
         if (!card) return;
         const matchId = Number(card.getAttribute("data-match-id"));
-        selectMatch(matchId);
+        await onSelectMatch(matchId);
     });
 
-    els.serversBackBtn.addEventListener("click", () => navigateTo("home"));
-    els.playerBackBtn.addEventListener("click", () => navigateTo("servers"));
-    els.closePlayerBtn.addEventListener("click", () => navigateTo("servers"));
+    els.serversBack.addEventListener("click", () => navigateTo("home"));
+
+    els.serversList.addEventListener("click", (event) => {
+        const btn = event.target.closest("[data-stream-url]");
+        if (!btn) return;
+        const streamUrl = btn.getAttribute("data-stream-url") || "";
+        playStream(streamUrl);
+    });
+
     els.fullscreenBtn.addEventListener("click", toggleFullscreen);
+
+    document.addEventListener("fullscreenchange", onFullscreenChange);
+    document.addEventListener("webkitfullscreenchange", onFullscreenChange);
 }
 
-function applyInitialTheme() {
-    const current = document.documentElement.getAttribute("data-theme");
-    if (current === "light" || current === "dark") return;
+function applyTheme() {
+    const attr = document.documentElement.getAttribute("data-theme");
+    if (attr === "light" || attr === "dark") return;
 
     const saved = localStorage.getItem(CONFIG.themeKey);
     if (saved === "light" || saved === "dark") {
         document.documentElement.setAttribute("data-theme", saved);
-        return;
+    } else {
+        document.documentElement.setAttribute("data-theme", "dark");
     }
-
-    document.documentElement.setAttribute("data-theme", "dark");
 }
 
 function toggleTheme() {
@@ -144,36 +119,28 @@ function toggleTheme() {
     localStorage.setItem(CONFIG.themeKey, next);
 }
 
-async function fetchMatches(manual = false) {
+async function fetchMatches() {
     const controller = new AbortController();
     const timeout = setTimeout(() => controller.abort(), 9000);
 
     try {
-        if (!state.loadedOnce && !manual) showSkeletons(4);
-
         const response = await fetch(`${CONFIG.apiPath}?t=${Date.now()}`, {
             signal: controller.signal,
             cache: "no-store"
         });
 
-        if (!response.ok) {
-            throw new Error(`HTTP ${response.status}`);
-        }
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
 
         const data = await response.json();
-        const incoming = Array.isArray(data.matches) ? data.matches : [];
-        state.matches = incoming.map(normalizeMatch).filter(Boolean);
+        const list = Array.isArray(data.matches) ? data.matches : [];
+        state.matches = list.map(normalizeMatch).filter(Boolean);
 
-        updateStats();
-        applyFiltersAndRender();
-        state.loadedOnce = true;
-        hideLoader();
-    } catch (error) {
-        if (!state.loadedOnce) {
-            renderEmpty("تعذر تحميل المباريات", "تحقق من الاتصال ثم حاول مرة أخرى.");
+        renderMatches();
+    } catch (_) {
+        if (!state.matches.length) {
+            renderError("تعذر تحميل المباريات حاليا");
         }
-        showNotification("فشل التحديث. سيتم إعادة المحاولة تلقائيا.");
-        hideLoader();
+        showNote("فشل التحديث. سيتم المحاولة تلقائيا.");
     } finally {
         clearTimeout(timeout);
     }
@@ -182,44 +149,23 @@ async function fetchMatches(manual = false) {
 function normalizeMatch(raw) {
     if (!raw || !raw.id || !raw.home || !raw.away) return null;
 
-    const status = normalizeStatus(raw.status);
-    const homeName = safeString(raw.home.name, "الفريق الأول");
-    const awayName = safeString(raw.away.name, "الفريق الثاني");
-    const leagueName = safeString(raw.league && raw.league.name, "بطولة");
-
     return {
         id: Number(raw.id),
-        status,
+        status: normalizeStatus(raw.status),
         time: safeString(raw.time, "--:--"),
-        timeLabel: safeString(raw.time_label, ""),
         score: normalizeScore(raw.score),
-        league: {
-            name: leagueName,
-            logo: safeUrl(raw.league && raw.league.logo)
-        },
-        home: {
-            name: homeName,
-            logo: safeUrl(raw.home.logo)
-        },
-        away: {
-            name: awayName,
-            logo: safeUrl(raw.away.logo)
-        },
-        streams: Array.isArray(raw.streams)
-            ? raw.streams
-                .map((s, idx) => ({
-                    id: safeString(s && s.id, `s_${idx}`),
-                    channel: safeString(s && s.channel, `Server ${idx + 1}`),
-                    quality: safeString(s && s.quality, "HD"),
-                    url: safeUrl(s && s.url)
-                }))
-                .filter((s) => s.url)
-            : []
+        leagueName: safeString(raw.league && raw.league.name, "بطولة"),
+        leagueLogo: safeUrl(raw.league && raw.league.logo),
+        homeName: safeString(raw.home && raw.home.name, "الفريق الأول"),
+        homeLogo: safeUrl(raw.home && raw.home.logo),
+        awayName: safeString(raw.away && raw.away.name, "الفريق الثاني"),
+        awayLogo: safeUrl(raw.away && raw.away.logo),
+        streams: normalizeStreams(raw.streams)
     };
 }
 
 function normalizeStatus(status) {
-    if (status === "LIVE" || status === "FT" || status === "NS") return status;
+    if (status === "LIVE" || status === "NS" || status === "FT") return status;
     return "NS";
 }
 
@@ -230,6 +176,18 @@ function normalizeScore(score) {
         return `${score.home} - ${score.away}`;
     }
     return "";
+}
+
+function normalizeStreams(streams) {
+    if (!Array.isArray(streams)) return [];
+    return streams
+        .map((s, index) => ({
+            id: safeString(s && s.id, `stream_${index}`),
+            channel: safeString(s && s.channel, "بث مباشر"),
+            quality: safeString(s && s.quality, "HD"),
+            url: safeUrl(s && s.url)
+        }))
+        .filter((s) => s.url);
 }
 
 function safeString(value, fallback = "") {
@@ -249,337 +207,343 @@ function safeUrl(value) {
     return "";
 }
 
-function updateStats() {
-    const all = state.matches.length;
-    const live = state.matches.filter((m) => m.status === "LIVE").length;
-    const next = state.matches.filter((m) => m.status === "NS").length;
-
-    els.countAll.textContent = String(all);
-    els.countLive.textContent = String(live);
-    els.countNext.textContent = String(next);
-}
-
-function applyFiltersAndRender() {
-    const sorted = [...state.matches].sort((a, b) => {
-        const order = { LIVE: 0, NS: 1, FT: 2 };
-        const diff = (order[a.status] ?? 9) - (order[b.status] ?? 9);
-        if (diff !== 0) return diff;
-        return a.time.localeCompare(b.time);
-    });
-
-    const byFilter = sorted.filter((match) => {
-        if (state.selectedFilter === "ALL") return true;
-        return match.status === state.selectedFilter;
-    });
-
-    const q = state.searchQuery;
-    state.filtered = byFilter.filter((match) => {
-        if (!q) return true;
-        const haystack = `${match.home.name} ${match.away.name} ${match.league.name}`.toLowerCase();
-        return haystack.includes(q);
-    });
-
-    renderMatches();
-}
-
 function renderMatches() {
-    clearElement(els.matchesContainer);
+    clearNode(els.matches);
 
-    if (!state.filtered.length) {
-        renderEmpty("لا توجد نتائج", "حاول تغيير الفلتر أو البحث.");
+    if (!state.matches.length) {
+        renderError("لا توجد مباريات متاحة الآن");
         return;
     }
 
-    const groups = {
-        LIVE: state.filtered.filter((m) => m.status === "LIVE"),
-        NS: state.filtered.filter((m) => m.status === "NS"),
-        FT: state.filtered.filter((m) => m.status === "FT")
-    };
+    const sorted = [...state.matches].sort((a, b) => {
+        const order = { LIVE: 0, NS: 1, FT: 2 };
+        const byStatus = (order[a.status] ?? 9) - (order[b.status] ?? 9);
+        if (byStatus !== 0) return byStatus;
+        return a.time.localeCompare(b.time);
+    });
 
-    if (groups.LIVE.length) {
-        els.matchesContainer.appendChild(createSection("مباشر الآن", groups.LIVE));
-    }
-    if (groups.NS.length) {
-        els.matchesContainer.appendChild(createSection("مباريات قادمة", groups.NS));
-    }
-    if (groups.FT.length) {
-        els.matchesContainer.appendChild(createSection("مباريات منتهية", groups.FT));
-    }
+    const live = sorted.filter((m) => m.status === "LIVE");
+    const next = sorted.filter((m) => m.status === "NS");
+    const done = sorted.filter((m) => m.status === "FT");
+
+    if (live.length) els.matches.appendChild(createGroup("مباشر الآن", live));
+    if (next.length) els.matches.appendChild(createGroup("مباريات قادمة", next));
+    if (done.length) els.matches.appendChild(createGroup("مباريات منتهية", done));
+
+    mountBottomBanner();
 }
 
-function createSection(title, matches) {
-    const block = createEl("section", "section-block");
-    const head = createEl("div", "section-head");
-    const titleEl = createEl("h3", "section-title", title);
-    const count = createEl("span", "section-count", `${matches.length}`);
-
-    head.appendChild(titleEl);
+function createGroup(title, matches) {
+    const group = createEl("section", "group");
+    const head = createEl("div", "group-head");
+    const h2 = createEl("h2", "", title);
+    const count = createEl("span", "", String(matches.length));
+    head.appendChild(h2);
     head.appendChild(count);
-    block.appendChild(head);
+    group.appendChild(head);
 
-    for (const match of matches) {
-        block.appendChild(createMatchCard(match));
-    }
+    matches.forEach((match) => {
+        group.appendChild(createMatchCard(match));
+    });
 
-    return block;
+    return group;
 }
 
 function createMatchCard(match) {
-    const live = match.status === "LIVE";
-    const finished = match.status === "FT";
-
-    const card = createEl("article", `match-card glass${live ? " live-card" : ""}`);
+    const card = createEl("article", `match-card glass${match.status === "LIVE" ? " live" : ""}`);
     card.setAttribute("data-match-id", String(match.id));
 
-    const header = createEl("div", "match-header");
+    const top = createEl("div", "match-top");
     const league = createEl("div", "league");
-    const leagueLogo = createImg(match.league.logo || CONFIG.fallbackLogo, "league-logo", "league");
-    const leagueName = createEl("span", "league-name", match.league.name);
-    league.appendChild(leagueLogo);
-    league.appendChild(leagueName);
-    header.appendChild(league);
-    header.appendChild(createStatusPill(match));
+    league.appendChild(createImg(match.leagueLogo || CONFIG.fallbackLogo, ""));
+    league.appendChild(createEl("span", "", match.leagueName));
+    top.appendChild(league);
+    top.appendChild(createStatus(match));
 
     const main = createEl("div", "match-main");
-    main.appendChild(createTeam(match.home.name, match.home.logo));
-    main.appendChild(createCenterBox(match, live, finished));
-    main.appendChild(createTeam(match.away.name, match.away.logo));
+    main.appendChild(createTeam(match.homeName, match.homeLogo));
+    main.appendChild(createCenter(match));
+    main.appendChild(createTeam(match.awayName, match.awayLogo));
 
-    const footer = createEl("div", "card-footer");
-    footer.appendChild(createEl("span", "server-chip", `📺 ${match.streams.length} سيرفر`));
-    footer.appendChild(createEl("button", "watch-chip", finished ? "عرض التفاصيل" : "شاهد الآن"));
+    const bottom = createEl("div", "match-bottom");
+    bottom.appendChild(createEl("span", "servers-count", `📺 ${match.streams.length} سيرفر`));
+    bottom.appendChild(createEl("button", "watch-pill", "اختيار السيرفر"));
 
-    card.appendChild(header);
+    card.appendChild(top);
     card.appendChild(main);
-    card.appendChild(footer);
+    card.appendChild(bottom);
     return card;
 }
 
-function createStatusPill(match) {
-    if (match.status === "LIVE") return createEl("span", "status-pill live", "مباشر");
-    if (match.status === "FT") return createEl("span", "status-pill finished", "انتهت");
-    const label = match.time ? `${match.time} GMT` : "لم تبدأ";
-    return createEl("span", "status-pill", label);
+function createStatus(match) {
+    if (match.status === "LIVE") return createEl("span", "status live", "مباشر");
+    if (match.status === "FT") return createEl("span", "status ft", "انتهت");
+    return createEl("span", "status", `${match.time} GMT`);
 }
 
 function createTeam(name, logo) {
     const team = createEl("div", "team");
-    team.appendChild(createImg(logo || CONFIG.fallbackLogo, "team-logo", name));
-    team.appendChild(createEl("span", "team-name", name));
+    team.appendChild(createImg(logo || CONFIG.fallbackLogo, ""));
+    team.appendChild(createEl("b", "", name));
     return team;
 }
 
-function createCenterBox(match, live, finished) {
-    const center = createEl("div", "center-box");
+function createCenter(match) {
+    const center = createEl("div", "center");
+    if (match.score) center.appendChild(createEl("div", "score", match.score));
+    else center.appendChild(createEl("div", "vs", "VS"));
 
-    if (match.score) {
-        center.appendChild(createEl("div", "score", match.score));
-    } else {
-        center.appendChild(createEl("div", "vs", "VS"));
-    }
-
-    if (!finished) {
+    if (match.status !== "FT") {
         center.appendChild(createEl("div", "time", match.time || "--:--"));
-        center.appendChild(createEl("div", "time-sub", live ? "جارية الآن" : "بتوقيت GMT"));
-    } else if (!match.score) {
-        center.appendChild(createEl("div", "time-sub", "منتهية"));
+        center.appendChild(createEl("div", "sub", match.status === "LIVE" ? "جارية الآن" : "بتوقيت GMT"));
     }
-
     return center;
 }
 
-function renderEmpty(title, hint) {
-    clearElement(els.matchesContainer);
-    const empty = createEl("div", "empty-wrap glass");
-    empty.appendChild(createEl("h3", "", title));
-    empty.appendChild(createEl("p", "", hint));
-    els.matchesContainer.appendChild(empty);
+function renderError(message) {
+    clearNode(els.matches);
+    const box = createEl("div", "empty glass", message);
+    els.matches.appendChild(box);
 }
 
-function showSkeletons(count) {
-    clearElement(els.matchesContainer);
-    for (let i = 0; i < count; i += 1) {
-        els.matchesContainer.appendChild(createEl("div", "skeleton"));
-    }
-}
-
-async function selectMatch(matchId) {
+async function onSelectMatch(matchId) {
     const match = state.matches.find((m) => m.id === matchId);
     if (!match) return;
 
     state.selectedMatch = match;
     haptic("medium");
-
-    await triggerMonetagAd("inter");
-    navigateTo("servers");
-    renderServers();
+    await showMonetagInterstitialFor5s();
+    openServersView();
 }
 
-function renderServers() {
-    clearElement(els.serverList);
+function openServersView() {
+    if (!state.selectedMatch) return;
+    state.currentView = "servers";
+    els.serversTitle.textContent = `${state.selectedMatch.homeName} × ${state.selectedMatch.awayName}`;
+    clearNode(els.serversList);
 
-    const match = state.selectedMatch;
-    if (!match) {
-        renderServerMessage("لم يتم اختيار مباراة بعد.");
-        return;
+    const streams = state.selectedMatch.streams || [];
+    if (!streams.length) {
+        els.serversList.appendChild(createEl("div", "empty glass", "لا توجد سيرفرات متاحة لهذه المباراة"));
+    } else {
+        streams.forEach((stream, idx) => {
+            const item = createEl("button", "server-item");
+            item.type = "button";
+            item.setAttribute("data-stream-url", stream.url);
+
+            const icon = createEl("span", "server-icon", "📺");
+            const text = createEl("div", "server-text");
+            text.appendChild(createEl("b", "", `سيرفر ${idx + 1}`));
+            text.appendChild(createEl("span", "", stream.channel));
+            const quality = createEl("span", "server-quality", stream.quality);
+
+            item.appendChild(icon);
+            item.appendChild(text);
+            item.appendChild(quality);
+            els.serversList.appendChild(item);
+        });
     }
 
-    els.serverTitle.textContent = `${match.home.name} × ${match.away.name}`;
-
-    if (!match.streams.length) {
-        renderServerMessage("لا توجد روابط متاحة لهذه المباراة حالياً.");
-        return;
-    }
-
-    match.streams.forEach((stream, idx) => {
-        const button = createEl("button", "server-item");
-        button.type = "button";
-        button.addEventListener("click", () => playStream(stream.url));
-
-        const icon = createEl("span", "server-icon", "📺");
-        const info = createEl("div", "server-info");
-        const title = createEl("b", "", `سيرفر ${idx + 1}`);
-        const subtitle = createEl("span", "", stream.channel || "قناة البث");
-        const quality = createEl("span", "server-quality", stream.quality || "HD");
-
-        info.appendChild(title);
-        info.appendChild(subtitle);
-        button.appendChild(icon);
-        button.appendChild(info);
-        button.appendChild(quality);
-
-        els.serverList.appendChild(button);
-    });
+    mountServersBanner();
+    els.serversView.classList.add("active");
+    els.playerView.classList.remove("active");
+    syncBackButton();
 }
 
-function renderServerMessage(message) {
-    const box = createEl("div", "empty-wrap glass");
-    box.appendChild(createEl("h3", "", "تنبيه"));
-    box.appendChild(createEl("p", "", message));
-    els.serverList.appendChild(box);
-}
-
-async function playStream(url) {
+function playStream(url) {
     if (!url) {
-        showNotification("رابط البث غير صالح.");
+        showNote("رابط البث غير صالح.");
         return;
     }
 
+    state.currentView = "player";
     haptic("success");
-    await triggerMonetagAd("pop");
-    navigateTo("player");
+    els.iframe.src = "about:blank";
+    els.serversView.classList.remove("active");
+    els.playerView.classList.add("active");
+    syncBackButton();
 
-    if (state.selectedMatch) {
-        els.playerMatchName.textContent = `${state.selectedMatch.home.name} × ${state.selectedMatch.away.name}`;
-    }
-
-    els.mainIframe.src = "about:blank";
     setTimeout(() => {
-        els.mainIframe.src = url;
-    }, 280);
+        els.iframe.src = url;
+    }, 140);
 }
 
 function navigateTo(view) {
     state.currentView = view;
 
-    els.serversView.classList.remove("active");
-    els.playerView.classList.remove("active");
-
-    if (view === "servers") {
+    if (view === "home") {
+        els.serversView.classList.remove("active");
+        els.playerView.classList.remove("active");
+        els.iframe.src = "about:blank";
+        exitFullscreenIfNeeded();
+    } else if (view === "servers") {
+        els.playerView.classList.remove("active");
         els.serversView.classList.add("active");
-    } else if (view === "player") {
-        els.playerView.classList.add("active");
-    } else if (view === "home") {
-        els.mainIframe.src = "about:blank";
-        state.isFullscreen = false;
-        els.fullscreenBtn.textContent = "⛶ تكبير";
+        exitFullscreenIfNeeded();
     }
 
-    if (!tg) return;
-    if (view === "home") tg.BackButton.hide();
-    else tg.BackButton.show();
+    syncBackButton();
+}
+
+function handleBack() {
+    if (state.currentView === "player") {
+        if (document.fullscreenElement || document.webkitFullscreenElement) {
+            exitFullscreenIfNeeded();
+            return;
+        }
+        navigateTo("servers");
+        return;
+    }
+
+    if (state.currentView === "servers") {
+        navigateTo("home");
+        return;
+    }
+
+    askToExitApp();
+}
+
+function askToExitApp() {
+    if (tg && typeof tg.showConfirm === "function") {
+        tg.showConfirm("هل تريد الخروج من التطبيق؟", (ok) => {
+            if (ok && typeof tg.close === "function") tg.close();
+        });
+        return;
+    }
+
+    const ok = window.confirm("هل تريد الخروج من التطبيق؟");
+    if (ok) window.close();
 }
 
 async function toggleFullscreen() {
-    if (!document.fullscreenElement) {
+    const full = document.fullscreenElement || document.webkitFullscreenElement;
+
+    if (!full) {
         try {
-            await els.playerStage.requestFullscreen();
+            if (els.playerStage.requestFullscreen) await els.playerStage.requestFullscreen();
+            else if (els.playerStage.webkitRequestFullscreen) els.playerStage.webkitRequestFullscreen();
+
             state.isFullscreen = true;
-            els.fullscreenBtn.textContent = "🗗 تصغير";
+            els.playerView.classList.add("fullscreen-mode");
+            lockOrientation("landscape");
             haptic("light");
         } catch (_) {
-            showNotification("التكبير غير مدعوم على هذا الجهاز.");
+            showNote("ملء الشاشة غير مدعوم على هذا الجهاز.");
         }
     } else {
-        try {
-            await document.exitFullscreen();
-            state.isFullscreen = false;
-            els.fullscreenBtn.textContent = "⛶ تكبير";
-        } catch (_) {
-            // ignore
-        }
+        exitFullscreenIfNeeded();
     }
 }
 
-async function triggerMonetagAd(type) {
-    const now = Date.now();
-    if (now - state.adLastShownAt < CONFIG.adCooldownMs) return;
+function onFullscreenChange() {
+    const full = document.fullscreenElement || document.webkitFullscreenElement;
+    if (full) {
+        state.isFullscreen = true;
+        els.playerView.classList.add("fullscreen-mode");
+        return;
+    }
 
-    const adFn = window[`show_${CONFIG.adZoneId}`];
+    state.isFullscreen = false;
+    els.playerView.classList.remove("fullscreen-mode");
+    lockOrientation("portrait");
+}
+
+function exitFullscreenIfNeeded() {
+    const full = document.fullscreenElement || document.webkitFullscreenElement;
+    if (!full) {
+        state.isFullscreen = false;
+        els.playerView.classList.remove("fullscreen-mode");
+        lockOrientation("portrait");
+        return;
+    }
+
+    if (document.exitFullscreen) document.exitFullscreen().catch(() => { });
+    else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
+
+    state.isFullscreen = false;
+    els.playerView.classList.remove("fullscreen-mode");
+    lockOrientation("portrait");
+}
+
+function lockOrientation(mode) {
+    if (!screen.orientation || typeof screen.orientation.lock !== "function") return;
+    screen.orientation.lock(mode).catch(() => { });
+}
+
+async function showMonetagInterstitialFor5s() {
+    const adFn = window[`show_${CONFIG.monetagZoneId}`];
     if (typeof adFn !== "function") return;
 
-    const timeoutGuard = new Promise((resolve) => {
-        setTimeout(resolve, CONFIG.adTimeoutMs);
-    });
+    const timeout = wait(CONFIG.interstitialTimeoutMs);
+    const adTask = adFn({ type: "preload" })
+        .then(() => adFn())
+        .catch(() => { });
 
-    try {
-        if (type === "inter") {
-            await Promise.race([adFn({ type: "preload" }).then(() => adFn()), timeoutGuard]);
-        } else if (type === "pop") {
-            await Promise.race([adFn({ type: "pop" }), timeoutGuard]);
-        }
-        state.adLastShownAt = Date.now();
-    } catch (_) {
-        // ignore ad failures to keep UX smooth
-    }
+    await Promise.race([adTask, timeout]);
+}
+
+function wait(ms) {
+    return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
+function mountTopBanner() {
+    if (!els.topBanner) return;
+    clearNode(els.topBanner);
+    mountBanner(els.topBanner, "15d1ca482efd28581d78b70b9bb40556", 468, 60);
+}
+
+function mountBottomBanner() {
+    if (state.bottomBannerMounted || !els.bottomBanner) return;
+    state.bottomBannerMounted = true;
+    clearNode(els.bottomBanner);
+    mountBanner(els.bottomBanner, "2895cfc4a233371917690acdf46458f6", 300, 250);
+}
+
+function mountServersBanner() {
+    if (state.serverBannerMounted || !els.serversBanner) return;
+    state.serverBannerMounted = true;
+    clearNode(els.serversBanner);
+    mountBanner(els.serversBanner, "15d1ca482efd28581d78b70b9bb40556", 468, 60);
+}
+
+function mountBanner(container, key, width, height) {
+    const setupScript = document.createElement("script");
+    setupScript.text = `atOptions = { 'key': '${key}', 'format': 'iframe', 'height': ${height}, 'width': ${width}, 'params': {} };`;
+    const invokeScript = document.createElement("script");
+    invokeScript.src = `https://www.highperformanceformat.com/${key}/invoke.js`;
+    container.appendChild(setupScript);
+    container.appendChild(invokeScript);
+}
+
+function syncBackButton() {
+    if (!tg) return;
+    if (state.currentView === "home") tg.BackButton.show();
+    else tg.BackButton.show();
 }
 
 function haptic(level) {
     if (!tg || !tg.HapticFeedback) return;
-
-    if (level === "success") {
-        tg.HapticFeedback.notificationOccurred("success");
-        return;
-    }
-
-    tg.HapticFeedback.impactOccurred(level || "light");
+    if (level === "success") tg.HapticFeedback.notificationOccurred("success");
+    else tg.HapticFeedback.impactOccurred(level || "light");
 }
 
-function setActiveFilterButton() {
-    const buttons = els.filterRow.querySelectorAll("[data-filter]");
-    buttons.forEach((btn) => {
-        const active = btn.getAttribute("data-filter") === state.selectedFilter;
-        btn.classList.toggle("active", active);
-    });
+function showLoading() {
+    if (!els.loader) return;
+    els.loader.classList.remove("hidden");
 }
 
-function showNotification(message) {
-    els.notification.textContent = message;
-    els.notification.classList.add("show");
-    setTimeout(() => {
-        els.notification.classList.remove("show");
-    }, 2600);
-}
-
-function hideLoader() {
+function hideLoading() {
     if (!els.loader) return;
     els.loader.classList.add("hidden");
 }
 
-function clearElement(node) {
-    while (node.firstChild) {
-        node.removeChild(node.firstChild);
-    }
+function showNote(text) {
+    if (!els.note) return;
+    els.note.textContent = text;
+    els.note.classList.add("show");
+    setTimeout(() => {
+        els.note.classList.remove("show");
+    }, 2500);
 }
 
 function createEl(tag, className, text) {
@@ -589,14 +553,20 @@ function createEl(tag, className, text) {
     return el;
 }
 
-function createImg(src, className, alt) {
+function createImg(src, className) {
     const img = document.createElement("img");
-    img.className = className;
-    img.alt = alt || "";
+    if (className) img.className = className;
     img.loading = "lazy";
     img.src = src || CONFIG.fallbackLogo;
+    img.alt = "";
     img.addEventListener("error", () => {
         img.src = CONFIG.fallbackLogo;
     });
     return img;
+}
+
+function clearNode(node) {
+    while (node.firstChild) {
+        node.removeChild(node.firstChild);
+    }
 }

@@ -7,7 +7,7 @@
         content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>LiveMatch Mini App</title>
+    <title>بث مباشر مباريات كرة القدم</title>
 
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <script>
@@ -25,34 +25,33 @@
 
     <style>
         :root {
-            --bg: #090f14;
-            --bg-soft: #121a22;
-            --card: rgba(21, 33, 43, 0.8);
-            --text: #e9f0f6;
-            --muted: #8ea1b2;
+            --bg: #0a1016;
+            --bg-soft: #101a24;
+            --card: rgba(22, 34, 46, 0.84);
+            --text: #eaf2f8;
+            --muted: #8fa3b4;
             --accent: #1fa2ff;
             --accent-soft: rgba(31, 162, 255, 0.16);
-            --live: #ff3d56;
-            --live-soft: rgba(255, 61, 86, 0.14);
-            --success: #20c997;
-            --success-soft: rgba(32, 201, 151, 0.14);
+            --live: #ff3b5f;
+            --live-soft: rgba(255, 59, 95, 0.14);
+            --done: #16c784;
+            --done-soft: rgba(22, 199, 132, 0.14);
             --border: rgba(255, 255, 255, 0.08);
             --shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
-            --radius: 20px;
-            --transition: all 0.28s cubic-bezier(0.2, 0.8, 0.2, 1);
+            --radius: 18px;
         }
 
         [data-theme="light"] {
             --bg: #eef4f8;
             --bg-soft: #ffffff;
-            --card: rgba(255, 255, 255, 0.9);
-            --text: #10202e;
-            --muted: #607182;
+            --card: rgba(255, 255, 255, 0.92);
+            --text: #112131;
+            --muted: #607183;
             --accent-soft: rgba(31, 162, 255, 0.12);
-            --live-soft: rgba(255, 61, 86, 0.1);
-            --success-soft: rgba(32, 201, 151, 0.12);
+            --live-soft: rgba(255, 59, 95, 0.1);
+            --done-soft: rgba(22, 199, 132, 0.12);
             --border: rgba(0, 0, 0, 0.08);
-            --shadow: 0 10px 24px rgba(8, 20, 32, 0.12);
+            --shadow: 0 10px 24px rgba(7, 18, 28, 0.12);
         }
 
         * {
@@ -68,22 +67,9 @@
             min-height: 100vh;
             overflow-x: hidden;
             background:
-                radial-gradient(1100px 400px at 50% -140px, rgba(31, 162, 255, 0.2), transparent 60%),
-                radial-gradient(700px 300px at 10% -80px, rgba(255, 61, 86, 0.14), transparent 70%),
+                radial-gradient(900px 320px at 50% -130px, rgba(31, 162, 255, 0.2), transparent 60%),
+                radial-gradient(700px 280px at 8% -100px, rgba(255, 59, 95, 0.14), transparent 70%),
                 var(--bg);
-        }
-
-        .app-shell {
-            max-width: 560px;
-            margin: 0 auto;
-            padding: 0 14px 100px;
-        }
-
-        .glass {
-            background: var(--card);
-            border: 1px solid var(--border);
-            backdrop-filter: blur(12px);
-            box-shadow: var(--shadow);
         }
 
         #main-loader {
@@ -103,17 +89,17 @@
             pointer-events: none;
         }
 
-        .loader-ball {
+        .loader-badge {
             width: 64px;
             height: 64px;
             border-radius: 18px;
             display: grid;
             place-items: center;
             font-size: 1.9rem;
-            margin-bottom: 16px;
-            background: linear-gradient(135deg, rgba(31, 162, 255, 0.22), rgba(255, 61, 86, 0.16));
+            margin-bottom: 14px;
             border: 1px solid var(--border);
-            animation: loaderPulse 1.2s ease-in-out infinite;
+            background: linear-gradient(135deg, rgba(31, 162, 255, 0.22), rgba(255, 59, 95, 0.16));
+            animation: floatY 1.2s ease-in-out infinite;
         }
 
         .loader-ring {
@@ -131,55 +117,62 @@
             }
         }
 
-        @keyframes loaderPulse {
+        @keyframes floatY {
             50% {
-                transform: translateY(-4px) scale(1.03);
+                transform: translateY(-4px);
             }
         }
 
-        .app-header {
+        .shell {
+            max-width: 560px;
+            margin: 0 auto;
+            padding: 0 14px 24px;
+        }
+
+        .glass {
+            background: var(--card);
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow);
+            backdrop-filter: blur(12px);
+        }
+
+        .header {
             position: sticky;
             top: 0;
             z-index: 100;
             margin-top: env(safe-area-inset-top, 0);
+            border-radius: 0 0 20px 20px;
             padding: 14px;
-            border-radius: 0 0 22px 22px;
         }
 
-        .header-top {
+        .header-row {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            margin-bottom: 10px;
+            gap: 10px;
         }
 
-        .brand {
+        .title-wrap {
             display: flex;
             align-items: center;
             gap: 10px;
         }
 
-        .brand-logo {
+        .title-logo {
             width: 40px;
             height: 40px;
             border-radius: 12px;
             display: grid;
             place-items: center;
             font-size: 1.2rem;
-            background: linear-gradient(135deg, rgba(31, 162, 255, 0.18), rgba(255, 61, 86, 0.16));
             border: 1px solid var(--border);
+            background: linear-gradient(135deg, rgba(31, 162, 255, 0.18), rgba(255, 59, 95, 0.16));
         }
 
-        .brand h1 {
-            font-size: 1.08rem;
-            line-height: 1.1;
+        .title-wrap h1 {
+            font-size: 1rem;
             font-weight: 900;
-        }
-
-        .brand p {
-            font-size: 0.72rem;
-            color: var(--muted);
-            margin-top: 2px;
+            line-height: 1.2;
         }
 
         .header-actions {
@@ -188,172 +181,79 @@
         }
 
         .icon-btn {
-            width: 40px;
-            height: 40px;
-            border-radius: 12px;
+            width: 38px;
+            height: 38px;
+            border-radius: 11px;
             border: 1px solid var(--border);
             color: var(--text);
-            background: rgba(255, 255, 255, 0.04);
+            background: rgba(255, 255, 255, 0.05);
+            font-size: 1rem;
+            font-family: inherit;
             cursor: pointer;
-            font-size: 1.1rem;
-            transition: var(--transition);
         }
 
         .icon-btn:active {
             transform: scale(0.94);
-            background: var(--accent-soft);
         }
 
-        .stats-row {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 8px;
-            margin-bottom: 10px;
-        }
-
-        .stat-pill {
-            border-radius: 12px;
-            border: 1px solid var(--border);
-            background: rgba(255, 255, 255, 0.03);
-            padding: 8px 10px;
-            text-align: center;
-        }
-
-        .stat-pill b {
-            display: block;
-            font-size: 0.95rem;
-            font-weight: 900;
-            line-height: 1;
-        }
-
-        .stat-pill span {
-            font-size: 0.67rem;
-            color: var(--muted);
-        }
-
-        .search-wrap {
-            position: relative;
-            margin-bottom: 10px;
-        }
-
-        #search-input {
+        .top-banner {
             width: 100%;
-            border: 1px solid var(--border);
-            border-radius: 13px;
-            background: rgba(255, 255, 255, 0.04);
-            color: var(--text);
-            padding: 12px 40px 12px 14px;
-            font-family: inherit;
-            font-size: 0.88rem;
-            outline: none;
-        }
-
-        #search-input::placeholder {
-            color: var(--muted);
-        }
-
-        .search-icon {
-            position: absolute;
-            right: 12px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: var(--muted);
-            pointer-events: none;
-            font-size: 0.88rem;
-        }
-
-        .filter-row {
-            display: flex;
-            gap: 8px;
-            overflow-x: auto;
-            scrollbar-width: none;
-        }
-
-        .filter-row::-webkit-scrollbar {
-            display: none;
-        }
-
-        .filter-btn {
-            border: 1px solid var(--border);
-            background: rgba(255, 255, 255, 0.03);
-            color: var(--muted);
-            border-radius: 999px;
-            padding: 8px 14px;
-            white-space: nowrap;
-            font-family: inherit;
-            font-size: 0.76rem;
-            font-weight: 800;
-            cursor: pointer;
-            transition: var(--transition);
-        }
-
-        .filter-btn.active {
-            background: var(--accent-soft);
-            color: var(--text);
-            border-color: rgba(31, 162, 255, 0.5);
-        }
-
-        .top-ad-banner {
-            width: 100%;
-            margin: 12px auto 8px;
             min-height: 60px;
+            margin: 12px auto;
             text-align: center;
         }
 
-        .matches-container {
-            margin-top: 8px;
+        .matches {
+            margin-top: 4px;
         }
 
-        .section-block {
-            margin-bottom: 20px;
+        .group {
+            margin-bottom: 18px;
         }
 
-        .section-head {
+        .group-head {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin: 0 2px 10px;
+            margin: 0 2px 8px;
         }
 
-        .section-title {
+        .group-head h2 {
             font-size: 0.84rem;
             color: var(--muted);
             font-weight: 800;
         }
 
-        .section-count {
-            font-size: 0.72rem;
+        .group-head span {
+            font-size: 0.7rem;
             color: var(--muted);
             border: 1px solid var(--border);
             border-radius: 999px;
-            padding: 2px 9px;
+            padding: 2px 8px;
         }
 
         .match-card {
             border-radius: var(--radius);
-            padding: 14px;
+            padding: 13px;
             margin-bottom: 10px;
             cursor: pointer;
-            position: relative;
-            overflow: hidden;
-            transition: var(--transition);
         }
 
         .match-card:active {
-            transform: scale(0.985);
+            transform: scale(0.986);
         }
 
-        .match-card.live-card {
-            border-color: rgba(255, 61, 86, 0.42);
-            box-shadow: 0 0 0 1px rgba(255, 61, 86, 0.25), var(--shadow);
+        .match-card.live {
+            border-color: rgba(255, 59, 95, 0.45);
+            box-shadow: 0 0 0 1px rgba(255, 59, 95, 0.25), var(--shadow);
         }
 
-        .match-header {
+        .match-top {
             display: flex;
-            justify-content: space-between;
-            gap: 10px;
             align-items: center;
-            margin-bottom: 12px;
+            justify-content: space-between;
+            gap: 8px;
+            margin-bottom: 10px;
         }
 
         .league {
@@ -363,7 +263,7 @@
             min-width: 0;
         }
 
-        .league-logo {
+        .league img {
             width: 18px;
             height: 18px;
             border-radius: 4px;
@@ -372,43 +272,42 @@
             flex-shrink: 0;
         }
 
-        .league-name {
-            font-size: 0.75rem;
+        .league span {
+            font-size: 0.74rem;
             color: var(--muted);
-            font-weight: 700;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
         }
 
-        .status-pill {
-            font-size: 0.68rem;
+        .status {
+            font-size: 0.66rem;
             font-weight: 900;
-            padding: 5px 10px;
+            padding: 5px 9px;
             border-radius: 999px;
             border: 1px solid var(--border);
             background: rgba(255, 255, 255, 0.04);
-            flex-shrink: 0;
+            white-space: nowrap;
         }
 
-        .status-pill.live {
-            background: var(--live-soft);
+        .status.live {
             color: var(--live);
-            border-color: rgba(255, 61, 86, 0.45);
+            background: var(--live-soft);
+            border-color: rgba(255, 59, 95, 0.4);
         }
 
-        .status-pill.finished {
-            background: var(--success-soft);
-            color: var(--success);
-            border-color: rgba(32, 201, 151, 0.35);
+        .status.ft {
+            color: var(--done);
+            background: var(--done-soft);
+            border-color: rgba(22, 199, 132, 0.38);
         }
 
         .match-main {
             display: grid;
             grid-template-columns: 1fr auto 1fr;
-            gap: 8px;
             align-items: center;
-            margin-bottom: 10px;
+            gap: 8px;
+            margin-bottom: 9px;
         }
 
         .team {
@@ -419,21 +318,20 @@
             min-width: 0;
         }
 
-        .team-logo {
+        .team img {
             width: 52px;
             height: 52px;
             object-fit: contain;
             border-radius: 50%;
             padding: 6px;
-            background: rgba(255, 255, 255, 0.08);
             border: 1px solid var(--border);
+            background: rgba(255, 255, 255, 0.08);
         }
 
-        .team-name {
-            max-width: 130px;
-            font-size: 0.85rem;
-            font-weight: 800;
+        .team b {
+            max-width: 120px;
             text-align: center;
+            font-size: 0.83rem;
             line-height: 1.2;
             overflow: hidden;
             display: -webkit-box;
@@ -441,80 +339,74 @@
             -webkit-box-orient: vertical;
         }
 
-        .center-box {
+        .center {
             min-width: 94px;
             text-align: center;
         }
 
-        .score {
-            font-size: 1.35rem;
+        .center .score {
+            font-size: 1.32rem;
             font-weight: 900;
             line-height: 1;
-            margin-bottom: 3px;
+            margin-bottom: 4px;
         }
 
-        .time {
-            font-size: 0.85rem;
+        .center .vs {
+            font-size: 0.74rem;
+            color: var(--muted);
+            margin-bottom: 4px;
+        }
+
+        .center .time {
+            font-size: 0.84rem;
             font-weight: 900;
+            line-height: 1;
         }
 
-        .time-sub {
-            font-size: 0.63rem;
+        .center .sub {
+            font-size: 0.62rem;
             color: var(--muted);
-            margin-top: 2px;
+            margin-top: 3px;
         }
 
-        .vs {
-            font-size: 0.76rem;
-            color: var(--muted);
-            font-weight: 700;
-            opacity: 0.7;
-            margin-bottom: 5px;
-        }
-
-        .card-footer {
+        .match-bottom {
             display: flex;
-            align-items: center;
             justify-content: space-between;
-            gap: 8px;
+            align-items: center;
             border-top: 1px solid var(--border);
-            padding-top: 9px;
+            padding-top: 8px;
+            gap: 8px;
         }
 
-        .server-chip {
+        .servers-count {
             font-size: 0.72rem;
             color: var(--muted);
-            border: 1px solid var(--border);
-            border-radius: 999px;
-            padding: 3px 10px;
         }
 
-        .watch-chip {
+        .watch-pill {
+            border: 0;
             border-radius: 999px;
-            border: none;
+            padding: 7px 13px;
+            font-size: 0.73rem;
+            font-weight: 900;
             color: #fff;
             background: linear-gradient(135deg, #1fa2ff, #1286dd);
-            font-size: 0.74rem;
-            font-weight: 900;
-            padding: 8px 14px;
-            font-family: inherit;
             pointer-events: none;
         }
 
-        .empty-wrap {
-            margin-top: 18px;
+        .bottom-banner {
+            width: 100%;
             text-align: center;
+            min-height: 250px;
+            margin-top: 8px;
+            margin-bottom: 12px;
+        }
+
+        .empty {
             border-radius: var(--radius);
-            padding: 30px 18px;
-        }
-
-        .empty-wrap h3 {
-            font-size: 0.96rem;
-            margin-bottom: 6px;
-        }
-
-        .empty-wrap p {
-            font-size: 0.8rem;
+            padding: 24px 16px;
+            text-align: center;
+            font-size: 0.88rem;
             color: var(--muted);
         }
 
@@ -537,7 +429,7 @@
             display: flex;
             align-items: center;
             gap: 10px;
-            padding: 14px;
+            padding: 13px;
             border-bottom: 1px solid var(--border);
             background: var(--bg-soft);
         }
@@ -549,18 +441,17 @@
             border: 1px solid var(--border);
             color: var(--text);
             background: rgba(255, 255, 255, 0.05);
-            font-size: 1.1rem;
+            font-size: 1rem;
             cursor: pointer;
         }
 
         .view-title {
-            font-size: 0.9rem;
-            font-weight: 900;
-            line-height: 1.3;
             flex: 1;
             text-align: center;
+            font-size: 0.9rem;
+            font-weight: 900;
             margin-left: -48px;
-            padding-inline: 10px;
+            padding-inline: 12px;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
@@ -573,19 +464,18 @@
 
         .server-item {
             width: 100%;
-            border-radius: 16px;
+            border-radius: 15px;
             margin-bottom: 10px;
             border: 1px solid var(--border);
-            background: var(--card);
             color: var(--text);
+            background: var(--card);
             display: flex;
             align-items: center;
             gap: 10px;
-            padding: 12px 14px;
+            padding: 11px 13px;
             text-align: right;
             font-family: inherit;
             cursor: pointer;
-            transition: var(--transition);
         }
 
         .server-item:active {
@@ -593,32 +483,29 @@
         }
 
         .server-icon {
-            width: 42px;
-            height: 42px;
+            width: 40px;
+            height: 40px;
             border-radius: 12px;
             display: grid;
             place-items: center;
+            font-size: 1.15rem;
             background: var(--accent-soft);
-            border: 1px solid rgba(31, 162, 255, 0.25);
-            font-size: 1.2rem;
+            border: 1px solid rgba(31, 162, 255, 0.24);
             flex-shrink: 0;
         }
 
-        .server-info {
+        .server-text {
             flex: 1;
             min-width: 0;
         }
 
-        .server-info b {
-            font-size: 0.88rem;
+        .server-text b {
+            font-size: 0.86rem;
             display: block;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
         }
 
-        .server-info span {
-            font-size: 0.73rem;
+        .server-text span {
+            font-size: 0.72rem;
             color: var(--muted);
         }
 
@@ -629,7 +516,12 @@
             padding: 4px 8px;
             border: 1px solid var(--border);
             color: var(--muted);
-            flex-shrink: 0;
+        }
+
+        .servers-banner {
+            text-align: center;
+            min-height: 60px;
+            padding: 8px 10px 14px;
         }
 
         .player-stage {
@@ -645,200 +537,99 @@
         }
 
         .player-controls {
-            padding: 12px;
-            background: var(--bg-soft);
+            padding: 10px 12px 14px;
             border-top: 1px solid var(--border);
+            background: var(--bg-soft);
         }
 
-        .player-match {
-            font-size: 0.8rem;
-            color: var(--muted);
-            text-align: center;
-            margin-bottom: 8px;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-
-        .player-actions {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 8px;
-        }
-
-        .action-btn {
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            background: rgba(255, 255, 255, 0.04);
-            color: var(--text);
-            padding: 11px;
-            font-size: 0.82rem;
-            font-weight: 800;
+        .fullscreen-btn {
+            width: 100%;
+            border: 0;
+            border-radius: 13px;
+            color: #fff;
             font-family: inherit;
+            font-size: 0.88rem;
+            font-weight: 900;
+            padding: 12px;
+            background: linear-gradient(135deg, #1fa2ff, #1286dd);
             cursor: pointer;
         }
 
-        .action-btn.primary {
-            border: 0;
-            color: #fff;
-            background: linear-gradient(135deg, #1fa2ff, #1286dd);
+        .player-view.fullscreen-mode .player-controls {
+            display: none;
         }
 
-        .notification {
+        .note {
             position: fixed;
-            z-index: 10000;
+            top: 14px;
             right: 14px;
             left: 14px;
-            top: 14px;
+            z-index: 10000;
             border-radius: 14px;
             border: 1px solid var(--border);
             background: var(--card);
-            padding: 12px;
-            color: var(--text);
-            transform: translateY(-140%);
-            transition: var(--transition);
             text-align: center;
-            font-size: 0.84rem;
+            padding: 11px;
+            font-size: 0.82rem;
             font-weight: 700;
+            transform: translateY(-140%);
+            transition: transform 0.25s ease;
         }
 
-        .notification.show {
+        .note.show {
             transform: translateY(0);
-        }
-
-        .skeleton {
-            height: 148px;
-            border-radius: var(--radius);
-            margin-bottom: 10px;
-            border: 1px solid var(--border);
-            background: linear-gradient(90deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.03));
-            background-size: 200% 100%;
-            animation: shimmer 1.2s linear infinite;
-        }
-
-        @keyframes shimmer {
-            to {
-                background-position: -200% 0;
-            }
-        }
-
-        @media (max-width: 420px) {
-            .team-name {
-                max-width: 100px;
-                font-size: 0.8rem;
-            }
-
-            .center-box {
-                min-width: 80px;
-            }
-
-            .score {
-                font-size: 1.18rem;
-            }
-
-            .time {
-                font-size: 0.79rem;
-            }
         }
     </style>
 </head>
 
 <body>
     <div id="main-loader">
-        <div class="loader-ball">⚽</div>
+        <div class="loader-badge">⚽</div>
         <div class="loader-ring"></div>
     </div>
 
-    <div class="notification" id="notification"></div>
+    <div class="note" id="note"></div>
 
-    <header class="app-header glass">
-        <div class="header-top">
-            <div class="brand">
-                <div class="brand-logo">⚽</div>
-                <div>
-                    <h1>LiveMatch TMA</h1>
-                    <p>بث مباشر من داخل تيليجرام</p>
-                </div>
+    <header class="shell header glass">
+        <div class="header-row">
+            <div class="title-wrap">
+                <div class="title-logo">⚽</div>
+                <h1>بث مباشر مباريات كرة القدم</h1>
             </div>
             <div class="header-actions">
-                <button class="icon-btn" id="theme-btn" type="button" aria-label="Toggle Theme">◐</button>
-                <button class="icon-btn" id="refresh-btn" type="button" aria-label="Refresh">↻</button>
+                <button class="icon-btn" id="theme-btn" type="button" aria-label="الوضع المظلم">◐</button>
+                <button class="icon-btn" id="refresh-btn" type="button" aria-label="تحديث">↻</button>
             </div>
-        </div>
-
-        <div class="stats-row">
-            <div class="stat-pill">
-                <b id="count-all">0</b>
-                <span>كل المباريات</span>
-            </div>
-            <div class="stat-pill">
-                <b id="count-live">0</b>
-                <span>مباشر الآن</span>
-            </div>
-            <div class="stat-pill">
-                <b id="count-next">0</b>
-                <span>قادمة</span>
-            </div>
-        </div>
-
-        <div class="search-wrap">
-            <input id="search-input" type="search" placeholder="ابحث عن فريق أو بطولة..." autocomplete="off">
-            <span class="search-icon">🔎</span>
-        </div>
-
-        <div class="filter-row" id="filter-row">
-            <button class="filter-btn active" data-filter="ALL" type="button">الكل</button>
-            <button class="filter-btn" data-filter="LIVE" type="button">مباشر</button>
-            <button class="filter-btn" data-filter="NS" type="button">قادمة</button>
-            <button class="filter-btn" data-filter="FT" type="button">منتهية</button>
         </div>
     </header>
 
-    <main class="app-shell">
-        <div class="top-ad-banner" id="ad-banner">
-            <script>
-                atOptions = {
-                    "key": "15d1ca482efd28581d78b70b9bb40556",
-                    "format": "iframe",
-                    "height": 60,
-                    "width": 468,
-                    "params": {}
-                };
-            </script>
-            <script src="https://www.highperformanceformat.com/15d1ca482efd28581d78b70b9bb40556/invoke.js"></script>
-        </div>
-
-        <section class="matches-container" id="matches-container"></section>
+    <main class="shell">
+        <div class="top-banner" id="top-banner"></div>
+        <section class="matches" id="matches"></section>
+        <div class="bottom-banner" id="bottom-banner"></div>
     </main>
 
     <section class="servers-view" id="servers-view">
         <div class="view-header">
-            <button class="back-btn" id="servers-back-btn" type="button" aria-label="Back">←</button>
-            <div class="view-title" id="server-title">السيرفرات المتاحة</div>
+            <button class="back-btn" id="servers-back" type="button" aria-label="رجوع">←</button>
+            <div class="view-title" id="servers-title">اختيار السيرفر</div>
         </div>
-        <div class="servers-list" id="server-list"></div>
+        <div class="servers-list" id="servers-list"></div>
+        <div class="servers-banner" id="servers-banner"></div>
     </section>
 
     <section class="player-view" id="player-view">
-        <div class="view-header">
-            <button class="back-btn" id="player-back-btn" type="button" aria-label="Back">←</button>
-            <div class="view-title">المشغل</div>
-        </div>
         <div class="player-stage" id="player-stage">
             <iframe id="main-iframe" src="about:blank" allowfullscreen
                 allow="autoplay; encrypted-media; picture-in-picture" referrerpolicy="no-referrer"
                 sandbox="allow-scripts allow-same-origin allow-forms allow-presentation"></iframe>
         </div>
-        <div class="player-controls">
-            <div class="player-match" id="player-match-name">اختر مباراة أولاً</div>
-            <div class="player-actions">
-                <button class="action-btn primary" id="fullscreen-btn" type="button">⛶ تكبير</button>
-                <button class="action-btn" id="close-player-btn" type="button">إغلاق المشغل</button>
-            </div>
+        <div class="player-controls" id="player-controls">
+            <button class="fullscreen-btn" id="fullscreen-btn" type="button">⛶ تكبير الشاشة</button>
         </div>
     </section>
 
-    <script src="js/tma-v2.js?v=9001"></script>
+    <script src="js/tma-v2.js?v=9100"></script>
 </body>
 
 </html>
