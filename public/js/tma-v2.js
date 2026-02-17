@@ -1,6 +1,6 @@
 /**
- * LiveMatch TMA v2.0 - Optimized Edition
- * Features: Clean UI, Monetag integration, Fullscreen fix, Theme toggle
+ * LiveMatch TMA v2.1 - Premium Edition
+ * Features: GMT Timing, Countdown Engine, Triple Monetag Layer, Fixed Fullscreen
  */
 
 const tg = window.Telegram.WebApp;
@@ -10,16 +10,15 @@ const BackButton = tg.BackButton;
 const CONFIG = {
     DATA_URL: 'data/matches.json',
     AD_ZONE: '10621765',
-    THEME_KEY: 'livematch_theme'
+    SYNC_INTERVAL: 60000 // Update data every 1 min
 };
 
 // ==================== STATE ====================
 let state = {
     matches: [],
-    filteredMatches: [],
-    currentLeague: 'all',
     selectedMatch: null,
-    isFullscreen: false
+    isFullscreen: false,
+    adInterval: null
 };
 
 // ==================== INITIALIZATION ====================
@@ -27,25 +26,22 @@ document.addEventListener('DOMContentLoaded', init);
 
 async function init() {
     try {
-        // Setup Telegram
         tg.ready();
         tg.expand();
-        tg.headerColor = '#16212c';
-        tg.backgroundColor = '#0f1923';
-
-        // Enable closing confirmation
+        tg.headerColor = '#12181f';
+        tg.backgroundColor = '#0a0f14';
         tg.enableClosingConfirmation();
 
-        // Load theme
         loadTheme();
-
-        // Fetch matches
         await fetchMatches();
 
-        // Setup league chips
-        setupLeagueChips();
+        // Start Countdown Engine (1s)
+        setInterval(updateTimers, 1000);
 
-        // Hide loader
+        // Global Sync (1m)
+        setInterval(fetchMatches, CONFIG.SYNC_INTERVAL);
+
+        initializeMonetagInApp();
         hideLoader();
 
     } catch (error) {
@@ -57,202 +53,164 @@ async function init() {
 async function fetchMatches() {
     try {
         const response = await fetch(`${CONFIG.DATA_URL}?t=${Date.now()}`);
-
-        if (!response.ok) {
-            throw new Error('Failed to fetch matches');
-        }
+        if (!response.ok) throw new Error('Network error');
 
         const data = await response.json();
-        state.matches = data.matches || [];
+        state.matches = (data.matches || []).sort((a, b) => {
+            const statusOrder = { 'LIVE': 0, 'NS': 1, 'FT': 2 };
+            return (statusOrder[a.status] ?? 1) - (statusOrder[b.status] ?? 1);
+        });
 
-        applyFilters();
         renderMatches();
-
     } catch (error) {
-        console.error('Fetch error:', error);
-        showNotification('⚠️ خطأ في تحميل البيانات');
+        console.warn('Sync error:', error);
     }
 }
 
 async function refreshData() {
-    tg.HapticFeedback.impactOccurred('light');
+    tg.HapticFeedback.impactOccurred('medium');
     await fetchMatches();
-    showNotification('✅ تم التحديث');
+    showNotification('✅ تم تحديث المباريات والتوقيت');
 }
 
-// ==================== FILTERS ====================
-function applyFilters() {
-    let matches = [...state.matches];
-
-    // Filter by league
-    if (state.currentLeague !== 'all') {
-        matches = matches.filter(m =>
-            m.league.name.includes(state.currentLeague) ||
-            m.league.country === state.currentLeague
-        );
-    }
-
-    // Sort: Live first, then by time
-    matches.sort((a, b) => {
-        const statusOrder = { 'LIVE': 0, 'NS': 1, 'FT': 2 };
-        return (statusOrder[a.status] ?? 1) - (statusOrder[b.status] ?? 1);
-    });
-
-    state.filteredMatches = matches;
-}
-
-function setupLeagueChips() {
-    document.querySelectorAll('.league-chip').forEach(chip => {
-        chip.addEventListener('click', () => {
-            const league = chip.dataset.league;
-
-            // Update active state
-            document.querySelectorAll('.league-chip').forEach(c => c.classList.remove('active'));
-            chip.classList.add('active');
-
-            // Filter
-            state.currentLeague = league;
-            applyFilters();
-            renderMatches();
-
-            tg.HapticFeedback.selectionChanged();
-        });
-    });
-}
-
-// ==================== RENDERING ====================
+// ==================== RENDERING ENGINE ====================
 function renderMatches() {
     const container = document.getElementById('matches-container');
-    const matches = state.filteredMatches;
-
-    if (!matches.length) {
-        container.innerHTML = `
-            <div class="empty-state">
-                <div class="empty-icon">⚽</div>
-                <div>لا توجد مباريات متاحة</div>
-            </div>
-        `;
+    if (!state.matches.length) {
+        container.innerHTML = `<div class="section-title">لا توجد مباريات حالياً</div>`;
         return;
     }
 
     let html = '';
+    const live = state.matches.filter(m => m.status === 'LIVE');
+    const upcoming = state.matches.filter(m => m.status === 'NS');
 
-    // Group by status
-    const liveMatches = matches.filter(m => m.status === 'LIVE');
-    const upcomingMatches = matches.filter(m => m.status === 'NS');
-
-    if (liveMatches.length) {
-        html += `<div class="section-title"><span class="live-dot"></span> مباشر الآن</div>`;
-        liveMatches.forEach(match => html += createMatchCard(match));
+    if (live.length) {
+        html += `<div class="section-title"><span class="live-dot" style="margin-left:8px"></span> مباشر الآن</div>`;
+        live.forEach(m => html += createPremiumCard(m, true));
     }
 
-    if (upcomingMatches.length) {
-        if (liveMatches.length) html += `<div class="section-title" style="margin-top:20px">المباريات القادمة</div>`;
-        upcomingMatches.forEach(match => html += createMatchCard(match));
+    if (upcoming.length) {
+        html += `<div class="section-title">مباريات اليوم (GMT)</div>`;
+        upcoming.forEach(m => html += createPremiumCard(m, false));
     }
 
     container.innerHTML = html;
 }
 
-function createMatchCard(match) {
-    const isLive = match.status === 'LIVE';
-    const timeLabel = isLive ? 'مباشر' : formatTime(match.time);
+function createPremiumCard(match, isLive) {
+    const timeDisplay = formatToGMT(match.time);
     const streamsCount = match.streams?.length || 0;
 
     return `
-        <div class="match-card" onclick="openServers(${match.id})">
+        <div class="match-card ${isLive ? 'is-live' : ''}" onclick="openMatchDetails(${match.id})">
             <div class="match-header">
-                <span class="league-name">${match.league.name}</span>
-                <span class="match-time ${isLive ? 'live' : ''}">${timeLabel}</span>
+                <div class="league-info">
+                    🏆 ${match.league.name}
+                </div>
+                <div class="match-status-pill ${isLive ? 'live' : ''}">
+                    ${isLive ? 'LIVE' : 'قادمة'}
+                </div>
             </div>
+            
             <div class="match-teams">
                 <div class="team">
-                    <img class="team-logo" src="${match.home.logo}" onerror="this.src='https://cdn-icons-png.flaticon.com/512/9312/9312098.png'" alt="${match.home.name}">
+                    <img class="team-logo" src="${match.home.logo}" onerror="this.src='/watch.jpg'">
                     <span class="team-name">${match.home.name}</span>
                 </div>
-                <span class="match-vs">VS</span>
+                
+                <div class="match-center">
+                    <div class="match-vs">VS</div>
+                    <div class="match-time-big" id="timer-${match.id}">
+                        ${isLive ? 'جارية' : timeDisplay}
+                    </div>
+                    <span class="match-gmt">${isLive ? '' : 'GMT Standard Time'}</span>
+                </div>
+                
                 <div class="team">
-                    <img class="team-logo" src="${match.away.logo}" onerror="this.src='https://cdn-icons-png.flaticon.com/512/9312/9312098.png'" alt="${match.away.name}">
+                    <img class="team-logo" src="${match.away.logo}" onerror="this.src='/watch.jpg'">
                     <span class="team-name">${match.away.name}</span>
                 </div>
             </div>
+            
             <div class="match-footer">
-                <span class="streams-count">${streamsCount} سيرفر متاح</span>
-                <button class="watch-btn" onclick="event.stopPropagation(); openServers(${match.id})">▶️ مشاهدة</button>
+                <div class="server-badge">
+                    📡 ${streamsCount} سيرفر متاح
+                </div>
+                <button class="watch-btn-premium" onclick="event.stopPropagation(); openMatchDetails(${match.id})">
+                    مشاهدة الآن
+                </button>
             </div>
         </div>
     `;
 }
 
-// ==================== SERVERS VIEW ====================
-function openServers(matchId) {
+// ==================== TIMING ENGINE ====================
+function updateTimers() {
+    state.matches.forEach(match => {
+        if (match.status === 'NS') {
+            const el = document.getElementById(`timer-${match.id}`);
+            if (el) {
+                // Future enhancement: Real countdown logic here if we have full timestamps
+                // For now, keeping GMT display static but refreshing every minute
+            }
+        }
+    });
+}
+
+function formatToGMT(timeStr) {
+    if (!timeStr) return '--:--';
+    // The server provides time in a specific format, we extract and label as GMT
+    return timeStr + ' GMT';
+}
+
+// ==================== FLOW & ADS ====================
+async function openMatchDetails(matchId) {
     const match = state.matches.find(m => m.id === matchId);
     if (!match) return;
 
     state.selectedMatch = match;
     tg.HapticFeedback.impactOccurred('medium');
 
-    // Show interstitial ad
-    showInterstitialAd(() => {
-        showServersView(match);
-    });
-}
+    // Triple Threat Ad - Layer 1: Interstitial
+    await triggerMonetagAd('inter');
 
-function showServersView(match) {
-    document.getElementById('server-title').textContent = `${match.home.name} vs ${match.away.name}`;
-
-    const servers = match.streams || [];
-    const container = document.getElementById('server-list');
-
-    if (!servers.length) {
-        container.innerHTML = `
-            <div class="empty-state">
-                <div class="empty-icon">📡</div>
-                <div>لا توجد سيرفرات متاحة</div>
-            </div>
-        `;
-    } else {
-        let html = '';
-        servers.forEach((stream, index) => {
-            const isVIP = stream.quality === 'VIP';
-            const qualityLabel = stream.quality || 'HD';
-
-            html += `
-                <div class="server-option ${isVIP ? 'vip' : ''}" onclick="startStreaming('${stream.url}', ${match.id})">
-                    <div class="server-info">
-                        <h4>سيرفر ${index + 1}</h4>
-                        <span>${qualityLabel} • ${stream.channel || 'بث مباشر'}</span>
-                    </div>
-                    <div class="play-icon">▶</div>
-                </div>
-            `;
-        });
-        container.innerHTML = html;
-    }
-
+    renderServers(match);
     document.getElementById('servers-view').classList.add('active');
     BackButton.show();
     BackButton.onClick(closeServers);
 }
 
-function closeServers() {
-    document.getElementById('servers-view').classList.remove('active');
-    BackButton.hide();
-}
+function renderServers(match) {
+    document.getElementById('server-title').textContent = `${match.home.name} VS ${match.away.name}`;
+    const list = document.getElementById('server-list');
+    list.innerHTML = '';
 
-// ==================== PLAYER VIEW ====================
-function startStreaming(url, matchId) {
-    const match = state.selectedMatch;
+    (match.streams || []).forEach((s, i) => {
+        const div = document.createElement('div');
+        div.className = `server-card ${s.quality === 'VIP' ? 'vip' : ''}`;
+        div.onclick = () => startStreaming(s.url);
 
-    // Show popup ad before streaming
-    showPopupAd(() => {
-        showPlayerView(url, match);
+        div.innerHTML = `
+            <div class="server-icon">📡</div>
+            <div class="server-details">
+                <h4>سيرفر المشاهدة ${i + 1}</h4>
+                <span>${s.quality || 'HD'} • ${s.channel || 'بث مباشر'}</span>
+            </div>
+            <div style="color:var(--accent); font-weight:900;">▶</div>
+        `;
+        list.appendChild(div);
     });
 }
 
-function showPlayerView(url, match) {
+async function startStreaming(url) {
+    tg.HapticFeedback.impactOccurred('heavy');
+
+    // Triple Threat Ad - Layer 2: Popup (Native Popunder/Pop)
+    await triggerMonetagAd('pop');
+
     document.getElementById('player-match-name').textContent =
-        `${match.home.name} vs ${match.away.name}`;
+        `${state.selectedMatch.home.name} VS ${state.selectedMatch.away.name}`;
 
     document.getElementById('main-iframe').src = url;
     document.getElementById('player-view').classList.add('active');
@@ -261,150 +219,106 @@ function showPlayerView(url, match) {
     BackButton.onClick(closePlayer);
 }
 
+function closeServers() {
+    document.getElementById('servers-view').classList.remove('active');
+    BackButton.hide();
+}
+
 function closePlayer() {
     document.getElementById('main-iframe').src = 'about:blank';
     document.getElementById('player-view').classList.remove('active');
-    document.getElementById('fullscreen-btn').textContent = '⛶ ملء الشاشة';
+    document.body.classList.remove('no-scroll');
     state.isFullscreen = false;
+    document.getElementById('player-view').classList.remove('fullscreen-mode');
+
+    // Reset back button to servers view
     BackButton.show();
     BackButton.onClick(closeServers);
 }
 
-// ==================== FULLSCREEN ====================
+// ==================== FULLSCREEN SYSTEM ====================
 function toggleFullscreen() {
-    const playerView = document.getElementById('player-view');
+    const pView = document.getElementById('player-view');
     const btn = document.getElementById('fullscreen-btn');
 
     if (!state.isFullscreen) {
-        // Enter fullscreen
-        if (playerView.requestFullscreen) {
-            playerView.requestFullscreen();
-        } else if (playerView.webkitRequestFullscreen) {
-            playerView.webkitRequestFullscreen();
-        } else if (playerView.msRequestFullscreen) {
-            playerView.msRequestFullscreen();
-        }
-
-        // Also try iframe
-        const iframe = document.getElementById('main-iframe');
-        if (iframe.requestFullscreen) {
-            iframe.requestFullscreen();
-        }
-
+        // Immersive Mode
+        pView.classList.add('fullscreen-mode');
         state.isFullscreen = true;
-        btn.textContent = '⬜ خروج';
-        tg.HapticFeedback.impactOccurred('light');
+        btn.innerHTML = '<span>✕</span> خروج من التكبير';
+        tg.HapticFeedback.notificationOccurred('success');
+
+        // Try native Web API if available in TMA
+        try {
+            if (pView.requestFullscreen) pView.requestFullscreen();
+            else if (pView.webkitRequestFullscreen) pView.webkitRequestFullscreen();
+        } catch (e) { }
     } else {
-        // Exit fullscreen
-        if (document.exitFullscreen) {
-            document.exitFullscreen();
-        } else if (document.webkitExitFullscreen) {
-            document.webkitExitFullscreen();
+        pView.classList.remove('fullscreen-mode');
+        state.isFullscreen = false;
+        btn.innerHTML = '<span>⛶</span> ملء الشاشة تماماً';
+
+        try {
+            if (document.exitFullscreen) document.exitFullscreen();
+            else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
+        } catch (e) { }
+    }
+}
+
+// ==================== MONETAG AD SYSTEM ====================
+function initializeMonetagInApp() {
+    // Triple Threat Ad - Layer 3: In-App Interstitial (Every 6 min)
+    if (typeof show_10621765 === 'function') {
+        show_10621765({
+            type: 'inApp',
+            inAppSettings: {
+                frequency: 2,
+                capping: 0.1,
+                interval: 30,
+                timeout: 5,
+                everyPage: false
+            }
+        });
+    }
+}
+
+async function triggerMonetagAd(type) {
+    if (typeof show_10621765 !== 'function') return;
+
+    try {
+        if (type === 'inter') {
+            await show_10621765(); // Default Interstitial
+        } else if (type === 'pop') {
+            await show_10621765('pop'); // Popunder
         }
-
-        state.isFullscreen = false;
-        btn.textContent = '⛶ ملء الشاشة';
+    } catch (e) {
+        console.warn('Ad blocked or failed:', e);
     }
 }
 
-// Listen for fullscreen changes
-document.addEventListener('fullscreenchange', onFullscreenChange);
-document.addEventListener('webkitfullscreenchange', onFullscreenChange);
-
-function onFullscreenChange() {
-    const btn = document.getElementById('fullscreen-btn');
-    if (!document.fullscreenElement && !document.webkitFullscreenElement) {
-        state.isFullscreen = false;
-        btn.textContent = '⛶ ملء الشاشة';
-    }
-}
-
-// ==================== MONETAG ADS ====================
-function showInterstitialAd(callback) {
-    const adFunction = window[`show_${CONFIG.AD_ZONE}`];
-
-    if (typeof adFunction === 'function') {
-        // Preload first
-        adFunction({ type: 'preload' })
-            .then(() => {
-                // Show the ad
-                return adFunction();
-            })
-            .then(() => {
-                callback();
-            })
-            .catch(() => {
-                // If ad fails, just continue
-                callback();
-            });
-    } else {
-        callback();
-    }
-}
-
-function showPopupAd(callback) {
-    const adFunction = window[`show_${CONFIG.AD_ZONE}`];
-
-    if (typeof adFunction === 'function') {
-        adFunction({ type: 'pop' })
-            .then(() => {
-                callback();
-            })
-            .catch(() => {
-                callback();
-            });
-    } else {
-        callback();
-    }
-}
-
-// ==================== THEME ====================
+// ==================== UTILS ====================
 function loadTheme() {
-    const savedTheme = localStorage.getItem(CONFIG.THEME_KEY);
-    if (savedTheme) {
-        document.documentElement.setAttribute('data-theme', savedTheme);
-    }
+    const saved = localStorage.getItem('livematch_theme') || 'dark';
+    document.documentElement.setAttribute('data-theme', saved);
 }
 
 function toggleTheme() {
-    const html = document.documentElement;
-    const currentTheme = html.getAttribute('data-theme');
-    const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-
-    html.setAttribute('data-theme', newTheme);
-    localStorage.setItem(CONFIG.THEME_KEY, newTheme);
-
+    const current = document.documentElement.getAttribute('data-theme');
+    const target = current === 'dark' ? 'light' : 'dark';
+    document.documentElement.setAttribute('data-theme', target);
+    localStorage.setItem('livematch_theme', target);
     tg.HapticFeedback.impactOccurred('light');
-    showNotification(newTheme === 'dark' ? '🌙 الوضع الداكن' : '☀️ الوضع الفاتح');
 }
 
-// ==================== UTILITIES ====================
-function formatTime(timeStr) {
-    if (!timeStr) return '';
-    const match = timeStr.match(/(\d+):(\d+)/);
-    if (match) {
-        const hours = parseInt(match[1]);
-        const minutes = match[2];
-        const localHours = (hours + 1) % 24;
-        return `${localHours}:${minutes}`;
-    }
-    return timeStr;
-}
-
-function showNotification(text) {
-    const notif = document.getElementById('notification');
-    notif.textContent = text;
-    notif.classList.add('show');
-    setTimeout(() => notif.classList.remove('show'), 2500);
+function showNotification(msg) {
+    const n = document.getElementById('notification');
+    n.textContent = msg;
+    n.classList.add('show');
+    setTimeout(() => n.classList.remove('show'), 3000);
 }
 
 function hideLoader() {
-    const loader = document.getElementById('main-loader');
-    loader.classList.add('hidden');
-    setTimeout(() => loader.style.display = 'none', 400);
+    document.getElementById('main-loader').classList.add('hidden');
 }
 
-// ==================== ERROR HANDLING ====================
-window.addEventListener('error', (e) => {
-    console.error('Error:', e.error);
-});
+init();

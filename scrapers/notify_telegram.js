@@ -43,10 +43,8 @@ async function notifyTelegram() {
         const now = Math.floor(Date.now() / 1000);
 
         const upcomingMatches = matches.filter(m => {
-            const timeUntilStart = m.timestamp - now;
-
-            // WIDE WINDOW: -40 mins to +40 mins
-            const isSoon = timeUntilStart > -2400 && timeUntilStart < 2400;
+            // TARGETING: 5-8 minutes before the match starts
+            const isSoon = timeUntilStart > 240 && timeUntilStart < 540;
 
             const inHistory = history.includes(m.id);
             const shouldNotify = isSoon && !inHistory;
@@ -76,21 +74,26 @@ async function notifyTelegram() {
             const home = match.home ? match.home.name : 'Home';
             const away = match.away ? match.away.name : 'Away';
             const time = match.time_label || (match.time ? `${match.time} GMT` : 'Soon');
-            // Direct to server page for countdown and ads
-            const link = `${siteUrl}/server.html?match=${match.id}`;
+
+            // Format for Telegram Mini App Link
+            // Using actual bot: @livematchtoday_bot
+            const botUsername = process.env.TELEGRAM_BOT_USERNAME || 'livematchtoday_bot';
+            const appName = process.env.TELEGRAM_APP_NAME || 'live';
+            const tmaLink = `https://t.me/${botUsername}/${appName}?startapp=${match.id}`;
+            const siteLink = `${siteUrl}/server.html?match=${match.id}`;
 
             console.log(`🛠️ Constructing message for: ${home} vs ${away}`);
 
-            let message = `🌟 <b>مباراة اليوم المباشرة</b>\n\n` +
+            let message = `🚀 <b>بث مباشر للمباراة المرتقبة</b>\n\n` +
                 `🏟️ <b>${home}</b> 🆚 <b>${away}</b>\n\n` +
                 `🏆 <b>البطولة:</b> ${league}\n` +
-                `⏰ <b>التوقيت:</b> ${time}\n` +
-                `✨ <b>الجودة:</b> Full HD 1080p\n\n` +
-                `⚡ <b>شاهد المباراة مجاناً وبدون تقطيع هنا:</b>\n` +
+                `⏰ <b>التوقيت:</b> يبدأ خلال أقل من 5 دقائق!\n` +
+                `✨ <b>الجودة:</b> Full HD | 4K\n\n` +
+                `⚡ <b>شاهد المباراة الآن داخل تيليجرام:</b>\n` +
                 `👇👇👇\n` +
-                `🚀 <a href="${link}">رابط البث المباشر الفوري</a>\n\n` +
-                `🔥 <i>نتمنى لكم مشاهدة ممتعة!</i>\n` +
-                `✅ لا تنسوا متابعة قناتنا لكل جديد!`;
+                `🚀 <a href="${tmaLink}">فتح تطبيق البث المباشر</a>\n\n` +
+                `🔗 <b>رابط بديل (للمتصفح):</b> <a href="${siteLink}">اضغط هنا</a>\n\n` +
+                `🔥 <i>مشاهدة ممتعة للجميع!</i>`;
 
             // Validate message
             if (!message || message.trim().length === 0) {
@@ -108,7 +111,7 @@ async function notifyTelegram() {
 
             console.log(`🖼️ Poster URL: ${absolutePosterUrl || 'Using fallback'}`);
 
-            await sendTelegramPhoto(link, message, absolutePosterUrl);
+            await sendTelegramPhoto(tmaLink, message, absolutePosterUrl);
             history.push(match.id);
         }
 

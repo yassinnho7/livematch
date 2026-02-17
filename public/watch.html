@@ -482,7 +482,7 @@
     <!-- Bottom Controls -->
     <div class="watch-controls">
         <div>
-            <button onclick="window.location.href='/'" class="ctrl-btn">🏠 الرئيسية</button>
+            <button id="home-btn" onclick="goHome()" class="ctrl-btn">🏠 الرئيسية</button>
             <button id="fullscreen-btn" onclick="toggleFullscreen()" class="ctrl-btn">⛶ ملء الشاشة</button>
         </div>
         <div class="watch-social">
@@ -495,6 +495,7 @@
         const urlParams = new URLSearchParams(window.location.search);
         const matchId = urlParams.get('match');
         const selectedServerIdx = parseInt(urlParams.get('server') || '0');
+        const directServerUrl = urlParams.get('server_url');
         let currentMatch = null;
         let currentServerIdx = selectedServerIdx;
 
@@ -551,6 +552,22 @@
         // ============ INIT ============
         async function init() {
             try {
+                // If a direct server URL is provided (from TMA), use it immediately
+                if (directServerUrl) {
+                    launchStream(decodeURIComponent(directServerUrl));
+
+                    // Still try to fetch match data for context/servers list
+                    if (matchId) {
+                        const res = await fetch(`data/matches.json?t=${Date.now()}`, { cache: 'no-store' });
+                        const data = await res.json();
+                        currentMatch = data.matches.find(m => m.id == matchId);
+                        if (currentMatch && currentMatch.streams) {
+                            buildServerButtons(currentMatch.streams);
+                        }
+                    }
+                    return;
+                }
+
                 const res = await fetch(`data/matches.json?t=${Date.now()}`, { cache: 'no-store' });
                 const data = await res.json();
                 currentMatch = data.matches.find(m => m.id == matchId);
@@ -577,11 +594,20 @@
             document.getElementById('stream').src = url;
         }
 
+        function goHome() {
+            // If we have a server_url, we are likely in TMA context
+            if (urlParams.get('server_url') || window.Telegram?.WebApp) {
+                window.location.href = 'tma.html';
+            } else {
+                window.location.href = '/';
+            }
+        }
+
         function showError(msg) {
             document.body.innerHTML = `
                 <div class="error-screen">
                     <h2>⚠️ ${msg}</h2>
-                    <a href="/">العودة للرئيسية</a>
+                    <a href="javascript:goHome()">العودة للرئيسية</a>
                 </div>
             `;
         }
