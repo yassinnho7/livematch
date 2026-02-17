@@ -253,7 +253,6 @@
 
     <!-- Match Info -->
     <div class="match-info" id="match-info">
-        <img class="team-logo" id="home-logo" src="" alt="">
         <div>
             <div class="team-name" id="home-name"></div>
         </div>
@@ -261,7 +260,6 @@
         <div>
             <div class="team-name" id="away-name"></div>
         </div>
-        <img class="team-logo" id="away-logo" src="" alt="">
     </div>
 
     <!-- Servers List -->
@@ -316,8 +314,6 @@
         function displayMatchInfo() {
             document.getElementById('home-name').textContent = matchData.home.name;
             document.getElementById('away-name').textContent = matchData.away.name;
-            document.getElementById('home-logo').src = matchData.home.logo;
-            document.getElementById('away-logo').src = matchData.away.logo;
         }
 
         function displayServers() {
