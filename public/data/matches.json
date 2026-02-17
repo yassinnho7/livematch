@@ -1,12 +1,12 @@
 {
-  "generated_at": "2026-02-17T19:40:01.812Z",
+  "generated_at": "2026-02-17T20:09:22.601Z",
   "count": 6,
   "matches": [
     {
       "id": 37431139,
       "date": "2026-02-17T20:00:00.000Z",
       "timestamp": 1771358400,
-      "status": "NS",
+      "status": "LIVE",
       "time": "20:00",
       "time_label": "20:00 GMT",
       "league": {
@@ -47,7 +47,7 @@
       "id": 1194015073,
       "date": "2026-02-17T20:00:00.000Z",
       "timestamp": 1771358400,
-      "status": "NS",
+      "status": "LIVE",
       "time": "20:00",
       "time_label": "20:00 GMT",
       "league": {
@@ -88,7 +88,7 @@
       "id": 2038707295,
       "date": "2026-02-17T20:00:00.000Z",
       "timestamp": 1771358400,
-      "status": "NS",
+      "status": "LIVE",
       "time": "20:00",
       "time_label": "20:00 GMT",
       "league": {
@@ -203,7 +203,7 @@
       "id": 5773091,
       "date": "2026-02-17T17:45:00.000Z",
       "timestamp": 1771350300,
-      "status": "LIVE",
+      "status": "FT",
       "time": "17:45",
       "time_label": "17:45 GMT",
       "league": {
