@@ -3,259 +3,609 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LiveMatch</title>
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>LiveMatch - بث مباشر</title>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@600;700&display=swap" rel="stylesheet">
+    <link rel="preload" href="assets/fonts/Cairo-Bold.ttf" as="font" type="font/ttf" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Monetag SDK -->
+    <script>
+        (function () {
+            var zone = '10621765';
+            var script = document.createElement('script');
+            script.src = 'https://libtl.com/sdk.js';
+            script.setAttribute('data-zone', zone);
+            script.setAttribute('data-sdk', 'show_' + zone);
+            document.head.appendChild(script);
+        })();
+    </script>
+
     <style>
+        @font-face {
+            font-family: 'Cairo';
+            src: url('assets/fonts/Cairo-Bold.ttf') format('truetype');
+            font-weight: 700;
+            font-display: swap;
+        }
+
         :root {
-            --bg: #0a0e14;
-            --card: #151c25;
-            --txt: #f1f5f9;
-            --muted: #64748b;
+            --bg-primary: #0a0e14;
+            --bg-secondary: #151c25;
+            --bg-card: rgba(30, 41, 53, 0.8);
+            --text-primary: #f1f5f9;
+            --text-secondary: #94a3b8;
             --accent: #3b82f6;
-            --red: #ef4444
+            --accent-glow: rgba(59, 130, 246, 0.4);
+            --live-red: #ef4444;
+            --card-radius: 16px;
+            --glass-bg: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 255, 255, 0.1);
         }
 
         [data-theme="light"] {
-            --bg: #f8fafc;
-            --card: #fff;
-            --txt: #0f172a
+            --bg-primary: #f8fafc;
+            --bg-secondary: #ffffff;
+            --bg-card: rgba(255, 255, 255, 0.9);
+            --text-primary: #0f172a;
+            --text-secondary: #64748b;
+            --glass-bg: rgba(0, 0, 0, 0.03);
+            --glass-border: rgba(0, 0, 0, 0.08);
         }
 
         * {
             margin: 0;
             padding: 0;
-            box-sizing: border-box
+            box-sizing: border-box;
         }
 
         body {
             font-family: 'Cairo', sans-serif;
-            background: var(--bg);
-            color: var(--txt);
-            min-height: 100vh
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            min-height: 100vh;
+            padding-bottom: 80px;
         }
 
+        /* Header */
         .header {
             position: sticky;
             top: 0;
             z-index: 100;
-            background: var(--bg);
-            padding: 12px 16px;
+            background: linear-gradient(180deg, var(--bg-primary) 0%, var(--bg-primary) 80%, transparent 100%);
+            padding: 16px;
             display: flex;
             justify-content: space-between;
-            align-items: center
+            align-items: center;
+            backdrop-filter: blur(10px);
         }
 
         .brand {
-            font-weight: 800;
-            font-size: 1.2rem
-        }
-
-        .brand span {
-            color: var(--accent)
-        }
-
-        .acts {
             display: flex;
-            gap: 8px
+            align-items: center;
+            gap: 8px;
         }
 
-        .btn {
+        .brand-logo {
             width: 36px;
             height: 36px;
+            background: linear-gradient(135deg, var(--accent), #8b5cf6);
             border-radius: 10px;
-            border: none;
-            background: var(--card);
-            color: var(--txt);
-            font-size: 1rem;
-            cursor: pointer
-        }
-
-        .ad {
-            padding: 8px;
-            background: var(--card);
-            text-align: center;
-            min-height: 50px
-        }
-
-        .filt {
             display: flex;
-            gap: 6px;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            box-shadow: 0 4px 15px var(--accent-glow);
+        }
+
+        .brand-name {
+            font-weight: 800;
+            font-size: 1.3rem;
+            background: linear-gradient(135deg, #fff, #94a3b8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .brand-name span {
+            color: var(--accent);
+            -webkit-text-fill-color: var(--accent);
+        }
+
+        .actions {
+            display: flex;
+            gap: 8px;
+        }
+
+        .icon-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 12px;
+            border: 1px solid var(--glass-border);
+            background: var(--glass-bg);
+            color: var(--text-primary);
+            font-size: 1rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+        }
+
+        .icon-btn:active {
+            transform: scale(0.95);
+        }
+
+        /* Ad Banner */
+        .ad-banner {
             padding: 8px 16px;
-            overflow-x: auto
+            background: var(--bg-secondary);
+            text-align: center;
+            min-height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
-        .chip {
-            padding: 6px 12px;
-            border-radius: 15px;
-            background: var(--card);
+        /* Match List */
+        .match-list {
+            padding: 8px 16px;
+        }
+
+        .section-title {
             font-size: 0.75rem;
-            font-weight: 600;
-            white-space: nowrap;
-            cursor: pointer;
-            color: var(--muted)
-        }
-
-        .chip.active {
-            background: var(--accent);
-            color: #fff
-        }
-
-        .lst {
-            padding: 8px 16px 80px
-        }
-
-        .ttl {
-            font-size: 0.8rem;
             font-weight: 700;
-            color: var(--muted);
-            margin: 10px 0 6px
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin: 16px 0 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
 
-        .card {
-            background: var(--card);
-            border-radius: 10px;
-            padding: 10px;
-            margin-bottom: 6px;
+        .section-title::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: var(--glass-border);
+        }
+
+        /* Match Card */
+        .match-card {
+            background: var(--bg-card);
+            border-radius: var(--card-radius);
+            padding: 14px;
+            margin-bottom: 10px;
             cursor: pointer;
-            border-left: 3px solid transparent
+            border: 1px solid var(--glass-border);
+            transition: all 0.2s;
+            position: relative;
+            overflow: hidden;
         }
 
-        .card.live {
-            border-left-color: var(--red)
+        .match-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent), #8b5cf6);
+            opacity: 0;
+            transition: opacity 0.2s;
         }
 
-        .ch {
+        .match-card:active {
+            transform: scale(0.98);
+        }
+
+        .match-card.live::before {
+            opacity: 1;
+            background: linear-gradient(90deg, var(--live-red), #f97316);
+        }
+
+        .match-header {
             display: flex;
             justify-content: space-between;
-            margin-bottom: 6px
-        }
-
-        .lg {
-            font-size: 0.6rem;
-            color: var(--muted)
-        }
-
-        .tm {
-            font-size: 0.65rem;
-            font-weight: 700;
-            color: var(--accent);
-            padding: 2px 6px;
-            border-radius: 6px
-        }
-
-        .tm.live {
-            background: rgba(239, 68, 68, 0.15);
-            color: var(--red)
-        }
-
-        .tmz {
-            display: flex;
             align-items: center;
-            justify-content: space-between
+            margin-bottom: 12px;
         }
 
-        .tm {
+        .league-name {
+            font-size: 0.7rem;
+            font-weight: 600;
+            color: var(--text-secondary);
             display: flex;
             align-items: center;
             gap: 6px;
-            flex: 1
         }
 
-        .tn {
-            font-size: 0.75rem;
-            font-weight: 700
+        .league-badge {
+            width: 16px;
+            height: 16px;
+            border-radius: 4px;
+        }
+
+        .match-time {
+            font-size: 0.7rem;
+            font-weight: 700;
+            padding: 4px 10px;
+            border-radius: 20px;
+            background: rgba(59, 130, 246, 0.15);
+            color: var(--accent);
+        }
+
+        .match-time.live {
+            background: rgba(239, 68, 68, 0.15);
+            color: var(--live-red);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.7;
+            }
+        }
+
+        .match-teams {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 12px;
+        }
+
+        .team {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex: 1;
+        }
+
+        .team:last-child {
+            justify-content: flex-end;
+        }
+
+        .team-logo {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            object-fit: cover;
+            background: var(--bg-secondary);
+        }
+
+        .team-name {
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--text-primary);
         }
 
         .vs {
             font-size: 0.7rem;
             font-weight: 900;
-            color: var(--muted);
-            opacity: 0.4;
-            padding: 0 8px
+            color: var(--text-secondary);
+            opacity: 0.5;
+            padding: 0 12px;
         }
 
-        .ft {
+        .match-footer {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-top: 8px;
-            padding-top: 6px;
-            border-top: 1px solid rgba(255, 255, 255, 0.05)
+            padding-top: 10px;
+            border-top: 1px solid var(--glass-border);
         }
 
-        .inf {
-            font-size: 0.65rem;
-            color: var(--muted)
-        }
-
-        .ply {
-            background: var(--accent);
-            color: #fff;
-            border: none;
-            padding: 5px 12px;
-            border-radius: 12px;
+        .stream-count {
             font-size: 0.7rem;
-            font-weight: 700
+            color: var(--text-secondary);
+            display: flex;
+            align-items: center;
+            gap: 4px;
         }
 
-        .emp {
+        .play-btn {
+            background: linear-gradient(135deg, var(--accent), #8b5cf6);
+            color: white;
+            border: none;
+            padding: 8px 18px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            box-shadow: 0 4px 15px var(--accent-glow);
+        }
+
+        .play-btn:active {
+            transform: scale(0.95);
+        }
+
+        /* Empty State */
+        .empty-state {
             text-align: center;
-            padding: 40px;
-            color: var(--muted)
+            padding: 60px 20px;
+            color: var(--text-secondary);
         }
 
-        #ld {
+        .empty-icon {
+            font-size: 4rem;
+            margin-bottom: 16px;
+            opacity: 0.5;
+        }
+
+        .empty-text {
+            font-size: 1rem;
+            font-weight: 600;
+        }
+
+        /* Loading */
+        #loader {
             position: fixed;
             inset: 0;
-            background: var(--bg);
+            background: var(--bg-primary);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            transition: opacity 0.3s;
+        }
+
+        #loader.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .loader-logo {
+            font-size: 3rem;
+            margin-bottom: 16px;
+            animation: bounce 1s infinite;
+        }
+
+        @keyframes bounce {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        .loader-text {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        /* Ad Slot */
+        .ad-slot {
+            margin: 12px 0;
+            text-align: center;
+            min-height: 250px;
             display: flex;
             align-items: center;
             justify-content: center;
-            z-index: 9999
-        }
-
-        #ld.hd {
-            display: none
         }
     </style>
 </head>
 
 <body>
-    <div id="ld">
-        <div style="font-size:2rem">⚽</div>
+    <div id="loader">
+        <div class="loader-logo">⚽</div>
+        <div class="loader-text">جاري تحميل المباريات...</div>
     </div>
+
     <header class="header">
-        <div class="brand">⚽ Live<span>Match</span></div>
-        <div class="acts">
-            <button class="btn" onclick="th()">🌓</button>
-            <button class="btn" onclick="rf()">🔄</button>
+        <div class="brand">
+            <div class="brand-logo">⚽</div>
+            <div class="brand-name">Live<span>Match</span></div>
+        </div>
+        <div class="actions">
+            <button class="icon-btn" onclick="toggleTheme()">🌓</button>
+            <button class="icon-btn" onclick="refresh()">🔄</button>
         </div>
     </header>
-    <div class="ad">
-        <script>var atOptions = { 'key': '167755cfce2e606f5c26037ed81a359a', 'format': 'iframe', 'height': 50, 'width': 320, 'params': {} };</script>
+
+    <div class="ad-banner">
+        <script>
+            var atOptions = {
+                'key': '167755cfce2e606f5c26037ed81a359a',
+                'format': 'iframe',
+                'height': 50,
+                'width': 320,
+                'params': {}
+            };
+        </script>
         <script src="https://www.highperformanceformat.com/167755cfce2e606f5c26037ed81a359a/invoke.js"></script>
     </div>
-    <div class="filt" id="flt"></div>
-    <div class="lst" id="lst"></div>
+
+    <div class="match-list" id="matchList"></div>
+
     <script>
         var CFG = { URL: 'data/matches.json', Z: '10621765', TK: 'livematch_theme' };
-        var st = { m: [], f: [], l: 'all' };
+        var state = { matches: [], filtered: [], filter: 'all' };
+
         document.addEventListener('DOMContentLoaded', init);
-        function init() { var t = Telegram.WebApp; t.ready(); t.expand(); lt(); fc(); gm(); document.getElementById('ld').classList.add('hd') }
-        function gm() { fetch(CFG.URL + '?t=' + Date.now()).then(function (r) { return r.json() }).then(function (d) { st.m = d.matches || []; sf(); rp() }).catch(function (e) { console.log(e) }) }
-        function rf() { Telegram.WebApp.HapticFeedback.impactOccurred('light'); gm() }
-        function sf() { var m = st.m.slice(); if (st.l !== 'all') { m = m.filter(function (x) { return x.league.name.indexOf(st.l) !== -1 || x.league.country === st.l }) } m.sort(function (a, b) { var o = { 'LIVE': 0, 'NS': 1 }; return (o[a.status] || 1) - (o[b.status] || 1) }); st.f = m }
-        function fc() { var f = ['all', 'أفريقيا', 'السعودية', 'مصر', 'إنجلترا', 'إسبانيا', 'إيطاليا']; var h = ''; f.forEach(function (x) { h += '<div class="chip' + (x === st.l ? ' active' : '') + '" data-l="' + x + '">' + (x === 'all' ? 'كل البطولات' : x) + '</div>' }); document.getElementById('flt').innerHTML = h; document.querySelectorAll('.chip').forEach(function (c) { c.onclick = function () { document.querySelectorAll('.chip').forEach(function (x) { x.classList.remove('active') }); c.classList.add('active'); st.l = c.dataset.l; sf(); rp(); Telegram.WebApp.HapticFeedback.selectionChanged() } }) }
-        function rp() { var c = document.getElementById('lst'); var m = st.f || []; if (!m.length) { c.innerHTML = '<div class=emp>لا توجد مباريات</div>'; return } var h = ''; var lv = m.filter(function (x) { return x.status === 'LIVE' }); var up = m.filter(function (x) { return x.status === 'NS' }); var idx = 0; if (lv.length) { h += '<div class=ttl>مباريات مباشرة</div>'; lv.forEach(function (x) { h += cd(x, true); idx++; if (idx === 3) h += '<div class="ad-slot" id="ad-slot-1"></div>' }) } if (up.length) { if (lv.length) h += '<div class=ttl>القادمة</div>'; up.forEach(function (x) { h += cd(x, false); idx++; if (idx === 3) h += '<div class="ad-slot" id="ad-slot-1"></div>' }) } c.innerHTML = h; setTimeout(function () { var ad = document.getElementById('ad-slot-1'); if (ad) { ad.innerHTML = '<iframe src="https://ads.adtrafalgar.com/ads-300x250.html" frameborder="0" style="width:300px;height:250px;margin:0 auto;display:block;border-radius:8px;"></iframe>' } }, 100) }
-        function cd(m, isLive) { var tl = isLive ? 'مباشر' : ft(m.time); return '<div class="card ' + (isLive ? 'live' : '') + '" data-id="' + m.id + '"><div class=ch><span class=lg>' + m.league.name + '</span><span class="tm ' + (isLive ? 'live' : '') + '">' + tl + '</span></div><div class=tmz><div class=tm><img src="' + m.home.logo + '" style="width:24px;height:24px;margin-right:6px;border-radius:50%"><span class=tn>' + m.home.name + '</span></div><span class=vs>VS</span><div class=tm style=justify-content:flex-end><span class=tn>' + m.away.name + '</span><img src="' + m.away.logo + '" style="width:24px;height:24px;margin-left:6px;border-radius:50%"></div></div><div class=ft><span class=inf>' + (m.streams ? m.streams.length : 0) + ' سيرفر</span><button class=ply data-id="' + m.id + '">▶</button></div></div>' }
-        function ft(t) { if (!t) return ''; var m = t.match(/(\d+):(\d+)/); return m ? m[1] + ':' + m[2] + ' GMT' : t }
-        function go(id) { var m = st.m.find(function (x) { return x.id === id }); if (!m) return; Telegram.WebApp.HapticFeedback.impactOccurred('medium'); sh(function () { sessionStorage.setItem('selectedMatch', JSON.stringify(m)); window.location.href = 'select-server.html' }) }
-        function sh(cb) { var fn = window['show_' + CFG.Z]; if (typeof fn === 'function') { fn({ type: 'preload' }).then(function () { return fn() }).catch(function () { }).then(cb).catch(cb) } else { cb() } }
-        function lt() { var s = localStorage.getItem(CFG.TK); if (s) document.documentElement.setAttribute('data-theme', s) }
-        function th() { var d = document.documentElement; var n = d.getAttribute('data-theme') === 'dark' ? 'light' : 'dark'; d.setAttribute('data-theme', n); localStorage.setItem(CFG.TK, n); Telegram.WebApp.HapticFeedback.impactOccurred('light') }
-        document.addEventListener('click', function (e) { var c = e.target; if (c.classList.contains('card')) { go(parseInt(c.dataset.id)) } if (c.classList.contains('ply')) { go(parseInt(c.dataset.id)) } });
+
+        function init() {
+            var tg = Telegram.WebApp;
+            tg.ready();
+            tg.expand();
+            loadTheme();
+            loadMatches();
+            document.getElementById('loader').classList.add('hidden');
+        }
+
+        function loadMatches() {
+            fetch(CFG.URL + '?t=' + Date.now())
+                .then(function (r) { return r.json(); })
+                .then(function (data) {
+                    state.matches = data.matches || [];
+                    filterAndSort();
+                    render();
+                })
+                .catch(function (e) {
+                    console.error('Error loading matches:', e);
+                    renderEmpty();
+                });
+        }
+
+        function refresh() {
+            Telegram.WebApp.HapticFeedback.impactOccurred('light');
+            document.getElementById('loader').classList.remove('hidden');
+            loadMatches();
+        }
+
+        function filterAndSort() {
+            var m = state.matches.slice();
+            m.sort(function (a, b) {
+                var order = { 'LIVE': 0, 'NS': 1 };
+                return (order[a.status] || 2) - (order[b.status] || 2);
+            });
+            state.filtered = m;
+        }
+
+        function render() {
+            var container = document.getElementById('matchList');
+            var matches = state.filtered;
+
+            if (!matches.length) {
+                renderEmpty();
+                return;
+            }
+
+            var html = '';
+            var liveMatches = matches.filter(function (m) { return m.status === 'LIVE'; });
+            var upcomingMatches = matches.filter(function (m) { return m.status === 'NS'; });
+            var matchIndex = 0;
+
+            if (liveMatches.length) {
+                html += '<div class="section-title">مباريات مباشرة</div>';
+                liveMatches.forEach(function (m) {
+                    html += createMatchCard(m, true);
+                    matchIndex++;
+                    if (matchIndex === 3) {
+                        html += createAdSlot();
+                    }
+                });
+            }
+
+            if (upcomingMatches.length) {
+                if (liveMatches.length) {
+                    html += '<div class="section-title">المباريات القادمة</div>';
+                }
+                upcomingMatches.forEach(function (m) {
+                    html += createMatchCard(m, false);
+                    matchIndex++;
+                    if (matchIndex === 3) {
+                        html += createAdSlot();
+                    }
+                });
+            }
+
+            container.innerHTML = html;
+        }
+
+        function createMatchCard(match, isLive) {
+            var timeDisplay = isLive ? 'مباشر' : formatTime(match.time);
+            var timeClass = isLive ? 'match-time live' : 'match-time';
+
+            return '<div class="match-card ' + (isLive ? 'live' : '') + '" onclick="goToServer(' + match.id + ')">' +
+                '<div class="match-header">' +
+                '<div class="league-name">' +
+                '<img class="league-badge" src="' + (match.league.logo || 'data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 16 16%22><circle cx=%228%22 cy=%228%22 r=%226%22 fill=%22%233b82f6%22/></svg>') + '">' +
+                match.league.name +
+                '</div>' +
+                '<div class="' + timeClass + '">' + timeDisplay + '</div>' +
+                '</div>' +
+                '<div class="match-teams">' +
+                '<div class="team">' +
+                '<img class="team-logo" src="' + match.home.logo + '" onerror="this.src=\'data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 36 36%22><circle cx=%2218%22 cy=%2218%22 r=%2218%22 fill=%22%23151c25%22/><text x=%2218%22 y=%2222%22 text-anchor=%22middle%22 font-size=%2212%22 fill=%22%2364748b%22>?</text></svg>\'"> ' +
+                '<span class="team-name">' + match.home.name + '</span>' +
+                '</div>' +
+                '<span class="vs">VS</span>' +
+                '<div class="team">' +
+                '<span class="team-name">' + match.away.name + '</span>' +
+                '<img class="team-logo" src="' + match.away.logo + '" onerror="this.src=\'data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 36 36%22><circle cx=%2218%22 cy=%2218%22 r=%2218%22 fill=%22%23151c25%22/><text x=%2218%22 y=%2222%22 text-anchor=%22middle%22 font-size=%2212%22 fill=%22%2364748b%22>?</text></svg>\'"> ' +
+                '</div>' +
+                '</div>' +
+                '<div class="match-footer">' +
+                '<span class="stream-count">📺 ' + (match.streams ? match.streams.length : 0) + ' سيرفر</span>' +
+                '<button class="play-btn">▶ Watch</button>' +
+                '</div>' +
+                '</div>';
+        }
+
+        function createAdSlot() {
+            return '<div class="ad-slot">' +
+                '<iframe src="https://thetreasure.co.uk/300x250.html" frameborder="0" style="width:300px;height:250px;border-radius:8px;overflow:hidden;"></iframe>' +
+                '</div>';
+        }
+
+        function formatTime(t) {
+            if (!t) return '';
+            var m = t.match(/(\d+):(\d+)/);
+            return m ? m[1] + ':' + m[2] + ' GMT' : t;
+        }
+
+        function renderEmpty() {
+            document.getElementById('matchList').innerHTML =
+                '<div class="empty-state">' +
+                '<div class="empty-icon">📭</div>' +
+                '<div class="empty-text">لا توجد مباريات الآن</div>' +
+                '</div>';
+        }
+
+        function goToServer(id) {
+            var match = state.matches.find(function (m) { return m.id === id; });
+            if (!match) return;
+
+            Telegram.WebApp.HapticFeedback.impactOccurred('medium');
+
+            showAd(function () {
+                sessionStorage.setItem('selectedMatch', JSON.stringify(match));
+                window.location.href = 'select-server.html';
+            });
+        }
+
+        function showAd(callback) {
+            var fn = window['show_' + CFG.Z];
+            if (typeof fn === 'function') {
+                fn({ type: 'preload' })
+                    .then(function () { return fn(); })
+                    .then(callback)
+                    .catch(function () { callback(); });
+            } else {
+                callback();
+            }
+        }
+
+        function loadTheme() {
+            var saved = localStorage.getItem(CFG.TK);
+            if (saved) {
+                document.documentElement.setAttribute('data-theme', saved);
+            }
+        }
+
+        function toggleTheme() {
+            var d = document.documentElement;
+            var n = d.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+            d.setAttribute('data-theme', n);
+            localStorage.setItem(CFG.TK, n);
+            Telegram.WebApp.HapticFeedback.impactOccurred('light');
+        }
     </script>
 </body>
 
