@@ -15,6 +15,7 @@ const state = {
     selectedMatch: null,
     currentView: "home",
     isFullscreen: false,
+    pseudoFullscreen: false,
     bottomBannerMounted: false,
     serverBannerMounted: false
 };
@@ -58,6 +59,9 @@ function initTelegram() {
 
     tg.ready();
     tg.expand();
+    if (typeof tg.disableVerticalSwipes === "function") {
+        tg.disableVerticalSwipes();
+    }
     tg.BackButton.onClick(handleBack);
 
     if (tg.colorScheme === "dark" || tg.colorScheme === "light") {
@@ -416,19 +420,28 @@ function askToExitApp() {
 }
 
 async function toggleFullscreen() {
-    const full = document.fullscreenElement || document.webkitFullscreenElement;
+    const full = isAnyFullscreenActive();
 
     if (!full) {
         try {
-            if (els.playerStage.requestFullscreen) await els.playerStage.requestFullscreen();
-            else if (els.playerStage.webkitRequestFullscreen) els.playerStage.webkitRequestFullscreen();
+            if (tg && typeof tg.requestFullscreen === "function") {
+                tg.requestFullscreen();
+            } else if (els.playerStage.requestFullscreen) {
+                await els.playerStage.requestFullscreen();
+            } else if (els.playerStage.webkitRequestFullscreen) {
+                els.playerStage.webkitRequestFullscreen();
+            } else {
+                throw new Error("fullscreen_not_supported");
+            }
 
             state.isFullscreen = true;
+            state.pseudoFullscreen = false;
             els.playerView.classList.add("fullscreen-mode");
+            els.playerView.classList.remove("pseudo-fullscreen");
             lockOrientation("landscape");
             haptic("light");
         } catch (_) {
-            showNote("ملء الشاشة غير مدعوم على هذا الجهاز.");
+            enablePseudoFullscreen();
         }
     } else {
         exitFullscreenIfNeeded();
@@ -436,7 +449,7 @@ async function toggleFullscreen() {
 }
 
 function onFullscreenChange() {
-    const full = document.fullscreenElement || document.webkitFullscreenElement;
+    const full = isAnyFullscreenActive();
     if (full) {
         state.isFullscreen = true;
         els.playerView.classList.add("fullscreen-mode");
@@ -449,7 +462,12 @@ function onFullscreenChange() {
 }
 
 function exitFullscreenIfNeeded() {
-    const full = document.fullscreenElement || document.webkitFullscreenElement;
+    if (state.pseudoFullscreen) {
+        disablePseudoFullscreen();
+        return;
+    }
+
+    const full = isAnyFullscreenActive();
     if (!full) {
         state.isFullscreen = false;
         els.playerView.classList.remove("fullscreen-mode");
@@ -457,17 +475,58 @@ function exitFullscreenIfNeeded() {
         return;
     }
 
-    if (document.exitFullscreen) document.exitFullscreen().catch(() => { });
-    else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
+    if (tg && typeof tg.exitFullscreen === "function") {
+        tg.exitFullscreen();
+    } else if (document.exitFullscreen) {
+        document.exitFullscreen().catch(() => { });
+    } else if (document.webkitExitFullscreen) {
+        document.webkitExitFullscreen();
+    }
 
     state.isFullscreen = false;
+    state.pseudoFullscreen = false;
     els.playerView.classList.remove("fullscreen-mode");
+    els.playerView.classList.remove("pseudo-fullscreen");
     lockOrientation("portrait");
 }
 
 function lockOrientation(mode) {
-    if (!screen.orientation || typeof screen.orientation.lock !== "function") return;
-    screen.orientation.lock(mode).catch(() => { });
+    if (tg) {
+        if (mode === "landscape" && typeof tg.lockOrientation === "function") {
+            tg.lockOrientation();
+            return;
+        }
+        if (mode === "portrait" && typeof tg.unlockOrientation === "function") {
+            tg.unlockOrientation();
+        }
+    }
+
+    if (screen.orientation && typeof screen.orientation.lock === "function") {
+        screen.orientation.lock(mode).catch(() => { });
+    }
+}
+
+function isAnyFullscreenActive() {
+    if (state.pseudoFullscreen) return true;
+    if (tg && tg.isFullscreen) return true;
+    return Boolean(document.fullscreenElement || document.webkitFullscreenElement);
+}
+
+function enablePseudoFullscreen() {
+    state.isFullscreen = true;
+    state.pseudoFullscreen = true;
+    els.playerView.classList.add("fullscreen-mode");
+    els.playerView.classList.add("pseudo-fullscreen");
+    lockOrientation("landscape");
+    showNote("تم تفعيل وضع مشاهدة أفقي بديل.");
+}
+
+function disablePseudoFullscreen() {
+    state.isFullscreen = false;
+    state.pseudoFullscreen = false;
+    els.playerView.classList.remove("fullscreen-mode");
+    els.playerView.classList.remove("pseudo-fullscreen");
+    lockOrientation("portrait");
 }
 
 async function showMonetagInterstitialFor5s() {
