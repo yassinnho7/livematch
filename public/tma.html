@@ -6,7 +6,6 @@
     <meta name="viewport"
         content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <title>🏆 LiveMatch - مباشر</title>
 
     <!-- Telegram Web App SDK -->
@@ -20,35 +19,36 @@
             script.src = 'https://libtl.com/sdk.js';
             script.setAttribute('data-zone', zone);
             script.setAttribute('data-sdk', 'show_' + zone);
-            script.onload = function () {
-                window.monetagSDKReady = true;
-            };
             document.head.appendChild(script);
         })();
     </script>
 
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+
     <style>
         :root {
-            --bg-primary: #0a0f14;
-            --bg-secondary: #12181f;
-            --bg-card: rgba(26, 39, 50, 0.7);
-            --text-primary: #ffffff;
-            --text-secondary: #8b98a5;
-            --accent: #1d9bf0;
-            --accent-glow: rgba(29, 155, 240, 0.3);
-            --live-red: #f4212e;
+            --bg-primary: #0a0e14;
+            --bg-secondary: #151c25;
+            --bg-card: rgba(30, 41, 53, 0.7);
+            --text-primary: #f1f5f9;
+            --text-secondary: #94a3b8;
+            --accent: #3b82f6;
+            --accent-glow: rgba(59, 130, 246, 0.4);
+            --live-red: #ef4444;
             --card-radius: 20px;
-            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --glass-bg: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(255, 255, 255, 0.08);
         }
 
         [data-theme="light"] {
-            --bg-primary: #f0f3f5;
+            --bg-primary: #f8fafc;
             --bg-secondary: #ffffff;
-            --bg-card: rgba(255, 255, 255, 0.9);
-            --text-primary: #0f1419;
-            --text-secondary: #536471;
-            --accent: #1d9bf0;
-            --accent-glow: rgba(29, 155, 240, 0.1);
+            --bg-card: rgba(255, 255, 255, 0.8);
+            --text-primary: #0f172a;
+            --text-secondary: #64748b;
+            --accent: #2563eb;
+            --glass-bg: rgba(0, 0, 0, 0.03);
+            --glass-border: rgba(0, 0, 0, 0.08);
         }
 
         * {
@@ -59,16 +59,18 @@
         }
 
         body {
-            font-family: 'Cairo', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-family: 'Cairo', sans-serif;
             background: var(--bg-primary);
             color: var(--text-primary);
             min-height: 100vh;
             overflow-x: hidden;
-            background-image: radial-gradient(circle at 50% 0%, #16212c 0%, var(--bg-primary) 70%);
+            background-image:
+                radial-gradient(ellipse at top, rgba(59, 130, 246, 0.15) 0%, transparent 50%),
+                radial-gradient(ellipse at bottom right, rgba(139, 92, 246, 0.1) 0%, transparent 50%);
         }
 
         /* ==================== LOADER ==================== */
-        #main-loader {
+        #loader {
             position: fixed;
             inset: 0;
             background: var(--bg-primary);
@@ -77,62 +79,75 @@
             align-items: center;
             justify-content: center;
             z-index: 9999;
-            transition: opacity 0.5s ease;
+            transition: opacity 0.5s;
         }
 
-        #main-loader.hidden {
+        #loader.hidden {
             opacity: 0;
             pointer-events: none;
         }
 
-        .loader-logo {
+        .loader-icon {
             font-size: 4rem;
-            margin-bottom: 25px;
-            filter: drop-shadow(0 0 15px var(--accent-glow));
-            animation: pulse 1.5s ease-in-out infinite;
+            animation: bounce 1s infinite;
         }
 
         .loader-spinner {
-            width: 50px;
-            height: 50px;
-            border: 3px solid rgba(255, 255, 255, 0.05);
-            border-top-color: var(--accent);
-            border-radius: 50%;
-            animation: spin 0.8s linear infinite;
+            width: 40px;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 2px;
+            margin-top: 20px;
+            overflow: hidden;
         }
 
-        @keyframes spin {
-            to {
-                transform: rotate(360deg);
-            }
+        .loader-spinner::after {
+            content: '';
+            display: block;
+            width: 50%;
+            height: 100%;
+            background: var(--accent);
+            border-radius: 2px;
+            animation: slide 0.8s ease-in-out infinite;
         }
 
-        @keyframes pulse {
+        @keyframes bounce {
 
             0%,
             100% {
-                transform: scale(1);
-                filter: brightness(1);
+                transform: translateY(0);
             }
 
             50% {
-                transform: scale(1.1);
-                filter: brightness(1.3);
+                transform: translateY(-10px);
+            }
+        }
+
+        @keyframes slide {
+            0% {
+                transform: translateX(-100%);
+            }
+
+            100% {
+                transform: translateX(300%);
             }
         }
 
         /* ==================== HEADER ==================== */
-        .app-header {
+        .header {
             position: sticky;
             top: 0;
             z-index: 100;
-            background: rgba(18, 24, 31, 0.8);
-            backdrop-filter: blur(15px);
-            padding: 15px 20px;
+            background: linear-gradient(180deg, var(--bg-primary) 0%, rgba(10, 14, 20, 0.95) 100%);
+            backdrop-filter: blur(20px);
+            padding: 16px;
+            border-bottom: 1px solid var(--glass-border);
+        }
+
+        .header-content {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
         }
 
         .brand {
@@ -141,93 +156,165 @@
             gap: 10px;
         }
 
-        .brand-logo {
-            font-size: 1.6rem;
+        .brand-icon {
+            width: 42px;
+            height: 42px;
+            background: linear-gradient(135deg, var(--accent), #8b5cf6);
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4rem;
+            box-shadow: 0 4px 20px var(--accent-glow);
         }
 
         .brand-text {
-            font-weight: 900;
-            font-size: 1.2rem;
-            letter-spacing: -0.5px;
-        }
-
-        .brand-text span {
-            color: var(--accent);
-            text-shadow: 0 0 10px var(--accent-glow);
+            font-weight: 800;
+            font-size: 1.3rem;
+            background: linear-gradient(135deg, #fff, #94a3b8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
         .header-actions {
             display: flex;
-            gap: 10px;
+            gap: 8px;
         }
 
-        .icon-btn {
+        .action-btn {
             width: 42px;
             height: 42px;
             border-radius: 14px;
-            border: none;
-            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid var(--glass-border);
+            background: var(--glass-bg);
             color: var(--text-primary);
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
-            transition: var(--transition);
+            transition: all 0.2s;
         }
 
-        .icon-btn:active {
-            transform: scale(0.9);
+        .action-btn:active {
+            transform: scale(0.95);
             background: var(--accent);
         }
 
-        /* ==================== AD BANNER ==================== */
-        .top-ad-banner {
-            width: 100%;
-            max-width: 480px;
-            margin: 15px auto;
+        /* ==================== ADSTERRA TOP BANNER ==================== */
+        .ad-container {
+            padding: 12px 16px;
+            background: var(--bg-secondary);
             text-align: center;
-            padding: 0 10px;
-            min-height: 60px;
+            border-bottom: 1px solid var(--glass-border);
         }
 
-        .top-ad-banner iframe {
-            border-radius: 8px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        /* ==================== LEAGUE FILTERS ==================== */
+        .filters {
+            display: flex;
+            gap: 10px;
+            padding: 12px 16px;
+            overflow-x: auto;
+            scrollbar-width: none;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .filters::-webkit-scrollbar {
+            display: none;
+        }
+
+        .filter-chip {
+            padding: 10px 20px;
+            border-radius: 25px;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            font-size: 0.85rem;
+            font-weight: 700;
+            white-space: nowrap;
+            cursor: pointer;
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+            color: var(--text-secondary);
+        }
+
+        .filter-chip.active {
+            background: linear-gradient(135deg, var(--accent), #6366f1);
+            color: #fff;
+            border-color: transparent;
+            box-shadow: 0 4px 20px var(--accent-glow);
+            transform: scale(1.02);
+        }
+
+        .filter-chip:not(.active):active {
+            transform: scale(0.98);
         }
 
         /* ==================== MATCHES LIST ==================== */
-        .matches-container {
-            padding: 5px 16px 100px;
-            max-width: 500px;
-            margin: 0 auto;
+        .matches-list {
+            padding: 16px;
+            padding-bottom: 100px;
         }
 
-        .section-title {
+        .section-header {
             display: flex;
             align-items: center;
             gap: 10px;
-            font-size: 0.85rem;
-            font-weight: 800;
-            margin: 20px 0 15px;
-            color: var(--text-secondary);
-            text-transform: uppercase;
-            letter-spacing: 1px;
+            margin-bottom: 16px;
+            padding: 0 4px;
         }
 
-        /* PREMIUM MATCH CARD */
+        .live-badge {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(239, 68, 68, 0.15);
+            color: var(--live-red);
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 700;
+        }
+
+        .live-dot {
+            width: 8px;
+            height: 8px;
+            background: var(--live-red);
+            border-radius: 50%;
+            animation: pulse 1.2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+
+            50% {
+                opacity: 0.6;
+                transform: scale(1.2);
+            }
+        }
+
+        .section-title {
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: var(--text-secondary);
+        }
+
+        /* ==================== MATCH CARD ==================== */
         .match-card {
             background: var(--bg-card);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
             border-radius: var(--card-radius);
             padding: 20px;
-            margin-bottom: 16px;
+            margin-bottom: 14px;
             cursor: pointer;
-            transition: var(--transition);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             position: relative;
             overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
         }
 
         .match-card::before {
@@ -235,70 +322,69 @@
             position: absolute;
             top: 0;
             left: 0;
-            width: 100%;
-            height: 4px;
-            background: linear-gradient(90deg, transparent, var(--accent), transparent);
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent), #8b5cf6, var(--accent));
             opacity: 0;
-            transition: var(--transition);
+            transition: opacity 0.3s;
         }
 
         .match-card:active {
-            transform: scale(0.97) translateY(2px);
+            transform: scale(0.985);
         }
 
-        .match-card.is-live::before {
+        .match-card.live::before {
             opacity: 1;
-            background: linear-gradient(90deg, transparent, var(--live-red), transparent);
+            animation: shimmer 2s infinite;
+        }
+
+        @keyframes shimmer {
+            0% {
+                background-position: -200% 0;
+            }
+
+            100% {
+                background-position: 200% 0;
+            }
+        }
+
+        .match-card.live {
+            border-color: rgba(239, 68, 68, 0.3);
+            box-shadow: 0 0 30px rgba(239, 68, 68, 0.1);
         }
 
         .match-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 18px;
+            margin-bottom: 16px;
         }
 
-        .league-info {
-            display: flex;
-            align-items: center;
-            gap: 8px;
+        .league-name {
             font-size: 0.75rem;
             color: var(--text-secondary);
             font-weight: 600;
         }
 
-        .match-status-pill {
-            font-size: 0.7rem;
-            font-weight: 800;
-            padding: 4px 12px;
-            border-radius: 12px;
-            background: rgba(255, 255, 255, 0.05);
+        .match-time {
+            font-size: 0.8rem;
+            font-weight: 700;
             color: var(--accent);
+            padding: 5px 12px;
+            background: rgba(59, 130, 246, 0.1);
+            border-radius: 12px;
         }
 
-        .match-status-pill.live {
-            background: rgba(244, 33, 46, 0.15);
+        .match-time.live {
+            background: rgba(239, 68, 68, 0.15);
             color: var(--live-red);
-            animation: liveGlow 2s infinite;
-        }
-
-        @keyframes liveGlow {
-
-            0%,
-            100% {
-                box-shadow: 0 0 0px var(--live-red);
-            }
-
-            50% {
-                box-shadow: 0 0 10px rgba(244, 33, 46, 0.4);
-            }
         }
 
         .match-teams {
             display: flex;
             align-items: center;
-            justify-content: space-around;
-            margin-bottom: 20px;
+            justify-content: space-between;
+            margin-bottom: 18px;
         }
 
         .team {
@@ -306,364 +392,364 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 12px;
+            gap: 10px;
         }
 
         .team-logo {
             width: 56px;
             height: 56px;
             object-fit: contain;
-            filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
+            filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.3));
+            transition: transform 0.3s;
         }
 
         .team-name {
             font-size: 0.9rem;
-            font-weight: 800;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            max-width: 100px;
-        }
-
-        .match-center {
+            font-weight: 700;
             text-align: center;
-            padding: 0 15px;
+            line-height: 1.3;
         }
 
         .match-vs {
             font-size: 1.2rem;
             font-weight: 900;
-            opacity: 0.2;
-            font-style: italic;
-        }
-
-        .match-time-big {
-            font-size: 0.9rem;
-            font-weight: 900;
-            color: var(--text-primary);
-            margin-top: 5px;
-        }
-
-        .match-gmt {
-            font-size: 0.6rem;
             color: var(--text-secondary);
-            display: block;
+            opacity: 0.3;
+            padding: 0 16px;
         }
 
         .match-footer {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding-top: 15px;
-            border-top: 1px solid rgba(255, 255, 255, 0.03);
+            padding-top: 14px;
+            border-top: 1px solid var(--glass-border);
         }
 
-        .server-badge {
+        .stream-info {
             display: flex;
             align-items: center;
             gap: 6px;
             font-size: 0.75rem;
             color: var(--text-secondary);
-            font-weight: 600;
-            background: rgba(255, 255, 255, 0.03);
-            padding: 6px 12px;
-            border-radius: 10px;
         }
 
-        .watch-btn-premium {
-            background: linear-gradient(135deg, var(--accent), #1a8cd8);
+        .watch-btn {
+            background: linear-gradient(135deg, var(--accent), #6366f1);
             color: #fff;
             border: none;
             padding: 10px 24px;
-            border-radius: 14px;
+            border-radius: 25px;
             font-size: 0.85rem;
-            font-weight: 800;
-            cursor: pointer;
-            box-shadow: 0 4px 15px var(--accent-glow);
-        }
-
-        /* ==================== SERVERS VIEW ==================== */
-        .servers-view {
-            position: fixed;
-            inset: 0;
-            background: var(--bg-primary);
-            z-index: 200;
-            display: none;
-            flex-direction: column;
-            animation: slideIn 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
-        .servers-view.active {
-            display: flex;
-        }
-
-        @keyframes slideIn {
-            from {
-                transform: translateX(100%);
-                opacity: 0;
-            }
-
-            to {
-                transform: translateX(0);
-                opacity: 1;
-            }
-        }
-
-        .view-header {
-            padding: 20px;
-            display: flex;
-            align-items: center;
-            background: var(--bg-secondary);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-        }
-
-        .back-circle-btn {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            border: none;
-            background: rgba(255, 255, 255, 0.05);
-            color: #fff;
-            font-size: 1.2rem;
-            cursor: pointer;
-        }
-
-        .view-title {
-            flex: 1;
-            text-align: center;
-            font-weight: 900;
-            font-size: 1rem;
-            margin-right: 40px;
-        }
-
-        .servers-grid {
-            padding: 20px;
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 15px;
-            overflow-y: auto;
-        }
-
-        .server-card {
-            background: var(--bg-card);
-            border-radius: 18px;
-            padding: 18px 22px;
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            transition: var(--transition);
-        }
-
-        .server-card:active {
-            transform: scale(0.96);
-            background: var(--accent);
-        }
-
-        .server-icon {
-            width: 44px;
-            height: 44px;
-            border-radius: 12px;
-            background: rgba(29, 155, 240, 0.1);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.4rem;
-        }
-
-        .server-details {
-            flex: 1;
-        }
-
-        .server-details h4 {
-            font-size: 0.95rem;
-            font-weight: 800;
-            margin-bottom: 2px;
-        }
-
-        .server-details span {
-            font-size: 0.75rem;
-            color: var(--text-secondary);
-        }
-
-        /* ==================== PLAYER VIEW ==================== */
-        .player-view {
-            position: fixed;
-            inset: 0;
-            background: #000;
-            z-index: 300;
-            display: none;
-            flex-direction: column;
-        }
-
-        .player-view.active {
-            display: flex;
-        }
-
-        .player-view.fullscreen-mode .player-controls {
-            display: none;
-        }
-
-        .player-view.fullscreen-mode .player-container {
-            height: 100vh;
-            width: 100vw;
-        }
-
-        .player-container {
-            flex: 1;
-            position: relative;
-            background: #000;
-        }
-
-        #main-iframe {
-            width: 100%;
-            height: 100%;
-            border: none;
-        }
-
-        .player-controls {
-            padding: 20px;
-            background: var(--bg-secondary);
-            border-top: 1px solid rgba(255, 255, 255, 0.05);
-        }
-
-        .p-match-info {
-            font-weight: 800;
-            font-size: 0.9rem;
-            text-align: center;
-            margin-bottom: 15px;
-            color: var(--text-secondary);
-        }
-
-        .btn-fullscreen-toggle {
-            width: 100%;
-            padding: 16px;
-            border-radius: 14px;
-            border: none;
-            background: linear-gradient(135deg, var(--accent), #1a8cd8);
-            color: #fff;
-            font-size: 1rem;
-            font-weight: 800;
+            font-weight: 700;
             cursor: pointer;
             box-shadow: 0 4px 20px var(--accent-glow);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
+            transition: all 0.2s;
         }
 
-        /* ==================== NOTIFICATION ==================== */
-        .notification {
-            position: fixed;
-            top: 15px;
-            left: 15px;
-            right: 15px;
-            background: var(--bg-card);
-            backdrop-filter: blur(15px);
-            border: 1px solid var(--accent);
-            border-radius: 15px;
-            padding: 15px;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
-            z-index: 10000;
-            transform: translateY(-150%);
-            transition: all 0.4s cubic-bezier(0.17, 0.89, 0.32, 1.28);
+        .watch-btn:active {
+            transform: scale(0.95);
         }
 
-        .notification.show {
-            transform: translateY(0);
+        /* ==================== EMPTY STATE ==================== */
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            color: var(--text-secondary);
         }
 
-        @keyframes livePulse {
-            0% {
-                opacity: 1;
-            }
+        .empty-icon {
+            font-size: 4rem;
+            margin-bottom: 16px;
+            opacity: 0.4;
+        }
 
-            50% {
-                opacity: 0.5;
-            }
-
-            100% {
-                opacity: 1;
+        /* ==================== RESPONSIVE ==================== */
+        @media (min-width: 600px) {
+            .matches-list {
+                max-width: 550px;
+                margin: 0 auto;
             }
         }
     </style>
 </head>
 
 <body>
-    <!-- Premium Loader -->
-    <div id="main-loader">
-        <div class="loader-logo">⚽</div>
+    <!-- Loader -->
+    <div id="loader">
+        <div class="loader-icon">⚽</div>
         <div class="loader-spinner"></div>
     </div>
 
-    <!-- Smart Notification -->
-    <div class="notification" id="notification"></div>
-
-    <div id="app">
-        <!-- Transparent Header -->
-        <header class="app-header">
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
             <div class="brand">
-                <span class="brand-logo">⚽</span>
-                <span class="brand-text">Live<span>Match</span></span>
+                <div class="brand-icon">⚽</div>
+                <span class="brand-text">LiveMatch</span>
             </div>
             <div class="header-actions">
-                <button class="icon-btn" onclick="toggleTheme()">🌓</button>
-                <button class="icon-btn" onclick="refreshData()">🔄</button>
+                <button class="action-btn" onclick="toggleTheme()">🌓</button>
+                <button class="action-btn" onclick="refreshData()">🔄</button>
             </div>
-        </header>
-
-        <!-- Dynamic Adsterra Banner -->
-        <div class="top-ad-banner">
-            <script>
-                atOptions = {
-                    'key': '15d1ca482efd28581d78b70b9bb40556',
-                    'format': 'iframe',
-                    'height': 60,
-                    'width': 468,
-                    'params': {}
-                };
-            </script>
-            <script src="https://www.highperformanceformat.com/15d1ca482efd28581d78b70b9bb40556/invoke.js"></script>
         </div>
+    </header>
 
-        <!-- Scrollable Matches Content -->
-        <div class="matches-container" id="matches-container">
-            <!-- Skeleton cards while loading... -->
-        </div>
+    <!-- Adsterra Banner -->
+    <div class="ad-container">
+        <script>
+            var atOptions = {
+                'key': '167755cfce2e606f5c26037ed81a359a',
+                'format': 'iframe',
+                'height': 60,
+                'width': 468,
+                'params': {}
+            };
+        </script>
+        <script src="https://www.highperformanceformat.com/167755cfce2e606f5c26037ed81a359a/invoke.js"></script>
     </div>
 
-    <!-- Servers View Side-Panel -->
-    <div class="servers-view" id="servers-view">
-        <div class="view-header">
-            <button class="back-circle-btn" onclick="closeServers()">←</button>
-            <div class="view-title" id="server-title">اختر سيرفر المشاهدة</div>
-        </div>
-        <div class="servers-grid" id="server-list">
-            <!-- Servers go here -->
-        </div>
+    <!-- Filters -->
+    <div class="filters">
+        <div class="filter-chip active" data-league="all">🌍 كل البطولات</div>
+        <div class="filter-chip" data-league="أفريقيا">🌍 أفريقيا</div>
+        <div class="filter-chip" data-league="السعودية">🇸🇦 السعودية</div>
+        <div class="filter-chip" data-league="مصر">🇪🇬 مصر</div>
+        <div class="filter-chip" data-league="إنجلترا">🏴󠁧󠁢󠁥󠁮󠁧󠁿 إنجلترا</div>
+        <div class="filter-chip" data-league="إسبانيا">🇪🇸 إسبانيا</div>
+        <div class="filter-chip" data-league="إيطاليا">🇮🇹 إيطاليا</div>
+        <div class="filter-chip" data-league="فرنسا">🇫🇷 فرنسا</div>
     </div>
 
-    <!-- Immersive Player View -->
-    <div class="player-view" id="player-view">
-        <div class="player-container">
-            <iframe id="main-iframe" src="about:blank" allowfullscreen
-                allow="autoplay; encrypted-media; picture-in-picture" referrerpolicy="no-referrer"
-                sandbox="allow-scripts allow-same-origin allow-forms allow-presentation"></iframe>
-        </div>
-        <div class="player-controls">
-            <div class="p-match-info" id="player-match-name">المباراة جارية</div>
-            <button class="btn-fullscreen-toggle" id="fullscreen-btn" onclick="toggleFullscreen()">
-                <span>⛶</span> ملء الشاشة تماماً
-            </button>
-        </div>
-    </div>
+    <!-- Matches List -->
+    <div class="matches-list" id="matches-container"></div>
 
-    <script src="js/tma-v2.js?v=6001"></script>
-</body>
+    <script>
+        // ==================== CONFIG ====================
+        const CONFIG = {
+            DATA_URL: 'data/matches.json',
+            AD_ZONE: '10621765',
+            THEME_KEY: 'livematch_theme'
+        };
 
-</html>
+        // ==================== STATE ====================
+        let state = {
+            matches: [],
+            filteredMatches: [],
+            currentLeague: 'all'
+        };
 
-<script src="js/tma-v2.js"></script>
+        // ==================== INIT ====================
+        document.addEventListener('DOMContentLoaded', init);
+
+        async function init() {
+            try {
+                const tg = window.Telegram.WebApp;
+                tg.ready();
+                tg.expand();
+
+                loadTheme();
+                await fetchMatches();
+                setupFilters();
+                hideLoader();
+            } catch (error) {
+                console.error('Init error:', error);
+            }
+        }
+
+        // ==================== DATA ====================
+        async function fetchMatches() {
+            try {
+                const response = await fetch(`${CONFIG.DATA_URL}?t=${Date.now()}`);
+                const data = await response.json();
+                state.matches = data.matches || [];
+                applyFilters();
+                renderMatches();
+            } catch (error) {
+                console.error('Fetch error:', error);
+            }
+        }
+
+        async function refreshData() {
+            window.Telegram.WebApp.HapticFeedback.impactOccurred('light');
+            await fetchMatches();
+            showToast('✅ تم التحديث');
+        }
+
+        // ==================== FILTERS ====================
+        function applyFilters() {
+            let matches = [...state.matches];
+
+            if (state.currentLeague !== 'all') {
+                matches = matches.filter(m =>
+                    m.league.name.includes(state.currentLeague) ||
+                    m.league.country === state.currentLeague
+                );
+            }
+
+            matches.sort((a, b) => {
+                const order = { 'LIVE': 0, 'NS': 1 };
+                return (order[a.status] ?? 1) - (order[b.status] ?? 1);
+            });
+
+            state.filteredMatches = matches;
+        }
+
+        function setupFilters() {
+            document.querySelectorAll('.filter-chip').forEach(chip => {
+                chip.addEventListener('click', () => {
+                    document.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
+                    chip.classList.add('active');
+
+                    state.currentLeague = chip.dataset.league;
+                    applyFilters();
+                    renderMatches();
+
+                    window.Telegram.WebApp.HapticFeedback.selectionChanged();
+                });
+            });
+        }
+
+        // ==================== RENDER ====================
+        function renderMatches() {
+            const container = document.getElementById('matches-container');
+            const matches = state.filteredMatches;
+
+            if (!matches.length) {
+                container.innerHTML = `
+                    <div class="empty-state">
+                        <div class="empty-icon">⚽</div>
+                        <div>لا توجد مباريات الآن</div>
+                    </div>
+                `;
+                return;
+            }
+
+            const liveMatches = matches.filter(m => m.status === 'LIVE');
+            const upcomingMatches = matches.filter(m => m.status === 'NS');
+
+            let html = '';
+
+            if (liveMatches.length) {
+                html += `<div class="section-header"><div class="live-badge"><span class="live-dot"></span> مباشر</div></div>`;
+                liveMatches.forEach(m => html += createMatchCard(m, true));
+            }
+
+            if (upcomingMatches.length) {
+                if (liveMatches.length) html += `<div class="section-header"><span class="section-title">المباريات القادمة</span></div>`;
+                upcomingMatches.forEach(m => html += createMatchCard(m, false));
+            }
+
+            container.innerHTML = html;
+        }
+
+        function createMatchCard(match, isLive) {
+            const timeLabel = isLive ? 'مباشر' : formatTimeGMT(match.time);
+            const streams = match.streams?.length || 0;
+
+            return `
+                <div class="match-card ${isLive ? 'live' : ''}" onclick="goToServers(${match.id})">
+                    <div class="match-header">
+                        <span class="league-name">${match.league.name}</span>
+                        <span class="match-time ${isLive ? 'live' : ''}">${timeLabel}</span>
+                    </div>
+                    <div class="match-teams">
+                        <div class="team">
+                            <img class="team-logo" src="${match.home.logo}" onerror="this.src='https://cdn-icons-png.flaticon.com/512/9312/9312098.png'" alt="${match.home.name}">
+                            <span class="team-name">${match.home.name}</span>
+                        </div>
+                        <span class="match-vs">VS</span>
+                        <div class="team">
+                            <img class="team-logo" src="${match.away.logo}" onerror="this.src='https://cdn-icons-png.flaticon.com/512/9312/9312098.png'" alt="${match.away.name}">
+                            <span class="team-name">${match.away.name}</span>
+                        </div>
+                    </div>
+                    <div class="match-footer">
+                        <span class="stream-info">📺 ${streams} سيرفر</span>
+                        <button class="watch-btn" onclick="event.stopPropagation(); goToServers(${match.id})">▶️ مشاهدة</button>
+                    </div>
+                </div>
+            `;
+        }
+
+        // ==================== NAVIGATION ====================
+        function goToServers(matchId) {
+            const match = state.matches.find(m => m.id === matchId);
+            if (!match) return;
+
+            window.Telegram.WebApp.HapticFeedback.impactOccurred('medium');
+
+            // Show interstitial ad
+            showInterstitialAd(() => {
+                // Save match data to sessionStorage
+                sessionStorage.setItem('selectedMatch', JSON.stringify(match));
+                // Navigate to server selection
+                window.location.href = 'select-server.html';
+            });
+        }
+
+        // ==================== ADS ====================
+        function showInterstitialAd(callback) {
+            const adFn = window[`show_${CONFIG.AD_ZONE}`];
+            if (typeof adFn === 'function') {
+                adFn({ type: 'preload' })
+                    .then(() => adFn())
+                    .then(callback)
+                    .catch(callback);
+            } else {
+                callback();
+            }
+        }
+
+        // ==================== THEME ====================
+        function loadTheme() {
+            const saved = localStorage.getItem(CONFIG.THEME_KEY);
+            if (saved) document.documentElement.setAttribute('data-theme', saved);
+        }
+
+        function toggleTheme() {
+            const html = document.documentElement;
+            const current = html.getAttribute('data-theme');
+            const next = current === 'dark' ? 'light' : 'dark';
+            html.setAttribute('data-theme', next);
+            localStorage.setItem(CONFIG.THEME_KEY, next);
+            window.Telegram.WebApp.HapticFeedback.impactOccurred('light');
+        }
+
+        // ==================== UTILS ====================
+        function formatTimeGMT(timeStr) {
+            if (!timeStr) return '';
+            const match = timeStr.match(/(\d+):(\d+)/);
+            if (match) return `${match[1]}:${match[2]} GMT`;
+            return timeStr;
+        }
+
+        function hideLoader() {
+            const loader = document.getElementById('loader');
+            loader.classList.add('hidden');
+            setTimeout(() => loader.style.display = 'none', 500);
+        }
+
+        function showToast(text) {
+            const toast = document.createElement('div');
+            toast.style.cssText = `
+                position: fixed;
+                top: 80px;
+                left: 50%;
+                transform: translateX(-50%);
+                background: var(--bg-card);
+                padding: 12px 24px;
+                border-radius: 12px;
+                font-size: 0.9rem;
+                z-index: 1000;
+                backdrop-filter: blur(10px);
+                border: 1px solid var(--glass-border);
+            `;
+            toast.textContent = text;
+            document.body.appendChild(toast);
+            setTimeout(() => toast.remove(), 2500);
+        }
+    </script>
 </body>
 
 </html>

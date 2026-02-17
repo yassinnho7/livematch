@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" data-theme="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>اختر السيرفر - LiveMatch</title>
+
+    <!-- Telegram Web App SDK -->
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+
+    <!-- Monetag SDK -->
+    <script>
+        (function () {
+            var zone = '10621765';
+            var script = document.createElement('script');
+            script.src = 'https://libtl.com/sdk.js';
+            script.setAttribute('data-zone', zone);
+            script.setAttribute('data-sdk', 'show_' + zone);
+            document.head.appendChild(script);
+        })();
+    </script>
+
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg-primary: #0a0e14;
+            --bg-secondary: #151c25;
+            --bg-card: rgba(30, 41, 53, 0.7);
+            --text-primary: #f1f5f9;
+            --text-secondary: #94a3b8;
+            --accent: #3b82f6;
+            --accent-glow: rgba(59, 130, 246, 0.4);
+            --live-red: #ef4444;
+            --card-radius: 20px;
+            --glass-bg: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(255, 255, 255, 0.08);
+        }
+
+        [data-theme="light"] {
+            --bg-primary: #f8fafc;
+            --bg-secondary: #ffffff;
+            --bg-card: rgba(255, 255, 255, 0.8);
+            --text-primary: #0f172a;
+            --text-secondary: #64748b;
+            --accent: #2563eb;
+            --glass-bg: rgba(0, 0, 0, 0.03);
+            --glass-border: rgba(0, 0, 0, 0.08);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            font-family: 'Cairo', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            min-height: 100vh;
+            overflow-x: hidden;
+            background-image:
+                radial-gradient(ellipse at top, rgba(59, 130, 246, 0.15) 0%, transparent 50%);
+        }
+
+        /* ==================== HEADER ==================== */
+        .header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: linear-gradient(180deg, var(--bg-primary) 0%, rgba(10, 14, 20, 0.95) 100%);
+            backdrop-filter: blur(20px);
+            padding: 16px;
+            border-bottom: 1px solid var(--glass-border);
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .back-btn {
+            width: 42px;
+            height: 42px;
+            border-radius: 14px;
+            border: 1px solid var(--glass-border);
+            background: var(--glass-bg);
+            color: var(--text-primary);
+            font-size: 1.2rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .back-btn:active {
+            background: var(--accent);
+        }
+
+        .header-title {
+            flex: 1;
+            font-size: 1.1rem;
+            font-weight: 800;
+            text-align: center;
+        }
+
+        .header-spacer {
+            width: 42px;
+        }
+
+        /* ==================== MATCH INFO ==================== */
+        .match-info {
+            background: var(--bg-card);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--card-radius);
+            padding: 24px;
+            margin: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 16px;
+        }
+
+        .team-logo {
+            width: 50px;
+            height: 50px;
+            object-fit: contain;
+        }
+
+        .match-vs {
+            font-size: 1.3rem;
+            font-weight: 900;
+            color: var(--accent);
+        }
+
+        .team-name {
+            font-size: 0.9rem;
+            font-weight: 700;
+            text-align: center;
+            max-width: 100px;
+        }
+
+        /* ==================== SERVERS ==================== */
+        .servers-container {
+            padding: 16px;
+            padding-bottom: 120px;
+        }
+
+        .server-title {
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: var(--text-secondary);
+            margin-bottom: 16px;
+            padding: 0 4px;
+        }
+
+        .server-card {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: var(--bg-card);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--card-radius);
+            padding: 18px 20px;
+            margin-bottom: 12px;
+            cursor: pointer;
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .server-card:active {
+            transform: scale(0.98);
+            background: linear-gradient(135deg, var(--accent), #6366f1);
+            border-color: transparent;
+        }
+
+        .server-card.vip {
+            border-color: rgba(251, 191, 36, 0.4);
+            background: linear-gradient(135deg, rgba(251, 191, 36, 0.1), var(--bg-card));
+        }
+
+        .server-info h4 {
+            font-size: 1rem;
+            margin-bottom: 4px;
+        }
+
+        .server-info span {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+        }
+
+        .server-card.vip .server-info span {
+            color: #fbbf24;
+        }
+
+        .play-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--accent), #6366f1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-size: 1rem;
+            box-shadow: 0 4px 20px var(--accent-glow);
+        }
+
+        .server-card.vip .play-icon {
+            background: linear-gradient(135deg, #f59e0b, #fbbf24);
+        }
+
+        /* ==================== ADSTERRA BANNER ==================== */
+        .ad-container {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: var(--bg-secondary);
+            padding: 10px;
+            text-align: center;
+            border-top: 1px solid var(--glass-border);
+            z-index: 50;
+        }
+
+        /* ==================== EMPTY ==================== */
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            color: var(--text-secondary);
+        }
+
+        /* ==================== RESPONSIVE ==================== */
+        @media (min-width: 600px) {
+            .servers-container {
+                max-width: 550px;
+                margin: 0 auto;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header -->
+    <header class="header">
+        <button class="back-btn" onclick="goBack()">←</button>
+        <div class="header-title">اختر السيرفر</div>
+        <div class="header-spacer"></div>
+    </header>
+
+    <!-- Match Info -->
+    <div class="match-info" id="match-info">
+        <img class="team-logo" id="home-logo" src="" alt="">
+        <div>
+            <div class="team-name" id="home-name"></div>
+        </div>
+        <span class="match-vs">VS</span>
+        <div>
+            <div class="team-name" id="away-name"></div>
+        </div>
+        <img class="team-logo" id="away-logo" src="" alt="">
+    </div>
+
+    <!-- Servers List -->
+    <div class="servers-container">
+        <div class="server-title">السيرفرات المتاحة</div>
+        <div id="servers-list"></div>
+    </div>
+
+    <!-- Adsterra Banner -->
+    <div class="ad-container">
+        <script>
+            var atOptions = {
+                'key': '167755cfce2e606f5c26037ed81a359a',
+                'format': 'iframe',
+                'height': 50,
+                'width': 320,
+                'params': {}
+            };
+        </script>
+        <script src="https://www.highperformanceformat.com/167755cfce2e606f5c26037ed81a359a/invoke.js"></script>
+    </div>
+
+    <script>
+        // ==================== CONFIG ====================
+        const CONFIG = {
+            AD_ZONE: '10621765'
+        };
+
+        // ==================== STATE ====================
+        let matchData = null;
+
+        // ==================== INIT ====================
+        document.addEventListener('DOMContentLoaded', init);
+
+        function init() {
+            const tg = window.Telegram.WebApp;
+            tg.ready();
+
+            // Load match data from sessionStorage
+            const stored = sessionStorage.getItem('selectedMatch');
+            if (stored) {
+                matchData = JSON.parse(stored);
+                displayMatchInfo();
+                displayServers();
+            } else {
+                // No data, redirect to main
+                window.location.href = 'tma.html';
+            }
+        }
+
+        // ==================== DISPLAY ====================
+        function displayMatchInfo() {
+            document.getElementById('home-name').textContent = matchData.home.name;
+            document.getElementById('away-name').textContent = matchData.away.name;
+            document.getElementById('home-logo').src = matchData.home.logo;
+            document.getElementById('away-logo').src = matchData.away.logo;
+        }
+
+        function displayServers() {
+            const container = document.getElementById('servers-list');
+            const servers = matchData.streams || [];
+
+            if (!servers.length) {
+                container.innerHTML = `
+                    <div class="empty-state">
+                        <div>لا توجد سيرفرات متاحة</div>
+                    </div>
+                `;
+                return;
+            }
+
+            let html = '';
+            servers.forEach((stream, index) => {
+                const isVIP = stream.quality === 'VIP';
+                const quality = stream.quality || 'HD';
+                const channel = stream.channel || 'بث مباشر';
+
+                html += `
+                    <div class="server-card ${isVIP ? 'vip' : ''}" onclick="playStream('${encodeURIComponent(stream.url)}')">
+                        <div class="server-info">
+                            <h4>سيرفر ${index + 1}</h4>
+                            <span>${quality} • ${channel}</span>
+                        </div>
+                        <div class="play-icon">▶</div>
+                    </div>
+                `;
+            });
+
+            container.innerHTML = html;
+        }
+
+        // ==================== NAVIGATION ====================
+        function goBack() {
+            window.Telegram.WebApp.HapticFeedback.impactOccurred('light');
+            window.location.href = 'tma.html';
+        }
+
+        function playStream(url) {
+            window.Telegram.WebApp.HapticFeedback.impactOccurred('medium');
+
+            // Show popup ad before playing
+            showPopupAd(() => {
+                // Save stream URL
+                sessionStorage.setItem('streamUrl', decodeURIComponent(url));
+                sessionStorage.setItem('matchTitle', `${matchData.home.name} vs ${matchData.away.name}`);
+                // Go to player
+                window.location.href = 'live.html';
+            });
+        }
+
+        // ==================== ADS ====================
+        function showPopupAd(callback) {
+            const adFn = window[`show_${CONFIG.AD_ZONE}`];
+            if (typeof adFn === 'function') {
+                adFn({ type: 'pop' })
+                    .then(callback)
+                    .catch(callback);
+            } else {
+                callback();
+            }
+        }
+    </script>
+</body>
+
+</html>

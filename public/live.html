@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" data-theme="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>بث مباشر - LiveMatch</title>
+
+    <!-- Telegram Web App SDK -->
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg-primary: #000000;
+            --text-primary: #f1f5f9;
+            --text-secondary: #94a3b8;
+            --accent: #3b82f6;
+            --card-radius: 20px;
+        }
+
+        [data-theme="light"] {
+            --bg-primary: #1a1a1a;
+            --text-primary: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        html,
+        body {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background: #000;
+            font-family: 'Cairo', sans-serif;
+        }
+
+        /* ==================== PLAYER CONTAINER ==================== */
+        .player-wrapper {
+            position: fixed;
+            inset: 0;
+            background: #000;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Fullscreen state */
+        .player-wrapper.fullscreen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 999999;
+        }
+
+        .player-wrapper.landscape {
+            flex-direction: row;
+        }
+
+        .player-wrapper.landscape .video-container {
+            flex: 1;
+            height: 100%;
+        }
+
+        .player-wrapper.landscape .controls {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: auto;
+            padding: 10px 30px;
+            border-radius: 30px;
+            background: rgba(0, 0, 0, 0.8);
+        }
+
+        /* ==================== VIDEO CONTAINER ==================== */
+        .video-container {
+            flex: 1;
+            width: 100%;
+            height: 60%;
+            background: #000;
+            position: relative;
+        }
+
+        #stream-iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        /* Landscape mode for video */
+        @media (orientation: landscape) {
+            .video-container {
+                height: 100%;
+                width: 100%;
+            }
+        }
+
+        /* ==================== CONTROLS ==================== */
+        .controls {
+            width: 100%;
+            height: 40%;
+            background: #0a0e14;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        @media (orientation: landscape) {
+            .controls {
+                display: none;
+            }
+        }
+
+        .match-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            text-align: center;
+            color: var(--text-primary);
+            padding: 10px;
+        }
+
+        .fullscreen-btn {
+            width: 100%;
+            padding: 18px;
+            border-radius: 16px;
+            border: none;
+            background: linear-gradient(135deg, #3b82f6, #6366f1);
+            color: #fff;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            box-shadow: 0 4px 20px rgba(59, 130, 246, 0.4);
+            transition: all 0.2s;
+        }
+
+        .fullscreen-btn:active {
+            transform: scale(0.98);
+        }
+
+        .fullscreen-btn.active {
+            background: linear-gradient(135deg, #ef4444, #dc2626);
+        }
+
+        .back-btn {
+            width: 100%;
+            padding: 14px;
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: transparent;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .help-text {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            text-align: center;
+            line-height: 1.6;
+        }
+
+        /* ==================== LANDSCAPE CONTROLS ==================== */
+        .landscape-controls {
+            display: none;
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 100;
+        }
+
+        .player-wrapper.landscape .landscape-controls {
+            display: flex;
+            gap: 10px;
+        }
+
+        .control-btn {
+            padding: 12px 24px;
+            border-radius: 25px;
+            border: none;
+            background: rgba(0, 0, 0, 0.7);
+            color: #fff;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            backdrop-filter: blur(10px);
+        }
+
+        .control-btn.exit-fullscreen {
+            background: rgba(239, 68, 68, 0.8);
+        }
+
+        /* ==================== LOADING ==================== */
+        .loading {
+            position: fixed;
+            inset: 0;
+            background: #000;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+        }
+
+        .loading.hidden {
+            display: none;
+        }
+
+        .loading-spinner {
+            width: 50px;
+            height: 50px;
+            border: 4px solid rgba(255, 255, 255, 0.1);
+            border-top-color: var(--accent);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        .loading-text {
+            color: var(--text-secondary);
+            margin-top: 16px;
+            font-size: 0.9rem;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Loading -->
+    <div class="loading" id="loading">
+        <div class="loading-spinner"></div>
+        <div class="loading-text">جاري تحميل البث...</div>
+    </div>
+
+    <!-- Player -->
+    <div class="player-wrapper" id="player-wrapper">
+        <div class="video-container">
+            <iframe id="stream-iframe" src="about:blank" allowfullscreen
+                allow="autoplay; encrypted-media; fullscreen; picture-in-picture" referrerpolicy="no-referrer"
+                sandbox="allow-scripts allow-same-origin allow-forms allow-presentation allow-popups"></iframe>
+        </div>
+
+        <div class="controls">
+            <div class="match-title" id="match-title">المباراة</div>
+
+            <button class="fullscreen-btn" id="fullscreen-btn" onclick="toggleFullscreen()">
+                ⛶ ملء الشاشة (شاشة كاملة)
+            </button>
+
+            <button class="back-btn" onclick="goBack()">
+                ← العودة لاختيار السيرفر
+            </button>
+
+            <div class="help-text">
+                💡 إذا واجهت مشكلة في المشاهدة، جرب سيرفر آخر أو أعد تحميل الصفحة
+            </div>
+        </div>
+
+        <!-- Landscape Controls -->
+        <div class="landscape-controls">
+            <button class="control-btn exit-fullscreen" onclick="exitFullscreen()">
+                ✕ خروج
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // ==================== STATE ====================
+        let streamUrl = '';
+        let matchTitle = '';
+        let isFullscreen = false;
+        let isLandscape = false;
+
+        // ==================== INIT ====================
+        document.addEventListener('DOMContentLoaded', init);
+
+        function init() {
+            const tg = window.Telegram.WebApp;
+            tg.ready();
+            tg.expand();
+
+            // Enable closing confirmation
+            tg.enableClosingConfirmation();
+
+            // Load stream data
+            streamUrl = sessionStorage.getItem('streamUrl') || '';
+            matchTitle = sessionStorage.getItem('matchTitle') || 'المباراة';
+
+            if (!streamUrl) {
+                window.location.href = 'tma.html';
+                return;
+            }
+
+            document.getElementById('match-title').textContent = matchTitle;
+
+            // Load the stream
+            loadStream();
+
+            // Detect orientation
+            detectOrientation();
+            window.addEventListener('resize', detectOrientation);
+
+            // Fullscreen change events
+            document.addEventListener('fullscreenchange', onFullscreenChange);
+            document.addEventListener('webkitfullscreenchange', onFullscreenChange);
+        }
+
+        // ==================== STREAM ====================
+        function loadStream() {
+            const iframe = document.getElementById('stream-iframe');
+            iframe.src = decodeURIComponent(streamUrl);
+
+            iframe.onload = () => {
+                document.getElementById('loading').classList.add('hidden');
+            };
+
+            // Hide loading after timeout
+            setTimeout(() => {
+                document.getElementById('loading').classList.add('hidden');
+            }, 5000);
+        }
+
+        // ==================== FULLSCREEN ====================
+        function toggleFullscreen() {
+            const wrapper = document.getElementById('player-wrapper');
+            const btn = document.getElementById('fullscreen-btn');
+            const tg = window.Telegram.WebApp;
+
+            if (!isFullscreen) {
+                // Enter fullscreen
+                if (wrapper.requestFullscreen) {
+                    wrapper.requestFullscreen();
+                } else if (wrapper.webkitRequestFullscreen) {
+                    wrapper.webkitRequestFullscreen();
+                } else if (wrapper.msRequestFullscreen) {
+                    wrapper.msRequestFullscreen();
+                }
+
+                // Try to lock orientation
+                if (screen.orientation && screen.orientation.lock) {
+                    screen.orientation.lock('landscape').catch(() => { });
+                }
+
+                isFullscreen = true;
+                btn.textContent = '✕ خروج من ملء الشاشة';
+                btn.classList.add('active');
+
+                tg.HapticFeedback.impactOccurred('light');
+            } else {
+                exitFullscreen();
+            }
+        }
+
+        function exitFullscreen() {
+            const wrapper = document.getElementById('player-wrapper');
+            const btn = document.getElementById('fullscreen-btn');
+            const tg = window.Telegram.WebApp;
+
+            if (document.exitFullscreen) {
+                document.exitFullscreen();
+            } else if (document.webkitExitFullscreen) {
+                document.webkitExitFullscreen();
+            }
+
+            isFullscreen = false;
+            btn.textContent = '⛶ ملء الشاشة (شاشة كاملة)';
+            btn.classList.remove('active');
+
+            tg.HapticFeedback.impactOccurred('light');
+        }
+
+        function onFullscreenChange() {
+            const wrapper = document.getElementById('player-wrapper');
+            const btn = document.getElementById('fullscreen-btn');
+
+            if (!document.fullscreenElement && !document.webkitFullscreenElement) {
+                isFullscreen = false;
+                btn.textContent = '⛶ ملء الشاشة (شاشة كاملة)';
+                btn.classList.remove('active');
+                wrapper.classList.remove('fullscreen', 'landscape');
+            } else {
+                isFullscreen = true;
+                btn.textContent = '✕ خروج من ملء الشاشة';
+                btn.classList.add('active');
+                wrapper.classList.add('fullscreen');
+            }
+        }
+
+        // ==================== ORIENTATION ====================
+        function detectOrientation() {
+            const wrapper = document.getElementById('player-wrapper');
+
+            if (window.innerHeight < window.innerWidth) {
+                // Landscape
+                isLandscape = true;
+                wrapper.classList.add('landscape');
+            } else {
+                // Portrait
+                isLandscape = false;
+                wrapper.classList.remove('landscape');
+            }
+        }
+
+        // ==================== NAVIGATION ====================
+        function goBack() {
+            const tg = window.Telegram.WebApp;
+            tg.HapticFeedback.impactOccurred('light');
+
+            // Stop stream
+            document.getElementById('stream-iframe').src = 'about:blank';
+
+            // Go back to server selection
+            window.location.href = 'select-server.html';
+        }
+
+        // Handle back button
+        window.Telegram.WebApp.BackButton.onClick(() => {
+            goBack();
+        });
+
+        window.Telegram.WebApp.BackButton.show();
+    </script>
+</body>
+
+</html>
