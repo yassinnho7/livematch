@@ -1,130 +1,7 @@
 {
-  "generated_at": "2026-02-17T20:58:36.848Z",
+  "generated_at": "2026-02-17T22:03:42.350Z",
   "count": 6,
   "matches": [
-    {
-      "id": 37431139,
-      "date": "2026-02-17T20:00:00.000Z",
-      "timestamp": 1771358400,
-      "status": "LIVE",
-      "time": "20:00",
-      "time_label": "20:00 GMT",
-      "league": {
-        "name": "أوروبا, دوري أبطال اوروبا - بلاي اوف",
-        "country": "International",
-        "logo": "https://cdn-icons-png.flaticon.com/512/1378/1378598.png"
-      },
-      "home": {
-        "name": "بنفيكا",
-        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/02/888.png"
-      },
-      "away": {
-        "name": "ريال مدريد",
-        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/01/131.png"
-      },
-      "score": null,
-      "streams": [
-        {
-          "id": "stream_bein1_37431139",
-          "source": "livekora",
-          "quality": "HD",
-          "channel": "bein1",
-          "url": "https://pl.gomatch-live.com/albaplayer/bein1",
-          "priority": 1
-        },
-        {
-          "id": "stream_siiir_37431139",
-          "source": "siiir",
-          "quality": "VIP",
-          "channel": "VIP Server",
-          "url": "https://eyj0exaioijkv1qilcjhbgcioijiuzi1nij99sss.yallashot.us/playerv2.php?match=match1&key=c0ae1abba6eebd7e6cc5b88b1d2B71547",
-          "priority": 2
-        }
-      ],
-      "poster_url": "/posters/37431139.jpg"
-    },
-    {
-      "id": 1194015073,
-      "date": "2026-02-17T20:00:00.000Z",
-      "timestamp": 1771358400,
-      "status": "LIVE",
-      "time": "20:00",
-      "time_label": "20:00 GMT",
-      "league": {
-        "name": "أوروبا, دوري أبطال اوروبا - بلاي اوف",
-        "country": "International",
-        "logo": "https://cdn-icons-png.flaticon.com/512/1378/1378598.png"
-      },
-      "home": {
-        "name": "بوروسيا دورتموند",
-        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/01/341.png"
-      },
-      "away": {
-        "name": "أتالانتا",
-        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/02/232.png"
-      },
-      "score": null,
-      "streams": [
-        {
-          "id": "stream_bein4_1194015073",
-          "source": "livekora",
-          "quality": "HD",
-          "channel": "bein4",
-          "url": "https://pl.gomatch-live.com/albaplayer/bein4",
-          "priority": 1
-        },
-        {
-          "id": "stream_siiir_1194015073",
-          "source": "siiir",
-          "quality": "VIP",
-          "channel": "VIP Server",
-          "url": "https://eyj0exaioijkv1qilcjhbgcioijiuzi1nij99sss.yallashot.us/playerv2.php?match=match4&key=c0ae1abba6eebd7e6cc5b88b1d2B71547",
-          "priority": 2
-        }
-      ],
-      "poster_url": "/posters/1194015073.jpg"
-    },
-    {
-      "id": 2038707295,
-      "date": "2026-02-17T20:00:00.000Z",
-      "timestamp": 1771358400,
-      "status": "LIVE",
-      "time": "20:00",
-      "time_label": "20:00 GMT",
-      "league": {
-        "name": "أوروبا, دوري أبطال اوروبا - بلاي اوف",
-        "country": "International",
-        "logo": "https://cdn-icons-png.flaticon.com/512/1378/1378598.png"
-      },
-      "home": {
-        "name": "موناكو",
-        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/01/471.png"
-      },
-      "away": {
-        "name": "باريس سان جيرمان",
-        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/01/480.png"
-      },
-      "score": null,
-      "streams": [
-        {
-          "id": "stream_bein2_2038707295",
-          "source": "livekora",
-          "quality": "HD",
-          "channel": "bein2",
-          "url": "https://pl.gomatch-live.com/albaplayer/bein2",
-          "priority": 1
-        },
-        {
-          "id": "stream_siiir_2038707295",
-          "source": "siiir",
-          "quality": "VIP",
-          "channel": "VIP Server",
-          "url": "https://eyj0exaioijkv1qilcjhbgcioijiuzi1nij99sss.yallashot.us/playerv2.php?match=match2&key=c0ae1abba6eebd7e6cc5b88b1d2B71547",
-          "priority": 2
-        }
-      ],
-      "poster_url": "/posters/2038707295.jpg"
-    },
     {
       "id": 1956521994,
       "date": "2026-02-17T15:00:00.000Z",
@@ -239,6 +116,129 @@
         }
       ],
       "poster_url": "/posters/5773091.jpg"
+    },
+    {
+      "id": 37431139,
+      "date": "2026-02-17T20:00:00.000Z",
+      "timestamp": 1771358400,
+      "status": "FT",
+      "time": "20:00",
+      "time_label": "20:00 GMT",
+      "league": {
+        "name": "أوروبا, دوري أبطال اوروبا - بلاي اوف",
+        "country": "International",
+        "logo": "https://cdn-icons-png.flaticon.com/512/1378/1378598.png"
+      },
+      "home": {
+        "name": "بنفيكا",
+        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/02/888.png"
+      },
+      "away": {
+        "name": "ريال مدريد",
+        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/01/131.png"
+      },
+      "score": null,
+      "streams": [
+        {
+          "id": "stream_bein1_37431139",
+          "source": "livekora",
+          "quality": "HD",
+          "channel": "bein1",
+          "url": "https://pl.gomatch-live.com/albaplayer/bein1",
+          "priority": 1
+        },
+        {
+          "id": "stream_siiir_37431139",
+          "source": "siiir",
+          "quality": "VIP",
+          "channel": "VIP Server",
+          "url": "https://eyj0exaioijkv1qilcjhbgcioijiuzi1nij99sss.yallashot.us/playerv2.php?match=match1&key=c0ae1abba6eebd7e6cc5b88b1d2B71547",
+          "priority": 2
+        }
+      ],
+      "poster_url": "/posters/37431139.jpg"
+    },
+    {
+      "id": 1194015073,
+      "date": "2026-02-17T20:00:00.000Z",
+      "timestamp": 1771358400,
+      "status": "FT",
+      "time": "20:00",
+      "time_label": "20:00 GMT",
+      "league": {
+        "name": "أوروبا, دوري أبطال اوروبا - بلاي اوف",
+        "country": "International",
+        "logo": "https://cdn-icons-png.flaticon.com/512/1378/1378598.png"
+      },
+      "home": {
+        "name": "بوروسيا دورتموند",
+        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/01/341.png"
+      },
+      "away": {
+        "name": "أتالانتا",
+        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/02/232.png"
+      },
+      "score": null,
+      "streams": [
+        {
+          "id": "stream_bein4_1194015073",
+          "source": "livekora",
+          "quality": "HD",
+          "channel": "bein4",
+          "url": "https://pl.gomatch-live.com/albaplayer/bein4",
+          "priority": 1
+        },
+        {
+          "id": "stream_siiir_1194015073",
+          "source": "siiir",
+          "quality": "VIP",
+          "channel": "VIP Server",
+          "url": "https://eyj0exaioijkv1qilcjhbgcioijiuzi1nij99sss.yallashot.us/playerv2.php?match=match4&key=c0ae1abba6eebd7e6cc5b88b1d2B71547",
+          "priority": 2
+        }
+      ],
+      "poster_url": "/posters/1194015073.jpg"
+    },
+    {
+      "id": 2038707295,
+      "date": "2026-02-17T20:00:00.000Z",
+      "timestamp": 1771358400,
+      "status": "FT",
+      "time": "20:00",
+      "time_label": "20:00 GMT",
+      "league": {
+        "name": "أوروبا, دوري أبطال اوروبا - بلاي اوف",
+        "country": "International",
+        "logo": "https://cdn-icons-png.flaticon.com/512/1378/1378598.png"
+      },
+      "home": {
+        "name": "موناكو",
+        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/01/471.png"
+      },
+      "away": {
+        "name": "باريس سان جيرمان",
+        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/01/480.png"
+      },
+      "score": null,
+      "streams": [
+        {
+          "id": "stream_bein2_2038707295",
+          "source": "livekora",
+          "quality": "HD",
+          "channel": "bein2",
+          "url": "https://pl.gomatch-live.com/albaplayer/bein2",
+          "priority": 1
+        },
+        {
+          "id": "stream_siiir_2038707295",
+          "source": "siiir",
+          "quality": "VIP",
+          "channel": "VIP Server",
+          "url": "https://eyj0exaioijkv1qilcjhbgcioijiuzi1nij99sss.yallashot.us/playerv2.php?match=match2&key=c0ae1abba6eebd7e6cc5b88b1d2B71547",
+          "priority": 2
+        }
+      ],
+      "poster_url": "/posters/2038707295.jpg"
     }
   ]
 }
