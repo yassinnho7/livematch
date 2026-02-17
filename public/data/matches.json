@@ -1,45 +1,12 @@
 {
-  "generated_at": "2026-02-17T15:41:31.789Z",
+  "generated_at": "2026-02-17T17:46:39.185Z",
   "count": 6,
   "matches": [
-    {
-      "id": 1956521994,
-      "date": "2026-02-17T15:00:00.000Z",
-      "timestamp": 1771340400,
-      "status": "LIVE",
-      "time": "15:00",
-      "time_label": "15:00 GMT",
-      "league": {
-        "name": "مصر, كأس مصر - دور الـ 16",
-        "country": "Egypt",
-        "logo": "https://cdn-icons-png.flaticon.com/512/1378/1378598.png"
-      },
-      "home": {
-        "name": "الزمالك",
-        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/01/8201.png"
-      },
-      "away": {
-        "name": "سيراميكا كليوباترا",
-        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/02/50882.png"
-      },
-      "score": null,
-      "streams": [
-        {
-          "id": "stream_on-time-sport-1_1956521994",
-          "source": "livekora",
-          "quality": "HD",
-          "channel": "on-time-sport-1",
-          "url": "https://pl.gomatch-live.com/albaplayer/on-time-sport-1",
-          "priority": 1
-        }
-      ],
-      "poster_url": "/posters/1956521994.jpg"
-    },
     {
       "id": 1353089192,
       "date": "2026-02-17T16:00:00.000Z",
       "timestamp": 1771344000,
-      "status": "NS",
+      "status": "LIVE",
       "time": "16:00",
       "time_label": "16:00 GMT",
       "league": {
@@ -80,7 +47,7 @@
       "id": 5773091,
       "date": "2026-02-17T17:45:00.000Z",
       "timestamp": 1771350300,
-      "status": "NS",
+      "status": "LIVE",
       "time": "17:45",
       "time_label": "17:45 GMT",
       "league": {
@@ -105,6 +72,14 @@
           "channel": "bein3",
           "url": "https://pl.gomatch-live.com/albaplayer/bein3",
           "priority": 1
+        },
+        {
+          "id": "stream_siiir_5773091",
+          "source": "siiir",
+          "quality": "VIP",
+          "channel": "VIP Server",
+          "url": "https://eyj0exaioijkv1qilcjhbgcioijiuzi1nij99sss.yallashot.us/playerv2.php?match=match3&key=c0ae1abba6eebd7e6cc5b88b1d2B71547",
+          "priority": 2
         }
       ],
       "poster_url": "/posters/5773091.jpg"
@@ -207,6 +182,39 @@
         }
       ],
       "poster_url": "/posters/2038707295.jpg"
+    },
+    {
+      "id": 1956521994,
+      "date": "2026-02-17T15:00:00.000Z",
+      "timestamp": 1771340400,
+      "status": "FT",
+      "time": "15:00",
+      "time_label": "15:00 GMT",
+      "league": {
+        "name": "مصر, كأس مصر - دور الـ 16",
+        "country": "Egypt",
+        "logo": "https://cdn-icons-png.flaticon.com/512/1378/1378598.png"
+      },
+      "home": {
+        "name": "الزمالك",
+        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/01/8201.png"
+      },
+      "away": {
+        "name": "سيراميكا كليوباترا",
+        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/02/50882.png"
+      },
+      "score": null,
+      "streams": [
+        {
+          "id": "stream_on-time-sport-1_1956521994",
+          "source": "livekora",
+          "quality": "HD",
+          "channel": "on-time-sport-1",
+          "url": "https://pl.gomatch-live.com/albaplayer/on-time-sport-1",
+          "priority": 1
+        }
+      ],
+      "poster_url": "/posters/1956521994.jpg"
     }
   ]
 }
