@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-02-17T22:03:42.350Z",
+  "generated_at": "2026-02-17T22:44:32.294Z",
   "count": 6,
   "matches": [
     {
@@ -64,14 +64,6 @@
           "channel": "bein2",
           "url": "https://pl.gomatch-live.com/albaplayer/bein2",
           "priority": 1
-        },
-        {
-          "id": "stream_siiir_1353089192",
-          "source": "siiir",
-          "quality": "VIP",
-          "channel": "VIP Server",
-          "url": "https://eyj0exaioijkv1qilcjhbgcioijiuzi1nij99sss.yallashot.us/playerv2.php?match=match7&key=c0ae1abba6eebd7e6cc5b88b1d2B71547",
-          "priority": 2
         }
       ],
       "poster_url": "/posters/1353089192.jpg"
@@ -105,14 +97,6 @@
           "channel": "bein3",
           "url": "https://pl.gomatch-live.com/albaplayer/bein3",
           "priority": 1
-        },
-        {
-          "id": "stream_siiir_5773091",
-          "source": "siiir",
-          "quality": "VIP",
-          "channel": "VIP Server",
-          "url": "https://eyj0exaioijkv1qilcjhbgcioijiuzi1nij99sss.yallashot.us/playerv2.php?match=match3&key=c0ae1abba6eebd7e6cc5b88b1d2B71547",
-          "priority": 2
         }
       ],
       "poster_url": "/posters/5773091.jpg"
@@ -146,14 +130,6 @@
           "channel": "bein1",
           "url": "https://pl.gomatch-live.com/albaplayer/bein1",
           "priority": 1
-        },
-        {
-          "id": "stream_siiir_37431139",
-          "source": "siiir",
-          "quality": "VIP",
-          "channel": "VIP Server",
-          "url": "https://eyj0exaioijkv1qilcjhbgcioijiuzi1nij99sss.yallashot.us/playerv2.php?match=match1&key=c0ae1abba6eebd7e6cc5b88b1d2B71547",
-          "priority": 2
         }
       ],
       "poster_url": "/posters/37431139.jpg"
@@ -187,14 +163,6 @@
           "channel": "bein4",
           "url": "https://pl.gomatch-live.com/albaplayer/bein4",
           "priority": 1
-        },
-        {
-          "id": "stream_siiir_1194015073",
-          "source": "siiir",
-          "quality": "VIP",
-          "channel": "VIP Server",
-          "url": "https://eyj0exaioijkv1qilcjhbgcioijiuzi1nij99sss.yallashot.us/playerv2.php?match=match4&key=c0ae1abba6eebd7e6cc5b88b1d2B71547",
-          "priority": 2
         }
       ],
       "poster_url": "/posters/1194015073.jpg"
@@ -228,14 +196,6 @@
           "channel": "bein2",
           "url": "https://pl.gomatch-live.com/albaplayer/bein2",
           "priority": 1
-        },
-        {
-          "id": "stream_siiir_2038707295",
-          "source": "siiir",
-          "quality": "VIP",
-          "channel": "VIP Server",
-          "url": "https://eyj0exaioijkv1qilcjhbgcioijiuzi1nij99sss.yallashot.us/playerv2.php?match=match2&key=c0ae1abba6eebd7e6cc5b88b1d2B71547",
-          "priority": 2
         }
       ],
       "poster_url": "/posters/2038707295.jpg"
