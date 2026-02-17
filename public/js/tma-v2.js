@@ -1,239 +1,216 @@
 /**
  * LiveMatch TMA v2.1 - Premium Edition
- * Features: GMT Timing, Countdown Engine, Triple Monetag Layer, Fixed Fullscreen
+ * Integrated SPA Architecture
  */
 
 const tg = window.Telegram.WebApp;
-const BackButton = tg.BackButton;
 
-// ==================== CONFIG ====================
-const CONFIG = {
-    DATA_URL: 'data/matches.json',
-    AD_ZONE: '10621765',
-    SYNC_INTERVAL: 60000 // Update data every 1 min
+const config = {
+    apiPath: 'data/matches.json',
+    syncInterval: 60000, // 1 min
+    adZoneId: '10621765',
+    themeKey: 'livematch_premium_theme'
 };
 
-// ==================== STATE ====================
 let state = {
     matches: [],
     selectedMatch: null,
+    currentView: 'home',
     isFullscreen: false,
-    adInterval: null
+    theme: 'dark'
 };
 
 // ==================== INITIALIZATION ====================
-document.addEventListener('DOMContentLoaded', init);
+document.addEventListener('DOMContentLoaded', () => {
+    tg.ready();
+    tg.expand();
 
-async function init() {
-    try {
-        tg.ready();
-        tg.expand();
-        tg.headerColor = '#12181f';
-        tg.backgroundColor = '#0a0f14';
-        tg.enableClosingConfirmation();
+    // Set colors from Telegram
+    document.documentElement.setAttribute('data-theme', tg.colorScheme);
 
-        loadTheme();
-        await fetchMatches();
+    // Initial load
+    fetchMatches();
 
-        // Start Countdown Engine (1s)
-        setInterval(updateTimers, 1000);
+    // Auto sync
+    setInterval(fetchMatches, config.syncInterval);
 
-        // Global Sync (1m)
-        setInterval(fetchMatches, CONFIG.SYNC_INTERVAL);
+    // Handle back button
+    tg.BackButton.onClick(() => {
+        if (state.currentView === 'player') navigateTo('servers');
+        else if (state.currentView === 'servers') navigateTo('home');
+    });
 
-        initializeMonetagInApp();
-        hideLoader();
+    // Hide loader
+    setTimeout(() => {
+        document.getElementById('main-loader').classList.add('hidden');
+    }, 1000);
+});
 
-    } catch (error) {
-        console.error('Init error:', error);
-    }
-}
-
-// ==================== DATA FETCHING ====================
 async function fetchMatches() {
     try {
-        const response = await fetch(`${CONFIG.DATA_URL}?t=${Date.now()}`);
-        if (!response.ok) throw new Error('Network error');
-
+        const response = await fetch(`${config.apiPath}?t=${Date.now()}`);
         const data = await response.json();
-        state.matches = (data.matches || []).sort((a, b) => {
-            const statusOrder = { 'LIVE': 0, 'NS': 1, 'FT': 2 };
-            return (statusOrder[a.status] ?? 1) - (statusOrder[b.status] ?? 1);
-        });
-
+        state.matches = data.matches || [];
         renderMatches();
-    } catch (error) {
-        console.warn('Sync error:', error);
+    } catch (e) {
+        console.error('Fetch error:', e);
+        showNotification('خطأ في الاتصال بالسيرفر ❌');
     }
 }
 
-async function refreshData() {
-    tg.HapticFeedback.impactOccurred('medium');
-    await fetchMatches();
-    showNotification('✅ تم تحديث المباريات والتوقيت');
+// ==================== NAVIGATION ====================
+function navigateTo(view) {
+    state.currentView = view;
+
+    // UI Transitions
+    document.getElementById('servers-view').classList.remove('active');
+    document.getElementById('player-view').classList.remove('active');
+
+    if (view === 'home') {
+        tg.BackButton.hide();
+    } else if (view === 'servers') {
+        document.getElementById('servers-view').classList.add('active');
+        tg.BackButton.show();
+        renderServers();
+    } else if (view === 'player') {
+        document.getElementById('player-view').classList.add('active');
+        tg.BackButton.show();
+    }
 }
 
-// ==================== RENDERING ENGINE ====================
+// ==================== RENDERERS ====================
 function renderMatches() {
     const container = document.getElementById('matches-container');
-    if (!state.matches.length) {
-        container.innerHTML = `<div class="section-title">لا توجد مباريات حالياً</div>`;
+    if (!container) return;
+
+    if (state.matches.length === 0) {
+        container.innerHTML = '<div class="section-title">لا توجد مباريات متاحة حالياً</div>';
         return;
     }
 
     let html = '';
+
+    // Grouping
     const live = state.matches.filter(m => m.status === 'LIVE');
     const upcoming = state.matches.filter(m => m.status === 'NS');
+    const finished = state.matches.filter(m => m.status === 'FT');
 
     if (live.length) {
-        html += `<div class="section-title"><span class="live-dot" style="margin-left:8px"></span> مباشر الآن</div>`;
-        live.forEach(m => html += createPremiumCard(m, true));
+        html += '<div class="section-title">🔴 مباشر الآن</div>';
+        live.forEach(m => html += createMatchCard(m));
     }
 
     if (upcoming.length) {
-        html += `<div class="section-title">مباريات اليوم (GMT)</div>`;
-        upcoming.forEach(m => html += createPremiumCard(m, false));
+        html += '<div class="section-title">📅 مباريات قادمة</div>';
+        upcoming.forEach(m => html += createMatchCard(m));
+    }
+
+    if (finished.length) {
+        html += '<div class="section-title">✅ مباريات منتهية</div>';
+        finished.forEach(m => html += createMatchCard(m));
     }
 
     container.innerHTML = html;
 }
 
-function createPremiumCard(match, isLive) {
-    const timeDisplay = formatToGMT(match.time);
-    const streamsCount = match.streams?.length || 0;
+function createMatchCard(match) {
+    const isLive = match.status === 'LIVE';
+    const isFinished = match.status === 'FT';
+
+    let statusLabel = '';
+    if (isLive) statusLabel = '<span class="match-status-pill live">مباشر</span>';
+    else if (isFinished) statusLabel = '<span class="match-status-pill finished">منتهية</span>';
+    else statusLabel = `<span class="match-status-pill">${match.time || '--:--'} GMT</span>`;
 
     return `
-        <div class="match-card ${isLive ? 'is-live' : ''}" onclick="openMatchDetails(${match.id})">
+        <div class="match-card ${isLive ? 'is-live' : ''}" onclick="selectMatch(${match.id})">
             <div class="match-header">
                 <div class="league-info">
-                    🏆 ${match.league.name}
+                    <img src="${match.league.logo}" style="width:18px;height:18px;border-radius:4px">
+                    <span>${match.league.name}</span>
                 </div>
-                <div class="match-status-pill ${isLive ? 'live' : ''}">
-                    ${isLive ? 'LIVE' : 'قادمة'}
-                </div>
+                ${statusLabel}
             </div>
-            
             <div class="match-teams">
                 <div class="team">
-                    <img class="team-logo" src="${match.home.logo}" onerror="this.src='/watch.jpg'">
+                    <img src="${match.home.logo}" class="team-logo">
                     <span class="team-name">${match.home.name}</span>
                 </div>
-                
                 <div class="match-center">
                     <div class="match-vs">VS</div>
-                    <div class="match-time-big" id="timer-${match.id}">
-                        ${isLive ? 'جارية' : timeDisplay}
-                    </div>
-                    <span class="match-gmt">${isLive ? '' : 'GMT Standard Time'}</span>
+                    ${isFinished ? '' : `<div class="match-time-big">${match.time}</div>`}
                 </div>
-                
                 <div class="team">
-                    <img class="team-logo" src="${match.away.logo}" onerror="this.src='/watch.jpg'">
+                    <img src="${match.away.logo}" class="team-logo">
                     <span class="team-name">${match.away.name}</span>
                 </div>
             </div>
-            
             <div class="match-footer">
-                <div class="server-badge">
-                    📡 ${streamsCount} سيرفر متاح
-                </div>
-                <button class="watch-btn-premium" onclick="event.stopPropagation(); openMatchDetails(${match.id})">
-                    مشاهدة الآن
-                </button>
+                <div class="server-badge">📺 ${match.streams ? match.streams.length : 0} سيرفر</div>
+                <button class="watch-btn-premium">${isFinished ? 'النتيجة' : 'شاهد الآن'}</button>
             </div>
         </div>
     `;
 }
 
-// ==================== TIMING ENGINE ====================
-function updateTimers() {
-    state.matches.forEach(match => {
-        if (match.status === 'NS') {
-            const el = document.getElementById(`timer-${match.id}`);
-            if (el) {
-                // Future enhancement: Real countdown logic here if we have full timestamps
-                // For now, keeping GMT display static but refreshing every minute
-            }
-        }
-    });
-}
-
-function formatToGMT(timeStr) {
-    if (!timeStr) return '--:--';
-    // The server provides time in a specific format, we extract and label as GMT
-    return timeStr + ' GMT';
-}
-
-// ==================== FLOW & ADS ====================
-async function openMatchDetails(matchId) {
-    const match = state.matches.find(m => m.id === matchId);
+function selectMatch(id) {
+    const match = state.matches.find(m => m.id === id);
     if (!match) return;
 
     state.selectedMatch = match;
     tg.HapticFeedback.impactOccurred('medium');
 
-    // Triple Threat Ad - Layer 1: Interstitial
-    await triggerMonetagAd('inter');
-
-    renderServers(match);
-    document.getElementById('servers-view').classList.add('active');
-    BackButton.show();
-    BackButton.onClick(closeServers);
-}
-
-function renderServers(match) {
-    document.getElementById('server-title').textContent = `${match.home.name} VS ${match.away.name}`;
-    const list = document.getElementById('server-list');
-    list.innerHTML = '';
-
-    (match.streams || []).forEach((s, i) => {
-        const div = document.createElement('div');
-        div.className = `server-card ${s.quality === 'VIP' ? 'vip' : ''}`;
-        div.onclick = () => startStreaming(s.url);
-
-        div.innerHTML = `
-            <div class="server-icon">📡</div>
-            <div class="server-details">
-                <h4>سيرفر المشاهدة ${i + 1}</h4>
-                <span>${s.quality || 'HD'} • ${s.channel || 'بث مباشر'}</span>
-            </div>
-            <div style="color:var(--accent); font-weight:900;">▶</div>
-        `;
-        list.appendChild(div);
+    // Show interstitial before servers
+    triggerMonetagAd('inter', () => {
+        navigateTo('servers');
     });
 }
 
-async function startStreaming(url) {
-    tg.HapticFeedback.impactOccurred('heavy');
+function renderServers() {
+    const list = document.getElementById('server-list');
+    const match = state.selectedMatch;
+    document.getElementById('server-title').textContent = `${match.home.name} vs ${match.away.name}`;
 
-    // Triple Threat Ad - Layer 2: Popup (Native Popunder/Pop)
-    await triggerMonetagAd('pop');
+    if (!match.streams || match.streams.length === 0) {
+        list.innerHTML = '<div style="text-align:center;padding:40px;opacity:0.6">لا توجد روابط متاحة لهذه المباراة</div>';
+        return;
+    }
 
-    document.getElementById('player-match-name').textContent =
-        `${state.selectedMatch.home.name} VS ${state.selectedMatch.away.name}`;
-
-    document.getElementById('main-iframe').src = url;
-    document.getElementById('player-view').classList.add('active');
-
-    BackButton.show();
-    BackButton.onClick(closePlayer);
+    let html = '';
+    match.streams.forEach((s, idx) => {
+        html += `
+            <div class="server-card" onclick="playStream('${encodeURIComponent(s.url)}')">
+                <div class="server-icon">📺</div>
+                <div class="server-details">
+                    <h4>سيرفر جودة ${s.quality || 'HD'}</h4>
+                    <span>${s.channel || 'القناة الصوتية 1'}</span>
+                </div>
+                <div style="font-size:1.2rem;opacity:0.5">◀</div>
+            </div>
+        `;
+    });
+    list.innerHTML = html;
 }
 
-function closeServers() {
-    document.getElementById('servers-view').classList.remove('active');
-    BackButton.hide();
-}
+function playStream(url) {
+    const streamUrl = decodeURIComponent(url);
+    const iframe = document.getElementById('main-iframe');
 
-function closePlayer() {
-    document.getElementById('main-iframe').src = 'about:blank';
-    document.getElementById('player-view').classList.remove('active');
-    document.body.classList.remove('no-scroll');
-    state.isFullscreen = false;
-    document.getElementById('player-view').classList.remove('fullscreen-mode');
+    tg.HapticFeedback.notificationOccurred('success');
+    document.getElementById('player-match-name').textContent = `${state.selectedMatch.home.name} vs ${state.selectedMatch.away.name}`;
 
-    // Reset back button to servers view
-    BackButton.show();
-    BackButton.onClick(closeServers);
+    // Clear iframe
+    iframe.src = 'about:blank';
+
+    // Show Popunder before player
+    triggerMonetagAd('pop', () => {
+        navigateTo('player');
+
+        // Delay loading to ensure ad is active
+        setTimeout(() => {
+            iframe.src = streamUrl;
+        }, 300);
+    });
 }
 
 // ==================== FULLSCREEN SYSTEM ====================
@@ -242,83 +219,53 @@ function toggleFullscreen() {
     const btn = document.getElementById('fullscreen-btn');
 
     if (!state.isFullscreen) {
-        // Immersive Mode
         pView.classList.add('fullscreen-mode');
         state.isFullscreen = true;
         btn.innerHTML = '<span>✕</span> خروج من التكبير';
         tg.HapticFeedback.notificationOccurred('success');
-
-        // Try native Web API if available in TMA
-        try {
-            if (pView.requestFullscreen) pView.requestFullscreen();
-            else if (pView.webkitRequestFullscreen) pView.webkitRequestFullscreen();
-        } catch (e) { }
     } else {
         pView.classList.remove('fullscreen-mode');
         state.isFullscreen = false;
         btn.innerHTML = '<span>⛶</span> ملء الشاشة تماماً';
-
-        try {
-            if (document.exitFullscreen) document.exitFullscreen();
-            else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
-        } catch (e) { }
-    }
-}
-
-// ==================== MONETAG AD SYSTEM ====================
-function initializeMonetagInApp() {
-    // Triple Threat Ad - Layer 3: In-App Interstitial (Every 6 min)
-    if (typeof show_10621765 === 'function') {
-        show_10621765({
-            type: 'inApp',
-            inAppSettings: {
-                frequency: 2,
-                capping: 0.1,
-                interval: 30,
-                timeout: 5,
-                everyPage: false
-            }
-        });
-    }
-}
-
-async function triggerMonetagAd(type) {
-    if (typeof show_10621765 !== 'function') return;
-
-    try {
-        if (type === 'inter') {
-            await show_10621765(); // Default Interstitial
-        } else if (type === 'pop') {
-            await show_10621765('pop'); // Popunder
-        }
-    } catch (e) {
-        console.warn('Ad blocked or failed:', e);
     }
 }
 
 // ==================== UTILS ====================
-function loadTheme() {
-    const saved = localStorage.getItem('livematch_theme') || 'dark';
-    document.documentElement.setAttribute('data-theme', saved);
-}
-
 function toggleTheme() {
     const current = document.documentElement.getAttribute('data-theme');
-    const target = current === 'dark' ? 'light' : 'dark';
-    document.documentElement.setAttribute('data-theme', target);
-    localStorage.setItem('livematch_theme', target);
+    const next = current === 'dark' ? 'light' : 'dark';
+    document.documentElement.setAttribute('data-theme', next);
     tg.HapticFeedback.impactOccurred('light');
 }
 
+function refreshData() {
+    tg.HapticFeedback.impactOccurred('light');
+    fetchMatches();
+}
+
 function showNotification(msg) {
-    const n = document.getElementById('notification');
-    n.textContent = msg;
-    n.classList.add('show');
-    setTimeout(() => n.classList.remove('show'), 3000);
+    const el = document.getElementById('notification');
+    el.textContent = msg;
+    el.classList.add('show');
+    setTimeout(() => el.classList.remove('show'), 3000);
 }
 
-function hideLoader() {
-    document.getElementById('main-loader').classList.add('hidden');
-}
+function closeServers() { navigateTo('home'); }
 
-init();
+// ==================== AD SYSTEM ====================
+function triggerMonetagAd(type, callback) {
+    const zoneId = config.adZoneId;
+    if (typeof window[`show_${zoneId}`] === 'function') {
+        const adFn = window[`show_${zoneId}`];
+
+        if (type === 'inter') {
+            adFn({ type: 'preload' }).then(() => adFn()).finally(callback);
+        } else if (type === 'pop') {
+            adFn({ type: 'pop' }).finally(callback);
+        } else {
+            callback();
+        }
+    } else {
+        callback();
+    }
+}
