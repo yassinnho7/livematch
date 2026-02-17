@@ -1,0 +1,1118 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" data-theme="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>🏆 LiveMatch - مباشر</title>
+
+    <!-- Telegram Web App SDK -->
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+
+    <!-- Monetag SDK -->
+    <script src='//libtl.com/sdk.js' data-zone='10621765' data-sdk='show_10621765'></script>
+
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="manifest.json">
+
+    <style>
+        :root {
+            --tg-bg: var(--tg-theme-bg-color, #0f1923);
+            --tg-secondary-bg: var(--tg-theme-secondary-bg-color, #16212c);
+            --tg-text: var(--tg-theme-text-color, #fff);
+            --tg-hint: var(--tg-theme-hint-color, #8899a6);
+            --tg-accent: var(--tg-theme-button-color, #1d9bf0);
+            --tg-accent-text: var(--tg-theme-button-text-color, #fff);
+            --live-red: #f4212e;
+            --live-bg: rgba(244, 33, 46, 0.15);
+            --success-green: #00ba7c;
+            --card-radius: 16px;
+            --transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            font-family: 'Cairo', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: var(--tg-bg);
+            color: var(--tg-text);
+            min-height: 100vh;
+            overflow-x: hidden;
+            overscroll-behavior: contain;
+        }
+
+        /* ==================== LOADER ==================== */
+        #main-loader {
+            position: fixed;
+            inset: 0;
+            background: var(--tg-bg);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            transition: opacity 0.4s ease;
+        }
+
+        #main-loader.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .loader-logo {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            animation: pulse 1.5s ease-in-out infinite;
+        }
+
+        .loader-spinner {
+            width: 48px;
+            height: 48px;
+            border: 4px solid rgba(255, 255, 255, 0.1);
+            border-top-color: var(--tg-accent);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        .loader-text {
+            margin-top: 16px;
+            font-size: 0.9rem;
+            color: var(--tg-hint);
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.1);
+            }
+        }
+
+        /* ==================== HEADER ==================== */
+        .app-header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: var(--tg-secondary-bg);
+            padding: 12px 16px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .brand-logo {
+            font-size: 1.5rem;
+        }
+
+        .brand-text {
+            font-weight: 800;
+            font-size: 1.1rem;
+        }
+
+        .brand-text span {
+            color: var(--tg-accent);
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 8px;
+        }
+
+        .icon-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 12px;
+            border: none;
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--tg-text);
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .icon-btn:active {
+            transform: scale(0.95);
+            background: var(--tg-accent);
+        }
+
+        /* ==================== SEARCH BAR ==================== */
+        .search-container {
+            padding: 12px 16px;
+            background: var(--tg-secondary-bg);
+        }
+
+        .search-box {
+            display: flex;
+            align-items: center;
+            background: var(--tg-bg);
+            border-radius: 12px;
+            padding: 10px 14px;
+            gap: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .search-box:focus-within {
+            border-color: var(--tg-accent);
+        }
+
+        .search-icon {
+            color: var(--tg-hint);
+            font-size: 1rem;
+        }
+
+        .search-input {
+            flex: 1;
+            background: none;
+            border: none;
+            color: var(--tg-text);
+            font-size: 0.95rem;
+            outline: none;
+            font-family: inherit;
+        }
+
+        .search-input::placeholder {
+            color: var(--tg-hint);
+        }
+
+        /* ==================== TABS ==================== */
+        .tabs-container {
+            display: flex;
+            padding: 0 16px;
+            gap: 8px;
+            background: var(--tg-secondary-bg);
+            overflow-x: auto;
+            scrollbar-width: none;
+        }
+
+        .tabs-container::-webkit-scrollbar {
+            display: none;
+        }
+
+        .tab {
+            padding: 10px 18px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            white-space: nowrap;
+            cursor: pointer;
+            transition: var(--transition);
+            border: none;
+            background: transparent;
+            color: var(--tg-hint);
+        }
+
+        .tab.active {
+            background: var(--tg-accent);
+            color: var(--tg-accent-text);
+        }
+
+        .tab:not(.active):active {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        /* ==================== LEAGUE FILTERS ==================== */
+        .leagues-scroll {
+            display: flex;
+            gap: 8px;
+            padding: 12px 16px;
+            overflow-x: auto;
+            scrollbar-width: none;
+        }
+
+        .leagues-scroll::-webkit-scrollbar {
+            display: none;
+        }
+
+        .league-chip {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 12px;
+            border-radius: 20px;
+            background: var(--tg-secondary-bg);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            font-size: 0.75rem;
+            color: var(--tg-hint);
+            cursor: pointer;
+            transition: var(--transition);
+            white-space: nowrap;
+        }
+
+        .league-chip.active {
+            background: var(--tg-accent);
+            border-color: var(--tg-accent);
+            color: var(--tg-accent-text);
+        }
+
+        .league-chip img {
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            object-fit: contain;
+        }
+
+        /* ==================== MATCHES LIST ==================== */
+        .matches-container {
+            padding: 12px 16px;
+            padding-bottom: 100px;
+        }
+
+        .section-title {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 1rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+            color: var(--tg-text);
+        }
+
+        .live-indicator {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            color: var(--live-red);
+            font-size: 0.8rem;
+        }
+
+        .live-dot {
+            width: 8px;
+            height: 8px;
+            background: var(--live-red);
+            border-radius: 50%;
+            animation: livePulse 1.5s ease-in-out infinite;
+        }
+
+        @keyframes livePulse {
+
+            0%,
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+
+            50% {
+                opacity: 0.5;
+                transform: scale(1.2);
+            }
+        }
+
+        .match-card {
+            background: var(--tg-secondary-bg);
+            border-radius: var(--card-radius);
+            padding: 16px;
+            margin-bottom: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.03);
+            transition: var(--transition);
+            cursor: pointer;
+        }
+
+        .match-card:active {
+            transform: scale(0.98);
+        }
+
+        .match-card:hover {
+            border-color: var(--tg-accent);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .match-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 14px;
+        }
+
+        .league-info {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .league-logo {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            object-fit: contain;
+        }
+
+        .league-name {
+            font-size: 0.7rem;
+            color: var(--tg-hint);
+            max-width: 150px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .match-time {
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: var(--tg-accent);
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .match-time.live {
+            background: var(--live-bg);
+            color: var(--live-red);
+            padding: 4px 10px;
+            border-radius: 12px;
+        }
+
+        .match-teams {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 16px;
+        }
+
+        .team {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            gap: 8px;
+        }
+
+        .team-logo {
+            width: 52px;
+            height: 52px;
+            object-fit: contain;
+            transition: var(--transition);
+        }
+
+        .team-name {
+            font-size: 0.85rem;
+            font-weight: 700;
+            max-width: 100px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .match-vs {
+            font-size: 1.1rem;
+            font-weight: 900;
+            color: var(--tg-hint);
+            opacity: 0.5;
+            padding: 0 12px;
+        }
+
+        .match-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 12px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .streams-count {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.75rem;
+            color: var(--tg-hint);
+        }
+
+        .watch-btn {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            background: var(--tg-accent);
+            color: var(--tg-accent-text);
+            border: none;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .watch-btn:active {
+            transform: scale(0.95);
+        }
+
+        /* ==================== SERVERS VIEW ==================== */
+        .servers-view {
+            position: fixed;
+            inset: 0;
+            background: var(--tg-bg);
+            z-index: 200;
+            display: none;
+            flex-direction: column;
+            animation: slideUp 0.3s ease;
+        }
+
+        .servers-view.active {
+            display: flex;
+        }
+
+        @keyframes slideUp {
+            from {
+                transform: translateY(100%);
+            }
+
+            to {
+                transform: translateY(0);
+            }
+        }
+
+        .servers-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 16px;
+            background: var(--tg-secondary-bg);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .back-btn {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: none;
+            border: none;
+            color: var(--tg-text);
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            padding: 8px;
+            margin: -8px;
+            border-radius: 8px;
+        }
+
+        .back-btn:active {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .servers-title {
+            font-size: 1.1rem;
+            font-weight: 800;
+            text-align: center;
+            flex: 1;
+        }
+
+        .servers-content {
+            flex: 1;
+            padding: 20px 16px;
+            overflow-y: auto;
+        }
+
+        .match-info-banner {
+            background: var(--tg-secondary-bg);
+            border-radius: var(--card-radius);
+            padding: 20px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .banner-teams {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex: 1;
+        }
+
+        .banner-logo {
+            width: 40px;
+            height: 40px;
+        }
+
+        .banner-vs {
+            font-weight: 900;
+            color: var(--tg-accent);
+        }
+
+        .server-options {
+            display: grid;
+            gap: 12px;
+        }
+
+        .server-option {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: var(--tg-secondary-bg);
+            border: 2px solid rgba(255, 255, 255, 0.05);
+            border-radius: var(--card-radius);
+            padding: 16px 20px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .server-option:active {
+            border-color: var(--tg-accent);
+            background: rgba(29, 155, 240, 0.1);
+        }
+
+        .server-option.vip {
+            border-color: #ffd700;
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.1), transparent);
+        }
+
+        .server-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .server-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+
+        .server-icon.hd {
+            background: rgba(29, 155, 240, 0.2);
+        }
+
+        .server-icon.vip {
+            background: rgba(255, 215, 0, 0.2);
+        }
+
+        .server-details h4 {
+            font-size: 0.95rem;
+            margin-bottom: 4px;
+        }
+
+        .server-details span {
+            font-size: 0.75rem;
+            color: var(--tg-hint);
+        }
+
+        .play-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: var(--tg-accent);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            color: white;
+        }
+
+        /* ==================== PLAYER VIEW ==================== */
+        .player-view {
+            position: fixed;
+            inset: 0;
+            background: #000;
+            z-index: 300;
+            display: none;
+            flex-direction: column;
+        }
+
+        .player-view.active {
+            display: flex;
+        }
+
+        .player-container {
+            flex: 1;
+            position: relative;
+            background: #111;
+        }
+
+        #main-iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .player-controls {
+            padding: 16px;
+            background: var(--tg-secondary-bg);
+        }
+
+        .player-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+
+        .player-match-name {
+            font-weight: 700;
+            font-size: 1rem;
+        }
+
+        .fullscreen-btn {
+            width: 100%;
+            padding: 14px;
+            border-radius: 12px;
+            border: none;
+            background: var(--tg-accent);
+            color: var(--tg-accent-text);
+            font-size: 0.95rem;
+            font-weight: 700;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transition: var(--transition);
+        }
+
+        .fullscreen-btn:active {
+            transform: scale(0.98);
+        }
+
+        .player-help {
+            margin-top: 12px;
+            font-size: 0.75rem;
+            color: var(--tg-hint);
+            text-align: center;
+            line-height: 1.5;
+        }
+
+        /* ==================== EMPTY STATE ==================== */
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            color: var(--tg-hint);
+        }
+
+        .empty-icon {
+            font-size: 4rem;
+            margin-bottom: 16px;
+            opacity: 0.5;
+        }
+
+        .empty-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: var(--tg-text);
+        }
+
+        .empty-text {
+            font-size: 0.9rem;
+        }
+
+        /* ==================== FLOATING REFRESH ==================== */
+        .refresh-hint {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--tg-secondary-bg);
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            color: var(--tg-hint);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            z-index: 50;
+            animation: float 2s ease-in-out infinite;
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateX(-50%) translateY(0);
+            }
+
+            50% {
+                transform: translateX(-50%) translateY(-5px);
+            }
+        }
+
+        /* ==================== PULL TO REFRESH ==================== */
+        .pull-refresh {
+            position: absolute;
+            top: -50px;
+            left: 0;
+            right: 0;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--tg-hint);
+            font-size: 0.85rem;
+            transition: top 0.3s;
+        }
+
+        .pull-refresh.active {
+            top: 0;
+        }
+
+        /* ==================== AD BANNER ==================== */
+        .ad-banner {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: var(--tg-secondary-bg);
+            padding: 8px 16px;
+            padding-bottom: calc(8px + env(safe-area-inset-bottom));
+            text-align: center;
+            font-size: 0.7rem;
+            color: var(--tg-hint);
+            z-index: 90;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        /* ==================== NOTIFICATION POPUP ==================== */
+        .notification-popup {
+            position: fixed;
+            top: 20px;
+            left: 16px;
+            right: 16px;
+            background: var(--tg-secondary-bg);
+            border-radius: 12px;
+            padding: 14px 16px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+            z-index: 1000;
+            transform: translateY(-100px);
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+
+        .notification-popup.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .notif-icon {
+            font-size: 1.5rem;
+        }
+
+        .notif-content h4 {
+            font-size: 0.9rem;
+            margin-bottom: 2px;
+        }
+
+        .notif-content p {
+            font-size: 0.75rem;
+            color: var(--tg-hint);
+        }
+
+        /* ==================== FAVORITES ==================== */
+        .favorites-modal {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 400;
+            display: none;
+            align-items: flex-end;
+            justify-content: center;
+        }
+
+        .favorites-modal.active {
+            display: flex;
+        }
+
+        .favorites-sheet {
+            background: var(--tg-secondary-bg);
+            width: 100%;
+            max-width: 400px;
+            border-radius: 24px 24px 0 0;
+            padding: 24px;
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+        }
+
+        .favorites-modal.active .favorites-sheet {
+            transform: translateY(0);
+        }
+
+        .favorites-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .favorites-title {
+            font-size: 1.2rem;
+            font-weight: 800;
+        }
+
+        .close-modal {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            border: none;
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--tg-text);
+            font-size: 1.2rem;
+            cursor: pointer;
+        }
+
+        .favorite-team-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px;
+            background: var(--tg-bg);
+            border-radius: 12px;
+            margin-bottom: 8px;
+        }
+
+        .favorite-team-item img {
+            width: 36px;
+            height: 36px;
+        }
+
+        .favorite-team-item span {
+            flex: 1;
+            font-weight: 600;
+        }
+
+        .remove-fav {
+            background: none;
+            border: none;
+            color: var(--live-red);
+            font-size: 1.2rem;
+            cursor: pointer;
+        }
+
+        /* ==================== FILTER DROPDOWN ==================== */
+        .filter-dropdown {
+            position: relative;
+        }
+
+        .filter-menu {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background: var(--tg-secondary-bg);
+            border-radius: 12px;
+            padding: 8px;
+            min-width: 180px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+            display: none;
+            z-index: 150;
+        }
+
+        .filter-menu.active {
+            display: block;
+        }
+
+        .filter-option {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 12px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            transition: var(--transition);
+        }
+
+        .filter-option:active {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .filter-option img {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+        }
+
+        /* ==================== RESPONSIVE ==================== */
+        @media (min-width: 500px) {
+            .matches-container {
+                max-width: 500px;
+                margin: 0 auto;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Loader -->
+    <div id="main-loader">
+        <div class="loader-logo">⚽</div>
+        <div class="loader-spinner"></div>
+        <div class="loader-text">جاري تحميل المباريات...</div>
+    </div>
+
+    <!-- Notification Popup -->
+    <div class="notification-popup" id="notification">
+        <div class="notif-icon">🔔</div>
+        <div class="notif-content">
+            <h4 id="notif-title">عنوان الإشعار</h4>
+            <p id="notif-text">نص الإشعار</p>
+        </div>
+    </div>
+
+    <!-- Main App -->
+    <div id="app">
+        <!-- Header -->
+        <header class="app-header">
+            <div class="header-content">
+                <div class="brand">
+                    <span class="brand-logo">⚽</span>
+                    <span class="brand-text">Live<span>Match</span></span>
+                </div>
+                <div class="header-actions">
+                    <button class="icon-btn" onclick="openFavorites()" title="المفضلة">⭐</button>
+                    <button class="icon-btn" onclick="refreshData()" title="تحديث">🔄</button>
+                    <div class="filter-dropdown">
+                        <button class="icon-btn" onclick="toggleFilter()" title="تصفية">☰</button>
+                        <div class="filter-menu" id="filter-menu">
+                            <div class="filter-option" onclick="setFilter('all')">
+                                <span>🌍</span> كل البطولات
+                            </div>
+                            <div class="filter-option" onclick="setFilter('live')">
+                                <span>🔴</span> المباشرة فقط
+                            </div>
+                            <div class="filter-option" onclick="setFilter('upcoming')">
+                                <span>⏰</span> القادمة
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Search -->
+        <div class="search-container">
+            <div class="search-box">
+                <span class="search-icon">🔍</span>
+                <input type="text" class="search-input" placeholder="ابحث عن فريق أو بطولة..." id="search-input"
+                    oninput="handleSearch(this.value)">
+            </div>
+        </div>
+
+        <!-- Tabs -->
+        <div class="tabs-container">
+            <button class="tab active" onclick="switchTab('all')" data-tab="all">الكل</button>
+            <button class="tab" onclick="switchTab('live')" data-tab="live">🔴 مباشرة</button>
+            <button class="tab" onclick="switchTab('upcoming')" data-tab="upcoming">⏰ القادمة</button>
+            <button class="tab" onclick="switchTab('favorites')" data-tab="favorites">⭐ المفضلة</button>
+        </div>
+
+        <!-- League Filters -->
+        <div class="leagues-scroll" id="leagues-scroll">
+            <div class="league-chip active" onclick="filterByLeague('all')" data-league="all">
+                <span>🌍</span> كل البطولات
+            </div>
+        </div>
+
+        <!-- Matches List -->
+        <div class="matches-container" id="matches-container">
+            <!-- Matches will be rendered here -->
+        </div>
+
+        <!-- Refresh Hint -->
+        <div class="refresh-hint" id="refresh-hint" style="display: none;">
+            🔄 اسحب للأسفل للتحديث
+        </div>
+    </div>
+
+    <!-- Servers View -->
+    <div class="servers-view" id="servers-view">
+        <div class="servers-header">
+            <button class="back-btn" onclick="closeServers()">
+                ← رجوع
+            </button>
+            <div class="servers-title">اختر السيرفر</div>
+            <div style="width: 60px;"></div>
+        </div>
+        <div class="servers-content">
+            <div class="match-info-banner" id="server-banner">
+                <!-- Will be populated -->
+            </div>
+            <div class="server-options" id="server-options">
+                <!-- Servers will be rendered here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Player View -->
+    <div class="player-view" id="player-view">
+        <div class="player-container">
+            <iframe id="main-iframe" src="about:blank" allowfullscreen
+                allow="autoplay; encrypted-media; picture-in-picture" referrerpolicy="no-referrer"></iframe>
+        </div>
+        <div class="player-controls">
+            <div class="player-info">
+                <div class="player-match-name" id="player-match-name">المباراة</div>
+                <div class="live-indicator">
+                    <span class="live-dot"></span> مباشر
+                </div>
+            </div>
+            <button class="fullscreen-btn" onclick="toggleFullscreen()">
+                ↕ تكبير المشغل للشاشة الكاملة
+            </button>
+            <p class="player-help">
+                💡 إذا واجهتك مشكلة في المشاهدة، جرب تغيير السيرفر أو تدوير الهاتف للشاشة الكاملة
+            </p>
+        </div>
+    </div>
+
+    <!-- Favorites Modal -->
+    <div class="favorites-modal" id="favorites-modal" onclick="closeFavorites(event)">
+        <div class="favorites-sheet" onclick="event.stopPropagation()">
+            <div class="favorites-header">
+                <div class="favorites-title">⭐ فرقك المفضلة</div>
+                <button class="close-modal" onclick="closeFavorites()">✕</button>
+            </div>
+            <div id="favorites-list">
+                <!-- Favorites will be rendered here -->
+            </div>
+            <button class="watch-btn" style="width: 100%; justify-content: center; margin-top: 16px;"
+                onclick="addFavoritePrompt()">
+                + إضافة فريق للمفضلة
+            </button>
+        </div>
+    </div>
+
+    <!-- Ad Banner -->
+    <div class="ad-banner" id="ad-banner">
+        advertisement
+    </div>
+
+    <script src="js/tma-v2.js"></script>
+</body>
+
+</html>
