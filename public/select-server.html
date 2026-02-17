@@ -358,8 +358,8 @@
         function playStream(url) {
             window.Telegram.WebApp.HapticFeedback.impactOccurred('medium');
 
-            // Show popup ad before playing
-            showPopupAd(() => {
+            // Show interstitial ad before playing
+            showInterstitialAd(() => {
                 // Save stream URL
                 sessionStorage.setItem('streamUrl', decodeURIComponent(url));
                 sessionStorage.setItem('matchTitle', `${matchData.home.name} vs ${matchData.away.name}`);
@@ -369,15 +369,22 @@
         }
 
         // ==================== ADS ====================
-        function showPopupAd(callback) {
+        function showInterstitialAd(callback) {
             const adFn = window[`show_${CONFIG.AD_ZONE}`];
             if (typeof adFn === 'function') {
-                adFn({ type: 'pop' })
+                // Preload interstitial first, then show
+                adFn({ type: 'preload' })
+                    .then(function () { return adFn(); })
                     .then(callback)
-                    .catch(callback);
+                    .catch(function () { callback(); });
             } else {
                 callback();
             }
+        }
+
+        // Legacy function - now uses interstitial instead of pop
+        function showPopupAd(callback) {
+            showInterstitialAd(callback);
         }
     </script>
 </body>
