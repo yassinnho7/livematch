@@ -198,9 +198,11 @@
 
         .top-banner {
             width: 100%;
-            min-height: 60px;
+            min-height: 66px;
             margin: 12px auto;
-            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
         .matches {
@@ -396,10 +398,49 @@
 
         .bottom-banner {
             width: 100%;
-            text-align: center;
-            min-height: 250px;
+            min-height: 266px;
             margin-top: 8px;
             margin-bottom: 12px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .ad-frame {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            background: transparent;
+        }
+
+        .ad-frame-320 {
+            max-width: 340px;
+            min-height: 50px;
+            padding: 4px;
+        }
+
+        .ad-frame-468 {
+            max-width: 500px;
+            min-height: 60px;
+            padding: 4px;
+        }
+
+        .ad-frame-300 {
+            max-width: 330px;
+            min-height: 250px;
+            padding: 4px;
+        }
+
+        .ad-slot {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            overflow: hidden;
         }
 
         .empty {
@@ -519,9 +560,10 @@
         }
 
         .servers-banner {
-            text-align: center;
             min-height: 60px;
             padding: 8px 10px 14px;
+            display: flex;
+            justify-content: center;
         }
 
         .player-stage {
@@ -557,6 +599,17 @@
 
         .player-view.fullscreen-mode .player-controls {
             display: none;
+        }
+
+        .player-view.fullscreen-mode.force-landscape .player-stage {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            width: 100vh;
+            height: 100vw;
+            transform: translate(-50%, -50%) rotate(90deg);
+            transform-origin: center center;
+            z-index: 999;
         }
 
         .player-view.pseudo-fullscreen .player-controls {

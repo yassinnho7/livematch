@@ -5,6 +5,8 @@ const CONFIG = {
     syncIntervalMs: 60000,
     monetagZoneId: "10621765",
     interstitialTimeoutMs: 5000,
+    bannerRetryCount: 3,
+    bannerRetryDelayMs: 1400,
     themeKey: "tma_theme_v4",
     fallbackLogo:
         "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='56'%3E%3Crect width='56' height='56' rx='28' fill='%23111f2b'/%3E%3Ccircle cx='28' cy='28' r='14' fill='%232a3a49'/%3E%3C/svg%3E"
@@ -102,6 +104,8 @@ function bindEvents() {
 
     document.addEventListener("fullscreenchange", onFullscreenChange);
     document.addEventListener("webkitfullscreenchange", onFullscreenChange);
+    window.addEventListener("resize", updateLandscapeClass);
+    window.addEventListener("orientationchange", updateLandscapeClass);
 }
 
 function applyTheme() {
@@ -439,6 +443,7 @@ async function toggleFullscreen() {
             els.playerView.classList.add("fullscreen-mode");
             els.playerView.classList.remove("pseudo-fullscreen");
             lockOrientation("landscape");
+            updateLandscapeClass();
             haptic("light");
         } catch (_) {
             enablePseudoFullscreen();
@@ -453,11 +458,13 @@ function onFullscreenChange() {
     if (full) {
         state.isFullscreen = true;
         els.playerView.classList.add("fullscreen-mode");
+        updateLandscapeClass();
         return;
     }
 
     state.isFullscreen = false;
     els.playerView.classList.remove("fullscreen-mode");
+    els.playerView.classList.remove("force-landscape");
     lockOrientation("portrait");
 }
 
@@ -471,6 +478,7 @@ function exitFullscreenIfNeeded() {
     if (!full) {
         state.isFullscreen = false;
         els.playerView.classList.remove("fullscreen-mode");
+        els.playerView.classList.remove("force-landscape");
         lockOrientation("portrait");
         return;
     }
@@ -487,13 +495,20 @@ function exitFullscreenIfNeeded() {
     state.pseudoFullscreen = false;
     els.playerView.classList.remove("fullscreen-mode");
     els.playerView.classList.remove("pseudo-fullscreen");
+    els.playerView.classList.remove("force-landscape");
     lockOrientation("portrait");
 }
 
 function lockOrientation(mode) {
     if (tg) {
-        if (mode === "landscape" && typeof tg.lockOrientation === "function") {
-            tg.lockOrientation();
+        if (mode === "landscape") {
+            if (screen.orientation && typeof screen.orientation.lock === "function") {
+                screen.orientation.lock("landscape").catch(() => {
+                    if (typeof tg.lockOrientation === "function") tg.lockOrientation();
+                });
+            } else if (typeof tg.lockOrientation === "function") {
+                tg.lockOrientation();
+            }
             return;
         }
         if (mode === "portrait" && typeof tg.unlockOrientation === "function") {
@@ -517,6 +532,7 @@ function enablePseudoFullscreen() {
     state.pseudoFullscreen = true;
     els.playerView.classList.add("fullscreen-mode");
     els.playerView.classList.add("pseudo-fullscreen");
+    els.playerView.classList.remove("force-landscape");
     lockOrientation("landscape");
     showNote("تم تفعيل وضع مشاهدة أفقي بديل.");
 }
@@ -526,7 +542,14 @@ function disablePseudoFullscreen() {
     state.pseudoFullscreen = false;
     els.playerView.classList.remove("fullscreen-mode");
     els.playerView.classList.remove("pseudo-fullscreen");
+    els.playerView.classList.remove("force-landscape");
     lockOrientation("portrait");
+}
+
+function updateLandscapeClass() {
+    if (!state.isFullscreen || state.pseudoFullscreen) return;
+    const isPortrait = window.matchMedia("(orientation: portrait)").matches;
+    els.playerView.classList.toggle("force-landscape", isPortrait);
 }
 
 async function showMonetagInterstitialFor5s() {
@@ -548,30 +571,69 @@ function wait(ms) {
 function mountTopBanner() {
     if (!els.topBanner) return;
     clearNode(els.topBanner);
-    mountBanner(els.topBanner, "15d1ca482efd28581d78b70b9bb40556", 468, 60);
+    mountBannerWithRetry(els.topBanner, "167755cfce2e606f5c26037ed81a359a", 320, 50, "ad-frame-320");
 }
 
 function mountBottomBanner() {
     if (state.bottomBannerMounted || !els.bottomBanner) return;
     state.bottomBannerMounted = true;
     clearNode(els.bottomBanner);
-    mountBanner(els.bottomBanner, "2895cfc4a233371917690acdf46458f6", 300, 250);
+    mountBannerWithRetry(els.bottomBanner, "2895cfc4a233371917690acdf46458f6", 300, 250, "ad-frame-300");
 }
 
 function mountServersBanner() {
-    if (state.serverBannerMounted || !els.serversBanner) return;
-    state.serverBannerMounted = true;
+    if (!els.serversBanner) return;
+    if (!state.serverBannerMounted) state.serverBannerMounted = true;
     clearNode(els.serversBanner);
-    mountBanner(els.serversBanner, "15d1ca482efd28581d78b70b9bb40556", 468, 60);
+    mountBannerWithRetry(els.serversBanner, "15d1ca482efd28581d78b70b9bb40556", 468, 60, "ad-frame-468");
 }
 
-function mountBanner(container, key, width, height) {
+function mountBannerWithRetry(container, key, width, height, frameClass, attempt = 1) {
+    mountBanner(container, key, width, height, frameClass);
+    setTimeout(() => {
+        const hasAd = Boolean(container.querySelector("iframe"));
+        if (!hasAd && attempt < CONFIG.bannerRetryCount) {
+            mountBannerWithRetry(container, key, width, height, frameClass, attempt + 1);
+        }
+    }, CONFIG.bannerRetryDelayMs);
+}
+
+function mountBanner(container, key, width, height, frameClass) {
+    clearNode(container);
+    const frame = createEl("div", `ad-frame ${frameClass}`);
+    const slot = createEl("div", "ad-slot");
+    frame.appendChild(slot);
+    container.appendChild(frame);
+
+    window.atOptions = {
+        key: key,
+        format: "iframe",
+        height: height,
+        width: width,
+        params: {}
+    };
+
     const setupScript = document.createElement("script");
     setupScript.text = `atOptions = { 'key': '${key}', 'format': 'iframe', 'height': ${height}, 'width': ${width}, 'params': {} };`;
     const invokeScript = document.createElement("script");
-    invokeScript.src = `https://www.highperformanceformat.com/${key}/invoke.js`;
-    container.appendChild(setupScript);
-    container.appendChild(invokeScript);
+    invokeScript.src = `https://www.highperformanceformat.com/${key}/invoke.js?cb=${Date.now()}_${Math.random().toString(36).slice(2)}`;
+    slot.appendChild(setupScript);
+    slot.appendChild(invokeScript);
+
+    fitBannerOnMobile(frame, width, height);
+    setTimeout(() => fitBannerOnMobile(frame, width, height), 1200);
+}
+
+function fitBannerOnMobile(frame, width, height) {
+    const iframe = frame.querySelector("iframe");
+    if (!iframe) return;
+
+    const maxWidth = frame.clientWidth - 8;
+    const ratio = Math.min(1, maxWidth / width);
+    iframe.style.transformOrigin = "top center";
+    iframe.style.transform = `scale(${ratio})`;
+    iframe.style.display = "block";
+    frame.style.minHeight = `${Math.ceil(height * ratio) + 8}px`;
 }
 
 function syncBackButton() {
