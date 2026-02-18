@@ -1,12 +1,12 @@
 {
-  "generated_at": "2026-02-18T15:36:21.925Z",
+  "generated_at": "2026-02-18T16:43:30.526Z",
   "count": 15,
   "matches": [
     {
       "id": 1690220622,
       "date": "2026-02-18T16:00:00.000Z",
       "timestamp": 1771430400,
-      "status": "NS",
+      "status": "LIVE",
       "time": "16:00",
       "time_label": "16:00 GMT",
       "league": {
@@ -72,6 +72,22 @@
           "channel": "bein3",
           "url": "https://pl.gomatch-live.com/albaplayer/bein3",
           "priority": 1
+        },
+        {
+          "id": "stream_koraplus_1309783146",
+          "source": "koraplus",
+          "quality": "HD",
+          "channel": "beIN Sports 3 HD",
+          "url": "https://pl.gomatch-live.com/albaplayer/bein3/",
+          "priority": 1
+        },
+        {
+          "id": "stream_siiir_1309783146",
+          "source": "siiir",
+          "quality": "VIP",
+          "channel": "VIP Server",
+          "url": "https://eyj0exaioijkv1qilcjhbgcioijiuzi1nij99sss.yallashot.us/playerv2.php?match=match3&key=c0ae1abba6eebd7e6cc5b88b1d2B71547",
+          "priority": 2
         }
       ],
       "poster_url": "/posters/1309783146.jpg"
@@ -105,6 +121,22 @@
           "channel": "bein2",
           "url": "https://pl.gomatch-live.com/albaplayer/bein2",
           "priority": 1
+        },
+        {
+          "id": "stream_koraplus_962397780",
+          "source": "koraplus",
+          "quality": "HD",
+          "channel": "Bein Sports HD2",
+          "url": "https://pl.gomatch-live.com/albaplayer/bein22/",
+          "priority": 1
+        },
+        {
+          "id": "stream_siiir_962397780",
+          "source": "siiir",
+          "quality": "VIP",
+          "channel": "VIP Server",
+          "url": "https://eyj0exaioijkv1qilcjhbgcioijiuzi1nij99sss.yallashot.us/playerv2.php?match=match2&key=c0ae1abba6eebd7e6cc5b88b1d2B71547",
+          "priority": 2
         }
       ],
       "poster_url": "/posters/962397780.jpg"
@@ -137,6 +169,14 @@
           "quality": "HD",
           "channel": "bein6",
           "url": "https://pl.gomatch-live.com/albaplayer/bein6",
+          "priority": 1
+        },
+        {
+          "id": "stream_koraplus_982617644",
+          "source": "koraplus",
+          "quality": "HD",
+          "channel": "الكأس 7",
+          "url": "https://pl.gomatch-live.com/albaplayer/bein-6/",
           "priority": 1
         }
       ],
@@ -171,6 +211,14 @@
           "channel": "ch1",
           "url": "https://pl.gomatch-live.com/albaplayer/ch1",
           "priority": 1
+        },
+        {
+          "id": "stream_koraplus_1323733339",
+          "source": "koraplus",
+          "quality": "HD",
+          "channel": "غير معروف",
+          "url": "https://pl.gomatch-live.com/albaplayer/ch1/",
+          "priority": 1
         }
       ],
       "poster_url": "/posters/1323733339.jpg"
@@ -204,6 +252,14 @@
           "channel": "ad-premium-1",
           "url": "https://pl.gomatch-live.com/albaplayer/ad-premium-1",
           "priority": 1
+        },
+        {
+          "id": "stream_koraplus_695222019",
+          "source": "koraplus",
+          "quality": "HD",
+          "channel": "Starzplay",
+          "url": "https://pl.gomatch-live.com/albaplayer/ad-premium-1/",
+          "priority": 1
         }
       ],
       "poster_url": "/posters/695222019.jpg"
@@ -236,6 +292,14 @@
           "quality": "HD",
           "channel": "bein1",
           "url": "https://pl.gomatch-live.com/albaplayer/bein1",
+          "priority": 1
+        },
+        {
+          "id": "stream_koraplus_1778728221",
+          "source": "koraplus",
+          "quality": "HD",
+          "channel": "beIN SPORTS HD 1",
+          "url": "https://pl.gomatch-live.com/albaplayer/1bein1/",
           "priority": 1
         }
       ],
@@ -303,6 +367,22 @@
           "channel": "bein3",
           "url": "https://pl.gomatch-live.com/albaplayer/bein3",
           "priority": 1
+        },
+        {
+          "id": "stream_koraplus_844502225",
+          "source": "koraplus",
+          "quality": "HD",
+          "channel": "beIN Sports 3 HD",
+          "url": "https://pl.gomatch-live.com/albaplayer/bein3/",
+          "priority": 1
+        },
+        {
+          "id": "stream_siiir_844502225",
+          "source": "siiir",
+          "quality": "VIP",
+          "channel": "VIP Server",
+          "url": "https://eyj0exaioijkv1qilcjhbgcioijiuzi1nij99sss.yallashot.us/playerv2.php?match=match3&key=c0ae1abba6eebd7e6cc5b88b1d2B71547",
+          "priority": 2
         }
       ],
       "poster_url": "/posters/844502225.jpg"
@@ -336,6 +416,14 @@
           "channel": "bein4",
           "url": "https://pl.gomatch-live.com/albaplayer/bein4",
           "priority": 1
+        },
+        {
+          "id": "stream_koraplus_1523463289",
+          "source": "koraplus",
+          "quality": "HD",
+          "channel": "beIN SPORTS HD 4",
+          "url": "https://pl.gomatch-live.com/albaplayer/bein4/",
+          "priority": 1
         }
       ],
       "poster_url": "/posters/1523463289.jpg"
@@ -344,7 +432,7 @@
       "id": 1508755264,
       "date": "2026-02-18T16:30:00.000Z",
       "timestamp": 1771432200,
-      "status": "NS",
+      "status": "LIVE",
       "time": "16:30",
       "time_label": "16:30 GMT",
       "league": {
@@ -414,11 +502,11 @@
     },
     {
       "id": 1465852383,
-      "date": "2026-02-18T15:35:20.000Z",
-      "timestamp": 1771428920,
-      "status": "NS",
-      "time": "15:35",
-      "time_label": "15:35 GMT",
+      "date": "2026-02-18T16:41:44.000Z",
+      "timestamp": 1771432904,
+      "status": "LIVE",
+      "time": "16:41",
+      "time_label": "16:41 GMT",
       "league": {
         "name": "آسيا, دوري أبطال آسيا 2 - دور الـ 16",
         "country": "Asia",
