@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-02-18T13:24:29.684Z",
+  "generated_at": "2026-02-18T14:37:32.721Z",
   "count": 12,
   "matches": [
     {
@@ -32,7 +32,8 @@
           "url": "https://pl.gomatch-live.com/albaplayer/arryadia",
           "priority": 1
         }
-      ]
+      ],
+      "poster_url": "/posters/1690220622.jpg"
     },
     {
       "id": 1309783146,
@@ -64,7 +65,8 @@
           "url": "https://pl.gomatch-live.com/albaplayer/bein3",
           "priority": 1
         }
-      ]
+      ],
+      "poster_url": "/posters/1309783146.jpg"
     },
     {
       "id": 962397780,
@@ -96,7 +98,8 @@
           "url": "https://pl.gomatch-live.com/albaplayer/bein2",
           "priority": 1
         }
-      ]
+      ],
+      "poster_url": "/posters/962397780.jpg"
     },
     {
       "id": 982617644,
@@ -128,7 +131,8 @@
           "url": "https://pl.gomatch-live.com/albaplayer/bein6",
           "priority": 1
         }
-      ]
+      ],
+      "poster_url": "/posters/982617644.jpg"
     },
     {
       "id": 1323733339,
@@ -160,7 +164,8 @@
           "url": "https://pl.gomatch-live.com/albaplayer/ch1",
           "priority": 1
         }
-      ]
+      ],
+      "poster_url": "/posters/1323733339.jpg"
     },
     {
       "id": 695222019,
@@ -192,7 +197,8 @@
           "url": "https://pl.gomatch-live.com/albaplayer/ad-premium-1",
           "priority": 1
         }
-      ]
+      ],
+      "poster_url": "/posters/695222019.jpg"
     },
     {
       "id": 1778728221,
@@ -224,7 +230,8 @@
           "url": "https://pl.gomatch-live.com/albaplayer/bein1",
           "priority": 1
         }
-      ]
+      ],
+      "poster_url": "/posters/1778728221.jpg"
     },
     {
       "id": 1734079948,
@@ -256,7 +263,8 @@
           "url": "https://pl.gomatch-live.com/albaplayer/bein5",
           "priority": 1
         }
-      ]
+      ],
+      "poster_url": "/posters/1734079948.jpg"
     },
     {
       "id": 844502225,
@@ -288,7 +296,8 @@
           "url": "https://pl.gomatch-live.com/albaplayer/bein3",
           "priority": 1
         }
-      ]
+      ],
+      "poster_url": "/posters/844502225.jpg"
     },
     {
       "id": 1523463289,
@@ -320,7 +329,8 @@
           "url": "https://pl.gomatch-live.com/albaplayer/bein4",
           "priority": 1
         }
-      ]
+      ],
+      "poster_url": "/posters/1523463289.jpg"
     },
     {
       "id": 1508755264,
@@ -355,7 +365,8 @@
           "url": "https://pl.kooralive.fit/albaplayer/%d8%a7%d9%84%d8%b9%d9%8a%d9%86-%d9%88-%d8%a7%d9%84%d9%82%d8%a7%d8%af%d8%b3%d9%8a%d8%a9",
           "priority": 1
         }
-      ]
+      ],
+      "poster_url": "/posters/1508755264.jpg"
     },
     {
       "id": 173822439,
@@ -390,7 +401,8 @@
           "url": "https://pl.kooralive.fit/albaplayer/%d8%b2%d8%a7%d8%ae%d9%88-%d9%88-%d8%b3%d8%aa%d8%b1%d8%a9",
           "priority": 1
         }
-      ]
+      ],
+      "poster_url": "/posters/173822439.jpg"
     }
   ]
 }
