@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-02-18T16:43:30.526Z",
+  "generated_at": "2026-02-18T17:45:58.432Z",
   "count": 15,
   "matches": [
     {
@@ -16,11 +16,11 @@
       },
       "home": {
         "name": "نهضة الزمامرة",
-        "logo": "https://www.korah.live/wp-content/uploads/2026/02/49266.png"
+        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/01/49266.png"
       },
       "away": {
         "name": "نهضة بركان",
-        "logo": "https://www.korah.live/wp-content/uploads/2026/02/9974.png"
+        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/01/9974.png"
       },
       "score": null,
       "streams": [
@@ -57,11 +57,11 @@
       },
       "home": {
         "name": "كارباغ اغدام",
-        "logo": "https://www.korah.live/wp-content/uploads/2026/02/7521.png"
+        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/02/7521.png"
       },
       "away": {
         "name": "نيوكاسل يونايتد",
-        "logo": "https://www.korah.live/wp-content/uploads/2026/02/116.png"
+        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/01/116.png"
       },
       "score": null,
       "streams": [
@@ -106,11 +106,11 @@
       },
       "home": {
         "name": "النصر",
-        "logo": "https://www.korah.live/wp-content/uploads/2026/02/7549.png"
+        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/01/7549.png"
       },
       "away": {
         "name": "أركاداج",
-        "logo": "https://www.korah.live/wp-content/uploads/2026/02/74158.png"
+        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/02/74158.png"
       },
       "score": null,
       "streams": [
@@ -127,7 +127,7 @@
           "source": "koraplus",
           "quality": "HD",
           "channel": "Bein Sports HD2",
-          "url": "https://pl.gomatch-live.com/albaplayer/bein22/",
+          "url": "https://2.wwwkoora.com/albaplayer/bein-sports-hd-2/",
           "priority": 1
         },
         {
@@ -155,11 +155,11 @@
       },
       "home": {
         "name": "الأهلي",
-        "logo": "https://www.korah.live/wp-content/uploads/2026/02/8946.png"
+        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/01/8200.png"
       },
       "away": {
         "name": "سباهان",
-        "logo": "https://www.korah.live/wp-content/uploads/2026/02/9356.png"
+        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/02/9356.png"
       },
       "score": null,
       "streams": [
@@ -176,7 +176,7 @@
           "source": "koraplus",
           "quality": "HD",
           "channel": "الكأس 7",
-          "url": "https://pl.gomatch-live.com/albaplayer/bein-6/",
+          "url": "https://2.wwwkoora.com/albaplayer/bein-sports-hd-6/",
           "priority": 1
         }
       ],
@@ -196,11 +196,11 @@
       },
       "home": {
         "name": "ليفانتي",
-        "logo": "https://www.korah.live/wp-content/uploads/2026/02/150.png"
+        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/01/150.png"
       },
       "away": {
         "name": "فياريال",
-        "logo": "https://www.korah.live/wp-content/uploads/2026/02/133.png"
+        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/01/133.png"
       },
       "score": null,
       "streams": [
@@ -468,7 +468,7 @@
       "id": 173822439,
       "date": "2026-02-18T17:30:00.000Z",
       "timestamp": 1771435800,
-      "status": "NS",
+      "status": "LIVE",
       "time": "17:30",
       "time_label": "17:30 GMT",
       "league": {
@@ -501,12 +501,36 @@
       "poster_url": "/posters/173822439.jpg"
     },
     {
-      "id": 1465852383,
-      "date": "2026-02-18T16:41:44.000Z",
-      "timestamp": 1771432904,
+      "id": 1228430536,
+      "date": "2026-02-18T17:44:41.000Z",
+      "timestamp": 1771436681,
       "status": "LIVE",
-      "time": "16:41",
-      "time_label": "16:41 GMT",
+      "time": "17:44",
+      "time_label": "17:44 GMT",
+      "league": {
+        "name": "آسيا, دوري أبطال الخليج للأندية",
+        "country": "Asia",
+        "logo": "https://cdn-icons-png.flaticon.com/512/1378/1378598.png"
+      },
+      "home": {
+        "name": "الشباب",
+        "logo": "https://koraplus.blog/wp-content/uploads/2026/02/8945-3.png"
+      },
+      "away": {
+        "name": "تضامن حضرموت",
+        "logo": "https://koraplus.blog/wp-content/uploads/2026/02/78083.png"
+      },
+      "score": null,
+      "streams": [],
+      "poster_url": "/posters/1228430536.jpg"
+    },
+    {
+      "id": 1465852383,
+      "date": "2026-02-18T17:44:41.000Z",
+      "timestamp": 1771436681,
+      "status": "LIVE",
+      "time": "17:44",
+      "time_label": "17:44 GMT",
       "league": {
         "name": "آسيا, دوري أبطال آسيا 2 - دور الـ 16",
         "country": "Asia",
@@ -532,30 +556,6 @@
         }
       ],
       "poster_url": "/posters/1465852383.jpg"
-    },
-    {
-      "id": 1228430536,
-      "date": "2026-02-18T17:30:00.000Z",
-      "timestamp": 1771435800,
-      "status": "NS",
-      "time": "17:30",
-      "time_label": "17:30 GMT",
-      "league": {
-        "name": "آسيا, دوري أبطال الخليج للأندية",
-        "country": "Asia",
-        "logo": "https://cdn-icons-png.flaticon.com/512/1378/1378598.png"
-      },
-      "home": {
-        "name": "الشباب",
-        "logo": "https://koraplus.blog/wp-content/uploads/2026/02/8945-3.png"
-      },
-      "away": {
-        "name": "تضامن حضرموت",
-        "logo": "https://koraplus.blog/wp-content/uploads/2026/02/78083.png"
-      },
-      "score": null,
-      "streams": [],
-      "poster_url": "/posters/1228430536.jpg"
     },
     {
       "id": 2139338206,
