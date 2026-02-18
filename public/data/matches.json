@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-02-18T14:37:32.721Z",
-  "count": 12,
+  "generated_at": "2026-02-18T15:06:53.881Z",
+  "count": 15,
   "matches": [
     {
       "id": 1690220622,
@@ -30,6 +30,14 @@
           "quality": "HD",
           "channel": "arryadia",
           "url": "https://pl.gomatch-live.com/albaplayer/arryadia",
+          "priority": 1
+        },
+        {
+          "id": "stream_koraplus_1690220622",
+          "source": "koraplus",
+          "quality": "HD",
+          "channel": "الرياضية المغربية (3)",
+          "url": "https://pl.gomatch-live.com/albaplayer/arryadia/",
           "priority": 1
         }
       ],
@@ -403,6 +411,87 @@
         }
       ],
       "poster_url": "/posters/173822439.jpg"
+    },
+    {
+      "id": 1465852383,
+      "date": "2026-02-18T15:05:19.000Z",
+      "timestamp": 1771427119,
+      "status": "NS",
+      "time": "15:05",
+      "time_label": "15:05 GMT",
+      "league": {
+        "name": "آسيا, دوري أبطال آسيا 2 - دور الـ 16",
+        "country": "Asia",
+        "logo": "https://a.espncdn.com/combiner/i?img=/i/leaguelogos/soccer/500/209.png&h=40&w=40"
+      },
+      "home": {
+        "name": "الوصل",
+        "logo": "https://koraplus.blog/wp-content/uploads/2026/02/8346-3.png"
+      },
+      "away": {
+        "name": "الزوراء",
+        "logo": "https://koraplus.blog/wp-content/uploads/2026/02/8248-3.png"
+      },
+      "score": null,
+      "streams": [
+        {
+          "id": "stream_koraplus_1465852383",
+          "source": "koraplus",
+          "quality": "HD",
+          "channel": "beIN Sports 5 HD",
+          "url": "https://y5.alkoora.live/albaplayer/ad-sport-2/",
+          "priority": 1
+        }
+      ],
+      "poster_url": "/posters/1465852383.jpg"
+    },
+    {
+      "id": 1228430536,
+      "date": "2026-02-18T17:30:00.000Z",
+      "timestamp": 1771435800,
+      "status": "NS",
+      "time": "17:30",
+      "time_label": "17:30 GMT",
+      "league": {
+        "name": "آسيا, دوري أبطال الخليج للأندية",
+        "country": "Asia",
+        "logo": "https://cdn-icons-png.flaticon.com/512/1378/1378598.png"
+      },
+      "home": {
+        "name": "الشباب",
+        "logo": "https://koraplus.blog/wp-content/uploads/2026/02/8945-3.png"
+      },
+      "away": {
+        "name": "تضامن حضرموت",
+        "logo": "https://koraplus.blog/wp-content/uploads/2026/02/78083.png"
+      },
+      "score": null,
+      "streams": [],
+      "poster_url": "/posters/1228430536.jpg"
+    },
+    {
+      "id": 2139338206,
+      "date": "2026-02-18T20:15:00.000Z",
+      "timestamp": 1771445700,
+      "status": "NS",
+      "time": "20:15",
+      "time_label": "20:15 GMT",
+      "league": {
+        "name": "أوروبا, دوري أبطال اوروبا - بلاي اوف",
+        "country": "Europe",
+        "logo": "https://cdn-icons-png.flaticon.com/512/1378/1378598.png"
+      },
+      "home": {
+        "name": "بوروسيا دورتموند",
+        "logo": "https://koraplus.blog/wp-content/uploads/2026/02/341.png"
+      },
+      "away": {
+        "name": "أتالانتا",
+        "logo": "https://koraplus.blog/wp-content/uploads/2026/02/232.png"
+      },
+      "score": null,
+      "streams": [],
+      "poster_url": "/posters/2139338206.jpg"
     }
   ]
 }
