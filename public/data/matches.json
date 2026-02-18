@@ -1,48 +1,7 @@
 {
-  "generated_at": "2026-02-18T19:37:52.527Z",
+  "generated_at": "2026-02-18T19:55:14.203Z",
   "count": 15,
   "matches": [
-    {
-      "id": 1309783146,
-      "date": "2026-02-18T17:45:00.000Z",
-      "timestamp": 1771436700,
-      "status": "LIVE",
-      "time": "17:45",
-      "time_label": "17:45 GMT",
-      "league": {
-        "name": "أوروبا, دوري أبطال اوروبا - بلاي اوف",
-        "country": "International",
-        "logo": "https://cdn-icons-png.flaticon.com/512/1378/1378598.png"
-      },
-      "home": {
-        "name": "كارباغ اغدام",
-        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/02/7521.png"
-      },
-      "away": {
-        "name": "نيوكاسل يونايتد",
-        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/01/116.png"
-      },
-      "score": null,
-      "streams": [
-        {
-          "id": "stream_bein3_1309783146",
-          "source": "livekora",
-          "quality": "HD",
-          "channel": "bein3",
-          "url": "https://pl.gomatch-live.com/albaplayer/bein3",
-          "priority": 1
-        },
-        {
-          "id": "stream_siiir_1309783146",
-          "source": "siiir",
-          "quality": "VIP",
-          "channel": "VIP Server",
-          "url": "https://eyj0exaioijkv1qilcjhbgcioijiuzi1nij99sss.yallashot.us/playerv2.php?match=match3&key=c0ae1abba6eebd7e6cc5b88b1d2B71547",
-          "priority": 2
-        }
-      ],
-      "poster_url": "/posters/1309783146.jpg"
-    },
     {
       "id": 962397780,
       "date": "2026-02-18T18:15:00.000Z",
@@ -70,7 +29,7 @@
           "source": "livekora",
           "quality": "HD",
           "channel": "bein2",
-          "url": "https://pl.gomatch-live.com/albaplayer/bein2",
+          "url": "https://pl.gomatch-live.com/albaplayer/bein2/",
           "priority": 1
         },
         {
@@ -111,7 +70,7 @@
           "source": "livekora",
           "quality": "HD",
           "channel": "bein6",
-          "url": "https://pl.gomatch-live.com/albaplayer/bein6",
+          "url": "https://pl.gomatch-live.com/albaplayer/bein6/",
           "priority": 1
         }
       ],
@@ -144,7 +103,7 @@
           "source": "livekora",
           "quality": "HD",
           "channel": "ch1",
-          "url": "https://pl.gomatch-live.com/albaplayer/ch1",
+          "url": "https://pl.gomatch-live.com/albaplayer/ch1/",
           "priority": 1
         },
         {
@@ -162,7 +121,7 @@
       "id": 695222019,
       "date": "2026-02-18T19:45:00.000Z",
       "timestamp": 1771443900,
-      "status": "NS",
+      "status": "LIVE",
       "time": "19:45",
       "time_label": "19:45 GMT",
       "league": {
@@ -185,7 +144,7 @@
           "source": "livekora",
           "quality": "HD",
           "channel": "ad-premium-1",
-          "url": "https://pl.gomatch-live.com/albaplayer/ad-premium-1",
+          "url": "https://pl.gomatch-live.com/albaplayer/ad-premium-1/",
           "priority": 1
         },
         {
@@ -226,7 +185,7 @@
           "source": "livekora",
           "quality": "HD",
           "channel": "bein1",
-          "url": "https://pl.gomatch-live.com/albaplayer/bein1",
+          "url": "https://pl.gomatch-live.com/albaplayer/bein1/",
           "priority": 1
         },
         {
@@ -267,7 +226,7 @@
           "source": "livekora",
           "quality": "HD",
           "channel": "bein5",
-          "url": "https://pl.gomatch-live.com/albaplayer/bein5",
+          "url": "https://pl.gomatch-live.com/albaplayer/bein5/",
           "priority": 1
         },
         {
@@ -308,7 +267,7 @@
           "source": "livekora",
           "quality": "HD",
           "channel": "bein3",
-          "url": "https://pl.gomatch-live.com/albaplayer/bein3",
+          "url": "https://pl.gomatch-live.com/albaplayer/bein3/",
           "priority": 1
         },
         {
@@ -349,7 +308,7 @@
           "source": "livekora",
           "quality": "HD",
           "channel": "bein4",
-          "url": "https://pl.gomatch-live.com/albaplayer/bein4",
+          "url": "https://pl.gomatch-live.com/albaplayer/bein4/",
           "priority": 1
         },
         {
@@ -390,52 +349,60 @@
           "source": "livekora",
           "quality": "HD",
           "channel": "arryadia",
-          "url": "https://pl.gomatch-live.com/albaplayer/arryadia",
+          "url": "https://pl.gomatch-live.com/albaplayer/arryadia/",
           "priority": 1
         }
       ],
       "poster_url": "/posters/1690220622.jpg"
     },
     {
-      "id": 173822439,
-      "date": "2026-02-18T19:37:08.000Z",
-      "timestamp": 1771443428,
-      "status": "NS",
-      "time": "19:37",
-      "time_label": "19:37 GMT",
+      "id": 1309783146,
+      "date": "2026-02-18T17:45:00.000Z",
+      "timestamp": 1771436700,
+      "status": "FT",
+      "time": "17:45",
+      "time_label": "17:45 GMT",
       "league": {
-        "name": "بطولة عالمية",
-        "country": "World",
-        "logo": "https://a.espncdn.com/combiner/i?img=/i/leaguelogos/soccer/500/4.png&h=40&w=40"
+        "name": "أوروبا, دوري أبطال اوروبا - بلاي اوف",
+        "country": "International",
+        "logo": "https://cdn-icons-png.flaticon.com/512/1378/1378598.png"
       },
       "home": {
-        "name": "زاخو",
-        "logo": ""
+        "name": "كارباغ اغدام",
+        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/02/7521.png"
       },
       "away": {
-        "name": "سترة",
-        "logo": ""
+        "name": "نيوكاسل يونايتد",
+        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/01/116.png"
       },
       "score": null,
       "streams": [
         {
-          "id": "stream_%d8%b2%d8%a7%d8%ae%d9%88-%d9%88-%d8%b3%d8%aa%d8%b1%d8%a9_173822439",
-          "source": "korah",
+          "id": "stream_bein3_1309783146",
+          "source": "livekora",
           "quality": "HD",
-          "channel": "%d8%b2%d8%a7%d8%ae%d9%88-%d9%88-%d8%b3%d8%aa%d8%b1%d8%a9",
-          "url": "https://www.korah.live/matches/%d8%b2%d8%a7%d8%ae%d9%88-%d9%88-%d8%b3%d8%aa%d8%b1%d8%a9/",
+          "channel": "bein3",
+          "url": "https://pl.gomatch-live.com/albaplayer/bein3/",
           "priority": 1
+        },
+        {
+          "id": "stream_siiir_1309783146",
+          "source": "siiir",
+          "quality": "VIP",
+          "channel": "VIP Server",
+          "url": "https://eyj0exaioijkv1qilcjhbgcioijiuzi1nij99sss.yallashot.us/playerv2.php?match=match3&key=c0ae1abba6eebd7e6cc5b88b1d2B71547",
+          "priority": 2
         }
       ],
-      "poster_url": "/posters/173822439.jpg"
+      "poster_url": "/posters/1309783146.jpg"
     },
     {
       "id": 1508755264,
-      "date": "2026-02-18T19:37:08.000Z",
-      "timestamp": 1771443428,
+      "date": "2026-02-18T19:54:26.000Z",
+      "timestamp": 1771444466,
       "status": "NS",
-      "time": "19:37",
-      "time_label": "19:37 GMT",
+      "time": "19:54",
+      "time_label": "19:54 GMT",
       "league": {
         "name": "بطولة عالمية",
         "country": "World",
@@ -463,6 +430,39 @@
       "poster_url": "/posters/1508755264.jpg"
     },
     {
+      "id": 173822439,
+      "date": "2026-02-18T19:54:26.000Z",
+      "timestamp": 1771444466,
+      "status": "NS",
+      "time": "19:54",
+      "time_label": "19:54 GMT",
+      "league": {
+        "name": "بطولة عالمية",
+        "country": "World",
+        "logo": "https://a.espncdn.com/combiner/i?img=/i/leaguelogos/soccer/500/4.png&h=40&w=40"
+      },
+      "home": {
+        "name": "زاخو",
+        "logo": ""
+      },
+      "away": {
+        "name": "سترة",
+        "logo": ""
+      },
+      "score": null,
+      "streams": [
+        {
+          "id": "stream_%d8%b2%d8%a7%d8%ae%d9%88-%d9%88-%d8%b3%d8%aa%d8%b1%d8%a9_173822439",
+          "source": "korah",
+          "quality": "HD",
+          "channel": "%d8%b2%d8%a7%d8%ae%d9%88-%d9%88-%d8%b3%d8%aa%d8%b1%d8%a9",
+          "url": "https://www.korah.live/matches/%d8%b2%d8%a7%d8%ae%d9%88-%d9%88-%d8%b3%d8%aa%d8%b1%d8%a9/",
+          "priority": 1
+        }
+      ],
+      "poster_url": "/posters/173822439.jpg"
+    },
+    {
       "id": 2139338206,
       "date": "2026-02-18T20:15:00.000Z",
       "timestamp": 1771445700,
@@ -488,11 +488,11 @@
     },
     {
       "id": 1228430536,
-      "date": "2026-02-18T19:36:09.000Z",
-      "timestamp": 1771443369,
+      "date": "2026-02-18T19:53:28.000Z",
+      "timestamp": 1771444408,
       "status": "FT",
-      "time": "19:36",
-      "time_label": "19:36 GMT",
+      "time": "19:53",
+      "time_label": "19:53 GMT",
       "league": {
         "name": "آسيا, دوري أبطال الخليج للأندية",
         "country": "Asia",
@@ -512,11 +512,11 @@
     },
     {
       "id": 1465852383,
-      "date": "2026-02-18T19:36:09.000Z",
-      "timestamp": 1771443369,
+      "date": "2026-02-18T19:53:28.000Z",
+      "timestamp": 1771444408,
       "status": "FT",
-      "time": "19:36",
-      "time_label": "19:36 GMT",
+      "time": "19:53",
+      "time_label": "19:53 GMT",
       "league": {
         "name": "آسيا, دوري أبطال آسيا 2 - دور الـ 16",
         "country": "Asia",
