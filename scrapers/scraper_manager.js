@@ -2,6 +2,7 @@ import LiveKoraScraper from './livekora_scraper.js';
 import KorahScraper from './korah_scraper.js';
 import SiiirScraper from './siiir_scraper.js';
 import KoraplusScraper from './koraplus_scraper.js';
+import SportsOnlineScraper from './sportsonline_scraper.js';
 import fs from 'fs/promises';
 import path from 'path';
 import { fileURLToPath } from 'url';
@@ -16,23 +17,26 @@ class ScraperManager {
         this.korah = new KorahScraper();
         this.siiir = new SiiirScraper();
         this.koraplus = new KoraplusScraper();
+        this.sportsonline = new SportsOnlineScraper();
     }
 
     async runFullUpdate() {
-        console.log('🚀 Starting Multi-Source Scrape: LiveKora + Korah.live + Koraplus + Siiir.tv');
+        console.log('🚀 Starting Multi-Source Scrape: LiveKora + Korah.live + Koraplus + Siiir.tv + SportsOnline');
 
         // 1. Get matches from all primary sources
-        const [liveKoraMatches, korahMatches, koraplusMatches] = await Promise.all([
+        const [liveKoraMatches, korahMatches, koraplusMatches, sportsonlineMatches] = await Promise.all([
             this.liveKora.scrapeMatches().catch(e => { console.error('LiveKora Error:', e.message); return []; }),
             this.korah.scrapeMatches().catch(e => { console.error('Korah Error:', e.message); return []; }),
-            this.koraplus.scrapeMatches().catch(e => { console.error('Koraplus Error:', e.message); return []; })
+            this.koraplus.scrapeMatches().catch(e => { console.error('Koraplus Error:', e.message); return []; }),
+            this.sportsonline.scrapeMatches().catch(e => { console.error('SportsOnline Error:', e.message); return []; })
         ]);
 
-        console.log(`📊 Sources: LiveKora(${liveKoraMatches.length}), Korah.live(${korahMatches.length}), Koraplus(${koraplusMatches.length})`);
+        console.log(`📊 Sources: LiveKora(${liveKoraMatches.length}), Korah.live(${korahMatches.length}), Koraplus(${koraplusMatches.length}), SportsOnline(${sportsonlineMatches.length})`);
 
         // 2. Merge and deduplicate - Priority: Korah for logos, collect all streams
         let combinedMatches = this.deduplicateMatches(liveKoraMatches, korahMatches);
         combinedMatches = this.mergeKoraplus(combinedMatches, koraplusMatches);
+        combinedMatches = this.mergeSportsOnline(combinedMatches, sportsonlineMatches);
 
         console.log(`✅ Unified match list: ${combinedMatches.length} matches total.`);
 
@@ -213,6 +217,48 @@ class ScraperManager {
                 if (sMatch.home.logo) unified[pIndex].home.logo = sMatch.home.logo;
                 if (sMatch.away.logo) unified[pIndex].away.logo = sMatch.away.logo;
                 console.log(`🖼️ Applied high-accuracy logo from Korah for ${unified[pIndex].home.name} vs ${unified[pIndex].away.name}`);
+            }
+        });
+
+        return unified;
+    }
+
+    /**
+     * Merge SportsOnline streams into matches
+     * - Adds SportsOnline streams without duplicates
+     * - Lower priority than other sources
+     */
+    mergeSportsOnline(primary, sportsonline) {
+        const unified = [...primary];
+        const clean = (name) => name.toLowerCase()
+            .replace(/نادي|lon|fc|united|city|real|atletico|stade|club|f\.c/g, '')
+            .replace(/[^\w\u0621-\u064A\s]/g, '')
+            .trim();
+
+        sportsonline.forEach(sMatch => {
+            const sHome = clean(sMatch.home.name);
+            const sAway = clean(sMatch.away.name);
+
+            const pIndex = unified.findIndex(pMatch => {
+                const pHome = clean(pMatch.home.name);
+                const pAway = clean(pMatch.away.name);
+                return (pHome === sHome && pAway === sAway) || (pHome === sAway && pAway === sHome);
+            });
+
+            if (pIndex === -1) {
+                // Match not found in primary sources - add it as new match
+                sMatch.score = null;
+                unified.push(sMatch);
+                console.log(`🆕 Added new match from SportsOnline: ${sMatch.home.name} vs ${sMatch.away.name}`);
+            } else {
+                // Match exists - add SportsOnline stream without duplicates
+                sMatch.streams.forEach(sStream => {
+                    const streamExists = unified[pIndex].streams.some(existing => existing.url === sStream.url);
+                    if (!streamExists) {
+                        unified[pIndex].streams.push(sStream);
+                        console.log(`📡 Added SportsOnline stream to: ${unified[pIndex].home.name} vs ${unified[pIndex].away.name}`);
+                    }
+                });
             }
         });
 
