@@ -209,33 +209,40 @@ class KorahScraper {
                                 leagueName = infoItems[1].innerText?.trim() || leagueName;
                             }
 
-                            // Stream link
-                            const streamLink = href;
-
                             // Transform URL to albaplayer format
+                            // New format: https://pl.gomatch-live.com/albaplayer/{channel}/
                             let processedStreamLink = streamLink;
                             try {
+                                // The link from korah.live is like: https://a1.semohd.online/2026/02/6.html
+                                // We need to get the channel from the iframe in that page
+                                // For now, we'll store the original link and process it later
+                                processedStreamLink = streamLink;
+
+                                // Try to extract channel slug from URL path
                                 const urlObj = new URL(streamLink);
-                                const cleanPath = urlObj.pathname.replace(/^\/|\/$/g, '');
-                                const channelSlug = cleanPath.split('/').pop();
+                                const pathParts = urlObj.pathname.split('/').filter(p => p);
+                                if (pathParts.length > 0) {
+                                    const lastPart = pathParts[pathParts.length - 1];
+                                    const channelSlug = lastPart.replace(/\.html$/, '');
 
-                                if (channelSlug && channelSlug.length > 1) {
-                                    processedStreamLink = `https://pl.kooralive.fit/albaplayer/${channelSlug}`;
-
-                                    results.push({
-                                        id: 200000 + index + 1,
-                                        homeTeam,
-                                        awayTeam,
-                                        homeLogo,
-                                        awayLogo,
-                                        league: leagueName,
-                                        channel: channelName,
-                                        status,
-                                        time: timeText,
-                                        score: scoreText,
-                                        streamLink: processedStreamLink
-                                    });
+                                    // Build new player URL format
+                                    processedStreamLink = `https://pl.gomatch-live.com/albaplayer/${channelSlug}/`;
                                 }
+
+                                results.push({
+                                    id: 200000 + index + 1,
+                                    homeTeam,
+                                    awayTeam,
+                                    homeLogo,
+                                    awayLogo,
+                                    league: leagueName,
+                                    channel: channelName,
+                                    status,
+                                    time: timeText,
+                                    score: scoreText,
+                                    streamLink: processedStreamLink,
+                                    matchPageUrl: href // Store original match page URL for further processing
+                                });
                             } catch (e) { }
                         } catch (error) {
                             console.error('Error parsing match:', error.message);
@@ -284,6 +291,74 @@ class KorahScraper {
             if (matches.length === 0) {
                 console.log('⚠️ No matches found after extraction');
             } else {
+                console.log('📋 Extracting player URLs from match pages...');
+
+                // Visit each match page to get the actual player URL
+                for (let i = 0; i < matches.length; i++) {
+                    const match = matches[i];
+                    if (match.matchPageUrl) {
+                        try {
+                            console.log(`🔗 Checking match ${i + 1}/${matches.length}: ${match.homeTeam} vs ${match.awayTeam}`);
+
+                            const matchPage = await browser.newPage();
+                            await matchPage.setUserAgent('Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36');
+
+                            await matchPage.goto(match.matchPageUrl, {
+                                waitUntil: 'domcontentloaded',
+                                timeout: 30000
+                            });
+
+                            // Wait for iframe to load
+                            await new Promise(resolve => setTimeout(resolve, 3000));
+
+                            // Extract player URL from iframe
+                            const playerUrl = await matchPage.evaluate(() => {
+                                // Try to find iframe with player
+                                const iframes = document.querySelectorAll('iframe');
+                                for (const iframe of iframes) {
+                                    const src = iframe.src || iframe.getAttribute('data-src');
+                                    if (src && (src.includes('pl.gomatch') || src.includes('albaplayer') || src.includes('player'))) {
+                                        return src;
+                                    }
+                                }
+
+                                // Try to find in script tags
+                                const scripts = document.querySelectorAll('script');
+                                for (const script of scripts) {
+                                    const content = script.innerText || '';
+                                    const match = content.match(/src=["']([^"']*albaplayer[^"']*)["']/i) ||
+                                        content.match(/url["']?\s*[:=]\s*["']([^"']*albaplayer[^"']*)["']/i);
+                                    if (match && match[1]) {
+                                        return match[1];
+                                    }
+                                }
+
+                                return null;
+                            });
+
+                            if (playerUrl) {
+                                // Extract clean player URL
+                                try {
+                                    const urlObj = new URL(playerUrl);
+                                    const pathname = urlObj.pathname;
+                                    // Keep the full path for the player
+                                    match.streamLink = playerUrl.split('?')[0];
+                                    console.log(`  ✅ Found player: ${match.streamLink}`);
+                                } catch (e) {
+                                    match.streamLink = playerUrl;
+                                }
+                            } else {
+                                console.log(`  ⚠️ No player URL found`);
+                            }
+
+                            await matchPage.close();
+
+                        } catch (err) {
+                            console.log(`  ❌ Error on match page: ${err.message}`);
+                        }
+                    }
+                }
+
                 console.log('📋 Matches found:');
                 matches.forEach(m => {
                     console.log(`  - ${m.homeTeam} vs ${m.awayTeam} (${m.league}) [${m.status}] ${m.channel ? '📺 ' + m.channel : ''}`);
