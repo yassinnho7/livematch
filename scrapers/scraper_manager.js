@@ -19,25 +19,23 @@ class ScraperManager {
     async runFullUpdate() {
         console.log('🚀 Starting Multi-Source Scrape: LiveKora + Korah.live + Siiir.tv');
 
-        // 1. Get matches from LiveKora (Base data)
-        let koraMatches = await this.liveKora.scrapeMatches();
+        // 1. Get matches from both sources
+        const [liveKoraMatches, korahMatches] = await Promise.all([
+            this.liveKora.scrapeMatches().catch(e => { console.error('LiveKora Error:', e.message); return []; }),
+            this.korah.scrapeMatches().catch(e => { console.error('Korah Error:', e.message); return []; })
+        ]);
 
-        // 1b. Fallback to Korah.live if LiveKora returns 0 matches
-        if (koraMatches.length === 0) {
-            console.log('⚠️ LiveKora returned 0 matches. Trying Korah.live fallback...');
-            koraMatches = await this.korah.scrapeMatches();
-            if (koraMatches.length > 0) {
-                console.log(`✅ Korah.live fallback successful: ${koraMatches.length} matches found.`);
-            } else {
-                console.log('❌ Korah.live fallback also returned 0 matches.');
-            }
-        }
+        console.log(`📊 Found ${liveKoraMatches.length} matches from LiveKora and ${korahMatches.length} from Korah.live`);
 
-        // 2. Get player links from Siiir.tv
+        // 2. Merge and deduplicate (Prioritize Korah if LiveKora is reported broken)
+        const combinedMatches = this.deduplicateMatches(liveKoraMatches, korahMatches);
+        console.log(`✅ Unified match list: ${combinedMatches.length} matches total.`);
+
+        // 3. Get player links from Siiir.tv
         const siiirStreams = await this.siiir.scrapeMatches();
 
-        // 3. Merge Siiir streams into LiveKora matches
-        const finalMatches = this.mergeSources(koraMatches, siiirStreams);
+        // 4. Merge Siiir streams into unified matches
+        const finalMatches = this.mergeSources(combinedMatches, siiirStreams);
 
         // 4. Generate AI Articles for matches
         await this.processArticles(finalMatches);
@@ -125,6 +123,34 @@ class ScraperManager {
 
             return match;
         });
+    }
+
+    deduplicateMatches(primary, secondary) {
+        const unified = [...primary];
+        const clean = (name) => name.toLowerCase()
+            .replace(/نادي|ال|fc|united|city|real|atletico|stade|club|f\.c/g, '')
+            .replace(/[^\w\u0621-\u064A\s]/g, '')
+            .trim();
+
+        secondary.forEach(sMatch => {
+            const sHome = clean(sMatch.home.name);
+            const sAway = clean(sMatch.away.name);
+
+            const isDuplicate = primary.some(pMatch => {
+                const pHome = clean(pMatch.home.name);
+                const pAway = clean(pMatch.away.name);
+                return (pHome === sHome && pAway === sAway) || (pHome === sAway && pAway === sHome);
+            });
+
+            if (!isDuplicate) {
+                unified.push(sMatch);
+            } else {
+                // If it exists in both, we keep the primary but could potentially merge attributes
+                // For now, primary (LiveKora) is kept if it exists.
+            }
+        });
+
+        return unified;
     }
 
     async saveMatches(matches) {
