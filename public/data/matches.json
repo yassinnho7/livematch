@@ -1,81 +1,7 @@
 {
-  "generated_at": "2026-02-18T19:55:14.203Z",
+  "generated_at": "2026-02-18T20:12:53.535Z",
   "count": 15,
   "matches": [
-    {
-      "id": 962397780,
-      "date": "2026-02-18T18:15:00.000Z",
-      "timestamp": 1771438500,
-      "status": "LIVE",
-      "time": "18:15",
-      "time_label": "18:15 GMT",
-      "league": {
-        "name": "آسيا, دوري أبطال آسيا 2 - دور الـ 16",
-        "country": "Asia",
-        "logo": "https://a.espncdn.com/combiner/i?img=/i/leaguelogos/soccer/500/209.png&h=40&w=40"
-      },
-      "home": {
-        "name": "النصر",
-        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/01/7549.png"
-      },
-      "away": {
-        "name": "أركاداج",
-        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/02/74158.png"
-      },
-      "score": null,
-      "streams": [
-        {
-          "id": "stream_bein2_962397780",
-          "source": "livekora",
-          "quality": "HD",
-          "channel": "bein2",
-          "url": "https://pl.gomatch-live.com/albaplayer/bein2/",
-          "priority": 1
-        },
-        {
-          "id": "stream_siiir_962397780",
-          "source": "siiir",
-          "quality": "VIP",
-          "channel": "VIP Server",
-          "url": "https://eyj0exaioijkv1qilcjhbgcioijiuzi1nij99sss.yallashot.us/playerv2.php?match=match2&key=c0ae1abba6eebd7e6cc5b88b1d2B71547",
-          "priority": 2
-        }
-      ],
-      "poster_url": "/posters/962397780.jpg"
-    },
-    {
-      "id": 982617644,
-      "date": "2026-02-18T18:15:00.000Z",
-      "timestamp": 1771438500,
-      "status": "LIVE",
-      "time": "18:15",
-      "time_label": "18:15 GMT",
-      "league": {
-        "name": "آسيا, دوري أبطال آسيا 2 - دور الـ 16",
-        "country": "Asia",
-        "logo": "https://a.espncdn.com/combiner/i?img=/i/leaguelogos/soccer/500/209.png&h=40&w=40"
-      },
-      "home": {
-        "name": "الأهلي",
-        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/01/8200.png"
-      },
-      "away": {
-        "name": "سباهان",
-        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/02/9356.png"
-      },
-      "score": null,
-      "streams": [
-        {
-          "id": "stream_bein6_982617644",
-          "source": "livekora",
-          "quality": "HD",
-          "channel": "bein6",
-          "url": "https://pl.gomatch-live.com/albaplayer/bein6/",
-          "priority": 1
-        }
-      ],
-      "poster_url": "/posters/982617644.jpg"
-    },
     {
       "id": 1323733339,
       "date": "2026-02-18T19:00:00.000Z",
@@ -162,7 +88,7 @@
       "id": 1778728221,
       "date": "2026-02-18T20:00:00.000Z",
       "timestamp": 1771444800,
-      "status": "NS",
+      "status": "LIVE",
       "time": "20:00",
       "time_label": "20:00 GMT",
       "league": {
@@ -203,7 +129,7 @@
       "id": 1734079948,
       "date": "2026-02-18T20:00:00.000Z",
       "timestamp": 1771444800,
-      "status": "NS",
+      "status": "LIVE",
       "time": "20:00",
       "time_label": "20:00 GMT",
       "league": {
@@ -244,7 +170,7 @@
       "id": 844502225,
       "date": "2026-02-18T20:00:00.000Z",
       "timestamp": 1771444800,
-      "status": "NS",
+      "status": "LIVE",
       "time": "20:00",
       "time_label": "20:00 GMT",
       "league": {
@@ -285,7 +211,7 @@
       "id": 1523463289,
       "date": "2026-02-18T20:00:00.000Z",
       "timestamp": 1771444800,
-      "status": "NS",
+      "status": "LIVE",
       "time": "20:00",
       "time_label": "20:00 GMT",
       "league": {
@@ -397,12 +323,86 @@
       "poster_url": "/posters/1309783146.jpg"
     },
     {
+      "id": 962397780,
+      "date": "2026-02-18T18:15:00.000Z",
+      "timestamp": 1771438500,
+      "status": "LIVE",
+      "time": "18:15",
+      "time_label": "18:15 GMT",
+      "league": {
+        "name": "آسيا, دوري أبطال آسيا 2 - دور الـ 16",
+        "country": "Asia",
+        "logo": "https://a.espncdn.com/combiner/i?img=/i/leaguelogos/soccer/500/209.png&h=40&w=40"
+      },
+      "home": {
+        "name": "النصر",
+        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/01/7549.png"
+      },
+      "away": {
+        "name": "أركاداج",
+        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/02/74158.png"
+      },
+      "score": null,
+      "streams": [
+        {
+          "id": "stream_bein2_962397780",
+          "source": "livekora",
+          "quality": "HD",
+          "channel": "bein2",
+          "url": "https://pl.gomatch-live.com/albaplayer/bein2/",
+          "priority": 1
+        },
+        {
+          "id": "stream_siiir_962397780",
+          "source": "siiir",
+          "quality": "VIP",
+          "channel": "VIP Server",
+          "url": "https://eyj0exaioijkv1qilcjhbgcioijiuzi1nij99sss.yallashot.us/playerv2.php?match=match2&key=c0ae1abba6eebd7e6cc5b88b1d2B71547",
+          "priority": 2
+        }
+      ],
+      "poster_url": "/posters/962397780.jpg"
+    },
+    {
+      "id": 982617644,
+      "date": "2026-02-18T18:15:00.000Z",
+      "timestamp": 1771438500,
+      "status": "LIVE",
+      "time": "18:15",
+      "time_label": "18:15 GMT",
+      "league": {
+        "name": "آسيا, دوري أبطال آسيا 2 - دور الـ 16",
+        "country": "Asia",
+        "logo": "https://a.espncdn.com/combiner/i?img=/i/leaguelogos/soccer/500/209.png&h=40&w=40"
+      },
+      "home": {
+        "name": "الأهلي",
+        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/01/8200.png"
+      },
+      "away": {
+        "name": "سباهان",
+        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/02/9356.png"
+      },
+      "score": null,
+      "streams": [
+        {
+          "id": "stream_bein6_982617644",
+          "source": "livekora",
+          "quality": "HD",
+          "channel": "bein6",
+          "url": "https://pl.gomatch-live.com/albaplayer/bein6/",
+          "priority": 1
+        }
+      ],
+      "poster_url": "/posters/982617644.jpg"
+    },
+    {
       "id": 1508755264,
-      "date": "2026-02-18T19:54:26.000Z",
-      "timestamp": 1771444466,
+      "date": "2026-02-18T20:12:11.000Z",
+      "timestamp": 1771445531,
       "status": "NS",
-      "time": "19:54",
-      "time_label": "19:54 GMT",
+      "time": "20:12",
+      "time_label": "20:12 GMT",
       "league": {
         "name": "بطولة عالمية",
         "country": "World",
@@ -431,11 +431,11 @@
     },
     {
       "id": 173822439,
-      "date": "2026-02-18T19:54:26.000Z",
-      "timestamp": 1771444466,
+      "date": "2026-02-18T20:12:11.000Z",
+      "timestamp": 1771445531,
       "status": "NS",
-      "time": "19:54",
-      "time_label": "19:54 GMT",
+      "time": "20:12",
+      "time_label": "20:12 GMT",
       "league": {
         "name": "بطولة عالمية",
         "country": "World",
@@ -488,11 +488,11 @@
     },
     {
       "id": 1228430536,
-      "date": "2026-02-18T19:53:28.000Z",
-      "timestamp": 1771444408,
+      "date": "2026-02-18T20:11:11.000Z",
+      "timestamp": 1771445471,
       "status": "FT",
-      "time": "19:53",
-      "time_label": "19:53 GMT",
+      "time": "20:11",
+      "time_label": "20:11 GMT",
       "league": {
         "name": "آسيا, دوري أبطال الخليج للأندية",
         "country": "Asia",
@@ -512,11 +512,11 @@
     },
     {
       "id": 1465852383,
-      "date": "2026-02-18T19:53:28.000Z",
-      "timestamp": 1771444408,
+      "date": "2026-02-18T20:11:11.000Z",
+      "timestamp": 1771445471,
       "status": "FT",
-      "time": "19:53",
-      "time_label": "19:53 GMT",
+      "time": "20:11",
+      "time_label": "20:11 GMT",
       "league": {
         "name": "آسيا, دوري أبطال آسيا 2 - دور الـ 16",
         "country": "Asia",
