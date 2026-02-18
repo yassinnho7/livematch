@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-02-18T19:28:00.561Z",
+  "generated_at": "2026-02-18T19:37:52.527Z",
   "count": 15,
   "matches": [
     {
@@ -398,11 +398,11 @@
     },
     {
       "id": 173822439,
-      "date": "2026-02-18T19:27:17.000Z",
-      "timestamp": 1771442837,
+      "date": "2026-02-18T19:37:08.000Z",
+      "timestamp": 1771443428,
       "status": "NS",
-      "time": "19:27",
-      "time_label": "19:27 GMT",
+      "time": "19:37",
+      "time_label": "19:37 GMT",
       "league": {
         "name": "بطولة عالمية",
         "country": "World",
@@ -431,11 +431,11 @@
     },
     {
       "id": 1508755264,
-      "date": "2026-02-18T19:27:17.000Z",
-      "timestamp": 1771442837,
+      "date": "2026-02-18T19:37:08.000Z",
+      "timestamp": 1771443428,
       "status": "NS",
-      "time": "19:27",
-      "time_label": "19:27 GMT",
+      "time": "19:37",
+      "time_label": "19:37 GMT",
       "league": {
         "name": "بطولة عالمية",
         "country": "World",
@@ -463,30 +463,6 @@
       "poster_url": "/posters/1508755264.jpg"
     },
     {
-      "id": 1228430536,
-      "date": "2026-02-18T19:26:18.000Z",
-      "timestamp": 1771442778,
-      "status": "LIVE",
-      "time": "19:26",
-      "time_label": "19:26 GMT",
-      "league": {
-        "name": "آسيا, دوري أبطال الخليج للأندية",
-        "country": "Asia",
-        "logo": "https://cdn-icons-png.flaticon.com/512/1378/1378598.png"
-      },
-      "home": {
-        "name": "الشباب",
-        "logo": "https://koraplus.blog/wp-content/uploads/2026/02/8945-3.png"
-      },
-      "away": {
-        "name": "تضامن حضرموت",
-        "logo": "https://koraplus.blog/wp-content/uploads/2026/02/78083.png"
-      },
-      "score": null,
-      "streams": [],
-      "poster_url": "/posters/1228430536.jpg"
-    },
-    {
       "id": 2139338206,
       "date": "2026-02-18T20:15:00.000Z",
       "timestamp": 1771445700,
@@ -511,12 +487,36 @@
       "poster_url": "/posters/2139338206.jpg"
     },
     {
-      "id": 1465852383,
-      "date": "2026-02-18T19:26:18.000Z",
-      "timestamp": 1771442778,
+      "id": 1228430536,
+      "date": "2026-02-18T19:36:09.000Z",
+      "timestamp": 1771443369,
       "status": "FT",
-      "time": "19:26",
-      "time_label": "19:26 GMT",
+      "time": "19:36",
+      "time_label": "19:36 GMT",
+      "league": {
+        "name": "آسيا, دوري أبطال الخليج للأندية",
+        "country": "Asia",
+        "logo": "https://cdn-icons-png.flaticon.com/512/1378/1378598.png"
+      },
+      "home": {
+        "name": "الشباب",
+        "logo": "https://koraplus.blog/wp-content/uploads/2026/02/8945-3.png"
+      },
+      "away": {
+        "name": "تضامن حضرموت",
+        "logo": "https://koraplus.blog/wp-content/uploads/2026/02/78083.png"
+      },
+      "score": null,
+      "streams": [],
+      "poster_url": "/posters/1228430536.jpg"
+    },
+    {
+      "id": 1465852383,
+      "date": "2026-02-18T19:36:09.000Z",
+      "timestamp": 1771443369,
+      "status": "FT",
+      "time": "19:36",
+      "time_label": "19:36 GMT",
       "league": {
         "name": "آسيا, دوري أبطال آسيا 2 - دور الـ 16",
         "country": "Asia",
