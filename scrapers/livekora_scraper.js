@@ -153,7 +153,7 @@ class LiveKoraScraper {
                         const streamLink = card.href || '';
 
                         // تحويل رابط المقال إلى رابط المشغل (albaplayer) بشكل صارم
-                        // الهدف: https://pl.kooralive.fit/albaplayer/el-watania-2
+                        // الهدف: https://pl.gomatch-live.com/albaplayer/{channel}
                         let processedStreamLink = streamLink;
                         try {
                             const urlObj = new URL(streamLink);
@@ -162,9 +162,10 @@ class LiveKoraScraper {
                             // اسم القناة هو آخر جزء في المسار
                             const channelSlug = cleanPath.split('/').pop();
 
-                            // بناء الرابط الجديد بالشكل المطلوب تماماً
+                            // بناء الرابط الجديد بالشكل المطلوب
                             if (channelSlug && channelSlug.length > 1) {
-                                processedStreamLink = `${urlObj.origin}/albaplayer/${channelSlug}`;
+                                // استخدام domain الجديد
+                                processedStreamLink = `https://pl.gomatch-live.com/albaplayer/${channelSlug}/`;
 
                                 results.push({
                                     id: 100000 + index + 1,
