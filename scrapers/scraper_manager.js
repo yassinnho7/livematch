@@ -1,4 +1,5 @@
 import LiveKoraScraper from './livekora_scraper.js';
+import KorahScraper from './korah_scraper.js';
 import SiiirScraper from './siiir_scraper.js';
 import fs from 'fs/promises';
 import path from 'path';
@@ -11,14 +12,26 @@ const __dirname = path.dirname(__filename);
 class ScraperManager {
     constructor() {
         this.liveKora = new LiveKoraScraper();
+        this.korah = new KorahScraper();
         this.siiir = new SiiirScraper();
     }
 
     async runFullUpdate() {
-        console.log('🚀 Starting Multi-Source Scrape: LiveKora + Siiir.tv');
+        console.log('🚀 Starting Multi-Source Scrape: LiveKora + Korah.live + Siiir.tv');
 
         // 1. Get matches from LiveKora (Base data)
-        const koraMatches = await this.liveKora.scrapeMatches();
+        let koraMatches = await this.liveKora.scrapeMatches();
+
+        // 1b. Fallback to Korah.live if LiveKora returns 0 matches
+        if (koraMatches.length === 0) {
+            console.log('⚠️ LiveKora returned 0 matches. Trying Korah.live fallback...');
+            koraMatches = await this.korah.scrapeMatches();
+            if (koraMatches.length > 0) {
+                console.log(`✅ Korah.live fallback successful: ${koraMatches.length} matches found.`);
+            } else {
+                console.log('❌ Korah.live fallback also returned 0 matches.');
+            }
+        }
 
         // 2. Get player links from Siiir.tv
         const siiirStreams = await this.siiir.scrapeMatches();
