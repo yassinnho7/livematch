@@ -30,13 +30,13 @@ class ScraperManager {
 
         console.log(`📊 Sources: LiveKora(${liveKoraMatches.length}), Korah.live(${korahMatches.length}), Koraplus(${koraplusMatches.length})`);
 
-        // 2. Merge and deduplicate
+        // 2. Merge and deduplicate - Priority: Korah for logos, collect all streams
         let combinedMatches = this.deduplicateMatches(liveKoraMatches, korahMatches);
         combinedMatches = this.mergeKoraplus(combinedMatches, koraplusMatches);
 
         console.log(`✅ Unified match list: ${combinedMatches.length} matches total.`);
 
-        // 3. Get player links from Siiir.tv
+        // 3. Get player links from Siiir.tv (VIP fast streams)
         const siiirStreams = await this.siiir.scrapeMatches();
 
         // 4. Merge Siiir streams into unified matches
@@ -89,14 +89,22 @@ class ScraperManager {
         }
     }
 
+    /**
+     * Merge Siiir VIP streams into matches
+     * - Removes score data to avoid conflicts between sources
+     * - Adds Siiir streams as VIP quality
+     */
     mergeSources(matches, extraStreams) {
         console.log(`🔄 Merging ${extraStreams.length} Siiir streams into ${matches.length} matches...`);
 
         return matches.map(match => {
+            // Remove score data to avoid conflicts between sources (different sources show different scores)
+            match.score = null;
+
             const matchingSiiir = extraStreams.find(s => {
                 const title = s.title.toLowerCase();
                 const clean = (name) => name.toLowerCase()
-                    .replace(/نادي|ال|fc|united|city|real|atletico|stade|club|f\.c/g, '')
+                    .replace(/نادي|lon|fc|united|city|real|atletico|stade|club|f\.c/g, '')
                     .replace(/[^\w\u0621-\u064A\s]/g, '')
                     .trim();
 
@@ -128,6 +136,11 @@ class ScraperManager {
         });
     }
 
+    /**
+     * Merge Koraplus streams into matches
+     * - Collects all streams from Koraplus without duplicates
+     * - Prioritizes Korah for logos (better accuracy)
+     */
     mergeKoraplus(primary, koraplus) {
         const unified = [...primary];
         const clean = (name) => name.toLowerCase()
@@ -146,8 +159,12 @@ class ScraperManager {
             });
 
             if (pIndex === -1) {
+                // Match not found in primary sources - add it
+                // Remove score from Koraplus to avoid conflicts
+                kMatch.score = null;
                 unified.push(kMatch);
             } else {
+                // Match exists - merge streams without duplicates
                 kMatch.streams.forEach(kStream => {
                     const streamExists = unified[pIndex].streams.some(s => s.url === kStream.url);
                     if (!streamExists) {
@@ -156,6 +173,7 @@ class ScraperManager {
                     }
                 });
 
+                // Use Korah logos if available (better accuracy), otherwise use Koraplus
                 if (!unified[pIndex].home.logo && kMatch.home.logo) unified[pIndex].home.logo = kMatch.home.logo;
                 if (!unified[pIndex].away.logo && kMatch.away.logo) unified[pIndex].away.logo = kMatch.away.logo;
             }
@@ -164,6 +182,11 @@ class ScraperManager {
         return unified;
     }
 
+    /**
+     * Deduplicate matches between sources
+     * - Prioritizes Korah for logos (better accuracy)
+     * - Keeps all unique matches from both sources
+     */
     deduplicateMatches(primary, secondary) {
         const unified = [...primary];
         const clean = (name) => name.toLowerCase()
@@ -182,8 +205,11 @@ class ScraperManager {
             });
 
             if (pIndex === -1) {
+                // Match not in primary - add it (remove score to avoid conflicts)
+                sMatch.score = null;
                 unified.push(sMatch);
             } else {
+                // Match exists in both - prioritize Korah logos
                 if (sMatch.home.logo) unified[pIndex].home.logo = sMatch.home.logo;
                 if (sMatch.away.logo) unified[pIndex].away.logo = sMatch.away.logo;
                 console.log(`🖼️ Applied high-accuracy logo from Korah for ${unified[pIndex].home.name} vs ${unified[pIndex].away.name}`);
