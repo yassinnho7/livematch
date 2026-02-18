@@ -1,6 +1,7 @@
 import LiveKoraScraper from './livekora_scraper.js';
 import KorahScraper from './korah_scraper.js';
 import SiiirScraper from './siiir_scraper.js';
+import KoraplusScraper from './koraplus_scraper.js';
 import fs from 'fs/promises';
 import path from 'path';
 import { fileURLToPath } from 'url';
@@ -14,21 +15,29 @@ class ScraperManager {
         this.liveKora = new LiveKoraScraper();
         this.korah = new KorahScraper();
         this.siiir = new SiiirScraper();
+        this.koraplus = new KoraplusScraper();
     }
 
     async runFullUpdate() {
-        console.log('🚀 Starting Multi-Source Scrape: LiveKora + Korah.live + Siiir.tv');
+        console.log('🚀 Starting Multi-Source Scrape: LiveKora + Korah.live + Koraplus + Siiir.tv');
 
-        // 1. Get matches from both sources
-        const [liveKoraMatches, korahMatches] = await Promise.all([
+        // 1. Get matches from all primary sources
+        const [liveKoraMatches, korahMatches, koraplusMatches] = await Promise.all([
             this.liveKora.scrapeMatches().catch(e => { console.error('LiveKora Error:', e.message); return []; }),
-            this.korah.scrapeMatches().catch(e => { console.error('Korah Error:', e.message); return []; })
+            this.korah.scrapeMatches().catch(e => { console.error('Korah Error:', e.message); return []; }),
+            this.koraplus.scrapeMatches().catch(e => { console.error('Koraplus Error:', e.message); return []; })
         ]);
 
-        console.log(`📊 Found ${liveKoraMatches.length} matches from LiveKora and ${korahMatches.length} from Korah.live`);
+        console.log(`📊 Sources: LiveKora(${liveKoraMatches.length}), Korah.live(${korahMatches.length}), Koraplus(${koraplusMatches.length})`);
 
-        // 2. Merge and deduplicate (Prioritize Korah if LiveKora is reported broken)
-        const combinedMatches = this.deduplicateMatches(liveKoraMatches, korahMatches);
+        // 2. Merge and deduplicate
+        // First merge LiveKora and Korah
+        let combinedMatches = this.deduplicateMatches(liveKoraMatches, korahMatches);
+
+        // Then merge Koraplus into the result
+        // We use a custom merge for Koraplus to also extract its stream links
+        combinedMatches = this.mergeKoraplus(combinedMatches, koraplusMatches);
+
         console.log(`✅ Unified match list: ${combinedMatches.length} matches total.`);
 
         // 3. Get player links from Siiir.tv
@@ -37,13 +46,13 @@ class ScraperManager {
         // 4. Merge Siiir streams into unified matches
         const finalMatches = this.mergeSources(combinedMatches, siiirStreams);
 
-        // 4. Generate AI Articles for matches
+        // 5. Generate AI Articles for matches
         await this.processArticles(finalMatches);
 
-        // 5. Save results
+        // 6. Save results
         await this.saveMatches(finalMatches);
 
-        // 6. Clean old data (Articles & News)
+        // 7. Clean old data (Articles & News)
         await this.cleanOldArticles();
 
         return finalMatches;
@@ -123,6 +132,45 @@ class ScraperManager {
 
             return match;
         });
+    }
+
+    mergeKoraplus(primary, koraplus) {
+        const unified = [...primary];
+        const clean = (name) => name.toLowerCase()
+            .replace(/نادي|ال|fc|united|city|real|atletico|stade|club|f\.c/g, '')
+            .replace(/[^\w\u0621-\u064A\s]/g, '')
+            .trim();
+
+        koraplus.forEach(kMatch => {
+            const kHome = clean(kMatch.home.name);
+            const kAway = clean(kMatch.away.name);
+
+            const pIndex = unified.findIndex(pMatch => {
+                const pHome = clean(pMatch.home.name);
+                const pAway = clean(pMatch.away.name);
+                return (pHome === kHome && pAway === kAway) || (pHome === kAway && pAway === kHome);
+            });
+
+            if (pIndex === -1) {
+                // Not found, add it
+                unified.push(kMatch);
+            } else {
+                // Found, add Koraplus streams to existing match if they don't exist
+                kMatch.streams.forEach(kStream => {
+                    const streamExists = unified[pIndex].streams.some(s => s.url === kStream.url);
+                    if (!streamExists) {
+                        unified[pIndex].streams.push(kStream);
+                        console.log(`📡 Added Koraplus stream to existing match: ${unified[pIndex].home.name} vs ${unified[pIndex].away.name}`);
+                    }
+                });
+
+                // Update logos if primary is missing them or Koraplus has better ones
+                if (!unified[pIndex].home.logo && kMatch.home.logo) unified[pIndex].home.logo = kMatch.home.logo;
+                if (!unified[pIndex].away.logo && kMatch.away.logo) unified[pIndex].away.logo = kMatch.away.logo;
+            }
+        });
+
+        return unified;
     }
 
     deduplicateMatches(primary, secondary) {
