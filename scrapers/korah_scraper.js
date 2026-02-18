@@ -209,41 +209,21 @@ class KorahScraper {
                                 leagueName = infoItems[1].innerText?.trim() || leagueName;
                             }
 
-                            // Transform URL to albaplayer format
-                            // New format: https://pl.gomatch-live.com/albaplayer/{channel}/
-                            let processedStreamLink = streamLink;
-                            try {
-                                // The link from korah.live is like: https://a1.semohd.online/2026/02/6.html
-                                // We need to get the channel from the iframe in that page
-                                // For now, we'll store the original link and process it later
-                                processedStreamLink = streamLink;
-
-                                // Try to extract channel slug from URL path
-                                const urlObj = new URL(streamLink);
-                                const pathParts = urlObj.pathname.split('/').filter(p => p);
-                                if (pathParts.length > 0) {
-                                    const lastPart = pathParts[pathParts.length - 1];
-                                    const channelSlug = lastPart.replace(/\.html$/, '');
-
-                                    // Build new player URL format
-                                    processedStreamLink = `https://pl.gomatch-live.com/albaplayer/${channelSlug}/`;
-                                }
-
-                                results.push({
-                                    id: 200000 + index + 1,
-                                    homeTeam,
-                                    awayTeam,
-                                    homeLogo,
-                                    awayLogo,
-                                    league: leagueName,
-                                    channel: channelName,
-                                    status,
-                                    time: timeText,
-                                    score: scoreText,
-                                    streamLink: processedStreamLink,
-                                    matchPageUrl: href // Store original match page URL for further processing
-                                });
-                            } catch (e) { }
+                            // Keep stream link empty initially; it will be extracted from the match page.
+                            results.push({
+                                id: 200000 + index + 1,
+                                homeTeam,
+                                awayTeam,
+                                homeLogo,
+                                awayLogo,
+                                league: leagueName,
+                                channel: channelName,
+                                status,
+                                time: timeText,
+                                score: scoreText,
+                                streamLink: '',
+                                matchPageUrl: href
+                            });
                         } catch (error) {
                             console.error('Error parsing match:', error.message);
                         }
@@ -462,16 +442,30 @@ class KorahScraper {
                     logo: match.awayLogo
                 },
                 score: match.score ? this.parseScore(match.score) : null,
-                streams: [{
-                    id: `stream_${channel}_${stableId}`,
-                    source: 'korah',
-                    quality: 'HD',
-                    channel: channel,
-                    url: match.streamLink,
-                    priority: 1
-                }]
+                streams: this.buildStreams(match.streamLink, channel, stableId)
             };
         });
+    }
+
+    buildStreams(streamLink, channel, stableId) {
+        if (!streamLink || typeof streamLink !== 'string') return [];
+        const cleaned = streamLink.trim();
+        if (!cleaned) return [];
+
+        // Do not expose raw match-page URLs as playable streams.
+        const hasPlayerPattern = cleaned.includes('/albaplayer/') ||
+            cleaned.includes('pl.gomatch') ||
+            cleaned.includes('player');
+        if (!hasPlayerPattern) return [];
+
+        return [{
+            id: `stream_${channel}_${stableId}`,
+            source: 'korah',
+            quality: 'HD',
+            channel: channel,
+            url: cleaned,
+            priority: 1
+        }];
     }
 
     parseScore(scoreText) {

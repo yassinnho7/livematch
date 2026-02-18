@@ -91,12 +91,14 @@ class SportsOnlineScraper {
             if (!line || line.includes('====') || line.includes('INFO:') ||
                 line.includes('UPDATE') || line.includes('DOMAIN') ||
                 line.includes('CHANNELS') || line.includes('24/7') ||
-                line.includes('WOMEN') || line.includes('HD') || line.includes('BR')) {
+                line.includes('WOMEN')) {
                 continue;
             }
 
-            // Parse match line: TIME | Team1 x Team2 | URL
-            const matchLine = line.match(/(\d{1,2}:\d{2})\s*\|\s*(.+?)\s*x\s*(.+?)\s*\|\s*(https?:\/\/[^\s]+)/);
+            // Parse either:
+            // 1) TIME | Team1 x Team2 | URL
+            // 2) TIME   Team1 x Team2 | URL
+            const matchLine = line.match(/(\d{1,2}:\d{2})\s*(?:\|\s*)?(.+?)\s+x\s+(.+?)\s*\|\s*(https?:\/\/[^\s]+)/i);
 
             if (matchLine && matchLine[1] && matchLine[2] && matchLine[3] && matchLine[4]) {
                 const time = matchLine[1];

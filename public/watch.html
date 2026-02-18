@@ -554,7 +554,11 @@
             try {
                 // If a direct server URL is provided (from TMA), use it immediately
                 if (directServerUrl) {
-                    launchStream(decodeURIComponent(directServerUrl));
+                    const decoded = decodeURIComponent(directServerUrl);
+                    if (!isPreferredPlayerUrl(decoded)) {
+                        return showError('اعد المحاولة لاحقا، السيرفر غير متوفر حاليا. قد يظهر بعد التحديث التالي خلال 7 دقائق.');
+                    }
+                    launchStream(decoded);
 
                     // Still try to fetch match data for context/servers list
                     if (matchId) {
@@ -575,6 +579,11 @@
                 if (!currentMatch) return showError('البث المباشر انتهى أو غير متوفر');
 
                 if (currentMatch.streams && currentMatch.streams.length > 0) {
+                    const hasPreferredPlayer = currentMatch.streams.some((stream) => isPreferredPlayerUrl(stream.url));
+                    if (!hasPreferredPlayer) {
+                        return showError('اعد المحاولة لاحقا، السيرفر غير متوفر حاليا. قد يظهر بعد التحديث التالي خلال 7 دقائق.');
+                    }
+
                     buildServerButtons(currentMatch.streams);
 
                     const idx = Math.min(currentServerIdx, currentMatch.streams.length - 1);
@@ -582,7 +591,7 @@
                     // Directly launch the stream without countdown
                     launchStream(currentMatch.streams[idx].url);
                 } else {
-                    showError('لا توجد سيرفرات متاحة حالياً');
+                    showError('اعد المحاولة لاحقا، السيرفر غير متوفر حاليا. قد يظهر بعد التحديث التالي خلال 7 دقائق.');
                 }
 
             } catch (e) {
@@ -592,6 +601,10 @@
 
         function launchStream(url) {
             document.getElementById('stream').src = url;
+        }
+
+        function isPreferredPlayerUrl(url) {
+            return typeof url === 'string' && url.includes('/albaplayer/');
         }
 
         function goHome() {

@@ -331,8 +331,16 @@ function openServersView() {
     clearNode(els.serversList);
 
     const streams = state.selectedMatch.streams || [];
-    if (!streams.length) {
-        els.serversList.appendChild(createEl("div", "empty glass", "لا توجد سيرفرات متاحة لهذه المباراة"));
+    const hasPreferredPlayer = streams.some((stream) => isPreferredPlayerUrl(stream.url));
+
+    if (!hasPreferredPlayer) {
+        els.serversList.appendChild(
+            createEl(
+                "div",
+                "empty glass",
+                "اعد المحاولة لاحقا، السيرفر غير متوفر حاليا. قد يظهر بعد التحديث التالي خلال 7 دقائق."
+            )
+        );
     } else {
         streams.forEach((stream, idx) => {
             const item = createEl("button", "server-item");
@@ -374,6 +382,11 @@ function playStream(url) {
     setTimeout(() => {
         els.iframe.src = url;
     }, 140);
+}
+
+function isPreferredPlayerUrl(url) {
+    if (!url || typeof url !== "string") return false;
+    return url.includes("/albaplayer/");
 }
 
 function navigateTo(view) {

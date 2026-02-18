@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-02-18T20:12:53.535Z",
+  "generated_at": "2026-02-18T20:46:30.087Z",
   "count": 15,
   "matches": [
     {
@@ -33,15 +33,30 @@
           "priority": 1
         },
         {
-          "id": "stream_siiir_1323733339",
-          "source": "siiir",
-          "quality": "VIP",
-          "channel": "VIP Server",
-          "url": "https://eyj0exaioijkv1qilcjhbgcioijiuzi1nij99sss.yallashot.us/playerv2.php?match=match8&key=c0ae1abba6eebd7e6cc5b88b1d2B71547",
+          "id": "stream_koraplus_1323733339_1",
+          "source": "koraplus",
+          "quality": "SD",
+          "channel": "غير معروف",
+          "url": "https://koraplus.blog/kooracity/",
           "priority": 2
+        },
+        {
+          "id": "stream_koraplus_1323733339_2",
+          "source": "koraplus",
+          "quality": "SD",
+          "channel": "غير معروف",
+          "url": "https://koraplus.blog/koora-live/",
+          "priority": 3
+        },
+        {
+          "id": "stream_sportsonline_459551974",
+          "source": "sportsonline",
+          "quality": "HD",
+          "channel": "hd10",
+          "url": "https://sprtsonline.click/channels/hd/hd10.php",
+          "priority": 3
         }
-      ],
-      "poster_url": "/posters/1323733339.jpg"
+      ]
     },
     {
       "id": 695222019,
@@ -74,15 +89,38 @@
           "priority": 1
         },
         {
-          "id": "stream_siiir_695222019",
-          "source": "siiir",
-          "quality": "VIP",
-          "channel": "VIP Server",
-          "url": "https://eyj0exaioijkv1qilcjhbgcioijiuzi1nij99sss.yallashot.us/playerv2.php?match=match9&key=c0ae1abba6eebd7e6cc5b88b1d2B71547",
+          "id": "stream_koraplus_695222019_1",
+          "source": "koraplus",
+          "quality": "SD",
+          "channel": "Starzplay",
+          "url": "https://koraplus.blog/kooracity/",
           "priority": 2
+        },
+        {
+          "id": "stream_koraplus_695222019_2",
+          "source": "koraplus",
+          "quality": "SD",
+          "channel": "Starzplay",
+          "url": "https://koraplus.blog/koora-live/",
+          "priority": 3
+        },
+        {
+          "id": "stream_sportsonline_1456938780",
+          "source": "sportsonline",
+          "quality": "HD",
+          "channel": "hd8",
+          "url": "https://sprtsonline.click/channels/hd/hd8.php",
+          "priority": 3
+        },
+        {
+          "id": "stream_sportsonline_1456938780",
+          "source": "sportsonline",
+          "quality": "HD",
+          "channel": "sporttv3",
+          "url": "https://sprtsonline.click/channels/pt/sporttv3.php",
+          "priority": 3
         }
-      ],
-      "poster_url": "/posters/695222019.jpg"
+      ]
     },
     {
       "id": 1778728221,
@@ -115,15 +153,62 @@
           "priority": 1
         },
         {
-          "id": "stream_siiir_1778728221",
-          "source": "siiir",
-          "quality": "VIP",
-          "channel": "VIP Server",
-          "url": "https://eyj0exaioijkv1qilcjhbgcioijiuzi1nij99sss.yallashot.us/playerv2.php?match=match9&key=c0ae1abba6eebd7e6cc5b88b1d2B71547",
+          "id": "stream_koraplus_1778728221_0",
+          "source": "koraplus",
+          "quality": "HD",
+          "channel": "beIN SPORTS HD 1",
+          "url": "https://pl.gomatch-live.com/albaplayer/1bein1/",
+          "priority": 1
+        },
+        {
+          "id": "stream_koraplus_1778728221_1",
+          "source": "koraplus",
+          "quality": "SD",
+          "channel": "beIN SPORTS HD 1",
+          "url": "https://koraplus.blog/kooracity/",
           "priority": 2
+        },
+        {
+          "id": "stream_koraplus_1778728221_2",
+          "source": "koraplus",
+          "quality": "SD",
+          "channel": "beIN SPORTS HD 1",
+          "url": "https://koraplus.blog/koora-live/",
+          "priority": 3
+        },
+        {
+          "id": "stream_sportsonline_762493618",
+          "source": "sportsonline",
+          "quality": "HD",
+          "channel": "hd1",
+          "url": "https://sprtsonline.click/channels/hd/hd1.php",
+          "priority": 3
+        },
+        {
+          "id": "stream_sportsonline_762493618",
+          "source": "sportsonline",
+          "quality": "HD",
+          "channel": "hd7",
+          "url": "https://sprtsonline.click/channels/hd/hd7.php",
+          "priority": 3
+        },
+        {
+          "id": "stream_sportsonline_762493618",
+          "source": "sportsonline",
+          "quality": "HD",
+          "channel": "eleven2",
+          "url": "https://sprtsonline.click/channels/pt/eleven2.php",
+          "priority": 3
+        },
+        {
+          "id": "stream_sportsonline_762493618",
+          "source": "sportsonline",
+          "quality": "HD",
+          "channel": "br5",
+          "url": "https://sprtsonline.click/channels/bra/br5.php",
+          "priority": 3
         }
-      ],
-      "poster_url": "/posters/1778728221.jpg"
+      ]
     },
     {
       "id": 1734079948,
@@ -156,15 +241,46 @@
           "priority": 1
         },
         {
-          "id": "stream_siiir_1734079948",
-          "source": "siiir",
-          "quality": "VIP",
-          "channel": "VIP Server",
-          "url": "https://eyj0exaioijkv1qilcjhbgcioijiuzi1nij99sss.yallashot.us/playerv2.php?match=match5&key=c0ae1abba6eebd7e6cc5b88b1d2B71547",
+          "id": "stream_koraplus_1734079948_0",
+          "source": "koraplus",
+          "quality": "HD",
+          "channel": "beIN Sports 5 HD",
+          "url": "https://koraplus.blog/kooracity/",
+          "priority": 1
+        },
+        {
+          "id": "stream_koraplus_1734079948_1",
+          "source": "koraplus",
+          "quality": "SD",
+          "channel": "beIN Sports 5 HD",
+          "url": "https://koraplus.blog/koora-live/",
           "priority": 2
+        },
+        {
+          "id": "stream_sportsonline_820803388",
+          "source": "sportsonline",
+          "quality": "HD",
+          "channel": "hd11",
+          "url": "https://sprtsonline.click/channels/hd/hd11.php",
+          "priority": 3
+        },
+        {
+          "id": "stream_sportsonline_820803388",
+          "source": "sportsonline",
+          "quality": "HD",
+          "channel": "eleven3",
+          "url": "https://sprtsonline.click/channels/pt/eleven3.php",
+          "priority": 3
+        },
+        {
+          "id": "stream_sportsonline_820803388",
+          "source": "sportsonline",
+          "quality": "HD",
+          "channel": "br6",
+          "url": "https://sprtsonline.click/channels/bra/br6.php",
+          "priority": 3
         }
-      ],
-      "poster_url": "/posters/1734079948.jpg"
+      ]
     },
     {
       "id": 844502225,
@@ -197,15 +313,62 @@
           "priority": 1
         },
         {
-          "id": "stream_siiir_844502225",
-          "source": "siiir",
-          "quality": "VIP",
-          "channel": "VIP Server",
-          "url": "https://eyj0exaioijkv1qilcjhbgcioijiuzi1nij99sss.yallashot.us/playerv2.php?match=match3&key=c0ae1abba6eebd7e6cc5b88b1d2B71547",
+          "id": "stream_koraplus_844502225_1",
+          "source": "koraplus",
+          "quality": "SD",
+          "channel": "beIN Sports 3 HD",
+          "url": "https://koraplus.blog/kooracity/",
           "priority": 2
+        },
+        {
+          "id": "stream_koraplus_844502225_2",
+          "source": "koraplus",
+          "quality": "SD",
+          "channel": "beIN Sports 3 HD",
+          "url": "https://koraplus.blog/koora-live/",
+          "priority": 3
+        },
+        {
+          "id": "stream_sportsonline_1415016821",
+          "source": "sportsonline",
+          "quality": "HD",
+          "channel": "hd5",
+          "url": "https://sprtsonline.click/channels/hd/hd5.php",
+          "priority": 3
+        },
+        {
+          "id": "stream_sportsonline_1415016821",
+          "source": "sportsonline",
+          "quality": "HD",
+          "channel": "hd3",
+          "url": "https://sprtsonline.click/channels/hd/hd3.php",
+          "priority": 3
+        },
+        {
+          "id": "stream_sportsonline_1415016821",
+          "source": "sportsonline",
+          "quality": "HD",
+          "channel": "hd9",
+          "url": "https://sprtsonline.click/channels/hd/hd9.php",
+          "priority": 3
+        },
+        {
+          "id": "stream_sportsonline_1415016821",
+          "source": "sportsonline",
+          "quality": "HD",
+          "channel": "sporttv5",
+          "url": "https://sprtsonline.click/channels/pt/sporttv5.php",
+          "priority": 3
+        },
+        {
+          "id": "stream_sportsonline_1415016821",
+          "source": "sportsonline",
+          "quality": "HD",
+          "channel": "br4",
+          "url": "https://sprtsonline.click/channels/bra/br4.php",
+          "priority": 3
         }
-      ],
-      "poster_url": "/posters/844502225.jpg"
+      ]
     },
     {
       "id": 1523463289,
@@ -238,15 +401,54 @@
           "priority": 1
         },
         {
-          "id": "stream_siiir_1523463289",
-          "source": "siiir",
-          "quality": "VIP",
-          "channel": "VIP Server",
-          "url": "https://eyj0exaioijkv1qilcjhbgcioijiuzi1nij99sss.yallashot.us/playerv2.php?match=match4&key=c0ae1abba6eebd7e6cc5b88b1d2B71547",
+          "id": "stream_koraplus_1523463289_1",
+          "source": "koraplus",
+          "quality": "SD",
+          "channel": "beIN SPORTS HD 4",
+          "url": "https://koraplus.blog/kooracity/",
           "priority": 2
+        },
+        {
+          "id": "stream_koraplus_1523463289_2",
+          "source": "koraplus",
+          "quality": "SD",
+          "channel": "beIN SPORTS HD 4",
+          "url": "https://koraplus.blog/koora-live/",
+          "priority": 3
+        },
+        {
+          "id": "stream_sportsonline_1561926572",
+          "source": "sportsonline",
+          "quality": "HD",
+          "channel": "hd2",
+          "url": "https://sprtsonline.click/channels/hd/hd2.php",
+          "priority": 3
+        },
+        {
+          "id": "stream_sportsonline_1561926572",
+          "source": "sportsonline",
+          "quality": "HD",
+          "channel": "hd6",
+          "url": "https://sprtsonline.click/channels/hd/hd6.php",
+          "priority": 3
+        },
+        {
+          "id": "stream_sportsonline_1561926572",
+          "source": "sportsonline",
+          "quality": "HD",
+          "channel": "eleven1",
+          "url": "https://sprtsonline.click/channels/pt/eleven1.php",
+          "priority": 3
+        },
+        {
+          "id": "stream_sportsonline_1561926572",
+          "source": "sportsonline",
+          "quality": "HD",
+          "channel": "br3",
+          "url": "https://sprtsonline.click/channels/bra/br3.php",
+          "priority": 3
         }
-      ],
-      "poster_url": "/posters/1523463289.jpg"
+      ]
     },
     {
       "id": 1690220622,
@@ -277,9 +479,24 @@
           "channel": "arryadia",
           "url": "https://pl.gomatch-live.com/albaplayer/arryadia/",
           "priority": 1
+        },
+        {
+          "id": "stream_koraplus_1690220622_1",
+          "source": "koraplus",
+          "quality": "SD",
+          "channel": "الرياضية المغربية (3)",
+          "url": "https://koraplus.blog/kooracity/",
+          "priority": 2
+        },
+        {
+          "id": "stream_koraplus_1690220622_2",
+          "source": "koraplus",
+          "quality": "SD",
+          "channel": "الرياضية المغربية (3)",
+          "url": "https://koraplus.blog/koora-live/",
+          "priority": 3
         }
-      ],
-      "poster_url": "/posters/1690220622.jpg"
+      ]
     },
     {
       "id": 1309783146,
@@ -312,21 +529,60 @@
           "priority": 1
         },
         {
-          "id": "stream_siiir_1309783146",
-          "source": "siiir",
-          "quality": "VIP",
-          "channel": "VIP Server",
-          "url": "https://eyj0exaioijkv1qilcjhbgcioijiuzi1nij99sss.yallashot.us/playerv2.php?match=match3&key=c0ae1abba6eebd7e6cc5b88b1d2B71547",
+          "id": "stream_koraplus_1309783146_1",
+          "source": "koraplus",
+          "quality": "SD",
+          "channel": "beIN Sports 3 HD",
+          "url": "https://koraplus.blog/kooracity/",
           "priority": 2
+        },
+        {
+          "id": "stream_koraplus_1309783146_2",
+          "source": "koraplus",
+          "quality": "SD",
+          "channel": "beIN Sports 3 HD",
+          "url": "https://koraplus.blog/koora-live/",
+          "priority": 3
+        },
+        {
+          "id": "stream_sportsonline_250489228",
+          "source": "sportsonline",
+          "quality": "HD",
+          "channel": "hd1",
+          "url": "https://sprtsonline.click/channels/hd/hd1.php",
+          "priority": 3
+        },
+        {
+          "id": "stream_sportsonline_250489228",
+          "source": "sportsonline",
+          "quality": "HD",
+          "channel": "hd3",
+          "url": "https://sprtsonline.click/channels/hd/hd3.php",
+          "priority": 3
+        },
+        {
+          "id": "stream_sportsonline_250489228",
+          "source": "sportsonline",
+          "quality": "HD",
+          "channel": "eleven1",
+          "url": "https://sprtsonline.click/channels/pt/eleven1.php",
+          "priority": 3
+        },
+        {
+          "id": "stream_sportsonline_250489228",
+          "source": "sportsonline",
+          "quality": "HD",
+          "channel": "br3",
+          "url": "https://sprtsonline.click/channels/bra/br3.php",
+          "priority": 3
         }
-      ],
-      "poster_url": "/posters/1309783146.jpg"
+      ]
     },
     {
       "id": 962397780,
       "date": "2026-02-18T18:15:00.000Z",
       "timestamp": 1771438500,
-      "status": "LIVE",
+      "status": "FT",
       "time": "18:15",
       "time_label": "18:15 GMT",
       "league": {
@@ -353,21 +609,52 @@
           "priority": 1
         },
         {
-          "id": "stream_siiir_962397780",
-          "source": "siiir",
-          "quality": "VIP",
-          "channel": "VIP Server",
-          "url": "https://eyj0exaioijkv1qilcjhbgcioijiuzi1nij99sss.yallashot.us/playerv2.php?match=match2&key=c0ae1abba6eebd7e6cc5b88b1d2B71547",
+          "id": "stream_koraplus_962397780_0",
+          "source": "koraplus",
+          "quality": "HD",
+          "channel": "Bein Sports HD2",
+          "url": "https://2.wwwkoora.com/albaplayer/bein-sports-hd-2/",
+          "priority": 1
+        },
+        {
+          "id": "stream_koraplus_962397780_1",
+          "source": "koraplus",
+          "quality": "SD",
+          "channel": "Bein Sports HD2",
+          "url": "https://koraplus.blog/kooracity/",
           "priority": 2
+        },
+        {
+          "id": "stream_koraplus_962397780_2",
+          "source": "koraplus",
+          "quality": "SD",
+          "channel": "Bein Sports HD2",
+          "url": "https://koraplus.blog/koora-live/",
+          "priority": 3
+        },
+        {
+          "id": "stream_sportsonline_1589760762",
+          "source": "sportsonline",
+          "quality": "HD",
+          "channel": "hd4",
+          "url": "https://sprtsonline.click/channels/hd/hd4.php",
+          "priority": 3
+        },
+        {
+          "id": "stream_sportsonline_1589760762",
+          "source": "sportsonline",
+          "quality": "HD",
+          "channel": "br1",
+          "url": "https://sprtsonline.click/channels/bra/br1.php",
+          "priority": 3
         }
-      ],
-      "poster_url": "/posters/962397780.jpg"
+      ]
     },
     {
       "id": 982617644,
       "date": "2026-02-18T18:15:00.000Z",
       "timestamp": 1771438500,
-      "status": "LIVE",
+      "status": "FT",
       "time": "18:15",
       "time_label": "18:15 GMT",
       "league": {
@@ -377,7 +664,7 @@
       },
       "home": {
         "name": "الأهلي",
-        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/01/8200.png"
+        "logo": "https://koraplus.blog/wp-content/uploads/2026/02/8946-5.png"
       },
       "away": {
         "name": "سباهان",
@@ -392,83 +679,86 @@
           "channel": "bein6",
           "url": "https://pl.gomatch-live.com/albaplayer/bein6/",
           "priority": 1
+        },
+        {
+          "id": "stream_koraplus_982617644_0",
+          "source": "koraplus",
+          "quality": "HD",
+          "channel": "الكأس 7",
+          "url": "https://2.wwwkoora.com/albaplayer/bein-sports-hd-6/",
+          "priority": 1
+        },
+        {
+          "id": "stream_koraplus_982617644_1",
+          "source": "koraplus",
+          "quality": "SD",
+          "channel": "الكأس 7",
+          "url": "https://koraplus.blog/kooracity/",
+          "priority": 2
+        },
+        {
+          "id": "stream_koraplus_982617644_2",
+          "source": "koraplus",
+          "quality": "SD",
+          "channel": "الكأس 7",
+          "url": "https://koraplus.blog/koora-live/",
+          "priority": 3
         }
-      ],
-      "poster_url": "/posters/982617644.jpg"
+      ]
     },
     {
       "id": 1508755264,
-      "date": "2026-02-18T20:12:11.000Z",
-      "timestamp": 1771445531,
-      "status": "NS",
-      "time": "20:12",
-      "time_label": "20:12 GMT",
+      "date": "2026-02-18T16:30:00.000Z",
+      "timestamp": 1771432200,
+      "status": "FT",
+      "time": "16:30",
+      "time_label": "16:30 GMT",
       "league": {
-        "name": "بطولة عالمية",
-        "country": "World",
-        "logo": "https://a.espncdn.com/combiner/i?img=/i/leaguelogos/soccer/500/4.png&h=40&w=40"
+        "name": "آسيا, دوري أبطال الخليج للأندية",
+        "country": "Asia",
+        "logo": "https://a.espncdn.com/combiner/i?img=/i/leaguelogos/soccer/500/209.png&h=40&w=40"
       },
       "home": {
         "name": "العين",
-        "logo": ""
+        "logo": "https://www.korah.live/wp-content/uploads/2026/02/8353.png"
       },
       "away": {
         "name": "القادسية",
-        "logo": ""
+        "logo": "https://www.korah.live/wp-content/uploads/2026/02/10292.png"
       },
       "score": null,
-      "streams": [
-        {
-          "id": "stream_%d8%a7%d9%84%d8%b9%d9%8a%d9%86-%d9%88-%d8%a7%d9%84%d9%82%d8%a7%d8%af%d8%b3%d9%8a%d8%a9_1508755264",
-          "source": "korah",
-          "quality": "HD",
-          "channel": "%d8%a7%d9%84%d8%b9%d9%8a%d9%86-%d9%88-%d8%a7%d9%84%d9%82%d8%a7%d8%af%d8%b3%d9%8a%d8%a9",
-          "url": "https://www.korah.live/matches/%d8%a7%d9%84%d8%b9%d9%8a%d9%86-%d9%88-%d8%a7%d9%84%d9%82%d8%a7%d8%af%d8%b3%d9%8a%d8%a9/",
-          "priority": 1
-        }
-      ],
-      "poster_url": "/posters/1508755264.jpg"
+      "streams": []
     },
     {
       "id": 173822439,
-      "date": "2026-02-18T20:12:11.000Z",
-      "timestamp": 1771445531,
-      "status": "NS",
-      "time": "20:12",
-      "time_label": "20:12 GMT",
+      "date": "2026-02-18T17:30:00.000Z",
+      "timestamp": 1771435800,
+      "status": "FT",
+      "time": "17:30",
+      "time_label": "17:30 GMT",
       "league": {
-        "name": "بطولة عالمية",
-        "country": "World",
-        "logo": "https://a.espncdn.com/combiner/i?img=/i/leaguelogos/soccer/500/4.png&h=40&w=40"
+        "name": "آسيا, دوري أبطال الخليج للأندية",
+        "country": "Asia",
+        "logo": "https://a.espncdn.com/combiner/i?img=/i/leaguelogos/soccer/500/209.png&h=40&w=40"
       },
       "home": {
         "name": "زاخو",
-        "logo": ""
+        "logo": "https://www.korah.live/wp-content/uploads/2026/02/11273.png"
       },
       "away": {
         "name": "سترة",
-        "logo": ""
+        "logo": "https://www.korah.live/wp-content/uploads/2026/02/16940.png"
       },
       "score": null,
-      "streams": [
-        {
-          "id": "stream_%d8%b2%d8%a7%d8%ae%d9%88-%d9%88-%d8%b3%d8%aa%d8%b1%d8%a9_173822439",
-          "source": "korah",
-          "quality": "HD",
-          "channel": "%d8%b2%d8%a7%d8%ae%d9%88-%d9%88-%d8%b3%d8%aa%d8%b1%d8%a9",
-          "url": "https://www.korah.live/matches/%d8%b2%d8%a7%d8%ae%d9%88-%d9%88-%d8%b3%d8%aa%d8%b1%d8%a9/",
-          "priority": 1
-        }
-      ],
-      "poster_url": "/posters/173822439.jpg"
+      "streams": []
     },
     {
       "id": 2139338206,
-      "date": "2026-02-18T20:15:00.000Z",
-      "timestamp": 1771445700,
-      "status": "NS",
-      "time": "20:15",
-      "time_label": "20:15 GMT",
+      "date": "2026-02-18T20:44:41.000Z",
+      "timestamp": 1771447481,
+      "status": "LIVE",
+      "time": "20:44",
+      "time_label": "20:44 GMT",
       "league": {
         "name": "أوروبا, دوري أبطال اوروبا - بلاي اوف",
         "country": "Europe",
@@ -483,16 +773,32 @@
         "logo": "https://koraplus.blog/wp-content/uploads/2026/02/232.png"
       },
       "score": null,
-      "streams": [],
-      "poster_url": "/posters/2139338206.jpg"
+      "streams": [
+        {
+          "id": "stream_koraplus_2139338206_0",
+          "source": "koraplus",
+          "quality": "HD",
+          "channel": "beIN SPORTS HD 4",
+          "url": "https://koraplus.blog/kooracity/",
+          "priority": 1
+        },
+        {
+          "id": "stream_koraplus_2139338206_1",
+          "source": "koraplus",
+          "quality": "SD",
+          "channel": "beIN SPORTS HD 4",
+          "url": "https://koraplus.blog/koora-live/",
+          "priority": 2
+        }
+      ]
     },
     {
       "id": 1228430536,
-      "date": "2026-02-18T20:11:11.000Z",
-      "timestamp": 1771445471,
+      "date": "2026-02-18T20:44:41.000Z",
+      "timestamp": 1771447481,
       "status": "FT",
-      "time": "20:11",
-      "time_label": "20:11 GMT",
+      "time": "20:44",
+      "time_label": "20:44 GMT",
       "league": {
         "name": "آسيا, دوري أبطال الخليج للأندية",
         "country": "Asia",
@@ -507,16 +813,32 @@
         "logo": "https://koraplus.blog/wp-content/uploads/2026/02/78083.png"
       },
       "score": null,
-      "streams": [],
-      "poster_url": "/posters/1228430536.jpg"
+      "streams": [
+        {
+          "id": "stream_koraplus_1228430536_0",
+          "source": "koraplus",
+          "quality": "HD",
+          "channel": "الكأس 2 HD",
+          "url": "https://koraplus.blog/kooracity/",
+          "priority": 1
+        },
+        {
+          "id": "stream_koraplus_1228430536_1",
+          "source": "koraplus",
+          "quality": "SD",
+          "channel": "الكأس 2 HD",
+          "url": "https://koraplus.blog/koora-live/",
+          "priority": 2
+        }
+      ]
     },
     {
       "id": 1465852383,
-      "date": "2026-02-18T20:11:11.000Z",
-      "timestamp": 1771445471,
+      "date": "2026-02-18T20:44:41.000Z",
+      "timestamp": 1771447481,
       "status": "FT",
-      "time": "20:11",
-      "time_label": "20:11 GMT",
+      "time": "20:44",
+      "time_label": "20:44 GMT",
       "league": {
         "name": "آسيا, دوري أبطال آسيا 2 - دور الـ 16",
         "country": "Asia",
@@ -531,8 +853,32 @@
         "logo": "https://koraplus.blog/wp-content/uploads/2026/02/8248-3.png"
       },
       "score": null,
-      "streams": [],
-      "poster_url": "/posters/1465852383.jpg"
+      "streams": [
+        {
+          "id": "stream_koraplus_1465852383_0",
+          "source": "koraplus",
+          "quality": "HD",
+          "channel": "beIN Sports 5 HD",
+          "url": "https://y5.alkoora.live/albaplayer/ad-sport-2/",
+          "priority": 1
+        },
+        {
+          "id": "stream_koraplus_1465852383_1",
+          "source": "koraplus",
+          "quality": "SD",
+          "channel": "beIN Sports 5 HD",
+          "url": "https://koraplus.blog/kooracity/",
+          "priority": 2
+        },
+        {
+          "id": "stream_koraplus_1465852383_2",
+          "source": "koraplus",
+          "quality": "SD",
+          "channel": "beIN Sports 5 HD",
+          "url": "https://koraplus.blog/koora-live/",
+          "priority": 3
+        }
+      ]
     }
   ]
 }

@@ -221,23 +221,31 @@ class KoraplusScraper {
             let timestamp;
             let timeLabel = '';
 
-            // User says site is GMT+2. Subtract 2 to get GMT.
+            // Parse both 12h (AM/PM) and 24h formats, then convert from GMT+2 to GMT.
             if (match.time && match.time.includes(':')) {
                 try {
-                    const timeMatch = match.time.match(/(\d+):?(\d+)?\s*(AM|PM)/i);
-                    if (timeMatch) {
-                        let hours = parseInt(timeMatch[1]);
-                        const minutes = timeMatch[2] ? parseInt(timeMatch[2]) : 0;
-                        const ampm = timeMatch[3].toUpperCase();
+                    let hours = null;
+                    let minutes = null;
 
+                    const twelveHour = match.time.match(/(\d{1,2}):(\d{2})\s*(AM|PM)/i);
+                    if (twelveHour) {
+                        hours = parseInt(twelveHour[1], 10);
+                        minutes = parseInt(twelveHour[2], 10);
+                        const ampm = twelveHour[3].toUpperCase();
                         if (ampm === 'PM' && hours < 12) hours += 12;
                         if (ampm === 'AM' && hours === 12) hours = 0;
+                    } else {
+                        const twentyFourHour = match.time.match(/(\d{1,2}):(\d{2})/);
+                        if (twentyFourHour) {
+                            hours = parseInt(twentyFourHour[1], 10);
+                            minutes = parseInt(twentyFourHour[2], 10);
+                        }
+                    }
 
+                    if (hours !== null && minutes !== null) {
                         const date = new Date();
-                        // GMT+2 to UTC -> hours - 2
                         date.setUTCHours(hours - 2, minutes, 0, 0);
                         timestamp = Math.floor(date.getTime() / 1000);
-
                         timeLabel = date.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit', timeZone: 'UTC' });
                     }
                 } catch (e) {
@@ -258,32 +266,50 @@ class KoraplusScraper {
             // Determine status
             let status = 'NS';
             if (match.statusText) {
-                if (match.statusText.includes('جارية') || match.statusText.includes('بث مباشر')) status = 'LIVE';
-                if (match.statusText.includes('انتهت')) status = 'FT';
+                const statusText = String(match.statusText).toLowerCase();
+                if (statusText.includes('live') || statusText.includes('مباشر') || statusText.includes('جارية')) status = 'LIVE';
+                if (statusText.includes('ft') || statusText.includes('finished') || statusText.includes('انته')) status = 'FT';
             }
 
             const streams = [];
-            // Handle multiple player URLs
+            const seenUrls = new Set();
+            const pushStream = (stream, fallbackIndex = 0) => {
+                if (!stream || !stream.url || seenUrls.has(stream.url)) return;
+                seenUrls.add(stream.url);
+                streams.push({
+                    id: stream.id || `stream_koraplus_${stableId}_${fallbackIndex}`,
+                    source: 'koraplus',
+                    quality: stream.quality || (fallbackIndex === 0 ? 'HD' : 'SD'),
+                    channel: stream.channel || match.channel || `Server ${fallbackIndex + 1}`,
+                    url: stream.url,
+                    priority: Number.isFinite(stream.priority) ? stream.priority : fallbackIndex + 1
+                });
+            };
+
+            // Prefer extracted streams from scrape loop.
+            if (Array.isArray(match.streams) && match.streams.length) {
+                match.streams.forEach((stream, idx) => pushStream(stream, idx));
+            }
+
+            // Fallback for legacy field.
             if (match.playerUrl && Array.isArray(match.playerUrl)) {
                 match.playerUrl.forEach((url, idx) => {
-                    streams.push({
+                    pushStream({
                         id: `stream_koraplus_${stableId}_${idx}`,
-                        source: 'koraplus',
                         quality: idx === 0 ? 'HD' : 'SD',
                         channel: match.channel || `Server ${idx + 1}`,
                         url: url,
                         priority: idx + 1
-                    });
+                    }, streams.length + idx);
                 });
             } else if (match.playerUrl) {
-                streams.push({
+                pushStream({
                     id: `stream_koraplus_${stableId}`,
-                    source: 'koraplus',
                     quality: 'HD',
                     channel: match.channel || 'Koraplus',
                     url: match.playerUrl,
                     priority: 1
-                });
+                }, streams.length);
             }
 
             return {
