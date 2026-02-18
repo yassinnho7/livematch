@@ -24,14 +24,26 @@ jobs:
         with:
           node-version: '20'
           cache: 'npm'
+
+      - name: Cache Puppeteer Browser
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/puppeteer
+          key: ${{ runner.os }}-puppeteer-${{ hashFiles('package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-puppeteer-
       
       - name: Install System Dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install -y libgbm-dev libasound2 libnss3 libatk1.0-0 libatk-bridge2.0-0 libcups2 libdrm2 libxkbcommon0 libxcomposite1 libxdamage1 libxrandr2 libpangocairo-1.0-0 libpango-1.0-0 build-essential libcairo2-dev libpango1.0-dev libjpeg-dev libgif-dev librsvg2-dev
+          sudo apt-get install -y --no-install-recommends libgbm-dev libasound2 libnss3 libatk1.0-0 libatk-bridge2.0-0 libcups2 libdrm2 libxkbcommon0 libxcomposite1 libxdamage1 libxrandr2 libpangocairo-1.0-0 libpango-1.0-0 build-essential libcairo2-dev libpango1.0-dev libjpeg-dev libgif-dev librsvg2-dev
           
       - name: Install Node Dependencies
-        run: npm install puppeteer puppeteer-extra puppeteer-extra-plugin-stealth canvas
+        env:
+          PUPPETEER_CACHE_DIR: ~/.cache/puppeteer
+          PUPPETEER_SKIP_DOWNLOAD: 'false'
+        run: |
+          npm ci --no-audit --no-fund --prefer-offline
       
       - name: Download Arabic Font (Cairo)
         run: |
