@@ -107,30 +107,87 @@ class KoraplusScraper {
                     await page.goto(match.matchUrl, { waitUntil: 'domcontentloaded', timeout: 30000 });
 
                     const playerUrl = await page.evaluate(() => {
-                        // Search for iframeUrl in scripts
+                        const playerUrls = [];
+
+                        // Strategy 1: Search for iframeUrl in scripts
                         const scripts = Array.from(document.querySelectorAll('script'));
                         for (const script of scripts) {
                             const content = script.innerText;
-                            const match = content.match(/var\s+iframeUrl\s*=\s*['"]([^'"]+)['"]/);
-                            if (match && match[1]) {
-                                return match[1];
+
+                            // Match var iframeUrl = '...'
+                            let match = content.match(/var\s+iframeUrl\s*=\s*['"]([^'"]+)['"]/);
+                            if (match && match[1] && !playerUrls.includes(match[1])) {
+                                playerUrls.push(match[1]);
+                            }
+
+                            // Match src="...albaplayer..."
+                            const srcMatches = content.match(/src=["']([^"']*albaplayer[^"']*)["']/gi);
+                            if (srcMatches) {
+                                srcMatches.forEach(m => {
+                                    const urlMatch = m.match(/["']([^"']+)[""]/);
+                                    if (urlMatch && urlMatch[1] && !playerUrls.includes(urlMatch[1])) {
+                                        playerUrls.push(urlMatch[1]);
+                                    }
+                                });
+                            }
+
+                            // Match live4.php or splayer links
+                            const splayerMatches = content.match(/https?:\/\/[^\s"'<>]+\.(?:php|html)[^\s"'<>]*/gi);
+                            if (splayerMatches) {
+                                splayerMatches.forEach(url => {
+                                    if ((url.includes('splayer') || url.includes('live4') || url.includes('koora')) &&
+                                        !playerUrls.includes(url)) {
+                                        playerUrls.push(url);
+                                    }
+                                });
                             }
                         }
 
-                        // Fallback to searching for iframe src in placeholder
-                        const iframe = document.querySelector('#iframe-placeholder iframe');
-                        if (iframe && iframe.src) return iframe.src;
+                        // Strategy 2: Search for iframes
+                        const iframes = document.querySelectorAll('iframe');
+                        for (const iframe of iframes) {
+                            const src = iframe.src || iframe.getAttribute('data-src');
+                            if (src && (src.includes('player') || src.includes('albaplayer') || src.includes('splayer') || src.includes('koora')) &&
+                                !playerUrls.includes(src)) {
+                                playerUrls.push(src);
+                            }
+                        }
 
-                        return null;
+                        // Strategy 3: Search for links with player keywords
+                        const links = document.querySelectorAll('a[href*="player"], a[href*="albaplayer"], a[href*="splayer"], a[href*="koora"]');
+                        for (const link of links) {
+                            const href = link.href;
+                            if (href && !playerUrls.includes(href)) {
+                                playerUrls.push(href);
+                            }
+                        }
+
+                        return playerUrls.length > 0 ? playerUrls : null;
                     });
 
-                    if (playerUrl) {
-                        console.log(`✨ Found player: ${playerUrl}`);
-                        match.playerUrl = playerUrl;
+                    if (playerUrl && playerUrl.length > 0) {
+                        console.log(`✨ Found ${playerUrl.length} player(s) for: ${match.homeTeam} vs ${match.awayTeam}`);
+
+                        // Generate stable ID for the match
+                        const dateStr = new Date().toISOString().split('T')[0];
+                        const uniqueString = `${dateStr}-${match.homeTeam}-${match.awayTeam}`;
+                        const matchStableId = this.generateMatchHash(uniqueString);
+
+                        // Add all found player URLs as streams
+                        match.streams = [];
+                        playerUrl.forEach((url, idx) => {
+                            match.streams.push({
+                                id: `stream_koraplus_${matchStableId}_${idx}`,
+                                source: 'koraplus',
+                                quality: idx === 0 ? 'HD' : 'SD',
+                                channel: match.channel || `Server ${idx + 1}`,
+                                url: url,
+                                priority: idx + 1
+                            });
+                        });
                         finalMatches.push(match);
                     } else {
                         console.log(`⚠️ No player URL found for this match.`);
-                        // Even without player URL, we might want to keep the match info for metadata
                         finalMatches.push(match);
                     }
                 } catch (err) {
@@ -206,7 +263,19 @@ class KoraplusScraper {
             }
 
             const streams = [];
-            if (match.playerUrl) {
+            // Handle multiple player URLs
+            if (match.playerUrl && Array.isArray(match.playerUrl)) {
+                match.playerUrl.forEach((url, idx) => {
+                    streams.push({
+                        id: `stream_koraplus_${stableId}_${idx}`,
+                        source: 'koraplus',
+                        quality: idx === 0 ? 'HD' : 'SD',
+                        channel: match.channel || `Server ${idx + 1}`,
+                        url: url,
+                        priority: idx + 1
+                    });
+                });
+            } else if (match.playerUrl) {
                 streams.push({
                     id: `stream_koraplus_${stableId}`,
                     source: 'koraplus',
