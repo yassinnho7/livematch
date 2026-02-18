@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-02-18T18:36:20.456Z",
+  "generated_at": "2026-02-18T19:28:00.561Z",
   "count": 15,
   "matches": [
     {
@@ -30,14 +30,6 @@
           "quality": "HD",
           "channel": "bein3",
           "url": "https://pl.gomatch-live.com/albaplayer/bein3",
-          "priority": 1
-        },
-        {
-          "id": "stream_koraplus_1309783146",
-          "source": "koraplus",
-          "quality": "HD",
-          "channel": "beIN Sports 3 HD",
-          "url": "https://pl.gomatch-live.com/albaplayer/bein3/",
           "priority": 1
         },
         {
@@ -82,14 +74,6 @@
           "priority": 1
         },
         {
-          "id": "stream_koraplus_962397780",
-          "source": "koraplus",
-          "quality": "HD",
-          "channel": "Bein Sports HD2",
-          "url": "https://2.wwwkoora.com/albaplayer/bein-sports-hd-2/",
-          "priority": 1
-        },
-        {
           "id": "stream_siiir_962397780",
           "source": "siiir",
           "quality": "VIP",
@@ -129,14 +113,6 @@
           "channel": "bein6",
           "url": "https://pl.gomatch-live.com/albaplayer/bein6",
           "priority": 1
-        },
-        {
-          "id": "stream_koraplus_982617644",
-          "source": "koraplus",
-          "quality": "HD",
-          "channel": "الكأس 7",
-          "url": "https://2.wwwkoora.com/albaplayer/bein-sports-hd-6/",
-          "priority": 1
         }
       ],
       "poster_url": "/posters/982617644.jpg"
@@ -145,7 +121,7 @@
       "id": 1323733339,
       "date": "2026-02-18T19:00:00.000Z",
       "timestamp": 1771441200,
-      "status": "NS",
+      "status": "LIVE",
       "time": "19:00",
       "time_label": "19:00 GMT",
       "league": {
@@ -172,12 +148,12 @@
           "priority": 1
         },
         {
-          "id": "stream_koraplus_1323733339",
-          "source": "koraplus",
-          "quality": "HD",
-          "channel": "غير معروف",
-          "url": "https://pl.gomatch-live.com/albaplayer/ch1/",
-          "priority": 1
+          "id": "stream_siiir_1323733339",
+          "source": "siiir",
+          "quality": "VIP",
+          "channel": "VIP Server",
+          "url": "https://eyj0exaioijkv1qilcjhbgcioijiuzi1nij99sss.yallashot.us/playerv2.php?match=match8&key=c0ae1abba6eebd7e6cc5b88b1d2B71547",
+          "priority": 2
         }
       ],
       "poster_url": "/posters/1323733339.jpg"
@@ -196,11 +172,11 @@
       },
       "home": {
         "name": "ميلان",
-        "logo": "https://www.korah.live/wp-content/uploads/2026/02/227.png"
+        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/02/227.png"
       },
       "away": {
         "name": "كومو",
-        "logo": "https://www.korah.live/wp-content/uploads/2026/02/6117.png"
+        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/02/6117.png"
       },
       "score": null,
       "streams": [
@@ -213,12 +189,12 @@
           "priority": 1
         },
         {
-          "id": "stream_koraplus_695222019",
-          "source": "koraplus",
-          "quality": "HD",
-          "channel": "Starzplay",
-          "url": "https://pl.gomatch-live.com/albaplayer/ad-premium-1/",
-          "priority": 1
+          "id": "stream_siiir_695222019",
+          "source": "siiir",
+          "quality": "VIP",
+          "channel": "VIP Server",
+          "url": "https://eyj0exaioijkv1qilcjhbgcioijiuzi1nij99sss.yallashot.us/playerv2.php?match=match9&key=c0ae1abba6eebd7e6cc5b88b1d2B71547",
+          "priority": 2
         }
       ],
       "poster_url": "/posters/695222019.jpg"
@@ -237,11 +213,11 @@
       },
       "home": {
         "name": "بودو جليمت",
-        "logo": "https://www.korah.live/wp-content/uploads/2026/02/1978.png"
+        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/02/1978.png"
       },
       "away": {
         "name": "إنتر ميلان",
-        "logo": "https://www.korah.live/wp-content/uploads/2026/02/224.png"
+        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/01/224.png"
       },
       "score": null,
       "streams": [
@@ -254,12 +230,12 @@
           "priority": 1
         },
         {
-          "id": "stream_koraplus_1778728221",
-          "source": "koraplus",
-          "quality": "HD",
-          "channel": "beIN SPORTS HD 1",
-          "url": "https://pl.gomatch-live.com/albaplayer/1bein1/",
-          "priority": 1
+          "id": "stream_siiir_1778728221",
+          "source": "siiir",
+          "quality": "VIP",
+          "channel": "VIP Server",
+          "url": "https://eyj0exaioijkv1qilcjhbgcioijiuzi1nij99sss.yallashot.us/playerv2.php?match=match9&key=c0ae1abba6eebd7e6cc5b88b1d2B71547",
+          "priority": 2
         }
       ],
       "poster_url": "/posters/1778728221.jpg"
@@ -278,11 +254,11 @@
       },
       "home": {
         "name": "وولفرهامبتون",
-        "logo": "https://www.korah.live/wp-content/uploads/2026/02/15.png"
+        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/01/15.png"
       },
       "away": {
         "name": "أرسنال",
-        "logo": "https://www.korah.live/wp-content/uploads/2026/02/104.png"
+        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/01/104.png"
       },
       "score": null,
       "streams": [
@@ -293,6 +269,14 @@
           "channel": "bein5",
           "url": "https://pl.gomatch-live.com/albaplayer/bein5",
           "priority": 1
+        },
+        {
+          "id": "stream_siiir_1734079948",
+          "source": "siiir",
+          "quality": "VIP",
+          "channel": "VIP Server",
+          "url": "https://eyj0exaioijkv1qilcjhbgcioijiuzi1nij99sss.yallashot.us/playerv2.php?match=match5&key=c0ae1abba6eebd7e6cc5b88b1d2B71547",
+          "priority": 2
         }
       ],
       "poster_url": "/posters/1734079948.jpg"
@@ -311,11 +295,11 @@
       },
       "home": {
         "name": "أولمبياكوس",
-        "logo": "https://www.korah.live/wp-content/uploads/2026/02/1023.png"
+        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/02/1023.png"
       },
       "away": {
         "name": "باير ليفركوزن",
-        "logo": "https://www.korah.live/wp-content/uploads/2026/02/333.png"
+        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/01/333.png"
       },
       "score": null,
       "streams": [
@@ -325,14 +309,6 @@
           "quality": "HD",
           "channel": "bein3",
           "url": "https://pl.gomatch-live.com/albaplayer/bein3",
-          "priority": 1
-        },
-        {
-          "id": "stream_koraplus_844502225",
-          "source": "koraplus",
-          "quality": "HD",
-          "channel": "beIN Sports 3 HD",
-          "url": "https://pl.gomatch-live.com/albaplayer/bein3/",
           "priority": 1
         },
         {
@@ -360,11 +336,11 @@
       },
       "home": {
         "name": "كلوب بروج",
-        "logo": "https://www.korah.live/wp-content/uploads/2026/02/1169.png"
+        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/02/1169.png"
       },
       "away": {
         "name": "أتلتيكو مدريد",
-        "logo": "https://www.korah.live/wp-content/uploads/2026/02/134.png"
+        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/01/134.png"
       },
       "score": null,
       "streams": [
@@ -377,12 +353,12 @@
           "priority": 1
         },
         {
-          "id": "stream_koraplus_1523463289",
-          "source": "koraplus",
-          "quality": "HD",
-          "channel": "beIN SPORTS HD 4",
-          "url": "https://pl.gomatch-live.com/albaplayer/bein4/",
-          "priority": 1
+          "id": "stream_siiir_1523463289",
+          "source": "siiir",
+          "quality": "VIP",
+          "channel": "VIP Server",
+          "url": "https://eyj0exaioijkv1qilcjhbgcioijiuzi1nij99sss.yallashot.us/playerv2.php?match=match4&key=c0ae1abba6eebd7e6cc5b88b1d2B71547",
+          "priority": 2
         }
       ],
       "poster_url": "/posters/1523463289.jpg"
@@ -416,97 +392,83 @@
           "channel": "arryadia",
           "url": "https://pl.gomatch-live.com/albaplayer/arryadia",
           "priority": 1
-        },
-        {
-          "id": "stream_koraplus_1690220622",
-          "source": "koraplus",
-          "quality": "HD",
-          "channel": "الرياضية المغربية (3)",
-          "url": "https://pl.gomatch-live.com/albaplayer/arryadia/",
-          "priority": 1
         }
       ],
       "poster_url": "/posters/1690220622.jpg"
     },
     {
-      "id": 1508755264,
-      "date": "2026-02-18T16:30:00.000Z",
-      "timestamp": 1771432200,
-      "status": "LIVE",
-      "time": "16:30",
-      "time_label": "16:30 GMT",
-      "league": {
-        "name": "آسيا, دوري أبطال الخليج للأندية",
-        "country": "Asia",
-        "logo": "https://a.espncdn.com/combiner/i?img=/i/leaguelogos/soccer/500/209.png&h=40&w=40"
-      },
-      "home": {
-        "name": "العين",
-        "logo": "https://www.korah.live/wp-content/uploads/2026/02/8353.png"
-      },
-      "away": {
-        "name": "القادسية",
-        "logo": "https://www.korah.live/wp-content/uploads/2026/02/10292.png"
-      },
-      "score": {
-        "home": 0,
-        "away": 0
-      },
-      "streams": [
-        {
-          "id": "stream_%d8%a7%d9%84%d8%b9%d9%8a%d9%86-%d9%88-%d8%a7%d9%84%d9%82%d8%a7%d8%af%d8%b3%d9%8a%d8%a9_1508755264",
-          "source": "korah",
-          "quality": "HD",
-          "channel": "%d8%a7%d9%84%d8%b9%d9%8a%d9%86-%d9%88-%d8%a7%d9%84%d9%82%d8%a7%d8%af%d8%b3%d9%8a%d8%a9",
-          "url": "https://pl.kooralive.fit/albaplayer/%d8%a7%d9%84%d8%b9%d9%8a%d9%86-%d9%88-%d8%a7%d9%84%d9%82%d8%a7%d8%af%d8%b3%d9%8a%d8%a9",
-          "priority": 1
-        }
-      ],
-      "poster_url": "/posters/1508755264.jpg"
-    },
-    {
       "id": 173822439,
-      "date": "2026-02-18T17:30:00.000Z",
-      "timestamp": 1771435800,
-      "status": "LIVE",
-      "time": "17:30",
-      "time_label": "17:30 GMT",
+      "date": "2026-02-18T19:27:17.000Z",
+      "timestamp": 1771442837,
+      "status": "NS",
+      "time": "19:27",
+      "time_label": "19:27 GMT",
       "league": {
-        "name": "آسيا, دوري أبطال الخليج للأندية",
-        "country": "Asia",
-        "logo": "https://a.espncdn.com/combiner/i?img=/i/leaguelogos/soccer/500/209.png&h=40&w=40"
+        "name": "بطولة عالمية",
+        "country": "World",
+        "logo": "https://a.espncdn.com/combiner/i?img=/i/leaguelogos/soccer/500/4.png&h=40&w=40"
       },
       "home": {
         "name": "زاخو",
-        "logo": "https://www.korah.live/wp-content/uploads/2026/02/11273.png"
+        "logo": ""
       },
       "away": {
         "name": "سترة",
-        "logo": "https://www.korah.live/wp-content/uploads/2026/02/16940.png"
+        "logo": ""
       },
-      "score": {
-        "home": 0,
-        "away": 0
-      },
+      "score": null,
       "streams": [
         {
           "id": "stream_%d8%b2%d8%a7%d8%ae%d9%88-%d9%88-%d8%b3%d8%aa%d8%b1%d8%a9_173822439",
           "source": "korah",
           "quality": "HD",
           "channel": "%d8%b2%d8%a7%d8%ae%d9%88-%d9%88-%d8%b3%d8%aa%d8%b1%d8%a9",
-          "url": "https://pl.kooralive.fit/albaplayer/%d8%b2%d8%a7%d8%ae%d9%88-%d9%88-%d8%b3%d8%aa%d8%b1%d8%a9",
+          "url": "https://www.korah.live/matches/%d8%b2%d8%a7%d8%ae%d9%88-%d9%88-%d8%b3%d8%aa%d8%b1%d8%a9/",
           "priority": 1
         }
       ],
       "poster_url": "/posters/173822439.jpg"
     },
     {
+      "id": 1508755264,
+      "date": "2026-02-18T19:27:17.000Z",
+      "timestamp": 1771442837,
+      "status": "NS",
+      "time": "19:27",
+      "time_label": "19:27 GMT",
+      "league": {
+        "name": "بطولة عالمية",
+        "country": "World",
+        "logo": "https://a.espncdn.com/combiner/i?img=/i/leaguelogos/soccer/500/4.png&h=40&w=40"
+      },
+      "home": {
+        "name": "العين",
+        "logo": ""
+      },
+      "away": {
+        "name": "القادسية",
+        "logo": ""
+      },
+      "score": null,
+      "streams": [
+        {
+          "id": "stream_%d8%a7%d9%84%d8%b9%d9%8a%d9%86-%d9%88-%d8%a7%d9%84%d9%82%d8%a7%d8%af%d8%b3%d9%8a%d8%a9_1508755264",
+          "source": "korah",
+          "quality": "HD",
+          "channel": "%d8%a7%d9%84%d8%b9%d9%8a%d9%86-%d9%88-%d8%a7%d9%84%d9%82%d8%a7%d8%af%d8%b3%d9%8a%d8%a9",
+          "url": "https://www.korah.live/matches/%d8%a7%d9%84%d8%b9%d9%8a%d9%86-%d9%88-%d8%a7%d9%84%d9%82%d8%a7%d8%af%d8%b3%d9%8a%d8%a9/",
+          "priority": 1
+        }
+      ],
+      "poster_url": "/posters/1508755264.jpg"
+    },
+    {
       "id": 1228430536,
-      "date": "2026-02-18T18:35:04.000Z",
-      "timestamp": 1771439704,
+      "date": "2026-02-18T19:26:18.000Z",
+      "timestamp": 1771442778,
       "status": "LIVE",
-      "time": "18:35",
-      "time_label": "18:35 GMT",
+      "time": "19:26",
+      "time_label": "19:26 GMT",
       "league": {
         "name": "آسيا, دوري أبطال الخليج للأندية",
         "country": "Asia",
@@ -550,11 +512,11 @@
     },
     {
       "id": 1465852383,
-      "date": "2026-02-18T18:35:04.000Z",
-      "timestamp": 1771439704,
+      "date": "2026-02-18T19:26:18.000Z",
+      "timestamp": 1771442778,
       "status": "FT",
-      "time": "18:35",
-      "time_label": "18:35 GMT",
+      "time": "19:26",
+      "time_label": "19:26 GMT",
       "league": {
         "name": "آسيا, دوري أبطال آسيا 2 - دور الـ 16",
         "country": "Asia",
@@ -569,16 +531,7 @@
         "logo": "https://koraplus.blog/wp-content/uploads/2026/02/8248-3.png"
       },
       "score": null,
-      "streams": [
-        {
-          "id": "stream_koraplus_1465852383",
-          "source": "koraplus",
-          "quality": "HD",
-          "channel": "beIN Sports 5 HD",
-          "url": "https://y5.alkoora.live/albaplayer/ad-sport-2/",
-          "priority": 1
-        }
-      ],
+      "streams": [],
       "poster_url": "/posters/1465852383.jpg"
     }
   ]
