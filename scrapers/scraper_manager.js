@@ -136,17 +136,19 @@ class ScraperManager {
             const sHome = clean(sMatch.home.name);
             const sAway = clean(sMatch.away.name);
 
-            const isDuplicate = primary.some(pMatch => {
+            const pIndex = primary.findIndex(pMatch => {
                 const pHome = clean(pMatch.home.name);
                 const pAway = clean(pMatch.away.name);
                 return (pHome === sHome && pAway === sAway) || (pHome === sAway && pAway === sHome);
             });
 
-            if (!isDuplicate) {
+            if (pIndex === -1) {
                 unified.push(sMatch);
             } else {
-                // If it exists in both, we keep the primary but could potentially merge attributes
-                // For now, primary (LiveKora) is kept if it exists.
+                // If it exists in both, keep the primary but prioritize Korah's high-accuracy logo
+                if (sMatch.home.logo) unified[pIndex].home.logo = sMatch.home.logo;
+                if (sMatch.away.logo) unified[pIndex].away.logo = sMatch.away.logo;
+                console.log(`🖼️ Applied high-accuracy logo from Korah for ${unified[pIndex].home.name} vs ${unified[pIndex].away.name}`);
             }
         });
 

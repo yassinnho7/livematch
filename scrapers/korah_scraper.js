@@ -131,74 +131,55 @@ class KorahScraper {
             const matches = await page.evaluate((foundSelector) => {
                 const results = [];
 
-                // Strategy 1: Try various match-specific links
-                const matchCards = document.querySelectorAll('a[title*=" و "], a[title*=" vs "], a[href*="/matches/"]');
+                // Strategy 1: Accurate extraction from match cards
+                const matchCards = document.querySelectorAll('.AY_Match');
 
                 if (matchCards.length > 0) {
-                    console.log(`Found ${matchCards.length} potential match elements`);
-
                     matchCards.forEach((card, index) => {
                         try {
-                            const title = card.getAttribute('title') || '';
-                            const href = card.href || '';
-                            if (!href.includes('/matches/')) return;
+                            const linkEl = card.querySelector('a[href*="/matches/"]');
+                            if (!linkEl) return;
 
-                            let homeTeam = '', awayTeam = '';
+                            const href = linkEl.href || '';
+                            const title = linkEl.getAttribute('title') || '';
 
-                            // Try to parse title
-                            // Example: "بث مباشر مباراة العين و القادسية كورة لايف koora live"
-                            if (title.includes(' مباراة ') && (title.includes(' و ') || title.includes(' vs '))) {
-                                let matchPart = title.split(' مباراة ')[1];
-                                if (matchPart.includes(' كورة لايف ')) {
-                                    matchPart = matchPart.split(' كورة لايف ')[0];
-                                }
+                            // Team Names
+                            const homeNameEl = card.querySelector('.TM1 .TM_Name');
+                            const awayNameEl = card.querySelector('.TM2 .TM_Name');
+                            let homeTeam = homeNameEl?.innerText?.trim() || '';
+                            let awayTeam = awayNameEl?.innerText?.trim() || '';
 
-                                if (matchPart.includes(' و ')) {
-                                    [homeTeam, awayTeam] = matchPart.split(' و ').map(t => t.trim());
-                                } else if (matchPart.includes(' vs ')) {
-                                    [homeTeam, awayTeam] = matchPart.split(' vs ').map(t => t.trim());
-                                }
-                            } else if (title.includes(' vs ')) {
-                                [homeTeam, awayTeam] = title.split(' vs ').map(t => t.trim());
-                            } else if (title.includes(' و ')) {
-                                [homeTeam, awayTeam] = title.split(' و ').map(t => t.trim());
-                            }
-
-                            // If title parsing failed, try href slug
+                            // Fallback to title parsing if name elements are empty
                             if (!homeTeam || !awayTeam) {
-                                try {
-                                    const urlObj = new URL(href);
-                                    let slug = decodeURIComponent(urlObj.pathname).replace(/^\/|\/$/g, '').split('/').pop();
-                                    if (slug.includes('-و-')) {
-                                        [homeTeam, awayTeam] = slug.split('-و-').map(t => t.replace(/-/g, ' ').trim());
-                                    } else if (slug.includes('-vs-')) {
-                                        [homeTeam, awayTeam] = slug.split('-vs-').map(t => t.replace(/-/g, ' ').trim());
+                                if (title.includes(' مباراة ') && (title.includes(' و ') || title.includes(' vs '))) {
+                                    let matchPart = title.split(' مباراة ')[1];
+                                    if (matchPart.includes(' كورة لايف ')) {
+                                        matchPart = matchPart.split(' كورة لايف ')[0];
                                     }
-                                } catch (e) { }
+                                    if (matchPart.includes(' و ')) {
+                                        [homeTeam, awayTeam] = matchPart.split(' و ').map(t => t.trim());
+                                    } else if (matchPart.includes(' vs ')) {
+                                        [homeTeam, awayTeam] = matchPart.split(' vs ').map(t => t.trim());
+                                    }
+                                }
                             }
 
                             if (!homeTeam || !awayTeam) return;
 
-                            // Team logos
-                            const teamLogos = card.querySelectorAll('img');
-                            const homeLogo = teamLogos[0]?.src || '';
-                            const awayLogo = teamLogos[1]?.src || '';
+                            // Team Logos (Very accurate from Korah.live)
+                            const homeLogoEl = card.querySelector('.TM1 .TM_Logo img');
+                            const awayLogoEl = card.querySelector('.TM2 .TM_Logo img');
 
-                            // Time - try multiple selectors
-                            const timeEl = card.querySelector('#match-time') ||
-                                card.querySelector('.match-time') ||
-                                card.querySelector('[data-time]') ||
-                                card.querySelector('.time');
+                            // Prefer data-src (lazy load) or src
+                            const homeLogo = homeLogoEl?.getAttribute('data-src') || homeLogoEl?.src || '';
+                            const awayLogo = awayLogoEl?.getAttribute('data-src') || awayLogoEl?.src || '';
+
+                            // Time (Saudi Time GMT+3)
+                            const timeEl = card.querySelector('.MT_Time');
                             const timeText = timeEl?.innerText?.trim() || '';
 
-                            // ISO timestamp
-                            const dateEl = card.querySelector('.date[data-start]') ||
-                                card.querySelector('[data-start]');
-                            const isoTimestamp = dateEl?.getAttribute('data-start') || '';
-
                             // Status
-                            const statusEl = card.querySelector('.match-status') ||
-                                card.querySelector('.status');
+                            const statusEl = card.querySelector('.MT_Stat');
                             let status = 'NS';
                             if (statusEl) {
                                 const statusText = statusEl.innerText?.trim() || '';
@@ -210,26 +191,22 @@ class KorahScraper {
                             }
 
                             // Score
-                            const scoreEl = card.querySelector('.match-score') ||
-                                card.querySelector('.score');
+                            const scoreEl = card.querySelector('.MT_Result');
                             const scoreText = scoreEl?.innerText?.trim() || '';
 
-                            // League
-                            let leagueName = 'بطولة عالمية';
-                            const leagueEl = card.querySelector('.match-info li:nth-child(3)') ||
-                                card.querySelector('.match-info li:last-child') ||
-                                card.querySelector('.league') ||
-                                card.querySelector('.championship');
-                            if (leagueEl) {
-                                leagueName = leagueEl.innerText?.trim() || leagueName;
-                            }
-
-                            // Channel
+                            // Info (Channel, Commentator, League)
+                            const infoItems = card.querySelectorAll('.MT_Info li span');
                             let channelName = '';
-                            const channelEl = card.querySelector('.match-info li:first-child') ||
-                                card.querySelector('.channel');
-                            if (channelEl) {
-                                channelName = channelEl.innerText?.trim() || '';
+                            let leagueName = 'بطولة عالمية';
+
+                            if (infoItems.length >= 1) {
+                                channelName = infoItems[0].innerText?.trim() || '';
+                            }
+                            if (infoItems.length >= 3) {
+                                leagueName = infoItems[2].innerText?.trim() || leagueName;
+                            } else if (infoItems.length === 2) {
+                                // Sometimes league is the second item if commentator is missing
+                                leagueName = infoItems[1].innerText?.trim() || leagueName;
                             }
 
                             // Stream link
@@ -255,26 +232,19 @@ class KorahScraper {
                                         channel: channelName,
                                         status,
                                         time: timeText,
-                                        isoTimestamp,
                                         score: scoreText,
                                         streamLink: processedStreamLink
                                     });
-                                } else {
-                                    console.warn(`⚠️ Skipping match ${homeTeam} vs ${awayTeam}: No channel slug found.`);
                                 }
-                            } catch (e) {
-                                console.warn('⚠️ Could not transform URL:', streamLink);
-                            }
+                            } catch (e) { }
                         } catch (error) {
                             console.error('Error parsing match:', error.message);
                         }
                     });
                 }
 
-                // Strategy 2: If no matches found yet, try generic link extraction
+                // Strategy 2: Fallback (only if no matches found)
                 if (results.length === 0) {
-                    console.log('Trying generic match link extraction...');
-
                     const allLinks = document.querySelectorAll('a[href*="/matches/"]');
                     allLinks.forEach((link, index) => {
                         try {
@@ -285,26 +255,9 @@ class KorahScraper {
                             if (title.includes(' و ')) {
                                 const matchPart = title.split(' مباراة ')?.pop()?.split(' كورة ')?.[0] || title;
                                 [homeTeam, awayTeam] = matchPart.split(' و ').map(t => t.trim());
-                            } else {
-                                try {
-                                    const slug = decodeURIComponent(new URL(href).pathname).replace(/^\/|\/$/g, '').split('/').pop();
-                                    if (slug.includes('-و-')) {
-                                        [homeTeam, awayTeam] = slug.split('-و-').map(t => t.replace(/-/g, ' ').trim());
-                                    }
-                                } catch (e) { }
                             }
 
                             if (homeTeam && awayTeam) {
-                                let processedStreamLink = href;
-                                try {
-                                    const urlObj = new URL(href);
-                                    const cleanPath = urlObj.pathname.replace(/^\/|\/$/g, '');
-                                    const channelSlug = cleanPath.split('/').pop();
-                                    if (channelSlug && channelSlug.length > 1) {
-                                        processedStreamLink = `https://pl.kooralive.fit/albaplayer/${channelSlug}`;
-                                    }
-                                } catch (e) { }
-
                                 results.push({
                                     id: 200000 + 1000 + index + 1,
                                     homeTeam,
@@ -315,9 +268,8 @@ class KorahScraper {
                                     channel: '',
                                     status: 'NS',
                                     time: '',
-                                    isoTimestamp: '',
                                     score: '',
-                                    streamLink: processedStreamLink
+                                    streamLink: href
                                 });
                             }
                         } catch (e) { }
@@ -368,17 +320,23 @@ class KorahScraper {
 
             if (match.time && match.time.includes(':')) {
                 try {
-                    const timeMatch = match.time.match(/(\d+):(\d+)/);
+                    const timeMatch = match.time.match(/(\d+):(\d+)\s*(AM|PM)/i);
                     if (timeMatch) {
                         let hours = parseInt(timeMatch[1]);
                         const minutes = parseInt(timeMatch[2]);
+                        const ampm = timeMatch[3].toUpperCase();
 
-                        // Create date object for TODAY with this time
+                        if (ampm === 'PM' && hours < 12) hours += 12;
+                        if (ampm === 'AM' && hours === 12) hours = 0;
+
+                        // Create date object for TODAY
                         const date = new Date();
-                        date.setUTCHours(hours - 1, minutes, 0, 0); // Assume scraped time is GMT+1, so -1 to get GMT
+                        // Site is Saudi Time (GMT+3). To get UTC: hours - 3
+                        date.setUTCHours(hours - 3, minutes, 0, 0);
 
                         timestamp = Math.floor(date.getTime() / 1000);
                     } else {
+                        // Fallback if regex fails but colon exists
                         timestamp = Math.floor(Date.now() / 1000);
                     }
                 } catch (e) {
