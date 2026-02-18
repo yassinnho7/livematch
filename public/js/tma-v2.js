@@ -585,7 +585,8 @@ function mountServersBanner() {
     if (!els.serversBanner) return;
     if (!state.serverBannerMounted) state.serverBannerMounted = true;
     clearNode(els.serversBanner);
-    mountBannerWithRetry(els.serversBanner, "15d1ca482efd28581d78b70b9bb40556", 468, 60, "ad-frame-468");
+    const dynamicWidth = getDynamicBannerWidth(els.serversBanner, 468, 320);
+    mountBannerWithRetry(els.serversBanner, "15d1ca482efd28581d78b70b9bb40556", dynamicWidth, 60, "ad-frame-468");
 }
 
 function mountBannerWithRetry(container, key, width, height, frameClass, attempt = 1) {
@@ -628,12 +629,29 @@ function fitBannerOnMobile(frame, width, height) {
     const iframe = frame.querySelector("iframe");
     if (!iframe) return;
 
+    if (frame.classList.contains("ad-frame-468")) {
+        iframe.style.transform = "none";
+        iframe.style.width = "100%";
+        iframe.style.maxWidth = `${width}px`;
+        iframe.style.height = `${height}px`;
+        iframe.style.display = "block";
+        iframe.style.margin = "0 auto";
+        frame.style.minHeight = `${height + 8}px`;
+        return;
+    }
+
     const maxWidth = frame.clientWidth - 8;
     const ratio = Math.min(1, maxWidth / width);
     iframe.style.transformOrigin = "top center";
     iframe.style.transform = `scale(${ratio})`;
     iframe.style.display = "block";
     frame.style.minHeight = `${Math.ceil(height * ratio) + 8}px`;
+}
+
+function getDynamicBannerWidth(container, max, min) {
+    const available = Math.floor(container.clientWidth || 0) - 12;
+    const safe = Math.max(min, Math.min(max, available || max));
+    return safe;
 }
 
 function syncBackButton() {
