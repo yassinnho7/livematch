@@ -1,53 +1,12 @@
 {
-  "generated_at": "2026-02-18T17:45:58.432Z",
+  "generated_at": "2026-02-18T18:36:20.456Z",
   "count": 15,
   "matches": [
-    {
-      "id": 1690220622,
-      "date": "2026-02-18T16:00:00.000Z",
-      "timestamp": 1771430400,
-      "status": "LIVE",
-      "time": "16:00",
-      "time_label": "16:00 GMT",
-      "league": {
-        "name": "المغرب, الدوري المغربي",
-        "country": "Morocco",
-        "logo": "https://cdn-icons-png.flaticon.com/512/1378/1378598.png"
-      },
-      "home": {
-        "name": "نهضة الزمامرة",
-        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/01/49266.png"
-      },
-      "away": {
-        "name": "نهضة بركان",
-        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/01/9974.png"
-      },
-      "score": null,
-      "streams": [
-        {
-          "id": "stream_arryadia_1690220622",
-          "source": "livekora",
-          "quality": "HD",
-          "channel": "arryadia",
-          "url": "https://pl.gomatch-live.com/albaplayer/arryadia",
-          "priority": 1
-        },
-        {
-          "id": "stream_koraplus_1690220622",
-          "source": "koraplus",
-          "quality": "HD",
-          "channel": "الرياضية المغربية (3)",
-          "url": "https://pl.gomatch-live.com/albaplayer/arryadia/",
-          "priority": 1
-        }
-      ],
-      "poster_url": "/posters/1690220622.jpg"
-    },
     {
       "id": 1309783146,
       "date": "2026-02-18T17:45:00.000Z",
       "timestamp": 1771436700,
-      "status": "NS",
+      "status": "LIVE",
       "time": "17:45",
       "time_label": "17:45 GMT",
       "league": {
@@ -96,7 +55,7 @@
       "id": 962397780,
       "date": "2026-02-18T18:15:00.000Z",
       "timestamp": 1771438500,
-      "status": "NS",
+      "status": "LIVE",
       "time": "18:15",
       "time_label": "18:15 GMT",
       "league": {
@@ -145,7 +104,7 @@
       "id": 982617644,
       "date": "2026-02-18T18:15:00.000Z",
       "timestamp": 1771438500,
-      "status": "NS",
+      "status": "LIVE",
       "time": "18:15",
       "time_label": "18:15 GMT",
       "league": {
@@ -429,6 +388,47 @@
       "poster_url": "/posters/1523463289.jpg"
     },
     {
+      "id": 1690220622,
+      "date": "2026-02-18T16:00:00.000Z",
+      "timestamp": 1771430400,
+      "status": "FT",
+      "time": "16:00",
+      "time_label": "16:00 GMT",
+      "league": {
+        "name": "المغرب, الدوري المغربي",
+        "country": "Morocco",
+        "logo": "https://cdn-icons-png.flaticon.com/512/1378/1378598.png"
+      },
+      "home": {
+        "name": "نهضة الزمامرة",
+        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/01/49266.png"
+      },
+      "away": {
+        "name": "نهضة بركان",
+        "logo": "https://pub-9099b5bec5c7424e97829a0fd8a31977.r2.dev/wp-content/uploads/2026/01/9974.png"
+      },
+      "score": null,
+      "streams": [
+        {
+          "id": "stream_arryadia_1690220622",
+          "source": "livekora",
+          "quality": "HD",
+          "channel": "arryadia",
+          "url": "https://pl.gomatch-live.com/albaplayer/arryadia",
+          "priority": 1
+        },
+        {
+          "id": "stream_koraplus_1690220622",
+          "source": "koraplus",
+          "quality": "HD",
+          "channel": "الرياضية المغربية (3)",
+          "url": "https://pl.gomatch-live.com/albaplayer/arryadia/",
+          "priority": 1
+        }
+      ],
+      "poster_url": "/posters/1690220622.jpg"
+    },
+    {
       "id": 1508755264,
       "date": "2026-02-18T16:30:00.000Z",
       "timestamp": 1771432200,
@@ -502,11 +502,11 @@
     },
     {
       "id": 1228430536,
-      "date": "2026-02-18T17:44:41.000Z",
-      "timestamp": 1771436681,
+      "date": "2026-02-18T18:35:04.000Z",
+      "timestamp": 1771439704,
       "status": "LIVE",
-      "time": "17:44",
-      "time_label": "17:44 GMT",
+      "time": "18:35",
+      "time_label": "18:35 GMT",
       "league": {
         "name": "آسيا, دوري أبطال الخليج للأندية",
         "country": "Asia",
@@ -525,12 +525,36 @@
       "poster_url": "/posters/1228430536.jpg"
     },
     {
+      "id": 2139338206,
+      "date": "2026-02-18T20:15:00.000Z",
+      "timestamp": 1771445700,
+      "status": "NS",
+      "time": "20:15",
+      "time_label": "20:15 GMT",
+      "league": {
+        "name": "أوروبا, دوري أبطال اوروبا - بلاي اوف",
+        "country": "Europe",
+        "logo": "https://cdn-icons-png.flaticon.com/512/1378/1378598.png"
+      },
+      "home": {
+        "name": "بوروسيا دورتموند",
+        "logo": "https://koraplus.blog/wp-content/uploads/2026/02/341.png"
+      },
+      "away": {
+        "name": "أتالانتا",
+        "logo": "https://koraplus.blog/wp-content/uploads/2026/02/232.png"
+      },
+      "score": null,
+      "streams": [],
+      "poster_url": "/posters/2139338206.jpg"
+    },
+    {
       "id": 1465852383,
-      "date": "2026-02-18T17:44:41.000Z",
-      "timestamp": 1771436681,
-      "status": "LIVE",
-      "time": "17:44",
-      "time_label": "17:44 GMT",
+      "date": "2026-02-18T18:35:04.000Z",
+      "timestamp": 1771439704,
+      "status": "FT",
+      "time": "18:35",
+      "time_label": "18:35 GMT",
       "league": {
         "name": "آسيا, دوري أبطال آسيا 2 - دور الـ 16",
         "country": "Asia",
@@ -556,30 +580,6 @@
         }
       ],
       "poster_url": "/posters/1465852383.jpg"
-    },
-    {
-      "id": 2139338206,
-      "date": "2026-02-18T20:15:00.000Z",
-      "timestamp": 1771445700,
-      "status": "NS",
-      "time": "20:15",
-      "time_label": "20:15 GMT",
-      "league": {
-        "name": "أوروبا, دوري أبطال اوروبا - بلاي اوف",
-        "country": "Europe",
-        "logo": "https://cdn-icons-png.flaticon.com/512/1378/1378598.png"
-      },
-      "home": {
-        "name": "بوروسيا دورتموند",
-        "logo": "https://koraplus.blog/wp-content/uploads/2026/02/341.png"
-      },
-      "away": {
-        "name": "أتالانتا",
-        "logo": "https://koraplus.blog/wp-content/uploads/2026/02/232.png"
-      },
-      "score": null,
-      "streams": [],
-      "poster_url": "/posters/2139338206.jpg"
     }
   ]
 }
