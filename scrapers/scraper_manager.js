@@ -49,7 +49,8 @@ class ScraperManager {
         console.log(`✅ Unified match list: ${combinedMatches.length} matches total.`);
 
         const siiirStreams = await this.siiir.scrapeMatches().catch(() => []);
-        const finalMatches = this.mergeAllStreams(combinedMatches, siiirStreams);
+        const mergedMatches = this.mergeAllStreams(combinedMatches, siiirStreams);
+        const finalMatches = this.filterOutFinishedAndStaleMatches(mergedMatches);
 
         await this.saveMatches(finalMatches);
         return finalMatches;
@@ -218,16 +219,20 @@ class ScraperManager {
     // Only add if the match has streams
     addUniqueMatches(primaryMatches, newMatches) {
         const unified = [...primaryMatches];
+        const now = Math.floor(Date.now() / 1000);
 
         newMatches.forEach((newMatch) => {
             const existingIndex = this.findMatchIndex(unified, newMatch.home.name, newMatch.away.name);
 
             // Only process matches that have at least one stream
             const hasStreams = newMatch.streams && newMatch.streams.length > 0;
+            const isFinished = String(newMatch.status || '').toUpperCase() === 'FT';
+            const timestamp = Number(newMatch.timestamp);
+            const isStale = Number.isFinite(timestamp) && timestamp > 0 && timestamp < (now - (6 * 60 * 60));
 
             if (existingIndex === -1) {
-                // Match doesn't exist - only add if it has streams
-                if (hasStreams) {
+                // Match doesn't exist - only add if it has streams and is not finished/stale
+                if (hasStreams && !isFinished && !isStale) {
                     newMatch.score = null;
                     unified.push(newMatch);
                     console.log(`➕ Added new match with stream: ${newMatch.home.name} vs ${newMatch.away.name}`);
@@ -248,6 +253,19 @@ class ScraperManager {
         });
 
         return unified;
+    }
+
+    filterOutFinishedAndStaleMatches(matches) {
+        const now = Math.floor(Date.now() / 1000);
+        const maxPastSeconds = 6 * 60 * 60;
+        return matches.filter((match) => {
+            const status = String(match.status || '').toUpperCase();
+            if (status === 'FT') return false;
+
+            const ts = Number(match.timestamp);
+            if (!Number.isFinite(ts) || ts <= 0) return true;
+            return ts >= (now - maxPastSeconds);
+        });
     }
 
     // Merge all streams from all sources with proper deduplication
