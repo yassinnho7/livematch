@@ -8,7 +8,13 @@ export default defineConfig({
         rollupOptions: {
             input: {
                 main: 'public/index.html',
-                watch: 'public/watch.html'
+                watch: 'public/watch.html',
+                tma: 'public/tma.html',
+                live: 'public/live.html',
+                news: 'public/news.html',
+                article: 'public/article.html',
+                server: 'public/server.html',
+                'select-server': 'public/select-server.html'
             }
         }
     },
