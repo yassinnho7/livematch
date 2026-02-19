@@ -60,18 +60,23 @@ async function bootstrap() {
 function initTelegram() {
     if (!tg) return;
 
-    tg.ready();
-    tg.expand();
-    if (typeof tg.disableVerticalSwipes === "function") {
-        tg.disableVerticalSwipes();
-    }
-    tg.BackButton.onClick(handleBack);
+    try {
+        tg.ready();
+        tg.expand();
+        if (typeof tg.disableVerticalSwipes === "function") {
+            tg.disableVerticalSwipes();
+        }
+        if (tg.BackButton && typeof tg.BackButton.onClick === "function") {
+            tg.BackButton.onClick(handleBack);
+        }
 
-    if (tg.colorScheme === "dark" || tg.colorScheme === "light") {
-        document.documentElement.setAttribute("data-theme", tg.colorScheme);
+        if (tg.colorScheme === "dark" || tg.colorScheme === "light") {
+            document.documentElement.setAttribute("data-theme", tg.colorScheme);
+        }
+    } catch (e) {
+        console.error("Telegram initialization error:", e);
     }
 }
-
 function bindEvents() {
     els.themeBtn.addEventListener("click", () => {
         toggleTheme();
@@ -147,9 +152,9 @@ async function fetchMatches() {
         renderMatches();
     } catch (_) {
         if (!state.matches.length) {
-            renderError("ØªØ¹Ø°Ø± ØªØ­Ù…ÙŠÙ„ Ø§Ù„Ù…Ø¨Ø§Ø±ÙŠØ§Øª Ø­Ø§Ù„ÙŠØ§");
+            renderError("تعذر تحميل المباريات حاليا");
         }
-        showNote("ÙØ´Ù„ Ø§Ù„ØªØ­Ø¯ÙŠØ«. Ø³ÙŠØªÙ… Ø§Ù„Ù…Ø­Ø§ÙˆÙ„Ø© ØªÙ„Ù‚Ø§Ø¦ÙŠØ§.");
+        showNote("فشل التحديث. سيتم المحاولة تلقائيا.");
     } finally {
         clearTimeout(timeout);
     }
@@ -164,11 +169,11 @@ function normalizeMatch(raw) {
         time: safeString(raw.time, "--:--"),
         timestamp: Number(raw.timestamp) || 0,
         score: normalizeScore(raw.score),
-        leagueName: safeString(raw.league && raw.league.name, "Ø¨Ø·ÙˆÙ„Ø©"),
+        leagueName: safeString(raw.league && raw.league.name, "بطولة"),
         leagueLogo: safeUrl(raw.league && raw.league.logo),
-        homeName: safeString(raw.home && raw.home.name, "Ø§Ù„ÙØ±ÙŠÙ‚ Ø§Ù„Ø£ÙˆÙ„"),
+        homeName: safeString(raw.home && raw.home.name, "الفريق الأول"),
         homeLogo: safeUrl(raw.home && raw.home.logo),
-        awayName: safeString(raw.away && raw.away.name, "Ø§Ù„ÙØ±ÙŠÙ‚ Ø§Ù„Ø«Ø§Ù†ÙŠ"),
+        awayName: safeString(raw.away && raw.away.name, "الفريق الثاني"),
         awayLogo: safeUrl(raw.away && raw.away.logo),
         streams: normalizeStreams(raw.streams)
     };
@@ -193,7 +198,7 @@ function normalizeStreams(streams) {
     return streams
         .map((s, index) => ({
             id: safeString(s && s.id, `stream_${index}`),
-            channel: safeString(s && s.channel, "Ø¨Ø« Ù…Ø¨Ø§Ø´Ø±"),
+            channel: safeString(s && s.channel, "بث مباشر"),
             quality: safeString(s && s.quality, "HD"),
             url: safeUrl(s && s.url)
         }))
@@ -221,7 +226,7 @@ function renderMatches() {
     clearNode(els.matches);
 
     if (!state.matches.length) {
-        renderError("Ù„Ø§ ØªÙˆØ¬Ø¯ Ù…Ø¨Ø§Ø±ÙŠØ§Øª Ù…ØªØ§Ø­Ø© Ø§Ù„Ø¢Ù†");
+        renderError("لا توجد مباريات متاحة الآن");
         return;
     }
 
@@ -236,9 +241,9 @@ function renderMatches() {
     const next = sorted.filter((m) => m.status === "NS");
     const done = sorted.filter((m) => m.status === "FT");
 
-    if (live.length) els.matches.appendChild(createGroup("Ù…Ø¨Ø§Ø´Ø± Ø§Ù„Ø¢Ù†", live));
-    if (next.length) els.matches.appendChild(createGroup("Ù…Ø¨Ø§Ø±ÙŠØ§Øª Ù‚Ø§Ø¯Ù…Ø©", next));
-    if (done.length) els.matches.appendChild(createGroup("Ù…Ø¨Ø§Ø±ÙŠØ§Øª Ù…Ù†ØªÙ‡ÙŠØ©", done));
+    if (live.length) els.matches.appendChild(createGroup("مباشر الآن", live));
+    if (next.length) els.matches.appendChild(createGroup("مباريات قادمة", next));
+    if (done.length) els.matches.appendChild(createGroup("مباريات منتهية", done));
 
     startCountdowns();
     mountBottomBanner();
@@ -276,8 +281,8 @@ function createMatchCard(match) {
     main.appendChild(createTeam(match.awayName, match.awayLogo));
 
     const bottom = createEl("div", "match-bottom");
-    bottom.appendChild(createEl("span", "servers-count", `ðŸ“º ${match.streams.length} Ø³ÙŠØ±ÙØ±`));
-    bottom.appendChild(createEl("button", "watch-pill", "Ø§Ø®ØªÙŠØ§Ø± Ø§Ù„Ø³ÙŠØ±ÙØ±"));
+    bottom.appendChild(createEl("span", "servers-count", `📺 ${match.streams.length} سيرفر`));
+    bottom.appendChild(createEl("button", "watch-pill", "اختيار السيرفر"));
 
     card.appendChild(top);
     card.appendChild(main);
@@ -286,8 +291,8 @@ function createMatchCard(match) {
 }
 
 function createStatus(match) {
-    if (match.status === "LIVE") return createEl("span", "status live", "Ù…Ø¨Ø§Ø´Ø±");
-    if (match.status === "FT") return createEl("span", "status ft", "Ø§Ù†ØªÙ‡Øª");
+    if (match.status === "LIVE") return createEl("span", "status live", "مباشر");
+    if (match.status === "FT") return createEl("span", "status ft", "انتهت");
     return createEl("span", "status", "GMT");
 }
 
@@ -305,7 +310,7 @@ function createCenter(match) {
 
     if (match.status !== "FT") {
         center.appendChild(createEl("div", "time", match.time || "--:--"));
-        center.appendChild(createEl("div", "sub", match.status === "LIVE" ? "Ø¬Ø§Ø±ÙŠØ© Ø§Ù„Ø¢Ù†" : "Ø¨ØªÙˆÙ‚ÙŠØª GMT"));
+        center.appendChild(createEl("div", "sub", match.status === "LIVE" ? "جارية الآن" : "بتوقيت GMT"));
     }
     if (match.timestamp && match.timestamp > Math.floor(Date.now() / 1000)) {
         const countdown = createEl("div", "sub countdown", "--:--:--");
@@ -334,7 +339,7 @@ async function onSelectMatch(matchId) {
 function openServersView() {
     if (!state.selectedMatch) return;
     state.currentView = "servers";
-    els.serversTitle.textContent = `${state.selectedMatch.homeName} Ã— ${state.selectedMatch.awayName}`;
+    els.serversTitle.textContent = `${state.selectedMatch.homeName} × ${state.selectedMatch.awayName}`;
     clearNode(els.serversList);
 
     const streams = (state.selectedMatch.streams || []).filter((stream) => !isBlockedPlaceholderUrl(stream.url));
@@ -344,7 +349,7 @@ function openServersView() {
             createEl(
                 "div",
                 "empty glass",
-                "Ø§Ø¹Ø¯ Ø§Ù„Ù…Ø­Ø§ÙˆÙ„Ø© Ù„Ø§Ø­Ù‚Ø§ØŒ Ø§Ù„Ø³ÙŠØ±ÙØ± ØºÙŠØ± Ù…ØªÙˆÙØ± Ø­Ø§Ù„ÙŠØ§. Ù‚Ø¯ ÙŠØ¸Ù‡Ø± Ø¨Ø¹Ø¯ Ø§Ù„ØªØ­Ø¯ÙŠØ« Ø§Ù„ØªØ§Ù„ÙŠ Ø®Ù„Ø§Ù„ 7 Ø¯Ù‚Ø§Ø¦Ù‚.",
+                "اعد المحاولة لاحقا، السيرفر غير متوفر حاليا. قد يظهر بعد التحديث التالي خلال 7 دقائق.",
             )
         );
     } else {
@@ -353,9 +358,9 @@ function openServersView() {
             item.type = "button";
             item.setAttribute("data-stream-url", stream.url);
 
-            const icon = createEl("span", "server-icon", "ðŸ“º");
+            const icon = createEl("span", "server-icon", "📺");
             const text = createEl("div", "server-text");
-            text.appendChild(createEl("b", "", `Ø³ÙŠØ±ÙØ± ${idx + 1}`));
+            text.appendChild(createEl("b", "", `سيرفر ${idx + 1}`));
             text.appendChild(createEl("span", "", stream.channel));
             const quality = createEl("span", "server-quality", stream.quality);
 
@@ -374,11 +379,11 @@ function openServersView() {
 
 function playStream(url) {
     if (!url) {
-        showNote("Ø±Ø§Ø¨Ø· Ø§Ù„Ø¨Ø« ØºÙŠØ± ØµØ§Ù„Ø­.");
-        return;
+        showNote("رابط البث غير صالح.");
+        showNote("رابط البث غير صالح.");
     }
     if (isBlockedPlaceholderUrl(url)) {
-        showNote("Ø§Ø¹Ø¯ Ø§Ù„Ù…Ø­Ø§ÙˆÙ„Ø© Ù„Ø§Ø­Ù‚Ø§ØŒ Ø§Ù„Ø³ÙŠØ±ÙØ± ØºÙŠØ± Ù…ØªÙˆÙØ± Ø­Ø§Ù„ÙŠØ§.");
+        showNote("اعد المحاولة لاحقا، السيرفر غير متوفر حاليا.");
         return;
     }
 
@@ -412,7 +417,7 @@ function startCountdowns() {
             const h = Math.floor(diff / 3600);
             const m = Math.floor((diff % 3600) / 60);
             const s = diff % 60;
-            el.textContent = `â± ${String(h).padStart(2, "0")}:${String(m).padStart(2, "0")}:${String(s).padStart(2, "0")}`;
+            el.textContent = `⏳ ${String(h).padStart(2, "0")}:${String(m).padStart(2, "0")}:${String(s).padStart(2, "0")}`;
         });
     };
 
@@ -467,13 +472,13 @@ function handleBack() {
 
 function askToExitApp() {
     if (tg && typeof tg.showConfirm === "function") {
-        tg.showConfirm("Ù‡Ù„ ØªØ±ÙŠØ¯ Ø§Ù„Ø®Ø±ÙˆØ¬ Ù…Ù† Ø§Ù„ØªØ·Ø¨ÙŠÙ‚ØŸ", (ok) => {
+        tg.showConfirm("هل تريد الخروج من التطبيق؟", (ok) => {
             if (ok && typeof tg.close === "function") tg.close();
         });
         return;
     }
 
-    const ok = window.confirm("Ù‡Ù„ ØªØ±ÙŠØ¯ Ø§Ù„Ø®Ø±ÙˆØ¬ Ù…Ù† Ø§Ù„ØªØ·Ø¨ÙŠÙ‚ØŸ");
+    const ok = window.confirm("هل تريد الخروج من التطبيق؟");
     if (ok) window.close();
 }
 
@@ -588,7 +593,7 @@ function enablePseudoFullscreen() {
     els.playerView.classList.add("pseudo-fullscreen");
     els.playerView.classList.remove("force-landscape");
     lockOrientation("landscape");
-    showNote("ØªÙ… ØªÙØ¹ÙŠÙ„ ÙˆØ¶Ø¹ Ù…Ø´Ø§Ù‡Ø¯Ø© Ø£ÙÙ‚ÙŠ Ø¨Ø¯ÙŠÙ„.");
+    showNote("تم تفعيل وضع مشاهدة أفقي بديل.");
 }
 
 function disablePseudoFullscreen() {
