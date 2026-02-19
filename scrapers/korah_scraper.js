@@ -198,7 +198,7 @@ class KorahScraper {
                             // Info (Channel, Commentator, League)
                             const infoItems = card.querySelectorAll('.MT_Info li span');
                             let channelName = '';
-                            let leagueName = 'Ø¨Ø·ÙˆÙ„Ø© Ø¹Ø§Ù„Ù…ÙŠØ©';
+                            let leagueName = 'الدوري الأوروبي';
 
                             if (infoItems.length >= 1) {
                                 channelName = infoItems[0].innerText?.trim() || '';
@@ -252,7 +252,7 @@ class KorahScraper {
                                     awayTeam,
                                     homeLogo: '',
                                     awayLogo: '',
-                                    league: 'Ø¨Ø·ÙˆÙ„Ø© Ø¹Ø§Ù„Ù…ÙŠØ©',
+                                    league: 'الدوري الأوروبي',
                                     channel: '',
                                     status: 'NS',
                                     time: '',
