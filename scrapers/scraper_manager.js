@@ -1,4 +1,5 @@
-﻿import LiveKoraScraper from './livekora_scraper.js';
+﻿import KoraOnlineScraper from './koraonline_scraper.js';
+import LiveKoraScraper from './livekora_scraper.js';
 import KorahScraper from './korah_scraper.js';
 import SiiirScraper from './siiir_scraper.js';
 import KoraplusScraper from './koraplus_scraper.js';
@@ -14,6 +15,7 @@ const __dirname = path.dirname(__filename);
 
 class ScraperManager {
     constructor() {
+        this.koraonline = new KoraOnlineScraper();
         this.liveKora = new LiveKoraScraper();
         this.korah = new KorahScraper();
         this.siiir = new SiiirScraper();
@@ -22,26 +24,30 @@ class ScraperManager {
     }
 
     async runFullUpdate() {
-        console.log('ðŸš€ Starting Multi-Source Scrape: Korah.live (Primary) + Koraplus + LiveKora + SportsOnline + Siiir.tv');
+        console.log('ðŸš€ Starting Multi-Source Scrape: Kora-Online.cc (Primary) + Korah.live (Secondary) + Koraplus + LiveKora + SportsOnline + Siiir.tv');
 
-        // First, get Korah as PRIMARY source (matches-today)
-        const [korahMatches, koraplusMatches, liveKoraMatches, sportsonlineMatches] = await Promise.all([
+        // First, get KoraOnline as PRIMARY source (better logos), Korah as secondary
+        const [koraonlineMatches, korahMatches, koraplusMatches, liveKoraMatches, sportsonlineMatches] = await Promise.all([
+            this.koraonline.scrapeMatches().catch((e) => { console.error('KoraOnline Error:', e.message); return []; }),
             this.korah.scrapeMatches().catch((e) => { console.error('Korah Error:', e.message); return []; }),
             this.koraplus.scrapeMatches().catch((e) => { console.error('Koraplus Error:', e.message); return []; }),
             this.liveKora.scrapeMatches().catch((e) => { console.error('LiveKora Error:', e.message); return []; }),
             this.sportsonline.scrapeMatches().catch((e) => { console.error('SportsOnline Error:', e.message); return []; })
         ]);
 
-        console.log(`ðŸ“Š Sources: Korah.live(${korahMatches.length}), Koraplus(${koraplusMatches.length}), LiveKora(${liveKoraMatches.length}), SportsOnline(${sportsonlineMatches.length})`);
+        console.log(`ðŸ“Š Sources: KoraOnline(${koraonlineMatches.length}), Korah.live(${korahMatches.length}), Koraplus(${koraplusMatches.length}), LiveKora(${liveKoraMatches.length}), SportsOnline(${sportsonlineMatches.length})`);
 
-        // Use Korah as primary source for match metadata
-        let combinedMatches = [...korahMatches];
+        // Use KoraOnline as primary source for match metadata
+        let combinedMatches = [...koraonlineMatches];
 
-        // Enrich Korah matches from other sources.
+        // Enrich and add unique matches from Korah.live (now secondary)
+        combinedMatches = this.addUniqueMatches(combinedMatches, korahMatches);
+
+        // Enrich matches from other sources.
         combinedMatches = this.mergeSportsOnline(combinedMatches, koraplusMatches, 'Koraplus');
         combinedMatches = this.mergeSportsOnline(combinedMatches, liveKoraMatches, 'LiveKora');
 
-        // Add unique matches from curated sources when Korah misses them.
+        // Add unique matches from curated sources when primary/secondary misses them.
         combinedMatches = this.addUniqueMatches(combinedMatches, koraplusMatches);
         combinedMatches = this.addUniqueMatches(combinedMatches, liveKoraMatches);
 
