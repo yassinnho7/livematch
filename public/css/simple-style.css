@@ -1,6 +1,7 @@
 /* ============================================
    LiveMatch - CSS v3.0
    Dark/Light theme with comfortable colors
+   Cairo font loaded via Google Fonts CDN in HTML
    ============================================ */
 
 * {
@@ -9,12 +10,6 @@
     box-sizing: border-box;
 }
 
-@font-face {
-    font-family: 'Cairo';
-    src: url('../assets/fonts/Cairo-Bold.ttf') format('truetype');
-    font-weight: 700;
-    font-display: swap;
-}
 
 /* ========================
    CSS VARIABLES (Themes)

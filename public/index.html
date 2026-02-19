@@ -6,8 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>مباريات اليوم - بث مباشر</title>
 
-    <!-- Preload critical assets -->
-    <link rel="preload" href="assets/fonts/Cairo-Bold.ttf" as="font" type="font/ttf" crossorigin>
+    <!-- Preload critical assets (Google Fonts - CDN) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
 
     <!-- DNS Prefetch -->
     <link rel="dns-prefetch" href="https://www.googletagmanager.com">
@@ -20,12 +22,7 @@
             box-sizing: border-box;
         }
 
-        @font-face {
-            font-family: 'Cairo';
-            src: url('assets/fonts/Cairo-Bold.ttf') format('truetype');
-            font-weight: 700;
-            font-display: swap;
-        }
+        /* Cairo font loaded from Google Fonts CDN */
 
         body {
             font-family: 'Cairo', system-ui, -apple-system, sans-serif;
