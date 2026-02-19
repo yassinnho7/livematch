@@ -1,4 +1,4 @@
-import LiveKoraScraper from './livekora_scraper.js';
+﻿import LiveKoraScraper from './livekora_scraper.js';
 import KorahScraper from './korah_scraper.js';
 import SiiirScraper from './siiir_scraper.js';
 import KoraplusScraper from './koraplus_scraper.js';
@@ -22,7 +22,7 @@ class ScraperManager {
     }
 
     async runFullUpdate() {
-        console.log('🚀 Starting Multi-Source Scrape: Korah.live (Primary) + Koraplus + LiveKora + SportsOnline + Siiir.tv');
+        console.log('ðŸš€ Starting Multi-Source Scrape: Korah.live (Primary) + Koraplus + LiveKora + SportsOnline + Siiir.tv');
 
         // First, get Korah as PRIMARY source (matches-today)
         const [korahMatches, koraplusMatches, liveKoraMatches, sportsonlineMatches] = await Promise.all([
@@ -32,20 +32,23 @@ class ScraperManager {
             this.sportsonline.scrapeMatches().catch((e) => { console.error('SportsOnline Error:', e.message); return []; })
         ]);
 
-        console.log(`📊 Sources: Korah.live(${korahMatches.length}), Koraplus(${koraplusMatches.length}), LiveKora(${liveKoraMatches.length}), SportsOnline(${sportsonlineMatches.length})`);
+        console.log(`ðŸ“Š Sources: Korah.live(${korahMatches.length}), Koraplus(${koraplusMatches.length}), LiveKora(${liveKoraMatches.length}), SportsOnline(${sportsonlineMatches.length})`);
 
         // Use Korah as primary source for match metadata
         let combinedMatches = [...korahMatches];
 
-        // Koraplus and LiveKora are streams-only sources now:
-        // they can enrich existing Korah matches but never create new matches.
+        // Enrich Korah matches from other sources.
         combinedMatches = this.mergeSportsOnline(combinedMatches, koraplusMatches, 'Koraplus');
         combinedMatches = this.mergeSportsOnline(combinedMatches, liveKoraMatches, 'LiveKora');
 
-        // SportsOnline is streams-only: never create new matches from it
+        // Add unique matches from curated sources when Korah misses them.
+        combinedMatches = this.addUniqueMatches(combinedMatches, koraplusMatches);
+        combinedMatches = this.addUniqueMatches(combinedMatches, liveKoraMatches);
+
+        // SportsOnline remains streams-only (no new matches from this source).
         combinedMatches = this.mergeSportsOnline(combinedMatches, sportsonlineMatches, 'SportsOnline');
 
-        console.log(`✅ Unified match list: ${combinedMatches.length} matches total.`);
+        console.log(`âœ… Unified match list: ${combinedMatches.length} matches total.`);
 
         const siiirStreams = await this.siiir.scrapeMatches().catch(() => []);
         const mergedMatches = this.mergeAllStreams(combinedMatches, siiirStreams);
@@ -56,7 +59,7 @@ class ScraperManager {
     }
 
     async cleanOldArticles() {
-        console.log('🧹 [DISABLED] Cleaning old match articles...');
+        console.log('ðŸ§¹ [DISABLED] Cleaning old match articles...');
         const articlesDir = path.join(__dirname, '..', 'public', 'data', 'articles');
         try {
             const files = await fs.readdir(articlesDir);
@@ -69,21 +72,21 @@ class ScraperManager {
                 const stats = await fs.stat(filePath);
                 if (now - stats.mtimeMs > expiry) {
                     await fs.unlink(filePath);
-                    console.log(`🗑️ Deleted old article: ${file}`);
+                    console.log(`ðŸ—‘ï¸ Deleted old article: ${file}`);
                 }
             }
         } catch (e) {
-            console.warn('⚠️ No articles directory to clean yet.');
+            console.warn('âš ï¸ No articles directory to clean yet.');
         }
     }
 
     async processArticles(matches) {
-        console.log(`🤖 [DISABLED] Generating AI Articles for ${matches.length} matches...`);
+        console.log(`ðŸ¤– [DISABLED] Generating AI Articles for ${matches.length} matches...`);
         for (const match of matches) {
             const article = await generateMatchArticle(match);
             if (article) {
                 await saveArticle(match.id, article);
-                console.log(`📝 Generated article for: ${match.home.name} vs ${match.away.name}`);
+                console.log(`ðŸ“ Generated article for: ${match.home.name} vs ${match.away.name}`);
             }
         }
     }
@@ -93,39 +96,49 @@ class ScraperManager {
         let value = String(name).toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
         value = value
             .replace(/[\u064B-\u065F\u0670]/g, '')
-            .replace(/[أإآ]/g, 'ا')
-            .replace(/ى/g, 'ي')
-            .replace(/ة/g, 'ه')
-            .replace(/ؤ/g, 'و')
-            .replace(/ئ/g, 'ي')
+            .replace(/[Ø£Ø¥Ø¢]/g, 'Ø§')
+            .replace(/Ù‰/g, 'ÙŠ')
+            .replace(/Ø©/g, 'Ù‡')
+            .replace(/Ø¤/g, 'Ùˆ')
+            .replace(/Ø¦/g, 'ÙŠ')
+            .replace(/[\u0623\u0625\u0622]/g, '\u0627')
+            .replace(/\u0649/g, '\u064A')
+            .replace(/\u0629/g, '\u0647')
+            .replace(/\u0624/g, '\u0648')
+            .replace(/\u0626/g, '\u064A')
             .replace(/[^\w\u0600-\u06FF\s]/g, ' ')
             .replace(/\s+/g, ' ')
             .trim();
 
         const arabicContainsAliases = [
-            ['كلوب بروج', 'club brugge'],
-            ['اتلتيكو مدريد', 'atletico madrid'],
-            ['تلتيكو مدريد', 'atletico madrid'],
-            ['اتالانتا', 'atalanta'],
-            ['بودو جليمت', 'bodo glimt'],
-            ['انتر ميلان', 'inter milan'],
-            ['ميلان', 'ac milan'],
-            ['كومو', 'como'],
-            ['ليفانتي', 'levante'],
-            ['فياريال', 'villarreal'],
-            ['وولفرهامبتون', 'wolverhampton wanderers'],
-            ['ارسنال', 'arsenal'],
-            ['اولمبياكوس', 'olympiacos'],
-            ['باير ليفركوزن', 'bayer leverkusen'],
-            ['النصر', 'al nassr'],
-            ['اركاداج', 'arkadag'],
-            ['كارباغ اغدام', 'qarabag'],
-            ['نيوكاسل يونايتد', 'newcastle united'],
-            ['الاهلي', 'al ahly'],
-            ['الزوراء', 'al zorra'],
-            ['الوصل', 'al wasl'],
-            ['الشباب', 'al shabab'],
-            ['بوروسيا دورتموند', 'borussia dortmund']
+            ['ÙƒÙ„ÙˆØ¨ Ø¨Ø±ÙˆØ¬', 'club brugge'],
+            ['Ø§ØªÙ„ØªÙŠÙƒÙˆ Ù…Ø¯Ø±ÙŠØ¯', 'atletico madrid'],
+            ['ØªÙ„ØªÙŠÙƒÙˆ Ù…Ø¯Ø±ÙŠØ¯', 'atletico madrid'],
+            ['Ø§ØªØ§Ù„Ø§Ù†ØªØ§', 'atalanta'],
+            ['Ø¨ÙˆØ¯Ùˆ Ø¬Ù„ÙŠÙ…Øª', 'bodo glimt'],
+            ['Ø§Ù†ØªØ± Ù…ÙŠÙ„Ø§Ù†', 'inter milan'],
+            ['Ù…ÙŠÙ„Ø§Ù†', 'ac milan'],
+            ['ÙƒÙˆÙ…Ùˆ', 'como'],
+            ['Ù„ÙŠÙØ§Ù†ØªÙŠ', 'levante'],
+            ['ÙÙŠØ§Ø±ÙŠØ§Ù„', 'villarreal'],
+            ['ÙˆÙˆÙ„ÙØ±Ù‡Ø§Ù…Ø¨ØªÙˆÙ†', 'wolverhampton wanderers'],
+            ['Ø§Ø±Ø³Ù†Ø§Ù„', 'arsenal'],
+            ['Ø§ÙˆÙ„Ù…Ø¨ÙŠØ§ÙƒÙˆØ³', 'olympiacos'],
+            ['Ø¨Ø§ÙŠØ± Ù„ÙŠÙØ±ÙƒÙˆØ²Ù†', 'bayer leverkusen'],
+            ['Ø§Ù„Ù†ØµØ±', 'al nassr'],
+            ['Ø§Ø±ÙƒØ§Ø¯Ø§Ø¬', 'arkadag'],
+            ['ÙƒØ§Ø±Ø¨Ø§Øº Ø§ØºØ¯Ø§Ù…', 'qarabag'],
+            ['Ù†ÙŠÙˆÙƒØ§Ø³Ù„ ÙŠÙˆÙ†Ø§ÙŠØªØ¯', 'newcastle united'],
+            ['Ø§Ù„Ø§Ù‡Ù„ÙŠ', 'al ahly'],
+            ['Ø§Ù„Ø²ÙˆØ±Ø§Ø¡', 'al zorra'],
+            ['Ø§Ù„ÙˆØµÙ„', 'al wasl'],
+            ['Ø§Ù„Ø´Ø¨Ø§Ø¨', 'al shabab'],
+            ['Ø¨ÙˆØ±ÙˆØ³ÙŠØ§ Ø¯ÙˆØ±ØªÙ…ÙˆÙ†Ø¯', 'borussia dortmund'],
+            ['\u0628\u0631\u0627\u0646 \u0628\u064A\u0631\u063A\u0646', 'brann'],
+            ['\u0628\u0648\u0644\u0648\u0646\u064A\u0627', 'bologna'],
+            ['\u0633\u064A\u0644\u062A\u0627 \u0641\u064A\u062C\u0648', 'celta vigo'],
+            ['\u0628\u0627\u0648\u0643 \u0633\u0627\u0644\u0648\u0646\u064A\u0643\u0627', 'paok'],
+            ['\u062F\u064A\u0646\u0627\u0645\u0648 \u0632\u063A\u0631\u0628', 'dinamo zagreb']
         ];
         for (const [needle, canonical] of arabicContainsAliases) {
             if (value.includes(needle)) return canonical;
@@ -168,18 +181,101 @@ class ScraperManager {
 
         const stopwords = new Set([
             'club', 'fc', 'cf', 'sc', 'ac', 'real', 'united', 'city', 'stade',
-            'نادي', 'ال', 'فريق'
+            'Ù†Ø§Ø¯ÙŠ', 'Ø§Ù„', 'ÙØ±ÙŠÙ‚',
+            '\u0646\u0627\u062F\u064A', '\u0627\u0644', '\u0641\u0631\u064A\u0642'
         ]);
         return value.split(' ').filter((t) => t && !stopwords.has(t)).join(' ').trim();
     }
 
+    transliterateArabicToLatin(text) {
+        const map = {
+            '\u0627': 'a', '\u0623': 'a', '\u0625': 'i', '\u0622': 'a', '\u0628': 'b', '\u062A': 't', '\u062B': 'th',
+            '\u062C': 'j', '\u062D': 'h', '\u062E': 'kh', '\u062F': 'd', '\u0630': 'dh', '\u0631': 'r', '\u0632': 'z',
+            '\u0633': 's', '\u0634': 'sh', '\u0635': 's', '\u0636': 'd', '\u0637': 't', '\u0638': 'z', '\u0639': 'a',
+            '\u063A': 'gh', '\u0641': 'f', '\u0642': 'q', '\u0643': 'k', '\u0644': 'l', '\u0645': 'm', '\u0646': 'n',
+            '\u0647': 'h', '\u0648': 'o', '\u0624': 'o', '\u064A': 'i', '\u0649': 'a', '\u0626': 'i', '\u0629': 'h'
+        };
+        return String(text || '')
+            .split('')
+            .map((ch) => map[ch] || ch)
+            .join('')
+            .replace(/\s+/g, ' ')
+            .trim();
+    }
+
+    levenshteinDistance(a, b) {
+        const s = String(a || '');
+        const t = String(b || '');
+        const m = s.length;
+        const n = t.length;
+        if (!m) return n;
+        if (!n) return m;
+
+        const dp = Array.from({ length: m + 1 }, () => new Array(n + 1).fill(0));
+        for (let i = 0; i <= m; i++) dp[i][0] = i;
+        for (let j = 0; j <= n; j++) dp[0][j] = j;
+
+        for (let i = 1; i <= m; i++) {
+            for (let j = 1; j <= n; j++) {
+                const cost = s[i - 1] === t[j - 1] ? 0 : 1;
+                dp[i][j] = Math.min(
+                    dp[i - 1][j] + 1,
+                    dp[i][j - 1] + 1,
+                    dp[i - 1][j - 1] + cost
+                );
+            }
+        }
+        return dp[m][n];
+    }
+
+    wordsSimilar(w1, w2) {
+        const a = String(w1 || '').trim().toLowerCase();
+        const b = String(w2 || '').trim().toLowerCase();
+        if (!a || !b) return false;
+        if (a === b) return true;
+        if ((a.length >= 4 && b.startsWith(a)) || (b.length >= 4 && a.startsWith(b))) return true;
+        const dist = this.levenshteinDistance(a, b);
+        const limit = Math.max(1, Math.floor(Math.min(a.length, b.length) * 0.4));
+        return dist <= limit;
+    }
+
+    areTeamNamesEquivalent(nameA, nameB) {
+        const a = this.normalizeTeamName(nameA);
+        const b = this.normalizeTeamName(nameB);
+        if (!a || !b) return false;
+        if (a === b) return true;
+
+        const variantsA = [a, this.transliterateArabicToLatin(a)].filter(Boolean);
+        const variantsB = [b, this.transliterateArabicToLatin(b)].filter(Boolean);
+
+        for (const va of variantsA) {
+            for (const vb of variantsB) {
+                if (!va || !vb) continue;
+                if (va === vb) return true;
+
+                const wordsA = va.split(' ').filter((w) => w.length >= 3);
+                const wordsB = vb.split(' ').filter((w) => w.length >= 3);
+                if (!wordsA.length || !wordsB.length) continue;
+
+                let hits = 0;
+                for (const wa of wordsA) {
+                    if (wordsB.some((wb) => this.wordsSimilar(wa, wb))) {
+                        hits++;
+                    }
+                }
+
+                const coverage = hits / Math.min(wordsA.length, wordsB.length);
+                if (coverage >= 0.6) return true;
+            }
+        }
+
+        return false;
+    }
+
     isMatchPair(homeA, awayA, homeB, awayB) {
-        const a1 = this.normalizeTeamName(homeA);
-        const a2 = this.normalizeTeamName(awayA);
-        const b1 = this.normalizeTeamName(homeB);
-        const b2 = this.normalizeTeamName(awayB);
-        if (!a1 || !a2 || !b1 || !b2) return false;
-        return (a1 === b1 && a2 === b2) || (a1 === b2 && a2 === b1);
+        const direct = this.areTeamNamesEquivalent(homeA, homeB) && this.areTeamNamesEquivalent(awayA, awayB);
+        const swapped = this.areTeamNamesEquivalent(homeA, awayB) && this.areTeamNamesEquivalent(awayA, homeB);
+        return direct || swapped;
     }
 
     findMatchIndex(matches, home, away) {
@@ -206,12 +302,28 @@ class ScraperManager {
             if (!stream || !stream.url) return;
             const normalizedUrl = normalizeStreamUrl(stream.url);
             if (!normalizedUrl) return;
+            if (this.isBlockedPlaceholderStream(normalizedUrl)) return;
             // Only add if URL doesn't exist
             if (!existingUrls.has(normalizedUrl)) {
                 existingUrls.add(normalizedUrl);
                 targetMatch.streams.push(stream);
             }
         });
+    }
+
+    getUsableStreams(streams) {
+        if (!Array.isArray(streams)) return [];
+        return streams.filter((stream) => {
+            if (!stream || !stream.url) return false;
+            const normalized = String(stream.url).trim().replace(/\/+$/, '');
+            if (!normalized) return false;
+            return !this.isBlockedPlaceholderStream(normalized);
+        });
+    }
+
+    isBlockedPlaceholderStream(url) {
+        const value = String(url || '').toLowerCase();
+        return value.includes('koraplus.blog/kooracity') || value.includes('koraplus.blog/koora-live');
     }
 
     // Add unique matches from a source (that don't exist in primary)
@@ -224,7 +336,8 @@ class ScraperManager {
             const existingIndex = this.findMatchIndex(unified, newMatch.home.name, newMatch.away.name);
 
             // Only process matches that have at least one stream
-            const hasStreams = newMatch.streams && newMatch.streams.length > 0;
+            const usableStreams = this.getUsableStreams(newMatch.streams);
+            const hasStreams = usableStreams.length > 0;
             const isFinished = String(newMatch.status || '').toUpperCase() === 'FT';
             const timestamp = Number(newMatch.timestamp);
             const isStale = Number.isFinite(timestamp) && timestamp > 0 && timestamp < (now - (6 * 60 * 60));
@@ -232,14 +345,15 @@ class ScraperManager {
             if (existingIndex === -1) {
                 // Match doesn't exist - only add if it has streams and is not finished/stale
                 if (hasStreams && !isFinished && !isStale) {
+                    newMatch.streams = usableStreams;
                     newMatch.score = null;
                     unified.push(newMatch);
-                    console.log(`➕ Added new match with stream: ${newMatch.home.name} vs ${newMatch.away.name}`);
+                    console.log(`âž• Added new match with stream: ${newMatch.home.name} vs ${newMatch.away.name}`);
                 }
             } else {
                 // Match exists - merge streams only
                 const existingMatch = unified[existingIndex];
-                this.addUniqueStreams(existingMatch, newMatch.streams);
+                this.addUniqueStreams(existingMatch, usableStreams);
 
                 // Also merge logos if missing
                 if (!existingMatch.home.logo && newMatch.home.logo) {
@@ -269,7 +383,7 @@ class ScraperManager {
 
     // Merge all streams from all sources with proper deduplication
     mergeAllStreams(matches, siiirStreams) {
-        console.log(`🔄 Merging streams from all sources (including Siiir.tv)...`);
+        console.log(`ðŸ”„ Merging streams from all sources (including Siiir.tv)...`);
 
         return matches.map((match) => {
             // Reset score for matches that haven't started (NS)
@@ -292,7 +406,7 @@ class ScraperManager {
                     url: matchingSiiir.playerUrl,
                     priority: 2
                 }]);
-                console.log(`🔗 Linked Siiir stream to: ${match.home.name} vs ${match.away.name}`);
+                console.log(`ðŸ”— Linked Siiir stream to: ${match.home.name} vs ${match.away.name}`);
             }
 
             // Sort streams by priority
@@ -310,7 +424,7 @@ class ScraperManager {
         if (normalized !== 'al ahly') return false;
 
         const league = String((baseMatch.league && baseMatch.league.name) || '').toLowerCase();
-        const isAsianContext = league.includes('asia') || league.includes('آسيا') || league.includes('سعود');
+        const isAsianContext = league.includes('asia') || league.includes('Ø¢Ø³ÙŠØ§') || league.includes('Ø³Ø¹ÙˆØ¯');
         if (!isAsianContext) return false;
 
         const incomingLogo = side === 'home' ? incomingMatch.home.logo : incomingMatch.away.logo;
@@ -318,7 +432,7 @@ class ScraperManager {
     }
 
     mergeSources(matches, extraStreams) {
-        console.log(`🔄 Merging ${extraStreams.length} Siiir streams into ${matches.length} matches...`);
+        console.log(`ðŸ”„ Merging ${extraStreams.length} Siiir streams into ${matches.length} matches...`);
         return matches.map((match) => {
             // Only reset score for matches that haven't started (NS)
             if (match.status === 'NS') {
@@ -339,7 +453,7 @@ class ScraperManager {
                     url: matchingSiiir.playerUrl,
                     priority: 2
                 }]);
-                console.log(`🔗 Linked Siiir stream to: ${match.home.name} vs ${match.away.name}`);
+                console.log(`ðŸ”— Linked Siiir stream to: ${match.home.name} vs ${match.away.name}`);
             }
 
             return match;
@@ -391,7 +505,7 @@ class ScraperManager {
             const pIndex = this.findMatchIndex(unified, sMatch.home.name, sMatch.away.name);
             if (pIndex === -1) return;
             this.addUniqueStreams(unified[pIndex], sMatch.streams);
-            console.log(`📡 Added ${sourceName} stream(s) to: ${unified[pIndex].home.name} vs ${unified[pIndex].away.name}`);
+            console.log(`ðŸ“¡ Added ${sourceName} stream(s) to: ${unified[pIndex].home.name} vs ${unified[pIndex].away.name}`);
         });
         return unified;
     }
@@ -399,7 +513,7 @@ class ScraperManager {
     async saveMatches(matches) {
         // Don't save if 0 matches (something went wrong)
         if (!matches || matches.length === 0) {
-            console.warn('⚠️ Refusing to save 0 matches — keeping previous data intact.');
+            console.warn('âš ï¸ Refusing to save 0 matches â€” keeping previous data intact.');
             return;
         }
         const data = {
@@ -409,7 +523,7 @@ class ScraperManager {
         };
         const outputPath = path.join(__dirname, '..', 'public', 'data', 'matches.json');
         await fs.writeFile(outputPath, JSON.stringify(data, null, 2), 'utf8');
-        console.log(`✅ Multi-source update complete. Saved ${matches.length} matches.`);
+        console.log(`âœ… Multi-source update complete. Saved ${matches.length} matches.`);
 
         // Run health check after saving
         await healthCheck();
@@ -425,3 +539,5 @@ if (process.argv[1] === fileURLToPath(import.meta.url)) {
 }
 
 export default ScraperManager;
+
+

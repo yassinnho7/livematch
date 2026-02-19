@@ -1,4 +1,4 @@
-import puppeteer from 'puppeteer-extra';
+﻿import puppeteer from 'puppeteer-extra';
 import StealthPlugin from 'puppeteer-extra-plugin-stealth';
 import fs from 'fs/promises';
 import path from 'path';
@@ -17,7 +17,7 @@ class KorahScraper {
     }
 
     async scrapeMatches() {
-        console.log('🔍 Starting Korah.live fallback scraper with stealth mode...');
+        console.log('ðŸ” Starting Korah.live fallback scraper with stealth mode...');
 
         let browser;
         try {
@@ -39,8 +39,8 @@ class KorahScraper {
             await page.setViewport({ width: 1920, height: 1080 });
 
             // Log browser console messages
-            page.on('console', msg => console.log('🌐 KORAH BROWSER:', msg.text()));
-            page.on('error', err => console.log('❌ KORAH BROWSER ERROR:', err.message));
+            page.on('console', msg => console.log('ðŸŒ KORAH BROWSER:', msg.text()));
+            page.on('error', err => console.log('âŒ KORAH BROWSER ERROR:', err.message));
 
             // Set realistic user agent
             await page.setUserAgent('Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36');
@@ -51,13 +51,13 @@ class KorahScraper {
                 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8'
             });
 
-            console.log('📡 Navigating to Korah.live...');
+            console.log('ðŸ“¡ Navigating to Korah.live...');
             await page.goto(this.baseUrl, {
                 waitUntil: 'networkidle2',
                 timeout: 90000
             });
 
-            console.log('⏳ Waiting for content to load...');
+            console.log('â³ Waiting for content to load...');
 
             // Wait for match cards - try multiple selectors
             let selectorFound = null;
@@ -75,7 +75,7 @@ class KorahScraper {
                 try {
                     await page.waitForSelector(sel, { timeout: 10000 });
                     selectorFound = sel;
-                    console.log(`✅ Found match elements with selector: ${sel}`);
+                    console.log(`âœ… Found match elements with selector: ${sel}`);
                     break;
                 } catch (e) {
                     // Try next selector
@@ -83,22 +83,22 @@ class KorahScraper {
             }
 
             if (!selectorFound) {
-                console.log('⚠️ No match cards found with known selectors - trying generic extraction...');
+                console.log('âš ï¸ No match cards found with known selectors - trying generic extraction...');
 
                 // Save screenshot for debugging
                 try {
                     await page.screenshot({ path: 'debug_korah_screenshot.png', fullPage: true });
-                    console.log('📸 Saved debug screenshot');
+                    console.log('ðŸ“¸ Saved debug screenshot');
                 } catch (err) {
                     console.log('Could not save screenshot');
                 }
 
                 // Check if we got blocked
                 const pageContent = await page.content();
-                console.log('📄 Page Title:', await page.title());
+                console.log('ðŸ“„ Page Title:', await page.title());
 
                 if (pageContent.includes('cloudflare') || pageContent.includes('captcha') || pageContent.includes('blocked')) {
-                    console.log('🚫 Bot detection detected! Page was blocked.');
+                    console.log('ðŸš« Bot detection detected! Page was blocked.');
                     await fs.writeFile('debug_korah_source.html', pageContent);
                 }
 
@@ -107,7 +107,7 @@ class KorahScraper {
             }
 
             // Auto-scroll to load lazy content
-            console.log('📜 Auto-scrolling to load all matches...');
+            console.log('ðŸ“œ Auto-scrolling to load all matches...');
             await page.evaluate(async () => {
                 await new Promise((resolve) => {
                     let totalHeight = 0;
@@ -128,7 +128,7 @@ class KorahScraper {
             // Wait a bit after scrolling
             await new Promise(resolve => setTimeout(resolve, 2000));
 
-            console.log('📊 Extracting match data from Korah.live...');
+            console.log('ðŸ“Š Extracting match data from Korah.live...');
             const matches = await page.evaluate((foundSelector) => {
                 const results = [];
 
@@ -152,13 +152,13 @@ class KorahScraper {
 
                             // Fallback to title parsing if name elements are empty
                             if (!homeTeam || !awayTeam) {
-                                if (title.includes(' مباراة ') && (title.includes(' و ') || title.includes(' vs '))) {
-                                    let matchPart = title.split(' مباراة ')[1];
-                                    if (matchPart.includes(' كورة لايف ')) {
-                                        matchPart = matchPart.split(' كورة لايف ')[0];
+                                if (title.includes(' Ù…Ø¨Ø§Ø±Ø§Ø© ') && (title.includes(' Ùˆ ') || title.includes(' vs '))) {
+                                    let matchPart = title.split(' Ù…Ø¨Ø§Ø±Ø§Ø© ')[1];
+                                    if (matchPart.includes(' ÙƒÙˆØ±Ø© Ù„Ø§ÙŠÙ ')) {
+                                        matchPart = matchPart.split(' ÙƒÙˆØ±Ø© Ù„Ø§ÙŠÙ ')[0];
                                     }
-                                    if (matchPart.includes(' و ')) {
-                                        [homeTeam, awayTeam] = matchPart.split(' و ').map(t => t.trim());
+                                    if (matchPart.includes(' Ùˆ ')) {
+                                        [homeTeam, awayTeam] = matchPart.split(' Ùˆ ').map(t => t.trim());
                                     } else if (matchPart.includes(' vs ')) {
                                         [homeTeam, awayTeam] = matchPart.split(' vs ').map(t => t.trim());
                                     }
@@ -184,9 +184,9 @@ class KorahScraper {
                             let status = 'NS';
                             if (statusEl) {
                                 const statusText = statusEl.innerText?.trim() || '';
-                                if (statusText.includes('جارية') || statusText.includes('مباشر') || statusText.includes('LIVE')) {
+                                if (statusText.includes('Ø¬Ø§Ø±ÙŠØ©') || statusText.includes('Ù…Ø¨Ø§Ø´Ø±') || statusText.includes('LIVE')) {
                                     status = 'LIVE';
-                                } else if (statusText.includes('انتهت') || statusText.includes('FT')) {
+                                } else if (statusText.includes('Ø§Ù†ØªÙ‡Øª') || statusText.includes('FT')) {
                                     status = 'FT';
                                 }
                             }
@@ -198,7 +198,7 @@ class KorahScraper {
                             // Info (Channel, Commentator, League)
                             const infoItems = card.querySelectorAll('.MT_Info li span');
                             let channelName = '';
-                            let leagueName = 'بطولة عالمية';
+                            let leagueName = 'Ø¨Ø·ÙˆÙ„Ø© Ø¹Ø§Ù„Ù…ÙŠØ©';
 
                             if (infoItems.length >= 1) {
                                 channelName = infoItems[0].innerText?.trim() || '';
@@ -240,9 +240,9 @@ class KorahScraper {
                             const title = link.getAttribute('title') || link.innerText?.trim() || '';
 
                             let homeTeam = '', awayTeam = '';
-                            if (title.includes(' و ')) {
-                                const matchPart = title.split(' مباراة ')?.pop()?.split(' كورة ')?.[0] || title;
-                                [homeTeam, awayTeam] = matchPart.split(' و ').map(t => t.trim());
+                            if (title.includes(' Ùˆ ')) {
+                                const matchPart = title.split(' Ù…Ø¨Ø§Ø±Ø§Ø© ')?.pop()?.split(' ÙƒÙˆØ±Ø© ')?.[0] || title;
+                                [homeTeam, awayTeam] = matchPart.split(' Ùˆ ').map(t => t.trim());
                             }
 
                             if (homeTeam && awayTeam) {
@@ -252,12 +252,13 @@ class KorahScraper {
                                     awayTeam,
                                     homeLogo: '',
                                     awayLogo: '',
-                                    league: 'بطولة عالمية',
+                                    league: 'Ø¨Ø·ÙˆÙ„Ø© Ø¹Ø§Ù„Ù…ÙŠØ©',
                                     channel: '',
                                     status: 'NS',
                                     time: '',
                                     score: '',
-                                    streamLink: href
+                                    streamLink: '',
+                                    matchPageUrl: href
                                 });
                             }
                         } catch (e) { }
@@ -267,19 +268,19 @@ class KorahScraper {
                 return results;
             }, selectorFound);
 
-            console.log(`✅ Successfully extracted ${matches.length} matches from Korah.live`);
+            console.log(`âœ… Successfully extracted ${matches.length} matches from Korah.live`);
 
             if (matches.length === 0) {
-                console.log('⚠️ No matches found after extraction');
+                console.log('âš ï¸ No matches found after extraction');
             } else {
-                console.log('📋 Extracting player URLs from match pages...');
+                console.log('ðŸ“‹ Extracting player URLs from match pages...');
 
                 // Visit each match page to get the actual player URL
                 for (let i = 0; i < matches.length; i++) {
                     const match = matches[i];
                     if (match.matchPageUrl) {
                         try {
-                            console.log(`🔗 Checking match ${i + 1}/${matches.length}: ${match.homeTeam} vs ${match.awayTeam}`);
+                            console.log(`ðŸ”— Checking match ${i + 1}/${matches.length}: ${match.homeTeam} vs ${match.awayTeam}`);
 
                             const matchPage = await browser.newPage();
                             await matchPage.setUserAgent('Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36');
@@ -292,57 +293,93 @@ class KorahScraper {
                             // Wait for iframe to load
                             await new Promise(resolve => setTimeout(resolve, 3000));
 
-                            // Extract player URL from iframe
-                            const playerUrl = await matchPage.evaluate(() => {
-                                // Try to find iframe with player
+                            // Extract direct player URL and intermediate candidates from match page.
+                            const extraction = await matchPage.evaluate(() => {
+                                const candidates = [];
+                                const seen = new Set();
+                                const addCandidate = (value) => {
+                                    if (!value || typeof value !== 'string') return;
+                                    const cleaned = value.trim();
+                                    if (!cleaned || seen.has(cleaned)) return;
+                                    seen.add(cleaned);
+                                    candidates.push(cleaned);
+                                };
+
+                                let direct = null;
+
                                 const iframes = document.querySelectorAll('iframe');
                                 for (const iframe of iframes) {
                                     const src = iframe.src || iframe.getAttribute('data-src');
-                                    if (src && (src.includes('pl.gomatch') || src.includes('albaplayer') || src.includes('player'))) {
-                                        return src;
+                                    if (!src) continue;
+                                    addCandidate(src);
+                                    if (!direct && src.includes('/albaplayer/')) {
+                                        direct = src;
                                     }
                                 }
 
-                                // Try to find in script tags
                                 const scripts = document.querySelectorAll('script');
                                 for (const script of scripts) {
                                     const content = script.innerText || '';
-                                    const match = content.match(/src=["']([^"']*albaplayer[^"']*)["']/i) ||
-                                        content.match(/url["']?\s*[:=]\s*["']([^"']*albaplayer[^"']*)["']/i);
-                                    if (match && match[1]) {
-                                        return match[1];
+                                    const normalizedContent = content.replace(/\\\//g, '/');
+                                    const directMatches = normalizedContent.match(/https?:\/\/[^\s"'<>]*albaplayer[^\s"'<>]*/gi) || [];
+                                    directMatches.forEach(addCandidate);
+                                    if (!direct && directMatches.length) {
+                                        direct = directMatches[0];
+                                    }
+
+                                    const htmlMatches = normalizedContent.match(/https?:\/\/[^\s"'<>]+\.html[^\s"'<>]*/gi) || [];
+                                    htmlMatches.forEach(addCandidate);
+                                    const semohdMatches = normalizedContent.match(/[a-z0-9.-]*semohd\.online\/[^\s"'<>]*\.html[^\s"'<>]*/gi) || [];
+                                    semohdMatches.forEach((m) => {
+                                        if (m.startsWith('http')) addCandidate(m);
+                                        else addCandidate(`https://${m}`);
+                                    });
+                                }
+
+                                const links = document.querySelectorAll('a[href]');
+                                for (const link of links) {
+                                    const href = link.href;
+                                    if (!href) continue;
+                                    if (href.includes('albaplayer') || href.includes('.html') || href.includes('semohd')) {
+                                        addCandidate(href);
                                     }
                                 }
 
-                                return null;
+                                return { direct, candidates };
                             });
+
+                            let playerUrl = extraction && extraction.direct ? extraction.direct : null;
+                            if (!playerUrl) {
+                                playerUrl = await this.resolveIntermediatePlayerUrl(
+                                    browser,
+                                    extraction && Array.isArray(extraction.candidates) ? extraction.candidates : [],
+                                    match.matchPageUrl
+                                );
+                            }
 
                             if (playerUrl) {
                                 // Extract clean player URL
                                 try {
-                                    const urlObj = new URL(playerUrl);
-                                    const pathname = urlObj.pathname;
-                                    // Keep the full path for the player
                                     match.streamLink = playerUrl.split('?')[0];
-                                    console.log(`  ✅ Found player: ${match.streamLink}`);
+                                    console.log(`  âœ… Found player: ${match.streamLink}`);
                                 } catch (e) {
                                     match.streamLink = playerUrl;
                                 }
                             } else {
-                                console.log(`  ⚠️ No player URL found`);
+                                console.log(`  âš ï¸ No player URL found`);
                             }
 
                             await matchPage.close();
 
                         } catch (err) {
-                            console.log(`  ❌ Error on match page: ${err.message}`);
+                            console.log(`  âŒ Error on match page: ${err.message}`);
                         }
                     }
                 }
 
-                console.log('📋 Matches found:');
+                console.log('ðŸ“‹ Matches found:');
                 matches.forEach(m => {
-                    console.log(`  - ${m.homeTeam} vs ${m.awayTeam} (${m.league}) [${m.status}] ${m.channel ? '📺 ' + m.channel : ''}`);
+                    console.log(`  - ${m.homeTeam} vs ${m.awayTeam} (${m.league}) [${m.status}] ${m.channel ? 'ðŸ“º ' + m.channel : ''}`);
                 });
             }
 
@@ -352,7 +389,7 @@ class KorahScraper {
             return processedMatches;
 
         } catch (error) {
-            console.error('❌ Korah.live scraping error:', error.message);
+            console.error('âŒ Korah.live scraping error:', error.message);
             console.error(error.stack);
             if (browser) await browser.close();
             return [];
@@ -414,9 +451,7 @@ class KorahScraper {
         if (!cleaned) return [];
 
         // Do not expose raw match-page URLs as playable streams.
-        const hasPlayerPattern = cleaned.includes('/albaplayer/') ||
-            cleaned.includes('pl.gomatch') ||
-            cleaned.includes('player');
+        const hasPlayerPattern = cleaned.includes('/albaplayer/');
         if (!hasPlayerPattern) return [];
 
         return [{
@@ -429,6 +464,93 @@ class KorahScraper {
         }];
     }
 
+    normalizeUrl(rawUrl, baseUrl = '') {
+        if (!rawUrl || typeof rawUrl !== 'string') return '';
+        const trimmed = rawUrl.trim();
+        if (!trimmed) return '';
+        try {
+            return new URL(trimmed, baseUrl || undefined).toString();
+        } catch (_) {
+            return '';
+        }
+    }
+
+    async resolveIntermediatePlayerUrl(browser, candidates, baseUrl) {
+        if (!Array.isArray(candidates) || !candidates.length) return null;
+
+        for (const candidate of candidates) {
+            const normalized = this.normalizeUrl(candidate, baseUrl);
+            if (!normalized) continue;
+
+            if (normalized.includes('/albaplayer/')) {
+                return normalized.split('?')[0];
+            }
+
+            const shouldFollow = normalized.includes('semohd') ||
+                normalized.includes('.html') ||
+                normalized.includes('/2026/') ||
+                normalized.includes('/2027/');
+            if (!shouldFollow) continue;
+
+            let page = null;
+            try {
+                page = await browser.newPage();
+                await page.setUserAgent('Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36');
+                await page.goto(normalized, {
+                    waitUntil: 'domcontentloaded',
+                    timeout: 30000
+                });
+                await new Promise(resolve => setTimeout(resolve, 1200));
+
+                const nestedPlayer = await page.evaluate(() => {
+                    const pickAlbaplayer = (value) => {
+                        if (!value || typeof value !== 'string') return null;
+                        const cleaned = value.trim();
+                        return cleaned.includes('/albaplayer/') ? cleaned : null;
+                    };
+
+                    const iframes = document.querySelectorAll('iframe');
+                    for (const iframe of iframes) {
+                        const src = iframe.src || iframe.getAttribute('data-src');
+                        const found = pickAlbaplayer(src);
+                        if (found) return found;
+                    }
+
+                    const scripts = document.querySelectorAll('script');
+                    for (const script of scripts) {
+                        const content = (script.innerText || '').replace(/\\\//g, '/');
+                        const match = content.match(/https?:\/\/[^\s"'<>]*albaplayer[^\s"'<>]*/i);
+                        if (match && match[0]) return match[0];
+                    }
+
+                    const links = document.querySelectorAll('a[href*="albaplayer"]');
+                    for (const link of links) {
+                        const found = pickAlbaplayer(link.href);
+                        if (found) return found;
+                    }
+
+                    return null;
+                });
+
+                if (nestedPlayer) {
+                    const finalPlayer = this.normalizeUrl(nestedPlayer, normalized);
+                    if (finalPlayer && finalPlayer.includes('/albaplayer/')) {
+                        return finalPlayer.split('?')[0];
+                    }
+                }
+            } catch (_) {
+                // Try next candidate.
+            } finally {
+                if (page) {
+                    try {
+                        await page.close();
+                    } catch (_) { }
+                }
+            }
+        }
+
+        return null;
+    }
     parseScore(scoreText) {
         const match = scoreText.match(/(\d+)\s*-\s*(\d+)/);
         if (match) {
@@ -456,7 +578,7 @@ class KorahScraper {
             'utf8'
         );
 
-        console.log(`✅ Saved ${matches.length} matches to ${outputPath}`);
+        console.log(`âœ… Saved ${matches.length} matches to ${outputPath}`);
     }
 }
 
@@ -467,7 +589,7 @@ async function main() {
         const matches = await scraper.scrapeMatches();
 
         if (matches.length === 0) {
-            console.log('⚠️ No matches found - this might be due to:');
+            console.log('âš ï¸ No matches found - this might be due to:');
             console.log('  1. No matches scheduled for today');
             console.log('  2. Bot detection blocking the scraper');
             console.log('  3. Site structure changed');
@@ -475,11 +597,11 @@ async function main() {
 
         await scraper.saveMatches(matches);
 
-        console.log('🎉 Korah.live scraping completed!');
-        console.log(`📊 Total matches saved: ${matches.length}`);
+        console.log('ðŸŽ‰ Korah.live scraping completed!');
+        console.log(`ðŸ“Š Total matches saved: ${matches.length}`);
         process.exit(0);
     } catch (error) {
-        console.error('💥 Fatal error:', error.message);
+        console.error('ðŸ’¥ Fatal error:', error.message);
         console.error(error.stack);
         process.exit(1);
     }
@@ -490,3 +612,6 @@ if (process.argv[1] === fileURLToPath(import.meta.url)) {
 }
 
 export default KorahScraper;
+
+
+

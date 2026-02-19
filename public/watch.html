@@ -555,7 +555,7 @@
                 // If a direct server URL is provided (from TMA), use it immediately
                 if (directServerUrl) {
                     const decoded = decodeURIComponent(directServerUrl);
-                    if (!isPreferredPlayerUrl(decoded)) {
+                    if (!isPreferredPlayerUrl(decoded) || isBlockedPlaceholderUrl(decoded)) {
                         return showError('اعد المحاولة لاحقا، السيرفر غير متوفر حاليا. قد يظهر بعد التحديث التالي خلال 7 دقائق.');
                     }
                     launchStream(decoded);
@@ -566,7 +566,8 @@
                         const data = await res.json();
                         currentMatch = data.matches.find(m => m.id == matchId);
                         if (currentMatch && currentMatch.streams) {
-                            buildServerButtons(currentMatch.streams);
+                            const visibleStreams = currentMatch.streams.filter((stream) => !isBlockedPlaceholderUrl(stream.url));
+                            buildServerButtons(visibleStreams);
                         }
                     }
                     return;
@@ -579,17 +580,18 @@
                 if (!currentMatch) return showError('البث المباشر انتهى أو غير متوفر');
 
                 if (currentMatch.streams && currentMatch.streams.length > 0) {
-                    const hasPreferredPlayer = currentMatch.streams.some((stream) => isPreferredPlayerUrl(stream.url));
+                    const visibleStreams = currentMatch.streams.filter((stream) => !isBlockedPlaceholderUrl(stream.url));
+                    const hasPreferredPlayer = visibleStreams.some((stream) => isPreferredPlayerUrl(stream.url));
                     if (!hasPreferredPlayer) {
                         return showError('اعد المحاولة لاحقا، السيرفر غير متوفر حاليا. قد يظهر بعد التحديث التالي خلال 7 دقائق.');
                     }
 
-                    buildServerButtons(currentMatch.streams);
+                    buildServerButtons(visibleStreams);
 
-                    const idx = Math.min(currentServerIdx, currentMatch.streams.length - 1);
+                    const idx = Math.min(currentServerIdx, visibleStreams.length - 1);
 
                     // Directly launch the stream without countdown
-                    launchStream(currentMatch.streams[idx].url);
+                    launchStream(visibleStreams[idx].url);
                 } else {
                     showError('اعد المحاولة لاحقا، السيرفر غير متوفر حاليا. قد يظهر بعد التحديث التالي خلال 7 دقائق.');
                 }
@@ -605,6 +607,11 @@
 
         function isPreferredPlayerUrl(url) {
             return typeof url === 'string' && url.includes('/albaplayer/');
+        }
+
+        function isBlockedPlaceholderUrl(url) {
+            const value = String(url || '').toLowerCase();
+            return value.includes('koraplus.blog/kooracity') || value.includes('koraplus.blog/koora-live');
         }
 
         function goHome() {

@@ -229,6 +229,7 @@ class KoraplusScraper {
             const seenUrls = new Set();
             const pushStream = (stream, fallbackIndex = 0) => {
                 if (!stream || !stream.url || seenUrls.has(stream.url)) return;
+                if (this.isPlaceholderUrl(stream.url)) return;
                 seenUrls.add(stream.url);
                 streams.push({
                     id: stream.id || `stream_koraplus_${stableId}_${fallbackIndex}`,
@@ -290,6 +291,13 @@ class KoraplusScraper {
                 streams: streams
             };
         });
+    }
+
+    isPlaceholderUrl(url) {
+        const value = String(url || '').toLowerCase().trim();
+        if (!value) return true;
+        return value.includes('koraplus.blog/kooracity') ||
+            value.includes('koraplus.blog/koora-live');
     }
 
 
