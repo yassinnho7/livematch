@@ -40,10 +40,10 @@ jobs:
           
       - name: Install Node Dependencies
         env:
-          PUPPETEER_CACHE_DIR: ~/.cache/puppeteer
-          PUPPETEER_SKIP_DOWNLOAD: 'false'
+          PUPPETEER_CACHE_DIR: ${{ github.workspace }}/.cache/puppeteer
+          PUPPETEER_SKIP_CHROMIUM_DOWNLOAD: 'false'
         run: |
-          npm ci --no-audit --no-fund --prefer-offline
+          npm install --no-audit --no-fund
       
       - name: Download Arabic Font (Cairo)
         run: |
