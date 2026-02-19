@@ -11,7 +11,7 @@ permissions:
 jobs:
   scrape-and-update:
     runs-on: ubuntu-22.04
-    timeout-minutes: 15
+    timeout-minutes: 12
     
     steps:
       - name: Checkout Repository
@@ -82,26 +82,34 @@ jobs:
           git add public/data/matches.json
           
           # Add/Remove generated posters
-          git add --all public/posters || true
+          git add --all public/posters 2>/dev/null || true
           
           # Add/Remove AI-generated articles
-          git add --all public/data/articles || true
+          git add --all public/data/articles 2>/dev/null || true
           
           # Add optional log files (ignore if missing)
-          git add sent_notifications.json || true
-          git add sent_telegram_notifications.json || true
+          git add sent_notifications.json 2>/dev/null || true
+          git add sent_telegram_notifications.json 2>/dev/null || true
           
-          git diff --cached --quiet || git commit -m "🔄 Auto-update: LiveKora matches data"
+          # If no changes, exit cleanly
+          if git diff --cached --quiet; then
+            echo "✅ No changes to commit — skipping push"
+            exit 0
+          fi
           
-          # Retry loop for push to handle race conditions
-          n=0
-          until [ "$n" -ge 10 ]
-          do
-             echo "Push attempt $((n+1))..."
-             # Clear any unstaged changes before pull
-             git checkout .
-             git pull --rebase origin main
-             git push origin main && break
-             n=$((n+1)) 
-             sleep 10
+          git commit -m "🔄 Auto-update: LiveKora matches data ($(date '+%H:%M'))"
+          
+          # Push with Retry — doesn't cancel changes
+          MAX=5
+          for n in $(seq 1 $MAX); do
+            echo "📤 Push attempt $n/$MAX..."
+            git fetch origin main --quiet
+            git rebase origin/main --quiet && git push origin main && break
+            
+            if [ $n -eq $MAX ]; then
+              echo "❌ All push attempts failed"
+              exit 1
+            fi
+            echo "⏳ Waiting 20s before retry..."
+            sleep 20
           done

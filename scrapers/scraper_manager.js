@@ -7,6 +7,7 @@ import fs from 'fs/promises';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { generateMatchArticle, saveArticle } from './ai_content.js';
+import { healthCheck } from './health-check.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -202,7 +203,10 @@ class ScraperManager {
     mergeSources(matches, extraStreams) {
         console.log(`🔄 Merging ${extraStreams.length} Siiir streams into ${matches.length} matches...`);
         return matches.map((match) => {
-            match.score = null;
+            // Only reset score for matches that haven't started (NS)
+            if (match.status === 'NS') {
+                match.score = null;
+            }
 
             const matchingSiiir = extraStreams.find((s) => {
                 const title = String(s.title || '').toLowerCase();
@@ -279,6 +283,11 @@ class ScraperManager {
     }
 
     async saveMatches(matches) {
+        // Don't save if 0 matches (something went wrong)
+        if (!matches || matches.length === 0) {
+            console.warn('⚠️ Refusing to save 0 matches — keeping previous data intact.');
+            return;
+        }
         const data = {
             generated_at: new Date().toISOString(),
             count: matches.length,
@@ -287,6 +296,9 @@ class ScraperManager {
         const outputPath = path.join(__dirname, '..', 'public', 'data', 'matches.json');
         await fs.writeFile(outputPath, JSON.stringify(data, null, 2), 'utf8');
         console.log(`✅ Multi-source update complete. Saved ${matches.length} matches.`);
+
+        // Run health check after saving
+        await healthCheck();
     }
 }
 

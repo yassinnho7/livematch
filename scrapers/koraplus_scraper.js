@@ -3,6 +3,7 @@ import StealthPlugin from 'puppeteer-extra-plugin-stealth';
 import fs from 'fs/promises';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import { toGMTTimestamp, generateMatchHash, getCountryFromLeague, getLeagueLogo, formatGMTTime } from './utils.js';
 
 // Add stealth plugin to avoid bot detection
 puppeteer.use(StealthPlugin());
@@ -206,62 +207,15 @@ class KoraplusScraper {
         }
     }
 
-    generateMatchHash(str) {
-        let hash = 0;
-        for (let i = 0; i < str.length; i++) {
-            const char = str.charCodeAt(i);
-            hash = ((hash << 5) - hash) + char;
-            hash = hash & hash;
-        }
-        return Math.abs(hash);
-    }
 
     processMatches(rawMatches) {
         return rawMatches.map((match, index) => {
-            let timestamp;
-            let timeLabel = '';
+            // Use centralized timezone conversion (koraplus = GMT+2)
+            const timestamp = toGMTTimestamp(match.time, 2);
+            const timeLabel = formatGMTTime(timestamp);
 
-            // Parse both 12h (AM/PM) and 24h formats, then convert from GMT+2 to GMT.
-            if (match.time && match.time.includes(':')) {
-                try {
-                    let hours = null;
-                    let minutes = null;
-
-                    const twelveHour = match.time.match(/(\d{1,2}):(\d{2})\s*(AM|PM)/i);
-                    if (twelveHour) {
-                        hours = parseInt(twelveHour[1], 10);
-                        minutes = parseInt(twelveHour[2], 10);
-                        const ampm = twelveHour[3].toUpperCase();
-                        if (ampm === 'PM' && hours < 12) hours += 12;
-                        if (ampm === 'AM' && hours === 12) hours = 0;
-                    } else {
-                        const twentyFourHour = match.time.match(/(\d{1,2}):(\d{2})/);
-                        if (twentyFourHour) {
-                            hours = parseInt(twentyFourHour[1], 10);
-                            minutes = parseInt(twentyFourHour[2], 10);
-                        }
-                    }
-
-                    if (hours !== null && minutes !== null) {
-                        const date = new Date();
-                        date.setUTCHours(hours - 2, minutes, 0, 0);
-                        timestamp = Math.floor(date.getTime() / 1000);
-                        timeLabel = date.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit', timeZone: 'UTC' });
-                    }
-                } catch (e) {
-                    timestamp = Math.floor(Date.now() / 1000);
-                }
-            }
-
-            if (!timestamp) timestamp = Math.floor(Date.now() / 1000);
-            if (!timeLabel) {
-                const d = new Date(timestamp * 1000);
-                timeLabel = d.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit', timeZone: 'UTC' });
-            }
-
-            const dateStr = new Date().toISOString().split('T')[0];
-            const uniqueString = `${dateStr}-${match.homeTeam}-${match.awayTeam}`;
-            const stableId = this.generateMatchHash(uniqueString);
+            // Use centralized hash generation
+            const stableId = generateMatchHash(match.homeTeam, match.awayTeam);
 
             // Determine status
             let status = 'NS';
@@ -321,8 +275,8 @@ class KoraplusScraper {
                 time_label: `${timeLabel} GMT`,
                 league: {
                     name: match.league,
-                    country: this.getCountryFromLeague(match.league),
-                    logo: this.getLeagueLogo(match.league)
+                    country: getCountryFromLeague(match.league),
+                    logo: getLeagueLogo(match.league)
                 },
                 home: {
                     name: match.homeTeam,
@@ -338,37 +292,6 @@ class KoraplusScraper {
         });
     }
 
-    getCountryFromLeague(league) {
-        if (!league) return 'International';
-        if (league.includes('الإسباني') || league.includes('إسبانيا')) return 'Spain';
-        if (league.includes('الإنجليزي') || league.includes('إنجلترا')) return 'England';
-        if (league.includes('الإيطالي') || league.includes('إيطاليا')) return 'Italy';
-        if (league.includes('السعودي') || league.includes('السعودية')) return 'Saudi Arabia';
-        if (league.includes('المصري') || league.includes('مصر')) return 'Egypt';
-        if (league.includes('المغربي') || league.includes('المغرب')) return 'Morocco';
-        if (league.includes('أبطال أوروبا') || league.includes('اوروبا')) return 'Europe';
-        if (league.includes('آسيا') || league.includes('الخليج')) return 'Asia';
-        return 'International';
-    }
-
-    getLeagueLogo(league) {
-        const logos = {
-            'إسباني': 'https://a.espncdn.com/combiner/i?img=/i/leaguelogos/soccer/500/15.png&h=40&w=40',
-            'إنجليزي': 'https://a.espncdn.com/combiner/i?img=/i/leaguelogos/soccer/500/23.png&h=40&w=40',
-            'إيطالي': 'https://a.espncdn.com/combiner/i?img=/i/leaguelogos/soccer/500/12.png&h=40&w=40',
-            'ألماني': 'https://a.espncdn.com/combiner/i?img=/i/leaguelogos/soccer/500/10.png&h=40&w=40',
-            'فرنسي': 'https://a.espncdn.com/combiner/i?img=/i/leaguelogos/soccer/500/9.png&h=40&w=40',
-            'سعودي': 'https://a.espncdn.com/combiner/i?img=/i/leaguelogos/soccer/500/3007.png&h=40&w=40',
-            'مصري': 'https://a.espncdn.com/combiner/i?img=/i/leaguelogos/soccer/500/1237.png&h=40&w=40',
-            'أبطال أوروبا': 'https://a.espncdn.com/combiner/i?img=/i/leaguelogos/soccer/500/2.png&h=40&w=40',
-            'أبطال آسيا': 'https://a.espncdn.com/combiner/i?img=/i/leaguelogos/soccer/500/209.png&h=40&w=40'
-        };
-
-        for (const [key, logo] of Object.entries(logos)) {
-            if (league && league.includes(key)) return logo;
-        }
-        return 'https://cdn-icons-png.flaticon.com/512/1378/1378598.png';
-    }
 
     async saveMatches(matches) {
         const data = {

@@ -3,6 +3,17 @@
  * Features: Viewer counter, countdown timers, hover overlay, live scores
  */
 
+// ============ SECURITY ============
+function sanitizeText(str) {
+    if (!str) return '';
+    return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#x27;');
+}
+
 // ============ VIEWER COUNTER ============
 function initViewerCounter() {
     const counterEl = document.getElementById('viewer-count');
@@ -274,9 +285,9 @@ function createMatchCard(match) {
     // Meta
     let metaHTML = '';
     const metaParts = [];
-    if (match.channel) metaParts.push(`<span>📺 ${match.channel}</span>`);
-    if (match.commentator) metaParts.push(`<span>🎙️ ${match.commentator}</span>`);
-    if (match.league && match.league.name) metaParts.push(`<span>🏆 ${match.league.name}</span>`);
+    if (match.channel) metaParts.push(`<span>📺 ${sanitizeText(match.channel)}</span>`);
+    if (match.commentator) metaParts.push(`<span>🎙️ ${sanitizeText(match.commentator)}</span>`);
+    if (match.league && match.league.name) metaParts.push(`<span>🏆 ${sanitizeText(match.league.name)}</span>`);
     if (metaParts.length > 0) {
         metaHTML = `<div class="match-meta">${metaParts.join('')}</div>`;
     }
