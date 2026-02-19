@@ -37,14 +37,13 @@ class ScraperManager {
         // Use Korah as primary source for match metadata
         let combinedMatches = [...korahMatches];
 
-        // Add unique matches from Koraplus (that don't exist in Korah)
-        combinedMatches = this.addUniqueMatches(combinedMatches, koraplusMatches);
-
-        // Add unique matches from LiveKora
-        combinedMatches = this.addUniqueMatches(combinedMatches, liveKoraMatches);
+        // Koraplus and LiveKora are streams-only sources now:
+        // they can enrich existing Korah matches but never create new matches.
+        combinedMatches = this.mergeSportsOnline(combinedMatches, koraplusMatches, 'Koraplus');
+        combinedMatches = this.mergeSportsOnline(combinedMatches, liveKoraMatches, 'LiveKora');
 
         // SportsOnline is streams-only: never create new matches from it
-        combinedMatches = this.mergeSportsOnline(combinedMatches, sportsonlineMatches);
+        combinedMatches = this.mergeSportsOnline(combinedMatches, sportsonlineMatches, 'SportsOnline');
 
         console.log(`✅ Unified match list: ${combinedMatches.length} matches total.`);
 
@@ -386,13 +385,13 @@ class ScraperManager {
         return unified;
     }
 
-    mergeSportsOnline(primary, sportsonline) {
+    mergeSportsOnline(primary, sportsonline, sourceName = 'SportsOnline') {
         const unified = [...primary];
         sportsonline.forEach((sMatch) => {
             const pIndex = this.findMatchIndex(unified, sMatch.home.name, sMatch.away.name);
             if (pIndex === -1) return;
             this.addUniqueStreams(unified[pIndex], sMatch.streams);
-            console.log(`📡 Added SportsOnline stream(s) to: ${unified[pIndex].home.name} vs ${unified[pIndex].away.name}`);
+            console.log(`📡 Added ${sourceName} stream(s) to: ${unified[pIndex].home.name} vs ${unified[pIndex].away.name}`);
         });
         return unified;
     }
