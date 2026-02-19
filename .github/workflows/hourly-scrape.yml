@@ -36,8 +36,12 @@ jobs:
       - name: Install System Dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install -y --no-install-recommends libgbm-dev libasound2 libnss3 libatk1.0-0 libatk-bridge2.0-0 libcups2 libdrm2 libxkbcommon0 libxcomposite1 libxdamage1 libxrandr2 libpangocairo-1.0-0 libpango-1.0-0 build-essential libcairo2-dev libpango1.0-dev libjpeg-dev libgif-dev librsvg2-dev
-          
+          sudo apt-get install -y --no-install-recommends libgbm-dev libasound2 libnss3 libatk1.0-0 libatk-bridge2.0-0 libcups2 libdrm2 libxkbcommon0 libxcomposite1 libxdamage1 libxrandr2 libpangocairo-1.0-0 libpango1.0-0 build-essential libcairo2-dev libpango1.0-dev libjpeg-dev libgif-dev librsvg2-dev wget gnupg
+
+      - name: Install Chrome Browser
+        run: |
+          npx puppeteer browsers install chrome
+
       - name: Install Node Dependencies
         env:
           PUPPETEER_CACHE_DIR: ${{ github.workspace }}/.cache/puppeteer
