@@ -49,7 +49,7 @@ class SiiirScraper {
 
             const results = [];
 
-            for (const matchInfo of matchLinks.slice(0, 10)) { // Limit to 10 for safety
+            for (const matchInfo of matchLinks) {
                 console.log(`🕵️ Investigating: ${matchInfo.title}`);
                 const matchResult = await this.extractPlayerLink(browser, matchInfo.url);
                 if (matchResult && matchResult.playerUrl) {

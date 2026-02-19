@@ -34,7 +34,7 @@ class ScraperManager {
 
         console.log(`📊 Sources: Korah.live(${korahMatches.length}), Koraplus(${koraplusMatches.length}), LiveKora(${liveKoraMatches.length}), SportsOnline(${sportsonlineMatches.length})`);
 
-        // Use Korah as primary, then add unique matches from other sources
+        // Use Korah as primary source for match metadata
         let combinedMatches = [...korahMatches];
 
         // Add unique matches from Koraplus (that don't exist in Korah)
@@ -43,8 +43,8 @@ class ScraperManager {
         // Add unique matches from LiveKora
         combinedMatches = this.addUniqueMatches(combinedMatches, liveKoraMatches);
 
-        // Add unique matches from SportsOnline
-        combinedMatches = this.addUniqueMatches(combinedMatches, sportsonlineMatches);
+        // SportsOnline is streams-only: never create new matches from it
+        combinedMatches = this.mergeSportsOnline(combinedMatches, sportsonlineMatches);
 
         console.log(`✅ Unified match list: ${combinedMatches.length} matches total.`);
 
@@ -186,18 +186,29 @@ class ScraperManager {
         return matches.findIndex((m) => this.isMatchPair(m.home.name, m.away.name, home, away));
     }
 
+    titleMatchesMatch(title, match) {
+        const normalizedTitle = this.normalizeTeamName(title);
+        const home = this.normalizeTeamName(match.home.name);
+        const away = this.normalizeTeamName(match.away.name);
+        if (!normalizedTitle || !home || !away) return false;
+        return normalizedTitle.includes(home) && normalizedTitle.includes(away);
+    }
+
     addUniqueStreams(targetMatch, streams) {
         if (!targetMatch.streams) targetMatch.streams = [];
         if (!Array.isArray(streams) || !streams.length) return;
 
-        // Use URL-based deduplication to avoid duplicates
-        const existingUrls = new Set(targetMatch.streams.map(s => s.url));
+        // Use normalized URL-based deduplication to avoid duplicates from different sources
+        const normalizeStreamUrl = (url) => String(url || '').trim().replace(/\/+$/, '');
+        const existingUrls = new Set(targetMatch.streams.map((s) => normalizeStreamUrl(s.url)));
 
         streams.forEach((stream) => {
             if (!stream || !stream.url) return;
+            const normalizedUrl = normalizeStreamUrl(stream.url);
+            if (!normalizedUrl) return;
             // Only add if URL doesn't exist
-            if (!existingUrls.has(stream.url)) {
-                existingUrls.add(stream.url);
+            if (!existingUrls.has(normalizedUrl)) {
+                existingUrls.add(normalizedUrl);
                 targetMatch.streams.push(stream);
             }
         });
@@ -251,11 +262,8 @@ class ScraperManager {
 
             // Find and add Siiir streams
             const matchingSiiir = siiirStreams.find((s) => {
-                const title = String(s.title || '').toLowerCase();
-                const home = this.normalizeTeamName(match.home.name);
-                const away = this.normalizeTeamName(match.away.name);
-                if (!home || !away) return false;
-                return title.includes(home) || title.includes(away);
+                const title = String(s.title || '');
+                return this.titleMatchesMatch(title, match);
             });
 
             if (matchingSiiir && matchingSiiir.playerUrl) {
@@ -301,11 +309,8 @@ class ScraperManager {
             }
 
             const matchingSiiir = extraStreams.find((s) => {
-                const title = String(s.title || '').toLowerCase();
-                const home = this.normalizeTeamName(match.home.name);
-                const away = this.normalizeTeamName(match.away.name);
-                if (!home || !away) return false;
-                return title.includes(home) || title.includes(away);
+                const title = String(s.title || '');
+                return this.titleMatchesMatch(title, match);
             });
 
             if (matchingSiiir && matchingSiiir.playerUrl) {

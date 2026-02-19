@@ -78,8 +78,8 @@ function startCountdowns() {
             const diff = timestamp - now;
 
             if (diff <= 0) {
-                el.textContent = '🔴 بدأت';
-                el.style.color = '#f4212e';
+                el.textContent = '';
+                el.style.display = 'none';
                 return;
             }
 
@@ -128,13 +128,7 @@ function showError(message, isRetryable = true) {
 function updateLiveBadge(matches) {
     const badge = document.getElementById('live-badge');
     if (!badge) return;
-
-    const hasLive = matches.some(m => m.status === 'LIVE');
-    if (hasLive) {
-        badge.classList.add('active');
-    } else {
-        badge.classList.remove('active');
-    }
+    badge.classList.remove('active');
 }
 
 // ============ LOAD MATCHES ============
@@ -179,12 +173,8 @@ async function loadMatches() {
             return;
         }
 
-        // Sort: LIVE first, then NS by time, then FT
+        // Sort by kickoff time only
         const sorted = [...data.matches].sort((a, b) => {
-            const order = { 'LIVE': 0, 'NS': 1, 'FT': 2 };
-            const oa = order[a.status] ?? 1;
-            const ob = order[b.status] ?? 1;
-            if (oa !== ob) return oa - ob;
             return (a.timestamp || 0) - (b.timestamp || 0);
         });
 
@@ -236,10 +226,6 @@ function createMatchCard(match) {
         card.href = `article.html?match=${match.id}`;
     }
 
-    if (match.status === 'LIVE') {
-        card.classList.add('is-live');
-    }
-
     // Time
     let timeString = match.time_label || '';
     if (!timeString && match.timestamp) {
@@ -253,26 +239,15 @@ function createMatchCard(match) {
         }
     }
 
-    // Status
-    let statusHTML = '';
     let scoreHTML = '';
     let countdownHTML = '';
 
-    if (match.status === 'LIVE') {
-        statusHTML = '<span class="match-status-badge status-live">🔴 مباشر</span>';
-        if (match.score) {
-            scoreHTML = `<div class="match-score">${match.score}</div>`;
-        }
-    } else if (match.status === 'FT') {
-        statusHTML = '<span class="match-status-badge status-finished">انتهت</span>';
-        if (match.score) {
-            scoreHTML = `<div class="match-score">${match.score}</div>`;
-        }
-    } else {
-        statusHTML = '<span class="match-status-badge status-upcoming">لم تبدأ</span>';
-        if (match.timestamp) {
-            countdownHTML = `<div class="match-countdown" data-timestamp="${match.timestamp}">⏱ --:--</div>`;
-        }
+    const now = Math.floor(Date.now() / 1000);
+    if (match.score) {
+        scoreHTML = `<div class="match-score">${match.score}</div>`;
+    }
+    if (match.timestamp && match.timestamp > now) {
+        countdownHTML = `<div class="match-countdown" data-timestamp="${match.timestamp}">⏱ --:--</div>`;
     }
 
     // Team info
@@ -307,7 +282,6 @@ function createMatchCard(match) {
         <div class="match-center">
             <div class="match-time">${timeString}</div>
             ${scoreHTML}
-            ${statusHTML}
             ${countdownHTML}
         </div>
         
