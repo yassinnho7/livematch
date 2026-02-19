@@ -169,6 +169,19 @@
             margin-bottom: 12px;
             cursor: pointer;
             transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .server-card::before {
+            content: "";
+            position: absolute;
+            inset-inline-start: 0;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: linear-gradient(180deg, var(--accent), #6366f1);
+            opacity: 0.9;
         }
 
         .server-card:active {
@@ -197,15 +210,15 @@
         }
 
         .play-icon {
-            width: 44px;
-            height: 44px;
+            width: 48px;
+            height: 48px;
             border-radius: 50%;
             background: linear-gradient(135deg, var(--accent), #6366f1);
             display: flex;
             align-items: center;
             justify-content: center;
             color: #fff;
-            font-size: 1rem;
+            font-size: 1.08rem;
             box-shadow: 0 4px 20px var(--accent-glow);
         }
 

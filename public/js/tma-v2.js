@@ -19,7 +19,8 @@ const state = {
     isFullscreen: false,
     pseudoFullscreen: false,
     bottomBannerMounted: false,
-    serverBannerMounted: false
+    serverBannerMounted: false,
+    countdownTimer: null
 };
 
 const els = {
@@ -161,6 +162,7 @@ function normalizeMatch(raw) {
         id: Number(raw.id),
         status: normalizeStatus(raw.status),
         time: safeString(raw.time, "--:--"),
+        timestamp: Number(raw.timestamp) || 0,
         score: normalizeScore(raw.score),
         leagueName: safeString(raw.league && raw.league.name, "بطولة"),
         leagueLogo: safeUrl(raw.league && raw.league.logo),
@@ -238,6 +240,7 @@ function renderMatches() {
     if (next.length) els.matches.appendChild(createGroup("مباريات قادمة", next));
     if (done.length) els.matches.appendChild(createGroup("مباريات منتهية", done));
 
+    startCountdowns();
     mountBottomBanner();
 }
 
@@ -286,7 +289,7 @@ function createMatchCard(match) {
 function createStatus(match) {
     if (match.status === "LIVE") return createEl("span", "status live", "مباشر");
     if (match.status === "FT") return createEl("span", "status ft", "انتهت");
-    return createEl("span", "status", `${match.time} GMT`);
+    return createEl("span", "status", "GMT");
 }
 
 function createTeam(name, logo) {
@@ -304,6 +307,11 @@ function createCenter(match) {
     if (match.status !== "FT") {
         center.appendChild(createEl("div", "time", match.time || "--:--"));
         center.appendChild(createEl("div", "sub", match.status === "LIVE" ? "جارية الآن" : "بتوقيت GMT"));
+    }
+    if (match.timestamp && match.timestamp > Math.floor(Date.now() / 1000)) {
+        const countdown = createEl("div", "sub countdown", "--:--:--");
+        countdown.setAttribute("data-kickoff", String(match.timestamp));
+        center.appendChild(countdown);
     }
     return center;
 }
@@ -331,9 +339,8 @@ function openServersView() {
     clearNode(els.serversList);
 
     const streams = state.selectedMatch.streams || [];
-    const hasPreferredPlayer = streams.some((stream) => isPreferredPlayerUrl(stream.url));
 
-    if (!hasPreferredPlayer) {
+    if (!streams.length) {
         els.serversList.appendChild(
             createEl(
                 "div",
@@ -382,6 +389,32 @@ function playStream(url) {
     setTimeout(() => {
         els.iframe.src = url;
     }, 140);
+}
+
+function startCountdowns() {
+    if (state.countdownTimer) {
+        clearInterval(state.countdownTimer);
+        state.countdownTimer = null;
+    }
+
+    const tick = () => {
+        const now = Math.floor(Date.now() / 1000);
+        document.querySelectorAll(".countdown[data-kickoff]").forEach((el) => {
+            const ts = Number(el.getAttribute("data-kickoff")) || 0;
+            const diff = ts - now;
+            if (diff <= 0) {
+                el.textContent = "";
+                return;
+            }
+            const h = Math.floor(diff / 3600);
+            const m = Math.floor((diff % 3600) / 60);
+            const s = diff % 60;
+            el.textContent = `⏱ ${String(h).padStart(2, "0")}:${String(m).padStart(2, "0")}:${String(s).padStart(2, "0")}`;
+        });
+    };
+
+    tick();
+    state.countdownTimer = setInterval(tick, 1000);
 }
 
 function isPreferredPlayerUrl(url) {
