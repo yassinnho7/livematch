@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-02-19T14:43:28.861Z",
+  "generated_at": "2026-02-19T15:33:53.929Z",
   "count": 14,
   "matches": [
     {
@@ -498,12 +498,36 @@
       "score": null,
       "streams": [
         {
+          "id": "stream_koraplus_342292646_0",
+          "source": "koraplus",
+          "quality": "HD",
+          "channel": "غير معروف",
+          "url": "https://pl.gomatch-live.com/albaplayer/bein22/",
+          "priority": 1
+        },
+        {
           "id": "stream_bein2_1388015362",
           "source": "livekora",
           "quality": "HD",
           "channel": "bein2",
           "url": "https://pl.gomatch-live.com/albaplayer/bein2/",
           "priority": 1
+        },
+        {
+          "id": "stream_koraplus_342292646_1",
+          "source": "koraplus",
+          "quality": "SD",
+          "channel": "غير معروف",
+          "url": "https://koraplus.blog/kooracity/",
+          "priority": 2
+        },
+        {
+          "id": "stream_koraplus_342292646_2",
+          "source": "koraplus",
+          "quality": "SD",
+          "channel": "غير معروف",
+          "url": "https://koraplus.blog/koora-live/",
+          "priority": 3
         }
       ]
     }
