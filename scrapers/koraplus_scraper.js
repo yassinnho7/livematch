@@ -172,7 +172,7 @@ class KoraplusScraper {
                         // Generate stable ID for the match
                         const dateStr = new Date().toISOString().split('T')[0];
                         const uniqueString = `${dateStr}-${match.homeTeam}-${match.awayTeam}`;
-                        const matchStableId = this.generateMatchHash(uniqueString);
+                        const matchStableId = generateMatchHash(uniqueString);
 
                         // Add all found player URLs as streams
                         match.streams = [];

@@ -60,9 +60,9 @@ jobs:
         run: |
           node scrapers/scraper_manager.js
       
-      - name: Generate Match Posters (AI-Hybrid)
-        run: |
-          node scripts/generate_posters.js
+      # - name: Generate Match Posters (AI-Hybrid)
+      #   run: |
+      #     node scripts/generate_posters.js
       
       - name: Notify Webhook (Make.com)
         env:
