@@ -22,25 +22,34 @@ class ScraperManager {
     }
 
     async runFullUpdate() {
-        console.log('🚀 Starting Multi-Source Scrape: LiveKora + Korah.live + Koraplus + Siiir.tv + SportsOnline');
+        console.log('🚀 Starting Multi-Source Scrape: Korah.live (Primary) + Koraplus + LiveKora + SportsOnline + Siiir.tv');
 
-        const [liveKoraMatches, korahMatches, koraplusMatches, sportsonlineMatches] = await Promise.all([
-            this.liveKora.scrapeMatches().catch((e) => { console.error('LiveKora Error:', e.message); return []; }),
+        // First, get Korah as PRIMARY source (matches-today)
+        const [korahMatches, koraplusMatches, liveKoraMatches, sportsonlineMatches] = await Promise.all([
             this.korah.scrapeMatches().catch((e) => { console.error('Korah Error:', e.message); return []; }),
             this.koraplus.scrapeMatches().catch((e) => { console.error('Koraplus Error:', e.message); return []; }),
+            this.liveKora.scrapeMatches().catch((e) => { console.error('LiveKora Error:', e.message); return []; }),
             this.sportsonline.scrapeMatches().catch((e) => { console.error('SportsOnline Error:', e.message); return []; })
         ]);
 
-        console.log(`📊 Sources: LiveKora(${liveKoraMatches.length}), Korah.live(${korahMatches.length}), Koraplus(${koraplusMatches.length}), SportsOnline(${sportsonlineMatches.length})`);
+        console.log(`📊 Sources: Korah.live(${korahMatches.length}), Koraplus(${koraplusMatches.length}), LiveKora(${liveKoraMatches.length}), SportsOnline(${sportsonlineMatches.length})`);
 
-        let combinedMatches = this.deduplicateMatches(liveKoraMatches, korahMatches);
-        combinedMatches = this.mergeKoraplus(combinedMatches, koraplusMatches);
-        combinedMatches = this.mergeSportsOnline(combinedMatches, sportsonlineMatches);
+        // Use Korah as primary, then add unique matches from other sources
+        let combinedMatches = [...korahMatches];
+
+        // Add unique matches from Koraplus (that don't exist in Korah)
+        combinedMatches = this.addUniqueMatches(combinedMatches, koraplusMatches);
+
+        // Add unique matches from LiveKora
+        combinedMatches = this.addUniqueMatches(combinedMatches, liveKoraMatches);
+
+        // Add unique matches from SportsOnline
+        combinedMatches = this.addUniqueMatches(combinedMatches, sportsonlineMatches);
 
         console.log(`✅ Unified match list: ${combinedMatches.length} matches total.`);
 
         const siiirStreams = await this.siiir.scrapeMatches().catch(() => []);
-        const finalMatches = this.mergeSources(combinedMatches, siiirStreams);
+        const finalMatches = this.mergeAllStreams(combinedMatches, siiirStreams);
 
         await this.saveMatches(finalMatches);
         return finalMatches;
@@ -180,10 +189,87 @@ class ScraperManager {
     addUniqueStreams(targetMatch, streams) {
         if (!targetMatch.streams) targetMatch.streams = [];
         if (!Array.isArray(streams) || !streams.length) return;
+
+        // Use URL-based deduplication to avoid duplicates
+        const existingUrls = new Set(targetMatch.streams.map(s => s.url));
+
         streams.forEach((stream) => {
             if (!stream || !stream.url) return;
-            const exists = targetMatch.streams.some((s) => s.url === stream.url);
-            if (!exists) targetMatch.streams.push(stream);
+            // Only add if URL doesn't exist
+            if (!existingUrls.has(stream.url)) {
+                existingUrls.add(stream.url);
+                targetMatch.streams.push(stream);
+            }
+        });
+    }
+
+    // Add unique matches from a source (that don't exist in primary)
+    addUniqueMatches(primaryMatches, newMatches) {
+        const unified = [...primaryMatches];
+
+        newMatches.forEach((newMatch) => {
+            const existingIndex = this.findMatchIndex(unified, newMatch.home.name, newMatch.away.name);
+
+            if (existingIndex === -1) {
+                // Match doesn't exist - add it with null score
+                newMatch.score = null;
+                unified.push(newMatch);
+                console.log(`➕ Added new match: ${newMatch.home.name} vs ${newMatch.away.name}`);
+            } else {
+                // Match exists - merge streams only
+                const existingMatch = unified[existingIndex];
+                this.addUniqueStreams(existingMatch, newMatch.streams);
+
+                // Also merge logos if missing
+                if (!existingMatch.home.logo && newMatch.home.logo) {
+                    existingMatch.home.logo = newMatch.home.logo;
+                }
+                if (!existingMatch.away.logo && newMatch.away.logo) {
+                    existingMatch.away.logo = newMatch.away.logo;
+                }
+            }
+        });
+
+        return unified;
+    }
+
+    // Merge all streams from all sources with proper deduplication
+    mergeAllStreams(matches, siiirStreams) {
+        console.log(`🔄 Merging streams from all sources (including Siiir.tv)...`);
+
+        return matches.map((match) => {
+            // Reset score for matches that haven't started (NS)
+            if (match.status === 'NS') {
+                match.score = null;
+            }
+
+            // Find and add Siiir streams
+            const matchingSiiir = siiirStreams.find((s) => {
+                const title = String(s.title || '').toLowerCase();
+                const home = this.normalizeTeamName(match.home.name);
+                const away = this.normalizeTeamName(match.away.name);
+                if (!home || !away) return false;
+                return title.includes(home) || title.includes(away);
+            });
+
+            if (matchingSiiir && matchingSiiir.playerUrl) {
+                this.addUniqueStreams(match, [{
+                    id: `stream_siiir_${match.id}`,
+                    source: 'siiir',
+                    quality: 'VIP',
+                    channel: 'VIP Server',
+                    url: matchingSiiir.playerUrl,
+                    priority: 2
+                }]);
+                console.log(`🔗 Linked Siiir stream to: ${match.home.name} vs ${match.away.name}`);
+            }
+
+            // Sort streams by priority
+            if (match.streams && match.streams.length > 0) {
+                match.streams.sort((a, b) => (a.priority || 999) - (b.priority || 999));
+            }
+
+            return match;
         });
     }
 
