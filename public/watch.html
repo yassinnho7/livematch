@@ -553,7 +553,7 @@
                 if (directServerUrl) {
                     const decoded = decodeURIComponent(directServerUrl);
                     if (!isPreferredPlayerUrl(decoded) || isBlockedPlaceholderUrl(decoded)) {
-                        return showError('اعد المحاولة لاحقا، السيرفر غير متوفر حاليا. قد يظهر بعد التحديث التالي خلال 7 دقائق.');
+                        return showError('اعد المحاولة لاحقا، السيرفر غير متوفر حاليا. سيتم توفير البث قريبا، أعد المحاولة بعد قليل.');
                     }
                     launchStream(decoded);
 
@@ -580,7 +580,7 @@
                     const visibleStreams = currentMatch.streams.filter((stream) => !isBlockedPlaceholderUrl(stream.url));
                     const hasPreferredPlayer = visibleStreams.some((stream) => isPreferredPlayerUrl(stream.url));
                     if (!hasPreferredPlayer) {
-                        return showError('اعد المحاولة لاحقا، السيرفر غير متوفر حاليا. قد يظهر بعد التحديث التالي خلال 7 دقائق.');
+                        return showError('اعد المحاولة لاحقا، السيرفر غير متوفر حاليا. سيتم توفير البث قريبا، أعد المحاولة بعد قليل.');
                     }
 
                     buildServerButtons(visibleStreams);
@@ -590,7 +590,7 @@
                     // Directly launch the stream without countdown
                     launchStream(visibleStreams[idx].url);
                 } else {
-                    showError('اعد المحاولة لاحقا، السيرفر غير متوفر حاليا. قد يظهر بعد التحديث التالي خلال 7 دقائق.');
+                    showError('اعد المحاولة لاحقا، السيرفر غير متوفر حاليا. سيتم توفير البث قريبا، أعد المحاولة بعد قليل.');
                 }
 
             } catch (e) {
