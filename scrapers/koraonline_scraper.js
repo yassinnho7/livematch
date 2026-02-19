@@ -13,8 +13,8 @@ const __dirname_local = path.dirname(__filename_local);
 
 class KoraOnlineScraper {
     constructor() {
-        // According to user, https://www.kora-online.cc/ redirects to is_home/
-        this.baseUrl = process.env.KORAONLINE_URL || 'https://www.kora-online.cc/is_home/';
+        // According to user, https://www.kora-online.cc/ redirects to is_home/ but matches-today_4/ works better for getting all matches
+        this.baseUrl = process.env.KORAONLINE_URL || 'https://www.kora-online.cc/matches-today_4/';
     }
 
     async scrapeMatches() {
@@ -111,71 +111,88 @@ class KoraOnlineScraper {
             const matches = await page.evaluate((foundSelector) => {
                 const results = [];
 
-                const matchCards = document.querySelectorAll('.AY_Match, div.AY_Block.AY-Fixture, .match-card');
+                // Use robust schema.org selectors since CSS classes are auto-generated hashes (e.g. ay_dfd80026)
+                const matchCards = document.querySelectorAll('div[itemscope][itemtype="https://schema.org/SportsEvent"], .AY_Match');
 
                 if (matchCards.length > 0) {
                     matchCards.forEach((card, index) => {
                         try {
-                            const linkEl = card.querySelector('a') || card.closest('a');
+                            const linkEl = card.querySelector('a[itemprop="url"]') || card.querySelector('a');
                             if (!linkEl) {
-                                console.log('No link found in card', card.className);
                                 return;
                             }
 
                             const href = linkEl.href || '';
 
-                            // Team Names
-                            const homeNameEl = card.querySelector('.TM1 .TM_Name') || card.querySelector('.TM1');
-                            const awayNameEl = card.querySelector('.TM2 .TM_Name') || card.querySelector('.TM2');
-                            let homeTeam = homeNameEl?.innerText?.trim() || '';
-                            let awayTeam = awayNameEl?.innerText?.trim() || '';
+                            // Team Names using itemprop="name" inside Home/Away containers
+                            const homeContainer = card.querySelector('[itemprop="homeTeam performer"]') || card.querySelector('.TM1');
+                            const awayContainer = card.querySelector('[itemprop="awayTeam performer"]') || card.querySelector('.TM2');
+
+                            let homeTeam = homeContainer?.querySelector('[itemprop="name"]')?.innerText?.trim() || homeContainer?.innerText?.trim() || '';
+                            let awayTeam = awayContainer?.querySelector('[itemprop="name"]')?.innerText?.trim() || awayContainer?.innerText?.trim() || '';
+
+                            // Clean team names if they picked up the score or other text
+                            homeTeam = homeTeam.replace(/\n.*/g, '').trim();
+                            awayTeam = awayTeam.replace(/\n.*/g, '').trim();
 
                             if (!homeTeam || !awayTeam) {
-                                console.log('No team names found. Home:', homeTeam, 'Away:', awayTeam);
                                 return;
                             }
 
                             // Team Logos
-                            const homeLogoEl = card.querySelector('.TM1 .TM_Logo img');
-                            const awayLogoEl = card.querySelector('.TM2 .TM_Logo img');
-                            const homeLogo = homeLogoEl?.getAttribute('data-src') || homeLogoEl?.src || '';
-                            const awayLogo = awayLogoEl?.getAttribute('data-src') || awayLogoEl?.src || '';
+                            const homeLogoEl = homeContainer?.querySelector('img[itemprop="image"]') || homeContainer?.querySelector('img');
+                            const awayLogoEl = awayContainer?.querySelector('img[itemprop="image"]') || awayContainer?.querySelector('img');
 
-                            // Time (Kora-Online is usually GMT+3)
-                            const timeEl = card.querySelector('.MT_Time');
-                            const timeText = timeEl?.innerText?.trim() || '';
+                            // Get the most robust image source
+                            const homeLogo = homeLogoEl?.getAttribute('content') || homeLogoEl?.getAttribute('data-lazy-src') || homeLogoEl?.getAttribute('data-src') || homeLogoEl?.src || '';
+                            const awayLogo = awayLogoEl?.getAttribute('content') || awayLogoEl?.getAttribute('data-lazy-src') || awayLogoEl?.getAttribute('data-src') || awayLogoEl?.src || '';
+
+                            // Time: Use the reliable ISO startDate if available
+                            const startDateMeta = card.querySelector('meta[itemprop="startDate"]');
+                            let timeText = '';
+
+                            if (startDateMeta && startDateMeta.content) {
+                                // e.g. "2026-02-20T22:30:00+03:00". We pass it to be correctly parsed later
+                                timeText = startDateMeta.content;
+                            } else {
+                                // Fallback
+                                const timeEl = card.querySelector('.MT_Time') || card.querySelector('span:first-of-type');
+                                timeText = timeEl?.innerText?.trim() || '';
+                            }
 
                             // Status
-                            const statusEl = card.querySelector('.MT_Status') || card.querySelector('.MT_Result');
                             let status = 'NS';
                             let scoreText = '';
-                            if (statusEl) {
-                                const statusText = statusEl.innerText?.trim() || '';
-                                if (statusText.includes('Ø¬Ø§Ø±ÙŠØ©') || statusText.includes('Ù…Ø¨Ø§Ø´Ø±') || statusText.includes('LIVE')) {
-                                    status = 'LIVE';
-                                    const resEl = card.querySelector('.MT_Result');
-                                    if (resEl) scoreText = resEl.innerText?.trim() || '';
-                                } else if (statusText.includes('Ø§Ù†ØªÙ‡Øª') || statusText.includes('FT')) {
-                                    status = 'FT';
-                                    scoreText = statusText;
-                                } else if (statusText.includes('-')) {
-                                    // might be ongoing or finished score
-                                    const textVal = statusText.replace(/[^\d-]/g, '');
-                                    if (textVal.length >= 3) {
-                                        status = 'LIVE';
-                                        scoreText = textVal;
-                                    }
+
+                            const classList = card.className || '';
+                            const cardText = card.innerText || '';
+
+                            if (classList.includes('finished') || cardText.includes('انتهت')) {
+                                status = 'FT';
+                            } else if (classList.includes('live') || cardText.includes('مباشر') || cardText.includes('جارية')) {
+                                status = 'LIVE';
+                            }
+
+                            // Try to extract exact score if FT or LIVE
+                            if (status === 'FT' || status === 'LIVE') {
+                                const goals = card.querySelectorAll('.RS-goals, [class*="goals"]');
+                                if (goals.length >= 2) {
+                                    scoreText = `${goals[0].innerText}-${goals[1].innerText}`;
                                 }
                             }
 
                             // Info (Channel, Commentator, League)
-                            const infoItems = card.querySelectorAll('.MT_Info li span');
-                            let channelName = '';
-                            let leagueName = 'مباريات كرة القدم';
+                            const leagueItem = card.querySelector('[itemprop="location"] [itemprop="name"]');
+                            let leagueName = leagueItem?.innerText?.trim() || 'مباريات كرة القدم';
 
-                            if (infoItems.length >= 1) channelName = infoItems[0].innerText?.trim() || '';
-                            if (infoItems.length >= 3) leagueName = infoItems[2].innerText?.trim() || leagueName;
-                            else if (infoItems.length === 2) leagueName = infoItems[1].innerText?.trim() || leagueName;
+                            const ulInfo = card.querySelector('ul');
+                            let channelName = '';
+                            if (ulInfo) {
+                                const lis = ulInfo.querySelectorAll('li');
+                                if (lis.length >= 1) {
+                                    channelName = lis[0].innerText?.trim() || '';
+                                }
+                            }
 
                             results.push({
                                 id: 300000 + index + 1,
