@@ -107,8 +107,11 @@ jobs:
           MAX=5
           for n in $(seq 1 $MAX); do
             echo "📤 Push attempt $n/$MAX..."
-            git fetch origin main --quiet
-            git rebase origin/main --quiet && git push origin main && break
+            # First, discard any local changes that might conflict
+            git checkout -- .
+            # Then try to pull and push
+            git pull origin main --no-rebase --quiet 2>/dev/null || true
+            git push origin main && break
             
             if [ $n -eq $MAX ]; then
               echo "❌ All push attempts failed"

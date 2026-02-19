@@ -204,17 +204,23 @@ class ScraperManager {
     }
 
     // Add unique matches from a source (that don't exist in primary)
+    // Only add if the match has streams
     addUniqueMatches(primaryMatches, newMatches) {
         const unified = [...primaryMatches];
 
         newMatches.forEach((newMatch) => {
             const existingIndex = this.findMatchIndex(unified, newMatch.home.name, newMatch.away.name);
 
+            // Only process matches that have at least one stream
+            const hasStreams = newMatch.streams && newMatch.streams.length > 0;
+
             if (existingIndex === -1) {
-                // Match doesn't exist - add it with null score
-                newMatch.score = null;
-                unified.push(newMatch);
-                console.log(`➕ Added new match: ${newMatch.home.name} vs ${newMatch.away.name}`);
+                // Match doesn't exist - only add if it has streams
+                if (hasStreams) {
+                    newMatch.score = null;
+                    unified.push(newMatch);
+                    console.log(`➕ Added new match with stream: ${newMatch.home.name} vs ${newMatch.away.name}`);
+                }
             } else {
                 // Match exists - merge streams only
                 const existingMatch = unified[existingIndex];
