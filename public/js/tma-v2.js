@@ -269,7 +269,6 @@ function createMatchCard(match) {
     league.appendChild(createImg(match.leagueLogo || CONFIG.fallbackLogo, ""));
     league.appendChild(createEl("span", "", match.leagueName));
     top.appendChild(league);
-    top.appendChild(createStatus(match));
 
     const main = createEl("div", "match-main");
     main.appendChild(createTeam(match.homeName, match.homeLogo));
