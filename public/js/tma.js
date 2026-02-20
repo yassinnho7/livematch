@@ -1,4 +1,4 @@
-/**
+﻿/**
  * LiveMatch TMA SPA Core v2.0
  * Features: SPA View Management, Monetag Integration, Telegram Native UI
  */
@@ -48,7 +48,7 @@ async function init() {
         initializeAdTimer();
     } catch (e) {
         console.error('Init error:', e);
-        loader.innerHTML = '<p style="color:#f4212e;">حدث خطأ في تحميل البيانات.</p>';
+        loader.innerHTML = '<p style="color:#f4212e;">Ø­Ø¯Ø« Ø®Ø·Ø£ ÙÙŠ ØªØ­Ù…ÙŠÙ„ Ø§Ù„Ø¨ÙŠØ§Ù†Ø§Øª.</p>';
     }
 }
 
@@ -125,14 +125,11 @@ async function triggerServerAd() {
 
 function renderMatches(matches) {
     if (!matches.length) {
-        matchesList.innerHTML = '<div style="text-align:center; padding:40px; color:#8899a6;">لا توجد مباريات جارية.</div>';
+        matchesList.innerHTML = '<div style="text-align:center; padding:40px; color:#8899a6;">Ù„Ø§ ØªÙˆØ¬Ø¯ Ù…Ø¨Ø§Ø±ÙŠØ§Øª Ø¬Ø§Ø±ÙŠØ©.</div>';
         return;
     }
 
-    const sorted = [...matches].sort((a, b) => {
-        const order = { 'LIVE': 0, 'NS': 1, 'FT': 2 };
-        return (order[a.status] ?? 1) - (order[b.status] ?? 1);
-    });
+    const sorted = [...matches].sort((a, b) => (a.timestamp || 0) - (b.timestamp || 0));
 
     matchesList.innerHTML = '';
     sorted.forEach(match => {
@@ -140,12 +137,11 @@ function renderMatches(matches) {
         div.className = 'match-card';
         div.onclick = () => openMatch(match);
 
-        const isLive = match.status === 'LIVE';
-        const time = match.time_label || match.time || 'قريباً';
+        const time = match.time_label || match.time || 'Ù‚Ø±ÙŠØ¨Ø§Ù‹';
 
         div.innerHTML = `
             <div class="m-header">
-                <span>🏆 ${match.league.name}</span>
+                <span>ðŸ† ${match.league.name}</span>
                 <span>${time}</span>
             </div>
             <div class="m-teams">
@@ -160,8 +156,8 @@ function renderMatches(matches) {
                 </div>
             </div>
             <div class="m-footer">
-                ${isLive ? '<div class="live-tag"><span class="live-dot"></span> مباشر</div>' : '<div></div>'}
-                <button class="btn-primary">مشاهدة</button>
+                <div></div>
+                <button class="btn-primary">Ù…Ø´Ø§Ù‡Ø¯Ø©</button>
             </div>
         `;
         matchesList.appendChild(div);
@@ -180,14 +176,14 @@ function renderServers(match) {
     serverList.innerHTML = '';
 
     if (!match.streams?.length) {
-        serverList.innerHTML = '<p style="color:#f4212e; text-align:center;">لا توجد سيرفرات متاحة.</p>';
+        serverList.innerHTML = '<p style="color:#f4212e; text-align:center;">Ù„Ø§ ØªÙˆØ¬Ø¯ Ø³ÙŠØ±ÙØ±Ø§Øª Ù…ØªØ§Ø­Ø©.</p>';
         return;
     }
 
     match.streams.forEach((s, i) => {
         const b = document.createElement('div');
         b.className = 'server-item';
-        b.textContent = `سيرفر ${i + 1} (${s.quality || 'HD'})`;
+        b.textContent = `Ø³ÙŠØ±ÙØ± ${i + 1} (${s.quality || 'HD'})`;
         b.onclick = () => startStreaming(s.url);
         serverList.appendChild(b);
     });
@@ -212,8 +208,9 @@ function toggleMaximize() {
         playerContainer.style.height = '100vh';
         playerContainer.style.aspectRatio = 'unset';
         // Suggest landscape to user
-        tg.showAlert('يرجى تدوير الهاتف للحصول على أفضل تجربة مشاهدة!');
+        tg.showAlert('ÙŠØ±Ø¬Ù‰ ØªØ¯ÙˆÙŠØ± Ø§Ù„Ù‡Ø§ØªÙ Ù„Ù„Ø­ØµÙˆÙ„ Ø¹Ù„Ù‰ Ø£ÙØ¶Ù„ ØªØ¬Ø±Ø¨Ø© Ù…Ø´Ø§Ù‡Ø¯Ø©!');
     }
 }
 
 init();
+

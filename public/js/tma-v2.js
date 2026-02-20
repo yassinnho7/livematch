@@ -236,20 +236,8 @@ function renderMatches() {
         return;
     }
 
-    const sorted = [...state.matches].sort((a, b) => {
-        const order = { LIVE: 0, NS: 1, FT: 2 };
-        const byStatus = (order[a.status] ?? 9) - (order[b.status] ?? 9);
-        if (byStatus !== 0) return byStatus;
-        return a.time.localeCompare(b.time);
-    });
-
-    const live = sorted.filter((m) => m.status === "LIVE");
-    const next = sorted.filter((m) => m.status === "NS");
-    const done = sorted.filter((m) => m.status === "FT");
-
-    if (live.length) els.matches.appendChild(createGroup("مباشر الآن", live));
-    if (next.length) els.matches.appendChild(createGroup("مباريات قادمة", next));
-    if (done.length) els.matches.appendChild(createGroup("مباريات منتهية", done));
+    const sorted = [...state.matches].sort((a, b) => (a.timestamp || 0) - (b.timestamp || 0));
+    els.matches.appendChild(createGroup("مباريات اليوم", sorted));
 
     startCountdowns();
     mountBottomBanner();
@@ -272,7 +260,7 @@ function createGroup(title, matches) {
 }
 
 function createMatchCard(match) {
-    const card = createEl("article", `match-card glass${match.status === "LIVE" ? " live" : ""}`);
+    const card = createEl("article", "match-card glass");
     card.setAttribute("data-match-id", String(match.id));
 
     const top = createEl("div", "match-top");
@@ -311,13 +299,9 @@ function createTeam(name, logo) {
 
 function createCenter(match) {
     const center = createEl("div", "center");
-    if (match.score) center.appendChild(createEl("div", "score", match.score));
-    else center.appendChild(createEl("div", "vs", "VS"));
-
-    if (match.status !== "FT") {
-        center.appendChild(createEl("div", "time", match.time || "--:--"));
-        center.appendChild(createEl("div", "sub", match.status === "LIVE" ? "جارية الآن" : "بتوقيت GMT"));
-    }
+    center.appendChild(createEl("div", "vs", "VS"));
+    center.appendChild(createEl("div", "time", match.time || "--:--"));
+    center.appendChild(createEl("div", "sub", "بتوقيت GMT"));
     if (match.timestamp && match.timestamp > Math.floor(Date.now() / 1000)) {
         const countdown = createEl("div", "sub countdown", "--:--:--");
         countdown.setAttribute("data-kickoff", String(match.timestamp));
