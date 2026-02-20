@@ -470,7 +470,7 @@ class ScraperManager {
     filterOutFinishedAndStaleMatches(matches) {
         const now = Math.floor(Date.now() / 1000);
         const maxPastSeconds = 6 * 60 * 60;
-        const staleNotStartedSeconds = 90 * 60;
+        const staleNotStartedSeconds = 4 * 60 * 60;
         return matches.filter((match) => {
             const status = String(match.status || '').toUpperCase();
             if (status === 'FT') return false;
