@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-02-20T12:04:17.699Z",
-  "count": 9,
+  "generated_at": "2026-02-20T12:22:56.635Z",
+  "count": 12,
   "matches": [
     {
       "id": 2071434755,
@@ -118,6 +118,29 @@
       "streams": []
     },
     {
+      "id": 314796892,
+      "date": "2026-02-20T19:45:00.000Z",
+      "timestamp": 1771616700,
+      "status": "NS",
+      "time": "19:45",
+      "time_label": "19:45 GMT",
+      "league": {
+        "name": "فرنسا, الدوري الفرنسي",
+        "country": "France",
+        "logo": "https://a.espncdn.com/combiner/i?img=/i/leaguelogos/soccer/500/9.png&h=40&w=40"
+      },
+      "home": {
+        "name": "بريست",
+        "logo": "https://i0.wp.com/www.kora-online.cc/wp-content/uploads/2026/02/534-135x150.png"
+      },
+      "away": {
+        "name": "أولمبيك مارسيليا",
+        "logo": "https://i0.wp.com/www.kora-online.cc/wp-content/uploads/2026/02/469.png"
+      },
+      "score": null,
+      "streams": []
+    },
+    {
       "id": 1108296027,
       "date": "2026-02-20T19:45:00.000Z",
       "timestamp": 1771616700,
@@ -156,29 +179,6 @@
           "priority": 3
         }
       ]
-    },
-    {
-      "id": 314796892,
-      "date": "2026-02-20T19:45:00.000Z",
-      "timestamp": 1771616700,
-      "status": "NS",
-      "time": "19:45",
-      "time_label": "19:45 GMT",
-      "league": {
-        "name": "فرنسا, الدوري الفرنسي",
-        "country": "France",
-        "logo": "https://a.espncdn.com/combiner/i?img=/i/leaguelogos/soccer/500/9.png&h=40&w=40"
-      },
-      "home": {
-        "name": "بريست",
-        "logo": "https://i0.wp.com/www.kora-online.cc/wp-content/uploads/2026/02/534-135x150.png"
-      },
-      "away": {
-        "name": "أولمبيك مارسيليا",
-        "logo": "https://i0.wp.com/www.kora-online.cc/wp-content/uploads/2026/02/469.png"
-      },
-      "score": null,
-      "streams": []
     },
     {
       "id": 318169880,
@@ -222,6 +222,75 @@
       "away": {
         "name": "إلتشي",
         "logo": "https://i0.wp.com/www.kora-online.cc/wp-content/uploads/2026/02/156-150x150.png"
+      },
+      "score": null,
+      "streams": []
+    },
+    {
+      "id": 1240129098,
+      "date": "2026-02-20T19:30:00.000Z",
+      "timestamp": 1771615800,
+      "status": "NS",
+      "time": "19:30",
+      "time_label": "19:30 GMT",
+      "league": {
+        "name": "مصر, الدوري المصري",
+        "country": "Egypt",
+        "logo": "https://a.espncdn.com/combiner/i?img=/i/leaguelogos/soccer/500/1237.png&h=40&w=40"
+      },
+      "home": {
+        "name": "بيراميدز",
+        "logo": "https://www.korah.live/wp-content/uploads/2026/02/22143.png"
+      },
+      "away": {
+        "name": "سيراميكا كليوباترا",
+        "logo": "https://www.korah.live/wp-content/uploads/2026/02/50882.png"
+      },
+      "score": null,
+      "streams": []
+    },
+    {
+      "id": 2118405102,
+      "date": "2026-02-20T19:30:00.000Z",
+      "timestamp": 1771615800,
+      "status": "NS",
+      "time": "19:30",
+      "time_label": "19:30 GMT",
+      "league": {
+        "name": "مصر, الدوري المصري",
+        "country": "Egypt",
+        "logo": "https://a.espncdn.com/combiner/i?img=/i/leaguelogos/soccer/500/1237.png&h=40&w=40"
+      },
+      "home": {
+        "name": "الإسماعيلي",
+        "logo": "https://www.korah.live/wp-content/uploads/2026/02/8299.png"
+      },
+      "away": {
+        "name": "وادي دجلة",
+        "logo": "https://www.korah.live/wp-content/uploads/2026/02/8311.png"
+      },
+      "score": null,
+      "streams": []
+    },
+    {
+      "id": 1512956477,
+      "date": "2026-02-20T19:30:00.000Z",
+      "timestamp": 1771615800,
+      "status": "NS",
+      "time": "19:30",
+      "time_label": "19:30 GMT",
+      "league": {
+        "name": "مصر, الدوري المصري",
+        "country": "Egypt",
+        "logo": "https://a.espncdn.com/combiner/i?img=/i/leaguelogos/soccer/500/1237.png&h=40&w=40"
+      },
+      "home": {
+        "name": "غزل المحلة",
+        "logo": "https://www.korah.live/wp-content/uploads/2026/02/8610.png"
+      },
+      "away": {
+        "name": "زد",
+        "logo": "https://www.korah.live/wp-content/uploads/2026/02/29732.png"
       },
       "score": null,
       "streams": []
