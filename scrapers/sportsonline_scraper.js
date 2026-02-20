@@ -131,9 +131,16 @@ class SportsOnlineScraper {
     }
 
     cleanTeamName(name) {
-        // Remove extra spaces, emoji, and clean team name
-        return name
-            .replace(/[^\w\s\u0621-\u064A]/g, '') // Remove non-Arabic/non-English chars
+        // Normalize diacritics and special latin chars to improve cross-source matching.
+        return String(name || '')
+            .normalize('NFD')
+            .replace(/[\u0300-\u036f]/g, '')
+            .replace(/[Łł]/g, 'l')
+            .replace(/[Øø]/g, 'o')
+            .replace(/[Đđ]/g, 'd')
+            .replace(/[Ææ]/g, 'ae')
+            .replace(/[Œœ]/g, 'oe')
+            .replace(/[^\w\s\u0621-\u064A-]/g, '')
             .replace(/\s+/g, ' ')
             .trim();
     }

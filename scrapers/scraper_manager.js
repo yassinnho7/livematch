@@ -148,7 +148,18 @@ class ScraperManager {
             ['\u0628\u0648\u0644\u0648\u0646\u064A\u0627', 'bologna'],
             ['\u0633\u064A\u0644\u062A\u0627 \u0641\u064A\u062C\u0648', 'celta vigo'],
             ['\u0628\u0627\u0648\u0643 \u0633\u0627\u0644\u0648\u0646\u064A\u0643\u0627', 'paok'],
-            ['\u062F\u064A\u0646\u0627\u0645\u0648 \u0632\u063A\u0631\u0628', 'dinamo zagreb']
+            ['\u062F\u064A\u0646\u0627\u0645\u0648 \u0632\u063A\u0631\u0628', 'dinamo zagreb'],
+            ['\u0623\u062A\u0644\u062A\u064A\u0643 \u0628\u0644\u0628\u0627\u0648', 'athletic bilbao'],
+            ['\u0627\u062A\u0644\u062A\u064A\u0643 \u0628\u0644\u0628\u0627\u0648', 'athletic bilbao'],
+            ['\u0625\u0644\u062A\u0634\u064A', 'elche'],
+            ['\u0627\u0644\u062A\u0634\u064A', 'elche'],
+            ['\u0628\u0644\u0627\u0643\u0628\u064A\u0631\u0646 \u0631\u0648\u0641\u0631\u0632', 'blackburn rovers'],
+            ['\u0628\u0631\u064A\u0633\u062A\u0648\u0646 \u0646\u0648\u0631\u062B \u0625\u0646\u062F', 'preston north end'],
+            ['\u0628\u0631\u064A\u0633\u062A\u0648\u0646 \u0646\u0648\u0631\u062B \u0627\u0646\u062F', 'preston north end'],
+            ['\u0623\u0648\u0644\u0645\u0628\u064A\u0643 \u0645\u0627\u0631\u0633\u064A\u0644\u064A\u0627', 'marseille'],
+            ['\u0628\u0631\u064A\u0633\u062A', 'brest'],
+            ['\u0645\u0627\u064A\u0646\u0632 05', 'mainz 05'],
+            ['\u0647\u0627\u0645\u0628\u0648\u0631\u062C', 'hamburger sv']
         ];
         for (const [needle, canonical] of arabicContainsAliases) {
             if (value.includes(needle)) return canonical;
@@ -159,7 +170,10 @@ class ScraperManager {
             .replace(/\binternazionale\b/g, 'inter milan')
             .replace(/\bbod\b/g, 'bodo')
             .replace(/\bqaraba\b/g, 'qarabag')
-            .replace(/\bohiggins\b/g, 'ohiggins');
+            .replace(/\bohiggins\b/g, 'ohiggins')
+            .replace(/\bathletic club de bilbao\b/g, 'athletic bilbao')
+            .replace(/\bathletic club\b/g, 'athletic bilbao')
+            .replace(/\bolympique marseille\b/g, 'marseille');
 
         const englishExactAliases = [
             [/^club brugge$/, 'club brugge'],
@@ -183,7 +197,18 @@ class ScraperManager {
             [/^al ahly$/, 'al ahly'],
             [/^al ahli saudi$/, 'al ahly'],
             [/^borussia dortmund$/, 'borussia dortmund'],
-            [/^bodo glimt$/, 'bodo glimt']
+            [/^bodo glimt$/, 'bodo glimt'],
+            [/^athletic club$/, 'athletic bilbao'],
+            [/^athletic bilbao$/, 'athletic bilbao'],
+            [/^athletic club de bilbao$/, 'athletic bilbao'],
+            [/^elche$/, 'elche'],
+            [/^olympique marseille$/, 'marseille'],
+            [/^marseille$/, 'marseille'],
+            [/^blackburn rovers$/, 'blackburn rovers'],
+            [/^preston north end$/, 'preston north end'],
+            [/^mainz 05$/, 'mainz 05'],
+            [/^hamburger sv$/, 'hamburger sv'],
+            [/^brest$/, 'brest']
         ];
         for (const [pattern, canonical] of englishExactAliases) {
             if (pattern.test(value)) return canonical;
@@ -290,6 +315,36 @@ class ScraperManager {
 
     findMatchIndex(matches, home, away) {
         return matches.findIndex((m) => this.isMatchPair(m.home.name, m.away.name, home, away));
+    }
+
+    findMatchIndexByKickoffAndSingleTeam(matches, incomingMatch) {
+        if (!incomingMatch || !incomingMatch.home?.name || !incomingMatch.away?.name) return -1;
+        const incomingTs = Number(incomingMatch.timestamp);
+        if (!Number.isFinite(incomingTs) || incomingTs <= 0) return -1;
+
+        const maxDelta = 20 * 60;
+        let bestIndex = -1;
+        let bestScore = 0;
+
+        for (let i = 0; i < matches.length; i++) {
+            const candidate = matches[i];
+            const candidateTs = Number(candidate.timestamp);
+            if (!Number.isFinite(candidateTs) || candidateTs <= 0) continue;
+            if (Math.abs(candidateTs - incomingTs) > maxDelta) continue;
+
+            let score = 0;
+            if (this.areTeamNamesEquivalent(candidate.home?.name, incomingMatch.home.name) ||
+                this.areTeamNamesEquivalent(candidate.home?.name, incomingMatch.away.name)) score++;
+            if (this.areTeamNamesEquivalent(candidate.away?.name, incomingMatch.home.name) ||
+                this.areTeamNamesEquivalent(candidate.away?.name, incomingMatch.away.name)) score++;
+
+            if (score > bestScore) {
+                bestScore = score;
+                bestIndex = i;
+            }
+        }
+
+        return bestScore >= 1 ? bestIndex : -1;
     }
 
     titleMatchesMatch(title, match) {
@@ -549,7 +604,10 @@ class ScraperManager {
     mergeSportsOnline(primary, sportsonline, sourceName = 'SportsOnline') {
         const unified = [...primary];
         sportsonline.forEach((sMatch) => {
-            const pIndex = this.findMatchIndex(unified, sMatch.home.name, sMatch.away.name);
+            let pIndex = this.findMatchIndex(unified, sMatch.home.name, sMatch.away.name);
+            if (pIndex === -1) {
+                pIndex = this.findMatchIndexByKickoffAndSingleTeam(unified, sMatch);
+            }
             if (pIndex === -1) return;
             this.addUniqueStreams(unified[pIndex], sMatch.streams);
             console.log(`ðŸ“¡ Added ${sourceName} stream(s) to: ${unified[pIndex].home.name} vs ${unified[pIndex].away.name}`);
