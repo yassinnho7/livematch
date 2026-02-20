@@ -41,7 +41,11 @@ class ScraperManager {
         let combinedMatches = [...koraonlineMatches];
 
         // Enrich and add unique matches from Korah.live (now secondary)
-        combinedMatches = this.addUniqueMatches(combinedMatches, korahMatches);
+        // Korah can provide valid extra fixtures even when stream links are unavailable.
+        combinedMatches = this.addUniqueMatches(combinedMatches, korahMatches, {
+            includeWithoutStreams: true,
+            sourceName: 'Korah.live'
+        });
 
         // Enrich matches from other sources.
         combinedMatches = this.mergeSportsOnline(combinedMatches, koraplusMatches, 'Koraplus');
@@ -362,8 +366,9 @@ class ScraperManager {
     }
 
     // Add unique matches from a source (that don't exist in primary)
-    // Only add if the match has streams
-    addUniqueMatches(primaryMatches, newMatches) {
+    addUniqueMatches(primaryMatches, newMatches, options = {}) {
+        const includeWithoutStreams = Boolean(options.includeWithoutStreams);
+        const sourceName = String(options.sourceName || 'source');
         const unified = [...primaryMatches];
         const now = Math.floor(Date.now() / 1000);
 
@@ -378,12 +383,16 @@ class ScraperManager {
             const isStale = Number.isFinite(timestamp) && timestamp > 0 && timestamp < (now - (6 * 60 * 60));
 
             if (existingIndex === -1) {
-                // Match doesn't exist - only add if it has streams and is not finished/stale
-                if (hasStreams && !isFinished && !isStale) {
+                // Match doesn't exist - add if valid and either has streams or source is trusted for fixtures.
+                if ((hasStreams || includeWithoutStreams) && !isFinished && !isStale) {
                     newMatch.streams = usableStreams;
                     newMatch.score = null;
                     unified.push(newMatch);
-                    console.log(`âž• Added new match with stream: ${newMatch.home.name} vs ${newMatch.away.name}`);
+                    if (hasStreams) {
+                        console.log(`➕ Added new match with stream from ${sourceName}: ${newMatch.home.name} vs ${newMatch.away.name}`);
+                    } else {
+                        console.log(`➕ Added fixture without stream from ${sourceName}: ${newMatch.home.name} vs ${newMatch.away.name}`);
+                    }
                 }
             } else {
                 // Match exists - merge streams only
