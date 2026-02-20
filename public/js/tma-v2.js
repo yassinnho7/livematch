@@ -100,6 +100,12 @@ function bindEvents() {
     els.serversBack.addEventListener("click", () => navigateTo("home"));
 
     els.serversList.addEventListener("click", (event) => {
+        const homeBtn = event.target.closest("[data-action-home]");
+        if (homeBtn) {
+            navigateTo("home");
+            return;
+        }
+
         const btn = event.target.closest("[data-stream-url]");
         if (!btn) return;
         const streamUrl = btn.getAttribute("data-stream-url") || "";
@@ -345,13 +351,18 @@ function openServersView() {
     const streams = (state.selectedMatch.streams || []).filter((stream) => !isBlockedPlaceholderUrl(stream.url));
 
     if (!streams.length) {
-        els.serversList.appendChild(
-            createEl(
-                "div",
-                "empty glass",
-                "اعد المحاولة لاحقا، السيرفر غير متوفر حاليا. سيتم توفير البث قريبا، أعد المحاولة بعد قليل.",
-            )
+        const empty = createEl(
+            "div",
+            "empty glass",
+            "اعد المحاولة لاحقا، السيرفر غير متوفر حاليا. سيتم توفير البث قريبا، أعد المحاولة بعد قليل."
         );
+        const backHomeBtn = createEl("button", "server-item", "العودة للصفحة الرئيسية");
+        backHomeBtn.type = "button";
+        backHomeBtn.setAttribute("data-action-home", "1");
+        empty.appendChild(document.createElement("br"));
+        empty.appendChild(document.createElement("br"));
+        empty.appendChild(backHomeBtn);
+        els.serversList.appendChild(empty);
     } else {
         streams.forEach((stream, idx) => {
             const item = createEl("button", "server-item");
@@ -380,7 +391,7 @@ function openServersView() {
 function playStream(url) {
     if (!url) {
         showNote("رابط البث غير صالح.");
-        showNote("رابط البث غير صالح.");
+        return;
     }
     if (isBlockedPlaceholderUrl(url)) {
         showNote("اعد المحاولة لاحقا، السيرفر غير متوفر حاليا.");
@@ -598,7 +609,6 @@ function enablePseudoFullscreen() {
     els.playerView.classList.add("pseudo-fullscreen");
     els.playerView.classList.remove("force-landscape");
     lockOrientation("landscape");
-    showNote("تم تفعيل وضع مشاهدة أفقي بديل.");
 }
 
 function disablePseudoFullscreen() {
