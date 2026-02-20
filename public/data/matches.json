@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-02-20T23:04:10.012Z",
-  "count": 5,
+  "generated_at": "2026-02-20T23:41:45.381Z",
+  "count": 4,
   "matches": [
     {
       "id": 167372432,
@@ -90,29 +90,6 @@
       "away": {
         "name": "ميتز",
         "logo": "https://i0.wp.com/www.kora-online.cc/wp-content/uploads/2026/02/484-150x150.png"
-      },
-      "score": null,
-      "streams": []
-    },
-    {
-      "id": 181045974,
-      "date": "2026-02-20T19:30:00.000Z",
-      "timestamp": 1771615800,
-      "status": "NS",
-      "time": "19:30",
-      "time_label": "19:30 GMT",
-      "league": {
-        "name": "مصر, كأس مصر - ربع النهائي",
-        "country": "Egypt",
-        "logo": "https://cdn-icons-png.flaticon.com/512/1378/1378598.png"
-      },
-      "home": {
-        "name": "المصرية للاتصالات",
-        "logo": "https://www.korah.live/wp-content/uploads/2026/02/54377.png"
-      },
-      "away": {
-        "name": "إنبي",
-        "logo": "https://www.korah.live/wp-content/uploads/2026/02/8300.png"
       },
       "score": null,
       "streams": []
