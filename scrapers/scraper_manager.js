@@ -51,9 +51,8 @@ class ScraperManager {
         combinedMatches = this.mergeSportsOnline(combinedMatches, koraplusMatches, 'Koraplus');
         combinedMatches = this.mergeSportsOnline(combinedMatches, liveKoraMatches, 'LiveKora');
 
-        // Add unique matches from curated sources when primary/secondary misses them.
-        combinedMatches = this.addUniqueMatches(combinedMatches, koraplusMatches);
-        combinedMatches = this.addUniqueMatches(combinedMatches, liveKoraMatches);
+        // Koraplus/LiveKora are used as enrichment sources only.
+        // Do not add unique fixtures from them to avoid carrying stale previous-day matches.
 
         // SportsOnline remains streams-only (no new matches from this source).
         combinedMatches = this.mergeSportsOnline(combinedMatches, sportsonlineMatches, 'SportsOnline');
