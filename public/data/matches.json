@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-02-20T15:01:43.487Z",
+  "generated_at": "2026-02-20T15:49:01.374Z",
   "count": 12,
   "matches": [
     {
@@ -23,7 +23,16 @@
         "logo": "https://i0.wp.com/www.kora-online.cc/wp-content/uploads/2026/02/8351-150x150.png"
       },
       "score": null,
-      "streams": []
+      "streams": [
+        {
+          "id": "stream_sports-c2_ko_2071434755",
+          "source": "koraonline",
+          "quality": "HD",
+          "channel": "sports-c2",
+          "url": "https://aa.yallashoot2026.com/albaplayer/sports-c2/",
+          "priority": 1
+        }
+      ]
     },
     {
       "id": 1202767043,
@@ -46,7 +55,16 @@
         "logo": "https://i0.wp.com/www.kora-online.cc/wp-content/uploads/2026/02/8283.png"
       },
       "score": null,
-      "streams": []
+      "streams": [
+        {
+          "id": "stream_sports-c4_ko_1202767043",
+          "source": "koraonline",
+          "quality": "HD",
+          "channel": "sports-c4",
+          "url": "https://aa.yallashoot2026.com/albaplayer/sports-c4/",
+          "priority": 1
+        }
+      ]
     },
     {
       "id": 1359924466,
@@ -69,7 +87,16 @@
         "logo": "https://i0.wp.com/www.kora-online.cc/wp-content/uploads/2026/02/8347-150x150.png"
       },
       "score": null,
-      "streams": []
+      "streams": [
+        {
+          "id": "stream_sports-c3_ko_1359924466",
+          "source": "koraonline",
+          "quality": "HD",
+          "channel": "sports-c3",
+          "url": "https://aa.yallashoot2026.com/albaplayer/sports-c3/",
+          "priority": 1
+        }
+      ]
     },
     {
       "id": 1919330083,
