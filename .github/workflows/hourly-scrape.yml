@@ -94,6 +94,7 @@ jobs:
           # Add optional log files (ignore if missing)
           git add sent_notifications.json 2>/dev/null || true
           git add sent_telegram_notifications.json 2>/dev/null || true
+          git add telegram_prekick_state.json 2>/dev/null || true
           
           # If no changes, exit cleanly
           if git diff --cached --quiet; then
