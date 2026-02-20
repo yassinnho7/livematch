@@ -221,8 +221,18 @@ class LiveKoraScraper {
 
     processMatches(rawMatches) {
         return rawMatches.map(match => {
-            // Use centralized timezone conversion (livekora = GMT+1)
-            const timestamp = toGMTTimestamp(match.time, 1);
+            // Prefer exact page timestamp when available; fallback to local-time conversion.
+            let timestamp = null;
+            if (match.isoTimestamp) {
+                const parsed = Date.parse(match.isoTimestamp);
+                if (Number.isFinite(parsed)) {
+                    timestamp = Math.floor(parsed / 1000);
+                }
+            }
+            if (!Number.isFinite(timestamp) || timestamp <= 0) {
+                // Fallback: source usually shows local time in GMT+1
+                timestamp = toGMTTimestamp(match.time, 1);
+            }
 
             // Use centralized hash generation
             const stableId = generateMatchHash(match.homeTeam, match.awayTeam);

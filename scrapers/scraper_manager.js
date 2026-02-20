@@ -332,6 +332,35 @@ class ScraperManager {
         return value.includes('koraplus.blog/kooracity') || value.includes('koraplus.blog/koora-live');
     }
 
+    getStatusPriority(status) {
+        const value = String(status || '').toUpperCase();
+        if (value === 'FT') return 3;
+        if (value === 'LIVE') return 2;
+        return 1;
+    }
+
+    reconcileMatchState(targetMatch, incomingMatch) {
+        if (!targetMatch || !incomingMatch) return;
+
+        const targetPriority = this.getStatusPriority(targetMatch.status);
+        const incomingPriority = this.getStatusPriority(incomingMatch.status);
+
+        if (incomingPriority > targetPriority) {
+            targetMatch.status = incomingMatch.status;
+
+            if (incomingMatch.score) {
+                targetMatch.score = incomingMatch.score;
+            }
+
+            if (Number.isFinite(Number(incomingMatch.timestamp)) && Number(incomingMatch.timestamp) > 0) {
+                targetMatch.timestamp = Number(incomingMatch.timestamp);
+                if (incomingMatch.date) targetMatch.date = incomingMatch.date;
+                if (incomingMatch.time) targetMatch.time = incomingMatch.time;
+                if (incomingMatch.time_label) targetMatch.time_label = incomingMatch.time_label;
+            }
+        }
+    }
+
     // Add unique matches from a source (that don't exist in primary)
     // Only add if the match has streams
     addUniqueMatches(primaryMatches, newMatches) {
@@ -360,6 +389,7 @@ class ScraperManager {
                 // Match exists - merge streams only
                 const existingMatch = unified[existingIndex];
                 this.addUniqueStreams(existingMatch, usableStreams);
+                this.reconcileMatchState(existingMatch, newMatch);
 
                 // Also merge logos if missing
                 if (!existingMatch.home.logo && newMatch.home.logo) {
@@ -377,12 +407,14 @@ class ScraperManager {
     filterOutFinishedAndStaleMatches(matches) {
         const now = Math.floor(Date.now() / 1000);
         const maxPastSeconds = 6 * 60 * 60;
+        const staleNotStartedSeconds = 90 * 60;
         return matches.filter((match) => {
             const status = String(match.status || '').toUpperCase();
             if (status === 'FT') return false;
 
             const ts = Number(match.timestamp);
             if (!Number.isFinite(ts) || ts <= 0) return true;
+            if (status === 'NS' && ts < (now - staleNotStartedSeconds)) return false;
             return ts >= (now - maxPastSeconds);
         });
     }
