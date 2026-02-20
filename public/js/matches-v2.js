@@ -1,4 +1,4 @@
-﻿/**
+/**
  * LiveMatch - Matches Loader v3.0
  * Features: Viewer counter, countdown timers, hover overlay, live scores
  */
@@ -51,16 +51,16 @@ function setCurrentDate() {
     const now = new Date();
 
     // Arabic day/month names but with regular (Western) digits
-    const days = ['Ø§Ù„Ø£Ø­Ø¯', 'Ø§Ù„Ø¥Ø«Ù†ÙŠÙ†', 'Ø§Ù„Ø«Ù„Ø§Ø«Ø§Ø¡', 'Ø§Ù„Ø£Ø±Ø¨Ø¹Ø§Ø¡', 'Ø§Ù„Ø®Ù…ÙŠØ³', 'Ø§Ù„Ø¬Ù…Ø¹Ø©', 'Ø§Ù„Ø³Ø¨Øª'];
-    const months = ['ÙŠÙ†Ø§ÙŠØ±', 'ÙØ¨Ø±Ø§ÙŠØ±', 'Ù…Ø§Ø±Ø³', 'Ø£Ø¨Ø±ÙŠÙ„', 'Ù…Ø§ÙŠÙˆ', 'ÙŠÙˆÙ†ÙŠÙˆ',
-        'ÙŠÙˆÙ„ÙŠÙˆ', 'Ø£ØºØ³Ø·Ø³', 'Ø³Ø¨ØªÙ…Ø¨Ø±', 'Ø£ÙƒØªÙˆØ¨Ø±', 'Ù†ÙˆÙÙ…Ø¨Ø±', 'Ø¯ÙŠØ³Ù…Ø¨Ø±'];
+    const days = ['الأحد', 'الإثنين', 'الثلاثاء', 'الأربعاء', 'الخميس', 'الجمعة', 'السبت'];
+    const months = ['يناير', 'فبراير', 'مارس', 'أبريل', 'مايو', 'يونيو',
+        'يوليو', 'أغسطس', 'سبتمبر', 'أكتوبر', 'نوفمبر', 'ديسمبر'];
 
     const dayName = days[now.getDay()];
     const day = now.getDate();
     const month = months[now.getMonth()];
     const year = now.getFullYear();
 
-    dateEl.textContent = `${dayName}ØŒ ${day} ${month} ${year}`;
+    dateEl.textContent = `${dayName}، ${day} ${month} ${year}`;
 }
 
 // ============ COUNTDOWN TIMERS ============
@@ -88,9 +88,9 @@ function startCountdowns() {
             const seconds = Math.floor((diff % 60000) / 1000);
 
             if (hours > 0) {
-                el.textContent = `â± ${hours}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+                el.textContent = `⏱ ${hours}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
             } else {
-                el.textContent = `â± ${minutes}:${String(seconds).padStart(2, '0')}`;
+                el.textContent = `⏱ ${minutes}:${String(seconds).padStart(2, '0')}`;
             }
         }
 
@@ -117,9 +117,9 @@ function showError(message, isRetryable = true) {
     const container = document.getElementById('matches-container');
     container.innerHTML = `
         <div class="error-state">
-            <div class="error-icon">âš ï¸</div>
+            <div class="error-icon">⚠️</div>
             <div class="error-message">${message}</div>
-            ${isRetryable ? '<button class="retry-btn" onclick="loadMatches()">ðŸ”„ Ø¥Ø¹Ø§Ø¯Ø© Ø§Ù„Ù…Ø­Ø§ÙˆÙ„Ø©</button>' : ''}
+            ${isRetryable ? '<button class="retry-btn" onclick="loadMatches()">🔄 إعادة المحاولة</button>' : ''}
         </div>
     `;
 }
@@ -155,19 +155,19 @@ async function loadMatches() {
         try {
             data = await response.json();
         } catch (jsonError) {
-            throw new Error('Ø§Ù„Ø¨ÙŠØ§Ù†Ø§Øª ØºÙŠØ± ØµØ§Ù„Ø­Ø©');
+            throw new Error('البيانات غير صالحة');
         }
 
         if (!data || !data.matches || !Array.isArray(data.matches)) {
-            throw new Error('Ù„Ø§ ØªÙˆØ¬Ø¯ Ù‚Ø§Ø¦Ù…Ø© Ù…Ø¨Ø§Ø±ÙŠØ§Øª');
+            throw new Error('لا توجد قائمة مباريات');
         }
 
         if (data.matches.length === 0) {
             container.innerHTML = `
                 <div class="empty-state">
-                    <div class="empty-icon">ðŸ“…</div>
-                    <div class="empty-message">Ù„Ø§ ØªÙˆØ¬Ø¯ Ù…Ø¨Ø§Ø±ÙŠØ§Øª Ø§Ù„ÙŠÙˆÙ…</div>
-                    <div class="empty-hint">ØªØ­Ù‚Ù‚ Ù„Ø§Ø­Ù‚Ø§Ù‹ Ù„Ù…Ø´Ø§Ù‡Ø¯Ø© Ø§Ù„Ù…Ø¨Ø§Ø±ÙŠØ§Øª Ø§Ù„Ù‚Ø§Ø¯Ù…Ø©</div>
+                    <div class="empty-icon">📅</div>
+                    <div class="empty-message">لا توجد مباريات اليوم</div>
+                    <div class="empty-hint">تحقق لاحقاً لمشاهدة المباريات القادمة</div>
                 </div>
             `;
             return;
@@ -197,15 +197,15 @@ async function loadMatches() {
 
     } catch (error) {
         if (error.name === 'AbortError') {
-            showError('Ø§Ù†ØªÙ‡Øª Ù…Ù‡Ù„Ø© Ø§Ù„Ø§ØªØµØ§Ù„ - ØªØ­Ù‚Ù‚ Ù…Ù† Ø§Ù„Ø¥Ù†ØªØ±Ù†Øª');
+            showError('انتهت مهلة الاتصال - تحقق من الإنترنت');
         } else if (error.message.includes('Failed to fetch') || error.message.includes('NetworkError')) {
-            showError('Ù„Ø§ ÙŠÙˆØ¬Ø¯ Ø§ØªØµØ§Ù„ Ø¨Ø§Ù„Ø¥Ù†ØªØ±Ù†Øª');
+            showError('لا يوجد اتصال بالإنترنت');
         } else if (error.message.includes('HTTP 404')) {
-            showError('Ù…Ù„Ù Ø§Ù„Ù…Ø¨Ø§Ø±ÙŠØ§Øª ØºÙŠØ± Ù…ÙˆØ¬ÙˆØ¯', false);
+            showError('ملف المباريات غير موجود', false);
         } else if (error.message.includes('HTTP 5')) {
-            showError('Ø®Ø·Ø£ ÙÙŠ Ø§Ù„Ø®Ø§Ø¯Ù… - Ø¬Ø§Ø±ÙŠ Ø§Ù„Ø¥ØµÙ„Ø§Ø­');
+            showError('خطأ في الخادم - جاري الإصلاح');
         } else {
-            showError(error.message || 'Ø®Ø·Ø£ ÙÙŠ ØªØ­Ù…ÙŠÙ„ Ø§Ù„Ù…Ø¨Ø§Ø±ÙŠØ§Øª');
+            showError(error.message || 'خطأ في تحميل المباريات');
         }
     }
 }
@@ -243,12 +243,12 @@ function createMatchCard(match) {
 
     const now = Math.floor(Date.now() / 1000);
     if (match.timestamp && match.timestamp > now) {
-        countdownHTML = `<div class="match-countdown" data-timestamp="${match.timestamp}">â± --:--</div>`;
+        countdownHTML = `<div class="match-countdown" data-timestamp="${match.timestamp}">⏱ --:--</div>`;
     }
 
     // Team info
-    const homeName = match.home.name || 'ÙØ±ÙŠÙ‚ 1';
-    const awayName = match.away.name || 'ÙØ±ÙŠÙ‚ 2';
+    const homeName = match.home.name || 'فريق 1';
+    const awayName = match.away.name || 'فريق 2';
     const fallbackLogo = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32'%3E%3Ccircle cx='16' cy='16' r='16' fill='%231e293b'/%3E%3C/svg%3E";
     const homeLogo = match.home.logo || fallbackLogo;
     const awayLogo = match.away.logo || fallbackLogo;
@@ -256,9 +256,9 @@ function createMatchCard(match) {
     // Meta
     let metaHTML = '';
     const metaParts = [];
-    if (match.channel) metaParts.push(`<span>ðŸ“º ${sanitizeText(match.channel)}</span>`);
-    if (match.commentator) metaParts.push(`<span>ðŸŽ™ï¸ ${sanitizeText(match.commentator)}</span>`);
-    if (match.league && match.league.name) metaParts.push(`<span>ðŸ† ${sanitizeText(match.league.name)}</span>`);
+    if (match.channel) metaParts.push(`<span>📺 ${sanitizeText(match.channel)}</span>`);
+    if (match.commentator) metaParts.push(`<span>🎙️ ${sanitizeText(match.commentator)}</span>`);
+    if (match.league && match.league.name) metaParts.push(`<span>🏆 ${sanitizeText(match.league.name)}</span>`);
     if (metaParts.length > 0) {
         metaHTML = `<div class="match-meta">${metaParts.join('')}</div>`;
     }
