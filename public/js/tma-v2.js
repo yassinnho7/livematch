@@ -453,20 +453,25 @@ function navigateTo(view) {
 }
 
 function handleBack() {
+    // 1. If in any fullscreen (native or pseudo), exit it first but stay in player view
+    if (isAnyFullscreenActive()) {
+        exitFullscreenIfNeeded();
+        return;
+    }
+
+    // 2. If in player view but NOT in fullscreen, go back to servers list
     if (state.currentView === "player") {
-        if (document.fullscreenElement || document.webkitFullscreenElement) {
-            exitFullscreenIfNeeded();
-            return;
-        }
         navigateTo("servers");
         return;
     }
 
+    // 3. If in servers view, go back to home (matches list)
     if (state.currentView === "servers") {
         navigateTo("home");
         return;
     }
 
+    // 4. If in home view, ask to exit the app
     askToExitApp();
 }
 
@@ -606,7 +611,10 @@ function disablePseudoFullscreen() {
 }
 
 function updateLandscapeClass() {
-    if (!state.isFullscreen || state.pseudoFullscreen) return;
+    if (!state.isFullscreen) return;
+
+    // We force landscape class even if pseudo-fullscreen is active
+    // because the user wants it to be landscape in both cases.
     const isPortrait = window.matchMedia("(orientation: portrait)").matches;
     els.playerView.classList.toggle("force-landscape", isPortrait);
 }
@@ -714,9 +722,16 @@ function getDynamicBannerWidth(container, max, min) {
 }
 
 function syncBackButton() {
-    if (!tg) return;
-    if (state.currentView === "home") tg.BackButton.show();
-    else tg.BackButton.show();
+    if (!tg || !tg.BackButton) return;
+
+    // On the main screen (home list), the back button should either be hidden 
+    // or lead to the "Exit" confirm. To make it consistent with TMA UX, 
+    // we show it if we are NOT on home.
+    if (state.currentView === "home") {
+        tg.BackButton.hide();
+    } else {
+        tg.BackButton.show();
+    }
 }
 
 function haptic(level) {

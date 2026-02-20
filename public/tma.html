@@ -623,34 +623,47 @@
             display: none;
         }
 
-        .player-view.fullscreen-mode.force-landscape .player-stage {
-            position: fixed;
-            inset: 0;
-            width: 100vw;
-            height: 100dvh;
-            transform: none;
-            z-index: 999;
-        }
-
-        .player-view.pseudo-fullscreen .player-controls {
-            display: none;
-        }
-
-        .player-view.pseudo-fullscreen .player-stage {
-            position: fixed;
-            inset: 0;
-            width: 100vw;
-            height: 100dvh;
-            transform: none;
-            z-index: 999;
-        }
-
         .player-view.fullscreen-mode #main-iframe,
         .player-view.pseudo-fullscreen #main-iframe {
-            width: 100vw;
-            height: 100dvh;
+            width: 100%;
+            height: 100%;
             display: block;
             background: #000;
+            border: 0;
+        }
+
+        /* 
+           Force landscape for vertical devices in fullscreen-mode or pseudo-fullscreen.
+           We use @media orientation: portrait to detect if the phone is held vertically.
+        */
+        @media screen and (orientation: portrait) {
+
+            .player-view.fullscreen-mode.force-landscape .player-stage,
+            .player-view.pseudo-fullscreen.force-landscape .player-stage {
+                position: fixed;
+                top: 50%;
+                left: 50%;
+                width: 100vh;
+                height: 100vw;
+                transform: translate(-50%, -50%) rotate(90deg);
+                z-index: 9999;
+                background: #000;
+            }
+        }
+
+        /* If naturally landscape, just fill the screen */
+        @media screen and (orientation: landscape) {
+
+            .player-view.fullscreen-mode .player-stage,
+            .player-view.pseudo-fullscreen .player-stage {
+                position: fixed;
+                inset: 0;
+                width: 100vw;
+                height: 100vh;
+                transform: none;
+                z-index: 9999;
+                background: #000;
+            }
         }
 
         .note {
