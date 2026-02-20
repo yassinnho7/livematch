@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-02-20T19:54:21.358Z",
+  "generated_at": "2026-02-20T20:22:28.185Z",
   "count": 9,
   "matches": [
     {
@@ -140,6 +140,73 @@
       ]
     },
     {
+      "id": 314796892,
+      "date": "2026-02-20T19:45:00.000Z",
+      "timestamp": 1771616700,
+      "status": "LIVE",
+      "time": "19:45",
+      "time_label": "19:45 GMT",
+      "league": {
+        "name": "فرنسا, الدوري الفرنسي",
+        "country": "France",
+        "logo": "https://a.espncdn.com/combiner/i?img=/i/leaguelogos/soccer/500/9.png&h=40&w=40"
+      },
+      "home": {
+        "name": "بريست",
+        "logo": "https://i0.wp.com/www.kora-online.cc/wp-content/uploads/2026/02/534-135x150.png"
+      },
+      "away": {
+        "name": "أولمبيك مارسيليا",
+        "logo": "https://i0.wp.com/www.kora-online.cc/wp-content/uploads/2026/02/469.png"
+      },
+      "score": {
+        "home": 2,
+        "away": 0
+      },
+      "streams": [
+        {
+          "id": "stream_sports-2_ko_314796892",
+          "source": "koraonline",
+          "quality": "HD",
+          "channel": "sports-2",
+          "url": "https://aa.yallashoot2026.com/albaplayer/sports-2/",
+          "priority": 1
+        },
+        {
+          "id": "stream_koraplus_1994186104_0",
+          "source": "koraplus",
+          "quality": "HD",
+          "channel": "غير معروف",
+          "url": "https://pl.gomatch-live.com/albaplayer/bein22/",
+          "priority": 1
+        },
+        {
+          "id": "stream_bein2_314796892",
+          "source": "livekora",
+          "quality": "HD",
+          "channel": "bein2",
+          "url": "https://pl.gomatch-live.com/albaplayer/bein2/",
+          "priority": 1
+        },
+        {
+          "id": "stream_sportsonline_666125085",
+          "source": "sportsonline",
+          "quality": "HD",
+          "channel": "hd4",
+          "url": "https://www1.sprtsonline.click/channels/hd/hd4.php",
+          "priority": 3
+        },
+        {
+          "id": "stream_sportsonline_666125085",
+          "source": "sportsonline",
+          "quality": "HD",
+          "channel": "sporttv3",
+          "url": "https://www1.sprtsonline.click/channels/pt/sporttv3.php",
+          "priority": 3
+        }
+      ]
+    },
+    {
       "id": 1108296027,
       "date": "2026-02-20T19:45:00.000Z",
       "timestamp": 1771616700,
@@ -191,77 +258,10 @@
       ]
     },
     {
-      "id": 314796892,
-      "date": "2026-02-20T19:45:00.000Z",
-      "timestamp": 1771616700,
-      "status": "LIVE",
-      "time": "19:45",
-      "time_label": "19:45 GMT",
-      "league": {
-        "name": "فرنسا, الدوري الفرنسي",
-        "country": "France",
-        "logo": "https://a.espncdn.com/combiner/i?img=/i/leaguelogos/soccer/500/9.png&h=40&w=40"
-      },
-      "home": {
-        "name": "بريست",
-        "logo": "https://i0.wp.com/www.kora-online.cc/wp-content/uploads/2026/02/534-135x150.png"
-      },
-      "away": {
-        "name": "أولمبيك مارسيليا",
-        "logo": "https://i0.wp.com/www.kora-online.cc/wp-content/uploads/2026/02/469.png"
-      },
-      "score": {
-        "home": 0,
-        "away": 0
-      },
-      "streams": [
-        {
-          "id": "stream_sports-2_ko_314796892",
-          "source": "koraonline",
-          "quality": "HD",
-          "channel": "sports-2",
-          "url": "https://aa.yallashoot2026.com/albaplayer/sports-2/",
-          "priority": 1
-        },
-        {
-          "id": "stream_koraplus_1994186104_0",
-          "source": "koraplus",
-          "quality": "HD",
-          "channel": "غير معروف",
-          "url": "https://pl.gomatch-live.com/albaplayer/bein22/",
-          "priority": 1
-        },
-        {
-          "id": "stream_bein2_314796892",
-          "source": "livekora",
-          "quality": "HD",
-          "channel": "bein2",
-          "url": "https://pl.gomatch-live.com/albaplayer/bein2/",
-          "priority": 1
-        },
-        {
-          "id": "stream_sportsonline_666125085",
-          "source": "sportsonline",
-          "quality": "HD",
-          "channel": "hd4",
-          "url": "https://www1.sprtsonline.click/channels/hd/hd4.php",
-          "priority": 3
-        },
-        {
-          "id": "stream_sportsonline_666125085",
-          "source": "sportsonline",
-          "quality": "HD",
-          "channel": "sporttv3",
-          "url": "https://www1.sprtsonline.click/channels/pt/sporttv3.php",
-          "priority": 3
-        }
-      ]
-    },
-    {
       "id": 318169880,
       "date": "2026-02-20T20:00:00.000Z",
       "timestamp": 1771617600,
-      "status": "NS",
+      "status": "LIVE",
       "time": "20:00",
       "time_label": "20:00 GMT",
       "league": {
@@ -277,7 +277,10 @@
         "name": "بريستون نورث إند",
         "logo": "https://i0.wp.com/www.kora-online.cc/wp-content/uploads/2026/02/23-150x150.png"
       },
-      "score": null,
+      "score": {
+        "home": 0,
+        "away": 0
+      },
       "streams": [
         {
           "id": "stream_sports-4_ko_318169880",
@@ -301,7 +304,7 @@
       "id": 772552342,
       "date": "2026-02-20T20:00:00.000Z",
       "timestamp": 1771617600,
-      "status": "NS",
+      "status": "LIVE",
       "time": "20:00",
       "time_label": "20:00 GMT",
       "league": {
@@ -317,7 +320,10 @@
         "name": "إلتشي",
         "logo": "https://i0.wp.com/www.kora-online.cc/wp-content/uploads/2026/02/156-150x150.png"
       },
-      "score": null,
+      "score": {
+        "home": 0,
+        "away": 0
+      },
       "streams": [
         {
           "id": "stream_sports-3_ko_772552342",
