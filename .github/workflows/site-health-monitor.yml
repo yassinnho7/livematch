@@ -7,7 +7,7 @@ on:
 
 permissions:
   actions: write
-  contents: read
+  contents: write
 
 concurrency:
   group: site-health-monitor
@@ -24,33 +24,68 @@ jobs:
         run: |
           set -euo pipefail
 
-          URLS=(
-            "https://livematch-991.pages.dev/"
-            "https://livematch-991.pages.dev/data/matches.json"
-            "https://livematch-991.pages.dev/healthz.txt"
-          )
-
           site_down="false"
-          for url in "${URLS[@]}"; do
-            code="$(curl -sS -o /dev/null -w "%{http_code}" --connect-timeout 8 --max-time 20 "$url" || echo "000")"
-            echo "$url => $code"
-            if [ "$code" = "000" ] || [ "$code" -ge 400 ]; then
-              site_down="true"
+          for attempt in 1 2 3; do
+            echo "Probe attempt $attempt/3"
+
+            home="$(curl -sS --http1.1 --connect-timeout 8 --max-time 20 "https://livematch-991.pages.dev/" || true)"
+            matches="$(curl -sS --http1.1 --connect-timeout 8 --max-time 20 "https://livematch-991.pages.dev/data/matches.json" || true)"
+            health="$(curl -sS --http1.1 --connect-timeout 8 --max-time 20 "https://livematch-991.pages.dev/healthz.txt" || true)"
+
+            ok_home="false"
+            ok_matches="false"
+            ok_health="false"
+
+            if printf "%s" "$home" | grep -qiE "<title|<!doctype html>"; then
+              ok_home="true"
             fi
+            if printf "%s" "$matches" | grep -q "\"matches\""; then
+              ok_matches="true"
+            fi
+            if [ "$(printf "%s" "$health" | tr -d '\r\n ')" = "ok" ]; then
+              ok_health="true"
+            fi
+
+            echo "home=$ok_home matches=$ok_matches health=$ok_health"
+            if [ "$ok_home" = "true" ] && [ "$ok_matches" = "true" ] && [ "$ok_health" = "true" ]; then
+              echo "Site probe healthy"
+              echo "site_down=false" >> "$GITHUB_OUTPUT"
+              exit 0
+            fi
+
+            sleep 10
           done
 
+          site_down="true"
+
           echo "site_down=$site_down" >> "$GITHUB_OUTPUT"
-          if [ "$site_down" = "true" ]; then
-            echo "Site probe failed"
-          else
-            echo "Site probe healthy"
-          fi
+          echo "Site probe failed"
 
   auto-recover:
     runs-on: ubuntu-latest
     needs: monitor
     if: needs.monitor.outputs.site_down == 'true'
     steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Force Pages redeploy with heartbeat commit
+        run: |
+          set -euo pipefail
+          mkdir -p public
+          date -u +"%Y-%m-%dT%H:%M:%SZ" > public/redeploy-heartbeat.txt
+
+          git config --global user.name "Health Monitor Bot"
+          git config --global user.email "actions@github.com"
+          git add public/redeploy-heartbeat.txt
+
+          if ! git diff --cached --quiet; then
+            git commit -m "Auto-recover: force Pages redeploy ($(date -u '+%H:%M UTC'))"
+            git push origin HEAD:main
+          fi
+
       - name: Trigger hourly scrape workflow for recovery
         env:
           GH_TOKEN: ${{ github.token }}

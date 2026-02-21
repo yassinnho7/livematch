@@ -1,8 +1,6 @@
 name: Daily News Generation
 
 on:
-  schedule:
-    - cron: '0 8,20 * * *'  # Runs at 8:00 AM and 8:00 PM UTC
   workflow_dispatch:
 
 permissions:
