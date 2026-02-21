@@ -1,53 +1,7 @@
 {
-  "generated_at": "2026-02-21T23:30:52.601Z",
-  "count": 3,
+  "generated_at": "2026-02-21T23:52:12.089Z",
+  "count": 1,
   "matches": [
-    {
-      "id": 1069893187,
-      "date": "2026-02-21T19:45:00.000Z",
-      "timestamp": 1771703100,
-      "status": "NS",
-      "time": "19:45",
-      "time_label": "19:45 GMT",
-      "league": {
-        "name": "فرنسا, الدوري الفرنسي",
-        "country": "France",
-        "logo": "https://a.espncdn.com/combiner/i?img=/i/leaguelogos/soccer/500/9.png&h=40&w=40"
-      },
-      "home": {
-        "name": "ستراسبورج",
-        "logo": "https://i0.wp.com/www.kora-online.cc/wp-content/uploads/2026/02/479.png"
-      },
-      "away": {
-        "name": "أولمبيك ليون",
-        "logo": "https://i0.wp.com/www.kora-online.cc/wp-content/uploads/2026/02/465-150x150.png"
-      },
-      "score": null,
-      "streams": []
-    },
-    {
-      "id": 624174708,
-      "date": "2026-02-21T19:45:00.000Z",
-      "timestamp": 1771703100,
-      "status": "NS",
-      "time": "19:45",
-      "time_label": "19:45 GMT",
-      "league": {
-        "name": "إيطاليا, الدوري الإيطالي",
-        "country": "Italy",
-        "logo": "https://a.espncdn.com/combiner/i?img=/i/leaguelogos/soccer/500/12.png&h=40&w=40"
-      },
-      "home": {
-        "name": "روما",
-        "logo": "https://i0.wp.com/www.kora-online.cc/wp-content/uploads/2026/02/225-127x150.png"
-      },
-      "away": {
-        "name": "كريمونيسي",
-        "logo": "https://i0.wp.com/www.kora-online.cc/wp-content/uploads/2026/02/290.png"
-      },
-      "score": null,
-      "streams": []
-    },
     {
       "id": 1478028703,
       "date": "2026-02-21T20:00:00.000Z",
@@ -72,5 +26,5 @@
       "streams": []
     }
   ],
-  "generatedAt": "2026-02-21T23:30:52.642Z"
+  "generatedAt": "2026-02-21T23:52:12.132Z"
 }
