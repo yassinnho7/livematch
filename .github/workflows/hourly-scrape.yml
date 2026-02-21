@@ -12,13 +12,13 @@ jobs:
   scrape-and-update:
     runs-on: ubuntu-22.04
     timeout-minutes: 12
-    
+
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-      
+
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
@@ -32,7 +32,7 @@ jobs:
           key: ${{ runner.os }}-puppeteer-${{ hashFiles('package-lock.json') }}
           restore-keys: |
             ${{ runner.os }}-puppeteer-
-      
+
       - name: Install System Dependencies
         run: |
           sudo apt-get update
@@ -48,28 +48,32 @@ jobs:
           PUPPETEER_SKIP_CHROMIUM_DOWNLOAD: 'false'
         run: |
           npm install --no-audit --no-fund
-      
+
       - name: Download Arabic Font (Cairo)
         run: |
           mkdir -p public/assets/fonts
           wget -O public/assets/fonts/Cairo-Bold.ttf https://github.com/Gue3bara/Cairo/raw/v3.116/fonts/ttf/Cairo-Bold.ttf
-      
-      - name: "Run Scraper Manager (Multi-Source: LiveKora + Korah.live + Siiir.tv)"
+
+      - name: Run Scraper Manager (Multi-Source: LiveKora + Korah.live + Siiir.tv)
         env:
           GEMINI_API_KEYS: ${{ secrets.GEMINI_API_KEYS }}
         run: |
           node scrapers/scraper_manager.js
-      
+
+      - name: Validate/Fallback matches.json
+        run: |
+          node -e "const fs=require('fs');const path='public/data/matches.json';const fallback={matches:[],generatedAt:new Date().toISOString(),source:'fallback'};if(!fs.existsSync(path)){fs.mkdirSync('public/data',{recursive:true});fs.writeFileSync(path,JSON.stringify(fallback,null,2)+'\n');console.log('Created fallback matches.json');process.exit(0);}try{const raw=fs.readFileSync(path,'utf8');const parsed=JSON.parse(raw);if(!parsed||typeof parsed!=='object'){throw new Error('Invalid root');}if(!Array.isArray(parsed.matches)){parsed.matches=[];}if(!parsed.generatedAt){parsed.generatedAt=new Date().toISOString();}fs.writeFileSync(path,JSON.stringify(parsed,null,2)+'\n');console.log('Validated matches.json');}catch(e){fs.writeFileSync(path,JSON.stringify(fallback,null,2)+'\n');console.log('Replaced broken matches.json with fallback');}"
+
       # - name: Generate Match Posters (AI-Hybrid)
       #   run: |
       #     node scripts/generate_posters.js
-      
+
       - name: Notify Webhook (Make.com)
         env:
           MAKE_WEBHOOK_URL: ${{ secrets.MAKE_WEBHOOK_URL }}
         run: |
           node scrapers/notify_webhook.js
-      
+
       - name: Notify Telegram (Direct)
         if: ${{ false }}  # Temporarily disabled
         env:
@@ -77,49 +81,54 @@ jobs:
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
         run: |
           node scrapers/notify_telegram.js
-      
+
       - name: Commit and Push Changes
         run: |
           git config --global user.name "GitHub Actions Bot"
           git config --global user.email "actions@github.com"
-          
+
           # Add critical files first (must succeed)
           git add public/data/matches.json
-          
+
           # Add/Remove generated posters
           git add --all public/posters 2>/dev/null || true
-          
+
           # Add/Remove AI-generated articles
           git add --all public/data/articles 2>/dev/null || true
-          
+
           # Add optional log files (ignore if missing)
           git add sent_notifications.json 2>/dev/null || true
           git add sent_telegram_notifications.json 2>/dev/null || true
           git add telegram_prekick_state.json 2>/dev/null || true
           git add telegram_bot_state.json 2>/dev/null || true
-          
+
           # If no changes, exit cleanly
           if git diff --cached --quiet; then
-            echo "✅ No changes to commit — skipping push"
+            echo "No changes to commit - skipping push"
             exit 0
           fi
-          
-          git commit -m "🔄 Auto-update: LiveKora matches data ($(date '+%H:%M'))"
-          
-          # Push with Retry — doesn't cancel changes
+
+          git commit -m "Auto-update: LiveKora matches data ($(date '+%H:%M'))"
+
+          # Push with retry + rebase flow to resolve remote updates safely.
           MAX=5
           for n in $(seq 1 $MAX); do
-            echo "📤 Push attempt $n/$MAX..."
-            # First, discard any local changes that might conflict
-            git checkout -- .
-            # Then try to pull and push
-            git pull origin main --no-rebase --quiet 2>/dev/null || true
-            git push origin main && break
-            
+            echo "Push attempt $n/$MAX..."
+
+            if git push origin HEAD:main; then
+              echo "Push succeeded"
+              break
+            fi
+
+            echo "Push rejected, rebasing on origin/main..."
+            git fetch origin main
+            git rebase origin/main
+
             if [ $n -eq $MAX ]; then
-              echo "❌ All push attempts failed"
+              echo "All push attempts failed"
               exit 1
             fi
-            echo "⏳ Waiting 20s before retry..."
-            sleep 20
+
+            echo "Waiting 10s before retry..."
+            sleep 10
           done
