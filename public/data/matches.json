@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-02-21T15:39:56.434Z",
+  "generated_at": "2026-02-21T15:59:14.874Z",
   "count": 22,
   "matches": [
     {
@@ -188,73 +188,6 @@
       ]
     },
     {
-      "id": 712082837,
-      "date": "2026-02-21T15:00:00.000Z",
-      "timestamp": 1771686000,
-      "status": "LIVE",
-      "time": "15:00",
-      "time_label": "15:00 GMT",
-      "league": {
-        "name": "إنجلترا, الدوري الإنجليزي",
-        "country": "England",
-        "logo": "https://a.espncdn.com/combiner/i?img=/i/leaguelogos/soccer/500/23.png&h=40&w=40"
-      },
-      "home": {
-        "name": "برينتفورد",
-        "logo": "https://i0.wp.com/www.kora-online.cc/wp-content/uploads/2026/02/63-150x150.png"
-      },
-      "away": {
-        "name": "برايتون",
-        "logo": "https://i0.wp.com/www.kora-online.cc/wp-content/uploads/2026/02/38-150x150.png"
-      },
-      "score": {
-        "home": 0,
-        "away": 1
-      },
-      "streams": [
-        {
-          "id": "stream_sports-4_ko_712082837",
-          "source": "koraonline",
-          "quality": "HD",
-          "channel": "sports-4",
-          "url": "https://aa.yallashoot2026.com/albaplayer/sports-4/",
-          "priority": 1
-        },
-        {
-          "id": "stream_koraplus_1088054116_0",
-          "source": "koraplus",
-          "quality": "HD",
-          "channel": "beIN SPORTS HD 4",
-          "url": "https://pl.gomatch-live.com/albaplayer/bein4/",
-          "priority": 1
-        },
-        {
-          "id": "stream_siiir_712082837",
-          "source": "siiir",
-          "quality": "VIP",
-          "channel": "VIP Server",
-          "url": "https://eyj0exaioijkv1qilcjhbgcioijiuzi1nij99sss.yallashot.us/playerv2.php?match=match4&key=c0ae1abba6eebd7e6cc5b88b1d2B71547",
-          "priority": 2
-        },
-        {
-          "id": "stream_sportsonline_378739513",
-          "source": "sportsonline",
-          "quality": "HD",
-          "channel": "hd2",
-          "url": "https://www1.sprtsonline.click/channels/hd/hd2.php",
-          "priority": 3
-        },
-        {
-          "id": "stream_sportsonline_378739513",
-          "source": "sportsonline",
-          "quality": "HD",
-          "channel": "br6",
-          "url": "https://www1.sprtsonline.click/channels/bra/br6.php",
-          "priority": 3
-        }
-      ]
-    },
-    {
       "id": 977259940,
       "date": "2026-02-21T15:00:00.000Z",
       "timestamp": 1771686000,
@@ -276,7 +209,7 @@
       },
       "score": {
         "home": 0,
-        "away": 0
+        "away": 1
       },
       "streams": [
         {
@@ -373,6 +306,73 @@
       ]
     },
     {
+      "id": 712082837,
+      "date": "2026-02-21T15:00:00.000Z",
+      "timestamp": 1771686000,
+      "status": "LIVE",
+      "time": "15:00",
+      "time_label": "15:00 GMT",
+      "league": {
+        "name": "إنجلترا, الدوري الإنجليزي",
+        "country": "England",
+        "logo": "https://a.espncdn.com/combiner/i?img=/i/leaguelogos/soccer/500/23.png&h=40&w=40"
+      },
+      "home": {
+        "name": "برينتفورد",
+        "logo": "https://i0.wp.com/www.kora-online.cc/wp-content/uploads/2026/02/63-150x150.png"
+      },
+      "away": {
+        "name": "برايتون",
+        "logo": "https://i0.wp.com/www.kora-online.cc/wp-content/uploads/2026/02/38-150x150.png"
+      },
+      "score": {
+        "home": 0,
+        "away": 2
+      },
+      "streams": [
+        {
+          "id": "stream_sports-4_ko_712082837",
+          "source": "koraonline",
+          "quality": "HD",
+          "channel": "sports-4",
+          "url": "https://aa.yallashoot2026.com/albaplayer/sports-4/",
+          "priority": 1
+        },
+        {
+          "id": "stream_koraplus_1088054116_0",
+          "source": "koraplus",
+          "quality": "HD",
+          "channel": "beIN SPORTS HD 4",
+          "url": "https://pl.gomatch-live.com/albaplayer/bein4/",
+          "priority": 1
+        },
+        {
+          "id": "stream_siiir_712082837",
+          "source": "siiir",
+          "quality": "VIP",
+          "channel": "VIP Server",
+          "url": "https://eyj0exaioijkv1qilcjhbgcioijiuzi1nij99sss.yallashot.us/playerv2.php?match=match4&key=c0ae1abba6eebd7e6cc5b88b1d2B71547",
+          "priority": 2
+        },
+        {
+          "id": "stream_sportsonline_378739513",
+          "source": "sportsonline",
+          "quality": "HD",
+          "channel": "hd2",
+          "url": "https://www1.sprtsonline.click/channels/hd/hd2.php",
+          "priority": 3
+        },
+        {
+          "id": "stream_sportsonline_378739513",
+          "source": "sportsonline",
+          "quality": "HD",
+          "channel": "br6",
+          "url": "https://www1.sprtsonline.click/channels/bra/br6.php",
+          "priority": 3
+        }
+      ]
+    },
+    {
       "id": 838136896,
       "date": "2026-02-21T15:15:00.000Z",
       "timestamp": 1771686900,
@@ -393,7 +393,7 @@
         "logo": "https://i0.wp.com/www.kora-online.cc/wp-content/uploads/2026/02/174.png"
       },
       "score": {
-        "home": 0,
+        "home": 1,
         "away": 0
       },
       "streams": [
@@ -548,54 +548,6 @@
           "channel": "VIP Server",
           "url": "https://eyj0exaioijkv1qilcjhbgcioijiuzi1nij99sss.yallashot.us/playerv2.php?match=match9&key=c0ae1abba6eebd7e6cc5b88b1d2B71547",
           "priority": 2
-        }
-      ]
-    },
-    {
-      "id": 660027924,
-      "date": "2026-02-21T17:30:00.000Z",
-      "timestamp": 1771695000,
-      "status": "NS",
-      "time": "17:30",
-      "time_label": "17:30 GMT",
-      "league": {
-        "name": "إنجلترا, الدوري الإنجليزي",
-        "country": "England",
-        "logo": "https://a.espncdn.com/combiner/i?img=/i/leaguelogos/soccer/500/23.png&h=40&w=40"
-      },
-      "home": {
-        "name": "وست هام يونايتد",
-        "logo": "https://i0.wp.com/www.kora-online.cc/wp-content/uploads/2026/02/113.png"
-      },
-      "away": {
-        "name": "بورنموث",
-        "logo": "https://i0.wp.com/www.kora-online.cc/wp-content/uploads/2026/02/50-126x150.png"
-      },
-      "score": null,
-      "streams": [
-        {
-          "id": "stream_sports-4_ko_660027924",
-          "source": "koraonline",
-          "quality": "HD",
-          "channel": "sports-4",
-          "url": "https://aa.yallashoot2026.com/albaplayer/sports-4/",
-          "priority": 1
-        },
-        {
-          "id": "stream_sportsonline_562459351",
-          "source": "sportsonline",
-          "quality": "HD",
-          "channel": "hd5",
-          "url": "https://www1.sprtsonline.click/channels/hd/hd5.php",
-          "priority": 3
-        },
-        {
-          "id": "stream_sportsonline_562459351",
-          "source": "sportsonline",
-          "quality": "HD",
-          "channel": "eleven2",
-          "url": "https://www1.sprtsonline.click/channels/pt/eleven2.php",
-          "priority": 3
         }
       ]
     },
@@ -800,6 +752,54 @@
       ]
     },
     {
+      "id": 660027924,
+      "date": "2026-02-21T17:30:00.000Z",
+      "timestamp": 1771695000,
+      "status": "NS",
+      "time": "17:30",
+      "time_label": "17:30 GMT",
+      "league": {
+        "name": "إنجلترا, الدوري الإنجليزي",
+        "country": "England",
+        "logo": "https://a.espncdn.com/combiner/i?img=/i/leaguelogos/soccer/500/23.png&h=40&w=40"
+      },
+      "home": {
+        "name": "وست هام يونايتد",
+        "logo": "https://i0.wp.com/www.kora-online.cc/wp-content/uploads/2026/02/113.png"
+      },
+      "away": {
+        "name": "بورنموث",
+        "logo": "https://i0.wp.com/www.kora-online.cc/wp-content/uploads/2026/02/50-126x150.png"
+      },
+      "score": null,
+      "streams": [
+        {
+          "id": "stream_sports-4_ko_660027924",
+          "source": "koraonline",
+          "quality": "HD",
+          "channel": "sports-4",
+          "url": "https://aa.yallashoot2026.com/albaplayer/sports-4/",
+          "priority": 1
+        },
+        {
+          "id": "stream_sportsonline_562459351",
+          "source": "sportsonline",
+          "quality": "HD",
+          "channel": "hd5",
+          "url": "https://www1.sprtsonline.click/channels/hd/hd5.php",
+          "priority": 3
+        },
+        {
+          "id": "stream_sportsonline_562459351",
+          "source": "sportsonline",
+          "quality": "HD",
+          "channel": "eleven2",
+          "url": "https://www1.sprtsonline.click/channels/pt/eleven2.php",
+          "priority": 3
+        }
+      ]
+    },
+    {
       "id": 1966886647,
       "date": "2026-02-21T18:00:00.000Z",
       "timestamp": 1771696800,
@@ -949,6 +949,46 @@
       ]
     },
     {
+      "id": 1221054246,
+      "date": "2026-02-21T20:00:00.000Z",
+      "timestamp": 1771704000,
+      "status": "NS",
+      "time": "20:00",
+      "time_label": "20:00 GMT",
+      "league": {
+        "name": "إسبانيا, الدوري الإسباني",
+        "country": "Spain",
+        "logo": "https://a.espncdn.com/combiner/i?img=/i/leaguelogos/soccer/500/15.png&h=40&w=40"
+      },
+      "home": {
+        "name": "أتلتيكو مدريد",
+        "logo": "https://i0.wp.com/www.kora-online.cc/wp-content/uploads/2026/02/134-128x150.png"
+      },
+      "away": {
+        "name": "إسبانيول",
+        "logo": "https://i0.wp.com/www.kora-online.cc/wp-content/uploads/2026/02/136-150x150.png"
+      },
+      "score": null,
+      "streams": [
+        {
+          "id": "stream_sportsonline_168807982",
+          "source": "sportsonline",
+          "quality": "HD",
+          "channel": "hd6",
+          "url": "https://www1.sprtsonline.click/channels/hd/hd6.php",
+          "priority": 3
+        },
+        {
+          "id": "stream_sportsonline_168807982",
+          "source": "sportsonline",
+          "quality": "HD",
+          "channel": "eleven2",
+          "url": "https://www1.sprtsonline.click/channels/pt/eleven2.php",
+          "priority": 3
+        }
+      ]
+    },
+    {
       "id": 634926903,
       "date": "2026-02-21T20:00:00.000Z",
       "timestamp": 1771704000,
@@ -1000,46 +1040,6 @@
           "quality": "HD",
           "channel": "br2",
           "url": "https://www1.sprtsonline.click/channels/bra/br2.php",
-          "priority": 3
-        }
-      ]
-    },
-    {
-      "id": 1221054246,
-      "date": "2026-02-21T20:00:00.000Z",
-      "timestamp": 1771704000,
-      "status": "NS",
-      "time": "20:00",
-      "time_label": "20:00 GMT",
-      "league": {
-        "name": "إسبانيا, الدوري الإسباني",
-        "country": "Spain",
-        "logo": "https://a.espncdn.com/combiner/i?img=/i/leaguelogos/soccer/500/15.png&h=40&w=40"
-      },
-      "home": {
-        "name": "أتلتيكو مدريد",
-        "logo": "https://i0.wp.com/www.kora-online.cc/wp-content/uploads/2026/02/134-128x150.png"
-      },
-      "away": {
-        "name": "إسبانيول",
-        "logo": "https://i0.wp.com/www.kora-online.cc/wp-content/uploads/2026/02/136-150x150.png"
-      },
-      "score": null,
-      "streams": [
-        {
-          "id": "stream_sportsonline_168807982",
-          "source": "sportsonline",
-          "quality": "HD",
-          "channel": "hd6",
-          "url": "https://www1.sprtsonline.click/channels/hd/hd6.php",
-          "priority": 3
-        },
-        {
-          "id": "stream_sportsonline_168807982",
-          "source": "sportsonline",
-          "quality": "HD",
-          "channel": "eleven2",
-          "url": "https://www1.sprtsonline.click/channels/pt/eleven2.php",
           "priority": 3
         }
       ]
