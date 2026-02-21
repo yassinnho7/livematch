@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-02-21T14:16:01.571Z",
+  "generated_at": "2026-02-21T14:49:16.836Z",
   "count": 23,
   "matches": [
     {
@@ -23,8 +23,8 @@
         "logo": "https://i0.wp.com/www.kora-online.cc/wp-content/uploads/2026/02/193.png"
       },
       "score": {
-        "home": 0,
-        "away": 1
+        "home": 1,
+        "away": 2
       },
       "streams": [
         {
@@ -99,7 +99,7 @@
       },
       "score": {
         "home": 0,
-        "away": 0
+        "away": 1
       },
       "streams": [
         {
@@ -156,7 +156,7 @@
       "id": 459065128,
       "date": "2026-02-21T14:30:00.000Z",
       "timestamp": 1771684200,
-      "status": "NS",
+      "status": "LIVE",
       "time": "14:30",
       "time_label": "14:30 GMT",
       "league": {
@@ -172,7 +172,10 @@
         "name": "أوغسبورغ",
         "logo": "https://i0.wp.com/www.kora-online.cc/wp-content/uploads/2026/02/358.png"
       },
-      "score": null,
+      "score": {
+        "home": 0,
+        "away": 0
+      },
       "streams": [
         {
           "id": "stream_sports-b1_ko_459065128",
@@ -196,7 +199,7 @@
       "id": 1672020962,
       "date": "2026-02-21T14:30:00.000Z",
       "timestamp": 1771684200,
-      "status": "NS",
+      "status": "LIVE",
       "time": "14:30",
       "time_label": "14:30 GMT",
       "league": {
@@ -212,7 +215,10 @@
         "name": "آينتراخت فرانكفورت",
         "logo": "https://i0.wp.com/www.kora-online.cc/wp-content/uploads/2026/02/337.png"
       },
-      "score": null,
+      "score": {
+        "home": 0,
+        "away": 0
+      },
       "streams": [
         {
           "id": "stream_sports-b1_ko_1672020962",
@@ -295,6 +301,14 @@
           "priority": 1
         },
         {
+          "id": "stream_siiir_712082837",
+          "source": "siiir",
+          "quality": "VIP",
+          "channel": "VIP Server",
+          "url": "https://eyj0exaioijkv1qilcjhbgcioijiuzi1nij99sss.yallashot.us/playerv2.php?match=match4&key=c0ae1abba6eebd7e6cc5b88b1d2B71547",
+          "priority": 2
+        },
+        {
           "id": "stream_sportsonline_378739513",
           "source": "sportsonline",
           "quality": "HD",
@@ -357,6 +371,14 @@
           "channel": "bein2",
           "url": "https://pl.gomatch-live.com/albaplayer/bein2/",
           "priority": 1
+        },
+        {
+          "id": "stream_siiir_977259940",
+          "source": "siiir",
+          "quality": "VIP",
+          "channel": "VIP Server",
+          "url": "https://eyj0exaioijkv1qilcjhbgcioijiuzi1nij99sss.yallashot.us/playerv2.php?match=match2&key=c0ae1abba6eebd7e6cc5b88b1d2B71547",
+          "priority": 2
         }
       ]
     },
@@ -525,6 +547,14 @@
           "channel": "bein6",
           "url": "https://pl.gomatch-live.com/albaplayer/bein6/",
           "priority": 1
+        },
+        {
+          "id": "stream_siiir_977708184",
+          "source": "siiir",
+          "quality": "VIP",
+          "channel": "VIP Server",
+          "url": "https://eyj0exaioijkv1qilcjhbgcioijiuzi1nij99sss.yallashot.us/playerv2.php?match=match6&key=c0ae1abba6eebd7e6cc5b88b1d2B71547",
+          "priority": 2
         },
         {
           "id": "stream_sportsonline_1289693630",
