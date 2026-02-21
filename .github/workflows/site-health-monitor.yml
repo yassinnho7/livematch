@@ -1,0 +1,68 @@
+name: Site Health Monitor
+
+on:
+  schedule:
+    - cron: "*/5 * * * *"
+  workflow_dispatch:
+
+permissions:
+  actions: write
+  contents: read
+
+concurrency:
+  group: site-health-monitor
+  cancel-in-progress: true
+
+jobs:
+  monitor:
+    runs-on: ubuntu-latest
+    outputs:
+      site_down: ${{ steps.probe.outputs.site_down }}
+    steps:
+      - name: Probe pages.dev endpoints
+        id: probe
+        run: |
+          set -euo pipefail
+
+          URLS=(
+            "https://livematch-991.pages.dev/"
+            "https://livematch-991.pages.dev/data/matches.json"
+            "https://livematch-991.pages.dev/healthz.txt"
+          )
+
+          site_down="false"
+          for url in "${URLS[@]}"; do
+            code="$(curl -sS -o /dev/null -w "%{http_code}" --connect-timeout 8 --max-time 20 "$url" || echo "000")"
+            echo "$url => $code"
+            if [ "$code" = "000" ] || [ "$code" -ge 400 ]; then
+              site_down="true"
+            fi
+          done
+
+          echo "site_down=$site_down" >> "$GITHUB_OUTPUT"
+          if [ "$site_down" = "true" ]; then
+            echo "Site probe failed"
+          else
+            echo "Site probe healthy"
+          fi
+
+  auto-recover:
+    runs-on: ubuntu-latest
+    needs: monitor
+    if: needs.monitor.outputs.site_down == 'true'
+    steps:
+      - name: Trigger hourly scrape workflow for recovery
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          curl -sS -X POST \
+            -H "Authorization: Bearer $GH_TOKEN" \
+            -H "Accept: application/vnd.github+json" \
+            https://api.github.com/repos/${{ github.repository }}/actions/workflows/hourly-scrape.yml/dispatches \
+            -d '{"ref":"main"}'
+          echo "Triggered hourly-scrape.yml workflow_dispatch"
+
+      - name: Mark run as failed for visibility
+        run: |
+          echo "Site is down. Auto-recovery was triggered."
+          exit 1
