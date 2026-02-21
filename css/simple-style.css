@@ -1,0 +1,913 @@
+/* ============================================
+   LiveMatch - CSS v3.0
+   Dark/Light theme with comfortable colors
+   Cairo font loaded via Google Fonts CDN in HTML
+   ============================================ */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+/* ========================
+   CSS VARIABLES (Themes)
+   ======================== */
+[data-theme="dark"] {
+    --bg-primary: #0f1923;
+    --bg-secondary: #162029;
+    --bg-card: #1a2732;
+    --bg-card-hover: #213340;
+    --bg-header: #0f1923;
+    --border-color: rgba(255, 255, 255, 0.06);
+    --border-hover: rgba(56, 189, 248, 0.25);
+    --text-primary: #e8edf2;
+    --text-secondary: #8899a6;
+    --text-muted: #5b7083;
+    --accent: #1d9bf0;
+    --accent-soft: rgba(29, 155, 240, 0.12);
+    --live-color: #f4212e;
+    --live-bg: rgba(244, 33, 46, 0.12);
+    --green-color: #00ba7c;
+    --green-bg: rgba(0, 186, 124, 0.12);
+    --shadow: rgba(0, 0, 0, 0.3);
+}
+
+[data-theme="light"] {
+    --bg-primary: #f7f9fa;
+    --bg-secondary: #eef1f3;
+    --bg-card: #ffffff;
+    --bg-card-hover: #f0f4f7;
+    --bg-header: #ffffff;
+    --border-color: rgba(0, 0, 0, 0.08);
+    --border-hover: rgba(29, 155, 240, 0.3);
+    --text-primary: #0f1419;
+    --text-secondary: #536471;
+    --text-muted: #8899a6;
+    --accent: #1d9bf0;
+    --accent-soft: rgba(29, 155, 240, 0.08);
+    --live-color: #f4212e;
+    --live-bg: rgba(244, 33, 46, 0.08);
+    --green-color: #00ba7c;
+    --green-bg: rgba(0, 186, 124, 0.08);
+    --shadow: rgba(0, 0, 0, 0.08);
+}
+
+body {
+    font-family: 'Cairo', system-ui, -apple-system, sans-serif;
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    min-height: 100vh;
+    overflow-x: hidden;
+    transition: background 0.3s ease, color 0.3s ease;
+}
+
+.container {
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 16px;
+}
+
+/* ========================
+   HEADER
+   ======================== */
+.site-header {
+    background: var(--bg-header);
+    border-bottom: 1px solid var(--border-color);
+    padding: 12px 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    transition: background 0.3s, border-color 0.3s;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.header-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.header-brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.header-brand h1 {
+    font-size: 1.25rem;
+    font-weight: 900;
+    color: var(--text-primary);
+    letter-spacing: -0.5px;
+}
+
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+/* Theme Toggle Button */
+.theme-toggle {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-size: 1rem;
+}
+
+.theme-toggle:hover {
+    background: var(--bg-card-hover);
+    border-color: var(--border-hover);
+}
+
+/* Live Badge */
+.live-badge {
+    background: var(--live-color);
+    padding: 3px 9px;
+    border-radius: 4px;
+    font-size: 0.65rem;
+    font-weight: 700;
+    color: #fff;
+    animation: livePulse 2s infinite;
+    white-space: nowrap;
+    display: none;
+}
+
+.live-badge.active {
+    display: inline-flex;
+    align-items: center;
+    gap: 3px;
+}
+
+@keyframes livePulse {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.6;
+    }
+}
+
+/* Viewer Counter */
+.viewer-counter {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.78rem;
+    color: var(--text-secondary);
+    background: var(--bg-card);
+    padding: 5px 12px;
+    border-radius: 20px;
+    border: 1px solid var(--border-color);
+    transition: background 0.3s, border-color 0.3s;
+}
+
+.viewer-dot {
+    width: 7px;
+    height: 7px;
+    background: var(--green-color);
+    border-radius: 50%;
+    animation: dotPulse 2s infinite;
+}
+
+@keyframes dotPulse {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.3;
+    }
+}
+
+#viewer-count {
+    font-weight: 700;
+    color: var(--text-primary);
+    min-width: 30px;
+    text-align: center;
+}
+
+/* ========================
+   AD BANNER
+   ======================== */
+.ad-banner {
+    width: 100%;
+    margin: 12px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    min-height: 0;
+}
+
+/* ========================
+   SECTIONS
+   ======================== */
+.matches-section,
+.news-section {
+    margin-bottom: 25px;
+}
+
+.section-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 16px 0 14px;
+    padding: 0;
+}
+
+.section-title {
+    font-size: 1.05rem;
+    font-weight: 900;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--text-primary);
+}
+
+.match-date {
+    font-size: 0.88rem;
+    font-weight: 700;
+    color: var(--text-secondary);
+    background: var(--bg-card);
+    padding: 8px 20px;
+    border-radius: 10px;
+    border: 1px solid var(--border-color);
+    letter-spacing: 0.3px;
+}
+
+/* ========================
+   MATCH CARDS
+   ======================== */
+.matches-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    min-height: 200px;
+    padding: 0;
+}
+
+.match-card {
+    background: var(--bg-card);
+    border-radius: 16px;
+    padding: 18px 20px;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    gap: 16px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    text-decoration: none;
+    color: inherit;
+    border: 1px solid var(--border-color);
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.match-card:hover {
+    border-color: var(--accent);
+    transform: translateY(-2px);
+    background: var(--bg-card-hover);
+}
+
+/* Hover Play Overlay */
+.match-card .play-overlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    transition: opacity 0.25s;
+    z-index: 5;
+    pointer-events: none;
+}
+
+[data-theme="light"] .match-card .play-overlay {
+    background: rgba(0, 0, 0, 0.35);
+}
+
+.match-card:hover .play-overlay {
+    opacity: 1;
+}
+
+.play-overlay .play-icon {
+    width: 44px;
+    height: 44px;
+    background: var(--accent);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 15px rgba(29, 155, 240, 0.4);
+    transform: scale(0.85);
+    transition: transform 0.25s;
+}
+
+.match-card:hover .play-overlay .play-icon {
+    transform: scale(1);
+}
+
+.play-icon svg {
+    fill: white;
+    width: 18px;
+    height: 18px;
+    margin-right: -2px;
+}
+
+/* Live match card */
+.match-card.is-live {
+    border-color: rgba(244, 33, 46, 0.2);
+}
+
+.match-card.is-live::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 3px;
+    height: 100%;
+    background: var(--live-color);
+    border-radius: 0 10px 10px 0;
+}
+
+/* ======= TEAM ELEMENTS =======
+   CRITICAL BUG FIX: .play-overlay is :first-child, .match-meta is :last-child.
+   Teams are NOT first/last children! Use :first-of-type / :last-of-type.
+   =============================== */
+.team {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    min-width: 0;
+    position: relative;
+    z-index: 2;
+    flex: 1;
+}
+
+/* Watermark Background - REMOVED for cleaner look */
+/* Removed dynamic watermark backgrounds */
+
+.team-logo {
+    width: 42px;
+    height: 42px;
+    object-fit: contain;
+    flex-shrink: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 4px;
+}
+
+.team-name {
+    font-size: 1rem;
+    font-weight: 800;
+    white-space: normal;
+    overflow: visible;
+    text-overflow: unset;
+    color: var(--text-primary);
+    max-width: 150px;
+    z-index: 2;
+    text-align: center;
+    line-height: 1.2;
+}
+
+/* Center Section */
+.match-center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0;
+    min-width: 60px;
+    padding: 0 8px;
+    position: relative;
+    z-index: 2;
+}
+
+.match-time {
+    font-size: 0.85rem;
+    font-weight: 800;
+    color: var(--text-secondary);
+    line-height: 1;
+}
+
+.match-score {
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: var(--text-primary);
+    letter-spacing: 1px;
+    line-height: 1;
+    margin: 4px 0;
+}
+
+.match-countdown {
+    font-size: 0.72rem;
+    color: var(--accent);
+    font-weight: 700;
+    direction: ltr;
+    line-height: 1;
+    margin-top: 8px;
+}
+
+.match-status-badge {
+    font-size: 0.65rem;
+    padding: 3px 9px;
+    border-radius: 4px;
+    font-weight: 800;
+    line-height: 1.3;
+    margin-top: 6px;
+}
+
+.status-live {
+    background: var(--live-bg);
+    color: var(--live-color);
+}
+
+.status-finished {
+    background: var(--green-bg);
+    color: var(--green-color);
+}
+
+.status-upcoming {
+    background: var(--accent-soft);
+    color: var(--text-muted);
+}
+
+/* Match Meta (Channel + Commentator) */
+.match-meta {
+    grid-column: 1 / -1;
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    padding-top: 6px;
+    border-top: 1px solid var(--border-color);
+    position: relative;
+    z-index: 2;
+}
+
+.match-meta span {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    display: flex;
+    align-items: center;
+    gap: 3px;
+}
+
+/* ========================
+   LOADING & STATES
+   ======================== */
+.loading {
+    text-align: center;
+    padding: 35px 20px;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    background: var(--bg-card);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    border: 1px solid var(--border-color);
+}
+
+.loading-spinner {
+    width: 18px;
+    height: 18px;
+    border: 2px solid var(--border-color);
+    border-top-color: var(--accent);
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.error-state {
+    text-align: center;
+    padding: 30px;
+    background: var(--bg-card);
+    border-radius: 10px;
+    border: 1px solid var(--border-color);
+}
+
+.error-icon {
+    font-size: 2rem;
+    margin-bottom: 10px;
+}
+
+.error-message {
+    color: var(--text-secondary);
+    margin-bottom: 12px;
+}
+
+.retry-btn {
+    background: var(--accent);
+    color: white;
+    border: none;
+    padding: 8px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 700;
+    font-family: inherit;
+    font-size: 0.85rem;
+}
+
+.empty-state {
+    text-align: center;
+    padding: 35px;
+    background: var(--bg-card);
+    border-radius: 10px;
+    border: 1px solid var(--border-color);
+}
+
+.empty-icon {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+}
+
+.empty-message {
+    font-size: 1rem;
+    color: var(--text-primary);
+    margin-bottom: 5px;
+}
+
+.empty-hint {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+}
+
+/* ========================
+   NEWS CARDS
+   ======================== */
+.news-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 16px;
+    margin-bottom: 25px;
+}
+
+.news-card {
+    background: var(--bg-card);
+    border-radius: 16px;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.news-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
+    border-color: var(--accent);
+}
+
+.news-poster {
+    width: 100%;
+    height: 170px;
+    object-fit: cover;
+    background: var(--bg-secondary);
+}
+
+.news-info {
+    padding: 14px 16px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.news-title {
+    font-size: 0.95rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+    line-height: 1.5;
+    color: var(--text-primary);
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.news-meta {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    margin-top: auto;
+    display: flex;
+    justify-content: space-between;
+}
+
+/* ========================
+   FOOTER
+   ======================== */
+.site-footer {
+    background: var(--bg-secondary);
+    border-top: 1px solid var(--border-color);
+    padding: 22px 0 18px;
+    margin-top: 15px;
+    transition: background 0.3s, border-color 0.3s;
+}
+
+.footer-inner {
+    text-align: center;
+}
+
+.footer-social {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 12px;
+    flex-wrap: wrap;
+}
+
+.social-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 16px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 0.8rem;
+    font-weight: 700;
+    transition: all 0.25s;
+    border: 1px solid transparent;
+}
+
+.telegram-btn {
+    background: rgba(0, 136, 204, 0.1);
+    color: #1d9bf0;
+    border-color: rgba(0, 136, 204, 0.15);
+}
+
+.telegram-btn:hover {
+    background: rgba(0, 136, 204, 0.2);
+    transform: translateY(-1px);
+}
+
+.facebook-btn {
+    background: rgba(24, 119, 242, 0.1);
+    color: #1877f2;
+    border-color: rgba(24, 119, 242, 0.15);
+}
+
+.facebook-btn:hover {
+    background: rgba(24, 119, 242, 0.2);
+    transform: translateY(-1px);
+}
+
+.footer-copy {
+    font-size: 0.72rem;
+    color: var(--text-muted);
+}
+
+/* ========================
+   SKELETON LOADING
+   ======================== */
+.skeleton {
+    background: linear-gradient(90deg, var(--bg-card) 25%, var(--bg-card-hover) 50%, var(--bg-card) 75%);
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+    border-radius: 4px;
+}
+
+@keyframes shimmer {
+    0% {
+        background-position: 200% 0;
+    }
+
+    100% {
+        background-position: -200% 0;
+    }
+}
+
+.skeleton-card {
+    height: 80px;
+    border-radius: 10px;
+    border: 1px solid var(--border-color);
+}
+
+.skeleton-logo {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+}
+
+.skeleton-text {
+    height: 12px;
+    width: 60%;
+    margin-bottom: 8px;
+}
+
+.skeleton-time {
+    height: 16px;
+    width: 40px;
+}
+
+.news-skeleton {
+    height: 220px;
+    width: 100%;
+    border-radius: 10px;
+}
+
+.news-skeleton-img {
+    height: 140px;
+    width: 100%;
+    border-radius: 10px 10px 0 0;
+}
+
+.news-skeleton-content {
+    padding: 10px;
+}
+
+/* ========================
+   AD CONTAINERS (article)
+   ======================== */
+.ad-container-frame {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    overflow: hidden;
+    margin-bottom: 20px;
+    background: transparent;
+}
+
+.ad-slot-header {
+    width: 470px;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+/* Table wrapper for articles */
+.table-wrapper {
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.02);
+}
+
+/* Related News */
+.related-section {
+    margin-top: 40px;
+    padding-top: 30px;
+    border-top: 1px solid var(--border-color);
+}
+
+/* ========================
+   RESPONSIVE
+   ======================== */
+@media (max-width: 600px) {
+    .header-inner {
+        justify-content: space-between;
+    }
+
+    .header-brand h1 {
+        font-size: 0.9rem;
+    }
+
+    .header-actions {
+        gap: 6px;
+    }
+
+    .viewer-counter {
+        font-size: 0.75rem;
+        padding: 4px 8px;
+    }
+
+    .match-card {
+        padding: 14px 10px;
+        border-radius: 12px;
+        grid-template-columns: 1fr auto 1fr;
+        gap: 8px;
+    }
+
+    .team {
+        gap: 8px;
+    }
+
+    .team-logo {
+        width: 32px;
+        height: 32px;
+    }
+
+    .team-name {
+        font-size: 0.8rem;
+        max-width: 90px;
+    }
+
+    .team-logo {
+        width: 36px;
+        height: 36px;
+    }
+
+    .team-name {
+        font-size: 0.9rem;
+        max-width: 120px;
+        text-align: center;
+    }
+
+    .match-center {
+        min-width: 70px;
+        gap: 2px;
+        padding: 0 6px;
+    }
+
+    .match-time {
+        font-size: 0.7rem;
+    }
+
+    .match-score {
+        font-size: 1.4rem;
+    }
+
+    .match-status-badge {
+        font-size: 0.55rem;
+        padding: 2px 5px;
+    }
+
+    .match-countdown {
+        font-size: 0.65rem;
+    }
+
+    .match-meta {
+        gap: 4px;
+        flex-wrap: wrap;
+        padding-top: 8px;
+    }
+
+    .match-meta span {
+        font-size: 0.55rem;
+    }
+
+    .match-date {
+        font-size: 0.78rem;
+        padding: 6px 14px;
+    }
+
+    .play-overlay .play-icon {
+        width: 38px;
+        height: 38px;
+    }
+
+    .news-grid {
+        grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+        gap: 10px;
+    }
+
+    .theme-toggle {
+        width: 32px;
+        height: 32px;
+    }
+}
+
+/* News Link Button (Homepage) */
+.news-link-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
+    padding: 12px 24px;
+    border-radius: 12px;
+    text-decoration: none;
+    font-weight: 700;
+    transition: all 0.3s;
+}
+
+.news-link-btn:hover {
+    background: var(--bg-card-hover);
+    border-color: var(--accent);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px var(--shadow);
+}

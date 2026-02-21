@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" data-theme="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>بث مباشر مباريات كرة القدم</title>
+
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <script>
+        (function () {
+            var zone = "10621765";
+            var script = document.createElement("script");
+            script.src = "https://libtl.com/sdk.js";
+            script.setAttribute("data-zone", zone);
+            script.setAttribute("data-sdk", "show_" + zone);
+            document.head.appendChild(script);
+        })();
+    </script>
+
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg: #0a1016;
+            --bg-soft: #101a24;
+            --card: rgba(22, 34, 46, 0.84);
+            --text: #eaf2f8;
+            --muted: #8fa3b4;
+            --accent: #1fa2ff;
+            --accent-soft: rgba(31, 162, 255, 0.16);
+            --live: #ff3b5f;
+            --live-soft: rgba(255, 59, 95, 0.14);
+            --done: #16c784;
+            --done-soft: rgba(22, 199, 132, 0.14);
+            --border: rgba(255, 255, 255, 0.08);
+            --shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
+            --radius: 18px;
+        }
+
+        [data-theme="light"] {
+            --bg: #eef4f8;
+            --bg-soft: #ffffff;
+            --card: rgba(255, 255, 255, 0.92);
+            --text: #112131;
+            --muted: #607183;
+            --accent-soft: rgba(31, 162, 255, 0.12);
+            --live-soft: rgba(255, 59, 95, 0.1);
+            --done-soft: rgba(22, 199, 132, 0.12);
+            --border: rgba(0, 0, 0, 0.08);
+            --shadow: 0 10px 24px rgba(7, 18, 28, 0.12);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            font-family: "Cairo", system-ui, sans-serif;
+            color: var(--text);
+            min-height: 100vh;
+            overflow-x: hidden;
+            background:
+                radial-gradient(900px 320px at 50% -130px, rgba(31, 162, 255, 0.2), transparent 60%),
+                radial-gradient(700px 280px at 8% -100px, rgba(255, 59, 95, 0.14), transparent 70%),
+                var(--bg);
+        }
+
+        #main-loader {
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            background: var(--bg);
+            transition: opacity 0.35s ease;
+        }
+
+        #main-loader.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .loader-badge {
+            width: 64px;
+            height: 64px;
+            border-radius: 18px;
+            display: grid;
+            place-items: center;
+            font-size: 1.9rem;
+            margin-bottom: 14px;
+            border: 1px solid var(--border);
+            background: linear-gradient(135deg, rgba(31, 162, 255, 0.22), rgba(255, 59, 95, 0.16));
+            animation: floatY 1.2s ease-in-out infinite;
+        }
+
+        .loader-ring {
+            width: 46px;
+            height: 46px;
+            border-radius: 50%;
+            border: 3px solid rgba(255, 255, 255, 0.08);
+            border-top-color: var(--accent);
+            animation: spin 0.8s linear infinite;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        @keyframes floatY {
+            50% {
+                transform: translateY(-4px);
+            }
+        }
+
+        .shell {
+            max-width: 560px;
+            margin: 0 auto;
+            padding: 0 14px 24px;
+        }
+
+        .glass {
+            background: var(--card);
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow);
+            backdrop-filter: blur(12px);
+        }
+
+        .header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            margin-top: env(safe-area-inset-top, 0);
+            border-radius: 0 0 20px 20px;
+            padding: 14px;
+        }
+
+        .header-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+        }
+
+        .title-wrap {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .title-logo {
+            width: 40px;
+            height: 40px;
+            border-radius: 12px;
+            display: grid;
+            place-items: center;
+            font-size: 1.2rem;
+            border: 1px solid var(--border);
+            background: linear-gradient(135deg, rgba(31, 162, 255, 0.18), rgba(255, 59, 95, 0.16));
+        }
+
+        .title-wrap h1 {
+            font-size: 1rem;
+            font-weight: 900;
+            line-height: 1.2;
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 8px;
+        }
+
+        .icon-btn {
+            width: 46px;
+            height: 46px;
+            border-radius: 11px;
+            border: 1px solid var(--border);
+            color: var(--text);
+            background: rgba(255, 255, 255, 0.05);
+            font-size: 1.25rem;
+            font-family: inherit;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .icon-btn:active {
+            transform: scale(0.94);
+        }
+
+        .top-banner {
+            width: 100%;
+            min-height: 66px;
+            margin: 12px auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .matches {
+            margin-top: 4px;
+        }
+
+        .group {
+            margin-bottom: 18px;
+        }
+
+        .group-head {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 0 2px 8px;
+        }
+
+        .group-head h2 {
+            font-size: 0.84rem;
+            color: var(--muted);
+            font-weight: 800;
+        }
+
+        .group-head span {
+            font-size: 0.7rem;
+            color: var(--muted);
+            border: 1px solid var(--border);
+            border-radius: 999px;
+            padding: 2px 8px;
+        }
+
+        .match-card {
+            border-radius: var(--radius);
+            padding: 13px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            transition: transform 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease;
+        }
+
+        .match-card:active {
+            transform: scale(0.986);
+        }
+
+        .match-card:hover {
+            border-color: rgba(31, 162, 255, 0.28);
+            box-shadow: 0 10px 22px rgba(0, 0, 0, 0.24);
+        }
+
+        .match-card.live {
+            border-color: rgba(255, 59, 95, 0.45);
+            box-shadow: 0 0 0 1px rgba(255, 59, 95, 0.25), var(--shadow);
+        }
+
+        .match-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 8px;
+            margin-bottom: 10px;
+        }
+
+        .league {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            min-width: 0;
+        }
+
+        .league img {
+            width: 18px;
+            height: 18px;
+            border-radius: 4px;
+            object-fit: cover;
+            border: 1px solid var(--border);
+            flex-shrink: 0;
+        }
+
+        .league span {
+            font-size: 0.74rem;
+            color: var(--muted);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .status {
+            font-size: 0.66rem;
+            font-weight: 900;
+            padding: 5px 9px;
+            border-radius: 999px;
+            border: 1px solid var(--border);
+            background: rgba(255, 255, 255, 0.04);
+            white-space: nowrap;
+        }
+
+        .status.live {
+            color: var(--live);
+            background: var(--live-soft);
+            border-color: rgba(255, 59, 95, 0.4);
+        }
+
+        .status.ft {
+            color: var(--done);
+            background: var(--done-soft);
+            border-color: rgba(22, 199, 132, 0.38);
+        }
+
+        .match-main {
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 9px;
+        }
+
+        .team {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            min-width: 0;
+        }
+
+        .team img {
+            width: 52px;
+            height: 52px;
+            object-fit: contain;
+            border-radius: 50%;
+            padding: 6px;
+            border: 1px solid var(--border);
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .team b {
+            max-width: 120px;
+            text-align: center;
+            font-size: 0.83rem;
+            line-height: 1.2;
+            overflow: hidden;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+        }
+
+        .center {
+            min-width: 94px;
+            text-align: center;
+        }
+
+        .center .score {
+            font-size: 1.32rem;
+            font-weight: 900;
+            line-height: 1;
+            margin-bottom: 4px;
+        }
+
+        .center .vs {
+            font-size: 0.74rem;
+            color: var(--muted);
+            margin-bottom: 4px;
+        }
+
+        .center .time {
+            font-size: 0.84rem;
+            font-weight: 900;
+            line-height: 1;
+        }
+
+        .center .sub {
+            font-size: 0.62rem;
+            color: var(--muted);
+            margin-top: 3px;
+        }
+
+        .center .countdown {
+            font-size: 0.66rem;
+            font-weight: 800;
+            color: #9ad3ff;
+            letter-spacing: 0.2px;
+        }
+
+        .match-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid var(--border);
+            padding-top: 8px;
+            gap: 8px;
+        }
+
+        .servers-count {
+            font-size: 0.72rem;
+            color: var(--muted);
+        }
+
+        .watch-pill {
+            border: 0;
+            border-radius: 999px;
+            padding: 7px 13px;
+            font-size: 0.73rem;
+            font-weight: 900;
+            color: #fff;
+            background: linear-gradient(135deg, #1fa2ff, #1286dd);
+            pointer-events: none;
+        }
+
+        .bottom-banner {
+            width: 100%;
+            min-height: 266px;
+            margin-top: 8px;
+            margin-bottom: 12px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .ad-frame {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            background: transparent;
+        }
+
+        .ad-frame-320 {
+            max-width: 340px;
+            min-height: 50px;
+            padding: 4px;
+        }
+
+        .ad-frame-468 {
+            width: 100%;
+            min-height: 60px;
+            padding: 4px;
+        }
+
+        .ad-frame-300 {
+            max-width: 330px;
+            min-height: 250px;
+            padding: 4px;
+        }
+
+        .ad-slot {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            overflow: hidden;
+        }
+
+        .empty {
+            border-radius: var(--radius);
+            padding: 24px 16px;
+            text-align: center;
+            font-size: 0.88rem;
+            color: var(--muted);
+        }
+
+        .servers-view,
+        .player-view {
+            position: fixed;
+            inset: 0;
+            z-index: 300;
+            display: none;
+            flex-direction: column;
+            background: var(--bg);
+        }
+
+        .servers-view.active,
+        .player-view.active {
+            display: flex;
+        }
+
+        .view-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 13px;
+            border-bottom: 1px solid var(--border);
+            background: var(--bg-soft);
+        }
+
+        .back-btn {
+            width: 38px;
+            height: 38px;
+            border-radius: 11px;
+            border: 1px solid var(--border);
+            color: var(--text);
+            background: rgba(255, 255, 255, 0.05);
+            font-size: 1rem;
+            cursor: pointer;
+            position: relative;
+            z-index: 2;
+        }
+
+        .view-title {
+            flex: 1;
+            text-align: center;
+            font-size: 0.9rem;
+            font-weight: 900;
+            margin-right: -48px;
+            padding-inline: 12px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            pointer-events: none;
+        }
+
+        .servers-list {
+            padding: 14px;
+            overflow-y: auto;
+        }
+
+        .server-item {
+            width: 100%;
+            border-radius: 15px;
+            margin-bottom: 10px;
+            border: 1px solid var(--border);
+            color: var(--text);
+            background: var(--card);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 11px 13px;
+            text-align: right;
+            font-family: inherit;
+            cursor: pointer;
+            transition: transform 0.16s ease, border-color 0.16s ease, background-color 0.16s ease;
+        }
+
+        .server-item:active {
+            transform: scale(0.985);
+        }
+
+        .server-item:hover {
+            border-color: rgba(31, 162, 255, 0.35);
+            background: rgba(31, 162, 255, 0.08);
+        }
+
+        .server-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 12px;
+            display: grid;
+            place-items: center;
+            font-size: 1.15rem;
+            background: var(--accent-soft);
+            border: 1px solid rgba(31, 162, 255, 0.24);
+            flex-shrink: 0;
+        }
+
+        .server-text {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .server-text b {
+            font-size: 0.86rem;
+            display: block;
+        }
+
+        .server-text span {
+            font-size: 0.72rem;
+            color: var(--muted);
+        }
+
+        .server-quality {
+            font-size: 0.66rem;
+            font-weight: 900;
+            border-radius: 999px;
+            padding: 4px 8px;
+            border: 1px solid var(--border);
+            color: var(--muted);
+        }
+
+        .servers-banner {
+            min-height: 60px;
+            padding: 8px 10px 14px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .player-stage {
+            flex: 1;
+            background: #000;
+            position: relative;
+        }
+
+        #main-iframe {
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        .player-controls {
+            padding: 10px 12px 14px;
+            border-top: 1px solid var(--border);
+            background: var(--bg-soft);
+        }
+
+        .fullscreen-btn {
+            width: 100%;
+            border: 0;
+            border-radius: 13px;
+            color: #fff;
+            font-family: inherit;
+            font-size: 0.88rem;
+            font-weight: 900;
+            padding: 12px;
+            background: linear-gradient(135deg, #1fa2ff, #1286dd);
+            cursor: pointer;
+        }
+
+        .player-view.fullscreen-mode .player-controls {
+            display: none;
+        }
+
+        .player-view.fullscreen-mode #main-iframe,
+        .player-view.pseudo-fullscreen #main-iframe {
+            width: 100%;
+            height: 100%;
+            display: block;
+            background: #000;
+            border: 0;
+        }
+
+        /* 
+           Force landscape for vertical devices in fullscreen-mode or pseudo-fullscreen.
+           We use @media orientation: portrait to detect if the phone is held vertically.
+        */
+        @media screen and (orientation: portrait) {
+
+            .player-view.fullscreen-mode.force-landscape .player-stage,
+            .player-view.pseudo-fullscreen.force-landscape .player-stage {
+                position: fixed;
+                top: 50%;
+                left: 50%;
+                width: 100vh;
+                height: 100vw;
+                transform: translate(-50%, -50%) rotate(90deg);
+                z-index: 9999;
+                background: #000;
+            }
+        }
+
+        /* If naturally landscape, just fill the screen */
+        @media screen and (orientation: landscape) {
+
+            .player-view.fullscreen-mode .player-stage,
+            .player-view.pseudo-fullscreen .player-stage {
+                position: fixed;
+                inset: 0;
+                width: 100vw;
+                height: 100vh;
+                transform: none;
+                z-index: 9999;
+                background: #000;
+            }
+        }
+
+        .note {
+            position: fixed;
+            top: 14px;
+            right: 14px;
+            left: 14px;
+            z-index: 10000;
+            border-radius: 14px;
+            border: 1px solid var(--border);
+            background: var(--card);
+            text-align: center;
+            padding: 11px;
+            font-size: 0.82rem;
+            font-weight: 700;
+            transform: translateY(-140%);
+            transition: transform 0.25s ease;
+        }
+
+        .note.show {
+            transform: translateY(0);
+        }
+    </style>
+</head>
+
+<body>
+    <div id="main-loader">
+        <div class="loader-badge">⚽</div>
+        <div class="loader-ring"></div>
+    </div>
+
+    <div class="note" id="note"></div>
+
+    <header class="shell header glass">
+        <div class="header-row">
+            <div class="title-wrap">
+                <div class="title-logo">⚽</div>
+                <h1>بث مباشر مباريات كرة القدم</h1>
+            </div>
+            <div class="header-actions">
+                <button class="icon-btn" id="theme-btn" type="button" aria-label="الوضع المظلم">◐</button>
+                <button class="icon-btn" id="refresh-btn" type="button" aria-label="تحديث">↻</button>
+            </div>
+        </div>
+    </header>
+
+    <main class="shell">
+        <div class="top-banner" id="top-banner"></div>
+        <section class="matches" id="matches"></section>
+        <div class="bottom-banner" id="bottom-banner"></div>
+    </main>
+
+    <section class="servers-view" id="servers-view">
+        <div class="view-header">
+            <button class="back-btn" id="servers-back" type="button" aria-label="رجوع">→</button>
+            <div class="view-title" id="servers-title">اختيار السيرفر</div>
+        </div>
+        <div class="servers-list" id="servers-list"></div>
+        <div class="servers-banner" id="servers-banner"></div>
+    </section>
+
+    <section class="player-view" id="player-view">
+        <div class="player-stage" id="player-stage">
+            <iframe id="main-iframe" src="about:blank" allowfullscreen
+                allow="autoplay; encrypted-media; picture-in-picture" referrerpolicy="no-referrer"
+                sandbox="allow-scripts allow-same-origin allow-forms allow-presentation"></iframe>
+        </div>
+        <div class="player-controls" id="player-controls">
+            <button class="fullscreen-btn" id="fullscreen-btn" type="button">⛶ تكبير الشاشة</button>
+        </div>
+    </section>
+
+    <script src="js/tma-v2.js?v=9105"></script>
+</body>
+
+</html>

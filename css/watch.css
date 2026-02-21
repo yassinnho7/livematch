@@ -1,0 +1,194 @@
+/* ============================================================ */
+/* LiveMatch - Watch Player Styles                             */
+/* ============================================================ */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Cairo', sans-serif;
+    background: #000;
+    color: #fff;
+    height: 100vh;
+    height: 100dvh;
+    width: 100vw;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Essential Layers */
+#stream-container {
+    width: 100%;
+    height: 90dvh;
+    /* Match player height to prevent pushing controls down */
+    display: none;
+    flex-direction: column;
+}
+
+/* Video Area: Strict 90% height */
+.video-player-frame {
+    width: 100%;
+    height: 90dvh;
+    background: #000;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#stream {
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+/* Controls Area: Strict 10% height */
+.watch-controls-center {
+    width: 100%;
+    height: 10dvh;
+    padding: 3px 10px 0;
+    /* 3px top padding as requested */
+    background: #1a202c;
+    border-top: 1px solid #2d3748;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    /* Move to top */
+    flex-shrink: 0;
+    z-index: 100;
+    box-sizing: border-box;
+}
+
+.control-card {
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+    padding: 8px 15px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.control-btn {
+    background: none;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+    font-family: inherit;
+    font-weight: 600;
+    font-size: 13px;
+    /* Slightly larger text */
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 12px;
+    /* Comfortable touch area */
+    border-radius: 8px;
+    transition: background 0.2s;
+}
+
+.control-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: #667eea;
+}
+
+.control-btn .icon {
+    font-size: 18px;
+    /* Distinct icon */
+}
+
+/* Monetization Layers (Overlay) */
+.monetization-layer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #000;
+}
+
+.monetization-content {
+    text-align: center;
+    width: 90%;
+    max-width: 400px;
+}
+
+.countdown-circle {
+    position: relative;
+    width: 100px;
+    height: 100px;
+    margin: 0 auto 20px;
+}
+
+.countdown-circle svg {
+    transform: rotate(-90deg);
+}
+
+.countdown-bg {
+    fill: none;
+    stroke: rgba(255, 255, 255, 0.1);
+    stroke-width: 5;
+}
+
+.countdown-progress {
+    fill: none;
+    stroke: #667eea;
+    stroke-width: 5;
+    stroke-dasharray: 283;
+    transition: stroke-dashoffset 1s linear;
+}
+
+.countdown-number {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 30px;
+    font-weight: 800;
+}
+
+.choice-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    /* Responsive Grid */
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.choice-card {
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 15px;
+    /* Larger tap area */
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.choice-card:hover {
+    border-color: #667eea;
+    background: rgba(102, 126, 234, 0.1);
+}
+
+.ad-box {
+    margin: 15px auto;
+    text-align: center;
+}
+
+@media (max-width: 480px) {
+    .control-btn {
+        padding: 10px 15px;
+        /* Even larger touch targert for mobile */
+        font-size: 14px;
+    }
+
+    .monetization-content {
+        width: 95%;
+    }
+}

@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="page-title">مباراة اليوم - بث مباشر</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/simple-style.css?v=3015">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+
+    <!-- Meta Tags for SEO (Updated dynamically) -->
+    <meta name="description" id="meta-description" content="البث المباشر للمباراة وتحليل شامل بالذكاء الصناعي.">
+    <meta name="keywords" id="meta-keywords" content="بث مباشر, كورة, مباريات اليوم, بث مباشر للمباريات">
+
+    <style>
+        .article-container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background: rgba(26, 32, 44, 0.8);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(10px);
+        }
+
+        .match-hero {
+            position: relative;
+            width: 100%;
+            height: 300px;
+            border-radius: 15px;
+            overflow: hidden;
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 30px;
+        }
+
+        .match-hero::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(0deg, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.4) 100%);
+        }
+
+        .hero-info {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            text-align: center;
+        }
+
+        .hero-team img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: white;
+            padding: 5px;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+        }
+
+        .hero-vs {
+            font-size: 32px;
+            font-weight: 900;
+            color: #667eea;
+        }
+
+        .article-body {
+            line-height: 1.8;
+            font-size: 18px;
+            color: #e2e8f0;
+        }
+
+        .article-body h2 {
+            margin: 30px 0 15px;
+            color: #fff;
+            border-right: 4px solid #667eea;
+            padding-right: 15px;
+        }
+
+        .article-body p {
+            margin-bottom: 20px;
+        }
+
+        .watch-button-container {
+            text-align: center;
+            margin: 40px 0;
+        }
+
+        @media (max-width: 768px) {
+            .match-hero {
+                height: 200px;
+            }
+
+            .hero-team img {
+                width: 60px;
+                height: 60px;
+            }
+
+            .hero-vs {
+                font-size: 24px;
+            }
+
+            .article-body {
+                font-size: 16px;
+            }
+        }
+
+        /* Floating Pulsing Button */
+        .floating-watch-btn {
+            position: fixed;
+            bottom: 25px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1000;
+            background: linear-gradient(135deg, #ff4757 0%, #ff6b81 100%);
+            color: #fff;
+            text-decoration: none;
+            padding: 12px 25px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 16px;
+            box-shadow: 0 5px 20px rgba(255, 71, 87, 0.4);
+            animation: pulse-animation 2s infinite;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        @keyframes pulse-animation {
+            0% {
+                transform: translateX(-50%) scale(1);
+                box-shadow: 0 0 0 0 rgba(255, 71, 87, 0.7);
+            }
+
+            70% {
+                transform: translateX(-50%) scale(1.05);
+                box-shadow: 0 0 0 15px rgba(255, 71, 87, 0);
+            }
+
+            100% {
+                transform: translateX(-50%) scale(1);
+                box-shadow: 0 0 0 0 rgba(255, 71, 87, 0);
+            }
+        }
+
+        .floating-watch-btn:hover {
+            background: #ff6b81;
+            transform: translateX(-50%) translateY(-3px);
+        }
+
+        /* Embedded Server Selection */
+        .server-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            /* Centers items if there's only one */
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .server-card {
+            flex: 1 1 300px;
+            /* Take up space but don't grow too huge */
+            max-width: 400px;
+            /* Cap width for single item */
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 15px;
+            border-radius: 12px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .server-card:hover {
+            background: rgba(102, 126, 234, 0.2);
+            border-color: #667eea;
+            transform: translateY(-2px);
+        }
+
+        .server-card i {
+            display: block;
+            font-size: 24px;
+            margin-bottom: 8px;
+        }
+
+        .server-card h4 {
+            margin: 0;
+            font-size: 14px;
+            color: #fff;
+        }
+
+        .server-tag {
+            font-size: 10px;
+            background: #667eea;
+            padding: 2px 6px;
+            border-radius: 4px;
+            margin-top: 5px;
+            display: inline-block;
+        }
+
+        /* Premium Table Styling */
+        .article-body table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 25px 0;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            /* Ensure table doesn't overflow its container */
+            display: block;
+            overflow-x: auto;
+            white-space: nowrap;
+        }
+
+        th,
+        td {
+            padding: 15px;
+            text-align: right;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        th {
+            background: rgba(102, 126, 234, 0.2);
+            color: #667eea;
+            font-weight: 700;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        tr:hover {
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        @media (max-width: 600px) {
+
+            th,
+            td {
+                padding: 10px;
+                font-size: 14px;
+            }
+
+            .article-container {
+                padding: 15px;
+                margin: 10px auto;
+                width: 95%;
+            }
+
+            .match-hero {
+                height: 180px;
+            }
+
+            .hero-team img {
+                width: 50px;
+                height: 50px;
+            }
+
+            .hero-vs {
+                font-size: 20px;
+            }
+
+            .article-body {
+                font-size: 16px;
+                line-height: 1.6;
+            }
+        }
+    </style>
+
+    <!-- Adexium In-page Script (PAUSED)
+    <script type="text/javascript" src="https://cdn.atechp.space/assets/js/inp.min.js"></script>
+    <script type="text/javascript">
+        document.addEventListener('DOMContentLoaded', () => {
+            const adexiumInpage = new AdexiumInpageWidget({ wid: 'ee8ca344-81f7-468e-aec8-4b35fca66433' });
+            adexiumInpage.autoMode();
+        });
+    </script>
+    -->
+</head>
+
+<body>
+    <div class="container">
+
+        <!-- Header -->
+        <header class="header">
+            <a href="/" style="text-decoration: none; color: inherit;">
+                <h1>⚽ مباريات اليوم</h1>
+            </a>
+        </header>
+
+        <div class="article-container" id="loading-view">
+            <p style="text-align: center;">جاري تحضير المقال والتحليل الذكي للمباراة...</p>
+        </div>
+
+        <div class="article-container" id="article-view" style="display: none;">
+            <div class="match-hero" id="hero-bg">
+                <div class="hero-info">
+                    <div class="hero-team">
+                        <img id="home-logo" src="" alt="" loading="eager">
+                        <p id="home-name" style="margin-top: 10px; font-weight: 700;"></p>
+                    </div>
+                    <div class="hero-vs">VS</div>
+                    <div class="hero-team">
+                        <img id="away-logo" src="" alt="" loading="eager">
+                        <p id="away-name" style="margin-top: 10px; font-weight: 700;"></p>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="article-body" id="article-content">
+                <!-- Content injected here -->
+            </div>
+
+            <div class="watch-button-container">
+                <h3 style="margin-bottom: 20px; color: #fff;">⚡ اختر سيرفر المشاهدة لبدء البث المباشر</h3>
+
+                <div id="server-selection-area" class="server-grid">
+                    <!-- Servers injected here -->
+                </div>
+            </div>
+
+
+            <section class="related-section">
+                <h2 class="section-title">🗞️ مقالات قد تهمك</h2>
+                <div id="related-news" class="news-grid">
+                    <!-- Related News injected by news-loader.js -->
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <!-- Watch Button Floating -->
+    <a id="floating-btn" href="#server-selection-area" class="floating-watch-btn">
+        <span>⚡ شاهد الان</span>
+    </a>
+
+    <script src="js/news-loader.js" defer></script>
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const matchId = urlParams.get('match');
+        const newsId = urlParams.get('news');
+
+        async function loadArticle() {
+            if (!matchId && !newsId) {
+                window.location.href = '/';
+                return;
+            }
+
+            try {
+                const loadingView = document.getElementById('loading-view');
+                const articleView = document.getElementById('article-view');
+                const articleTitle = document.getElementById('article-title'); // Wait, ID is different in HTML
+                const articleContentEl = document.getElementById('article-content');
+
+                // 1. Fetch JSON Content
+                let dataUrl = matchId ? `/data/articles/${matchId}.json?t=${Date.now()}` : `/data/news/${newsId}.json?t=${Date.now()}`;
+                const response = await fetch(dataUrl, { cache: 'no-store' });
+                if (!response.ok) throw new Error('المحتوى غير متوفر حالياً');
+                const data = await response.json();
+
+                // 2. Hide loading, show article
+                loadingView.style.display = 'none';
+                articleView.style.display = 'block';
+
+                // 3. Inject Content
+                // In simple-style, we might not have 'article-title' but let's check hero or body
+                // Looking at the viewed file, it seems we use document.getElementById('article-content') for body
+                articleContentEl.innerHTML = `<h1>${data.title}</h1>` + data.content;
+
+                // 4. Handle Hero UI
+                const heroBg = document.getElementById('hero-bg');
+                if (matchId) {
+                    const mResp = await fetch(`/data/matches.json?t=${Date.now()}`, { cache: 'no-store' });
+                    const mData = await mResp.json();
+                    const match = mData.matches.find(m => m.id == matchId);
+                    if (match) {
+                        document.getElementById('home-logo').src = match.home.logo;
+                        document.getElementById('home-name').textContent = match.home.name;
+                        document.getElementById('away-logo').src = match.away.logo;
+                        document.getElementById('away-name').textContent = match.away.name;
+                        heroBg.style.backgroundImage = `url('https://raw.githubusercontent.com/yassinnho7/livematch/main/public/assets/backgrounds/stadium_night.png')`;
+
+                        // Inject Servers
+                        const serverArea = document.getElementById('server-selection-area');
+                        serverArea.innerHTML = ''; // Clear existing to prevent duplication
+                        const activeStreams = match.streams.filter(s => s.url && s.url.length > 5);
+                        activeStreams.forEach((stream, idx) => {
+                            const isVIP = stream.source === 'siiir' || idx === 1;
+                            const card = document.createElement('div');
+                            card.className = 'server-card';
+                            card.innerHTML = `
+                                <i>${isVIP ? '⚡' : '📺'}</i>
+                                <h4>سيرفر ${idx + 1}</h4>
+                                <span class="server-tag">${isVIP ? 'VIP High Quality' : 'Standard Quality'}</span>
+                            `;
+                            card.onclick = () => {
+                                window.location.href = `/server.html?match=${matchId}&server=${idx}`;
+                            };
+                            serverArea.appendChild(card);
+                        });
+                    }
+                } else {
+                    // News Hero
+                    document.querySelector('.hero-info').style.display = 'none';
+                    heroBg.style.height = '180px';
+                    heroBg.style.backgroundImage = `url('${data.poster_url || '/assets/backgrounds/stadium_night.png'}')`;
+                    document.querySelector('.watch-button-container').style.display = 'none';
+                    document.getElementById('floating-btn').style.display = 'none';
+                }
+
+                // 5. SEO & Social
+                const pageTitle = data.title + " | LiveMatch";
+                const pageDesc = data.meta_description;
+                const pageImage = matchId ? `https://raw.githubusercontent.com/yassinnho7/livematch/main/public/assets/backgrounds/stadium_night.png` : data.poster_url;
+                const pageUrl = window.location.href;
+
+                document.title = pageTitle;
+                setMetaTag('name', 'description', pageDesc);
+                setMetaTag('name', 'keywords', data.keywords.join(', '));
+
+                // Open Graph / Twitter
+                setMetaTag('property', 'og:title', pageTitle);
+                setMetaTag('property', 'og:description', pageDesc);
+                setMetaTag('property', 'og:image', pageImage);
+                setMetaTag('property', 'og:url', pageUrl);
+                setMetaTag('name', 'twitter:title', pageTitle);
+                setMetaTag('name', 'twitter:image', pageImage);
+
+                // 6. Schema.org
+                const schemaData = {
+                    "@context": "https://schema.org",
+                    "@type": matchId ? "SportsEvent" : "NewsArticle",
+                    "headline": data.title,
+                    "description": pageDesc,
+                    "image": pageImage,
+                    "url": pageUrl
+                };
+
+                let script = document.getElementById('json-ld-schema');
+                if (!script) {
+                    script = document.createElement('script');
+                    script.id = 'json-ld-schema';
+                    script.type = 'application/ld+json';
+                    document.head.appendChild(script);
+                }
+                script.textContent = JSON.stringify(schemaData);
+
+            } catch (err) {
+                console.error(err);
+                showError('حدث خطأ أثناء تحميل المحتوى');
+            }
+        }
+
+        function setMetaTag(attr, key, val) {
+            let meta = document.querySelector(`meta[${attr}="${key}"]`);
+            if (!meta) {
+                meta = document.createElement('meta');
+                meta.setAttribute(attr, key);
+                document.head.appendChild(meta);
+            }
+            meta.content = val;
+        }
+
+        function showError(msg) {
+            document.getElementById('loading-view').innerHTML = `<h2 style="color:#ff4757; text-align:center;">⚠️ ${msg}</h2><a href="/" style="display:block; text-align:center; margin-top:10px; color:#667eea;">العودة للرئيسية</a>`;
+        }
+
+        loadArticle();
+    </script>
+    <script src="js/pwa-install.js" defer></script>
+</body>
+
+</html>

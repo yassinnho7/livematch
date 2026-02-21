@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" data-theme="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مباريات اليوم - بث مباشر</title>
+
+    <!-- Preload critical assets (Google Fonts - CDN) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+
+    <!-- DNS Prefetch -->
+    <link rel="dns-prefetch" href="https://www.googletagmanager.com">
+
+    <!-- Critical CSS inlined for fast FCP -->
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Cairo font loaded from Google Fonts CDN */
+
+        body {
+            font-family: 'Cairo', system-ui, -apple-system, sans-serif;
+            min-height: 100vh;
+            overflow-x: hidden;
+            transition: background 0.3s, color 0.3s;
+        }
+
+        /* Dark theme (default) */
+        [data-theme="dark"] body {
+            background: #0f1923;
+            color: #e2e8f0;
+        }
+
+        /* Light theme */
+        [data-theme="light"] body {
+            background: #f0f2f5;
+            color: #1a1a2e;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 0 12px;
+        }
+    </style>
+
+    <!-- Full CSS -->
+    <link rel="stylesheet" href="css/simple-style.css?v=3016">
+
+    <!-- Meta Tags -->
+    <meta name="google-site-verification" content="wVmFPnoAmqaUN-06zAW4XDW04Q98_vnGCVuB-NIiB-c" />
+    <meta name="clickaine-site-verification"
+        content="95e74e9bba8edc6ef1dde8e8fd103e7946e6321497e8a2b274ebe05373ac0a0bac03dd8031c9342a4bf9be2d135321214e2e2913dbd81aee24b3b58e9fdb8f3e" />
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+
+    <!-- SEO -->
+    <meta name="description"
+        content="شاهد مباريات اليوم بث مباشر، نتائج المباريات لحظة بلحظة، وأخر أخبار كرة القدم العالمية والعربية.">
+    <meta name="keywords" content="مباريات اليوم, بث مباشر, كرة قدم, نتائج المباريات, يلا شوت, كورة لايف">
+    <meta property="og:title" content="مباريات اليوم - بث مباشر">
+    <meta property="og:description"
+        content="شاهد مباريات اليوم بث مباشر، نتائج المباريات، وأخر أخبار كرة القدم العالمية.">
+    <meta property="og:url" content="https://livematch-991.pages.dev/">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="https://livematch-991.pages.dev/icons/icon-512x512.png">
+    <meta name="twitter:card" content="summary_large_image">
+
+    <!-- PWA -->
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#667eea">
+    <link rel="apple-touch-icon" href="/icons/icon-192x192.png">
+    <link rel="canonical" href="https://livematch-991.pages.dev/">
+
+    <!-- Adexium In-page Script (PAUSED)
+    <script type="text/javascript" src="https://cdn.atechp.space/assets/js/inp.min.js"></script>
+    <script type="text/javascript">
+        document.addEventListener('DOMContentLoaded', () => {
+            const adexiumInpage = new AdexiumInpageWidget({ wid: 'ee8ca344-81f7-468e-aec8-4b35fca66433' });
+            adexiumInpage.autoMode();
+        });
+    </script>
+    -->
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header class="site-header">
+        <div class="container header-inner">
+            <div class="header-brand">
+                <h1>⚽ <span style="color: #1d9bf0;">مباريات اليوم</span> <span style="color: #ef4444;">بث مباشر</span>
+                </h1>
+            </div>
+            <div class="header-actions">
+                <div class="viewer-counter" id="viewer-counter">
+                    <span class="viewer-dot"></span>
+                    <span id="viewer-count">0</span>
+                    <span style="font-size: 0.65rem; opacity: 0.7;">مشاهد</span>
+                </div>
+                <button class="theme-toggle" id="theme-toggle" onclick="toggleTheme()" title="تبديل الوضع">
+                    <span class="theme-icon" id="theme-icon">☀️</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+
+        <!-- Ad Banner Slot (Adsterra) -->
+        <div class="ad-banner" id="ad-banner-top">
+            <script>
+                atOptions = {
+                    'key': '167755cfce2e606f5c26037ed81a359a',
+                    'format': 'iframe',
+                    'height': 50,
+                    'width': 320,
+                    'params': {}
+                };
+            </script>
+            <script src="https://www.highperformanceformat.com/167755cfce2e606f5c26037ed81a359a/invoke.js"></script>
+        </div>
+
+        <main>
+            <!-- Matches Section -->
+            <section class="matches-section">
+                <div class="section-header">
+                    <span class="match-date" id="current-date"></span>
+                </div>
+                <div id="matches-container" class="matches-container">
+                    <div class="loading">
+                        <div class="loading-spinner"></div>
+                        جاري التحميل...
+                    </div>
+                </div>
+            </section>
+
+            <!-- Link to News Page -->
+            <div style="text-align: center; margin: 20px 0 40px;">
+                <a href="news.html" class="news-link-btn">
+                    📰 تصفح أخر الأخبار الرياضية
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" style="vertical-align: middle;">
+                        <path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z" />
+                    </svg>
+                </a>
+            </div>
+        </main>
+
+    </div>
+
+    <!-- Smart Footer -->
+    <footer class="site-footer">
+        <div class="container footer-inner">
+            <div class="footer-social">
+                <a href="https://t.me/live_football_macth" target="_blank" rel="noopener"
+                    class="social-btn telegram-btn">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                        <path
+                            d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z" />
+                    </svg>
+                    تابعنا على تيليجرام
+                </a>
+                <a href="https://www.facebook.com/profile.php?id=61587365663321" target="_blank" rel="noopener"
+                    class="social-btn facebook-btn">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                        <path
+                            d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
+                    </svg>
+                    صفحتنا على فيسبوك
+                </a>
+            </div>
+            <div class="footer-copy">
+                © 2026 مباريات اليوم - بث مباشر | جميع الحقوق محفوظة
+            </div>
+        </div>
+    </footer>
+
+    <!-- Theme Toggle Script (inline for instant load) -->
+    <script>
+        function toggleTheme() {
+            const html = document.documentElement;
+            const current = html.getAttribute('data-theme');
+            const next = current === 'dark' ? 'light' : 'dark';
+            html.setAttribute('data-theme', next);
+            localStorage.setItem('theme', next);
+            document.getElementById('theme-icon').textContent = next === 'dark' ? '☀️' : '🌙';
+        }
+        // Restore saved theme
+        (function () {
+            const saved = localStorage.getItem('theme');
+            if (saved) {
+                document.documentElement.setAttribute('data-theme', saved);
+                const icon = document.getElementById('theme-icon');
+                if (icon) icon.textContent = saved === 'dark' ? '☀️' : '🌙';
+            }
+        })();
+    </script>
+
+    <!-- Core Scripts -->
+    <script src="js/config.js"></script>
+    <script src="js/matches-v2.js?v=3012" defer></script>
+</body>
+
+</html>

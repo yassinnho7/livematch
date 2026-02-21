@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" data-theme="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>بث مباشر</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+
+    <script src="/js/config.js"></script>
+
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <link rel="canonical" href="https://livematch-991.pages.dev/watch.html?v=3015">
+
+    <style>
+        /* Cairo font loaded from Google Fonts CDN */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Cairo', system-ui, sans-serif;
+            background: #000;
+            color: #fff;
+            height: 100dvh;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        /* ========================
+           COUNTDOWN SCREEN (5 seconds)
+           ======================== */
+        .countdown-screen {
+            position: fixed;
+            inset: 0;
+            background: radial-gradient(ellipse at center, #0f2027 0%, #0a0a15 100%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 999;
+            transition: opacity 0.5s;
+        }
+
+        .countdown-screen.hide {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .countdown-logo {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            animation: bounce 1s infinite;
+        }
+
+        @keyframes bounce {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-8px);
+            }
+        }
+
+        .countdown-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #e2e8f0;
+            margin-bottom: 5px;
+        }
+
+        .countdown-subtitle {
+            font-size: 0.8rem;
+            color: #64748b;
+            margin-bottom: 25px;
+            display: none;
+            /* User requested removal */
+        }
+
+        /* Circular countdown */
+        .countdown-circle-wrap {
+            position: relative;
+            width: 120px;
+            height: 120px;
+            margin-bottom: 30px;
+        }
+
+        .countdown-circle-wrap svg {
+            width: 120px;
+            height: 120px;
+            transform: rotate(-90deg);
+        }
+
+        .countdown-bg {
+            fill: none;
+            stroke: rgba(255, 255, 255, 0.08);
+            stroke-width: 5;
+        }
+
+        .countdown-progress {
+            fill: none;
+            stroke: #1d9bf0;
+            stroke-width: 5;
+            stroke-linecap: round;
+            stroke-dasharray: 339;
+            /* 2 * PI * 54 (cx=60, r=54) ≈ 339 */
+            stroke-dashoffset: 0;
+            transition: stroke-dashoffset 1s linear;
+        }
+
+        .countdown-number {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: #fff;
+        }
+
+        .countdown-message {
+            font-size: 0.95rem;
+            color: #1d9bf0;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        /* Watch Now Button */
+        .watch-now-btn {
+            background: #1d9bf0;
+            color: white;
+            border: none;
+            padding: 14px 40px;
+            border-radius: 30px;
+            font-size: 1.1rem;
+            font-weight: 900;
+            cursor: pointer;
+            display: none;
+            /* hidden until countdown ends */
+            align-items: center;
+            gap: 10px;
+            animation: pulseBtn 2s infinite;
+            box-shadow: 0 4px 20px rgba(29, 155, 240, 0.5);
+            font-family: inherit;
+        }
+
+        @keyframes pulseBtn {
+            0% {
+                transform: scale(1);
+                box-shadow: 0 4px 15px rgba(29, 155, 240, 0.4);
+            }
+
+            50% {
+                transform: scale(1.05);
+                box-shadow: 0 6px 25px rgba(29, 155, 240, 0.6);
+            }
+
+            100% {
+                transform: scale(1);
+                box-shadow: 0 4px 15px rgba(29, 155, 240, 0.4);
+            }
+        }
+
+        @keyframes fadeInOut {
+
+            0%,
+            100% {
+                opacity: 0.5;
+            }
+
+            50% {
+                opacity: 1;
+            }
+        }
+
+        /* Ad slot inside countdown */
+        .countdown-ad-slot {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 60px;
+        }
+
+        /* Animated dots for "preparing" text */
+        .dots::after {
+            content: '';
+            animation: dots 1.5s steps(4, end) infinite;
+        }
+
+        @keyframes dots {
+            0% {
+                content: '';
+            }
+
+            25% {
+                content: '.';
+            }
+
+            50% {
+                content: '..';
+            }
+
+            75% {
+                content: '...';
+            }
+        }
+
+        /* ========================
+           MATCH INFO BAR
+           ======================== */
+        .match-info-bar {
+            background: #0f1923;
+            padding: 8px 15px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 12px;
+            font-size: 0.82rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+            flex-shrink: 0;
+        }
+
+        .match-info-bar .teams {
+            font-weight: 700;
+        }
+
+        .match-info-bar .live-dot {
+            width: 7px;
+            height: 7px;
+            background: #f4212e;
+            border-radius: 50%;
+            animation: dotPulse 2s infinite;
+        }
+
+        .match-info-bar .score {
+            font-weight: 900;
+            color: #1d9bf0;
+            font-size: 0.95rem;
+        }
+
+        @keyframes dotPulse {
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.3;
+            }
+        }
+
+        /* ========================
+           VIDEO PLAYER
+           ======================== */
+        #stream-container {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #000;
+            position: relative;
+        }
+
+        .video-player-frame {
+            width: 100%;
+            height: 100%;
+            position: relative;
+        }
+
+        .video-player-frame iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        /* ========================
+           SERVER SELECTION
+           ======================== */
+        /* Safety: hide legacy server section if it somehow reappears */
+        .server-section,
+        .server-label {
+            display: none !important;
+        }
+
+        .server-section {
+            background: #0f1923;
+            padding: 10px 15px;
+            flex-shrink: 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
+        }
+
+        .server-label {
+            font-size: 0.72rem;
+            color: #5b7083;
+            margin-bottom: 6px;
+            text-align: center;
+        }
+
+        .server-grid {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .server-btn {
+            background: rgba(29, 155, 240, 0.08);
+            border: 1px solid rgba(29, 155, 240, 0.15);
+            color: #8899a6;
+            padding: 7px 14px;
+            border-radius: 8px;
+            font-size: 0.78rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-family: inherit;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .server-btn:hover {
+            background: rgba(29, 155, 240, 0.15);
+            color: #e2e8f0;
+        }
+
+        .server-btn.active {
+            background: #1d9bf0;
+            color: #fff;
+            border-color: transparent;
+        }
+
+        .server-quality {
+            font-size: 0.58rem;
+            background: rgba(255, 255, 255, 0.12);
+            padding: 1px 5px;
+            border-radius: 3px;
+        }
+
+        .server-btn.active .server-quality {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        /* ========================
+           BOTTOM CONTROLS
+           ======================== */
+        .watch-controls {
+            background: #0a0e15;
+            padding: 7px 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-shrink: 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .ctrl-btn {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            color: #8899a6;
+            padding: 5px 12px;
+            border-radius: 6px;
+            font-size: 0.72rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-family: inherit;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .ctrl-btn:hover {
+            background: rgba(255, 255, 255, 0.08);
+            color: #fff;
+        }
+
+        .watch-social {
+            display: flex;
+            gap: 8px;
+        }
+
+        .watch-social a {
+            color: #5b7083;
+            font-size: 0.68rem;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 3px;
+            transition: color 0.2s;
+        }
+
+        .watch-social a:hover {
+            color: #8899a6;
+        }
+
+        /* Ad Banner */
+        .watch-ad-banner {
+            background: transparent;
+            display: flex;
+            justify-content: center;
+            padding: 4px;
+            flex-shrink: 0;
+        }
+
+        /* Error State */
+        .error-screen {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100dvh;
+            background: #000;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .error-screen h2 {
+            color: #fff;
+            margin-bottom: 15px;
+            font-size: 1rem;
+        }
+
+        .error-screen a {
+            color: #1d9bf0;
+            font-weight: bold;
+            text-decoration: none;
+            font-size: 0.95rem;
+        }
+    </style>
+
+    <!-- Adexium In-page Script (PAUSED)
+    <script type="text/javascript" src="https://cdn.atechp.space/assets/js/inp.min.js"></script>
+    <script type="text/javascript">
+        document.addEventListener('DOMContentLoaded', () => {
+            const adexiumInpage = new AdexiumInpageWidget({ wid: 'ee8ca344-81f7-468e-aec8-4b35fca66433' });
+            adexiumInpage.autoMode();
+        });
+    </script>
+    -->
+</head>
+
+<body>
+
+    <!-- Match Info Bar (Now Header with Servers) -->
+    <div class="match-info-bar" id="match-info-bar">
+        <div class="server-grid" id="server-grid">
+            <!-- Server buttons will be here -->
+        </div>
+    </div>
+
+    <!-- Video Player -->
+    <div id="stream-container">
+        <div class="video-player-frame">
+            <iframe id="stream" allowfullscreen referrerpolicy="no-referrer"
+                allow="autoplay; encrypted-media; fullscreen; picture-in-picture"
+                sandbox="allow-scripts allow-same-origin allow-forms allow-presentation"></iframe>
+        </div>
+    </div>
+
+    <!-- Ad Banner Slot (Adsterra) -->
+    <div class="watch-ad-banner" id="watch-ad">
+        <!-- Adsterra banner will be placed here -->
+    </div>
+
+    <!-- Bottom Controls -->
+    <div class="watch-controls">
+        <div>
+            <button id="home-btn" onclick="goHome()" class="ctrl-btn">🏠 الرئيسية</button>
+            <button id="fullscreen-btn" onclick="toggleFullscreen()" class="ctrl-btn">⛶ ملء الشاشة</button>
+        </div>
+        <div class="watch-social">
+            <a href="https://t.me/live_football_macth" target="_blank">📱 تيليجرام</a>
+            <a href="https://www.facebook.com/profile.php?id=61587365663321" target="_blank">📘 فيسبوك</a>
+        </div>
+    </div>
+
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const matchId = urlParams.get('match');
+        const selectedServerIdx = parseInt(urlParams.get('server') || '0');
+        const directServerUrl = urlParams.get('server_url');
+        let currentMatch = null;
+        let currentServerIdx = selectedServerIdx;
+
+        async function toggleFullscreen() {
+            const el = document.querySelector('.video-player-frame');
+            if (!document.fullscreenElement) {
+                try {
+                    if (el.requestFullscreen) {
+                        await el.requestFullscreen();
+                    } else if (el.webkitRequestFullscreen) {
+                        await el.webkitRequestFullscreen();
+                    }
+
+                    // Attempt to lock landscape on mobile
+                    if (screen.orientation && screen.orientation.lock) {
+                        await screen.orientation.lock('landscape').catch(() => { });
+                    }
+                } catch (err) {
+                    console.error('Fullscreen error:', err);
+                }
+            } else {
+                if (document.exitFullscreen) {
+                    document.exitFullscreen();
+                }
+
+                // Unlock orientation
+                if (screen.orientation && screen.orientation.unlock) {
+                    screen.orientation.unlock();
+                }
+            }
+        }
+
+        // ============ SERVERS ============
+        function buildServerButtons(streams) {
+            const grid = document.getElementById('server-grid');
+            if (!grid) return;
+            grid.innerHTML = ''; // Essential clear
+
+            streams.forEach((stream, idx) => {
+                const btn = document.createElement('button');
+                btn.className = 'server-btn' + (idx === currentServerIdx ? ' active' : '');
+                // USER ONLY WANTS NUMBERS: Server 1, Server 2...
+                btn.innerHTML = `سيرفر ${idx + 1}`;
+                btn.onclick = () => {
+                    currentServerIdx = idx;
+                    launchStream(stream.url);
+                    grid.querySelectorAll('.server-btn').forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                };
+                grid.appendChild(btn);
+            });
+        }
+
+        // ============ INIT ============
+        async function init() {
+            try {
+                // If a direct server URL is provided (from TMA), use it immediately
+                if (directServerUrl) {
+                    const decoded = decodeURIComponent(directServerUrl);
+                    if (!isPreferredPlayerUrl(decoded) || isBlockedPlaceholderUrl(decoded)) {
+                        return showError('اعد المحاولة لاحقا، السيرفر غير متوفر حاليا. سيتم توفير البث قريبا، أعد المحاولة بعد قليل.');
+                    }
+                    launchStream(decoded);
+
+                    // Still try to fetch match data for context/servers list
+                    if (matchId) {
+                        const res = await fetch(`data/matches.json?t=${Date.now()}`, { cache: 'no-store' });
+                        const data = await res.json();
+                        currentMatch = data.matches.find(m => m.id == matchId);
+                        if (currentMatch && currentMatch.streams) {
+                            const visibleStreams = currentMatch.streams.filter((stream) => !isBlockedPlaceholderUrl(stream.url));
+                            buildServerButtons(visibleStreams);
+                        }
+                    }
+                    return;
+                }
+
+                const res = await fetch(`data/matches.json?t=${Date.now()}`, { cache: 'no-store' });
+                const data = await res.json();
+                currentMatch = data.matches.find(m => m.id == matchId);
+
+                if (!currentMatch) return showError('البث المباشر انتهى أو غير متوفر');
+
+                if (currentMatch.streams && currentMatch.streams.length > 0) {
+                    const visibleStreams = currentMatch.streams.filter((stream) => !isBlockedPlaceholderUrl(stream.url));
+                    const hasPreferredPlayer = visibleStreams.some((stream) => isPreferredPlayerUrl(stream.url));
+                    if (!hasPreferredPlayer) {
+                        return showError('اعد المحاولة لاحقا، السيرفر غير متوفر حاليا. سيتم توفير البث قريبا، أعد المحاولة بعد قليل.');
+                    }
+
+                    buildServerButtons(visibleStreams);
+
+                    const idx = Math.min(currentServerIdx, visibleStreams.length - 1);
+
+                    // Directly launch the stream without countdown
+                    launchStream(visibleStreams[idx].url);
+                } else {
+                    showError('اعد المحاولة لاحقا، السيرفر غير متوفر حاليا. سيتم توفير البث قريبا، أعد المحاولة بعد قليل.');
+                }
+
+            } catch (e) {
+                showError('خطأ في الاتصال بالخادم');
+            }
+        }
+
+        function launchStream(url) {
+            document.getElementById('stream').src = url;
+        }
+
+        function isPreferredPlayerUrl(url) {
+            return typeof url === 'string' && url.includes('/albaplayer/');
+        }
+
+        function isBlockedPlaceholderUrl(url) {
+            const value = String(url || '').toLowerCase();
+            return value.includes('koraplus.blog/kooracity') || value.includes('koraplus.blog/koora-live');
+        }
+
+        function goHome() {
+            // If we have a server_url, we are likely in TMA context
+            if (urlParams.get('server_url') || window.Telegram?.WebApp) {
+                window.location.href = 'tma.html';
+            } else {
+                window.location.href = '/';
+            }
+        }
+
+        function showError(msg) {
+            document.body.innerHTML = `
+                <div class="error-screen">
+                    <h2>⚠️ ${msg}</h2>
+                    <a href="javascript:goHome()">العودة للرئيسية</a>
+                </div>
+            `;
+        }
+
+        init();
+    </script>
+</body>
+
+</html>
