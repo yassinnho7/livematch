@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-02-21T18:33:05.983Z",
+  "generated_at": "2026-02-21T19:05:17.365Z",
   "count": 14,
   "matches": [
     {
@@ -24,7 +24,7 @@
       },
       "score": {
         "home": 0,
-        "away": 0
+        "away": 2
       },
       "streams": [
         {
@@ -62,6 +62,81 @@
       ]
     },
     {
+      "id": 2072535693,
+      "date": "2026-02-21T17:30:00.000Z",
+      "timestamp": 1771695000,
+      "status": "LIVE",
+      "time": "17:30",
+      "time_label": "17:30 GMT",
+      "league": {
+        "name": "ألمانيا, الدوري الألماني",
+        "country": "Germany",
+        "logo": "https://a.espncdn.com/combiner/i?img=/i/leaguelogos/soccer/500/10.png&h=40&w=40"
+      },
+      "home": {
+        "name": "لايبزيج",
+        "logo": "https://i0.wp.com/www.kora-online.cc/wp-content/uploads/2026/02/7171-150x108.png"
+      },
+      "away": {
+        "name": "بوروسيا دورتموند",
+        "logo": "https://i0.wp.com/www.kora-online.cc/wp-content/uploads/2026/02/341-150x150.png"
+      },
+      "score": {
+        "home": 2,
+        "away": 1
+      },
+      "streams": [
+        {
+          "id": "stream_sports-b1_ko_2072535693",
+          "source": "koraonline",
+          "quality": "HD",
+          "channel": "sports-b1",
+          "url": "https://aa.yallashoot2026.com/albaplayer/sports-b1/",
+          "priority": 1
+        },
+        {
+          "id": "stream_koraplus_177537570_0",
+          "source": "koraplus",
+          "quality": "HD",
+          "channel": "MBC Action",
+          "url": "https://www.gomatch-live.com/albaplayer/mbc-action/",
+          "priority": 1
+        },
+        {
+          "id": "stream_mbc-action_2072535693",
+          "source": "livekora",
+          "quality": "HD",
+          "channel": "mbc-action",
+          "url": "https://pl.gomatch-live.com/albaplayer/mbc-action/",
+          "priority": 1
+        },
+        {
+          "id": "stream_siiir_2072535693",
+          "source": "siiir",
+          "quality": "VIP",
+          "channel": "VIP Server",
+          "url": "https://eyj0exaioijkv1qilcjhbgcioijiuzi1nij99sss.yallashot.us/playerv2.php?match=match8&key=c0ae1abba6eebd7e6cc5b88b1d2B71547",
+          "priority": 2
+        },
+        {
+          "id": "stream_sportsonline_1157075700",
+          "source": "sportsonline",
+          "quality": "HD",
+          "channel": "hd3",
+          "url": "https://www1.sprtsonline.click/channels/hd/hd3.php",
+          "priority": 3
+        },
+        {
+          "id": "stream_sportsonline_1157075700",
+          "source": "sportsonline",
+          "quality": "HD",
+          "channel": "eleven3",
+          "url": "https://www1.sprtsonline.click/channels/pt/eleven3.php",
+          "priority": 3
+        }
+      ]
+    },
+    {
       "id": 1990568786,
       "date": "2026-02-21T17:30:00.000Z",
       "timestamp": 1771695000,
@@ -82,8 +157,8 @@
         "logo": "https://i0.wp.com/www.kora-online.cc/wp-content/uploads/2025/12/10880-150x150.png"
       },
       "score": {
-        "home": 0,
-        "away": 0
+        "home": 1,
+        "away": 1
       },
       "streams": [
         {
@@ -298,81 +373,6 @@
       ]
     },
     {
-      "id": 2072535693,
-      "date": "2026-02-21T17:30:00.000Z",
-      "timestamp": 1771695000,
-      "status": "LIVE",
-      "time": "17:30",
-      "time_label": "17:30 GMT",
-      "league": {
-        "name": "ألمانيا, الدوري الألماني",
-        "country": "Germany",
-        "logo": "https://a.espncdn.com/combiner/i?img=/i/leaguelogos/soccer/500/10.png&h=40&w=40"
-      },
-      "home": {
-        "name": "لايبزيج",
-        "logo": "https://i0.wp.com/www.kora-online.cc/wp-content/uploads/2026/02/7171-150x108.png"
-      },
-      "away": {
-        "name": "بوروسيا دورتموند",
-        "logo": "https://i0.wp.com/www.kora-online.cc/wp-content/uploads/2026/02/341-150x150.png"
-      },
-      "score": {
-        "home": 2,
-        "away": 0
-      },
-      "streams": [
-        {
-          "id": "stream_sports-b1_ko_2072535693",
-          "source": "koraonline",
-          "quality": "HD",
-          "channel": "sports-b1",
-          "url": "https://aa.yallashoot2026.com/albaplayer/sports-b1/",
-          "priority": 1
-        },
-        {
-          "id": "stream_koraplus_177537570_0",
-          "source": "koraplus",
-          "quality": "HD",
-          "channel": "MBC Action",
-          "url": "https://www.gomatch-live.com/albaplayer/mbc-action/",
-          "priority": 1
-        },
-        {
-          "id": "stream_mbc-action_2072535693",
-          "source": "livekora",
-          "quality": "HD",
-          "channel": "mbc-action",
-          "url": "https://pl.gomatch-live.com/albaplayer/mbc-action/",
-          "priority": 1
-        },
-        {
-          "id": "stream_siiir_2072535693",
-          "source": "siiir",
-          "quality": "VIP",
-          "channel": "VIP Server",
-          "url": "https://eyj0exaioijkv1qilcjhbgcioijiuzi1nij99sss.yallashot.us/playerv2.php?match=match8&key=c0ae1abba6eebd7e6cc5b88b1d2B71547",
-          "priority": 2
-        },
-        {
-          "id": "stream_sportsonline_1157075700",
-          "source": "sportsonline",
-          "quality": "HD",
-          "channel": "hd3",
-          "url": "https://www1.sprtsonline.click/channels/hd/hd3.php",
-          "priority": 3
-        },
-        {
-          "id": "stream_sportsonline_1157075700",
-          "source": "sportsonline",
-          "quality": "HD",
-          "channel": "eleven3",
-          "url": "https://www1.sprtsonline.click/channels/pt/eleven3.php",
-          "priority": 3
-        }
-      ]
-    },
-    {
       "id": 1966886647,
       "date": "2026-02-21T18:00:00.000Z",
       "timestamp": 1771696800,
@@ -394,7 +394,7 @@
       },
       "score": {
         "home": 0,
-        "away": 0
+        "away": 1
       },
       "streams": [
         {
@@ -443,7 +443,7 @@
       "id": 211998547,
       "date": "2026-02-21T19:00:00.000Z",
       "timestamp": 1771700400,
-      "status": "NS",
+      "status": "LIVE",
       "time": "19:00",
       "time_label": "19:00 GMT",
       "league": {
@@ -459,7 +459,10 @@
         "name": "الاتحاد",
         "logo": "https://i0.wp.com/www.kora-online.cc/wp-content/uploads/2026/02/8593-122x150.png"
       },
-      "score": null,
+      "score": {
+        "home": 0,
+        "away": 0
+      },
       "streams": [
         {
           "id": "stream_sports-7_ko_211998547",
@@ -475,6 +478,14 @@
           "quality": "HD",
           "channel": "ثمانية 1",
           "url": "https://3.wwwkoora.com/albaplayer/bein-sports-hd-5/",
+          "priority": 1
+        },
+        {
+          "id": "stream_koraplus_1448441243_0",
+          "source": "koraplus",
+          "quality": "HD",
+          "channel": "غير معروف",
+          "url": "https://pl.gomatch-live.com/albaplayer/el-watania-1/",
           "priority": 1
         },
         {
@@ -499,7 +510,7 @@
       "id": 1449845459,
       "date": "2026-02-21T19:00:00.000Z",
       "timestamp": 1771700400,
-      "status": "NS",
+      "status": "LIVE",
       "time": "19:00",
       "time_label": "19:00 GMT",
       "league": {
@@ -515,7 +526,10 @@
         "name": "الحزم",
         "logo": "https://i0.wp.com/www.kora-online.cc/wp-content/uploads/2026/02/14895-150x150.png"
       },
-      "score": null,
+      "score": {
+        "home": 0,
+        "away": 0
+      },
       "streams": [
         {
           "id": "stream_sports-8_ko_1449845459",
