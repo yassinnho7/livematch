@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-02-21T06:58:00.069Z",
+  "generated_at": "2026-02-21T07:35:24.669Z",
   "count": 23,
   "matches": [
     {
@@ -24,6 +24,14 @@
       },
       "score": null,
       "streams": [
+        {
+          "id": "stream_bein3_713036087",
+          "source": "livekora",
+          "quality": "HD",
+          "channel": "bein3",
+          "url": "https://pl.gomatch-live.com/albaplayer/bein3/",
+          "priority": 1
+        },
         {
           "id": "stream_sportsonline_320852891",
           "source": "sportsonline",
@@ -73,6 +81,14 @@
       "score": null,
       "streams": [
         {
+          "id": "stream_ad-premium-1_566361455",
+          "source": "livekora",
+          "quality": "HD",
+          "channel": "ad-premium-1",
+          "url": "https://pl.gomatch-live.com/albaplayer/ad-premium-1/",
+          "priority": 1
+        },
+        {
           "id": "stream_sportsonline_321543279",
           "source": "sportsonline",
           "quality": "HD",
@@ -94,46 +110,6 @@
           "quality": "HD",
           "channel": "br4",
           "url": "https://www1.sprtsonline.click/channels/bra/br4.php",
-          "priority": 3
-        }
-      ]
-    },
-    {
-      "id": 1672020962,
-      "date": "2026-02-21T14:30:00.000Z",
-      "timestamp": 1771684200,
-      "status": "NS",
-      "time": "14:30",
-      "time_label": "14:30 GMT",
-      "league": {
-        "name": "ألمانيا, الدوري الألماني",
-        "country": "Germany",
-        "logo": "https://a.espncdn.com/combiner/i?img=/i/leaguelogos/soccer/500/10.png&h=40&w=40"
-      },
-      "home": {
-        "name": "بايرن ميونخ",
-        "logo": "https://i0.wp.com/www.kora-online.cc/wp-content/uploads/2026/02/331-150x150.png"
-      },
-      "away": {
-        "name": "آينتراخت فرانكفورت",
-        "logo": "https://i0.wp.com/www.kora-online.cc/wp-content/uploads/2026/02/337.png"
-      },
-      "score": null,
-      "streams": [
-        {
-          "id": "stream_sportsonline_279005141",
-          "source": "sportsonline",
-          "quality": "HD",
-          "channel": "hd3",
-          "url": "https://www1.sprtsonline.click/channels/hd/hd3.php",
-          "priority": 3
-        },
-        {
-          "id": "stream_sportsonline_279005141",
-          "source": "sportsonline",
-          "quality": "HD",
-          "channel": "eleven3",
-          "url": "https://www1.sprtsonline.click/channels/pt/eleven3.php",
           "priority": 3
         }
       ]
@@ -171,6 +147,54 @@
       ]
     },
     {
+      "id": 1672020962,
+      "date": "2026-02-21T14:30:00.000Z",
+      "timestamp": 1771684200,
+      "status": "NS",
+      "time": "14:30",
+      "time_label": "14:30 GMT",
+      "league": {
+        "name": "ألمانيا, الدوري الألماني",
+        "country": "Germany",
+        "logo": "https://a.espncdn.com/combiner/i?img=/i/leaguelogos/soccer/500/10.png&h=40&w=40"
+      },
+      "home": {
+        "name": "بايرن ميونخ",
+        "logo": "https://i0.wp.com/www.kora-online.cc/wp-content/uploads/2026/02/331-150x150.png"
+      },
+      "away": {
+        "name": "آينتراخت فرانكفورت",
+        "logo": "https://i0.wp.com/www.kora-online.cc/wp-content/uploads/2026/02/337.png"
+      },
+      "score": null,
+      "streams": [
+        {
+          "id": "stream_mbc-action_1672020962",
+          "source": "livekora",
+          "quality": "HD",
+          "channel": "mbc-action",
+          "url": "https://pl.gomatch-live.com/albaplayer/mbc-action/",
+          "priority": 1
+        },
+        {
+          "id": "stream_sportsonline_279005141",
+          "source": "sportsonline",
+          "quality": "HD",
+          "channel": "hd3",
+          "url": "https://www1.sprtsonline.click/channels/hd/hd3.php",
+          "priority": 3
+        },
+        {
+          "id": "stream_sportsonline_279005141",
+          "source": "sportsonline",
+          "quality": "HD",
+          "channel": "eleven3",
+          "url": "https://www1.sprtsonline.click/channels/pt/eleven3.php",
+          "priority": 3
+        }
+      ]
+    },
+    {
       "id": 1794968129,
       "date": "2026-02-21T15:00:00.000Z",
       "timestamp": 1771686000,
@@ -191,7 +215,16 @@
         "logo": "https://i0.wp.com/www.kora-online.cc/wp-content/uploads/2026/02/12-1-143x150.png"
       },
       "score": null,
-      "streams": []
+      "streams": [
+        {
+          "id": "stream_bein1_1794968129",
+          "source": "livekora",
+          "quality": "HD",
+          "channel": "bein1",
+          "url": "https://pl.gomatch-live.com/albaplayer/bein1/",
+          "priority": 1
+        }
+      ]
     },
     {
       "id": 712082837,
@@ -215,6 +248,14 @@
       },
       "score": null,
       "streams": [
+        {
+          "id": "stream_bein4_712082837",
+          "source": "livekora",
+          "quality": "HD",
+          "channel": "bein4",
+          "url": "https://pl.gomatch-live.com/albaplayer/bein4/",
+          "priority": 1
+        },
         {
           "id": "stream_sportsonline_378739513",
           "source": "sportsonline",
@@ -254,7 +295,16 @@
         "logo": "https://i0.wp.com/www.kora-online.cc/wp-content/uploads/2026/02/36-134x150.png"
       },
       "score": null,
-      "streams": []
+      "streams": [
+        {
+          "id": "stream_bein2_977259940",
+          "source": "livekora",
+          "quality": "HD",
+          "channel": "bein2",
+          "url": "https://pl.gomatch-live.com/albaplayer/bein2/",
+          "priority": 1
+        }
+      ]
     },
     {
       "id": 838136896,
@@ -278,6 +328,14 @@
       },
       "score": null,
       "streams": [
+        {
+          "id": "stream_bein3_838136896",
+          "source": "livekora",
+          "quality": "HD",
+          "channel": "bein3",
+          "url": "https://pl.gomatch-live.com/albaplayer/bein3/",
+          "priority": 1
+        },
         {
           "id": "stream_sportsonline_349644292",
           "source": "sportsonline",
@@ -319,6 +377,14 @@
       "score": null,
       "streams": [
         {
+          "id": "stream_bein6_977708184",
+          "source": "livekora",
+          "quality": "HD",
+          "channel": "bein6",
+          "url": "https://pl.gomatch-live.com/albaplayer/bein6/",
+          "priority": 1
+        },
+        {
           "id": "stream_sportsonline_1289693630",
           "source": "sportsonline",
           "quality": "HD",
@@ -357,30 +423,16 @@
         "logo": "https://i0.wp.com/www.kora-online.cc/wp-content/uploads/2026/02/224-150x150.png"
       },
       "score": null,
-      "streams": []
-    },
-    {
-      "id": 1017361151,
-      "date": "2026-02-21T17:30:00.000Z",
-      "timestamp": 1771695000,
-      "status": "NS",
-      "time": "17:30",
-      "time_label": "17:30 GMT",
-      "league": {
-        "name": "الإمارات, دوري أدنوك للمحترفين",
-        "country": "International",
-        "logo": "https://cdn-icons-png.flaticon.com/512/1378/1378598.png"
-      },
-      "home": {
-        "name": "الوصل",
-        "logo": "https://i0.wp.com/www.kora-online.cc/wp-content/uploads/2026/02/8346.png"
-      },
-      "away": {
-        "name": "البطائح",
-        "logo": "https://i0.wp.com/www.kora-online.cc/wp-content/uploads/2026/01/57374-150x150.png"
-      },
-      "score": null,
-      "streams": []
+      "streams": [
+        {
+          "id": "stream_ad-premium-1_1302363527",
+          "source": "livekora",
+          "quality": "HD",
+          "channel": "ad-premium-1",
+          "url": "https://pl.gomatch-live.com/albaplayer/ad-premium-1/",
+          "priority": 1
+        }
+      ]
     },
     {
       "id": 225016530,
@@ -404,6 +456,14 @@
       },
       "score": null,
       "streams": [
+        {
+          "id": "stream_bein1_225016530",
+          "source": "livekora",
+          "quality": "HD",
+          "channel": "bein1",
+          "url": "https://pl.gomatch-live.com/albaplayer/bein1/",
+          "priority": 1
+        },
         {
           "id": "stream_sportsonline_2112871498",
           "source": "sportsonline",
@@ -461,6 +521,14 @@
       "score": null,
       "streams": [
         {
+          "id": "stream_bein4_660027924",
+          "source": "livekora",
+          "quality": "HD",
+          "channel": "bein4",
+          "url": "https://pl.gomatch-live.com/albaplayer/bein4/",
+          "priority": 1
+        },
+        {
           "id": "stream_sportsonline_562459351",
           "source": "sportsonline",
           "quality": "HD",
@@ -500,6 +568,14 @@
       },
       "score": null,
       "streams": [
+        {
+          "id": "stream_mbc-action_2072535693",
+          "source": "livekora",
+          "quality": "HD",
+          "channel": "mbc-action",
+          "url": "https://pl.gomatch-live.com/albaplayer/mbc-action/",
+          "priority": 1
+        },
         {
           "id": "stream_sportsonline_1157075700",
           "source": "sportsonline",
@@ -542,6 +618,29 @@
       "streams": []
     },
     {
+      "id": 1017361151,
+      "date": "2026-02-21T17:30:00.000Z",
+      "timestamp": 1771695000,
+      "status": "NS",
+      "time": "17:30",
+      "time_label": "17:30 GMT",
+      "league": {
+        "name": "الإمارات, دوري أدنوك للمحترفين",
+        "country": "International",
+        "logo": "https://cdn-icons-png.flaticon.com/512/1378/1378598.png"
+      },
+      "home": {
+        "name": "الوصل",
+        "logo": "https://i0.wp.com/www.kora-online.cc/wp-content/uploads/2026/02/8346.png"
+      },
+      "away": {
+        "name": "البطائح",
+        "logo": "https://i0.wp.com/www.kora-online.cc/wp-content/uploads/2026/01/57374-150x150.png"
+      },
+      "score": null,
+      "streams": []
+    },
+    {
       "id": 1966886647,
       "date": "2026-02-21T18:00:00.000Z",
       "timestamp": 1771696800,
@@ -563,6 +662,14 @@
       },
       "score": null,
       "streams": [
+        {
+          "id": "stream_bein3_1966886647",
+          "source": "livekora",
+          "quality": "HD",
+          "channel": "bein3",
+          "url": "https://pl.gomatch-live.com/albaplayer/bein3/",
+          "priority": 1
+        },
         {
           "id": "stream_sportsonline_1831688246",
           "source": "sportsonline",
@@ -602,7 +709,16 @@
         "logo": "https://i0.wp.com/www.kora-online.cc/wp-content/uploads/2026/02/8593-122x150.png"
       },
       "score": null,
-      "streams": []
+      "streams": [
+        {
+          "id": "stream_thmanya1_211998547",
+          "source": "livekora",
+          "quality": "HD",
+          "channel": "thmanya1",
+          "url": "https://pl.gomatch-live.com/albaplayer/thmanya1/",
+          "priority": 1
+        }
+      ]
     },
     {
       "id": 1449845459,
@@ -625,7 +741,16 @@
         "logo": "https://i0.wp.com/www.kora-online.cc/wp-content/uploads/2026/02/14895-150x150.png"
       },
       "score": null,
-      "streams": []
+      "streams": [
+        {
+          "id": "stream_thmanya2_1449845459",
+          "source": "livekora",
+          "quality": "HD",
+          "channel": "thmanya2",
+          "url": "https://pl.gomatch-live.com/albaplayer/thmanya2/",
+          "priority": 1
+        }
+      ]
     },
     {
       "id": 248052727,
@@ -673,6 +798,14 @@
       "score": null,
       "streams": [
         {
+          "id": "stream_ad-premium-1_343161745",
+          "source": "livekora",
+          "quality": "HD",
+          "channel": "ad-premium-1",
+          "url": "https://pl.gomatch-live.com/albaplayer/ad-premium-1/",
+          "priority": 1
+        },
+        {
           "id": "stream_sportsonline_318749630",
           "source": "sportsonline",
           "quality": "HD",
@@ -686,46 +819,6 @@
           "quality": "HD",
           "channel": "br6",
           "url": "https://www1.sprtsonline.click/channels/bra/br6.php",
-          "priority": 3
-        }
-      ]
-    },
-    {
-      "id": 1221054246,
-      "date": "2026-02-21T20:00:00.000Z",
-      "timestamp": 1771704000,
-      "status": "NS",
-      "time": "20:00",
-      "time_label": "20:00 GMT",
-      "league": {
-        "name": "إسبانيا, الدوري الإسباني",
-        "country": "Spain",
-        "logo": "https://a.espncdn.com/combiner/i?img=/i/leaguelogos/soccer/500/15.png&h=40&w=40"
-      },
-      "home": {
-        "name": "أتلتيكو مدريد",
-        "logo": "https://i0.wp.com/www.kora-online.cc/wp-content/uploads/2026/02/134-128x150.png"
-      },
-      "away": {
-        "name": "إسبانيول",
-        "logo": "https://i0.wp.com/www.kora-online.cc/wp-content/uploads/2026/02/136-150x150.png"
-      },
-      "score": null,
-      "streams": [
-        {
-          "id": "stream_sportsonline_168807982",
-          "source": "sportsonline",
-          "quality": "HD",
-          "channel": "hd6",
-          "url": "https://www1.sprtsonline.click/channels/hd/hd6.php",
-          "priority": 3
-        },
-        {
-          "id": "stream_sportsonline_168807982",
-          "source": "sportsonline",
-          "quality": "HD",
-          "channel": "eleven2",
-          "url": "https://www1.sprtsonline.click/channels/pt/eleven2.php",
           "priority": 3
         }
       ]
@@ -753,6 +846,14 @@
       "score": null,
       "streams": [
         {
+          "id": "stream_bein1_634926903",
+          "source": "livekora",
+          "quality": "HD",
+          "channel": "bein1",
+          "url": "https://pl.gomatch-live.com/albaplayer/bein1/",
+          "priority": 1
+        },
+        {
           "id": "stream_sportsonline_1741641617",
           "source": "sportsonline",
           "quality": "HD",
@@ -779,6 +880,54 @@
       ]
     },
     {
+      "id": 1221054246,
+      "date": "2026-02-21T20:00:00.000Z",
+      "timestamp": 1771704000,
+      "status": "NS",
+      "time": "20:00",
+      "time_label": "20:00 GMT",
+      "league": {
+        "name": "إسبانيا, الدوري الإسباني",
+        "country": "Spain",
+        "logo": "https://a.espncdn.com/combiner/i?img=/i/leaguelogos/soccer/500/15.png&h=40&w=40"
+      },
+      "home": {
+        "name": "أتلتيكو مدريد",
+        "logo": "https://i0.wp.com/www.kora-online.cc/wp-content/uploads/2026/02/134-128x150.png"
+      },
+      "away": {
+        "name": "إسبانيول",
+        "logo": "https://i0.wp.com/www.kora-online.cc/wp-content/uploads/2026/02/136-150x150.png"
+      },
+      "score": null,
+      "streams": [
+        {
+          "id": "stream_bein4_1221054246",
+          "source": "livekora",
+          "quality": "HD",
+          "channel": "bein4",
+          "url": "https://pl.gomatch-live.com/albaplayer/bein4/",
+          "priority": 1
+        },
+        {
+          "id": "stream_sportsonline_168807982",
+          "source": "sportsonline",
+          "quality": "HD",
+          "channel": "hd6",
+          "url": "https://www1.sprtsonline.click/channels/hd/hd6.php",
+          "priority": 3
+        },
+        {
+          "id": "stream_sportsonline_168807982",
+          "source": "sportsonline",
+          "quality": "HD",
+          "channel": "eleven2",
+          "url": "https://www1.sprtsonline.click/channels/pt/eleven2.php",
+          "priority": 3
+        }
+      ]
+    },
+    {
       "id": 938675496,
       "date": "2026-02-21T20:05:00.000Z",
       "timestamp": 1771704300,
@@ -800,6 +949,14 @@
       },
       "score": null,
       "streams": [
+        {
+          "id": "stream_bein2_938675496",
+          "source": "livekora",
+          "quality": "HD",
+          "channel": "bein2",
+          "url": "https://pl.gomatch-live.com/albaplayer/bein2/",
+          "priority": 1
+        },
         {
           "id": "stream_sportsonline_1897367669",
           "source": "sportsonline",
