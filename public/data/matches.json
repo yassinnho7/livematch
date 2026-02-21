@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-02-21T10:57:42.295Z",
+  "generated_at": "2026-02-21T11:24:27.028Z",
   "count": 23,
   "matches": [
     {
@@ -24,6 +24,14 @@
       },
       "score": null,
       "streams": [
+        {
+          "id": "stream_sports-3_ko_713036087",
+          "source": "koraonline",
+          "quality": "HD",
+          "channel": "sports-3",
+          "url": "https://aa.yallashoot2026.com/albaplayer/sports-3/",
+          "priority": 1
+        },
         {
           "id": "stream_bein3_713036087",
           "source": "livekora",
@@ -435,6 +443,29 @@
       ]
     },
     {
+      "id": 1017361151,
+      "date": "2026-02-21T17:30:00.000Z",
+      "timestamp": 1771695000,
+      "status": "NS",
+      "time": "17:30",
+      "time_label": "17:30 GMT",
+      "league": {
+        "name": "الإمارات, دوري أدنوك للمحترفين",
+        "country": "International",
+        "logo": "https://cdn-icons-png.flaticon.com/512/1378/1378598.png"
+      },
+      "home": {
+        "name": "الوصل",
+        "logo": "https://i0.wp.com/www.kora-online.cc/wp-content/uploads/2026/02/8346.png"
+      },
+      "away": {
+        "name": "البطائح",
+        "logo": "https://i0.wp.com/www.kora-online.cc/wp-content/uploads/2026/01/57374-150x150.png"
+      },
+      "score": null,
+      "streams": []
+    },
+    {
       "id": 225016530,
       "date": "2026-02-21T17:30:00.000Z",
       "timestamp": 1771695000,
@@ -613,29 +644,6 @@
       "away": {
         "name": "دبا الفجيرة",
         "logo": "https://i0.wp.com/www.kora-online.cc/wp-content/uploads/2025/12/10880-150x150.png"
-      },
-      "score": null,
-      "streams": []
-    },
-    {
-      "id": 1017361151,
-      "date": "2026-02-21T17:30:00.000Z",
-      "timestamp": 1771695000,
-      "status": "NS",
-      "time": "17:30",
-      "time_label": "17:30 GMT",
-      "league": {
-        "name": "الإمارات, دوري أدنوك للمحترفين",
-        "country": "International",
-        "logo": "https://cdn-icons-png.flaticon.com/512/1378/1378598.png"
-      },
-      "home": {
-        "name": "الوصل",
-        "logo": "https://i0.wp.com/www.kora-online.cc/wp-content/uploads/2026/02/8346.png"
-      },
-      "away": {
-        "name": "البطائح",
-        "logo": "https://i0.wp.com/www.kora-online.cc/wp-content/uploads/2026/01/57374-150x150.png"
       },
       "score": null,
       "streams": []
