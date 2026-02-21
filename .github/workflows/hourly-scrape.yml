@@ -54,7 +54,7 @@ jobs:
           mkdir -p public/assets/fonts
           wget -O public/assets/fonts/Cairo-Bold.ttf https://github.com/Gue3bara/Cairo/raw/v3.116/fonts/ttf/Cairo-Bold.ttf
 
-      - name: Run Scraper Manager (Multi-Source: LiveKora + Korah.live + Siiir.tv)
+      - name: "Run Scraper Manager (Multi-Source: LiveKora + Korah.live + Siiir.tv)"
         env:
           GEMINI_API_KEYS: ${{ secrets.GEMINI_API_KEYS }}
         run: |
