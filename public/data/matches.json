@@ -1,128 +1,7 @@
 {
-  "generated_at": "2026-02-22T19:22:20.496Z",
-  "count": 7,
+  "generated_at": "2026-02-22T19:45:17.309Z",
+  "count": 4,
   "matches": [
-    {
-      "id": 1531929008,
-      "date": "2026-02-22T17:30:00.000Z",
-      "timestamp": 1771781400,
-      "status": "LIVE",
-      "time": "17:30",
-      "time_label": "17:30 GMT",
-      "league": {
-        "name": "إسبانيا, الدوري الإسباني",
-        "country": "Spain",
-        "logo": "https://a.espncdn.com/combiner/i?img=/i/leaguelogos/soccer/500/15.png&h=40&w=40"
-      },
-      "home": {
-        "name": "سيلتا فيجو",
-        "logo": "https://i0.wp.com/www.kora-online.cc/wp-content/uploads/2026/02/158.png"
-      },
-      "away": {
-        "name": "ريال مايوركا",
-        "logo": "https://i0.wp.com/www.kora-online.cc/wp-content/uploads/2026/02/142.png"
-      },
-      "score": {
-        "home": 0,
-        "away": 0
-      },
-      "streams": [
-        {
-          "id": "stream_sports-3_ko_1531929008",
-          "source": "koraonline",
-          "quality": "HD",
-          "channel": "sports-3",
-          "url": "https://aa.yallashoot2026.com/albaplayer/sports-3/",
-          "priority": 1
-        },
-        {
-          "id": "stream_koraplus_1334715584_0",
-          "source": "koraplus",
-          "quality": "HD",
-          "channel": "beIN Sports 3 HD",
-          "url": "https://live.baranewssumsel.online/albaplayer/bein3/",
-          "priority": 1
-        },
-        {
-          "id": "stream_bein3_1531929008",
-          "source": "livekora",
-          "quality": "HD",
-          "channel": "bein3",
-          "url": "https://pl.gomatch-live.com/albaplayer/bein3/",
-          "priority": 1
-        }
-      ]
-    },
-    {
-      "id": 554539301,
-      "date": "2026-02-22T17:30:00.000Z",
-      "timestamp": 1771781400,
-      "status": "LIVE",
-      "time": "17:30",
-      "time_label": "17:30 GMT",
-      "league": {
-        "name": "الإمارات, دوري أدنوك للمحترفين",
-        "country": "International",
-        "logo": "https://cdn-icons-png.flaticon.com/512/1378/1378598.png"
-      },
-      "home": {
-        "name": "النصر الاماراتي",
-        "logo": "https://i0.wp.com/www.kora-online.cc/wp-content/uploads/2026/01/8349-70x70-1.png"
-      },
-      "away": {
-        "name": "خورفكان",
-        "logo": "https://i0.wp.com/www.kora-online.cc/wp-content/uploads/2026/02/11134-150x146.png"
-      },
-      "score": {
-        "home": 2,
-        "away": 2
-      },
-      "streams": [
-        {
-          "id": "stream_sports-c3_ko_554539301",
-          "source": "koraonline",
-          "quality": "HD",
-          "channel": "sports-c3",
-          "url": "https://aa.yallashoot2026.com/albaplayer/sports-c3/",
-          "priority": 1
-        }
-      ]
-    },
-    {
-      "id": 368385184,
-      "date": "2026-02-22T17:30:00.000Z",
-      "timestamp": 1771781400,
-      "status": "LIVE",
-      "time": "17:30",
-      "time_label": "17:30 GMT",
-      "league": {
-        "name": "الإمارات, دوري أدنوك للمحترفين",
-        "country": "International",
-        "logo": "https://cdn-icons-png.flaticon.com/512/1378/1378598.png"
-      },
-      "home": {
-        "name": "بني ياس",
-        "logo": "https://i0.wp.com/www.kora-online.cc/wp-content/uploads/2026/02/8345.png"
-      },
-      "away": {
-        "name": "العين",
-        "logo": "https://i0.wp.com/www.kora-online.cc/wp-content/uploads/2026/02/8353-115x150.png"
-      },
-      "score": {
-        "home": 2,
-        "away": 2
-      },
-      "streams": [
-        {
-          "id": "stream_sports-c4_ko_368385184",
-          "source": "koraonline",
-          "quality": "HD",
-          "channel": "sports-c4",
-          "url": "https://aa.yallashoot2026.com/albaplayer/sports-c4/",
-          "priority": 1
-        }
-      ]
-    },
     {
       "id": 1998994928,
       "date": "2026-02-22T18:30:00.000Z",
@@ -145,7 +24,7 @@
       },
       "score": {
         "home": 2,
-        "away": 1
+        "away": 2
       },
       "streams": [
         {
@@ -170,6 +49,70 @@
           "quality": "HD",
           "channel": "eleven3",
           "url": "https://www1.sprtsonline.click/channels/pt/eleven3.php",
+          "priority": 3
+        }
+      ]
+    },
+    {
+      "id": 1002886434,
+      "date": "2026-02-22T19:45:00.000Z",
+      "timestamp": 1771789500,
+      "status": "NS",
+      "time": "19:45",
+      "time_label": "19:45 GMT",
+      "league": {
+        "name": "فرنسا, الدوري الفرنسي",
+        "country": "France",
+        "logo": "https://a.espncdn.com/combiner/i?img=/i/leaguelogos/soccer/500/9.png&h=40&w=40"
+      },
+      "home": {
+        "name": "ستراسبورج",
+        "logo": "https://i0.wp.com/www.kora-online.cc/wp-content/uploads/2026/02/479.png"
+      },
+      "away": {
+        "name": "أولمبيك ليون",
+        "logo": "https://i0.wp.com/www.kora-online.cc/wp-content/uploads/2026/02/465-150x150.png"
+      },
+      "score": null,
+      "streams": [
+        {
+          "id": "stream_sports-2_ko_1002886434",
+          "source": "koraonline",
+          "quality": "HD",
+          "channel": "sports-2",
+          "url": "https://aa.yallashoot2026.com/albaplayer/sports-2/",
+          "priority": 1
+        },
+        {
+          "id": "stream_koraplus_1265147256_0",
+          "source": "koraplus",
+          "quality": "HD",
+          "channel": "Bein Sports HD2",
+          "url": "https://live.baranewssumsel.online/albaplayer/bein22/",
+          "priority": 1
+        },
+        {
+          "id": "stream_bein2_1002886434",
+          "source": "livekora",
+          "quality": "HD",
+          "channel": "bein2",
+          "url": "https://pl.gomatch-live.com/albaplayer/bein2/",
+          "priority": 1
+        },
+        {
+          "id": "stream_sportsonline_814140776",
+          "source": "sportsonline",
+          "quality": "HD",
+          "channel": "hd4",
+          "url": "https://www1.sprtsonline.click/channels/hd/hd4.php",
+          "priority": 3
+        },
+        {
+          "id": "stream_sportsonline_814140776",
+          "source": "sportsonline",
+          "quality": "HD",
+          "channel": "sporttv3",
+          "url": "https://www1.sprtsonline.click/channels/pt/sporttv3.php",
           "priority": 3
         }
       ]
@@ -247,70 +190,6 @@
       ]
     },
     {
-      "id": 1002886434,
-      "date": "2026-02-22T19:45:00.000Z",
-      "timestamp": 1771789500,
-      "status": "NS",
-      "time": "19:45",
-      "time_label": "19:45 GMT",
-      "league": {
-        "name": "فرنسا, الدوري الفرنسي",
-        "country": "France",
-        "logo": "https://a.espncdn.com/combiner/i?img=/i/leaguelogos/soccer/500/9.png&h=40&w=40"
-      },
-      "home": {
-        "name": "ستراسبورج",
-        "logo": "https://i0.wp.com/www.kora-online.cc/wp-content/uploads/2026/02/479.png"
-      },
-      "away": {
-        "name": "أولمبيك ليون",
-        "logo": "https://i0.wp.com/www.kora-online.cc/wp-content/uploads/2026/02/465-150x150.png"
-      },
-      "score": null,
-      "streams": [
-        {
-          "id": "stream_sports-2_ko_1002886434",
-          "source": "koraonline",
-          "quality": "HD",
-          "channel": "sports-2",
-          "url": "https://aa.yallashoot2026.com/albaplayer/sports-2/",
-          "priority": 1
-        },
-        {
-          "id": "stream_koraplus_1265147256_0",
-          "source": "koraplus",
-          "quality": "HD",
-          "channel": "Bein Sports HD2",
-          "url": "https://live.baranewssumsel.online/albaplayer/bein22/",
-          "priority": 1
-        },
-        {
-          "id": "stream_bein2_1002886434",
-          "source": "livekora",
-          "quality": "HD",
-          "channel": "bein2",
-          "url": "https://pl.gomatch-live.com/albaplayer/bein2/",
-          "priority": 1
-        },
-        {
-          "id": "stream_sportsonline_814140776",
-          "source": "sportsonline",
-          "quality": "HD",
-          "channel": "hd4",
-          "url": "https://www1.sprtsonline.click/channels/hd/hd4.php",
-          "priority": 3
-        },
-        {
-          "id": "stream_sportsonline_814140776",
-          "source": "sportsonline",
-          "quality": "HD",
-          "channel": "sporttv3",
-          "url": "https://www1.sprtsonline.click/channels/pt/sporttv3.php",
-          "priority": 3
-        }
-      ]
-    },
-    {
       "id": 124719006,
       "date": "2026-02-22T20:00:00.000Z",
       "timestamp": 1771790400,
@@ -367,5 +246,5 @@
       ]
     }
   ],
-  "generatedAt": "2026-02-22T19:22:20.539Z"
+  "generatedAt": "2026-02-22T19:45:17.352Z"
 }
