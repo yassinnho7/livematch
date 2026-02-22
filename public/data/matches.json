@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-02-22T19:45:17.309Z",
+  "generated_at": "2026-02-22T19:59:42.796Z",
   "count": 4,
   "matches": [
     {
@@ -57,7 +57,7 @@
       "id": 1002886434,
       "date": "2026-02-22T19:45:00.000Z",
       "timestamp": 1771789500,
-      "status": "NS",
+      "status": "LIVE",
       "time": "19:45",
       "time_label": "19:45 GMT",
       "league": {
@@ -73,7 +73,10 @@
         "name": "أولمبيك ليون",
         "logo": "https://i0.wp.com/www.kora-online.cc/wp-content/uploads/2026/02/465-150x150.png"
       },
-      "score": null,
+      "score": {
+        "home": 0,
+        "away": 0
+      },
       "streams": [
         {
           "id": "stream_sports-2_ko_1002886434",
@@ -121,7 +124,7 @@
       "id": 113640531,
       "date": "2026-02-22T19:45:00.000Z",
       "timestamp": 1771789500,
-      "status": "NS",
+      "status": "LIVE",
       "time": "19:45",
       "time_label": "19:45 GMT",
       "league": {
@@ -137,7 +140,10 @@
         "name": "كريمونيسي",
         "logo": "https://i0.wp.com/www.kora-online.cc/wp-content/uploads/2026/02/290.png"
       },
-      "score": null,
+      "score": {
+        "home": 0,
+        "away": 0
+      },
       "streams": [
         {
           "id": "stream_sports-d1_ko_113640531",
@@ -246,5 +252,5 @@
       ]
     }
   ],
-  "generatedAt": "2026-02-22T19:45:17.352Z"
+  "generatedAt": "2026-02-22T19:59:42.830Z"
 }
