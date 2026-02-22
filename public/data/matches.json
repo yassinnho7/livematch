@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-02-22T17:48:19.256Z",
+  "generated_at": "2026-02-22T18:04:05.663Z",
   "count": 13,
   "matches": [
     {
@@ -24,7 +24,7 @@
       },
       "score": {
         "home": 3,
-        "away": 1
+        "away": 2
       },
       "streams": [
         {
@@ -144,8 +144,8 @@
         "logo": "https://i0.wp.com/www.kora-online.cc/wp-content/uploads/2026/02/332-107x150.png"
       },
       "score": {
-        "home": 0,
-        "away": 0
+        "home": 1,
+        "away": 1
       },
       "streams": [
         {
@@ -196,7 +196,7 @@
       },
       "score": {
         "home": 1,
-        "away": 1
+        "away": 2
       },
       "streams": [
         {
@@ -341,7 +341,7 @@
       ]
     },
     {
-      "id": 1811734147,
+      "id": 554539301,
       "date": "2026-02-22T17:30:00.000Z",
       "timestamp": 1771781400,
       "status": "LIVE",
@@ -353,8 +353,8 @@
         "logo": "https://cdn-icons-png.flaticon.com/512/1378/1378598.png"
       },
       "home": {
-        "name": "النصر",
-        "logo": "https://i0.wp.com/www.kora-online.cc/wp-content/uploads/2026/02/7549-1.png"
+        "name": "النصر الاماراتي",
+        "logo": "https://i0.wp.com/www.kora-online.cc/wp-content/uploads/2026/01/8349-70x70-1.png"
       },
       "away": {
         "name": "خورفكان",
@@ -362,11 +362,11 @@
       },
       "score": {
         "home": 1,
-        "away": 0
+        "away": 1
       },
       "streams": [
         {
-          "id": "stream_sports-c3_ko_1811734147",
+          "id": "stream_sports-c3_ko_554539301",
           "source": "koraonline",
           "quality": "HD",
           "channel": "sports-c3",
@@ -406,14 +406,6 @@
           "quality": "HD",
           "channel": "sports-c4",
           "url": "https://aa.yallashoot2026.com/albaplayer/sports-c4/",
-          "priority": 1
-        },
-        {
-          "id": "stream_koraplus_512910590_0",
-          "source": "koraplus",
-          "quality": "HD",
-          "channel": "المغربية (5)",
-          "url": "https://3.wwwkoora.com/albaplayer/bein-sports-hd-6/",
           "priority": 1
         }
       ]
@@ -684,6 +676,14 @@
       "score": null,
       "streams": [
         {
+          "id": "stream_sports-3_ko_124719006",
+          "source": "koraonline",
+          "quality": "HD",
+          "channel": "sports-3",
+          "url": "https://aa.yallashoot2026.com/albaplayer/sports-3/",
+          "priority": 1
+        },
+        {
           "id": "stream_bein3_124719006",
           "source": "livekora",
           "quality": "HD",
@@ -702,5 +702,5 @@
       ]
     }
   ],
-  "generatedAt": "2026-02-22T17:48:19.300Z"
+  "generatedAt": "2026-02-22T18:04:05.706Z"
 }
