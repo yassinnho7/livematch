@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>اختبار مشغل البث المباشر</title>
+    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Arial, sans-serif;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            color: white;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 28px;
+            margin-bottom: 30px;
+            color: #38bdf8;
+            text-shadow: 0 0 20px rgba(56, 189, 248, 0.3);
+        }
+
+        .servers-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .server-btn {
+            background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);
+            color: white;
+            border: none;
+            padding: 15px 20px;
+            border-radius: 12px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .server-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(59, 130, 246, 0.4);
+        }
+
+        .server-btn:active {
+            transform: translateY(0);
+        }
+
+        .server-btn.loading {
+            opacity: 0.7;
+            cursor: wait;
+        }
+
+        .server-btn .source {
+            font-size: 12px;
+            opacity: 0.8;
+        }
+
+        .player-container {
+            background: #000;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+            aspect-ratio: 16/9;
+            margin-bottom: 20px;
+        }
+
+        video {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .info-panel {
+            background: rgba(30, 41, 59, 0.8);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .info-panel h3 {
+            color: #38bdf8;
+            margin-bottom: 15px;
+            font-size: 18px;
+        }
+
+        .info-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .info-row:last-child {
+            border-bottom: none;
+        }
+
+        .info-label {
+            color: #94a3b8;
+        }
+
+        .info-value {
+            color: #22c55e;
+            font-family: monospace;
+            word-break: break-all;
+            max-width: 70%;
+            text-align: left;
+        }
+
+        .status {
+            text-align: center;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+
+        .status.loading {
+            background: rgba(59, 130, 246, 0.2);
+            color: #60a5fa;
+        }
+
+        .status.success {
+            background: rgba(34, 197, 94, 0.2);
+            color: #22c55e;
+        }
+
+        .status.error {
+            background: rgba(239, 68, 68, 0.2);
+            color: #ef4444;
+        }
+
+        .custom-url {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .custom-url input {
+            flex: 1;
+            padding: 12px 15px;
+            border: 2px solid #334155;
+            border-radius: 8px;
+            background: #1e293b;
+            color: white;
+            font-size: 14px;
+        }
+
+        .custom-url input:focus {
+            outline: none;
+            border-color: #3b82f6;
+        }
+
+        .custom-url button {
+            padding: 12px 25px;
+            background: #22c55e;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .log-panel {
+            background: #0f172a;
+            border-radius: 12px;
+            padding: 15px;
+            max-height: 200px;
+            overflow-y: auto;
+            font-family: monospace;
+            font-size: 12px;
+        }
+
+        .log-entry {
+            padding: 5px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .log-entry.error {
+            color: #ef4444;
+        }
+
+        .log-entry.success {
+            color: #22c55e;
+        }
+
+        .log-entry.info {
+            color: #60a5fa;
+        }
+
+        .quality-selector {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .quality-btn {
+            padding: 8px 16px;
+            background: #334155;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .quality-btn.active {
+            background: #3b82f6;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 22px;
+            }
+
+            .servers-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .custom-url {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>🎬 اختبار مشغل البث المباشر</h1>
+
+        <div id="status" class="status loading">جاري تحميل السيرفرات...</div>
+
+        <div class="servers-grid" id="serversGrid">
+            <!-- سيتم ملؤها ديناميكياً -->
+        </div>
+
+        <div class="custom-url">
+            <input type="text" id="customUrl" placeholder="أدخل رابط صفحة البث مباشرة...">
+            <button onclick="loadCustomUrl()">استخراج وتشغيل</button>
+        </div>
+
+        <div class="player-container">
+            <video id="video" controls autoplay></video>
+        </div>
+
+        <div class="quality-selector" id="qualitySelector" style="display: none;">
+            <span style="color: #94a3b8;">الجودة:</span>
+        </div>
+
+        <div class="info-panel" id="infoPanel" style="display: none;">
+            <h3>📊 معلومات البث</h3>
+            <div id="infoContent"></div>
+        </div>
+
+        <div class="log-panel" id="logPanel">
+            <div class="log-entry info">🎬 مرحباً بك في مشغل البث التجريبي</div>
+        </div>
+    </div>
+
+    <script>
+        const PROXY_URL = 'http://localhost:8082';
+        const video = document.getElementById('video');
+        const statusEl = document.getElementById('status');
+        const serversGrid = document.getElementById('serversGrid');
+        const infoPanel = document.getElementById('infoPanel');
+        const infoContent = document.getElementById('infoContent');
+        const logPanel = document.getElementById('logPanel');
+        const qualitySelector = document.getElementById('qualitySelector');
+
+        let hls = null;
+        let currentInfo = null;
+
+        // دالة للتسجيل
+        function log(message, type = 'info') {
+            const entry = document.createElement('div');
+            entry.className = `log-entry ${type}`;
+            entry.textContent = `[${new Date().toLocaleTimeString()}] ${message}`;
+            logPanel.appendChild(entry);
+            logPanel.scrollTop = logPanel.scrollHeight;
+            console.log(`[${type}] ${message}`);
+        }
+
+        // تحميل قائمة السيرفرات
+        async function loadServers() {
+            try {
+                const response = await fetch(`${PROXY_URL}/api/servers`);
+                const servers = await response.json();
+
+                serversGrid.innerHTML = '';
+
+                servers.forEach((server, index) => {
+                    const btn = document.createElement('button');
+                    btn.className = 'server-btn';
+                    btn.innerHTML = `
+                        <span>${server.name}</span>
+                        <span class="source">${new URL(server.url).hostname}</span>
+                    `;
+                    btn.onclick = () => loadServer(server);
+                    serversGrid.appendChild(btn);
+                });
+
+                statusEl.textContent = `تم تحميل ${servers.length} سيرفر - اختر واحداً للمشاهدة`;
+                statusEl.className = 'status success';
+                log(`تم تحميل ${servers.length} سيرفر`, 'success');
+            } catch (error) {
+                statusEl.textContent = 'خطأ في الاتصال بالخادم - تأكد من تشغيل proxy-server.js';
+                statusEl.className = 'status error';
+                log(`خطأ: ${error.message}`, 'error');
+            }
+        }
+
+        // تحميل سيرفر معين
+        async function loadServer(server) {
+            log(`جاري استخراج البث من: ${server.name}`, 'info');
+            statusEl.textContent = `جاري استخراج البث من ${server.name}...`;
+            statusEl.className = 'status loading';
+
+            try {
+                // استخراج معلومات البث
+                const extractUrl = `${PROXY_URL}/api/extract?url=${encodeURIComponent(server.url)}`;
+                const response = await fetch(extractUrl);
+                const info = await response.json();
+
+                if (!info.streamUrl) {
+                    throw new Error('لم يتم العثور على رابط بث');
+                }
+
+                currentInfo = info;
+                log(`تم استخراج: ${info.streamUrl}`, 'success');
+
+                // عرض المعلومات
+                showInfo(info);
+
+                // تشغيل البث عبر الـ proxy
+                const proxiedUrl = `${PROXY_URL}/api/proxy?url=${encodeURIComponent(info.streamUrl)}&referer=${encodeURIComponent(info.referer)}`;
+                playStream(proxiedUrl);
+
+            } catch (error) {
+                statusEl.textContent = `خطأ: ${error.message}`;
+                statusEl.className = 'status error';
+                log(`خطأ: ${error.message}`, 'error');
+            }
+        }
+
+        // تحميل رابط مخصص
+        async function loadCustomUrl() {
+            const url = document.getElementById('customUrl').value.trim();
+            if (!url) {
+                alert('الرجاء إدخال رابط');
+                return;
+            }
+
+            await loadServer({ name: 'رابط مخصص', url });
+        }
+
+        // عرض معلومات البث
+        function showInfo(info) {
+            infoPanel.style.display = 'block';
+            infoContent.innerHTML = `
+                <div class="info-row">
+                    <span class="info-label">القناة:</span>
+                    <span class="info-value">${info.channel || 'غير معروف'}</span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label">الدومينات:</span>
+                    <span class="info-value">${info.domains ? info.domains.join(', ') : 'غير متوفرة'}</span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label">SB:</span>
+                    <span class="info-value">${info.sb || 'غير محسوب'}</span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label">رابط البث:</span>
+                    <span class="info-value" style="font-size: 11px;">${info.streamUrl}</span>
+                </div>
+            `;
+        }
+
+        // تشغيل البث
+        function playStream(url) {
+            log(`جاري تشغيل: ${url}`, 'info');
+
+            // إيقاف المشغل السابق
+            if (hls) {
+                hls.destroy();
+                hls = null;
+            }
+
+            statusEl.textContent = 'جاري تحميل البث...';
+            statusEl.className = 'status loading';
+
+            if (Hls.isSupported()) {
+                hls = new Hls({
+                    maxBufferLength: 30,
+                    maxMaxBufferLength: 60,
+                    enableWorker: true,
+                    lowLatencyMode: true
+                });
+
+                hls.loadSource(url);
+                hls.attachMedia(video);
+
+                hls.on(Hls.Events.MANIFEST_PARSED, function (event, data) {
+                    log('تم تحميل قائمة الجودات', 'success');
+                    statusEl.textContent = 'البث يعمل!';
+                    statusEl.className = 'status success';
+                    video.play();
+
+                    // عرض خيارات الجودة
+                    if (data.levels.length > 1) {
+                        showQualityOptions(data.levels);
+                    }
+                });
+
+                hls.on(Hls.Events.ERROR, function (event, data) {
+                    if (data.fatal) {
+                        log(`خطأ فادح: ${data.type}`, 'error');
+                        statusEl.textContent = `خطأ: ${data.type}`;
+                        statusEl.className = 'status error';
+
+                        switch (data.type) {
+                            case Hls.ErrorTypes.NETWORK_ERROR:
+                                log('خطأ شبكة - محاولة إعادة التحميل...', 'error');
+                                hls.startLoad();
+                                break;
+                            case Hls.ErrorTypes.MEDIA_ERROR:
+                                log('خطأ وسائط - محاولة الإصلاح...', 'error');
+                                hls.recoverMediaError();
+                                break;
+                            default:
+                                log('خطأ غير معروف', 'error');
+                                hls.destroy();
+                                break;
+                        }
+                    }
+                });
+            } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+                // Safari
+                video.src = url;
+                video.addEventListener('loadedmetadata', function () {
+                    video.play();
+                    statusEl.textContent = 'البث يعمل!';
+                    statusEl.className = 'status success';
+                });
+            }
+        }
+
+        // عرض خيارات الجودة
+        function showQualityOptions(levels) {
+            qualitySelector.style.display = 'flex';
+            qualitySelector.innerHTML = '<span style="color: #94a3b8;">الجودة:</span>';
+
+            // إضافة خيار تلقائي
+            const autoBtn = document.createElement('button');
+            autoBtn.className = 'quality-btn active';
+            autoBtn.textContent = 'تلقائي';
+            autoBtn.onclick = () => {
+                hls.currentLevel = -1;
+                updateQualityButtons(autoBtn);
+            };
+            qualitySelector.appendChild(autoBtn);
+
+            // إضافة الجودات المتاحة
+            levels.forEach((level, index) => {
+                const btn = document.createElement('button');
+                btn.className = 'quality-btn';
+                btn.textContent = `${level.height}p`;
+                btn.onclick = () => {
+                    hls.currentLevel = index;
+                    updateQualityButtons(btn);
+                };
+                qualitySelector.appendChild(btn);
+            });
+        }
+
+        function updateQualityButtons(activeBtn) {
+            document.querySelectorAll('.quality-btn').forEach(btn => btn.classList.remove('active'));
+            activeBtn.classList.add('active');
+        }
+
+        // بدء التشغيل
+        loadServers();
+    </script>
+</body>
+
+</html>

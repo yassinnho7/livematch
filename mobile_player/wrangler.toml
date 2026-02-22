@@ -1,0 +1,39 @@
+# ============================================
+#  LiveMatch Edge Stream Proxy — Wrangler Config
+# ============================================
+#
+#  Deploy:
+#    npx wrangler deploy
+#
+#  Dev:
+#    npx wrangler dev
+#
+# ============================================
+
+name = "livematch-edge-proxy"
+main = "worker-edge-proxy.js"
+compatibility_date = "2024-01-01"
+
+# KV Namespaces — create with:
+#   npx wrangler kv:namespace create STREAMS_KV
+#   npx wrangler kv:namespace create MATCHES_KV
+
+[[kv_namespaces]]
+binding = "STREAMS_KV"
+id = "YOUR_STREAMS_KV_ID"         # Replace after creating
+
+[[kv_namespaces]]
+binding = "MATCHES_KV"
+id = "YOUR_MATCHES_KV_ID"         # Replace after creating
+
+# Environment variables
+[vars]
+RATE_LIMIT = "120"                 # Max requests per IP per minute
+
+# Secrets (set with: npx wrangler secret put APP_SECRET)
+# APP_SECRET = "..."               # HMAC signing secret
+
+# Routes (optional — use custom domain)
+# [[routes]]
+# pattern = "api.livematch.app/*"
+# zone_name = "livematch.app"
