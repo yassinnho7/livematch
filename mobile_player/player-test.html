@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تجربة المشغل المباشر</title>
+    <!-- HLS.js Library -->
+    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+    <style>
+        body {
+            font-family: Tahoma, Arial, sans-serif;
+            background: #0f172a;
+            color: white;
+            margin: 0;
+            padding: 20px;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: #38bdf8;
+        }
+
+        .controls {
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        button {
+            background: #2563eb;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        button:hover {
+            background: #1d4ed8;
+        }
+
+        .player-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: #000;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+            aspect-ratio: 16/9;
+        }
+
+        video {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        #status {
+            margin-top: 15px;
+            font-size: 14px;
+            color: #94a3b8;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>تجربة استخراج مشغل YallaShoot</h1>
+
+    <div class="controls">
+        <button onclick="loadServer(1)">تشغيل السيرفر 1</button>
+        <button onclick="loadServer(2)">تشغيل السيرفر 2</button>
+        <button onclick="loadServer(3)">تشغيل السيرفر 3</button>
+    </div>
+
+    <div class="player-container">
+        <video id="video" controls autoplay></video>
+    </div>
+
+    <div id="status">أضغط على أحد الأزرار لتشغيل البث...</div>
+
+    <script>
+        const video = document.getElementById('video');
+        const statusEl = document.getElementById('status');
+        let hls = null;
+
+        async function extractStreamUrl(serverNum) {
+            statusEl.innerText = `جاري استخراج رابط البث للسيرفر ${serverNum}...`;
+
+            try {
+                // نستخدم الخادم المحلي الذي برمجناه لتخطي حماية CORS، في الهاتف لن تحتاجه
+                const proxyUrl = `http://localhost:8081/api/get-html?serv=${serverNum}`;
+
+                const response = await fetch(proxyUrl);
+                if (!response.ok) throw new Error("فشل جلب البيانات من الخادم المحلي، هل شغلته؟");
+                const html = await response.text();
+
+                if (!html || !html.includes("const D=")) throw new Error("لم يتم استلام HTML صحيح من الموقع الأصلي");
+
+                // 2. استخراج قائمة الدومينات D
+                const dMatch = html.match(/const\s+D\s*=\s*\[(.*?)\]/);
+                if (!dMatch) throw new Error("لم نتمكن من العثور على الدومينات");
+
+                const domains = dMatch[1].split(',').map(s => s.replace(/['"]/g, '').trim());
+
+                // 3. استخراج اسم القناة
+                const chMatch = html.match(/hls\/([^\/]+)\/master\.m3u8/);
+                if (!chMatch) throw new Error("لم نتمكن من العثور على اسم القناة");
+                const channel = chMatch[1];
+
+                // 4. خوارزمية جلب المتغير 'sb'
+                const sb = (() => {
+                    let n = Date.now();
+                    let v = Math.floor(n / 14400000) + Math.floor(n / 86400000 * 1.5);
+                    let l = v % 7 + 6;
+                    let c = 'abcdefghijklmnopqrstuvwxyz';
+                    let r = '';
+                    for (; l--; v = Math.floor(v / 26)) {
+                        r = c[v % 26] + r;
+                    }
+                    return r;
+                })();
+
+                // 5. ربط النتيجة النهائية برابط البث المباشر
+                const domain = domains[0];
+                const rawStreamUrl = `https://${sb}.${domain}/hls/${channel}/master.m3u8`;
+
+                // لكي يعمل في المتصفح نتخطى حظر Referer باستخدام الخادم المحلي
+                const proxiedStreamUrl = `http://localhost:8081/proxy/${rawStreamUrl}`;
+
+                return proxiedStreamUrl;
+            } catch (err) {
+                console.error(err);
+                statusEl.innerText = `خطأ: ${err.message}`;
+                return null;
+            }
+        }
+
+        async function loadServer(num) {
+            if (hls) {
+                hls.destroy();
+                hls = null;
+            }
+
+            const streamUrl = await extractStreamUrl(num);
+
+            if (streamUrl) {
+                statusEl.innerText = `تم الاستخراج بنجاح! الرابط: ${streamUrl}\nجاري التشغيل...`;
+
+                if (Hls.isSupported()) {
+                    hls = new Hls({
+                        maxBufferLength: 30,
+                        maxMaxBufferLength: 60,
+                    });
+                    hls.loadSource(streamUrl);
+                    hls.attachMedia(video);
+                    hls.on(Hls.Events.MANIFEST_PARSED, function () {
+                        video.play();
+                    });
+
+                    hls.on(Hls.Events.ERROR, function (event, data) {
+                        if (data.fatal) {
+                            switch (data.type) {
+                                case Hls.ErrorTypes.NETWORK_ERROR:
+                                    statusEl.innerText = 'خطأ في الشبكة. السيرفر قد يكون متوقفاً.';
+                                    break;
+                                case Hls.ErrorTypes.MEDIA_ERROR:
+                                    hls.recoverMediaError();
+                                    break;
+                                default:
+                                    hls.destroy();
+                                    break;
+                            }
+                        }
+                    });
+                } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+                    // For Safari
+                    video.src = streamUrl;
+                    video.addEventListener('loadedmetadata', function () {
+                        video.play();
+                    });
+                }
+            }
+        }
+    </script>
+</body>
+
+</html>
