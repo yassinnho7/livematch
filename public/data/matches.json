@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-02-22T12:02:53.787Z",
+  "generated_at": "2026-02-22T13:13:24.469Z",
   "count": 22,
   "matches": [
     {
@@ -23,7 +23,7 @@
         "logo": "https://i0.wp.com/www.kora-online.cc/wp-content/uploads/2026/02/235-137x150.png"
       },
       "score": {
-        "home": 1,
+        "home": 2,
         "away": 0
       },
       "streams": [
@@ -57,7 +57,7 @@
       "id": 1608726028,
       "date": "2026-02-22T13:00:00.000Z",
       "timestamp": 1771765200,
-      "status": "NS",
+      "status": "LIVE",
       "time": "13:00",
       "time_label": "13:00 GMT",
       "league": {
@@ -73,7 +73,10 @@
         "name": "إشبيلية",
         "logo": "https://i0.wp.com/www.kora-online.cc/wp-content/uploads/2026/02/135-135x150.png"
       },
-      "score": null,
+      "score": {
+        "home": 0,
+        "away": 0
+      },
       "streams": [
         {
           "id": "stream_sports-3_ko_1608726028",
@@ -84,68 +87,28 @@
           "priority": 1
         },
         {
+          "id": "stream_koraplus_1271789258_0",
+          "source": "koraplus",
+          "quality": "HD",
+          "channel": "beIN Sports 3 HD",
+          "url": "https://p1.panda-live.live/albaplayer/extra-1/",
+          "priority": 1
+        },
+        {
           "id": "stream_bein3_1608726028",
           "source": "livekora",
           "quality": "HD",
           "channel": "bein3",
           "url": "https://pl.gomatch-live.com/albaplayer/bein3/",
           "priority": 1
-        }
-      ]
-    },
-    {
-      "id": 1823507594,
-      "date": "2026-02-22T14:00:00.000Z",
-      "timestamp": 1771768800,
-      "status": "NS",
-      "time": "14:00",
-      "time_label": "14:00 GMT",
-      "league": {
-        "name": "إنجلترا, الدوري الإنجليزي",
-        "country": "England",
-        "logo": "https://a.espncdn.com/combiner/i?img=/i/leaguelogos/soccer/500/23.png&h=40&w=40"
-      },
-      "home": {
-        "name": "كريستال بالاس",
-        "logo": "https://i0.wp.com/www.kora-online.cc/wp-content/uploads/2026/02/10-150x150.png"
-      },
-      "away": {
-        "name": "وولفرهامبتون",
-        "logo": "https://i0.wp.com/www.kora-online.cc/wp-content/uploads/2026/02/15-150x142.png"
-      },
-      "score": null,
-      "streams": [
-        {
-          "id": "stream_sports-4_ko_1823507594",
-          "source": "koraonline",
-          "quality": "HD",
-          "channel": "sports-4",
-          "url": "https://aa.yallashoot2026.com/albaplayer/sports-4/",
-          "priority": 1
         },
         {
-          "id": "stream_bein4_1823507594",
-          "source": "livekora",
-          "quality": "HD",
-          "channel": "bein4",
-          "url": "https://pl.gomatch-live.com/albaplayer/bein4/",
-          "priority": 1
-        },
-        {
-          "id": "stream_sportsonline_1287607795",
-          "source": "sportsonline",
-          "quality": "HD",
-          "channel": "hd11",
-          "url": "https://www1.sprtsonline.click/channels/hd/hd11.php",
-          "priority": 3
-        },
-        {
-          "id": "stream_sportsonline_1287607795",
-          "source": "sportsonline",
-          "quality": "HD",
-          "channel": "br2",
-          "url": "https://www1.sprtsonline.click/channels/bra/br2.php",
-          "priority": 3
+          "id": "stream_siiir_1608726028",
+          "source": "siiir",
+          "quality": "VIP",
+          "channel": "VIP Server",
+          "url": "https://eyj0exaioijkv1qilcjhbgcioijiuzi1nij99sss.yallashot.us/playerv2.php?match=match3&key=c0ae1abba6eebd7e6cc5b88b1d2B71547",
+          "priority": 2
         }
       ]
     },
@@ -186,6 +149,14 @@
           "channel": "bein1",
           "url": "https://pl.gomatch-live.com/albaplayer/bein1/",
           "priority": 1
+        },
+        {
+          "id": "stream_siiir_1246226534",
+          "source": "siiir",
+          "quality": "VIP",
+          "channel": "VIP Server",
+          "url": "https://eyj0exaioijkv1qilcjhbgcioijiuzi1nij99sss.yallashot.us/playerv2.php?match=match1&key=c0ae1abba6eebd7e6cc5b88b1d2B71547",
+          "priority": 2
         },
         {
           "id": "stream_sportsonline_1743338702",
@@ -316,6 +287,14 @@
           "priority": 1
         },
         {
+          "id": "stream_siiir_1650722023",
+          "source": "siiir",
+          "quality": "VIP",
+          "channel": "VIP Server",
+          "url": "https://eyj0exaioijkv1qilcjhbgcioijiuzi1nij99sss.yallashot.us/playerv2.php?match=match6&key=c0ae1abba6eebd7e6cc5b88b1d2B71547",
+          "priority": 2
+        },
+        {
           "id": "stream_sportsonline_1066023033",
           "source": "sportsonline",
           "quality": "HD",
@@ -366,6 +345,70 @@
       ]
     },
     {
+      "id": 1823507594,
+      "date": "2026-02-22T14:00:00.000Z",
+      "timestamp": 1771768800,
+      "status": "NS",
+      "time": "14:00",
+      "time_label": "14:00 GMT",
+      "league": {
+        "name": "إنجلترا, الدوري الإنجليزي",
+        "country": "England",
+        "logo": "https://a.espncdn.com/combiner/i?img=/i/leaguelogos/soccer/500/23.png&h=40&w=40"
+      },
+      "home": {
+        "name": "كريستال بالاس",
+        "logo": "https://i0.wp.com/www.kora-online.cc/wp-content/uploads/2026/02/10-150x150.png"
+      },
+      "away": {
+        "name": "وولفرهامبتون",
+        "logo": "https://i0.wp.com/www.kora-online.cc/wp-content/uploads/2026/02/15-150x142.png"
+      },
+      "score": null,
+      "streams": [
+        {
+          "id": "stream_sports-4_ko_1823507594",
+          "source": "koraonline",
+          "quality": "HD",
+          "channel": "sports-4",
+          "url": "https://aa.yallashoot2026.com/albaplayer/sports-4/",
+          "priority": 1
+        },
+        {
+          "id": "stream_bein4_1823507594",
+          "source": "livekora",
+          "quality": "HD",
+          "channel": "bein4",
+          "url": "https://pl.gomatch-live.com/albaplayer/bein4/",
+          "priority": 1
+        },
+        {
+          "id": "stream_siiir_1823507594",
+          "source": "siiir",
+          "quality": "VIP",
+          "channel": "VIP Server",
+          "url": "https://eyj0exaioijkv1qilcjhbgcioijiuzi1nij99sss.yallashot.us/playerv2.php?match=match4&key=c0ae1abba6eebd7e6cc5b88b1d2B71547",
+          "priority": 2
+        },
+        {
+          "id": "stream_sportsonline_1287607795",
+          "source": "sportsonline",
+          "quality": "HD",
+          "channel": "hd11",
+          "url": "https://www1.sprtsonline.click/channels/hd/hd11.php",
+          "priority": 3
+        },
+        {
+          "id": "stream_sportsonline_1287607795",
+          "source": "sportsonline",
+          "quality": "HD",
+          "channel": "br2",
+          "url": "https://www1.sprtsonline.click/channels/bra/br2.php",
+          "priority": 3
+        }
+      ]
+    },
+    {
       "id": 267067917,
       "date": "2026-02-22T14:30:00.000Z",
       "timestamp": 1771770600,
@@ -387,6 +430,14 @@
       },
       "score": null,
       "streams": [
+        {
+          "id": "stream_sports-b1_ko_267067917",
+          "source": "koraonline",
+          "quality": "HD",
+          "channel": "sports-b1",
+          "url": "https://aa.yallashoot2026.com/albaplayer/sports-b1/",
+          "priority": 1
+        },
         {
           "id": "stream_sportsonline_1514122601",
           "source": "sportsonline",
@@ -434,6 +485,14 @@
           "channel": "bein2",
           "url": "https://pl.gomatch-live.com/albaplayer/bein2/",
           "priority": 1
+        },
+        {
+          "id": "stream_siiir_1953056594",
+          "source": "siiir",
+          "quality": "VIP",
+          "channel": "VIP Server",
+          "url": "https://eyj0exaioijkv1qilcjhbgcioijiuzi1nij99sss.yallashot.us/playerv2.php?match=match2&key=c0ae1abba6eebd7e6cc5b88b1d2B71547",
+          "priority": 2
         }
       ]
     },
@@ -516,6 +575,70 @@
       "streams": []
     },
     {
+      "id": 1730437814,
+      "date": "2026-02-22T16:30:00.000Z",
+      "timestamp": 1771777800,
+      "status": "NS",
+      "time": "16:30",
+      "time_label": "16:30 GMT",
+      "league": {
+        "name": "إنجلترا, الدوري الإنجليزي",
+        "country": "England",
+        "logo": "https://a.espncdn.com/combiner/i?img=/i/leaguelogos/soccer/500/23.png&h=40&w=40"
+      },
+      "home": {
+        "name": "توتنهام هوتسبر",
+        "logo": "https://i0.wp.com/www.kora-online.cc/wp-content/uploads/2026/02/114-83x150.png"
+      },
+      "away": {
+        "name": "أرسنال",
+        "logo": "https://i0.wp.com/www.kora-online.cc/wp-content/uploads/2026/02/104-140x150.png"
+      },
+      "score": null,
+      "streams": [
+        {
+          "id": "stream_bein1_1730437814",
+          "source": "livekora",
+          "quality": "HD",
+          "channel": "bein1",
+          "url": "https://pl.gomatch-live.com/albaplayer/bein1/",
+          "priority": 1
+        },
+        {
+          "id": "stream_siiir_1730437814",
+          "source": "siiir",
+          "quality": "VIP",
+          "channel": "VIP Server",
+          "url": "https://eyj0exaioijkv1qilcjhbgcioijiuzi1nij99sss.yallashot.us/playerv2.php?match=match1&key=c0ae1abba6eebd7e6cc5b88b1d2B71547",
+          "priority": 2
+        },
+        {
+          "id": "stream_sportsonline_1724320525",
+          "source": "sportsonline",
+          "quality": "HD",
+          "channel": "hd1",
+          "url": "https://www1.sprtsonline.click/channels/hd/hd1.php",
+          "priority": 3
+        },
+        {
+          "id": "stream_sportsonline_1724320525",
+          "source": "sportsonline",
+          "quality": "HD",
+          "channel": "eleven1",
+          "url": "https://www1.sprtsonline.click/channels/pt/eleven1.php",
+          "priority": 3
+        },
+        {
+          "id": "stream_sportsonline_1724320525",
+          "source": "sportsonline",
+          "quality": "HD",
+          "channel": "br2",
+          "url": "https://www1.sprtsonline.click/channels/bra/br2.php",
+          "priority": 3
+        }
+      ]
+    },
+    {
       "id": 2111263667,
       "date": "2026-02-22T16:30:00.000Z",
       "timestamp": 1771777800,
@@ -551,62 +674,6 @@
           "quality": "HD",
           "channel": "eleven3",
           "url": "https://www1.sprtsonline.click/channels/pt/eleven3.php",
-          "priority": 3
-        }
-      ]
-    },
-    {
-      "id": 1730437814,
-      "date": "2026-02-22T16:30:00.000Z",
-      "timestamp": 1771777800,
-      "status": "NS",
-      "time": "16:30",
-      "time_label": "16:30 GMT",
-      "league": {
-        "name": "إنجلترا, الدوري الإنجليزي",
-        "country": "England",
-        "logo": "https://a.espncdn.com/combiner/i?img=/i/leaguelogos/soccer/500/23.png&h=40&w=40"
-      },
-      "home": {
-        "name": "توتنهام هوتسبر",
-        "logo": "https://i0.wp.com/www.kora-online.cc/wp-content/uploads/2026/02/114-83x150.png"
-      },
-      "away": {
-        "name": "أرسنال",
-        "logo": "https://i0.wp.com/www.kora-online.cc/wp-content/uploads/2026/02/104-140x150.png"
-      },
-      "score": null,
-      "streams": [
-        {
-          "id": "stream_bein1_1730437814",
-          "source": "livekora",
-          "quality": "HD",
-          "channel": "bein1",
-          "url": "https://pl.gomatch-live.com/albaplayer/bein1/",
-          "priority": 1
-        },
-        {
-          "id": "stream_sportsonline_1724320525",
-          "source": "sportsonline",
-          "quality": "HD",
-          "channel": "hd1",
-          "url": "https://www1.sprtsonline.click/channels/hd/hd1.php",
-          "priority": 3
-        },
-        {
-          "id": "stream_sportsonline_1724320525",
-          "source": "sportsonline",
-          "quality": "HD",
-          "channel": "eleven1",
-          "url": "https://www1.sprtsonline.click/channels/pt/eleven1.php",
-          "priority": 3
-        },
-        {
-          "id": "stream_sportsonline_1724320525",
-          "source": "sportsonline",
-          "quality": "HD",
-          "channel": "br2",
-          "url": "https://www1.sprtsonline.click/channels/bra/br2.php",
           "priority": 3
         }
       ]
@@ -934,9 +1001,17 @@
           "channel": "bein3",
           "url": "https://pl.gomatch-live.com/albaplayer/bein3/",
           "priority": 1
+        },
+        {
+          "id": "stream_siiir_124719006",
+          "source": "siiir",
+          "quality": "VIP",
+          "channel": "VIP Server",
+          "url": "https://eyj0exaioijkv1qilcjhbgcioijiuzi1nij99sss.yallashot.us/playerv2.php?match=match3&key=c0ae1abba6eebd7e6cc5b88b1d2B71547",
+          "priority": 2
         }
       ]
     }
   ],
-  "generatedAt": "2026-02-22T12:02:53.820Z"
+  "generatedAt": "2026-02-22T13:13:24.511Z"
 }
