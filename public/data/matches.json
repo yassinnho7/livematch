@@ -1,26 +1,26 @@
 {
-  "generated_at": "2026-02-22T18:55:57.059Z",
-  "count": 8,
+  "generated_at": "2026-02-22T19:22:20.496Z",
+  "count": 7,
   "matches": [
     {
-      "id": 1151877400,
-      "date": "2026-02-22T17:00:00.000Z",
-      "timestamp": 1771779600,
+      "id": 1531929008,
+      "date": "2026-02-22T17:30:00.000Z",
+      "timestamp": 1771781400,
       "status": "LIVE",
-      "time": "17:00",
-      "time_label": "17:00 GMT",
+      "time": "17:30",
+      "time_label": "17:30 GMT",
       "league": {
-        "name": "إيطاليا, الدوري الإيطالي",
-        "country": "Italy",
-        "logo": "https://a.espncdn.com/combiner/i?img=/i/leaguelogos/soccer/500/12.png&h=40&w=40"
+        "name": "إسبانيا, الدوري الإسباني",
+        "country": "Spain",
+        "logo": "https://a.espncdn.com/combiner/i?img=/i/leaguelogos/soccer/500/15.png&h=40&w=40"
       },
       "home": {
-        "name": "ميلان",
-        "logo": "https://i0.wp.com/www.kora-online.cc/wp-content/uploads/2025/12/227-1.png"
+        "name": "سيلتا فيجو",
+        "logo": "https://i0.wp.com/www.kora-online.cc/wp-content/uploads/2026/02/158.png"
       },
       "away": {
-        "name": "بارما",
-        "logo": "https://i0.wp.com/www.kora-online.cc/wp-content/uploads/2026/02/241-150x150.png"
+        "name": "ريال مايوركا",
+        "logo": "https://i0.wp.com/www.kora-online.cc/wp-content/uploads/2026/02/142.png"
       },
       "score": {
         "home": 0,
@@ -28,36 +28,28 @@
       },
       "streams": [
         {
-          "id": "stream_sports-d1_ko_1151877400",
+          "id": "stream_sports-3_ko_1531929008",
           "source": "koraonline",
           "quality": "HD",
-          "channel": "sports-d1",
-          "url": "https://aa.yallashoot2026.com/albaplayer/sports-d1/",
+          "channel": "sports-3",
+          "url": "https://aa.yallashoot2026.com/albaplayer/sports-3/",
           "priority": 1
         },
         {
-          "id": "stream_koraplus_1306635688_0",
+          "id": "stream_koraplus_1334715584_0",
           "source": "koraplus",
           "quality": "HD",
-          "channel": "Starzplay",
-          "url": "https://live.baranewssumsel.online/albaplayer/ad-premium-1/",
+          "channel": "beIN Sports 3 HD",
+          "url": "https://live.baranewssumsel.online/albaplayer/bein3/",
           "priority": 1
         },
         {
-          "id": "stream_ad-premium-1_1151877400",
+          "id": "stream_bein3_1531929008",
           "source": "livekora",
           "quality": "HD",
-          "channel": "ad-premium-1",
-          "url": "https://pl.gomatch-live.com/albaplayer/ad-premium-1/",
+          "channel": "bein3",
+          "url": "https://pl.gomatch-live.com/albaplayer/bein3/",
           "priority": 1
-        },
-        {
-          "id": "stream_siiir_1151877400",
-          "source": "siiir",
-          "quality": "VIP",
-          "channel": "VIP Server",
-          "url": "https://eyj0exaioijkv1qilcjhbgcioijiuzi1nij99sss.yallashot.us/playerv2.php?match=match6&key=c0ae1abba6eebd7e6cc5b88b1d2B71547",
-          "priority": 2
         }
       ]
     },
@@ -117,8 +109,8 @@
         "logo": "https://i0.wp.com/www.kora-online.cc/wp-content/uploads/2026/02/8353-115x150.png"
       },
       "score": {
-        "home": 1,
-        "away": 1
+        "home": 2,
+        "away": 2
       },
       "streams": [
         {
@@ -127,57 +119,6 @@
           "quality": "HD",
           "channel": "sports-c4",
           "url": "https://aa.yallashoot2026.com/albaplayer/sports-c4/",
-          "priority": 1
-        }
-      ]
-    },
-    {
-      "id": 1531929008,
-      "date": "2026-02-22T17:30:00.000Z",
-      "timestamp": 1771781400,
-      "status": "LIVE",
-      "time": "17:30",
-      "time_label": "17:30 GMT",
-      "league": {
-        "name": "إسبانيا, الدوري الإسباني",
-        "country": "Spain",
-        "logo": "https://a.espncdn.com/combiner/i?img=/i/leaguelogos/soccer/500/15.png&h=40&w=40"
-      },
-      "home": {
-        "name": "سيلتا فيجو",
-        "logo": "https://i0.wp.com/www.kora-online.cc/wp-content/uploads/2026/02/158.png"
-      },
-      "away": {
-        "name": "ريال مايوركا",
-        "logo": "https://i0.wp.com/www.kora-online.cc/wp-content/uploads/2026/02/142.png"
-      },
-      "score": {
-        "home": 0,
-        "away": 0
-      },
-      "streams": [
-        {
-          "id": "stream_sports-3_ko_1531929008",
-          "source": "koraonline",
-          "quality": "HD",
-          "channel": "sports-3",
-          "url": "https://aa.yallashoot2026.com/albaplayer/sports-3/",
-          "priority": 1
-        },
-        {
-          "id": "stream_koraplus_1334715584_0",
-          "source": "koraplus",
-          "quality": "HD",
-          "channel": "beIN Sports 3 HD",
-          "url": "https://live.baranewssumsel.online/albaplayer/bein3/",
-          "priority": 1
-        },
-        {
-          "id": "stream_bein3_1531929008",
-          "source": "livekora",
-          "quality": "HD",
-          "channel": "bein3",
-          "url": "https://pl.gomatch-live.com/albaplayer/bein3/",
           "priority": 1
         }
       ]
@@ -203,7 +144,7 @@
         "logo": "https://i0.wp.com/www.kora-online.cc/wp-content/uploads/2026/02/338.png"
       },
       "score": {
-        "home": 0,
+        "home": 2,
         "away": 1
       },
       "streams": [
@@ -229,70 +170,6 @@
           "quality": "HD",
           "channel": "eleven3",
           "url": "https://www1.sprtsonline.click/channels/pt/eleven3.php",
-          "priority": 3
-        }
-      ]
-    },
-    {
-      "id": 1002886434,
-      "date": "2026-02-22T19:45:00.000Z",
-      "timestamp": 1771789500,
-      "status": "NS",
-      "time": "19:45",
-      "time_label": "19:45 GMT",
-      "league": {
-        "name": "فرنسا, الدوري الفرنسي",
-        "country": "France",
-        "logo": "https://a.espncdn.com/combiner/i?img=/i/leaguelogos/soccer/500/9.png&h=40&w=40"
-      },
-      "home": {
-        "name": "ستراسبورج",
-        "logo": "https://i0.wp.com/www.kora-online.cc/wp-content/uploads/2026/02/479.png"
-      },
-      "away": {
-        "name": "أولمبيك ليون",
-        "logo": "https://i0.wp.com/www.kora-online.cc/wp-content/uploads/2026/02/465-150x150.png"
-      },
-      "score": null,
-      "streams": [
-        {
-          "id": "stream_sports-2_ko_1002886434",
-          "source": "koraonline",
-          "quality": "HD",
-          "channel": "sports-2",
-          "url": "https://aa.yallashoot2026.com/albaplayer/sports-2/",
-          "priority": 1
-        },
-        {
-          "id": "stream_koraplus_1265147256_0",
-          "source": "koraplus",
-          "quality": "HD",
-          "channel": "Bein Sports HD2",
-          "url": "https://live.baranewssumsel.online/albaplayer/bein22/",
-          "priority": 1
-        },
-        {
-          "id": "stream_bein2_1002886434",
-          "source": "livekora",
-          "quality": "HD",
-          "channel": "bein2",
-          "url": "https://pl.gomatch-live.com/albaplayer/bein2/",
-          "priority": 1
-        },
-        {
-          "id": "stream_sportsonline_814140776",
-          "source": "sportsonline",
-          "quality": "HD",
-          "channel": "hd4",
-          "url": "https://www1.sprtsonline.click/channels/hd/hd4.php",
-          "priority": 3
-        },
-        {
-          "id": "stream_sportsonline_814140776",
-          "source": "sportsonline",
-          "quality": "HD",
-          "channel": "sporttv3",
-          "url": "https://www1.sprtsonline.click/channels/pt/sporttv3.php",
           "priority": 3
         }
       ]
@@ -370,6 +247,70 @@
       ]
     },
     {
+      "id": 1002886434,
+      "date": "2026-02-22T19:45:00.000Z",
+      "timestamp": 1771789500,
+      "status": "NS",
+      "time": "19:45",
+      "time_label": "19:45 GMT",
+      "league": {
+        "name": "فرنسا, الدوري الفرنسي",
+        "country": "France",
+        "logo": "https://a.espncdn.com/combiner/i?img=/i/leaguelogos/soccer/500/9.png&h=40&w=40"
+      },
+      "home": {
+        "name": "ستراسبورج",
+        "logo": "https://i0.wp.com/www.kora-online.cc/wp-content/uploads/2026/02/479.png"
+      },
+      "away": {
+        "name": "أولمبيك ليون",
+        "logo": "https://i0.wp.com/www.kora-online.cc/wp-content/uploads/2026/02/465-150x150.png"
+      },
+      "score": null,
+      "streams": [
+        {
+          "id": "stream_sports-2_ko_1002886434",
+          "source": "koraonline",
+          "quality": "HD",
+          "channel": "sports-2",
+          "url": "https://aa.yallashoot2026.com/albaplayer/sports-2/",
+          "priority": 1
+        },
+        {
+          "id": "stream_koraplus_1265147256_0",
+          "source": "koraplus",
+          "quality": "HD",
+          "channel": "Bein Sports HD2",
+          "url": "https://live.baranewssumsel.online/albaplayer/bein22/",
+          "priority": 1
+        },
+        {
+          "id": "stream_bein2_1002886434",
+          "source": "livekora",
+          "quality": "HD",
+          "channel": "bein2",
+          "url": "https://pl.gomatch-live.com/albaplayer/bein2/",
+          "priority": 1
+        },
+        {
+          "id": "stream_sportsonline_814140776",
+          "source": "sportsonline",
+          "quality": "HD",
+          "channel": "hd4",
+          "url": "https://www1.sprtsonline.click/channels/hd/hd4.php",
+          "priority": 3
+        },
+        {
+          "id": "stream_sportsonline_814140776",
+          "source": "sportsonline",
+          "quality": "HD",
+          "channel": "sporttv3",
+          "url": "https://www1.sprtsonline.click/channels/pt/sporttv3.php",
+          "priority": 3
+        }
+      ]
+    },
+    {
       "id": 124719006,
       "date": "2026-02-22T20:00:00.000Z",
       "timestamp": 1771790400,
@@ -426,5 +367,5 @@
       ]
     }
   ],
-  "generatedAt": "2026-02-22T18:55:57.102Z"
+  "generatedAt": "2026-02-22T19:22:20.539Z"
 }
