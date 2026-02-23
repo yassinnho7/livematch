@@ -1,11 +1,120 @@
 {
-  "generated_at": "2026-02-22T23:39:55.685Z",
-  "count": 3,
+  "generated_at": "2026-02-23T02:53:39.653Z",
+  "count": 8,
   "matches": [
     {
-      "id": 1952364663,
-      "date": "2026-02-22T19:45:00.000Z",
-      "timestamp": 1771789500,
+      "id": 1401007622,
+      "date": "2026-02-23T17:30:00.000Z",
+      "timestamp": 1771867800,
+      "status": "NS",
+      "time": "17:30",
+      "time_label": "17:30 GMT",
+      "league": {
+        "name": "إيطاليا, الدوري الإيطالي",
+        "country": "Italy",
+        "logo": "https://a.espncdn.com/combiner/i?img=/i/leaguelogos/soccer/500/12.png&h=40&w=40"
+      },
+      "home": {
+        "name": "فيورنتينا",
+        "logo": "https://i0.wp.com/www.kora-online.cc/wp-content/uploads/2026/02/228-150x150.png"
+      },
+      "away": {
+        "name": "بيسا",
+        "logo": "https://i0.wp.com/www.kora-online.cc/wp-content/uploads/2026/02/248-150x150.png"
+      },
+      "score": null,
+      "streams": [
+        {
+          "id": "stream_sportsonline_2031738161",
+          "source": "sportsonline",
+          "quality": "HD",
+          "channel": "hd7",
+          "url": "https://www1.sprtsonline.click/channels/hd/hd7.php",
+          "priority": 3
+        },
+        {
+          "id": "stream_sportsonline_2031738161",
+          "source": "sportsonline",
+          "quality": "HD",
+          "channel": "sporttv2",
+          "url": "https://www1.sprtsonline.click/channels/pt/sporttv2.php",
+          "priority": 3
+        }
+      ]
+    },
+    {
+      "id": 2125358036,
+      "date": "2026-02-23T19:00:00.000Z",
+      "timestamp": 1771873200,
+      "status": "NS",
+      "time": "19:00",
+      "time_label": "19:00 GMT",
+      "league": {
+        "name": "السعودية, الدوري السعودي",
+        "country": "Saudi Arabia",
+        "logo": "https://a.espncdn.com/combiner/i?img=/i/leaguelogos/soccer/500/3007.png&h=40&w=40"
+      },
+      "home": {
+        "name": "ضمك",
+        "logo": "https://i0.wp.com/www.kora-online.cc/wp-content/uploads/2026/02/24241-150x150.png"
+      },
+      "away": {
+        "name": "الأهلي السعودي",
+        "logo": "https://i0.wp.com/www.kora-online.cc/wp-content/uploads/2026/01/alba_img_6977e5c40e10f-70x70-1.png"
+      },
+      "score": null,
+      "streams": []
+    },
+    {
+      "id": 592385120,
+      "date": "2026-02-23T19:00:00.000Z",
+      "timestamp": 1771873200,
+      "status": "NS",
+      "time": "19:00",
+      "time_label": "19:00 GMT",
+      "league": {
+        "name": "السعودية, الدوري السعودي",
+        "country": "Saudi Arabia",
+        "logo": "https://a.espncdn.com/combiner/i?img=/i/leaguelogos/soccer/500/3007.png&h=40&w=40"
+      },
+      "home": {
+        "name": "القادسية",
+        "logo": "https://i0.wp.com/www.kora-online.cc/wp-content/uploads/2026/02/8947-150x150.png"
+      },
+      "away": {
+        "name": "الاتفاق",
+        "logo": "https://i0.wp.com/www.kora-online.cc/wp-content/uploads/2026/02/8943-150x150.png"
+      },
+      "score": null,
+      "streams": []
+    },
+    {
+      "id": 1164204910,
+      "date": "2026-02-23T19:30:00.000Z",
+      "timestamp": 1771875000,
+      "status": "NS",
+      "time": "19:30",
+      "time_label": "19:30 GMT",
+      "league": {
+        "name": "مصر, الدوري المصري",
+        "country": "Egypt",
+        "logo": "https://a.espncdn.com/combiner/i?img=/i/leaguelogos/soccer/500/1237.png&h=40&w=40"
+      },
+      "home": {
+        "name": "سموحة",
+        "logo": "https://i0.wp.com/www.kora-online.cc/wp-content/uploads/2026/02/8309-150x150.png"
+      },
+      "away": {
+        "name": "الأهلي",
+        "logo": "https://i0.wp.com/www.kora-online.cc/wp-content/uploads/2026/02/8200-1-126x150.png"
+      },
+      "score": null,
+      "streams": []
+    },
+    {
+      "id": 955292310,
+      "date": "2026-02-23T19:45:00.000Z",
+      "timestamp": 1771875900,
       "status": "NS",
       "time": "19:45",
       "time_label": "19:45 GMT",
@@ -23,12 +132,52 @@
         "logo": "https://i0.wp.com/www.kora-online.cc/wp-content/uploads/2026/02/229-150x150.png"
       },
       "score": null,
+      "streams": [
+        {
+          "id": "stream_sportsonline_674063700",
+          "source": "sportsonline",
+          "quality": "HD",
+          "channel": "hd8",
+          "url": "https://www1.sprtsonline.click/channels/hd/hd8.php",
+          "priority": 3
+        },
+        {
+          "id": "stream_sportsonline_674063700",
+          "source": "sportsonline",
+          "quality": "HD",
+          "channel": "sporttv2",
+          "url": "https://www1.sprtsonline.click/channels/pt/sporttv2.php",
+          "priority": 3
+        }
+      ]
+    },
+    {
+      "id": 68637576,
+      "date": "2026-02-23T19:45:00.000Z",
+      "timestamp": 1771875900,
+      "status": "NS",
+      "time": "19:45",
+      "time_label": "19:45 GMT",
+      "league": {
+        "name": "فرنسا, الدوري الفرنسي - الدرجة الثانية",
+        "country": "France",
+        "logo": "https://a.espncdn.com/combiner/i?img=/i/leaguelogos/soccer/500/9.png&h=40&w=40"
+      },
+      "home": {
+        "name": "لومان",
+        "logo": "https://i0.wp.com/www.kora-online.cc/wp-content/uploads/2026/02/468-150x150.png"
+      },
+      "away": {
+        "name": "جانجون",
+        "logo": "https://i0.wp.com/www.kora-online.cc/wp-content/uploads/2026/02/496-150x150.png"
+      },
+      "score": null,
       "streams": []
     },
     {
-      "id": 2056011251,
-      "date": "2026-02-22T20:00:00.000Z",
-      "timestamp": 1771790400,
+      "id": 21198092,
+      "date": "2026-02-23T20:00:00.000Z",
+      "timestamp": 1771876800,
       "status": "NS",
       "time": "20:00",
       "time_label": "20:00 GMT",
@@ -46,12 +195,37 @@
         "logo": "https://i0.wp.com/www.kora-online.cc/wp-content/uploads/2026/02/105-150x150.png"
       },
       "score": null,
-      "streams": []
+      "streams": [
+        {
+          "id": "stream_sportsonline_1324515317",
+          "source": "sportsonline",
+          "quality": "HD",
+          "channel": "hd1",
+          "url": "https://www1.sprtsonline.click/channels/hd/hd1.php",
+          "priority": 3
+        },
+        {
+          "id": "stream_sportsonline_1324515317",
+          "source": "sportsonline",
+          "quality": "HD",
+          "channel": "eleven1",
+          "url": "https://www1.sprtsonline.click/channels/pt/eleven1.php",
+          "priority": 3
+        },
+        {
+          "id": "stream_sportsonline_1324515317",
+          "source": "sportsonline",
+          "quality": "HD",
+          "channel": "br5",
+          "url": "https://www1.sprtsonline.click/channels/bra/br5.php",
+          "priority": 3
+        }
+      ]
     },
     {
-      "id": 2047134638,
-      "date": "2026-02-22T20:00:00.000Z",
-      "timestamp": 1771790400,
+      "id": 539582829,
+      "date": "2026-02-23T20:00:00.000Z",
+      "timestamp": 1771876800,
       "status": "NS",
       "time": "20:00",
       "time_label": "20:00 GMT",
@@ -69,8 +243,49 @@
         "logo": "https://i0.wp.com/www.kora-online.cc/wp-content/uploads/2026/02/175-150x150.png"
       },
       "score": null,
-      "streams": []
+      "streams": [
+        {
+          "id": "stream_sportsonline_315587227",
+          "source": "sportsonline",
+          "quality": "HD",
+          "channel": "hd2",
+          "url": "https://www1.sprtsonline.click/channels/hd/hd2.php",
+          "priority": 3
+        },
+        {
+          "id": "stream_sportsonline_315587227",
+          "source": "sportsonline",
+          "quality": "HD",
+          "channel": "hd6",
+          "url": "https://www1.sprtsonline.click/channels/hd/hd6.php",
+          "priority": 3
+        },
+        {
+          "id": "stream_sportsonline_315587227",
+          "source": "sportsonline",
+          "quality": "HD",
+          "channel": "hd3",
+          "url": "https://www1.sprtsonline.click/channels/hd/hd3.php",
+          "priority": 3
+        },
+        {
+          "id": "stream_sportsonline_315587227",
+          "source": "sportsonline",
+          "quality": "HD",
+          "channel": "eleven2",
+          "url": "https://www1.sprtsonline.click/channels/pt/eleven2.php",
+          "priority": 3
+        },
+        {
+          "id": "stream_sportsonline_315587227",
+          "source": "sportsonline",
+          "quality": "HD",
+          "channel": "br6",
+          "url": "https://www1.sprtsonline.click/channels/bra/br6.php",
+          "priority": 3
+        }
+      ]
     }
   ],
-  "generatedAt": "2026-02-22T23:39:55.728Z"
+  "generatedAt": "2026-02-23T02:53:39.693Z"
 }
