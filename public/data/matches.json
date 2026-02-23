@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-02-23T15:10:37.616Z",
+  "generated_at": "2026-02-23T16:05:12.844Z",
   "count": 8,
   "matches": [
     {
@@ -24,6 +24,22 @@
       },
       "score": null,
       "streams": [
+        {
+          "id": "stream_sports-d1_ko_1401007622",
+          "source": "koraonline",
+          "quality": "HD",
+          "channel": "sports-d1",
+          "url": "https://aa.yallashoot2026.com/albaplayer/sports-d1/",
+          "priority": 1
+        },
+        {
+          "id": "stream_ad-premium-1_1401007622",
+          "source": "livekora",
+          "quality": "HD",
+          "channel": "ad-premium-1",
+          "url": "https://pl.gomatch-live.com/albaplayer/ad-premium-1/",
+          "priority": 1
+        },
         {
           "id": "stream_sportsonline_2031738161",
           "source": "sportsonline",
@@ -86,7 +102,16 @@
         "logo": "https://i0.wp.com/www.kora-online.cc/wp-content/uploads/2026/01/alba_img_6977e5c40e10f-70x70-1.png"
       },
       "score": null,
-      "streams": []
+      "streams": [
+        {
+          "id": "stream_thmanya1_101463796",
+          "source": "livekora",
+          "quality": "HD",
+          "channel": "thmanya1",
+          "url": "https://pl.gomatch-live.com/albaplayer/thmanya1/",
+          "priority": 1
+        }
+      ]
     },
     {
       "id": 1164204910,
@@ -109,7 +134,16 @@
         "logo": "https://i0.wp.com/www.kora-online.cc/wp-content/uploads/2026/02/8200-1-126x150.png"
       },
       "score": null,
-      "streams": []
+      "streams": [
+        {
+          "id": "stream_on-time-sport-1_1164204910",
+          "source": "livekora",
+          "quality": "HD",
+          "channel": "on-time-sport-1",
+          "url": "https://pl.gomatch-live.com/albaplayer/on-time-sport-1/",
+          "priority": 1
+        }
+      ]
     },
     {
       "id": 955292310,
@@ -133,6 +167,14 @@
       },
       "score": null,
       "streams": [
+        {
+          "id": "stream_ad-premium-1_955292310",
+          "source": "livekora",
+          "quality": "HD",
+          "channel": "ad-premium-1",
+          "url": "https://pl.gomatch-live.com/albaplayer/ad-premium-1/",
+          "priority": 1
+        },
         {
           "id": "stream_sportsonline_674063700",
           "source": "sportsonline",
@@ -197,6 +239,14 @@
       "score": null,
       "streams": [
         {
+          "id": "stream_bein1_21198092",
+          "source": "livekora",
+          "quality": "HD",
+          "channel": "bein1",
+          "url": "https://pl.gomatch-live.com/albaplayer/bein1/",
+          "priority": 1
+        },
+        {
           "id": "stream_sportsonline_1324515317",
           "source": "sportsonline",
           "quality": "HD",
@@ -245,6 +295,14 @@
       "score": null,
       "streams": [
         {
+          "id": "stream_bein3_539582829",
+          "source": "livekora",
+          "quality": "HD",
+          "channel": "bein3",
+          "url": "https://pl.gomatch-live.com/albaplayer/bein3/",
+          "priority": 1
+        },
+        {
           "id": "stream_sportsonline_315587227",
           "source": "sportsonline",
           "quality": "HD",
@@ -287,5 +345,5 @@
       ]
     }
   ],
-  "generatedAt": "2026-02-23T15:10:37.657Z"
+  "generatedAt": "2026-02-23T16:05:12.884Z"
 }
