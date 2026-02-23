@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-02-23T18:15:18.060Z",
+  "generated_at": "2026-02-23T19:35:37.617Z",
   "count": 8,
   "matches": [
     {
@@ -62,10 +62,45 @@
       ]
     },
     {
+      "id": 592385120,
+      "date": "2026-02-23T19:00:00.000Z",
+      "timestamp": 1771873200,
+      "status": "LIVE",
+      "time": "19:00",
+      "time_label": "19:00 GMT",
+      "league": {
+        "name": "السعودية, الدوري السعودي",
+        "country": "Saudi Arabia",
+        "logo": "https://a.espncdn.com/combiner/i?img=/i/leaguelogos/soccer/500/3007.png&h=40&w=40"
+      },
+      "home": {
+        "name": "القادسية",
+        "logo": "https://i0.wp.com/www.kora-online.cc/wp-content/uploads/2026/02/8947-150x150.png"
+      },
+      "away": {
+        "name": "الاتفاق",
+        "logo": "https://i0.wp.com/www.kora-online.cc/wp-content/uploads/2026/02/8943-150x150.png"
+      },
+      "score": {
+        "home": 2,
+        "away": 0
+      },
+      "streams": [
+        {
+          "id": "stream_sports-7_ko_592385120",
+          "source": "koraonline",
+          "quality": "HD",
+          "channel": "sports-7",
+          "url": "https://aa.yallashoot2026.com/albaplayer/sports-7/",
+          "priority": 1
+        }
+      ]
+    },
+    {
       "id": 2125358036,
       "date": "2026-02-23T19:00:00.000Z",
       "timestamp": 1771873200,
-      "status": "NS",
+      "status": "LIVE",
       "time": "19:00",
       "time_label": "19:00 GMT",
       "league": {
@@ -81,7 +116,10 @@
         "name": "الأهلي السعودي",
         "logo": "https://i0.wp.com/www.kora-online.cc/wp-content/uploads/2026/01/alba_img_6977e5c40e10f-70x70-1.png"
       },
-      "score": null,
+      "score": {
+        "home": 0,
+        "away": 0
+      },
       "streams": [
         {
           "id": "stream_sports-8_ko_2125358036",
@@ -110,42 +148,10 @@
       ]
     },
     {
-      "id": 592385120,
-      "date": "2026-02-23T19:00:00.000Z",
-      "timestamp": 1771873200,
-      "status": "NS",
-      "time": "19:00",
-      "time_label": "19:00 GMT",
-      "league": {
-        "name": "السعودية, الدوري السعودي",
-        "country": "Saudi Arabia",
-        "logo": "https://a.espncdn.com/combiner/i?img=/i/leaguelogos/soccer/500/3007.png&h=40&w=40"
-      },
-      "home": {
-        "name": "القادسية",
-        "logo": "https://i0.wp.com/www.kora-online.cc/wp-content/uploads/2026/02/8947-150x150.png"
-      },
-      "away": {
-        "name": "الاتفاق",
-        "logo": "https://i0.wp.com/www.kora-online.cc/wp-content/uploads/2026/02/8943-150x150.png"
-      },
-      "score": null,
-      "streams": [
-        {
-          "id": "stream_sports-7_ko_592385120",
-          "source": "koraonline",
-          "quality": "HD",
-          "channel": "sports-7",
-          "url": "https://aa.yallashoot2026.com/albaplayer/sports-7/",
-          "priority": 1
-        }
-      ]
-    },
-    {
       "id": 1164204910,
       "date": "2026-02-23T19:30:00.000Z",
       "timestamp": 1771875000,
-      "status": "NS",
+      "status": "LIVE",
       "time": "19:30",
       "time_label": "19:30 GMT",
       "league": {
@@ -161,7 +167,10 @@
         "name": "الأهلي",
         "logo": "https://i0.wp.com/www.kora-online.cc/wp-content/uploads/2026/02/8200-1-126x150.png"
       },
-      "score": null,
+      "score": {
+        "home": 0,
+        "away": 0
+      },
       "streams": [
         {
           "id": "stream_sports-9_ko_1164204910",
@@ -332,6 +341,14 @@
           "priority": 1
         },
         {
+          "id": "stream_siiir_21198092",
+          "source": "siiir",
+          "quality": "VIP",
+          "channel": "VIP Server",
+          "url": "https://eyj0exaioijkv1qilcjhbgcioijiuzi1nij99sss.yallashot.us/playerv2.php?match=match1&key=c0ae1abba6eebd7e6cc5b88b1d2B71547",
+          "priority": 2
+        },
+        {
           "id": "stream_sportsonline_1324515317",
           "source": "sportsonline",
           "quality": "HD",
@@ -404,6 +421,14 @@
           "priority": 1
         },
         {
+          "id": "stream_siiir_539582829",
+          "source": "siiir",
+          "quality": "VIP",
+          "channel": "VIP Server",
+          "url": "https://eyj0exaioijkv1qilcjhbgcioijiuzi1nij99sss.yallashot.us/playerv2.php?match=match3&key=c0ae1abba6eebd7e6cc5b88b1d2B71547",
+          "priority": 2
+        },
+        {
           "id": "stream_sportsonline_315587227",
           "source": "sportsonline",
           "quality": "HD",
@@ -446,5 +471,5 @@
       ]
     }
   ],
-  "generatedAt": "2026-02-23T18:15:18.100Z"
+  "generatedAt": "2026-02-23T19:35:37.660Z"
 }
