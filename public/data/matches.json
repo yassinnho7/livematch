@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-02-23T16:05:12.844Z",
+  "generated_at": "2026-02-23T17:15:53.006Z",
   "count": 8,
   "matches": [
     {
@@ -79,7 +79,16 @@
         "logo": "https://i0.wp.com/www.kora-online.cc/wp-content/uploads/2026/02/8943-150x150.png"
       },
       "score": null,
-      "streams": []
+      "streams": [
+        {
+          "id": "stream_sports-7_ko_592385120",
+          "source": "koraonline",
+          "quality": "HD",
+          "channel": "sports-7",
+          "url": "https://aa.yallashoot2026.com/albaplayer/sports-7/",
+          "priority": 1
+        }
+      ]
     },
     {
       "id": 2125358036,
@@ -103,6 +112,22 @@
       },
       "score": null,
       "streams": [
+        {
+          "id": "stream_sports-8_ko_2125358036",
+          "source": "koraonline",
+          "quality": "HD",
+          "channel": "sports-8",
+          "url": "https://aa.yallashoot2026.com/albaplayer/sports-8/",
+          "priority": 1
+        },
+        {
+          "id": "stream_koraplus_1681962339_0",
+          "source": "koraplus",
+          "quality": "HD",
+          "channel": "تطبيق ثمانية",
+          "url": "https://live.baranewssumsel.online/albaplayer/thmanya1/",
+          "priority": 1
+        },
         {
           "id": "stream_thmanya1_101463796",
           "source": "livekora",
@@ -136,60 +161,20 @@
       "score": null,
       "streams": [
         {
+          "id": "stream_koraplus_1651220549_0",
+          "source": "koraplus",
+          "quality": "HD",
+          "channel": "أون سبورت 1",
+          "url": "https://live.baranewssumsel.online/albaplayer/thmanya1/",
+          "priority": 1
+        },
+        {
           "id": "stream_on-time-sport-1_1164204910",
           "source": "livekora",
           "quality": "HD",
           "channel": "on-time-sport-1",
           "url": "https://pl.gomatch-live.com/albaplayer/on-time-sport-1/",
           "priority": 1
-        }
-      ]
-    },
-    {
-      "id": 955292310,
-      "date": "2026-02-23T19:45:00.000Z",
-      "timestamp": 1771875900,
-      "status": "NS",
-      "time": "19:45",
-      "time_label": "19:45 GMT",
-      "league": {
-        "name": "إيطاليا, الدوري الإيطالي",
-        "country": "Italy",
-        "logo": "https://a.espncdn.com/combiner/i?img=/i/leaguelogos/soccer/500/12.png&h=40&w=40"
-      },
-      "home": {
-        "name": "بولونيا",
-        "logo": "https://i0.wp.com/www.kora-online.cc/wp-content/uploads/2025/12/245-1-107x150.png"
-      },
-      "away": {
-        "name": "أودينيزي",
-        "logo": "https://i0.wp.com/www.kora-online.cc/wp-content/uploads/2026/02/229-150x150.png"
-      },
-      "score": null,
-      "streams": [
-        {
-          "id": "stream_ad-premium-1_955292310",
-          "source": "livekora",
-          "quality": "HD",
-          "channel": "ad-premium-1",
-          "url": "https://pl.gomatch-live.com/albaplayer/ad-premium-1/",
-          "priority": 1
-        },
-        {
-          "id": "stream_sportsonline_674063700",
-          "source": "sportsonline",
-          "quality": "HD",
-          "channel": "hd8",
-          "url": "https://www1.sprtsonline.click/channels/hd/hd8.php",
-          "priority": 3
-        },
-        {
-          "id": "stream_sportsonline_674063700",
-          "source": "sportsonline",
-          "quality": "HD",
-          "channel": "sporttv2",
-          "url": "https://www1.sprtsonline.click/channels/pt/sporttv2.php",
-          "priority": 3
         }
       ]
     },
@@ -217,6 +202,62 @@
       "streams": []
     },
     {
+      "id": 955292310,
+      "date": "2026-02-23T19:45:00.000Z",
+      "timestamp": 1771875900,
+      "status": "NS",
+      "time": "19:45",
+      "time_label": "19:45 GMT",
+      "league": {
+        "name": "إيطاليا, الدوري الإيطالي",
+        "country": "Italy",
+        "logo": "https://a.espncdn.com/combiner/i?img=/i/leaguelogos/soccer/500/12.png&h=40&w=40"
+      },
+      "home": {
+        "name": "بولونيا",
+        "logo": "https://i0.wp.com/www.kora-online.cc/wp-content/uploads/2025/12/245-1-107x150.png"
+      },
+      "away": {
+        "name": "أودينيزي",
+        "logo": "https://i0.wp.com/www.kora-online.cc/wp-content/uploads/2026/02/229-150x150.png"
+      },
+      "score": null,
+      "streams": [
+        {
+          "id": "stream_koraplus_227386221_0",
+          "source": "koraplus",
+          "quality": "HD",
+          "channel": "Starzplay",
+          "url": "https://live.baranewssumsel.online/albaplayer/ad-premium-1/",
+          "priority": 1
+        },
+        {
+          "id": "stream_ad-premium-1_955292310",
+          "source": "livekora",
+          "quality": "HD",
+          "channel": "ad-premium-1",
+          "url": "https://pl.gomatch-live.com/albaplayer/ad-premium-1/",
+          "priority": 1
+        },
+        {
+          "id": "stream_sportsonline_674063700",
+          "source": "sportsonline",
+          "quality": "HD",
+          "channel": "hd8",
+          "url": "https://www1.sprtsonline.click/channels/hd/hd8.php",
+          "priority": 3
+        },
+        {
+          "id": "stream_sportsonline_674063700",
+          "source": "sportsonline",
+          "quality": "HD",
+          "channel": "sporttv2",
+          "url": "https://www1.sprtsonline.click/channels/pt/sporttv2.php",
+          "priority": 3
+        }
+      ]
+    },
+    {
       "id": 21198092,
       "date": "2026-02-23T20:00:00.000Z",
       "timestamp": 1771876800,
@@ -238,6 +279,14 @@
       },
       "score": null,
       "streams": [
+        {
+          "id": "stream_koraplus_898832035_0",
+          "source": "koraplus",
+          "quality": "HD",
+          "channel": "beIN SPORTS HD 1",
+          "url": "https://live.baranewssumsel.online/albaplayer/1bein1/",
+          "priority": 1
+        },
         {
           "id": "stream_bein1_21198092",
           "source": "livekora",
@@ -295,6 +344,14 @@
       "score": null,
       "streams": [
         {
+          "id": "stream_koraplus_2043831938_0",
+          "source": "koraplus",
+          "quality": "HD",
+          "channel": "beIN Sports 3 HD",
+          "url": "https://live.baranewssumsel.online/albaplayer/bein3/",
+          "priority": 1
+        },
+        {
           "id": "stream_bein3_539582829",
           "source": "livekora",
           "quality": "HD",
@@ -345,5 +402,5 @@
       ]
     }
   ],
-  "generatedAt": "2026-02-23T16:05:12.884Z"
+  "generatedAt": "2026-02-23T17:15:53.046Z"
 }
