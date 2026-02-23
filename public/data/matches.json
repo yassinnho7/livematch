@@ -1,42 +1,7 @@
 {
-  "generated_at": "2026-02-23T20:11:45.418Z",
-  "count": 7,
+  "generated_at": "2026-02-23T21:05:14.701Z",
+  "count": 13,
   "matches": [
-    {
-      "id": 592385120,
-      "date": "2026-02-23T19:00:00.000Z",
-      "timestamp": 1771873200,
-      "status": "LIVE",
-      "time": "19:00",
-      "time_label": "19:00 GMT",
-      "league": {
-        "name": "السعودية, الدوري السعودي",
-        "country": "Saudi Arabia",
-        "logo": "https://a.espncdn.com/combiner/i?img=/i/leaguelogos/soccer/500/3007.png&h=40&w=40"
-      },
-      "home": {
-        "name": "القادسية",
-        "logo": "https://i0.wp.com/www.kora-online.cc/wp-content/uploads/2026/02/8947-150x150.png"
-      },
-      "away": {
-        "name": "الاتفاق",
-        "logo": "https://i0.wp.com/www.kora-online.cc/wp-content/uploads/2026/02/8943-150x150.png"
-      },
-      "score": {
-        "home": 2,
-        "away": 0
-      },
-      "streams": [
-        {
-          "id": "stream_sports-7_ko_592385120",
-          "source": "koraonline",
-          "quality": "HD",
-          "channel": "sports-7",
-          "url": "https://aa.yallashoot2026.com/albaplayer/sports-7/",
-          "priority": 1
-        }
-      ]
-    },
     {
       "id": 2125358036,
       "date": "2026-02-23T19:00:00.000Z",
@@ -140,6 +105,41 @@
       ]
     },
     {
+      "id": 68637576,
+      "date": "2026-02-23T19:45:00.000Z",
+      "timestamp": 1771875900,
+      "status": "LIVE",
+      "time": "19:45",
+      "time_label": "19:45 GMT",
+      "league": {
+        "name": "فرنسا, الدوري الفرنسي - الدرجة الثانية",
+        "country": "France",
+        "logo": "https://a.espncdn.com/combiner/i?img=/i/leaguelogos/soccer/500/9.png&h=40&w=40"
+      },
+      "home": {
+        "name": "لومان",
+        "logo": "https://i0.wp.com/www.kora-online.cc/wp-content/uploads/2026/02/468-150x150.png"
+      },
+      "away": {
+        "name": "جانجون",
+        "logo": "https://i0.wp.com/www.kora-online.cc/wp-content/uploads/2026/02/496-150x150.png"
+      },
+      "score": {
+        "home": 1,
+        "away": 0
+      },
+      "streams": [
+        {
+          "id": "stream_sports-4_ko_68637576",
+          "source": "koraonline",
+          "quality": "HD",
+          "channel": "sports-4",
+          "url": "https://aa.yallashoot2026.com/albaplayer/sports-4/",
+          "priority": 1
+        }
+      ]
+    },
+    {
       "id": 955292310,
       "date": "2026-02-23T19:45:00.000Z",
       "timestamp": 1771875900,
@@ -203,41 +203,6 @@
           "channel": "sporttv2",
           "url": "https://www1.sprtsonline.click/channels/pt/sporttv2.php",
           "priority": 3
-        }
-      ]
-    },
-    {
-      "id": 68637576,
-      "date": "2026-02-23T19:45:00.000Z",
-      "timestamp": 1771875900,
-      "status": "LIVE",
-      "time": "19:45",
-      "time_label": "19:45 GMT",
-      "league": {
-        "name": "فرنسا, الدوري الفرنسي - الدرجة الثانية",
-        "country": "France",
-        "logo": "https://a.espncdn.com/combiner/i?img=/i/leaguelogos/soccer/500/9.png&h=40&w=40"
-      },
-      "home": {
-        "name": "لومان",
-        "logo": "https://i0.wp.com/www.kora-online.cc/wp-content/uploads/2026/02/468-150x150.png"
-      },
-      "away": {
-        "name": "جانجون",
-        "logo": "https://i0.wp.com/www.kora-online.cc/wp-content/uploads/2026/02/496-150x150.png"
-      },
-      "score": {
-        "home": 0,
-        "away": 0
-      },
-      "streams": [
-        {
-          "id": "stream_sports-4_ko_68637576",
-          "source": "koraonline",
-          "quality": "HD",
-          "channel": "sports-4",
-          "url": "https://aa.yallashoot2026.com/albaplayer/sports-4/",
-          "priority": 1
         }
       ]
     },
@@ -345,8 +310,8 @@
         "logo": "https://i0.wp.com/www.kora-online.cc/wp-content/uploads/2026/02/175-150x150.png"
       },
       "score": {
-        "home": 0,
-        "away": 0
+        "home": 1,
+        "away": 1
       },
       "streams": [
         {
@@ -422,7 +387,168 @@
           "priority": 3
         }
       ]
+    },
+    {
+      "id": 974161247,
+      "date": "2026-02-23T17:45:00.000Z",
+      "timestamp": 1771868700,
+      "status": "NS",
+      "time": "17:45",
+      "time_label": "17:45 GMT",
+      "league": {
+        "name": "أوروبا, دوري أبطال اوروبا - بلاي اوف",
+        "country": "Europe",
+        "logo": "https://a.espncdn.com/combiner/i?img=/i/leaguelogos/soccer/500/2.png&h=40&w=40"
+      },
+      "home": {
+        "name": "أتلتيكو مدريد",
+        "logo": "https://i0.wp.com/www.kora-online.cc/wp-content/uploads/2026/02/134-128x150.png"
+      },
+      "away": {
+        "name": "كلوب بروج",
+        "logo": "https://i0.wp.com/www.kora-online.cc/wp-content/uploads/2026/02/1169-126x150.png"
+      },
+      "score": null,
+      "streams": []
+    },
+    {
+      "id": 690662281,
+      "date": "2026-02-23T19:00:00.000Z",
+      "timestamp": 1771873200,
+      "status": "NS",
+      "time": "19:00",
+      "time_label": "19:00 GMT",
+      "league": {
+        "name": "السعودية, الدوري السعودي",
+        "country": "Saudi Arabia",
+        "logo": "https://a.espncdn.com/combiner/i?img=/i/leaguelogos/soccer/500/3007.png&h=40&w=40"
+      },
+      "home": {
+        "name": "التعاون",
+        "logo": "https://i0.wp.com/www.kora-online.cc/wp-content/uploads/2026/02/8941-150x150.png"
+      },
+      "away": {
+        "name": "الهلال",
+        "logo": "https://i0.wp.com/www.kora-online.cc/wp-content/uploads/2026/02/5457-127x150.png"
+      },
+      "score": null,
+      "streams": []
+    },
+    {
+      "id": 2051569951,
+      "date": "2026-02-23T19:00:00.000Z",
+      "timestamp": 1771873200,
+      "status": "NS",
+      "time": "19:00",
+      "time_label": "19:00 GMT",
+      "league": {
+        "name": "السعودية, الدوري السعودي",
+        "country": "Saudi Arabia",
+        "logo": "https://a.espncdn.com/combiner/i?img=/i/leaguelogos/soccer/500/3007.png&h=40&w=40"
+      },
+      "home": {
+        "name": "الحزم",
+        "logo": "https://i0.wp.com/www.kora-online.cc/wp-content/uploads/2026/02/14895-150x150.png"
+      },
+      "away": {
+        "name": "الاتحاد",
+        "logo": "https://i0.wp.com/www.kora-online.cc/wp-content/uploads/2026/02/8593-122x150.png"
+      },
+      "score": null,
+      "streams": []
+    },
+    {
+      "id": 1894684878,
+      "date": "2026-02-23T19:30:00.000Z",
+      "timestamp": 1771875000,
+      "status": "NS",
+      "time": "19:30",
+      "time_label": "19:30 GMT",
+      "league": {
+        "name": "مصر, الدوري المصري",
+        "country": "Egypt",
+        "logo": "https://a.espncdn.com/combiner/i?img=/i/leaguelogos/soccer/500/1237.png&h=40&w=40"
+      },
+      "home": {
+        "name": "زد",
+        "logo": "https://i0.wp.com/www.kora-online.cc/wp-content/uploads/2026/02/29732-136x150.png"
+      },
+      "away": {
+        "name": "الزمالك",
+        "logo": "https://i0.wp.com/www.kora-online.cc/wp-content/uploads/2026/02/8201-132x150.png"
+      },
+      "score": null,
+      "streams": []
+    },
+    {
+      "id": 672382581,
+      "date": "2026-02-23T20:00:00.000Z",
+      "timestamp": 1771876800,
+      "status": "NS",
+      "time": "20:00",
+      "time_label": "20:00 GMT",
+      "league": {
+        "name": "أوروبا, دوري أبطال اوروبا - بلاي اوف",
+        "country": "Europe",
+        "logo": "https://a.espncdn.com/combiner/i?img=/i/leaguelogos/soccer/500/2.png&h=40&w=40"
+      },
+      "home": {
+        "name": "إنتر ميلان",
+        "logo": "https://i0.wp.com/www.kora-online.cc/wp-content/uploads/2026/02/224-150x150.png"
+      },
+      "away": {
+        "name": "بودو جليمت",
+        "logo": "https://i0.wp.com/www.kora-online.cc/wp-content/uploads/2026/02/1978.png"
+      },
+      "score": null,
+      "streams": []
+    },
+    {
+      "id": 377861249,
+      "date": "2026-02-23T20:00:00.000Z",
+      "timestamp": 1771876800,
+      "status": "NS",
+      "time": "20:00",
+      "time_label": "20:00 GMT",
+      "league": {
+        "name": "أوروبا, دوري أبطال اوروبا - بلاي اوف",
+        "country": "Europe",
+        "logo": "https://a.espncdn.com/combiner/i?img=/i/leaguelogos/soccer/500/2.png&h=40&w=40"
+      },
+      "home": {
+        "name": "باير ليفركوزن",
+        "logo": "https://i0.wp.com/www.kora-online.cc/wp-content/uploads/2026/02/333-150x127.png"
+      },
+      "away": {
+        "name": "أولمبياكوس",
+        "logo": "https://i0.wp.com/www.kora-online.cc/wp-content/uploads/2026/02/1023-136x150.png"
+      },
+      "score": null,
+      "streams": []
+    },
+    {
+      "id": 1782957016,
+      "date": "2026-02-23T20:00:00.000Z",
+      "timestamp": 1771876800,
+      "status": "NS",
+      "time": "20:00",
+      "time_label": "20:00 GMT",
+      "league": {
+        "name": "أوروبا, دوري أبطال اوروبا - بلاي اوف",
+        "country": "Europe",
+        "logo": "https://a.espncdn.com/combiner/i?img=/i/leaguelogos/soccer/500/2.png&h=40&w=40"
+      },
+      "home": {
+        "name": "نيوكاسل يونايتد",
+        "logo": "https://i0.wp.com/www.kora-online.cc/wp-content/uploads/2026/02/116-150x150.png"
+      },
+      "away": {
+        "name": "كارباغ اغدام",
+        "logo": "https://i0.wp.com/www.kora-online.cc/wp-content/uploads/2026/02/7521.png"
+      },
+      "score": null,
+      "streams": []
     }
   ],
-  "generatedAt": "2026-02-23T20:11:45.460Z"
+  "generatedAt": "2026-02-23T21:05:14.742Z"
 }
