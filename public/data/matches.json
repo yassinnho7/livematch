@@ -1,111 +1,12 @@
 {
-  "generated_at": "2026-02-24T18:43:26.719Z",
-  "count": 7,
+  "generated_at": "2026-02-24T19:42:41.062Z",
+  "count": 6,
   "matches": [
-    {
-      "id": 1243596706,
-      "date": "2026-02-24T17:45:00.000Z",
-      "timestamp": 1771955100,
-      "status": "LIVE",
-      "time": "17:45",
-      "time_label": "17:45 GMT",
-      "league": {
-        "name": "أوروبا, دوري أبطال اوروبا - بلاي اوف",
-        "country": "Europe",
-        "logo": "https://a.espncdn.com/combiner/i?img=/i/leaguelogos/soccer/500/2.png&h=40&w=40"
-      },
-      "home": {
-        "name": "أتلتيكو مدريد",
-        "logo": "https://i0.wp.com/www.kora-online.cc/wp-content/uploads/2026/02/134-128x150.png"
-      },
-      "away": {
-        "name": "كلوب بروج",
-        "logo": "https://i0.wp.com/www.kora-online.cc/wp-content/uploads/2026/02/1169-126x150.png"
-      },
-      "score": {
-        "home": 1,
-        "away": 1
-      },
-      "streams": [
-        {
-          "id": "stream_sports-3_ko_1243596706",
-          "source": "koraonline",
-          "quality": "HD",
-          "channel": "sports-3",
-          "url": "https://aa.yallashoot2026.com/albaplayer/sports-3/",
-          "priority": 1
-        },
-        {
-          "id": "stream_koraplus_1745117040_0",
-          "source": "koraplus",
-          "quality": "HD",
-          "channel": "beIN Sports 3 HD",
-          "url": "https://live.baranewssumsel.online/albaplayer/bein3/",
-          "priority": 1
-        },
-        {
-          "id": "stream_bein3_1243596706",
-          "source": "livekora",
-          "quality": "HD",
-          "channel": "bein3",
-          "url": "https://pl.gomatch-live.com/albaplayer/bein3/",
-          "priority": 1
-        },
-        {
-          "id": "stream_siiir_1243596706",
-          "source": "siiir",
-          "quality": "VIP",
-          "channel": "VIP Server",
-          "url": "https://eyj0exaioijkv1qilcjhbgcioijiuzi1nij99sss.yallashot.us/playerv2.php?match=match3&key=c0ae1abba6eebd7e6cc5b88b1d2B71547",
-          "priority": 2
-        },
-        {
-          "id": "stream_sportsonline_1874820510",
-          "source": "sportsonline",
-          "quality": "HD",
-          "channel": "hd2",
-          "url": "https://www2.sprtsonline.click/channels/hd/hd2.php",
-          "priority": 3
-        },
-        {
-          "id": "stream_sportsonline_1874820510",
-          "source": "sportsonline",
-          "quality": "HD",
-          "channel": "hd6",
-          "url": "https://www2.sprtsonline.click/channels/hd/hd6.php",
-          "priority": 3
-        },
-        {
-          "id": "stream_sportsonline_1874820510",
-          "source": "sportsonline",
-          "quality": "HD",
-          "channel": "hd7",
-          "url": "https://www2.sprtsonline.click/channels/hd/hd7.php",
-          "priority": 3
-        },
-        {
-          "id": "stream_sportsonline_1874820510",
-          "source": "sportsonline",
-          "quality": "HD",
-          "channel": "eleven1",
-          "url": "https://www2.sprtsonline.click/channels/pt/eleven1.php",
-          "priority": 3
-        },
-        {
-          "id": "stream_sportsonline_1874820510",
-          "source": "sportsonline",
-          "quality": "HD",
-          "channel": "br5",
-          "url": "https://www2.sprtsonline.click/channels/bra/br5.php",
-          "priority": 3
-        }
-      ]
-    },
     {
       "id": 1201196458,
       "date": "2026-02-24T19:00:00.000Z",
       "timestamp": 1771959600,
-      "status": "NS",
+      "status": "LIVE",
       "time": "19:00",
       "time_label": "19:00 GMT",
       "league": {
@@ -121,7 +22,10 @@
         "name": "الهلال",
         "logo": "https://i0.wp.com/www.kora-online.cc/wp-content/uploads/2026/02/5457-127x150.png"
       },
-      "score": null,
+      "score": {
+        "home": 0,
+        "away": 0
+      },
       "streams": [
         {
           "id": "stream_sports-8_ko_1201196458",
@@ -161,7 +65,7 @@
       "id": 735845536,
       "date": "2026-02-24T19:00:00.000Z",
       "timestamp": 1771959600,
-      "status": "NS",
+      "status": "LIVE",
       "time": "19:00",
       "time_label": "19:00 GMT",
       "league": {
@@ -177,7 +81,10 @@
         "name": "الاتحاد",
         "logo": "https://i0.wp.com/www.kora-online.cc/wp-content/uploads/2026/02/8593-122x150.png"
       },
-      "score": null,
+      "score": {
+        "home": 0,
+        "away": 0
+      },
       "streams": [
         {
           "id": "stream_sports-7_ko_735845536",
@@ -217,7 +124,7 @@
       "id": 1765602159,
       "date": "2026-02-24T19:30:00.000Z",
       "timestamp": 1771961400,
-      "status": "NS",
+      "status": "LIVE",
       "time": "19:30",
       "time_label": "19:30 GMT",
       "league": {
@@ -233,7 +140,10 @@
         "name": "الزمالك",
         "logo": "https://i0.wp.com/www.kora-online.cc/wp-content/uploads/2026/02/8201-132x150.png"
       },
-      "score": null,
+      "score": {
+        "home": 0,
+        "away": 0
+      },
       "streams": [
         {
           "id": "stream_sports-9_ko_1765602159",
@@ -510,5 +420,5 @@
       ]
     }
   ],
-  "generatedAt": "2026-02-24T18:43:26.754Z"
+  "generatedAt": "2026-02-24T19:42:41.103Z"
 }
