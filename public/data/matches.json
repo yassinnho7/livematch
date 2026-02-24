@@ -1,12 +1,12 @@
 {
-  "generated_at": "2026-02-24T17:47:18.943Z",
+  "generated_at": "2026-02-24T18:43:26.719Z",
   "count": 7,
   "matches": [
     {
       "id": 1243596706,
       "date": "2026-02-24T17:45:00.000Z",
       "timestamp": 1771955100,
-      "status": "NS",
+      "status": "LIVE",
       "time": "17:45",
       "time_label": "17:45 GMT",
       "league": {
@@ -22,7 +22,10 @@
         "name": "كلوب بروج",
         "logo": "https://i0.wp.com/www.kora-online.cc/wp-content/uploads/2026/02/1169-126x150.png"
       },
-      "score": null,
+      "score": {
+        "home": 1,
+        "away": 1
+      },
       "streams": [
         {
           "id": "stream_sports-3_ko_1243596706",
@@ -61,7 +64,7 @@
           "source": "sportsonline",
           "quality": "HD",
           "channel": "hd2",
-          "url": "https://www1.sprtsonline.click/channels/hd/hd2.php",
+          "url": "https://www2.sprtsonline.click/channels/hd/hd2.php",
           "priority": 3
         },
         {
@@ -69,7 +72,7 @@
           "source": "sportsonline",
           "quality": "HD",
           "channel": "hd6",
-          "url": "https://www1.sprtsonline.click/channels/hd/hd6.php",
+          "url": "https://www2.sprtsonline.click/channels/hd/hd6.php",
           "priority": 3
         },
         {
@@ -77,7 +80,7 @@
           "source": "sportsonline",
           "quality": "HD",
           "channel": "hd7",
-          "url": "https://www1.sprtsonline.click/channels/hd/hd7.php",
+          "url": "https://www2.sprtsonline.click/channels/hd/hd7.php",
           "priority": 3
         },
         {
@@ -85,7 +88,7 @@
           "source": "sportsonline",
           "quality": "HD",
           "channel": "eleven1",
-          "url": "https://www1.sprtsonline.click/channels/pt/eleven1.php",
+          "url": "https://www2.sprtsonline.click/channels/pt/eleven1.php",
           "priority": 3
         },
         {
@@ -93,7 +96,7 @@
           "source": "sportsonline",
           "quality": "HD",
           "channel": "br5",
-          "url": "https://www1.sprtsonline.click/channels/bra/br5.php",
+          "url": "https://www2.sprtsonline.click/channels/bra/br5.php",
           "priority": 3
         }
       ]
@@ -143,6 +146,14 @@
           "channel": "thmanya1",
           "url": "https://pl.gomatch-live.com/albaplayer/thmanya1/",
           "priority": 1
+        },
+        {
+          "id": "stream_siiir_1201196458",
+          "source": "siiir",
+          "quality": "VIP",
+          "channel": "VIP Server",
+          "url": "https://eyj0exaioijkv1qilcjhbgcioijiuzi1nij99sss.yallashot.us/playerv2.php?match=match8&key=c0ae1abba6eebd7e6cc5b88b1d2B71547",
+          "priority": 2
         }
       ]
     },
@@ -191,6 +202,14 @@
           "channel": "thmanya2",
           "url": "https://pl.gomatch-live.com/albaplayer/thmanya2/",
           "priority": 1
+        },
+        {
+          "id": "stream_siiir_735845536",
+          "source": "siiir",
+          "quality": "VIP",
+          "channel": "VIP Server",
+          "url": "https://eyj0exaioijkv1qilcjhbgcioijiuzi1nij99sss.yallashot.us/playerv2.php?match=match7&key=c0ae1abba6eebd7e6cc5b88b1d2B71547",
+          "priority": 2
         }
       ]
     },
@@ -265,6 +284,14 @@
       "score": null,
       "streams": [
         {
+          "id": "stream_sports-4_ko_346841442",
+          "source": "koraonline",
+          "quality": "HD",
+          "channel": "sports-4",
+          "url": "https://aa.yallashoot2026.com/albaplayer/sports-4/",
+          "priority": 1
+        },
+        {
           "id": "stream_koraplus_1445171126_0",
           "source": "koraplus",
           "quality": "HD",
@@ -281,11 +308,19 @@
           "priority": 1
         },
         {
+          "id": "stream_siiir_346841442",
+          "source": "siiir",
+          "quality": "VIP",
+          "channel": "VIP Server",
+          "url": "https://eyj0exaioijkv1qilcjhbgcioijiuzi1nij99sss.yallashot.us/playerv2.php?match=match4&key=c0ae1abba6eebd7e6cc5b88b1d2B71547",
+          "priority": 2
+        },
+        {
           "id": "stream_sportsonline_484439540",
           "source": "sportsonline",
           "quality": "HD",
           "channel": "hd5",
-          "url": "https://www1.sprtsonline.click/channels/hd/hd5.php",
+          "url": "https://www2.sprtsonline.click/channels/hd/hd5.php",
           "priority": 3
         },
         {
@@ -293,7 +328,7 @@
           "source": "sportsonline",
           "quality": "HD",
           "channel": "hd3",
-          "url": "https://www1.sprtsonline.click/channels/hd/hd3.php",
+          "url": "https://www2.sprtsonline.click/channels/hd/hd3.php",
           "priority": 3
         },
         {
@@ -301,7 +336,7 @@
           "source": "sportsonline",
           "quality": "HD",
           "channel": "hd9",
-          "url": "https://www1.sprtsonline.click/channels/hd/hd9.php",
+          "url": "https://www2.sprtsonline.click/channels/hd/hd9.php",
           "priority": 3
         },
         {
@@ -309,7 +344,7 @@
           "source": "sportsonline",
           "quality": "HD",
           "channel": "eleven1",
-          "url": "https://www1.sprtsonline.click/channels/pt/eleven1.php",
+          "url": "https://www2.sprtsonline.click/channels/pt/eleven1.php",
           "priority": 3
         },
         {
@@ -317,7 +352,7 @@
           "source": "sportsonline",
           "quality": "HD",
           "channel": "br4",
-          "url": "https://www1.sprtsonline.click/channels/bra/br4.php",
+          "url": "https://www2.sprtsonline.click/channels/bra/br4.php",
           "priority": 3
         }
       ]
@@ -345,6 +380,14 @@
       "score": null,
       "streams": [
         {
+          "id": "stream_sports-2_ko_1794273143",
+          "source": "koraonline",
+          "quality": "HD",
+          "channel": "sports-2",
+          "url": "https://aa.yallashoot2026.com/albaplayer/sports-2/",
+          "priority": 1
+        },
+        {
           "id": "stream_koraplus_1005161777_0",
           "source": "koraplus",
           "quality": "HD",
@@ -359,6 +402,14 @@
           "channel": "bein2",
           "url": "https://pl.gomatch-live.com/albaplayer/bein2/",
           "priority": 1
+        },
+        {
+          "id": "stream_siiir_1794273143",
+          "source": "siiir",
+          "quality": "VIP",
+          "channel": "VIP Server",
+          "url": "https://eyj0exaioijkv1qilcjhbgcioijiuzi1nij99sss.yallashot.us/playerv2.php?match=match3&key=c0ae1abba6eebd7e6cc5b88b1d2B71547",
+          "priority": 2
         }
       ]
     },
@@ -385,6 +436,14 @@
       "score": null,
       "streams": [
         {
+          "id": "stream_sports-1_ko_572381900",
+          "source": "koraonline",
+          "quality": "HD",
+          "channel": "sports-1",
+          "url": "https://aa.yallashoot2026.com/albaplayer/sports-1/",
+          "priority": 1
+        },
+        {
           "id": "stream_koraplus_1185010470_0",
           "source": "koraplus",
           "quality": "HD",
@@ -401,11 +460,19 @@
           "priority": 1
         },
         {
+          "id": "stream_siiir_572381900",
+          "source": "siiir",
+          "quality": "VIP",
+          "channel": "VIP Server",
+          "url": "https://eyj0exaioijkv1qilcjhbgcioijiuzi1nij99sss.yallashot.us/playerv2.php?match=match1&key=c0ae1abba6eebd7e6cc5b88b1d2B71547",
+          "priority": 2
+        },
+        {
           "id": "stream_sportsonline_292029480",
           "source": "sportsonline",
           "quality": "HD",
           "channel": "hd1",
-          "url": "https://www1.sprtsonline.click/channels/hd/hd1.php",
+          "url": "https://www2.sprtsonline.click/channels/hd/hd1.php",
           "priority": 3
         },
         {
@@ -413,7 +480,7 @@
           "source": "sportsonline",
           "quality": "HD",
           "channel": "hd7",
-          "url": "https://www1.sprtsonline.click/channels/hd/hd7.php",
+          "url": "https://www2.sprtsonline.click/channels/hd/hd7.php",
           "priority": 3
         },
         {
@@ -421,7 +488,7 @@
           "source": "sportsonline",
           "quality": "HD",
           "channel": "hd11",
-          "url": "https://www1.sprtsonline.click/channels/hd/hd11.php",
+          "url": "https://www2.sprtsonline.click/channels/hd/hd11.php",
           "priority": 3
         },
         {
@@ -429,7 +496,7 @@
           "source": "sportsonline",
           "quality": "HD",
           "channel": "sporttv5",
-          "url": "https://www1.sprtsonline.click/channels/pt/sporttv5.php",
+          "url": "https://www2.sprtsonline.click/channels/pt/sporttv5.php",
           "priority": 3
         },
         {
@@ -437,11 +504,11 @@
           "source": "sportsonline",
           "quality": "HD",
           "channel": "br5",
-          "url": "https://www1.sprtsonline.click/channels/bra/br5.php",
+          "url": "https://www2.sprtsonline.click/channels/bra/br5.php",
           "priority": 3
         }
       ]
     }
   ],
-  "generatedAt": "2026-02-24T17:47:18.987Z"
+  "generatedAt": "2026-02-24T18:43:26.754Z"
 }
