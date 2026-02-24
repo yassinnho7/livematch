@@ -1,34 +1,208 @@
 {
-  "generated_at": "2026-02-23T23:39:48.872Z",
-  "count": 3,
+  "generated_at": "2026-02-24T00:01:16.868Z",
+  "count": 9,
   "matches": [
     {
-      "id": 672382581,
-      "date": "2026-02-23T20:00:00.000Z",
-      "timestamp": 1771876800,
+      "id": 188983253,
+      "date": "2026-02-24T13:00:00.000Z",
+      "timestamp": 1771938000,
       "status": "NS",
-      "time": "20:00",
-      "time_label": "20:00 GMT",
+      "time": "13:00",
+      "time_label": "13:00 GMT",
+      "league": {
+        "name": "أوروبا, دوري أبطال أوروبا للشباب",
+        "country": "Europe",
+        "logo": "https://a.espncdn.com/combiner/i?img=/i/leaguelogos/soccer/500/2.png&h=40&w=40"
+      },
+      "home": {
+        "name": "إنتر تحت 19",
+        "logo": "https://i0.wp.com/www.kora-online.cc/wp-content/uploads/2026/02/50053-150x150.png"
+      },
+      "away": {
+        "name": "Real Betis U19",
+        "logo": "https://i0.wp.com/www.kora-online.cc/wp-content/uploads/2026/02/84774.png"
+      },
+      "score": null,
+      "streams": [
+        {
+          "id": "stream_sportsonline_1395985474",
+          "source": "sportsonline",
+          "quality": "HD",
+          "channel": "hd6",
+          "url": "https://www1.sprtsonline.click/channels/hd/hd6.php",
+          "priority": 3
+        },
+        {
+          "id": "stream_sportsonline_1395985474",
+          "source": "sportsonline",
+          "quality": "HD",
+          "channel": "eleven1",
+          "url": "https://www1.sprtsonline.click/channels/pt/eleven1.php",
+          "priority": 3
+        }
+      ]
+    },
+    {
+      "id": 1650917466,
+      "date": "2026-02-24T15:00:00.000Z",
+      "timestamp": 1771945200,
+      "status": "NS",
+      "time": "15:00",
+      "time_label": "15:00 GMT",
+      "league": {
+        "name": "غير معروف",
+        "country": "International",
+        "logo": "https://cdn-icons-png.flaticon.com/512/1378/1378598.png"
+      },
+      "home": {
+        "name": "Eintracht Frankfurt U19",
+        "logo": "https://i0.wp.com/www.kora-online.cc/wp-content/uploads/2026/02/71017-150x150.png"
+      },
+      "away": {
+        "name": "Sporting CP U19",
+        "logo": "https://i0.wp.com/www.kora-online.cc/wp-content/uploads/2026/02/44910.png"
+      },
+      "score": null,
+      "streams": [
+        {
+          "id": "stream_sportsonline_1346973043",
+          "source": "sportsonline",
+          "quality": "HD",
+          "channel": "eleven1",
+          "url": "https://www1.sprtsonline.click/channels/pt/eleven1.php",
+          "priority": 3
+        }
+      ]
+    },
+    {
+      "id": 1243596706,
+      "date": "2026-02-24T17:45:00.000Z",
+      "timestamp": 1771955100,
+      "status": "NS",
+      "time": "17:45",
+      "time_label": "17:45 GMT",
       "league": {
         "name": "أوروبا, دوري أبطال اوروبا - بلاي اوف",
         "country": "Europe",
         "logo": "https://a.espncdn.com/combiner/i?img=/i/leaguelogos/soccer/500/2.png&h=40&w=40"
       },
       "home": {
-        "name": "إنتر ميلان",
-        "logo": "https://i0.wp.com/www.kora-online.cc/wp-content/uploads/2026/02/224-150x150.png"
+        "name": "أتلتيكو مدريد",
+        "logo": "https://i0.wp.com/www.kora-online.cc/wp-content/uploads/2026/02/134-128x150.png"
       },
       "away": {
-        "name": "بودو جليمت",
-        "logo": "https://i0.wp.com/www.kora-online.cc/wp-content/uploads/2026/02/1978.png"
+        "name": "كلوب بروج",
+        "logo": "https://i0.wp.com/www.kora-online.cc/wp-content/uploads/2026/02/1169-126x150.png"
+      },
+      "score": null,
+      "streams": [
+        {
+          "id": "stream_sportsonline_1874820510",
+          "source": "sportsonline",
+          "quality": "HD",
+          "channel": "hd2",
+          "url": "https://www1.sprtsonline.click/channels/hd/hd2.php",
+          "priority": 3
+        },
+        {
+          "id": "stream_sportsonline_1874820510",
+          "source": "sportsonline",
+          "quality": "HD",
+          "channel": "hd6",
+          "url": "https://www1.sprtsonline.click/channels/hd/hd6.php",
+          "priority": 3
+        },
+        {
+          "id": "stream_sportsonline_1874820510",
+          "source": "sportsonline",
+          "quality": "HD",
+          "channel": "eleven1",
+          "url": "https://www1.sprtsonline.click/channels/pt/eleven1.php",
+          "priority": 3
+        },
+        {
+          "id": "stream_sportsonline_1874820510",
+          "source": "sportsonline",
+          "quality": "HD",
+          "channel": "br5",
+          "url": "https://www1.sprtsonline.click/channels/bra/br5.php",
+          "priority": 3
+        }
+      ]
+    },
+    {
+      "id": 735845536,
+      "date": "2026-02-24T19:00:00.000Z",
+      "timestamp": 1771959600,
+      "status": "NS",
+      "time": "19:00",
+      "time_label": "19:00 GMT",
+      "league": {
+        "name": "السعودية, الدوري السعودي",
+        "country": "Saudi Arabia",
+        "logo": "https://a.espncdn.com/combiner/i?img=/i/leaguelogos/soccer/500/3007.png&h=40&w=40"
+      },
+      "home": {
+        "name": "الحزم",
+        "logo": "https://i0.wp.com/www.kora-online.cc/wp-content/uploads/2026/02/14895-150x150.png"
+      },
+      "away": {
+        "name": "الاتحاد",
+        "logo": "https://i0.wp.com/www.kora-online.cc/wp-content/uploads/2026/02/8593-122x150.png"
       },
       "score": null,
       "streams": []
     },
     {
-      "id": 377861249,
-      "date": "2026-02-23T20:00:00.000Z",
-      "timestamp": 1771876800,
+      "id": 1201196458,
+      "date": "2026-02-24T19:00:00.000Z",
+      "timestamp": 1771959600,
+      "status": "NS",
+      "time": "19:00",
+      "time_label": "19:00 GMT",
+      "league": {
+        "name": "السعودية, الدوري السعودي",
+        "country": "Saudi Arabia",
+        "logo": "https://a.espncdn.com/combiner/i?img=/i/leaguelogos/soccer/500/3007.png&h=40&w=40"
+      },
+      "home": {
+        "name": "التعاون",
+        "logo": "https://i0.wp.com/www.kora-online.cc/wp-content/uploads/2026/02/8941-150x150.png"
+      },
+      "away": {
+        "name": "الهلال",
+        "logo": "https://i0.wp.com/www.kora-online.cc/wp-content/uploads/2026/02/5457-127x150.png"
+      },
+      "score": null,
+      "streams": []
+    },
+    {
+      "id": 1765602159,
+      "date": "2026-02-24T19:30:00.000Z",
+      "timestamp": 1771961400,
+      "status": "NS",
+      "time": "19:30",
+      "time_label": "19:30 GMT",
+      "league": {
+        "name": "مصر, الدوري المصري",
+        "country": "Egypt",
+        "logo": "https://a.espncdn.com/combiner/i?img=/i/leaguelogos/soccer/500/1237.png&h=40&w=40"
+      },
+      "home": {
+        "name": "زد",
+        "logo": "https://i0.wp.com/www.kora-online.cc/wp-content/uploads/2026/02/29732-136x150.png"
+      },
+      "away": {
+        "name": "الزمالك",
+        "logo": "https://i0.wp.com/www.kora-online.cc/wp-content/uploads/2026/02/8201-132x150.png"
+      },
+      "score": null,
+      "streams": []
+    },
+    {
+      "id": 346841442,
+      "date": "2026-02-24T20:00:00.000Z",
+      "timestamp": 1771963200,
       "status": "NS",
       "time": "20:00",
       "time_label": "20:00 GMT",
@@ -46,12 +220,53 @@
         "logo": "https://i0.wp.com/www.kora-online.cc/wp-content/uploads/2026/02/1023-136x150.png"
       },
       "score": null,
-      "streams": []
+      "streams": [
+        {
+          "id": "stream_sportsonline_484439540",
+          "source": "sportsonline",
+          "quality": "HD",
+          "channel": "hd5",
+          "url": "https://www1.sprtsonline.click/channels/hd/hd5.php",
+          "priority": 3
+        },
+        {
+          "id": "stream_sportsonline_484439540",
+          "source": "sportsonline",
+          "quality": "HD",
+          "channel": "hd3",
+          "url": "https://www1.sprtsonline.click/channels/hd/hd3.php",
+          "priority": 3
+        },
+        {
+          "id": "stream_sportsonline_484439540",
+          "source": "sportsonline",
+          "quality": "HD",
+          "channel": "hd9",
+          "url": "https://www1.sprtsonline.click/channels/hd/hd9.php",
+          "priority": 3
+        },
+        {
+          "id": "stream_sportsonline_484439540",
+          "source": "sportsonline",
+          "quality": "HD",
+          "channel": "eleven1",
+          "url": "https://www1.sprtsonline.click/channels/pt/eleven1.php",
+          "priority": 3
+        },
+        {
+          "id": "stream_sportsonline_484439540",
+          "source": "sportsonline",
+          "quality": "HD",
+          "channel": "br4",
+          "url": "https://www1.sprtsonline.click/channels/bra/br4.php",
+          "priority": 3
+        }
+      ]
     },
     {
-      "id": 1782957016,
-      "date": "2026-02-23T20:00:00.000Z",
-      "timestamp": 1771876800,
+      "id": 1794273143,
+      "date": "2026-02-24T20:00:00.000Z",
+      "timestamp": 1771963200,
       "status": "NS",
       "time": "20:00",
       "time_label": "20:00 GMT",
@@ -70,7 +285,71 @@
       },
       "score": null,
       "streams": []
+    },
+    {
+      "id": 572381900,
+      "date": "2026-02-24T20:00:00.000Z",
+      "timestamp": 1771963200,
+      "status": "NS",
+      "time": "20:00",
+      "time_label": "20:00 GMT",
+      "league": {
+        "name": "أوروبا, دوري أبطال اوروبا - بلاي اوف",
+        "country": "Europe",
+        "logo": "https://a.espncdn.com/combiner/i?img=/i/leaguelogos/soccer/500/2.png&h=40&w=40"
+      },
+      "home": {
+        "name": "إنتر ميلان",
+        "logo": "https://i0.wp.com/www.kora-online.cc/wp-content/uploads/2026/02/224-150x150.png"
+      },
+      "away": {
+        "name": "بودو جليمت",
+        "logo": "https://i0.wp.com/www.kora-online.cc/wp-content/uploads/2026/02/1978.png"
+      },
+      "score": null,
+      "streams": [
+        {
+          "id": "stream_sportsonline_292029480",
+          "source": "sportsonline",
+          "quality": "HD",
+          "channel": "hd1",
+          "url": "https://www1.sprtsonline.click/channels/hd/hd1.php",
+          "priority": 3
+        },
+        {
+          "id": "stream_sportsonline_292029480",
+          "source": "sportsonline",
+          "quality": "HD",
+          "channel": "hd7",
+          "url": "https://www1.sprtsonline.click/channels/hd/hd7.php",
+          "priority": 3
+        },
+        {
+          "id": "stream_sportsonline_292029480",
+          "source": "sportsonline",
+          "quality": "HD",
+          "channel": "hd11",
+          "url": "https://www1.sprtsonline.click/channels/hd/hd11.php",
+          "priority": 3
+        },
+        {
+          "id": "stream_sportsonline_292029480",
+          "source": "sportsonline",
+          "quality": "HD",
+          "channel": "sporttv5",
+          "url": "https://www1.sprtsonline.click/channels/pt/sporttv5.php",
+          "priority": 3
+        },
+        {
+          "id": "stream_sportsonline_292029480",
+          "source": "sportsonline",
+          "quality": "HD",
+          "channel": "br5",
+          "url": "https://www1.sprtsonline.click/channels/bra/br5.php",
+          "priority": 3
+        }
+      ]
     }
   ],
-  "generatedAt": "2026-02-23T23:39:48.904Z"
+  "generatedAt": "2026-02-24T00:01:16.909Z"
 }
