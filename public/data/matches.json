@@ -1,50 +1,7 @@
 {
-  "generated_at": "2026-02-24T16:47:29.573Z",
-  "count": 8,
+  "generated_at": "2026-02-24T17:47:18.943Z",
+  "count": 7,
   "matches": [
-    {
-      "id": 1650917466,
-      "date": "2026-02-24T15:00:00.000Z",
-      "timestamp": 1771945200,
-      "status": "LIVE",
-      "time": "15:00",
-      "time_label": "15:00 GMT",
-      "league": {
-        "name": "غير معروف",
-        "country": "International",
-        "logo": "https://cdn-icons-png.flaticon.com/512/1378/1378598.png"
-      },
-      "home": {
-        "name": "Eintracht Frankfurt U19",
-        "logo": "https://i0.wp.com/www.kora-online.cc/wp-content/uploads/2026/02/71017-150x150.png"
-      },
-      "away": {
-        "name": "Sporting CP U19",
-        "logo": "https://i0.wp.com/www.kora-online.cc/wp-content/uploads/2026/02/44910.png"
-      },
-      "score": {
-        "home": 0,
-        "away": 1
-      },
-      "streams": [
-        {
-          "id": "stream_sports-2_ko_1650917466",
-          "source": "koraonline",
-          "quality": "HD",
-          "channel": "sports-2",
-          "url": "https://aa.yallashoot2026.com/albaplayer/sports-2/",
-          "priority": 1
-        },
-        {
-          "id": "stream_sportsonline_1346973043",
-          "source": "sportsonline",
-          "quality": "HD",
-          "channel": "eleven1",
-          "url": "https://www1.sprtsonline.click/channels/pt/eleven1.php",
-          "priority": 3
-        }
-      ]
-    },
     {
       "id": 1243596706,
       "date": "2026-02-24T17:45:00.000Z",
@@ -76,12 +33,28 @@
           "priority": 1
         },
         {
+          "id": "stream_koraplus_1745117040_0",
+          "source": "koraplus",
+          "quality": "HD",
+          "channel": "beIN Sports 3 HD",
+          "url": "https://live.baranewssumsel.online/albaplayer/bein3/",
+          "priority": 1
+        },
+        {
           "id": "stream_bein3_1243596706",
           "source": "livekora",
           "quality": "HD",
           "channel": "bein3",
           "url": "https://pl.gomatch-live.com/albaplayer/bein3/",
           "priority": 1
+        },
+        {
+          "id": "stream_siiir_1243596706",
+          "source": "siiir",
+          "quality": "VIP",
+          "channel": "VIP Server",
+          "url": "https://eyj0exaioijkv1qilcjhbgcioijiuzi1nij99sss.yallashot.us/playerv2.php?match=match3&key=c0ae1abba6eebd7e6cc5b88b1d2B71547",
+          "priority": 2
         },
         {
           "id": "stream_sportsonline_1874820510",
@@ -148,6 +121,22 @@
       "score": null,
       "streams": [
         {
+          "id": "stream_sports-8_ko_1201196458",
+          "source": "koraonline",
+          "quality": "HD",
+          "channel": "sports-8",
+          "url": "https://aa.yallashoot2026.com/albaplayer/sports-8/",
+          "priority": 1
+        },
+        {
+          "id": "stream_koraplus_521302958_0",
+          "source": "koraplus",
+          "quality": "HD",
+          "channel": "تطبيق ثمانية",
+          "url": "https://live.baranewssumsel.online/albaplayer/thmanya1/",
+          "priority": 1
+        },
+        {
           "id": "stream_thmanya1_1201196458",
           "source": "livekora",
           "quality": "HD",
@@ -179,6 +168,22 @@
       },
       "score": null,
       "streams": [
+        {
+          "id": "stream_sports-7_ko_735845536",
+          "source": "koraonline",
+          "quality": "HD",
+          "channel": "sports-7",
+          "url": "https://aa.yallashoot2026.com/albaplayer/sports-7/",
+          "priority": 1
+        },
+        {
+          "id": "stream_koraplus_1598224530_0",
+          "source": "koraplus",
+          "quality": "HD",
+          "channel": "تطبيق ثمانية",
+          "url": "https://live.baranewssumsel.online/albaplayer/thmanya2/",
+          "priority": 1
+        },
         {
           "id": "stream_thmanya2_735845536",
           "source": "livekora",
@@ -212,6 +217,22 @@
       "score": null,
       "streams": [
         {
+          "id": "stream_sports-9_ko_1765602159",
+          "source": "koraonline",
+          "quality": "HD",
+          "channel": "sports-9",
+          "url": "https://aa.yallashoot2026.com/albaplayer/sports-9/",
+          "priority": 1
+        },
+        {
+          "id": "stream_koraplus_1036047017_0",
+          "source": "koraplus",
+          "quality": "HD",
+          "channel": "أون سبورت 1",
+          "url": "https://live.baranewssumsel.online/albaplayer/on-time-sport-1/",
+          "priority": 1
+        },
+        {
           "id": "stream_on-time-sport-1_1765602159",
           "source": "livekora",
           "quality": "HD",
@@ -243,6 +264,14 @@
       },
       "score": null,
       "streams": [
+        {
+          "id": "stream_koraplus_1445171126_0",
+          "source": "koraplus",
+          "quality": "HD",
+          "channel": "beIN SPORTS HD 4",
+          "url": "https://live.baranewssumsel.online/albaplayer/bein4/",
+          "priority": 1
+        },
         {
           "id": "stream_bein4_346841442",
           "source": "livekora",
@@ -316,6 +345,14 @@
       "score": null,
       "streams": [
         {
+          "id": "stream_koraplus_1005161777_0",
+          "source": "koraplus",
+          "quality": "HD",
+          "channel": "Bein Sports HD2",
+          "url": "https://live.baranewssumsel.online/albaplayer/bein22/",
+          "priority": 1
+        },
+        {
           "id": "stream_bein2_1794273143",
           "source": "livekora",
           "quality": "HD",
@@ -347,6 +384,14 @@
       },
       "score": null,
       "streams": [
+        {
+          "id": "stream_koraplus_1185010470_0",
+          "source": "koraplus",
+          "quality": "HD",
+          "channel": "beIN SPORTS HD 1",
+          "url": "https://live.baranewssumsel.online/albaplayer/1bein1/",
+          "priority": 1
+        },
         {
           "id": "stream_bein1_572381900",
           "source": "livekora",
@@ -398,5 +443,5 @@
       ]
     }
   ],
-  "generatedAt": "2026-02-24T16:47:29.613Z"
+  "generatedAt": "2026-02-24T17:47:18.987Z"
 }
