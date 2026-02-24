@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-02-24T15:41:04.047Z",
+  "generated_at": "2026-02-24T16:47:29.573Z",
   "count": 8,
   "matches": [
     {
@@ -67,6 +67,14 @@
       },
       "score": null,
       "streams": [
+        {
+          "id": "stream_sports-3_ko_1243596706",
+          "source": "koraonline",
+          "quality": "HD",
+          "channel": "sports-3",
+          "url": "https://aa.yallashoot2026.com/albaplayer/sports-3/",
+          "priority": 1
+        },
         {
           "id": "stream_bein3_1243596706",
           "source": "livekora",
@@ -214,78 +222,6 @@
       ]
     },
     {
-      "id": 572381900,
-      "date": "2026-02-24T20:00:00.000Z",
-      "timestamp": 1771963200,
-      "status": "NS",
-      "time": "20:00",
-      "time_label": "20:00 GMT",
-      "league": {
-        "name": "أوروبا, دوري أبطال اوروبا - بلاي اوف",
-        "country": "Europe",
-        "logo": "https://a.espncdn.com/combiner/i?img=/i/leaguelogos/soccer/500/2.png&h=40&w=40"
-      },
-      "home": {
-        "name": "إنتر ميلان",
-        "logo": "https://i0.wp.com/www.kora-online.cc/wp-content/uploads/2026/02/224-150x150.png"
-      },
-      "away": {
-        "name": "بودو جليمت",
-        "logo": "https://i0.wp.com/www.kora-online.cc/wp-content/uploads/2026/02/1978.png"
-      },
-      "score": null,
-      "streams": [
-        {
-          "id": "stream_bein1_572381900",
-          "source": "livekora",
-          "quality": "HD",
-          "channel": "bein1",
-          "url": "https://pl.gomatch-live.com/albaplayer/bein1/",
-          "priority": 1
-        },
-        {
-          "id": "stream_sportsonline_292029480",
-          "source": "sportsonline",
-          "quality": "HD",
-          "channel": "hd1",
-          "url": "https://www1.sprtsonline.click/channels/hd/hd1.php",
-          "priority": 3
-        },
-        {
-          "id": "stream_sportsonline_292029480",
-          "source": "sportsonline",
-          "quality": "HD",
-          "channel": "hd7",
-          "url": "https://www1.sprtsonline.click/channels/hd/hd7.php",
-          "priority": 3
-        },
-        {
-          "id": "stream_sportsonline_292029480",
-          "source": "sportsonline",
-          "quality": "HD",
-          "channel": "hd11",
-          "url": "https://www1.sprtsonline.click/channels/hd/hd11.php",
-          "priority": 3
-        },
-        {
-          "id": "stream_sportsonline_292029480",
-          "source": "sportsonline",
-          "quality": "HD",
-          "channel": "sporttv5",
-          "url": "https://www1.sprtsonline.click/channels/pt/sporttv5.php",
-          "priority": 3
-        },
-        {
-          "id": "stream_sportsonline_292029480",
-          "source": "sportsonline",
-          "quality": "HD",
-          "channel": "br5",
-          "url": "https://www1.sprtsonline.click/channels/bra/br5.php",
-          "priority": 3
-        }
-      ]
-    },
-    {
       "id": 346841442,
       "date": "2026-02-24T20:00:00.000Z",
       "timestamp": 1771963200,
@@ -388,7 +324,79 @@
           "priority": 1
         }
       ]
+    },
+    {
+      "id": 572381900,
+      "date": "2026-02-24T20:00:00.000Z",
+      "timestamp": 1771963200,
+      "status": "NS",
+      "time": "20:00",
+      "time_label": "20:00 GMT",
+      "league": {
+        "name": "أوروبا, دوري أبطال اوروبا - بلاي اوف",
+        "country": "Europe",
+        "logo": "https://a.espncdn.com/combiner/i?img=/i/leaguelogos/soccer/500/2.png&h=40&w=40"
+      },
+      "home": {
+        "name": "إنتر ميلان",
+        "logo": "https://i0.wp.com/www.kora-online.cc/wp-content/uploads/2026/02/224-150x150.png"
+      },
+      "away": {
+        "name": "بودو جليمت",
+        "logo": "https://i0.wp.com/www.kora-online.cc/wp-content/uploads/2026/02/1978.png"
+      },
+      "score": null,
+      "streams": [
+        {
+          "id": "stream_bein1_572381900",
+          "source": "livekora",
+          "quality": "HD",
+          "channel": "bein1",
+          "url": "https://pl.gomatch-live.com/albaplayer/bein1/",
+          "priority": 1
+        },
+        {
+          "id": "stream_sportsonline_292029480",
+          "source": "sportsonline",
+          "quality": "HD",
+          "channel": "hd1",
+          "url": "https://www1.sprtsonline.click/channels/hd/hd1.php",
+          "priority": 3
+        },
+        {
+          "id": "stream_sportsonline_292029480",
+          "source": "sportsonline",
+          "quality": "HD",
+          "channel": "hd7",
+          "url": "https://www1.sprtsonline.click/channels/hd/hd7.php",
+          "priority": 3
+        },
+        {
+          "id": "stream_sportsonline_292029480",
+          "source": "sportsonline",
+          "quality": "HD",
+          "channel": "hd11",
+          "url": "https://www1.sprtsonline.click/channels/hd/hd11.php",
+          "priority": 3
+        },
+        {
+          "id": "stream_sportsonline_292029480",
+          "source": "sportsonline",
+          "quality": "HD",
+          "channel": "sporttv5",
+          "url": "https://www1.sprtsonline.click/channels/pt/sporttv5.php",
+          "priority": 3
+        },
+        {
+          "id": "stream_sportsonline_292029480",
+          "source": "sportsonline",
+          "quality": "HD",
+          "channel": "br5",
+          "url": "https://www1.sprtsonline.click/channels/bra/br5.php",
+          "priority": 3
+        }
+      ]
     }
   ],
-  "generatedAt": "2026-02-24T15:41:04.088Z"
+  "generatedAt": "2026-02-24T16:47:29.613Z"
 }
