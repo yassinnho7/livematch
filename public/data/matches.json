@@ -1,55 +1,12 @@
 {
-  "generated_at": "2026-02-25T14:38:47.873Z",
-  "count": 8,
+  "generated_at": "2026-02-25T15:42:28.596Z",
+  "count": 7,
   "matches": [
-    {
-      "id": 210977431,
-      "date": "2026-02-25T13:00:00.000Z",
-      "timestamp": 1772024400,
-      "status": "LIVE",
-      "time": "13:00",
-      "time_label": "13:00 GMT",
-      "league": {
-        "name": "غير معروف",
-        "country": "International",
-        "logo": "https://cdn-icons-png.flaticon.com/512/1378/1378598.png"
-      },
-      "home": {
-        "name": "باريس تحت 19",
-        "logo": "https://i0.wp.com/www.kora-online.cc/wp-content/uploads/2026/02/27524-150x150.png"
-      },
-      "away": {
-        "name": "HJK U19",
-        "logo": "https://i0.wp.com/www.kora-online.cc/wp-content/uploads/2026/02/54194-150x150.png"
-      },
-      "score": {
-        "home": 4,
-        "away": 1
-      },
-      "streams": [
-        {
-          "id": "stream_sports-2_ko_210977431",
-          "source": "koraonline",
-          "quality": "HD",
-          "channel": "sports-2",
-          "url": "https://aa.yallashoot2026.com/albaplayer/sports-2/",
-          "priority": 1
-        },
-        {
-          "id": "stream_sportsonline_1885179824",
-          "source": "sportsonline",
-          "quality": "HD",
-          "channel": "hd4",
-          "url": "https://www2.sprtsonline.click/channels/hd/hd4.php",
-          "priority": 3
-        }
-      ]
-    },
     {
       "id": 1524024078,
       "date": "2026-02-25T15:00:00.000Z",
       "timestamp": 1772031600,
-      "status": "NS",
+      "status": "LIVE",
       "time": "15:00",
       "time_label": "15:00 GMT",
       "league": {
@@ -65,7 +22,10 @@
         "name": "تشيلسي تحت 19",
         "logo": "https://i0.wp.com/www.kora-online.cc/wp-content/uploads/2026/02/27485-150x150.png"
       },
-      "score": null,
+      "score": {
+        "home": 1,
+        "away": 0
+      },
       "streams": [
         {
           "id": "stream_sports-1_ko_1524024078",
@@ -381,5 +341,5 @@
       ]
     }
   ],
-  "generatedAt": "2026-02-25T14:38:47.915Z"
+  "generatedAt": "2026-02-25T15:42:28.639Z"
 }
