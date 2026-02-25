@@ -1,71 +1,12 @@
 {
-  "generated_at": "2026-02-25T18:56:03.502Z",
-  "count": 7,
+  "generated_at": "2026-02-25T19:50:25.783Z",
+  "count": 6,
   "matches": [
-    {
-      "id": 1932940312,
-      "date": "2026-02-25T17:45:00.000Z",
-      "timestamp": 1772041500,
-      "status": "LIVE",
-      "time": "17:45",
-      "time_label": "17:45 GMT",
-      "league": {
-        "name": "أوروبا, دوري أبطال اوروبا - بلاي اوف",
-        "country": "Europe",
-        "logo": "https://a.espncdn.com/combiner/i?img=/i/leaguelogos/soccer/500/2.png&h=40&w=40"
-      },
-      "home": {
-        "name": "أتالانتا",
-        "logo": "https://i0.wp.com/www.kora-online.cc/wp-content/uploads/2026/02/232-105x150.png"
-      },
-      "away": {
-        "name": "بوروسيا دورتموند",
-        "logo": "https://i0.wp.com/www.kora-online.cc/wp-content/uploads/2026/02/341-150x150.png"
-      },
-      "score": {
-        "home": 2,
-        "away": 0
-      },
-      "streams": [
-        {
-          "id": "stream_sports-4_ko_1932940312",
-          "source": "koraonline",
-          "quality": "HD",
-          "channel": "sports-4",
-          "url": "https://aa.yallashoot2026.com/albaplayer/sports-4/",
-          "priority": 1
-        },
-        {
-          "id": "stream_koraplus_248598357_0",
-          "source": "koraplus",
-          "quality": "HD",
-          "channel": "beIN SPORTS HD 4",
-          "url": "https://live.baranewssumsel.online/albaplayer/bein4/",
-          "priority": 1
-        },
-        {
-          "id": "stream_bein4_1932940312",
-          "source": "livekora",
-          "quality": "HD",
-          "channel": "bein4",
-          "url": "https://pl.gomatch-live.com/albaplayer/bein4/",
-          "priority": 1
-        },
-        {
-          "id": "stream_siiir_1932940312",
-          "source": "siiir",
-          "quality": "VIP",
-          "channel": "VIP Server",
-          "url": "https://eyj0exaioijkv1qilcjhbgcioijiuzi1nij99sss.yallashot.us/playerv2.php?match=match4&key=c0ae1abba6eebd7e6cc5b88b1d2B71547",
-          "priority": 2
-        }
-      ]
-    },
     {
       "id": 1427854921,
       "date": "2026-02-25T19:00:00.000Z",
       "timestamp": 1772046000,
-      "status": "NS",
+      "status": "LIVE",
       "time": "19:00",
       "time_label": "19:00 GMT",
       "league": {
@@ -81,7 +22,10 @@
         "name": "النصر",
         "logo": "https://i0.wp.com/www.kora-online.cc/wp-content/uploads/2026/02/7549-1.png"
       },
-      "score": null,
+      "score": {
+        "home": 0,
+        "away": 3
+      },
       "streams": [
         {
           "id": "stream_sports-8_ko_1427854921",
@@ -96,7 +40,7 @@
           "source": "koraplus",
           "quality": "HD",
           "channel": "تطبيق ثمانية",
-          "url": "https://p1.panda-live.live/albaplayer/ad-1/",
+          "url": "https://live.baranewssumsel.online/albaplayer/1bein1/",
           "priority": 1
         },
         {
@@ -121,7 +65,7 @@
       "id": 1658156265,
       "date": "2026-02-25T19:00:00.000Z",
       "timestamp": 1772046000,
-      "status": "NS",
+      "status": "LIVE",
       "time": "19:00",
       "time_label": "19:00 GMT",
       "league": {
@@ -137,7 +81,10 @@
         "name": "نيوم",
         "logo": "https://i0.wp.com/www.kora-online.cc/wp-content/uploads/2026/02/55793-135x150.png"
       },
-      "score": null,
+      "score": {
+        "home": 0,
+        "away": 1
+      },
       "streams": [
         {
           "id": "stream_sports-7_ko_1658156265",
@@ -153,7 +100,7 @@
       "id": 584768816,
       "date": "2026-02-25T19:30:00.000Z",
       "timestamp": 1772047800,
-      "status": "NS",
+      "status": "LIVE",
       "time": "19:30",
       "time_label": "19:30 GMT",
       "league": {
@@ -169,7 +116,10 @@
         "name": "مودرن سبورت",
         "logo": "https://i0.wp.com/www.kora-online.cc/wp-content/uploads/2026/02/50877-150x150.png"
       },
-      "score": null,
+      "score": {
+        "home": 0,
+        "away": 0
+      },
       "streams": [
         {
           "id": "stream_sports-9_ko_584768816",
@@ -212,12 +162,28 @@
           "priority": 1
         },
         {
+          "id": "stream_koraplus_1392918739_0",
+          "source": "koraplus",
+          "quality": "HD",
+          "channel": "beIN Sports 3 HD",
+          "url": "https://live.baranewssumsel.online/albaplayer/bein3/",
+          "priority": 1
+        },
+        {
           "id": "stream_bein3_93175744",
           "source": "livekora",
           "quality": "HD",
           "channel": "bein3",
           "url": "https://pl.gomatch-live.com/albaplayer/bein3/",
           "priority": 1
+        },
+        {
+          "id": "stream_siiir_93175744",
+          "source": "siiir",
+          "quality": "VIP",
+          "channel": "VIP Server",
+          "url": "https://eyj0exaioijkv1qilcjhbgcioijiuzi1nij99sss.yallashot.us/playerv2.php?match=match3&key=c0ae1abba6eebd7e6cc5b88b1d2B71547",
+          "priority": 2
         }
       ]
     },
@@ -252,12 +218,28 @@
           "priority": 1
         },
         {
+          "id": "stream_koraplus_1205770133_0",
+          "source": "koraplus",
+          "quality": "HD",
+          "channel": "Bein Sports HD2",
+          "url": "https://live.baranewssumsel.online/albaplayer/bein22/",
+          "priority": 1
+        },
+        {
           "id": "stream_bein2_404144552",
           "source": "livekora",
           "quality": "HD",
           "channel": "bein2",
           "url": "https://pl.gomatch-live.com/albaplayer/bein2/",
           "priority": 1
+        },
+        {
+          "id": "stream_siiir_404144552",
+          "source": "siiir",
+          "quality": "VIP",
+          "channel": "VIP Server",
+          "url": "https://eyj0exaioijkv1qilcjhbgcioijiuzi1nij99sss.yallashot.us/playerv2.php?match=match1&key=c0ae1abba6eebd7e6cc5b88b1d2B71547",
+          "priority": 2
         },
         {
           "id": "stream_sportsonline_1465404396",
@@ -332,12 +314,28 @@
           "priority": 1
         },
         {
+          "id": "stream_koraplus_1705805735_0",
+          "source": "koraplus",
+          "quality": "HD",
+          "channel": "beIN SPORTS HD 1",
+          "url": "https://live.baranewssumsel.online/albaplayer/1bein1/",
+          "priority": 1
+        },
+        {
           "id": "stream_bein1_1566097388",
           "source": "livekora",
           "quality": "HD",
           "channel": "bein1",
           "url": "https://pl.gomatch-live.com/albaplayer/bein1/",
           "priority": 1
+        },
+        {
+          "id": "stream_siiir_1566097388",
+          "source": "siiir",
+          "quality": "VIP",
+          "channel": "VIP Server",
+          "url": "https://eyj0exaioijkv1qilcjhbgcioijiuzi1nij99sss.yallashot.us/playerv2.php?match=match2&key=c0ae1abba6eebd7e6cc5b88b1d2B71547",
+          "priority": 2
         },
         {
           "id": "stream_sportsonline_1332447596",
@@ -382,5 +380,5 @@
       ]
     }
   ],
-  "generatedAt": "2026-02-25T18:56:03.543Z"
+  "generatedAt": "2026-02-25T19:50:25.836Z"
 }
