@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-02-25T21:49:24.193Z",
-  "count": 7,
+  "generated_at": "2026-02-25T22:19:12.108Z",
+  "count": 5,
   "matches": [
     {
       "id": 93175744,
@@ -23,7 +23,7 @@
         "logo": "https://i0.wp.com/www.kora-online.cc/wp-content/uploads/2026/02/945-127x150.png"
       },
       "score": {
-        "home": 2,
+        "home": 3,
         "away": 0
       },
       "streams": [
@@ -58,204 +58,6 @@
           "channel": "VIP Server",
           "url": "https://eyj0exaioijkv1qilcjhbgcioijiuzi1nij99sss.yallashot.us/playerv2.php?match=match3&key=c0ae1abba6eebd7e6cc5b88b1d2B71547",
           "priority": 2
-        }
-      ]
-    },
-    {
-      "id": 404144552,
-      "date": "2026-02-25T20:00:00.000Z",
-      "timestamp": 1772049600,
-      "status": "LIVE",
-      "time": "20:00",
-      "time_label": "20:00 GMT",
-      "league": {
-        "name": "أوروبا, دوري أبطال اوروبا - بلاي اوف",
-        "country": "Europe",
-        "logo": "https://a.espncdn.com/combiner/i?img=/i/leaguelogos/soccer/500/2.png&h=40&w=40"
-      },
-      "home": {
-        "name": "باريس سان جيرمان",
-        "logo": "https://i0.wp.com/www.kora-online.cc/wp-content/uploads/2026/02/480-150x150.png"
-      },
-      "away": {
-        "name": "موناكو",
-        "logo": "https://i0.wp.com/www.kora-online.cc/wp-content/uploads/2026/02/471-94x150.png"
-      },
-      "score": {
-        "home": 2,
-        "away": 1
-      },
-      "streams": [
-        {
-          "id": "stream_sports-1_ko_404144552",
-          "source": "koraonline",
-          "quality": "HD",
-          "channel": "sports-1",
-          "url": "https://aa.yallashoot2026.com/albaplayer/sports-1/",
-          "priority": 1
-        },
-        {
-          "id": "stream_koraplus_1205770133_0",
-          "source": "koraplus",
-          "quality": "HD",
-          "channel": "Bein Sports HD2",
-          "url": "https://live.baranewssumsel.online/albaplayer/bein22/",
-          "priority": 1
-        },
-        {
-          "id": "stream_bein2_404144552",
-          "source": "livekora",
-          "quality": "HD",
-          "channel": "bein2",
-          "url": "https://pl.gomatch-live.com/albaplayer/bein2/",
-          "priority": 1
-        },
-        {
-          "id": "stream_siiir_404144552",
-          "source": "siiir",
-          "quality": "VIP",
-          "channel": "VIP Server",
-          "url": "https://eyj0exaioijkv1qilcjhbgcioijiuzi1nij99sss.yallashot.us/playerv2.php?match=match1&key=c0ae1abba6eebd7e6cc5b88b1d2B71547",
-          "priority": 2
-        },
-        {
-          "id": "stream_sportsonline_1465404396",
-          "source": "sportsonline",
-          "quality": "HD",
-          "channel": "hd5",
-          "url": "https://www2.sprtsonline.click/channels/hd/hd5.php",
-          "priority": 3
-        },
-        {
-          "id": "stream_sportsonline_1465404396",
-          "source": "sportsonline",
-          "quality": "HD",
-          "channel": "hd4",
-          "url": "https://www2.sprtsonline.click/channels/hd/hd4.php",
-          "priority": 3
-        },
-        {
-          "id": "stream_sportsonline_1465404396",
-          "source": "sportsonline",
-          "quality": "HD",
-          "channel": "hd9",
-          "url": "https://www2.sprtsonline.click/channels/hd/hd9.php",
-          "priority": 3
-        },
-        {
-          "id": "stream_sportsonline_1465404396",
-          "source": "sportsonline",
-          "quality": "HD",
-          "channel": "eleven1",
-          "url": "https://www2.sprtsonline.click/channels/pt/eleven1.php",
-          "priority": 3
-        },
-        {
-          "id": "stream_sportsonline_1465404396",
-          "source": "sportsonline",
-          "quality": "HD",
-          "channel": "br5",
-          "url": "https://www2.sprtsonline.click/channels/bra/br5.php",
-          "priority": 3
-        }
-      ]
-    },
-    {
-      "id": 1566097388,
-      "date": "2026-02-25T20:00:00.000Z",
-      "timestamp": 1772049600,
-      "status": "LIVE",
-      "time": "20:00",
-      "time_label": "20:00 GMT",
-      "league": {
-        "name": "أوروبا, دوري أبطال اوروبا - بلاي اوف",
-        "country": "Europe",
-        "logo": "https://a.espncdn.com/combiner/i?img=/i/leaguelogos/soccer/500/2.png&h=40&w=40"
-      },
-      "home": {
-        "name": "ريال مدريد",
-        "logo": "https://i0.wp.com/www.kora-online.cc/wp-content/uploads/2026/02/131-4-115x150.png"
-      },
-      "away": {
-        "name": "بنفيكا",
-        "logo": "https://i0.wp.com/www.kora-online.cc/wp-content/uploads/2026/01/888.png"
-      },
-      "score": {
-        "home": 1,
-        "away": 1
-      },
-      "streams": [
-        {
-          "id": "stream_sports-2_ko_1566097388",
-          "source": "koraonline",
-          "quality": "HD",
-          "channel": "sports-2",
-          "url": "https://aa.yallashoot2026.com/albaplayer/sports-2/",
-          "priority": 1
-        },
-        {
-          "id": "stream_koraplus_1705805735_0",
-          "source": "koraplus",
-          "quality": "HD",
-          "channel": "beIN SPORTS HD 1",
-          "url": "https://live.baranewssumsel.online/albaplayer/1bein1/",
-          "priority": 1
-        },
-        {
-          "id": "stream_bein1_1566097388",
-          "source": "livekora",
-          "quality": "HD",
-          "channel": "bein1",
-          "url": "https://pl.gomatch-live.com/albaplayer/bein1/",
-          "priority": 1
-        },
-        {
-          "id": "stream_siiir_1566097388",
-          "source": "siiir",
-          "quality": "VIP",
-          "channel": "VIP Server",
-          "url": "https://eyj0exaioijkv1qilcjhbgcioijiuzi1nij99sss.yallashot.us/playerv2.php?match=match2&key=c0ae1abba6eebd7e6cc5b88b1d2B71547",
-          "priority": 2
-        },
-        {
-          "id": "stream_sportsonline_1332447596",
-          "source": "sportsonline",
-          "quality": "HD",
-          "channel": "hd1",
-          "url": "https://www2.sprtsonline.click/channels/hd/hd1.php",
-          "priority": 3
-        },
-        {
-          "id": "stream_sportsonline_1332447596",
-          "source": "sportsonline",
-          "quality": "HD",
-          "channel": "hd6",
-          "url": "https://www2.sprtsonline.click/channels/hd/hd6.php",
-          "priority": 3
-        },
-        {
-          "id": "stream_sportsonline_1332447596",
-          "source": "sportsonline",
-          "quality": "HD",
-          "channel": "hd10",
-          "url": "https://www2.sprtsonline.click/channels/hd/hd10.php",
-          "priority": 3
-        },
-        {
-          "id": "stream_sportsonline_1332447596",
-          "source": "sportsonline",
-          "quality": "HD",
-          "channel": "sporttv5",
-          "url": "https://www2.sprtsonline.click/channels/pt/sporttv5.php",
-          "priority": 3
-        },
-        {
-          "id": "stream_sportsonline_1332447596",
-          "source": "sportsonline",
-          "quality": "HD",
-          "channel": "br4",
-          "url": "https://www2.sprtsonline.click/channels/bra/br4.php",
-          "priority": 3
         }
       ]
     },
@@ -352,5 +154,5 @@
       "streams": []
     }
   ],
-  "generatedAt": "2026-02-25T21:49:24.238Z"
+  "generatedAt": "2026-02-25T22:19:12.152Z"
 }
