@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-02-25T17:53:44.436Z",
+  "generated_at": "2026-02-25T18:56:03.502Z",
   "count": 7,
   "matches": [
     {
@@ -23,7 +23,7 @@
         "logo": "https://i0.wp.com/www.kora-online.cc/wp-content/uploads/2026/02/341-150x150.png"
       },
       "score": {
-        "home": 0,
+        "home": 2,
         "away": 0
       },
       "streams": [
@@ -58,46 +58,6 @@
           "channel": "VIP Server",
           "url": "https://eyj0exaioijkv1qilcjhbgcioijiuzi1nij99sss.yallashot.us/playerv2.php?match=match4&key=c0ae1abba6eebd7e6cc5b88b1d2B71547",
           "priority": 2
-        },
-        {
-          "id": "stream_sportsonline_1624193400",
-          "source": "sportsonline",
-          "quality": "HD",
-          "channel": "hd2",
-          "url": "https://www2.sprtsonline.click/channels/hd/hd2.php",
-          "priority": 3
-        },
-        {
-          "id": "stream_sportsonline_1624193400",
-          "source": "sportsonline",
-          "quality": "HD",
-          "channel": "hd3",
-          "url": "https://www2.sprtsonline.click/channels/hd/hd3.php",
-          "priority": 3
-        },
-        {
-          "id": "stream_sportsonline_1624193400",
-          "source": "sportsonline",
-          "quality": "HD",
-          "channel": "hd7",
-          "url": "https://www2.sprtsonline.click/channels/hd/hd7.php",
-          "priority": 3
-        },
-        {
-          "id": "stream_sportsonline_1624193400",
-          "source": "sportsonline",
-          "quality": "HD",
-          "channel": "eleven1",
-          "url": "https://www2.sprtsonline.click/channels/pt/eleven1.php",
-          "priority": 3
-        },
-        {
-          "id": "stream_sportsonline_1624193400",
-          "source": "sportsonline",
-          "quality": "HD",
-          "channel": "br5",
-          "url": "https://www2.sprtsonline.click/channels/bra/br5.php",
-          "priority": 3
         }
       ]
     },
@@ -132,12 +92,28 @@
           "priority": 1
         },
         {
+          "id": "stream_koraplus_1250460898_0",
+          "source": "koraplus",
+          "quality": "HD",
+          "channel": "تطبيق ثمانية",
+          "url": "https://p1.panda-live.live/albaplayer/ad-1/",
+          "priority": 1
+        },
+        {
           "id": "stream_thmanya1_1427854921",
           "source": "livekora",
           "quality": "HD",
           "channel": "thmanya1",
           "url": "https://pl.gomatch-live.com/albaplayer/thmanya1/",
           "priority": 1
+        },
+        {
+          "id": "stream_siiir_1427854921",
+          "source": "siiir",
+          "quality": "VIP",
+          "channel": "VIP Server",
+          "url": "https://eyj0exaioijkv1qilcjhbgcioijiuzi1nij99sss.yallashot.us/playerv2.php?match=match7&key=c0ae1abba6eebd7e6cc5b88b1d2B71547",
+          "priority": 2
         }
       ]
     },
@@ -228,6 +204,14 @@
       "score": null,
       "streams": [
         {
+          "id": "stream_sports-3_ko_93175744",
+          "source": "koraonline",
+          "quality": "HD",
+          "channel": "sports-3",
+          "url": "https://aa.yallashoot2026.com/albaplayer/sports-3/",
+          "priority": 1
+        },
+        {
           "id": "stream_bein3_93175744",
           "source": "livekora",
           "quality": "HD",
@@ -259,6 +243,14 @@
       },
       "score": null,
       "streams": [
+        {
+          "id": "stream_sports-1_ko_404144552",
+          "source": "koraonline",
+          "quality": "HD",
+          "channel": "sports-1",
+          "url": "https://aa.yallashoot2026.com/albaplayer/sports-1/",
+          "priority": 1
+        },
         {
           "id": "stream_bein2_404144552",
           "source": "livekora",
@@ -332,6 +324,14 @@
       "score": null,
       "streams": [
         {
+          "id": "stream_sports-2_ko_1566097388",
+          "source": "koraonline",
+          "quality": "HD",
+          "channel": "sports-2",
+          "url": "https://aa.yallashoot2026.com/albaplayer/sports-2/",
+          "priority": 1
+        },
+        {
           "id": "stream_bein1_1566097388",
           "source": "livekora",
           "quality": "HD",
@@ -382,5 +382,5 @@
       ]
     }
   ],
-  "generatedAt": "2026-02-25T17:53:44.477Z"
+  "generatedAt": "2026-02-25T18:56:03.543Z"
 }
