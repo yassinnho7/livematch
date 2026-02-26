@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-02-26T14:18:23.681Z",
+  "generated_at": "2026-02-26T15:12:11.648Z",
   "count": 9,
   "matches": [
     {
@@ -49,52 +49,6 @@
       "streams": []
     },
     {
-      "id": 1820164469,
-      "date": "2026-02-26T17:45:00.000Z",
-      "timestamp": 1772127900,
-      "status": "NS",
-      "time": "17:45",
-      "time_label": "17:45 GMT",
-      "league": {
-        "name": "أوروبا, الدوري الأوروبي - بلاي اوف",
-        "country": "International",
-        "logo": "https://cdn-icons-png.flaticon.com/512/1378/1378598.png"
-      },
-      "home": {
-        "name": "النجم الأحمر",
-        "logo": "https://i0.wp.com/www.kora-online.cc/wp-content/uploads/2026/02/8957-106x150.png"
-      },
-      "away": {
-        "name": "ليل",
-        "logo": "https://i0.wp.com/www.kora-online.cc/wp-content/uploads/2026/02/478-150x150.png"
-      },
-      "score": null,
-      "streams": []
-    },
-    {
-      "id": 559490798,
-      "date": "2026-02-26T17:45:00.000Z",
-      "timestamp": 1772127900,
-      "status": "NS",
-      "time": "17:45",
-      "time_label": "17:45 GMT",
-      "league": {
-        "name": "أوروبا, الدوري الأوروبي - بلاي اوف",
-        "country": "International",
-        "logo": "https://cdn-icons-png.flaticon.com/512/1378/1378598.png"
-      },
-      "home": {
-        "name": "شتوتجارت",
-        "logo": "https://i0.wp.com/www.kora-online.cc/wp-content/uploads/2026/02/338.png"
-      },
-      "away": {
-        "name": "سيلتيك",
-        "logo": "https://i0.wp.com/www.kora-online.cc/wp-content/uploads/2026/02/754.png"
-      },
-      "score": null,
-      "streams": []
-    },
-    {
       "id": 1386328412,
       "date": "2026-02-26T17:45:00.000Z",
       "timestamp": 1772127900,
@@ -127,6 +81,70 @@
       ]
     },
     {
+      "id": 1820164469,
+      "date": "2026-02-26T17:45:00.000Z",
+      "timestamp": 1772127900,
+      "status": "NS",
+      "time": "17:45",
+      "time_label": "17:45 GMT",
+      "league": {
+        "name": "أوروبا, الدوري الأوروبي - بلاي اوف",
+        "country": "International",
+        "logo": "https://cdn-icons-png.flaticon.com/512/1378/1378598.png"
+      },
+      "home": {
+        "name": "النجم الأحمر",
+        "logo": "https://i0.wp.com/www.kora-online.cc/wp-content/uploads/2026/02/8957-106x150.png"
+      },
+      "away": {
+        "name": "ليل",
+        "logo": "https://i0.wp.com/www.kora-online.cc/wp-content/uploads/2026/02/478-150x150.png"
+      },
+      "score": null,
+      "streams": [
+        {
+          "id": "stream_bein2_1820164469",
+          "source": "livekora",
+          "quality": "HD",
+          "channel": "bein2",
+          "url": "https://pl.gomatch-live.com/albaplayer/bein2/",
+          "priority": 1
+        }
+      ]
+    },
+    {
+      "id": 559490798,
+      "date": "2026-02-26T17:45:00.000Z",
+      "timestamp": 1772127900,
+      "status": "NS",
+      "time": "17:45",
+      "time_label": "17:45 GMT",
+      "league": {
+        "name": "أوروبا, الدوري الأوروبي - بلاي اوف",
+        "country": "International",
+        "logo": "https://cdn-icons-png.flaticon.com/512/1378/1378598.png"
+      },
+      "home": {
+        "name": "شتوتجارت",
+        "logo": "https://i0.wp.com/www.kora-online.cc/wp-content/uploads/2026/02/338.png"
+      },
+      "away": {
+        "name": "سيلتيك",
+        "logo": "https://i0.wp.com/www.kora-online.cc/wp-content/uploads/2026/02/754.png"
+      },
+      "score": null,
+      "streams": [
+        {
+          "id": "stream_bein4_2144917786",
+          "source": "livekora",
+          "quality": "HD",
+          "channel": "bein4",
+          "url": "https://pl.gomatch-live.com/albaplayer/bein4/",
+          "priority": 1
+        }
+      ]
+    },
+    {
       "id": 2119625114,
       "date": "2026-02-26T19:00:00.000Z",
       "timestamp": 1772132400,
@@ -145,6 +163,38 @@
       "away": {
         "name": "الأهلي السعودي",
         "logo": "https://i0.wp.com/www.kora-online.cc/wp-content/uploads/2026/01/alba_img_6977e5c40e10f-70x70-1.png"
+      },
+      "score": null,
+      "streams": [
+        {
+          "id": "stream_thmanya1_128049850",
+          "source": "livekora",
+          "quality": "HD",
+          "channel": "thmanya1",
+          "url": "https://pl.gomatch-live.com/albaplayer/thmanya1/",
+          "priority": 1
+        }
+      ]
+    },
+    {
+      "id": 1872944967,
+      "date": "2026-02-26T20:00:00.000Z",
+      "timestamp": 1772136000,
+      "status": "NS",
+      "time": "20:00",
+      "time_label": "20:00 GMT",
+      "league": {
+        "name": "أوروبا, دوري المؤتمر الأوروبي - بلاي اوف",
+        "country": "International",
+        "logo": "https://cdn-icons-png.flaticon.com/512/1378/1378598.png"
+      },
+      "home": {
+        "name": "كريستال بالاس",
+        "logo": "https://i0.wp.com/www.kora-online.cc/wp-content/uploads/2026/02/10-150x150.png"
+      },
+      "away": {
+        "name": "موستار",
+        "logo": "https://i0.wp.com/www.kora-online.cc/wp-content/uploads/2026/02/5650.png"
       },
       "score": null,
       "streams": []
@@ -171,6 +221,14 @@
       },
       "score": null,
       "streams": [
+        {
+          "id": "stream_bein1_1351363001",
+          "source": "livekora",
+          "quality": "HD",
+          "channel": "bein1",
+          "url": "https://pl.gomatch-live.com/albaplayer/bein1/",
+          "priority": 1
+        },
         {
           "id": "stream_sportsonline_584369819",
           "source": "sportsonline",
@@ -212,6 +270,14 @@
       "score": null,
       "streams": [
         {
+          "id": "stream_bein4_1402843989",
+          "source": "livekora",
+          "quality": "HD",
+          "channel": "bein4",
+          "url": "https://pl.gomatch-live.com/albaplayer/bein4/",
+          "priority": 1
+        },
+        {
           "id": "stream_sportsonline_785197746",
           "source": "sportsonline",
           "quality": "HD",
@@ -236,30 +302,7 @@
           "priority": 3
         }
       ]
-    },
-    {
-      "id": 1872944967,
-      "date": "2026-02-26T20:00:00.000Z",
-      "timestamp": 1772136000,
-      "status": "NS",
-      "time": "20:00",
-      "time_label": "20:00 GMT",
-      "league": {
-        "name": "أوروبا, دوري المؤتمر الأوروبي - بلاي اوف",
-        "country": "International",
-        "logo": "https://cdn-icons-png.flaticon.com/512/1378/1378598.png"
-      },
-      "home": {
-        "name": "كريستال بالاس",
-        "logo": "https://i0.wp.com/www.kora-online.cc/wp-content/uploads/2026/02/10-150x150.png"
-      },
-      "away": {
-        "name": "موستار",
-        "logo": "https://i0.wp.com/www.kora-online.cc/wp-content/uploads/2026/02/5650.png"
-      },
-      "score": null,
-      "streams": []
     }
   ],
-  "generatedAt": "2026-02-26T14:18:23.726Z"
+  "generatedAt": "2026-02-26T15:12:11.687Z"
 }
