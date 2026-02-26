@@ -1,11 +1,158 @@
 {
-  "generated_at": "2026-02-25T23:57:53.895Z",
-  "count": 3,
+  "generated_at": "2026-02-26T02:27:27.478Z",
+  "count": 9,
   "matches": [
     {
-      "id": 165111322,
-      "date": "2026-02-25T20:00:00.000Z",
-      "timestamp": 1772049600,
+      "id": 1888835213,
+      "date": "2026-02-26T17:30:00.000Z",
+      "timestamp": 1772127000,
+      "status": "NS",
+      "time": "17:30",
+      "time_label": "17:30 GMT",
+      "league": {
+        "name": "الإمارات, دوري أدنوك للمحترفين",
+        "country": "International",
+        "logo": "https://cdn-icons-png.flaticon.com/512/1378/1378598.png"
+      },
+      "home": {
+        "name": "كلباء",
+        "logo": "https://i0.wp.com/www.kora-online.cc/wp-content/uploads/2026/02/8355-150x150.png"
+      },
+      "away": {
+        "name": "الظفرة",
+        "logo": "https://i0.wp.com/www.kora-online.cc/wp-content/uploads/2025/12/8352-150x150.png"
+      },
+      "score": null,
+      "streams": []
+    },
+    {
+      "id": 953109873,
+      "date": "2026-02-26T17:30:00.000Z",
+      "timestamp": 1772127000,
+      "status": "NS",
+      "time": "17:30",
+      "time_label": "17:30 GMT",
+      "league": {
+        "name": "الإمارات, دوري أدنوك للمحترفين",
+        "country": "International",
+        "logo": "https://cdn-icons-png.flaticon.com/512/1378/1378598.png"
+      },
+      "home": {
+        "name": "الجزيرة",
+        "logo": "https://i0.wp.com/www.kora-online.cc/wp-content/uploads/2026/02/8283.png"
+      },
+      "away": {
+        "name": "الشارقة",
+        "logo": "https://i0.wp.com/www.kora-online.cc/wp-content/uploads/2026/02/8351-150x150.png"
+      },
+      "score": null,
+      "streams": []
+    },
+    {
+      "id": 1386328412,
+      "date": "2026-02-26T17:45:00.000Z",
+      "timestamp": 1772127900,
+      "status": "NS",
+      "time": "17:45",
+      "time_label": "17:45 GMT",
+      "league": {
+        "name": "أوروبا, دوري المؤتمر الأوروبي - بلاي اوف",
+        "country": "International",
+        "logo": "https://cdn-icons-png.flaticon.com/512/1378/1378598.png"
+      },
+      "home": {
+        "name": "فيورنتينا",
+        "logo": "https://i0.wp.com/www.kora-online.cc/wp-content/uploads/2026/02/228-150x150.png"
+      },
+      "away": {
+        "name": "ياغييلونيا بياويستوك",
+        "logo": "https://i0.wp.com/www.kora-online.cc/wp-content/uploads/2026/02/2220-102x150.png"
+      },
+      "score": null,
+      "streams": [
+        {
+          "id": "stream_sportsonline_119885274",
+          "source": "sportsonline",
+          "quality": "HD",
+          "channel": "hd7",
+          "url": "https://www2.sprtsonline.click/channels/hd/hd7.php",
+          "priority": 3
+        }
+      ]
+    },
+    {
+      "id": 1820164469,
+      "date": "2026-02-26T17:45:00.000Z",
+      "timestamp": 1772127900,
+      "status": "NS",
+      "time": "17:45",
+      "time_label": "17:45 GMT",
+      "league": {
+        "name": "أوروبا, الدوري الأوروبي - بلاي اوف",
+        "country": "International",
+        "logo": "https://cdn-icons-png.flaticon.com/512/1378/1378598.png"
+      },
+      "home": {
+        "name": "النجم الأحمر",
+        "logo": "https://i0.wp.com/www.kora-online.cc/wp-content/uploads/2026/02/8957-106x150.png"
+      },
+      "away": {
+        "name": "ليل",
+        "logo": "https://i0.wp.com/www.kora-online.cc/wp-content/uploads/2026/02/478-150x150.png"
+      },
+      "score": null,
+      "streams": []
+    },
+    {
+      "id": 559490798,
+      "date": "2026-02-26T17:45:00.000Z",
+      "timestamp": 1772127900,
+      "status": "NS",
+      "time": "17:45",
+      "time_label": "17:45 GMT",
+      "league": {
+        "name": "أوروبا, الدوري الأوروبي - بلاي اوف",
+        "country": "International",
+        "logo": "https://cdn-icons-png.flaticon.com/512/1378/1378598.png"
+      },
+      "home": {
+        "name": "شتوتجارت",
+        "logo": "https://i0.wp.com/www.kora-online.cc/wp-content/uploads/2026/02/338.png"
+      },
+      "away": {
+        "name": "سيلتيك",
+        "logo": "https://i0.wp.com/www.kora-online.cc/wp-content/uploads/2026/02/754.png"
+      },
+      "score": null,
+      "streams": []
+    },
+    {
+      "id": 2119625114,
+      "date": "2026-02-26T19:00:00.000Z",
+      "timestamp": 1772132400,
+      "status": "NS",
+      "time": "19:00",
+      "time_label": "19:00 GMT",
+      "league": {
+        "name": "السعودية, الدوري السعودي",
+        "country": "Saudi Arabia",
+        "logo": "https://a.espncdn.com/combiner/i?img=/i/leaguelogos/soccer/500/3007.png&h=40&w=40"
+      },
+      "home": {
+        "name": "الرياض",
+        "logo": "https://i0.wp.com/www.kora-online.cc/wp-content/uploads/2026/02/12135-150x150.png"
+      },
+      "away": {
+        "name": "الأهلي السعودي",
+        "logo": "https://i0.wp.com/www.kora-online.cc/wp-content/uploads/2026/01/alba_img_6977e5c40e10f-70x70-1.png"
+      },
+      "score": null,
+      "streams": []
+    },
+    {
+      "id": 1872944967,
+      "date": "2026-02-26T20:00:00.000Z",
+      "timestamp": 1772136000,
       "status": "NS",
       "time": "20:00",
       "time_label": "20:00 GMT",
@@ -26,9 +173,9 @@
       "streams": []
     },
     {
-      "id": 1746860708,
-      "date": "2026-02-25T20:00:00.000Z",
-      "timestamp": 1772049600,
+      "id": 1813867461,
+      "date": "2026-02-26T20:00:00.000Z",
+      "timestamp": 1772136000,
       "status": "NS",
       "time": "20:00",
       "time_label": "20:00 GMT",
@@ -46,12 +193,29 @@
         "logo": "https://i0.wp.com/www.kora-online.cc/wp-content/uploads/2026/02/946-150x150.png"
       },
       "score": null,
-      "streams": []
+      "streams": [
+        {
+          "id": "stream_sportsonline_584369819",
+          "source": "sportsonline",
+          "quality": "HD",
+          "channel": "hd1",
+          "url": "https://www2.sprtsonline.click/channels/hd/hd1.php",
+          "priority": 3
+        },
+        {
+          "id": "stream_sportsonline_584369819",
+          "source": "sportsonline",
+          "quality": "HD",
+          "channel": "sporttv5",
+          "url": "https://www2.sprtsonline.click/channels/pt/sporttv5.php",
+          "priority": 3
+        }
+      ]
     },
     {
-      "id": 1989343970,
-      "date": "2026-02-25T20:00:00.000Z",
-      "timestamp": 1772049600,
+      "id": 1958324163,
+      "date": "2026-02-26T20:00:00.000Z",
+      "timestamp": 1772136000,
       "status": "NS",
       "time": "20:00",
       "time_label": "20:00 GMT",
@@ -69,8 +233,33 @@
         "logo": "https://i0.wp.com/www.kora-online.cc/wp-content/uploads/2026/02/1029.png"
       },
       "score": null,
-      "streams": []
+      "streams": [
+        {
+          "id": "stream_sportsonline_785197746",
+          "source": "sportsonline",
+          "quality": "HD",
+          "channel": "hd6",
+          "url": "https://www2.sprtsonline.click/channels/hd/hd6.php",
+          "priority": 3
+        },
+        {
+          "id": "stream_sportsonline_785197746",
+          "source": "sportsonline",
+          "quality": "HD",
+          "channel": "hd10",
+          "url": "https://www2.sprtsonline.click/channels/hd/hd10.php",
+          "priority": 3
+        },
+        {
+          "id": "stream_sportsonline_785197746",
+          "source": "sportsonline",
+          "quality": "HD",
+          "channel": "eleven2",
+          "url": "https://www2.sprtsonline.click/channels/pt/eleven2.php",
+          "priority": 3
+        }
+      ]
     }
   ],
-  "generatedAt": "2026-02-25T23:57:53.936Z"
+  "generatedAt": "2026-02-26T02:27:27.514Z"
 }
