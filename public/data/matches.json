@@ -1,101 +1,7 @@
 {
-  "generated_at": "2026-02-26T19:57:18.769Z",
-  "count": 7,
+  "generated_at": "2026-02-26T20:39:56.923Z",
+  "count": 5,
   "matches": [
-    {
-      "id": 1386328412,
-      "date": "2026-02-26T17:45:00.000Z",
-      "timestamp": 1772127900,
-      "status": "LIVE",
-      "time": "17:45",
-      "time_label": "17:45 GMT",
-      "league": {
-        "name": "أوروبا, دوري المؤتمر الأوروبي - بلاي اوف",
-        "country": "International",
-        "logo": "https://cdn-icons-png.flaticon.com/512/1378/1378598.png"
-      },
-      "home": {
-        "name": "فيورنتينا",
-        "logo": "https://i0.wp.com/www.kora-online.cc/wp-content/uploads/2026/02/228-150x150.png"
-      },
-      "away": {
-        "name": "ياغييلونيا بياويستوك",
-        "logo": "https://i0.wp.com/www.kora-online.cc/wp-content/uploads/2026/02/2220-102x150.png"
-      },
-      "score": {
-        "home": 0,
-        "away": 3
-      },
-      "streams": [
-        {
-          "id": "stream_sports-3_ko_1386328412",
-          "source": "koraonline",
-          "quality": "HD",
-          "channel": "sports-3",
-          "url": "https://aa.yallashoot2026.com/albaplayer/sports-3/",
-          "priority": 1
-        },
-        {
-          "id": "stream_sportsonline_119885274",
-          "source": "sportsonline",
-          "quality": "HD",
-          "channel": "hd7",
-          "url": "https://www2.sprtsonline.click/channels/hd/hd7.php",
-          "priority": 3
-        }
-      ]
-    },
-    {
-      "id": 1820164469,
-      "date": "2026-02-26T17:45:00.000Z",
-      "timestamp": 1772127900,
-      "status": "LIVE",
-      "time": "17:45",
-      "time_label": "17:45 GMT",
-      "league": {
-        "name": "أوروبا, الدوري الأوروبي - بلاي اوف",
-        "country": "International",
-        "logo": "https://cdn-icons-png.flaticon.com/512/1378/1378598.png"
-      },
-      "home": {
-        "name": "النجم الأحمر",
-        "logo": "https://i0.wp.com/www.kora-online.cc/wp-content/uploads/2026/02/8957-106x150.png"
-      },
-      "away": {
-        "name": "ليل",
-        "logo": "https://i0.wp.com/www.kora-online.cc/wp-content/uploads/2026/02/478-150x150.png"
-      },
-      "score": {
-        "home": 0,
-        "away": 1
-      },
-      "streams": [
-        {
-          "id": "stream_sports-2_ko_1820164469",
-          "source": "koraonline",
-          "quality": "HD",
-          "channel": "sports-2",
-          "url": "https://aa.yallashoot2026.com/albaplayer/sports-2/",
-          "priority": 1
-        },
-        {
-          "id": "stream_bein2_1820164469",
-          "source": "livekora",
-          "quality": "HD",
-          "channel": "bein2",
-          "url": "https://pl.gomatch-live.com/albaplayer/bein2/",
-          "priority": 1
-        },
-        {
-          "id": "stream_siiir_1820164469",
-          "source": "siiir",
-          "quality": "VIP",
-          "channel": "VIP Server",
-          "url": "https://eyj0exaioijkv1qilcjhbgcioijiuzi1nij99sss.yallashot.us/playerv2.php?match=match2&key=c0ae1abba6eebd7e6cc5b88b1d2B71547",
-          "priority": 2
-        }
-      ]
-    },
     {
       "id": 1502291589,
       "date": "2026-02-26T19:00:00.000Z",
@@ -178,7 +84,7 @@
       "id": 1872944967,
       "date": "2026-02-26T20:00:00.000Z",
       "timestamp": 1772136000,
-      "status": "NS",
+      "status": "LIVE",
       "time": "20:00",
       "time_label": "20:00 GMT",
       "league": {
@@ -194,7 +100,10 @@
         "name": "موستار",
         "logo": "https://i0.wp.com/www.kora-online.cc/wp-content/uploads/2026/02/5650.png"
       },
-      "score": null,
+      "score": {
+        "home": 0,
+        "away": 0
+      },
       "streams": [
         {
           "id": "stream_sports-2_ko_1872944967",
@@ -218,7 +127,7 @@
       "id": 1813867461,
       "date": "2026-02-26T20:00:00.000Z",
       "timestamp": 1772136000,
-      "status": "NS",
+      "status": "LIVE",
       "time": "20:00",
       "time_label": "20:00 GMT",
       "league": {
@@ -234,7 +143,10 @@
         "name": "فنربخشة",
         "logo": "https://i0.wp.com/www.kora-online.cc/wp-content/uploads/2026/02/946-150x150.png"
       },
-      "score": null,
+      "score": {
+        "home": 0,
+        "away": 1
+      },
       "streams": [
         {
           "id": "stream_sports-1_ko_1813867461",
@@ -282,7 +194,7 @@
       "id": 1958324163,
       "date": "2026-02-26T20:00:00.000Z",
       "timestamp": 1772136000,
-      "status": "NS",
+      "status": "LIVE",
       "time": "20:00",
       "time_label": "20:00 GMT",
       "league": {
@@ -298,7 +210,10 @@
         "name": "باوك سالونيكا",
         "logo": "https://i0.wp.com/www.kora-online.cc/wp-content/uploads/2026/02/1029.png"
       },
-      "score": null,
+      "score": {
+        "home": 0,
+        "away": 0
+      },
       "streams": [
         {
           "id": "stream_sports-4_ko_1958324163",
@@ -343,5 +258,5 @@
       ]
     }
   ],
-  "generatedAt": "2026-02-26T19:57:18.811Z"
+  "generatedAt": "2026-02-26T20:39:56.966Z"
 }
